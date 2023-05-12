@@ -1,0 +1,137 @@
+
+MODULE _TOP__counter (_TOP__counter-usr-__ASSUME__HIST, _TOP__counter-usr-time, _TOP__counter-usr-Output)
+VAR
+
+	_TOP__counter-usr-__ASSERT : boolean;
+ASSIGN
+	init(_TOP__counter-usr-__ASSERT) := (_TOP__counter-usr-__ASSUME__HIST -> (_TOP__counter-usr-Output = 0));
+
+	next(_TOP__counter-usr-__ASSERT) := (next(_TOP__counter-usr-__ASSUME__HIST) -> (next(_TOP__counter-usr-Output) = _TOP__counter-usr-Output + 1));
+
+
+
+MODULE _TOP__target (_TOP__target-usr-__ASSUME__HIST, _TOP__target-usr-__ASSUME0, _TOP__target-usr-Input, _TOP__target-usr-time)
+VAR
+
+	_TOP__target-usr-__ASSERT : boolean;
+ASSIGN
+	init(_TOP__target-usr-__ASSERT) := (_TOP__target-usr-__ASSUME0 = (((_TOP__target-usr-Input = 0) & !((_TOP__target-usr-Input mod 7) = 0)) | (_TOP__target-usr-Input = -1)));
+
+	next(_TOP__target-usr-__ASSERT) := (next(_TOP__target-usr-__ASSUME0) = (((_TOP__target-usr-Input < next(_TOP__target-usr-Input)) & !((next(_TOP__target-usr-Input) mod 7) = 0)) | (next(_TOP__target-usr-Input) = -1)));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+
+	__HIST-usr-hist : boolean;
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE _TOP__sieve (_TOP__sieve-usr-__ASSUME__HIST, _TOP__sieve-usr-__ASSUME0, _TOP__sieve-usr-Input, _TOP__sieve-usr-time, _TOP__sieve-usr-Output)
+VAR
+
+	_TOP__sieve-usr-__ASSERT : boolean;
+ASSIGN
+	init(_TOP__sieve-usr-__ASSERT) := ((_TOP__sieve-usr-__ASSUME__HIST -> (_TOP__sieve-usr-Output = (((_TOP__sieve-usr-Input mod 7) = 0) ? -1 : _TOP__sieve-usr-Input))) & (_TOP__sieve-usr-__ASSUME0 = (_TOP__sieve-usr-Input = 0)));
+
+	next(_TOP__sieve-usr-__ASSERT) := ((next(_TOP__sieve-usr-__ASSUME__HIST) -> (next(_TOP__sieve-usr-Output) = (((next(_TOP__sieve-usr-Input) mod 7) = 0) ? -1 : next(_TOP__sieve-usr-Input)))) & (next(_TOP__sieve-usr-__ASSUME0) = (_TOP__sieve-usr-Input < next(_TOP__sieve-usr-Input))));
+
+
+
+MODULE main () 
+VAR
+
+	main-usr-counter__Output : integer;
+	main-usr-counter____ASSUME__HIST : boolean;
+	main-usr-sieve__Output : integer;
+	main-usr-sieve____ASSUME0 : boolean;
+	main-usr-sieve____ASSUME__HIST : boolean;
+	main-usr-target____ASSUME0 : boolean;
+	main-usr-target____ASSUME__HIST : boolean;
+	main-usr-counter__time : real;
+	main-usr-sieve__Input : integer;
+	main-usr-sieve__time : real;
+	main-usr-target__Input : integer;
+	main-usr-target__time : real;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-res-glocal_2 : boolean;
+	main-res-glocal_4 : boolean;
+	main-res-glocal_7 : boolean;
+	main-res-glocal_8 : boolean;
+	main-res-glocal_10 : boolean;
+	main-res-glocal_12 : boolean;
+	main-res-glocal_13 : boolean;
+	main-res-glocal_15 : boolean;
+	main-res-glocal_17 : boolean;
+	main-res-glocal_18 : boolean;
+	main-res-glocal_19 : boolean;
+	main-res-glocal_20 : boolean;
+	main-res-glocal_21 : boolean;
+	main-res-gklocal_5 : boolean;
+	main-res-call_16 : __HIST(main-usr-target____ASSUME0);
+	main-res-call_14 : _TOP__target(main-usr-target____ASSUME__HIST, main-usr-target____ASSUME0, main-usr-target__Input, main-usr-target__time);
+	main-res-call_11 : __HIST(main-usr-sieve____ASSUME0);
+	main-res-call_9 : _TOP__sieve(main-usr-sieve____ASSUME__HIST, main-usr-sieve____ASSUME0, main-usr-sieve__Input, main-usr-sieve__time, main-usr-sieve__Output);
+	main-res-call_6 : __HIST(main-res-gklocal_5);
+	main-res-call_3 : _TOP__counter(main-usr-counter____ASSUME__HIST, main-usr-counter__time, main-usr-counter__Output);
+
+
+
+
+
+
+ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-target____ASSUME__HIST & (main-usr-sieve____ASSUME__HIST & main-usr-counter____ASSUME__HIST));
+	init(main-res-glocal_2) := (main-usr-time = main-usr-counter__time);
+	init(main-res-glocal_4) := main-res-call_3._TOP__counter-usr-__ASSERT;
+	init(main-res-gklocal_5) := TRUE;
+	init(main-res-glocal_7) := (main-usr-counter____ASSUME__HIST = main-res-call_6.__HIST-usr-hist);
+	init(main-res-glocal_8) := (main-usr-time = main-usr-sieve__time);
+	init(main-res-glocal_10) := main-res-call_9._TOP__sieve-usr-__ASSERT;
+	init(main-res-glocal_12) := (main-usr-sieve____ASSUME__HIST = main-res-call_11.__HIST-usr-hist);
+	init(main-res-glocal_13) := (main-usr-time = main-usr-target__time);
+	init(main-res-glocal_15) := main-res-call_14._TOP__target-usr-__ASSERT;
+	init(main-res-glocal_17) := (main-usr-target____ASSUME__HIST = main-res-call_16.__HIST-usr-hist);
+	init(main-res-glocal_18) := (main-usr-counter__Output = main-usr-sieve__Input);
+	init(main-res-glocal_19) := (main-usr-sieve__Output = main-usr-target__Input);
+	init(main-res-glocal_20) := TRUE;
+	init(main-res-glocal_21) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-target____ASSUME__HIST) & (next(main-usr-sieve____ASSUME__HIST) & next(main-usr-counter____ASSUME__HIST)));
+	next(main-res-glocal_2) := (next(main-usr-time) = next(main-usr-counter__time));
+	next(main-res-glocal_4) := next(main-res-call_3._TOP__counter-usr-__ASSERT);
+	next(main-res-gklocal_5) := TRUE;
+	next(main-res-glocal_7) := (next(main-usr-counter____ASSUME__HIST) = next(main-res-call_6.__HIST-usr-hist));
+	next(main-res-glocal_8) := (next(main-usr-time) = next(main-usr-sieve__time));
+	next(main-res-glocal_10) := next(main-res-call_9._TOP__sieve-usr-__ASSERT);
+	next(main-res-glocal_12) := (next(main-usr-sieve____ASSUME__HIST) = next(main-res-call_11.__HIST-usr-hist));
+	next(main-res-glocal_13) := (next(main-usr-time) = next(main-usr-target__time));
+	next(main-res-glocal_15) := next(main-res-call_14._TOP__target-usr-__ASSERT);
+	next(main-res-glocal_17) := (next(main-usr-target____ASSUME__HIST) = next(main-res-call_16.__HIST-usr-hist));
+	next(main-res-glocal_18) := (next(main-usr-counter__Output) = next(main-usr-sieve__Input));
+	next(main-res-glocal_19) := (next(main-usr-sieve__Output) = next(main-usr-target__Input));
+	next(main-res-glocal_20) := TRUE;
+	next(main-res-glocal_21) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_21;
+	INVAR main-res-glocal_20;
+	INVAR main-res-glocal_19;
+	INVAR main-res-glocal_18;
+	INVAR main-res-glocal_17;
+	INVAR main-res-glocal_15;
+	INVAR main-res-glocal_13;
+	INVAR main-res-glocal_12;
+	INVAR main-res-glocal_10;
+	INVAR main-res-glocal_8;
+	INVAR main-res-glocal_7;
+	INVAR main-res-glocal_4;
+	INVAR main-res-glocal_2;
+
+INVARSPEC 
+((main-impl-usr-__ASSUME__HIST) & (main-usr-target____ASSUME0) & (main-usr-sieve____ASSUME0));
+

@@ -1,0 +1,23 @@
+
+MODULE main () 
+VAR
+
+	top-usr-OK : boolean;
+	top-impl-usr-a : boolean;
+	top-impl-usr-b : boolean;
+	top-impl-usr-c : boolean;
+ASSIGN
+	init(top-impl-usr-c) := FALSE;
+	init(top-impl-usr-b) := FALSE;
+	init(top-impl-usr-a) := TRUE;
+	init(top-usr-OK) := ((((top-impl-usr-a & top-impl-usr-b) & top-impl-usr-c) | ((((!top-impl-usr-a & !top-impl-usr-b) & top-impl-usr-c) & ((!top-impl-usr-a & top-impl-usr-b) & !top-impl-usr-c)) & ((top-impl-usr-a & !top-impl-usr-b) & !top-impl-usr-c))) & !((top-impl-usr-a & top-impl-usr-b) & top-impl-usr-c));
+
+	next(top-impl-usr-c) := top-impl-usr-b;
+	next(top-impl-usr-b) := top-impl-usr-a;
+	next(top-impl-usr-a) := top-impl-usr-c;
+	next(top-usr-OK) := ((((next(top-impl-usr-a) & next(top-impl-usr-b)) & next(top-impl-usr-c)) | ((((!next(top-impl-usr-a) & !next(top-impl-usr-b)) & next(top-impl-usr-c)) & ((!next(top-impl-usr-a) & next(top-impl-usr-b)) & !next(top-impl-usr-c))) & ((next(top-impl-usr-a) & !next(top-impl-usr-b)) & !next(top-impl-usr-c)))) & !((next(top-impl-usr-a) & next(top-impl-usr-b)) & next(top-impl-usr-c)));
+
+
+INVARSPEC 
+((top-usr-OK));
+

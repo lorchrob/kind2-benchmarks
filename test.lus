@@ -1,0 +1,10 @@
+node main(x: int) returns (y: int); 
+let 
+  y = x + 1;
+  check false -> y < node2(x);
+tel
+
+node node2(x: int) returns(y: int);
+let
+  y = x + 2;
+tel

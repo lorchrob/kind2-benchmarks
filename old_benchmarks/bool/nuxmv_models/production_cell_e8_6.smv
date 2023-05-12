@@ -1,0 +1,108 @@
+
+MODULE redge (redge-usr-signal)
+VAR
+
+	redge-usr-r : boolean;
+	redge-res-glocal_1 : boolean;
+ASSIGN
+	init(redge-usr-r) := redge-usr-signal;
+	init(redge-res-glocal_1) := !redge-usr-signal;
+
+	next(redge-usr-r) := (next(redge-usr-signal) & redge-res-glocal_1);
+	next(redge-res-glocal_1) := !next(redge-usr-signal);
+
+
+
+MODULE fedge (fedge-usr-signal)
+VAR
+
+	fedge-usr-f : boolean;
+	fedge-res-gklocal_2 : boolean;
+	fedge-res-call_3 : redge(fedge-res-gklocal_2);
+
+
+ASSIGN
+	init(fedge-res-gklocal_2) := !fedge-usr-signal;
+	init(fedge-usr-f) := fedge-res-call_3.redge-usr-r;
+
+	next(fedge-res-gklocal_2) := !next(fedge-usr-signal);
+	next(fedge-usr-f) := next(fedge-res-call_3.redge-usr-r);
+
+
+
+MODULE sustain (sustain-usr-on, sustain-usr-off)
+VAR
+
+	sustain-usr-s : boolean;
+ASSIGN
+	init(sustain-usr-s) := sustain-usr-on;
+	next(sustain-usr-s) := (next(sustain-usr-on) ? TRUE : (next(sustain-usr-off) ? FALSE : sustain-usr-s));
+
+
+
+MODULE main () 
+VAR
+
+	top-usr-MaySafelyMove : boolean;
+	top-usr-TryToMove1 : boolean;
+	top-usr-TryToMove2 : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-MayMove1 : boolean;
+	top-impl-usr-MayMove2 : boolean;
+	top-impl-usr-stop : boolean;
+	top-res-glocal_6 : boolean;
+	top-res-glocal_9 : boolean;
+	top-res-gklocal_10 : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-gklocal_4 : boolean;
+	top-res-call_14 : redge(top-usr-TryToMove1);
+	top-res-call_15 : redge(top-usr-TryToMove2);
+	top-res-call_12 : fedge(top-impl-usr-MayMove1);
+	top-res-call_13 : fedge(top-impl-usr-MayMove2);
+	top-res-call_11 : redge(top-res-gklocal_10);
+	top-res-call_8 : redge(top-res-gklocal_7);
+	top-res-call_5 : sustain(top-res-gklocal_4, top-impl-usr-stop);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ASSIGN
+	init(top-usr-OK) := TRUE;
+	init(top-impl-usr-MayMove1) := (top-usr-TryToMove1 & top-usr-MaySafelyMove);
+	init(top-res-gklocal_7) := top-impl-usr-MayMove1;
+	init(top-res-glocal_6) := !top-usr-TryToMove2;
+	init(top-impl-usr-MayMove2) := (top-usr-TryToMove2 & top-usr-MaySafelyMove);
+	init(top-res-gklocal_10) := top-impl-usr-MayMove2;
+	init(top-res-glocal_9) := !top-usr-TryToMove1;
+	init(top-impl-usr-stop) := (top-res-call_13.fedge-usr-f | top-res-call_12.fedge-usr-f);
+	init(top-res-gklocal_4) := (top-res-call_8.redge-usr-r & top-res-call_11.redge-usr-r);
+
+	next(top-impl-usr-MayMove1) := (next(top-usr-TryToMove1) & next(top-usr-MaySafelyMove));
+	next(top-res-gklocal_7) := (next(top-impl-usr-MayMove1) & top-res-glocal_6);
+	next(top-impl-usr-MayMove2) := (next(top-usr-TryToMove2) & next(top-usr-MaySafelyMove));
+	next(top-res-gklocal_10) := (next(top-impl-usr-MayMove2) & top-res-glocal_9);
+	next(top-res-gklocal_4) := (next(top-res-call_8.redge-usr-r) & next(top-res-call_11.redge-usr-r));
+	next(top-impl-usr-stop) := (next(top-res-call_13.fedge-usr-f) | next(top-res-call_12.fedge-usr-f));
+	next(top-usr-OK) := ((!next(top-res-call_15.redge-usr-r) | !next(top-res-call_14.redge-usr-r)) ? ((((!next(top-res-call_8.redge-usr-r) & !next(top-impl-usr-stop)) | ((!next(top-res-call_11.redge-usr-r) & !next(top-impl-usr-stop)) | (!next(top-res-call_8.redge-usr-r) & !next(top-res-call_11.redge-usr-r)))) & !((next(top-res-call_8.redge-usr-r) & next(top-res-call_11.redge-usr-r)) & next(top-impl-usr-stop))) & (next(top-res-call_5.sustain-usr-s) ? next(top-usr-MaySafelyMove) : TRUE)) : TRUE);
+	next(top-res-glocal_6) := !next(top-usr-TryToMove2);
+	next(top-res-glocal_9) := !next(top-usr-TryToMove1);
+
+
+INVARSPEC 
+((top-usr-OK));
+

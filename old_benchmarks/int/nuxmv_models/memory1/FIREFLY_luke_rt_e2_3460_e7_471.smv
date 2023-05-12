@@ -1,0 +1,1320 @@
+ kind2 v1.8.0-155-g2a6a75f-dirty
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:28:11: Unguarded pre in expression (pre invalid)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:28:30: Unguarded pre in expression (pre dirty)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:28:46: Unguarded pre in expression (pre shared)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:28:63: Unguarded pre in expression (pre exclusive)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:29:11: Unguarded pre in expression (pre invalid)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:29:30: Unguarded pre in expression (pre dirty)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:30:11: Unguarded pre in expression (pre invalid)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:30:30: Unguarded pre in expression (pre shared)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:30:41: Unguarded pre in expression (pre exclusive)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:31:11: Unguarded pre in expression (pre exclusive)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:32:11: Unguarded pre in expression (pre shared)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:33:11: Unguarded pre in expression (pre invalid)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:33:30: Unguarded pre in expression (pre dirty)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:33:46: Unguarded pre in expression (pre shared)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:33:63: Unguarded pre in expression (pre exclusive)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:34:11: Unguarded pre in expression (pre invalid)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:34:30: Unguarded pre in expression (pre dirty)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:35:11: Unguarded pre in expression (pre invalid)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:35:30: Unguarded pre in expression (pre shared)
+
+[1m<[33mWarning[39m>[22m Parser warning at FIREFLY_luke_rt_e2_3460_e7_471.lus:35:41: Unguarded pre in expression (pre exclusive)
+
+
+
+=======================================================================================================================================================
+[1mAnalyzing [34m[34mtop[39m[39m[22m
+  with First top: '[34mtop[39m'
+             subsystems
+               | concrete: [34mfirefly[39m, [34mexcludes8[39m, [34mSofar[39m, [34mFirst[39m
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+[1m<[91mFailure[39m>[22m Property [94mInvProp[l76c3][39m is invalid by bounded model checking for k=1 after 0.095s.
+                
+                [31mCounterexample[39m:
+                  [1mNode[22m [34mtop[39m ()
+                    == [1mInputs[22m ==
+                    [94me1       [39m [90mfalse[39m  true
+                    [94me2       [39m [90mfalse[39m [90mfalse[39m
+                    [94me3       [39m [90mfalse[39m [90mfalse[39m
+                    [94me4       [39m [90mfalse[39m [90mfalse[39m
+                    [94me5       [39m [90mfalse[39m [90mfalse[39m
+                    [94me6       [39m [90mfalse[39m  true
+                    [94me7       [39m  true [90mfalse[39m
+                    [94me8       [39m [90mfalse[39m [90mfalse[39m
+                    [94mi_invalid[39m     1    -1
+                    == [1mOutputs[22m ==
+                    [94mOK       [39m  true [90mfalse[39m
+                    == [1mLocals[22m ==
+                    [94minvalid  [39m     1     [90m0[39m
+                    [94mdirty    [39m     [90m0[39m     1
+                    [94mexclusive[39m     [90m0[39m     1
+                    [94mshared   [39m     [90m0[39m     [90m0[39m
+                    [94menv      [39m  true  true
+                    
+                  [1mNode[22m [34mFirst[39m (top[l74c56])
+                    == [1mInputs[22m ==
+                    [94mX    [39m  1 -1
+                    == [1mOutputs[22m ==
+                    [94mFirst[39m  1  1
+                    
+                  [1mNode[22m [34mexcludes8[39m (top[l72c18])
+                    == [1mInputs[22m ==
+                    [94mX1      [39m [90mfalse[39m  true
+                    [94mX2      [39m [90mfalse[39m [90mfalse[39m
+                    [94mX3      [39m [90mfalse[39m [90mfalse[39m
+                    [94mX4      [39m [90mfalse[39m [90mfalse[39m
+                    [94mX5      [39m [90mfalse[39m [90mfalse[39m
+                    [94mX6      [39m [90mfalse[39m  true
+                    [94mX7      [39m  true [90mfalse[39m
+                    [94mX8      [39m [90mfalse[39m [90mfalse[39m
+                    == [1mOutputs[22m ==
+                    [94mexcludes[39m  true [90mfalse[39m
+                    
+                  [1mNode[22m [34mSofar[39m (top[l72c11])
+                    == [1mInputs[22m ==
+                    [94mX    [39m  true [90mfalse[39m
+                    == [1mOutputs[22m ==
+                    [94mSofar[39m  true  true
+                    
+                  [1mNode[22m [34mfirefly[39m (top[l71c9])
+                    == [1mInputs[22m ==
+                    [94me1         [39m [90mfalse[39m  true
+                    [94me2         [39m [90mfalse[39m [90mfalse[39m
+                    [94me3         [39m [90mfalse[39m [90mfalse[39m
+                    [94me4         [39m [90mfalse[39m [90mfalse[39m
+                    [94me5         [39m [90mfalse[39m [90mfalse[39m
+                    [94me6         [39m [90mfalse[39m  true
+                    [94me7         [39m  true [90mfalse[39m
+                    [94me8         [39m [90mfalse[39m [90mfalse[39m
+                    [94mi_invalid  [39m     1    -1
+                    == [1mOutputs[22m ==
+                    [94minvalid    [39m     1     [90m0[39m
+                    [94mdirty      [39m     [90m0[39m     1
+                    [94mexclusive  [39m     [90m0[39m     1
+                    [94mshared     [39m     [90m0[39m     [90m0[39m
+                    == [1mLocals[22m ==
+                    [94mgarde1     [39m [90mfalse[39m  true
+                    [94mgarde2     [39m [90mfalse[39m [90mfalse[39m
+                    [94mgarde4     [39m [90mfalse[39m [90mfalse[39m
+                    [94mgarde3     [39m [90mfalse[39m [90mfalse[39m
+                    [94mgarde5     [39m [90mfalse[39m [90mfalse[39m
+                    [94mgarde7     [39m [90mfalse[39m [90mfalse[39m
+                    [94mgarde8     [39m [90mfalse[39m [90mfalse[39m
+                    [94mgarde6     [39m [90mfalse[39m  true
+                    [94mmem_invalid[39m     1     1
+                    
+                  
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-res-init_flag : boolean;
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	init(First-res-init_flag) := TRUE;
+
+	next(First-usr-First) := First-usr-First;
+	next(First-res-init_flag) := FALSE;
+
+
+
+MODULE excludes8 (excludes8-usr-X1, excludes8-usr-X2, excludes8-usr-X3, excludes8-usr-X4, excludes8-usr-X5, excludes8-usr-X6, excludes8-usr-X7, excludes8-usr-X8)
+VAR
+	excludes8-res-init_flag : boolean;
+	excludes8-usr-excludes : boolean;
+ASSIGN
+	init(excludes8-usr-excludes) := ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & !excludes8-usr-X2) & excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((!excludes8-usr-X1 & excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | ((((((((excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8) | (((((((!excludes8-usr-X1 & !excludes8-usr-X2) & !excludes8-usr-X3) & !excludes8-usr-X4) & !excludes8-usr-X5) & !excludes8-usr-X6) & !excludes8-usr-X7) & !excludes8-usr-X8)))))))));
+	init(excludes8-res-init_flag) := TRUE;
+
+	next(excludes8-usr-excludes) := ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((!next(excludes8-usr-X1) & next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | ((((((((next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8)) | (((((((!next(excludes8-usr-X1) & !next(excludes8-usr-X2)) & !next(excludes8-usr-X3)) & !next(excludes8-usr-X4)) & !next(excludes8-usr-X5)) & !next(excludes8-usr-X6)) & !next(excludes8-usr-X7)) & !next(excludes8-usr-X8))))))))));
+	next(excludes8-res-init_flag) := FALSE;
+
+
+
+MODULE firefly (firefly-usr-e1, firefly-usr-e2, firefly-usr-e3, firefly-usr-e4, firefly-usr-e5, firefly-usr-e6, firefly-usr-e7, firefly-usr-e8, firefly-usr-i_invalid)
+VAR
+	firefly-res-init_flag : boolean;
+	firefly-usr-invalid : integer;
+	firefly-usr-dirty : integer;
+	firefly-usr-exclusive : integer;
+	firefly-usr-shared : integer;
+	firefly-impl-usr-mem_invalid : integer;
+	firefly-res-oracle_18 : integer;
+	firefly-res-oracle_19 : integer;
+	firefly-res-oracle_20 : integer;
+	firefly-res-oracle_16 : integer;
+	firefly-res-oracle_17 : integer;
+	firefly-res-oracle_12 : integer;
+	firefly-res-oracle_13 : integer;
+	firefly-res-oracle_14 : integer;
+	firefly-res-oracle_15 : integer;
+	firefly-res-oracle_11 : integer;
+	firefly-res-oracle_10 : integer;
+	firefly-res-oracle_7 : integer;
+	firefly-res-oracle_8 : integer;
+	firefly-res-oracle_9 : integer;
+	firefly-res-oracle_5 : integer;
+	firefly-res-oracle_6 : integer;
+	firefly-res-oracle_1 : integer;
+	firefly-res-oracle_2 : integer;
+	firefly-res-oracle_3 : integer;
+	firefly-res-oracle_4 : integer;
+ASSIGN
+	init(firefly-impl-usr-mem_invalid) := firefly-usr-i_invalid;
+	init(firefly-usr-invalid) := firefly-impl-usr-mem_invalid;
+	init(firefly-usr-dirty) := 0;
+	init(firefly-usr-exclusive) := 0;
+	init(firefly-usr-shared) := 0;
+	init(firefly-res-init_flag) := TRUE;
+
+	next(firefly-usr-invalid) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-invalid - 1) : firefly-usr-invalid) : firefly-usr-invalid))))));
+	next(firefly-usr-dirty) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? firefly-usr-dirty + 1 : firefly-usr-dirty) : (next(firefly-usr-e6) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? 1 : firefly-usr-dirty) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? (firefly-usr-dirty - 1) : firefly-usr-dirty) : firefly-usr-dirty))));
+	next(firefly-usr-exclusive) := (next(firefly-usr-e1) ? ((((firefly-usr-invalid >= 1 & (firefly-usr-dirty = 0)) & (firefly-usr-shared = 0)) & (firefly-usr-exclusive = 0)) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : (next(firefly-usr-e4) ? (firefly-usr-exclusive >= 1 ? (firefly-usr-exclusive - 1) : firefly-usr-exclusive) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? firefly-usr-exclusive + 1 : firefly-usr-exclusive) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? 0 : firefly-usr-exclusive) : firefly-usr-exclusive)))));
+	next(firefly-usr-shared) := (next(firefly-usr-e2) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e3) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? (firefly-usr-shared - 1) + firefly-usr-exclusive + 1 : firefly-usr-shared) : (next(firefly-usr-e5) ? ((firefly-usr-shared = 1) ? 0 : firefly-usr-shared) : (next(firefly-usr-e7) ? ((firefly-usr-invalid >= 1 & firefly-usr-dirty >= 1) ? firefly-usr-shared + 2 : firefly-usr-shared) : (next(firefly-usr-e8) ? ((firefly-usr-invalid >= 1 & firefly-usr-shared + firefly-usr-exclusive >= 1) ? firefly-usr-shared + firefly-usr-exclusive + 1 : firefly-usr-shared) : firefly-usr-shared)))));
+	next(firefly-impl-usr-mem_invalid) := firefly-impl-usr-mem_invalid;
+	next(firefly-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_23 : boolean;
+	top-res-call_25 : First(top-usr-i_invalid);
+	top-res-call_22 : excludes8(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8);
+	top-res-call_24 : Sofar(top-res-gklocal_23);
+	top-res-2-call_21_0 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_1 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_2.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_2 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_3.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_21_3 : firefly(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-i_invalid, top-res-2-call_21_0.not_found, top-res-2-call_21_1.not_found, top-res-2-call_21_2.not_found, top-res-poracle_20, top-res-poracle_19, top-res-poracle_18, top-res-poracle_17, top-res-poracle_16, top-res-poracle_15, top-res-poracle_14, top-res-poracle_13, top-res-poracle_12, top-res-poracle_11, top-res-poracle_10, top-res-poracle_9, top-res-poracle_8, top-res-poracle_7, top-res-poracle_6, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+	top-res-poracle_6 : integer;
+	top-res-poracle_7 : integer;
+	top-res-poracle_8 : integer;
+	top-res-poracle_9 : integer;
+	top-res-poracle_10 : integer;
+	top-res-poracle_11 : integer;
+	top-res-poracle_12 : integer;
+	top-res-poracle_13 : integer;
+	top-res-poracle_14 : integer;
+	top-res-poracle_15 : integer;
+	top-res-poracle_16 : integer;
+	top-res-poracle_17 : integer;
+	top-res-poracle_18 : integer;
+	top-res-poracle_19 : integer;
+	top-res-poracle_20 : integer;
+
+
+
+
+
+ASSIGN
+	init(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & top-usr-i_invalid >= 0);
+	init(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+	next(top-res-gklocal_23) := (top-res-call_22.excludes8-usr-excludes & next(top-usr-i_invalid) >= 0);
+	next(top-usr-OK) := (top-res-call_24.Sofar-usr-Sofar -> (top-res-2-call_21_0.firefly-usr-invalid + top-res-2-call_21_1.firefly-usr-dirty + top-res-2-call_21_2.firefly-usr-exclusive + top-res-2-call_21_3.firefly-usr-shared = top-res-call_25.First-usr-First));
+
+
+LTLSPEC G
+((top-usr-OK));
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+[1mSummary of properties[22m:
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+[94mInvProp[l76c3][39m: [91minvalid after 1 steps[39m
+=======================================================================================================================================================
+

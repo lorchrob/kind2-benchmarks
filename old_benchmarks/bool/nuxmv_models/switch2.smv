@@ -1,0 +1,41 @@
+
+MODULE SWITCH (SWITCH-usr-set, SWITCH-usr-reset, SWITCH-usr-init)
+VAR
+
+	SWITCH-usr-level : boolean;
+ASSIGN
+	init(SWITCH-usr-level) := SWITCH-usr-init;
+	next(SWITCH-usr-level) := ((next(SWITCH-usr-set) & !SWITCH-usr-level) ? TRUE : (next(SWITCH-usr-reset) ? FALSE : SWITCH-usr-level));
+
+
+
+MODULE SWITCH1 (SWITCH1-usr-set, SWITCH1-usr-reset, SWITCH1-usr-init)
+VAR
+
+	SWITCH1-usr-level : boolean;
+ASSIGN
+	init(SWITCH1-usr-level) := SWITCH1-usr-init;
+	next(SWITCH1-usr-level) := (next(SWITCH1-usr-set) ? TRUE : (next(SWITCH1-usr-reset) ? FALSE : SWITCH1-usr-level));
+
+
+
+MODULE main () 
+VAR
+
+	top-usr-set : boolean;
+	top-usr-treset : boolean;
+	top-usr-init : boolean;
+	top-usr-OK : boolean;
+	top-res-call_2 : SWITCH1(top-usr-set, top-usr-treset, top-usr-init);
+	top-res-call_1 : SWITCH(top-usr-set, top-usr-treset, top-usr-init);
+
+
+ASSIGN
+	init(top-usr-OK) := (!(top-usr-set & top-usr-treset) ? (top-res-call_1.SWITCH-usr-level = top-res-call_2.SWITCH1-usr-level) : TRUE);
+
+	next(top-usr-OK) := (!(next(top-usr-set) & next(top-usr-treset)) ? (next(top-res-call_1.SWITCH-usr-level) = next(top-res-call_2.SWITCH1-usr-level)) : TRUE);
+
+
+INVARSPEC 
+((top-usr-OK));
+

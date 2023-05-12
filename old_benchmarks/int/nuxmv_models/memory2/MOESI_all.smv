@@ -1,0 +1,847 @@
+ kind2 v1.8.0-155-g2a6a75f-dirty
+
+[1m<[33mWarning[39m>[22m Parser warning at MOESI_all.lus:21:16: Unguarded pre in expression (pre invalid_mo)
+
+[1m<[33mWarning[39m>[22m Parser warning at MOESI_all.lus:22:16: Unguarded pre in expression (pre exclusive_mo)
+
+[1m<[33mWarning[39m>[22m Parser warning at MOESI_all.lus:23:16: Unguarded pre in expression (pre shared_mo)
+
+[1m<[33mWarning[39m>[22m Parser warning at MOESI_all.lus:23:32: Unguarded pre in expression (pre owned_mo)
+
+[1m<[33mWarning[39m>[22m Parser warning at MOESI_all.lus:24:16: Unguarded pre in expression (pre invalid_mo)
+
+
+
+=======================================================================================================================================================
+[1mAnalyzing [34m[34mtop[39m[39m[22m
+  with First top: '[34mtop[39m'
+             subsystems
+               | concrete: [34mmoesi[39m, [34mexcludes4[39m, [34mSofar[39m
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+[1m<[92mSuccess[39m>[22m Property [94mInvProp[l77c5][39m is valid by inductive step after 0.104s.
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
+VAR
+	moesi-res-init_flag : boolean;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+ASSIGN
+	init(moesi-usr-modified_mo) := 0;
+	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
+	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-usr-shared_mo) := 0;
+	init(moesi-usr-owned_mo) := 0;
+	init(moesi-usr-erreur_mo) := FALSE;
+	init(moesi-res-init_flag) := TRUE;
+
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
+	top-res-2-call_6_0 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_1 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_2 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_3 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_4.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_4 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_5.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_6_5 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4, top-res-2-call_6_0.not_found, top-res-2-call_6_1.not_found, top-res-2-call_6_2.not_found, top-res-2-call_6_3.not_found, top-res-2-call_6_4.not_found, top-res-poracle_5, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+	top-res-poracle_5 : integer;
+
+
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> !top-res-2-call_6_5.moesi-usr-erreur_mo);
+	init(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (!top-res-2-call_6_5.moesi-usr-erreur_mo & (top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo = top-res-glocal_9)));
+	next(top-res-glocal_9) := top-res-2-call_6_0.moesi-usr-modified_mo + top-res-2-call_6_1.moesi-usr-exclusive_mo + top-res-2-call_6_2.moesi-usr-shared_mo + top-res-2-call_6_3.moesi-usr-invalid_mo + top-res-2-call_6_4.moesi-usr-owned_mo;
+
+
+LTLSPEC G
+((top-usr-OK));
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+[1mSummary of properties[22m:
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+[94mInvProp[l77c5][39m: [92mvalid (k=1)[39m
+=======================================================================================================================================================
+

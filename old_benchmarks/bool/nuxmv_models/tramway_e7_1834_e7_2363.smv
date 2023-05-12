@@ -1,0 +1,205 @@
+
+MODULE jafter (jafter-usr-X)
+VAR
+
+	jafter-usr-after : boolean;
+ASSIGN
+	init(jafter-usr-after) := FALSE;
+	next(jafter-usr-after) := jafter-usr-X;
+
+
+
+MODULE edge (edge-usr-X)
+VAR
+
+	edge-usr-edge : boolean;
+ASSIGN
+	init(edge-usr-edge) := FALSE;
+	next(edge-usr-edge) := (!edge-usr-X | next(edge-usr-X));
+
+
+
+MODULE environment (environment-usr-door_is_open, environment-usr-open_door, environment-usr-close_door, environment-usr-in_station, environment-usr-door_ok, environment-usr-warning_start)
+VAR
+
+	environment-usr-env_always_ok : boolean;
+	environment-res-gklocal_13 : boolean;
+	environment-res-gklocal_10 : boolean;
+	environment-res-gklocal_8 : boolean;
+	environment-res-call_15 : edge(environment-usr-warning_start);
+	environment-res-call_14 : edge(environment-res-gklocal_13);
+	environment-res-call_11 : edge(environment-res-gklocal_10);
+	environment-res-call_12 : jafter(environment-usr-door_ok);
+	environment-res-call_9 : edge(environment-res-gklocal_8);
+	environment-res-call_7 : edge(environment-usr-door_is_open);
+
+
+
+
+
+
+ASSIGN
+	init(environment-usr-env_always_ok) := ((((((((environment-res-call_9.edge-usr-edge -> environment-usr-close_door) & (environment-res-call_7.edge-usr-edge -> environment-usr-open_door)) & (environment-res-call_11.edge-usr-edge -> environment-res-call_12.jafter-usr-after)) & !environment-usr-door_is_open) & !environment-usr-in_station) & (environment-res-call_11.edge-usr-edge = environment-res-call_14.edge-usr-edge)) & (environment-usr-warning_start -> environment-usr-in_station)) & (environment-res-call_15.edge-usr-edge -> !environment-usr-open_door));
+	init(environment-res-gklocal_8) := !environment-usr-door_is_open;
+	init(environment-res-gklocal_10) := !environment-usr-in_station;
+	init(environment-res-gklocal_13) := !environment-usr-warning_start;
+
+	next(environment-res-gklocal_8) := !next(environment-usr-door_is_open);
+	next(environment-res-gklocal_10) := !next(environment-usr-in_station);
+	next(environment-res-gklocal_13) := !next(environment-usr-warning_start);
+	next(environment-usr-env_always_ok) := (((((((((next(environment-res-call_9.edge-usr-edge) -> next(environment-usr-close_door)) & (next(environment-res-call_7.edge-usr-edge) -> next(environment-usr-open_door))) & (next(environment-res-call_11.edge-usr-edge) -> next(environment-res-call_12.jafter-usr-after))) & TRUE) & TRUE) & (next(environment-res-call_11.edge-usr-edge) = next(environment-res-call_14.edge-usr-edge))) & (next(environment-usr-warning_start) -> next(environment-usr-in_station))) & (next(environment-res-call_15.edge-usr-edge) -> !next(environment-usr-open_door))) & environment-usr-env_always_ok);
+
+
+
+MODULE switch (switch-usr-init, switch-usr-on, switch-usr-off)
+VAR
+
+	switch-usr-value : boolean;
+ASSIGN
+	init(switch-usr-value) := (switch-usr-on ? TRUE : (switch-usr-off ? FALSE : switch-usr-init));
+
+	next(switch-usr-value) := (next(switch-usr-on) ? TRUE : (next(switch-usr-off) ? FALSE : switch-usr-value));
+
+
+
+MODULE once_from_to (once_from_to-usr-A, once_from_to-usr-B, once_from_to-usr-X)
+VAR
+
+	once_from_to-usr-OK : boolean;
+	once_from_to-res-gklocal_1 : boolean;
+	once_from_to-res-call_2 : jafter(once_from_to-usr-X);
+	once_from_to-res-call_3 : switch(once_from_to-res-gklocal_1, once_from_to-usr-A, once_from_to-res-call_2.jafter-usr-after);
+
+
+ASSIGN
+	init(once_from_to-res-gklocal_1) := FALSE;
+	init(once_from_to-usr-OK) := !(once_from_to-usr-B | once_from_to-res-call_3.switch-usr-value);
+
+	next(once_from_to-usr-OK) := !(next(once_from_to-usr-B) | next(once_from_to-res-call_3.switch-usr-value));
+	next(once_from_to-res-gklocal_1) := FALSE;
+
+
+
+MODULE properties (properties-usr-door_is_open, properties-usr-in_station, properties-usr-request_door, properties-usr-warning_start)
+VAR
+
+	properties-usr-OK : boolean;
+	properties-res-gklocal_18 : boolean;
+	properties-res-gklocal_16 : boolean;
+	properties-res-call_20 : jafter(properties-usr-door_is_open);
+	properties-res-call_19 : edge(properties-res-gklocal_18);
+	properties-res-call_17 : jafter(properties-res-gklocal_16);
+	properties-res-call_21 : once_from_to(properties-res-call_17.jafter-usr-after, properties-res-call_19.edge-usr-edge, properties-res-call_20.jafter-usr-after);
+
+
+
+
+
+
+
+
+
+ASSIGN
+	init(properties-usr-OK) := ((properties-usr-door_is_open -> properties-usr-in_station) & properties-res-call_21.once_from_to-usr-OK);
+	init(properties-res-gklocal_16) := (properties-usr-request_door & !properties-usr-warning_start);
+	init(properties-res-gklocal_18) := !properties-usr-in_station;
+
+	next(properties-res-gklocal_18) := !next(properties-usr-in_station);
+	next(properties-usr-OK) := ((next(properties-usr-door_is_open) -> next(properties-usr-in_station)) & next(properties-res-call_21.once_from_to-usr-OK));
+	next(properties-res-gklocal_16) := (next(properties-usr-request_door) & !next(properties-usr-warning_start));
+
+
+
+MODULE controller (controller-usr-request_door, controller-usr-warning_start, controller-usr-in_station, controller-usr-door_is_open)
+VAR
+
+	controller-usr-open_door : boolean;
+	controller-usr-close_door : boolean;
+	controller-usr-door_ok : boolean;
+	controller-res-gklocal_5 : boolean;
+	controller-res-gklocal_4 : boolean;
+	controller-res-call_6 : switch(controller-res-gklocal_4, controller-res-gklocal_5, controller-usr-door_is_open);
+
+ASSIGN
+	init(controller-res-gklocal_4) := FALSE;
+	init(controller-res-gklocal_5) := (controller-usr-request_door & !controller-usr-warning_start);
+	init(controller-usr-open_door) := (controller-res-call_6.switch-usr-value & controller-usr-in_station);
+	init(controller-usr-close_door) := (controller-usr-warning_start & controller-usr-door_is_open);
+	init(controller-usr-door_ok) := (!controller-usr-door_is_open & controller-usr-warning_start);
+
+	next(controller-res-gklocal_5) := (next(controller-usr-request_door) & !next(controller-usr-warning_start));
+	next(controller-usr-open_door) := (next(controller-res-call_6.switch-usr-value) & next(controller-usr-in_station));
+	next(controller-res-gklocal_4) := FALSE;
+	next(controller-usr-close_door) := (next(controller-usr-warning_start) & next(controller-usr-door_is_open));
+	next(controller-usr-door_ok) := (!next(controller-usr-door_is_open) & next(controller-usr-warning_start));
+
+
+
+MODULE main () 
+VAR
+
+	top-usr-request_door : boolean;
+	top-usr-warning_start : boolean;
+	top-usr-in_station : boolean;
+	top-usr-door_is_open : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-open_door : boolean;
+	top-impl-usr-close_door : boolean;
+	top-impl-usr-door_ok : boolean;
+	top-res-2-call_24_0 : controller(top-usr-request_door, top-usr-warning_start, top-usr-in_station, top-usr-door_is_open);
+	top-res-2-call_24_1 : controller(top-usr-request_door, top-usr-warning_start, top-usr-in_station, top-usr-door_is_open);
+	top-res-2-call_24_2 : controller(top-usr-request_door, top-usr-warning_start, top-usr-in_station, top-usr-door_is_open);
+	top-res-call_23 : environment(top-usr-door_is_open, top-impl-usr-open_door, top-impl-usr-close_door, top-usr-in_station, top-impl-usr-door_ok, top-usr-warning_start);
+	top-res-call_22 : properties(top-usr-door_is_open, top-usr-in_station, top-usr-request_door, top-usr-warning_start);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ASSIGN
+	init(top-impl-usr-close_door) := top-res-2-call_24_1.controller-usr-close_door;
+	init(top-impl-usr-open_door) := top-res-2-call_24_0.controller-usr-open_door;
+	init(top-usr-OK) := (top-res-call_23.environment-usr-env_always_ok -> top-res-call_22.properties-usr-OK);
+	init(top-impl-usr-door_ok) := top-res-2-call_24_2.controller-usr-door_ok;
+
+	next(top-impl-usr-close_door) := next(top-res-2-call_24_1.controller-usr-close_door);
+	next(top-impl-usr-open_door) := next(top-res-2-call_24_0.controller-usr-open_door);
+	next(top-usr-OK) := (next(top-res-call_23.environment-usr-env_always_ok) -> next(top-res-call_22.properties-usr-OK));
+	next(top-impl-usr-door_ok) := next(top-res-2-call_24_2.controller-usr-door_ok);
+
+
+INVARSPEC 
+((top-usr-OK));
+

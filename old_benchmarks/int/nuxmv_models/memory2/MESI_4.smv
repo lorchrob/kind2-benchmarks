@@ -1,0 +1,755 @@
+ kind2 v1.8.0-155-g2a6a75f-dirty
+
+[1m<[33mWarning[39m>[22m Parser warning at MESI_4.lus:22:16: Unguarded pre in expression (pre invalid_me)
+
+[1m<[33mWarning[39m>[22m Parser warning at MESI_4.lus:23:16: Unguarded pre in expression (pre exclusive_me)
+
+[1m<[33mWarning[39m>[22m Parser warning at MESI_4.lus:24:16: Unguarded pre in expression (pre shared_me)
+
+[1m<[33mWarning[39m>[22m Parser warning at MESI_4.lus:25:16: Unguarded pre in expression (pre invalid_me)
+
+
+
+=======================================================================================================================================================
+[1mAnalyzing [34m[34mtop[39m[39m[22m
+  with First top: '[34mtop[39m'
+             subsystems
+               | concrete: [34mmesi[39m, [34mexcludes4[39m, [34mSofar[39m
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+[1m<[92mSuccess[39m>[22m Property [94mInvProp[l66c5][39m is valid by inductive step after 0.101s.
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-res-init_flag : boolean;
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	init(Sofar-res-init_flag) := TRUE;
+
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+	next(Sofar-res-init_flag) := FALSE;
+
+
+
+MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
+VAR
+	excludes4-res-init_flag : boolean;
+	excludes4-usr-excludes : boolean;
+ASSIGN
+	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
+	init(excludes4-res-init_flag) := TRUE;
+
+	next(excludes4-usr-excludes) := !((next(excludes4-usr-X3) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X2) & next(excludes4-usr-X3)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X4)) | ((next(excludes4-usr-X1) & next(excludes4-usr-X3)) | (next(excludes4-usr-X1) & next(excludes4-usr-X2)))))));
+	next(excludes4-res-init_flag) := FALSE;
+
+
+
+MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
+VAR
+	mesi-res-init_flag : boolean;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+ASSIGN
+	init(mesi-usr-modified_me) := 0;
+	init(mesi-usr-invalid_me) := 3;
+	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-usr-shared_me) := 0;
+	init(mesi-res-init_flag) := TRUE;
+
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-res-init_flag) := FALSE;
+
+
+
+MODULE main () 
+VAR
+	top-res-init_flag : boolean;
+	top-usr-OK : boolean;
+	top-res-gklocal_7 : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-res-call_8 : Sofar(top-res-gklocal_7);
+	top-res-2-call_5_0 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_1 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_2.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_2 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_3.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-2-call_5_3 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4, top-res-2-call_5_0.not_found, top-res-2-call_5_1.not_found, top-res-2-call_5_2.not_found, top-res-poracle_4, top-res-poracle_3, top-res-poracle_2, top-res-poracle_1);
+	top-res-poracle_1 : integer;
+	top-res-poracle_2 : integer;
+	top-res-poracle_3 : integer;
+	top-res-poracle_4 : integer;
+
+
+
+ASSIGN
+	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	init(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+	next(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & top-res-2-call_5_0.mesi-usr-modified_me >= 0);
+	next(top-usr-OK) := (top-res-call_8.Sofar-usr-Sofar -> (top-res-2-call_5_2.mesi-usr-shared_me <= 1 | top-res-2-call_5_0.mesi-usr-modified_me <= 1));
+
+
+LTLSPEC G
+((top-usr-OK));
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+[1mSummary of properties[22m:
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+[94mInvProp[l66c5][39m: [92mvalid (k=2)[39m
+=======================================================================================================================================================
+

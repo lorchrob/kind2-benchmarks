@@ -1,0 +1,30 @@
+List of models AADL models with AGREE specs and properties:
+	my Uptane model?
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/CASEArray/SW_lits_no_types.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/CASEArray/SW_no_arrays.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/CASEArray/SW_props_no_lits.aadl (SKIPPED)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/CASEArray/small-array-no-range.aadl (SKIPPED)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/CASEArray/small-array-range.aadl (SKIPPED)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/CASEArray/small-no-range.aadl (SKIPPED)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/CASEArray/small-range.aadl (SKIPPED)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/Flight/packages/UserInput.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/Pilot_Flying/aadl/packages/Signals.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/Pilot_Flying/aadl/packages/Pilot_Flying.aadl (nested) (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/SmaccmPhase2_V3/hardware/UAV.aadl (nested) (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/SmaccmPhase2_V3/software/Flight_Software.aadl (nested) (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/SmaccmPhase2_V3/software/Mission_Software.aadl (nested) (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/BSCU/aadl/packages/BSCU.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/CASEArray/SW_lits_no_types.aadl (SKIPPED)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/CASE_Simple_Example_Test/SW.aadl (SKIPPED)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/Car/packages/Car.aadl (nested) (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/Clocks/Clock.aadl (check with Daniel) (SMV MODEL WEIRD)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/Clocks/Sentinel.aadl (SMV MODEL WEIRD)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/Dual%20FGS/aadl/packages/FGS.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/GPCA/packages/GPCA_SW.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/Ground_Vehicle/Ground_Vehicle.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/Ground_Vehicle/Ground_Vehicle_Finished.aadl (ERROR)
+	https://github.com/loonwerks/formal-methods-workbench/blob/master/models/agree/Microwave/Microwave_SEng5861.aadl (ERROR)
+
+
+	last checked: Minitower
+

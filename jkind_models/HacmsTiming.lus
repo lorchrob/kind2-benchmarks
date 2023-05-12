@@ -1,0 +1,480 @@
+type Base_Types__Boolean = bool;
+type Base_Types__Unsigned = int;
+type Base_Types__Unsigned_64 = int;
+type Base_Types__Unsigned_32 = int;
+type Base_Types__Unsigned_16 = int;
+type Base_Types__Unsigned_8 = int;
+type Base_Types__Integer = int;
+type Base_Types__Integer_64 = int;
+type Base_Types__Integer_32 = int;
+type Base_Types__Integer_16 = int;
+type Base_Types__Integer_8 = int;
+type Base_Types__Float = real;
+type Base_Types__Float_32 = real;
+type Base_Types__Float_64 = real;
+
+node _TOP__a1(
+  __ASSUME__HIST : bool;
+  input___EVENT_ : bool;
+  input : int;
+  time : real;
+  output___EVENT_ : bool;
+  output : int;
+  _CLK : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  _TICKED : bool;
+  _INIT : bool;
+let
+  _TICKED = (_CLK -> (_CLK or (pre _TICKED)));
+
+  _INIT = (_CLK and (true -> (not (pre _TICKED))));
+
+  __ASSERT = (((not _TICKED) => true) and (((not _CLK) => (true -> ((true and (output___EVENT_ = (pre output___EVENT_))) and (output = (pre output))))) and (_CLK => (__ASSUME__HIST => true))));
+
+tel;
+
+node _TOP__a2(
+  __ASSUME__HIST : bool;
+  input___EVENT_ : bool;
+  input : int;
+  time : real;
+  output___EVENT_ : bool;
+  output : int;
+  _CLK : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  _TICKED : bool;
+  _INIT : bool;
+let
+  _TICKED = (_CLK -> (_CLK or (pre _TICKED)));
+
+  _INIT = (_CLK and (true -> (not (pre _TICKED))));
+
+  __ASSERT = (((not _TICKED) => true) and (((not _CLK) => (true -> ((true and (output___EVENT_ = (pre output___EVENT_))) and (output = (pre output))))) and (_CLK => (__ASSUME__HIST => true))));
+
+tel;
+
+node _TOP__m1(
+  __ASSUME__HIST : bool;
+  input___EVENT_ : bool;
+  input : int;
+  time : real;
+  input_hold : int;
+  output___EVENT_ : bool;
+  output : int;
+  _CLK : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  _TICKED : bool;
+  _INIT : bool;
+  _STATE0 : int;
+let
+  _TICKED = (_CLK -> (_CLK or (pre _TICKED)));
+
+  _INIT = (_CLK and (true -> (not (pre _TICKED))));
+
+  __GUARANTEE0 = (if _CLK then (output = input_hold) else (pre __GUARANTEE0));
+
+  __GUARANTEE1 = (if _CLK then (output___EVENT_ = input___EVENT_) else (pre __GUARANTEE1));
+
+  __ASSERT = (((not _TICKED) => ((output = 0) and (not output___EVENT_))) and (((not _CLK) => (true -> (((true and (input_hold = (pre input_hold))) and (output___EVENT_ = (pre output___EVENT_))) and (output = (pre output))))) and (_CLK => ((input_hold = (if input___EVENT_ then input else (if _INIT then 0 else _STATE0))) and (__ASSUME__HIST => (__GUARANTEE1 and __GUARANTEE0))))));
+
+  _STATE0 = (if _CLK then (pre input) else (pre _STATE0));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1;
+
+tel;
+
+node _TOP__m2(
+  __ASSUME__HIST : bool;
+  input___EVENT_ : bool;
+  input : int;
+  time : real;
+  input_hold : int;
+  output___EVENT_ : bool;
+  output : int;
+  _CLK : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  _TICKED : bool;
+  _INIT : bool;
+  _STATE0 : int;
+let
+  _TICKED = (_CLK -> (_CLK or (pre _TICKED)));
+
+  _INIT = (_CLK and (true -> (not (pre _TICKED))));
+
+  __GUARANTEE0 = (if _CLK then (output = input_hold) else (pre __GUARANTEE0));
+
+  __GUARANTEE1 = (if _CLK then (output___EVENT_ = input___EVENT_) else (pre __GUARANTEE1));
+
+  __ASSERT = (((not _TICKED) => ((output = 0) and (not output___EVENT_))) and (((not _CLK) => (true -> (((true and (input_hold = (pre input_hold))) and (output___EVENT_ = (pre output___EVENT_))) and (output = (pre output))))) and (_CLK => ((input_hold = (if input___EVENT_ then input else (if _INIT then 0 else _STATE0))) and (__ASSUME__HIST => (__GUARANTEE1 and __GUARANTEE0))))));
+
+  _STATE0 = (if _CLK then (pre input) else (pre _STATE0));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1;
+
+tel;
+
+node _TOP__m3(
+  __ASSUME__HIST : bool;
+  input1___EVENT_ : bool;
+  input1 : int;
+  input2___EVENT_ : bool;
+  input2 : int;
+  time : real;
+  input1_hold : int;
+  input2_hold : int;
+  output___EVENT_ : bool;
+  output : int;
+  _CLK : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  _TICKED : bool;
+  _INIT : bool;
+  _STATE0 : int;
+  _STATE1 : int;
+let
+  _TICKED = (_CLK -> (_CLK or (pre _TICKED)));
+
+  _INIT = (_CLK and (true -> (not (pre _TICKED))));
+
+  __GUARANTEE0 = (if _CLK then (output = (input1_hold + input2_hold)) else (pre __GUARANTEE0));
+
+  __GUARANTEE1 = (if _CLK then (output___EVENT_ = (input1___EVENT_ or input2___EVENT_)) else (pre __GUARANTEE1));
+
+  __ASSERT = (((not _TICKED) => (output = 0)) and (((not _CLK) => (true -> ((((true and (input1_hold = (pre input1_hold))) and (input2_hold = (pre input2_hold))) and (output___EVENT_ = (pre output___EVENT_))) and (output = (pre output))))) and (_CLK => ((input2_hold = (if input2___EVENT_ then input2 else (if _INIT then 0 else _STATE0))) and ((input1_hold = (if input1___EVENT_ then input1 else (if _INIT then 0 else _STATE1))) and (__ASSUME__HIST => (__GUARANTEE1 and __GUARANTEE0)))))));
+
+  _STATE0 = (if _CLK then (pre input2_hold) else (pre _STATE0));
+
+  _STATE1 = (if _CLK then (pre input1_hold) else (pre _STATE1));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1;
+
+tel;
+
+node main(
+  a1__output___EVENT_ : bool;
+  a1__output : int;
+  a1____ASSUME__HIST : bool;
+  a2__output___EVENT_ : bool;
+  a2__output : int;
+  a2____ASSUME__HIST : bool;
+  m1__input_hold : int;
+  m1__output___EVENT_ : bool;
+  m1__output : int;
+  m1____ASSUME__HIST : bool;
+  m2__input_hold : int;
+  m2__output___EVENT_ : bool;
+  m2__output : int;
+  m2____ASSUME__HIST : bool;
+  m3__input1_hold : int;
+  m3__input2_hold : int;
+  m3__output___EVENT_ : bool;
+  m3__output : int;
+  m3____ASSUME__HIST : bool;
+  a2_period : real;
+  clock_a1 : bool;
+  clock_a2 : bool;
+  clock_m1 : bool;
+  clock_m2 : bool;
+  clock_m3 : bool;
+  a1_sig_last : real;
+  a2_sig_last : real;
+  m1_sig_last : real;
+  m2_sig_last : real;
+  m3_sig_last : real;
+  a1_sig_cleared : real;
+  a2_sig_cleared : real;
+  m1_sig_cleared : real;
+  m2_sig_cleared : real;
+  m3_sig_cleared : real;
+  sig_a1 : bool;
+  sig_a2 : bool;
+  sig_m1 : bool;
+  sig_m2 : bool;
+  sig_m3 : bool;
+  t : real;
+  time_of_last_input_change : real;
+  output___EVENT_ : bool;
+  output : int;
+  a1__input___EVENT_ : bool;
+  a1__input : int;
+  a1__time : real;
+  a1___CLOCK_ : bool;
+  a2__input___EVENT_ : bool;
+  a2__input : int;
+  a2__time : real;
+  a2___CLOCK_ : bool;
+  m1__input___EVENT_ : bool;
+  m1__input : int;
+  m1__time : real;
+  m1___CLOCK_ : bool;
+  m2__input___EVENT_ : bool;
+  m2__input : int;
+  m2__time : real;
+  m2___CLOCK_ : bool;
+  m3__input1___EVENT_ : bool;
+  m3__input1 : int;
+  m3__input2___EVENT_ : bool;
+  m3__input2 : int;
+  m3__time : real;
+  m3___CLOCK_ : bool;
+  input___EVENT_ : bool;
+  input : int;
+  time : real
+) returns (
+
+);
+var
+  __ASSUME__HIST : bool;
+  __GUARANTEE0 : bool;
+let
+  --%MAIN;
+  __ASSUME__HIST = (m3____ASSUME__HIST and (m2____ASSUME__HIST and (m1____ASSUME__HIST and (a2____ASSUME__HIST and (a1____ASSUME__HIST and true)))));
+
+  __GUARANTEE0 = ((output <> (0 -> (pre output))) => (time_of_last_input_change < 40.0));
+
+  assert (time = a1__time);
+
+  assert _TOP__a1(a1____ASSUME__HIST, a1__input___EVENT_, a1__input, a1__time, a1__output___EVENT_, a1__output, a1___CLOCK_);
+
+  assert (a1____ASSUME__HIST = __HIST(true));
+
+  assert (time = a2__time);
+
+  assert _TOP__a2(a2____ASSUME__HIST, a2__input___EVENT_, a2__input, a2__time, a2__output___EVENT_, a2__output, a2___CLOCK_);
+
+  assert (a2____ASSUME__HIST = __HIST(true));
+
+  assert (time = m1__time);
+
+  assert _TOP__m1(m1____ASSUME__HIST, m1__input___EVENT_, m1__input, m1__time, m1__input_hold, m1__output___EVENT_, m1__output, m1___CLOCK_);
+
+  assert (m1____ASSUME__HIST = __HIST(true));
+
+  assert (time = m2__time);
+
+  assert _TOP__m2(m2____ASSUME__HIST, m2__input___EVENT_, m2__input, m2__time, m2__input_hold, m2__output___EVENT_, m2__output, m2___CLOCK_);
+
+  assert (m2____ASSUME__HIST = __HIST(true));
+
+  assert (time = m3__time);
+
+  assert _TOP__m3(m3____ASSUME__HIST, m3__input1___EVENT_, m3__input1, m3__input2___EVENT_, m3__input2, m3__time, m3__input1_hold, m3__input2_hold, m3__output___EVENT_, m3__output, m3___CLOCK_);
+
+  assert (m3____ASSUME__HIST = __HIST(true));
+
+  assert ((((a1___CLOCK_ or a2___CLOCK_) or m1___CLOCK_) or m2___CLOCK_) or m3___CLOCK_);
+
+  assert (input = a1__input);
+
+  assert (input___EVENT_ = a1__input___EVENT_);
+
+  assert (input = a2__input);
+
+  assert (input___EVENT_ = a2__input___EVENT_);
+
+  assert (a1__output = m1__input);
+
+  assert (a1__output___EVENT_ = m1__input___EVENT_);
+
+  assert (a2__output = m2__input);
+
+  assert (a2__output___EVENT_ = m2__input___EVENT_);
+
+  assert (m1__output = m3__input1);
+
+  assert (m1__output___EVENT_ = m3__input1___EVENT_);
+
+  assert (m2__output = m3__input2);
+
+  assert (m2__output___EVENT_ = m3__input2___EVENT_);
+
+  assert (m3__output = output);
+
+  assert (m3__output___EVENT_ = output___EVENT_);
+
+  assert ((80.0 <= a2_period) and (a2_period <= 120.0));
+
+  assert ((t >= 0.0) and (true -> (t > (pre t))));
+
+  assert ((((((t = 1.0) or (t = 1.0)) or (t = 1.0)) or (t = 1.0)) or (t = 1.0)) -> true);
+
+  assert ((((((((((not (clock_a1 and clock_a2)) and (not (clock_a1 and clock_m1))) and (not (clock_a1 and clock_m2))) and (not (clock_a1 and clock_m3))) and (not (clock_a2 and clock_m1))) and (not (clock_a2 and clock_m2))) and (not (clock_a2 and clock_m3))) and (not (clock_m1 and clock_m2))) and (not (clock_m1 and clock_m3))) and (not (clock_m2 and clock_m3)));
+
+  assert (((((clock_a1 => sig_a1) and (clock_a2 => sig_a2)) and (clock_m1 => sig_m1)) and (clock_m2 => sig_m2)) and (clock_m3 => sig_m3));
+
+  assert ((a1_sig_last - a1_sig_cleared) < 100.0);
+
+  assert ((a2_sig_last - a2_sig_cleared) < a2_period);
+
+  assert (clock_a1 = a1___CLOCK_);
+
+  assert (clock_a2 = a2___CLOCK_);
+
+  assert (clock_m1 = m1___CLOCK_);
+
+  assert (clock_m2 = m2___CLOCK_);
+
+  assert (clock_m3 = m3___CLOCK_);
+
+  assert (a1_sig_last = HacmsTiming__top_level__i__getLastSignal(t, 100.0));
+
+  assert (a2_sig_last = HacmsTiming__top_level__i__getLastSignal(t, a2_period));
+
+  assert (m1_sig_last = (if (clock_a1 and m1__input___EVENT_) then t else (0.0 -> (pre m1_sig_last))));
+
+  assert (m2_sig_last = (if (clock_a2 and m2__input___EVENT_) then t else (0.0 -> (pre m2_sig_last))));
+
+  assert (m3_sig_last = (if (clock_m1 and m3__input1___EVENT_) then t else (if (clock_m2 and m3__input2___EVENT_) then t else (0.0 -> (pre m3_sig_last)))));
+
+  assert (a1_sig_cleared = HacmsTiming__top_level__i__getSignalCleared(t, clock_a1, 1.0, (-1.0)));
+
+  assert (a2_sig_cleared = HacmsTiming__top_level__i__getSignalCleared(t, clock_a2, 1.0, (-1.0)));
+
+  assert (m1_sig_cleared = HacmsTiming__top_level__i__getSignalCleared(t, clock_m1, 1.0, 0.0));
+
+  assert (m2_sig_cleared = HacmsTiming__top_level__i__getSignalCleared(t, clock_m2, 1.0, 0.0));
+
+  assert (m3_sig_cleared = HacmsTiming__top_level__i__getSignalCleared(t, clock_m3, 1.0, 0.0));
+
+  assert (sig_a1 = (true -> (a1_sig_last > (pre a1_sig_cleared))));
+
+  assert (sig_a2 = (true -> (a2_sig_last > (pre a2_sig_cleared))));
+
+  assert (sig_m1 = (m1_sig_last > (0.0 -> (pre m1_sig_cleared))));
+
+  assert (sig_m2 = (m2_sig_last > (0.0 -> (pre m2_sig_cleared))));
+
+  assert (sig_m3 = (m3_sig_last > (0.0 -> (pre m3_sig_cleared))));
+
+  assert (time_of_last_input_change = (if (input <> (0 -> (pre input))) then t else (0.0 -> (pre time_of_last_input_change))));
+
+  assert true;
+
+  assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
+
+  --%PROPERTY __ASSUME__HIST;
+  --%PROPERTY __GUARANTEE0;
+
+tel;
+
+node HacmsTiming__top_level__i__getLastSignal(
+  time_val : real;
+  period : real
+) returns (
+  ret : real
+);
+let
+  ret = (0.0 -> (if (time_val < ((pre ret) + period)) then (pre ret) else ((pre ret) + period)));
+
+tel;
+
+node _CLOCKED_HacmsTiming__top_level__i__getLastSignal(
+  _CLK : bool;
+  _INIT : bool;
+  time_val : real;
+  period : real
+) returns (
+  ret : real
+);
+var
+  _STATE0 : real;
+let
+  ret = (if _CLK then (if _INIT then 0.0 else (if (time_val < (_STATE0 + period)) then _STATE0 else (_STATE0 + period))) else (pre ret));
+
+  _STATE0 = (if _CLK then (pre ret) else (pre _STATE0));
+
+tel;
+
+node HacmsTiming__top_level__i__getSignalCleared(
+  time_val : real;
+  clock : bool;
+  exec_time : real;
+  init_clear : real
+) returns (
+  ret : real
+);
+let
+  ret = (if clock then (time_val - exec_time) else (init_clear -> (pre ret)));
+
+tel;
+
+node _CLOCKED_HacmsTiming__top_level__i__getSignalCleared(
+  _CLK : bool;
+  _INIT : bool;
+  time_val : real;
+  clock : bool;
+  exec_time : real;
+  init_clear : real
+) returns (
+  ret : real
+);
+var
+  _STATE0 : real;
+let
+  ret = (if _CLK then (if clock then (time_val - exec_time) else (if _INIT then init_clear else _STATE0)) else (pre ret));
+
+  _STATE0 = (if _CLK then (pre ret) else (pre _STATE0));
+
+tel;
+
+node __HIST(
+  input : bool
+) returns (
+  hist : bool
+);
+let
+  hist = (input -> ((pre hist) and input));
+
+tel;
+
+node __MinPos(
+  a : real;
+  b : real
+) returns (
+  ret : real
+);
+let
+  ret = (if (a <= 0.0) then b else (if (b <= 0.0) then a else (if (a <= b) then a else b)));
+
+tel;
+
+node __Rise(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = (input -> ((pre (not input)) and input));
+
+tel;
+
+node __Fall(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = ((not input) -> ((pre input) and (not input)));
+
+tel;
+

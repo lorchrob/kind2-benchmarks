@@ -1,0 +1,374 @@
+-- Issue with array type, array of records
+MODULE _TOP__RADIO (_TOP__RADIO-usr-__ASSUME__HIST, _TOP__RADIO-usr-__ASSUME0, _TOP__RADIO-usr-__ASSUME1, _TOP__RADIO-usr-__ASSUME2, _TOP__RADIO-usr-recv_map_in___EVENT_, _TOP__RADIO-usr-5-recv_map_in-HMAC, _TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt, _TOP__RADIO-usr-2-4-4-recv_map_in-Map-lat, _TOP__RADIO-usr-2-5-4-recv_map_in-Map-long, _TOP__RADIO-usr-8-recv_map_in-Pattern, _TOP__RADIO-usr-send_status_in___EVENT_, _TOP__RADIO-usr-4-send_status_in-alt, _TOP__RADIO-usr-4-send_status_in-lat, _TOP__RADIO-usr-5-send_status_in-long, _TOP__RADIO-usr-time, _TOP__RADIO-usr-send_status_out___EVENT_, _TOP__RADIO-usr-4-send_status_out-alt, _TOP__RADIO-usr-4-send_status_out-lat, _TOP__RADIO-usr-5-send_status_out-long, _TOP__RADIO-usr-recv_map_out___EVENT_, _TOP__RADIO-usr-5-recv_map_out-HMAC, _TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt, _TOP__RADIO-usr-2-4-4-recv_map_out-Map-lat, _TOP__RADIO-usr-2-5-4-recv_map_out-Map-long, _TOP__RADIO-usr-8-recv_map_out-Pattern)
+VAR
+	_TOP__RADIO-res-init_flag : boolean;
+	_TOP__RADIO-usr-__ASSERT : boolean;
+ASSIGN
+	init(_TOP__RADIO-usr-__ASSERT) := ((_TOP__RADIO-usr-__ASSUME__HIST -> ((((((((0 <= (_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt[0]) & (_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt[0]) <= 15000) & 0 <= (_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt[1])) & (_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt[1]) <= 15000) & 0 <= (_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt[2])) & (_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt[2]) <= 15000) & 0 <= (_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt[3])) & (_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt[3]) <= 15000) & ((0 <= _TOP__RADIO-usr-4-send_status_out-alt & _TOP__RADIO-usr-4-send_status_out-alt <= 15000) & _TOP__RADIO-usr-5-recv_map_out-HMAC))) & ((_TOP__RADIO-usr-__ASSUME2 = (0 <= _TOP__RADIO-usr-4-send_status_in-alt & _TOP__RADIO-usr-4-send_status_in-alt <= 15000)) & ((_TOP__RADIO-usr-__ASSUME1 = (((((((0 <= (_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt[0]) & (_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt[0]) <= 15000) & 0 <= (_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt[1])) & (_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt[1]) <= 15000) & 0 <= (_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt[2])) & (_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt[2]) <= 15000) & 0 <= (_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt[3])) & (_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt[3]) <= 15000)) & (_TOP__RADIO-usr-__ASSUME0 = _TOP__RADIO-usr-5-recv_map_in-HMAC))));
+  next(_TOP__RADIO-usr-__ASSERT) := ((next(_TOP__RADIO-usr-__ASSUME__HIST) -> ((((((((0 <= (next(_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt)[0]) & (next(_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt)[0]) <= 15000) & 0 <= (next(_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt)[1])) & (next(_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt)[1]) <= 15000) & 0 <= (next(_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt)[2])) & (next(_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt)[2]) <= 15000) & 0 <= (next(_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt)[3])) & (next(_TOP__RADIO-usr-2-4-4-recv_map_out-Map-alt)[3]) <= 15000) & ((0 <= next(_TOP__RADIO-usr-4-send_status_out-alt) & next(_TOP__RADIO-usr-4-send_status_out-alt) <= 15000) & next(_TOP__RADIO-usr-5-recv_map_out-HMAC)))) & ((next(_TOP__RADIO-usr-__ASSUME2) = (0 <= next(_TOP__RADIO-usr-4-send_status_in-alt) & next(_TOP__RADIO-usr-4-send_status_in-alt) <= 15000)) & ((next(_TOP__RADIO-usr-__ASSUME1) = (((((((0 <= (next(_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt)[0]) & (next(_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt)[0]) <= 15000) & 0 <= (next(_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt)[1])) & (next(_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt)[1]) <= 15000) & 0 <= (next(_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt)[2])) & (next(_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt)[2]) <= 15000) & 0 <= (next(_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt)[3])) & (next(_TOP__RADIO-usr-2-4-4-recv_map_in-Map-alt)[3]) <= 15000)) & (next(_TOP__RADIO-usr-__ASSUME0) = next(_TOP__RADIO-usr-5-recv_map_in-HMAC)))));
+
+MODULE _TOP__WPM (_TOP__WPM-usr-__ASSUME__HIST, _TOP__WPM-usr-__ASSUME0, _TOP__WPM-usr-__ASSUME1, _TOP__WPM-usr-2-4-flight_plan-alt, _TOP__WPM-usr-2-4-flight_plan-lat, _TOP__WPM-usr-2-5-flight_plan-long, _TOP__WPM-usr-position_status___EVENT_, _TOP__WPM-usr-4-position_status-alt, _TOP__WPM-usr-4-position_status-lat, _TOP__WPM-usr-5-position_status-long, _TOP__WPM-usr-time, _TOP__WPM-usr-waypoint___EVENT_, _TOP__WPM-usr-4-waypoint-crc, _TOP__WPM-usr-2-4-4-waypoint-wps-alt, _TOP__WPM-usr-2-4-4-waypoint-wps-lat, _TOP__WPM-usr-2-5-4-waypoint-wps-long)
+VAR
+	_TOP__WPM-res-init_flag : boolean;
+	_TOP__WPM-usr-__ASSERT : boolean;
+ASSIGN
+	init(_TOP__WPM-usr-__ASSERT) := ((_TOP__WPM-usr-__ASSUME__HIST -> (((((((0 <= (_TOP__WPM-usr-2-4-4-waypoint-wps-alt[0]) & (_TOP__WPM-usr-2-4-4-waypoint-wps-alt[0]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-4-waypoint-wps-alt[1])) & (_TOP__WPM-usr-2-4-4-waypoint-wps-alt[1]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-4-waypoint-wps-alt[2])) & (_TOP__WPM-usr-2-4-4-waypoint-wps-alt[2]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-4-waypoint-wps-alt[3])) & (_TOP__WPM-usr-2-4-4-waypoint-wps-alt[3]) <= 15000)) & ((_TOP__WPM-usr-__ASSUME1 = (0 <= _TOP__WPM-usr-4-position_status-alt & _TOP__WPM-usr-4-position_status-alt <= 15000)) & (_TOP__WPM-usr-__ASSUME0 = (((((((((((((((((((0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[0]) & (_TOP__WPM-usr-2-4-flight_plan-alt[0]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[1])) & (_TOP__WPM-usr-2-4-flight_plan-alt[1]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[2])) & (_TOP__WPM-usr-2-4-flight_plan-alt[2]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[3])) & (_TOP__WPM-usr-2-4-flight_plan-alt[3]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[4])) & (_TOP__WPM-usr-2-4-flight_plan-alt[4]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[5])) & (_TOP__WPM-usr-2-4-flight_plan-alt[5]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[6])) & (_TOP__WPM-usr-2-4-flight_plan-alt[6]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[7])) & (_TOP__WPM-usr-2-4-flight_plan-alt[7]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[8])) & (_TOP__WPM-usr-2-4-flight_plan-alt[8]) <= 15000) & 0 <= (_TOP__WPM-usr-2-4-flight_plan-alt[9])) & (_TOP__WPM-usr-2-4-flight_plan-alt[9]) <= 15000))));
+	init(_TOP__WPM-res-init_flag) := TRUE;
+
+	next(_TOP__WPM-usr-__ASSERT) := ((next(_TOP__WPM-usr-__ASSUME__HIST) -> (((((((0 <= (next(_TOP__WPM-usr-2-4-4-waypoint-wps-alt)[0]) & (next(_TOP__WPM-usr-2-4-4-waypoint-wps-alt)[0]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-4-waypoint-wps-alt)[1])) & (next(_TOP__WPM-usr-2-4-4-waypoint-wps-alt)[1]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-4-waypoint-wps-alt)[2])) & (next(_TOP__WPM-usr-2-4-4-waypoint-wps-alt)[2]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-4-waypoint-wps-alt)[3])) & (next(_TOP__WPM-usr-2-4-4-waypoint-wps-alt)[3]) <= 15000)) & ((next(_TOP__WPM-usr-__ASSUME1) = (0 <= next(_TOP__WPM-usr-4-position_status-alt) & next(_TOP__WPM-usr-4-position_status-alt) <= 15000)) & (next(_TOP__WPM-usr-__ASSUME0) = (((((((((((((((((((0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[0]) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[0]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[1])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[1]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[2])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[2]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[3])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[3]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[4])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[4]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[5])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[5]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[6])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[6]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[7])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[7]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[8])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[8]) <= 15000) & 0 <= (next(_TOP__WPM-usr-2-4-flight_plan-alt)[9])) & (next(_TOP__WPM-usr-2-4-flight_plan-alt)[9]) <= 15000))));
+	next(_TOP__WPM-res-init_flag) := FALSE;
+
+
+
+MODULE _TOP__UART (_TOP__UART-usr-__ASSUME__HIST, _TOP__UART-usr-__ASSUME0, _TOP__UART-usr-__ASSUME1, _TOP__UART-usr-position_status_in___EVENT_, _TOP__UART-usr-4-position_status_in-alt, _TOP__UART-usr-4-position_status_in-lat, _TOP__UART-usr-5-position_status_in-long, _TOP__UART-usr-waypoint_in___EVENT_, _TOP__UART-usr-4-waypoint_in-crc, _TOP__UART-usr-2-4-4-waypoint_in-wps-alt, _TOP__UART-usr-2-4-4-waypoint_in-wps-lat, _TOP__UART-usr-2-5-4-waypoint_in-wps-long, _TOP__UART-usr-time, _TOP__UART-usr-waypoint_out___EVENT_, _TOP__UART-usr-4-waypoint_out-crc, _TOP__UART-usr-2-4-4-waypoint_out-wps-alt, _TOP__UART-usr-2-4-4-waypoint_out-wps-lat, _TOP__UART-usr-2-5-4-waypoint_out-wps-long, _TOP__UART-usr-position_status_out___EVENT_, _TOP__UART-usr-4-position_status_out-alt, _TOP__UART-usr-4-position_status_out-lat, _TOP__UART-usr-5-position_status_out-long)
+VAR
+	_TOP__UART-res-init_flag : boolean;
+	_TOP__UART-usr-__ASSERT : boolean;
+ASSIGN
+	init(_TOP__UART-usr-__ASSERT) := ((_TOP__UART-usr-__ASSUME__HIST -> ((0 <= _TOP__UART-usr-4-position_status_out-alt & _TOP__UART-usr-4-position_status_out-alt <= 15000) & ((((((((0 <= (_TOP__UART-usr-2-4-4-waypoint_out-wps-alt[0]) & (_TOP__UART-usr-2-4-4-waypoint_out-wps-alt[0]) <= 15000) & 0 <= (_TOP__UART-usr-2-4-4-waypoint_out-wps-alt[1])) & (_TOP__UART-usr-2-4-4-waypoint_out-wps-alt[1]) <= 15000) & 0 <= (_TOP__UART-usr-2-4-4-waypoint_out-wps-alt[2])) & (_TOP__UART-usr-2-4-4-waypoint_out-wps-alt[2]) <= 15000) & 0 <= (_TOP__UART-usr-2-4-4-waypoint_out-wps-alt[3])) & (_TOP__UART-usr-2-4-4-waypoint_out-wps-alt[3]) <= 15000) & _TOP__UART-usr-4-waypoint_out-crc))) & ((_TOP__UART-usr-__ASSUME1 = (((((((0 <= (_TOP__UART-usr-2-4-4-waypoint_in-wps-alt[0]) & (_TOP__UART-usr-2-4-4-waypoint_in-wps-alt[0]) <= 15000) & 0 <= (_TOP__UART-usr-2-4-4-waypoint_in-wps-alt[1])) & (_TOP__UART-usr-2-4-4-waypoint_in-wps-alt[1]) <= 15000) & 0 <= (_TOP__UART-usr-2-4-4-waypoint_in-wps-alt[2])) & (_TOP__UART-usr-2-4-4-waypoint_in-wps-alt[2]) <= 15000) & 0 <= (_TOP__UART-usr-2-4-4-waypoint_in-wps-alt[3])) & (_TOP__UART-usr-2-4-4-waypoint_in-wps-alt[3]) <= 15000)) & (_TOP__UART-usr-__ASSUME0 = (0 <= _TOP__UART-usr-4-position_status_in-alt & _TOP__UART-usr-4-position_status_in-alt <= 15000))));
+	init(_TOP__UART-res-init_flag) := TRUE;
+
+	next(_TOP__UART-usr-__ASSERT) := ((next(_TOP__UART-usr-__ASSUME__HIST) -> ((0 <= next(_TOP__UART-usr-4-position_status_out-alt) & next(_TOP__UART-usr-4-position_status_out-alt) <= 15000) & ((((((((0 <= (next(_TOP__UART-usr-2-4-4-waypoint_out-wps-alt)[0]) & (next(_TOP__UART-usr-2-4-4-waypoint_out-wps-alt)[0]) <= 15000) & 0 <= (next(_TOP__UART-usr-2-4-4-waypoint_out-wps-alt)[1])) & (next(_TOP__UART-usr-2-4-4-waypoint_out-wps-alt)[1]) <= 15000) & 0 <= (next(_TOP__UART-usr-2-4-4-waypoint_out-wps-alt)[2])) & (next(_TOP__UART-usr-2-4-4-waypoint_out-wps-alt)[2]) <= 15000) & 0 <= (next(_TOP__UART-usr-2-4-4-waypoint_out-wps-alt)[3])) & (next(_TOP__UART-usr-2-4-4-waypoint_out-wps-alt)[3]) <= 15000) & next(_TOP__UART-usr-4-waypoint_out-crc)))) & ((next(_TOP__UART-usr-__ASSUME1) = (((((((0 <= (next(_TOP__UART-usr-2-4-4-waypoint_in-wps-alt)[0]) & (next(_TOP__UART-usr-2-4-4-waypoint_in-wps-alt)[0]) <= 15000) & 0 <= (next(_TOP__UART-usr-2-4-4-waypoint_in-wps-alt)[1])) & (next(_TOP__UART-usr-2-4-4-waypoint_in-wps-alt)[1]) <= 15000) & 0 <= (next(_TOP__UART-usr-2-4-4-waypoint_in-wps-alt)[2])) & (next(_TOP__UART-usr-2-4-4-waypoint_in-wps-alt)[2]) <= 15000) & 0 <= (next(_TOP__UART-usr-2-4-4-waypoint_in-wps-alt)[3])) & (next(_TOP__UART-usr-2-4-4-waypoint_in-wps-alt)[3]) <= 15000)) & (next(_TOP__UART-usr-__ASSUME0) = (0 <= next(_TOP__UART-usr-4-position_status_in-alt) & next(_TOP__UART-usr-4-position_status_in-alt) <= 15000))));
+	next(_TOP__UART-res-init_flag) := FALSE;
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-res-init_flag : boolean;
+	__HIST-usr-hist : boolean;
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	init(__HIST-res-init_flag) := TRUE;
+
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+	next(__HIST-res-init_flag) := FALSE;
+
+
+
+MODULE _TOP__FPLN (_TOP__FPLN-usr-__ASSUME__HIST, _TOP__FPLN-usr-__ASSUME0, _TOP__FPLN-usr-__ASSUME1, _TOP__FPLN-usr-__ASSUME2, _TOP__FPLN-usr-recv_map___EVENT_, _TOP__FPLN-usr-5-recv_map-HMAC, _TOP__FPLN-usr-2-4-4-recv_map-Map-alt, _TOP__FPLN-usr-2-4-4-recv_map-Map-lat, _TOP__FPLN-usr-2-5-4-recv_map-Map-long, _TOP__FPLN-usr-8-recv_map-Pattern, _TOP__FPLN-usr-position_status___EVENT_, _TOP__FPLN-usr-4-position_status-alt, _TOP__FPLN-usr-4-position_status-lat, _TOP__FPLN-usr-5-position_status-long, _TOP__FPLN-usr-time, _TOP__FPLN-usr-2-4-flight_plan-alt, _TOP__FPLN-usr-2-4-flight_plan-lat, _TOP__FPLN-usr-2-5-flight_plan-long)
+VAR
+	_TOP__FPLN-res-init_flag : boolean;
+	_TOP__FPLN-usr-__ASSERT : boolean;
+ASSIGN
+	init(_TOP__FPLN-usr-__ASSERT) := ((_TOP__FPLN-usr-__ASSUME__HIST -> (((((((((((((((((((0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[0]) & (_TOP__FPLN-usr-2-4-flight_plan-alt[0]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[1])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[1]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[2])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[2]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[3])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[3]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[4])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[4]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[5])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[5]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[6])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[6]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[7])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[7]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[8])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[8]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-flight_plan-alt[9])) & (_TOP__FPLN-usr-2-4-flight_plan-alt[9]) <= 15000)) & ((_TOP__FPLN-usr-__ASSUME2 = (0 <= _TOP__FPLN-usr-4-position_status-alt & _TOP__FPLN-usr-4-position_status-alt <= 15000)) & ((_TOP__FPLN-usr-__ASSUME1 = (((((((0 <= (_TOP__FPLN-usr-2-4-4-recv_map-Map-alt[0]) & (_TOP__FPLN-usr-2-4-4-recv_map-Map-alt[0]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-4-recv_map-Map-alt[1])) & (_TOP__FPLN-usr-2-4-4-recv_map-Map-alt[1]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-4-recv_map-Map-alt[2])) & (_TOP__FPLN-usr-2-4-4-recv_map-Map-alt[2]) <= 15000) & 0 <= (_TOP__FPLN-usr-2-4-4-recv_map-Map-alt[3])) & (_TOP__FPLN-usr-2-4-4-recv_map-Map-alt[3]) <= 15000)) & (_TOP__FPLN-usr-__ASSUME0 = _TOP__FPLN-usr-5-recv_map-HMAC))));
+  next(_TOP__FPLN-usr-__ASSERT) := ((next(_TOP__FPLN-usr-__ASSUME__HIST) -> (((((((((((((((((((0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[0]) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[0]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[1])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[1]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[2])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[2]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[3])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[3]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[4])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[4]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[5])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[5]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[6])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[6]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[7])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[7]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[8])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[8]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[9])) & (next(_TOP__FPLN-usr-2-4-flight_plan-alt)[9]) <= 15000)) & ((next(_TOP__FPLN-usr-__ASSUME2) = (0 <= next(_TOP__FPLN-usr-4-position_status-alt) & next(_TOP__FPLN-usr-4-position_status-alt) <= 15000)) & ((next(_TOP__FPLN-usr-__ASSUME1) = (((((((0 <= (next(_TOP__FPLN-usr-2-4-4-recv_map-Map-alt)[0]) & (next(_TOP__FPLN-usr-2-4-4-recv_map-Map-alt)[0]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-4-recv_map-Map-alt)[1])) & (next(_TOP__FPLN-usr-2-4-4-recv_map-Map-alt)[1]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-4-recv_map-Map-alt)[2])) & (next(_TOP__FPLN-usr-2-4-4-recv_map-Map-alt)[2]) <= 15000) & 0 <= (next(_TOP__FPLN-usr-2-4-4-recv_map-Map-alt)[3])) & (next(_TOP__FPLN-usr-2-4-4-recv_map-Map-alt)[3]) <= 15000)) & (next(_TOP__FPLN-usr-__ASSUME0) = next(_TOP__FPLN-usr-5-recv_map-HMAC)))));
+
+MODULE main ()
+VAR
+	main-res-init_flag : boolean;
+	main-usr-RADIO__send_status_out___EVENT_ : boolean;
+	main-usr-4-RADIO__send_status_out-alt : integer;
+	main-usr-4-RADIO__send_status_out-lat : integer;
+	main-usr-5-RADIO__send_status_out-long : integer;
+	main-usr-RADIO__recv_map_out___EVENT_ : boolean;
+	main-usr-5-RADIO__recv_map_out-HMAC : boolean;
+	main-usr-2-4-4-RADIO__recv_map_out-Map-alt : array integer of 0 .. 4;
+	main-usr-2-4-4-RADIO__recv_map_out-Map-lat : array integer of 0 .. 4;
+	main-usr-2-5-4-RADIO__recv_map_out-Map-long : array integer of 0 .. 4;
+	main-usr-8-RADIO__recv_map_out-Pattern : 0 .. 2;
+	main-usr-RADIO____ASSUME0 : boolean;
+	main-usr-RADIO____ASSUME1 : boolean;
+	main-usr-RADIO____ASSUME2 : boolean;
+	main-usr-RADIO____ASSUME__HIST : boolean;
+	main-usr-2-4-FPLN__flight_plan-alt : array integer of 0 .. 10;
+	main-usr-2-4-FPLN__flight_plan-lat : array integer of 0 .. 10;
+	main-usr-2-5-FPLN__flight_plan-long : array integer of 0 .. 10;
+	main-usr-FPLN____ASSUME0 : boolean;
+	main-usr-FPLN____ASSUME1 : boolean;
+	main-usr-FPLN____ASSUME2 : boolean;
+	main-usr-FPLN____ASSUME__HIST : boolean;
+	main-usr-WPM__waypoint___EVENT_ : boolean;
+	main-usr-4-WPM__waypoint-crc : boolean;
+	main-usr-2-4-4-WPM__waypoint-wps-alt : array integer of 0 .. 4;
+	main-usr-2-4-4-WPM__waypoint-wps-lat : array integer of 0 .. 4;
+	main-usr-2-5-4-WPM__waypoint-wps-long : array integer of 0 .. 4;
+	main-usr-WPM____ASSUME0 : boolean;
+	main-usr-WPM____ASSUME1 : boolean;
+	main-usr-WPM____ASSUME__HIST : boolean;
+	main-usr-UART__waypoint_out___EVENT_ : boolean;
+	main-usr-4-UART__waypoint_out-crc : boolean;
+	main-usr-2-4-4-UART__waypoint_out-wps-alt : array integer of 0 .. 4;
+	main-usr-2-4-4-UART__waypoint_out-wps-lat : array integer of 0 .. 4;
+	main-usr-2-5-4-UART__waypoint_out-wps-long : array integer of 0 .. 4;
+	main-usr-UART__position_status_out___EVENT_ : boolean;
+	main-usr-4-UART__position_status_out-alt : integer;
+	main-usr-4-UART__position_status_out-lat : integer;
+	main-usr-5-UART__position_status_out-long : integer;
+	main-usr-UART____ASSUME0 : boolean;
+	main-usr-UART____ASSUME1 : boolean;
+	main-usr-UART____ASSUME__HIST : boolean;
+	main-usr-send_status___EVENT_ : boolean;
+	main-usr-4-send_status-alt : integer;
+	main-usr-4-send_status-lat : integer;
+	main-usr-5-send_status-long : integer;
+	main-usr-waypoint___EVENT_ : boolean;
+	main-usr-4-waypoint-crc : boolean;
+	main-usr-2-4-4-waypoint-wps-alt : array integer of 0 .. 4;
+	main-usr-2-4-4-waypoint-wps-lat : array integer of 0 .. 4;
+	main-usr-2-5-4-waypoint-wps-long : array integer of 0 .. 4;
+	main-usr-RADIO__recv_map_in___EVENT_ : boolean;
+	main-usr-5-RADIO__recv_map_in-HMAC : boolean;
+	main-usr-2-4-4-RADIO__recv_map_in-Map-alt : array integer of 0 .. 4;
+	main-usr-2-4-4-RADIO__recv_map_in-Map-lat : array integer of 0 .. 4;
+	main-usr-2-5-4-RADIO__recv_map_in-Map-long : array integer of 0 .. 4;
+	main-usr-8-RADIO__recv_map_in-Pattern : 0 .. 2;
+	main-usr-RADIO__send_status_in___EVENT_ : boolean;
+	main-usr-4-RADIO__send_status_in-alt : integer;
+	main-usr-4-RADIO__send_status_in-lat : integer;
+	main-usr-5-RADIO__send_status_in-long : integer;
+	main-usr-RADIO__time : real;
+	main-usr-FPLN__recv_map___EVENT_ : boolean;
+	main-usr-5-FPLN__recv_map-HMAC : boolean;
+	main-usr-2-4-4-FPLN__recv_map-Map-alt : array integer of 0 .. 4;
+	main-usr-2-4-4-FPLN__recv_map-Map-lat : array integer of 0 .. 4;
+	main-usr-2-5-4-FPLN__recv_map-Map-long : array integer of 0 .. 4;
+	main-usr-8-FPLN__recv_map-Pattern : 0 .. 2;
+	main-usr-FPLN__position_status___EVENT_ : boolean;
+	main-usr-4-FPLN__position_status-alt : integer;
+	main-usr-4-FPLN__position_status-lat : integer;
+	main-usr-5-FPLN__position_status-long : integer;
+	main-usr-FPLN__time : real;
+	main-usr-2-4-WPM__flight_plan-alt : array integer of 0 .. 10;
+	main-usr-2-4-WPM__flight_plan-lat : array integer of 0 .. 10;
+	main-usr-2-5-WPM__flight_plan-long : array integer of 0 .. 10;
+	main-usr-WPM__position_status___EVENT_ : boolean;
+	main-usr-4-WPM__position_status-alt : integer;
+	main-usr-4-WPM__position_status-lat : integer;
+	main-usr-5-WPM__position_status-long : integer;
+	main-usr-WPM__time : real;
+	main-usr-UART__position_status_in___EVENT_ : boolean;
+	main-usr-4-UART__position_status_in-alt : integer;
+	main-usr-4-UART__position_status_in-lat : integer;
+	main-usr-5-UART__position_status_in-long : integer;
+	main-usr-UART__waypoint_in___EVENT_ : boolean;
+	main-usr-4-UART__waypoint_in-crc : boolean;
+	main-usr-2-4-4-UART__waypoint_in-wps-alt : array integer of 0 .. 4;
+	main-usr-2-4-4-UART__waypoint_in-wps-lat : array integer of 0 .. 4;
+	main-usr-2-5-4-UART__waypoint_in-wps-long : array integer of 0 .. 4;
+	main-usr-UART__time : real;
+	main-usr-recv_map___EVENT_ : boolean;
+	main-usr-5-recv_map-HMAC : boolean;
+	main-usr-2-4-4-recv_map-Map-alt : array integer of 0 .. 4;
+	main-usr-2-4-4-recv_map-Map-lat : array integer of 0 .. 4;
+	main-usr-2-5-4-recv_map-Map-long : array integer of 0 .. 4;
+	main-usr-8-recv_map-Pattern : 0 .. 2;
+	main-usr-position_status___EVENT_ : boolean;
+	main-usr-4-position_status-alt : integer;
+	main-usr-4-position_status-lat : integer;
+	main-usr-5-position_status-long : integer;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
+	main-impl-usr-__GUARANTEE2 : boolean;
+	main-res-glocal_2 : boolean;
+	main-res-glocal_3 : boolean;
+	main-res-glocal_4 : boolean;
+	main-res-glocal_5 : boolean;
+	main-res-glocal_7 : boolean;
+	main-res-glocal_9 : boolean;
+	main-res-glocal_10 : boolean;
+	main-res-glocal_12 : boolean;
+	main-res-glocal_14 : boolean;
+	main-res-glocal_15 : boolean;
+	main-res-glocal_17 : boolean;
+	main-res-glocal_20 : boolean;
+	main-res-glocal_21 : boolean;
+	main-res-glocal_23 : boolean;
+	main-res-glocal_24 : boolean;
+	main-res-glocal_25 : boolean;
+	main-res-glocal_26 : boolean;
+	main-res-glocal_27 : boolean;
+	main-res-glocal_28 : boolean;
+	main-res-glocal_29 : boolean;
+	main-res-glocal_30 : boolean;
+	main-res-glocal_31 : boolean;
+	main-res-glocal_32 : boolean;
+	main-res-glocal_33 : boolean;
+	main-res-glocal_34 : boolean;
+	main-res-glocal_35 : boolean;
+	main-res-glocal_36 : boolean;
+	main-res-glocal_37 : boolean;
+	main-res-glocal_38 : boolean;
+	main-res-glocal_39 : boolean;
+	main-res-glocal_40 : boolean;
+	main-res-glocal_41 : boolean;
+	main-res-glocal_42 : boolean;
+	main-res-glocal_43 : boolean;
+	main-res-glocal_44 : boolean;
+	main-res-glocal_45 : boolean;
+	main-res-glocal_46 : boolean;
+	main-res-glocal_47 : boolean;
+	main-res-glocal_48 : boolean;
+	main-res-glocal_49 : boolean;
+	main-res-glocal_50 : boolean;
+	main-res-glocal_51 : boolean;
+	main-res-glocal_52 : boolean;
+	main-res-glocal_53 : boolean;
+	main-res-glocal_54 : boolean;
+	main-res-gklocal_18 : boolean;
+	main-res-call_22 : _TOP__UART(main-usr-UART____ASSUME__HIST, main-usr-UART____ASSUME0, main-usr-UART____ASSUME1, main-usr-UART__position_status_in___EVENT_, main-usr-4-UART__position_status_in-alt, main-usr-4-UART__position_status_in-lat, main-usr-5-UART__position_status_in-long, main-usr-UART__waypoint_in___EVENT_, main-usr-4-UART__waypoint_in-crc, main-usr-2-4-4-UART__waypoint_in-wps-alt, main-usr-2-4-4-UART__waypoint_in-wps-lat, main-usr-2-5-4-UART__waypoint_in-wps-long, main-usr-UART__time, main-usr-UART__waypoint_out___EVENT_, main-usr-4-UART__waypoint_out-crc, main-usr-2-4-4-UART__waypoint_out-wps-alt, main-usr-2-4-4-UART__waypoint_out-wps-lat, main-usr-2-5-4-UART__waypoint_out-wps-long, main-usr-UART__position_status_out___EVENT_, main-usr-4-UART__position_status_out-alt, main-usr-4-UART__position_status_out-lat, main-usr-5-UART__position_status_out-long);
+	main-res-call_19 : __HIST(main-res-gklocal_18);
+	main-res-call_16 : _TOP__WPM(main-usr-WPM____ASSUME__HIST, main-usr-WPM____ASSUME0, main-usr-WPM____ASSUME1, main-usr-2-4-WPM__flight_plan-alt, main-usr-2-4-WPM__flight_plan-lat, main-usr-2-5-WPM__flight_plan-long, main-usr-WPM__position_status___EVENT_, main-usr-4-WPM__position_status-alt, main-usr-4-WPM__position_status-lat, main-usr-5-WPM__position_status-long, main-usr-WPM__time, main-usr-WPM__waypoint___EVENT_, main-usr-4-WPM__waypoint-crc, main-usr-2-4-4-WPM__waypoint-wps-alt, main-usr-2-4-4-WPM__waypoint-wps-lat, main-usr-2-5-4-WPM__waypoint-wps-long);
+	main-res-call_13 : __HIST(main-usr-FPLN____ASSUME0);
+	main-res-call_11 : _TOP__FPLN(main-usr-FPLN____ASSUME__HIST, main-usr-FPLN____ASSUME0, main-usr-FPLN____ASSUME1, main-usr-FPLN____ASSUME2, main-usr-FPLN__recv_map___EVENT_, main-usr-5-FPLN__recv_map-HMAC, main-usr-2-4-4-FPLN__recv_map-Map-alt, main-usr-2-4-4-FPLN__recv_map-Map-lat, main-usr-2-5-4-FPLN__recv_map-Map-long, main-usr-8-FPLN__recv_map-Pattern, main-usr-FPLN__position_status___EVENT_, main-usr-4-FPLN__position_status-alt, main-usr-4-FPLN__position_status-lat, main-usr-5-FPLN__position_status-long, main-usr-FPLN__time, main-usr-2-4-FPLN__flight_plan-alt, main-usr-2-4-FPLN__flight_plan-lat, main-usr-2-5-FPLN__flight_plan-long);
+	main-res-call_8 : __HIST(main-usr-RADIO____ASSUME0);
+	main-res-call_6 : _TOP__RADIO(main-usr-RADIO____ASSUME__HIST, main-usr-RADIO____ASSUME0, main-usr-RADIO____ASSUME1, main-usr-RADIO____ASSUME2, main-usr-RADIO__recv_map_in___EVENT_, main-usr-5-RADIO__recv_map_in-HMAC, main-usr-2-4-4-RADIO__recv_map_in-Map-alt, main-usr-2-4-4-RADIO__recv_map_in-Map-lat, main-usr-2-5-4-RADIO__recv_map_in-Map-long, main-usr-8-RADIO__recv_map_in-Pattern, main-usr-RADIO__send_status_in___EVENT_, main-usr-4-RADIO__send_status_in-alt, main-usr-4-RADIO__send_status_in-lat, main-usr-5-RADIO__send_status_in-long, main-usr-RADIO__time, main-usr-RADIO__send_status_out___EVENT_, main-usr-4-RADIO__send_status_out-alt, main-usr-4-RADIO__send_status_out-lat, main-usr-5-RADIO__send_status_out-long, main-usr-RADIO__recv_map_out___EVENT_, main-usr-5-RADIO__recv_map_out-HMAC, main-usr-2-4-4-RADIO__recv_map_out-Map-alt, main-usr-2-4-4-RADIO__recv_map_out-Map-lat, main-usr-2-5-4-RADIO__recv_map_out-Map-long, main-usr-8-RADIO__recv_map_out-Pattern);
+	main-res-inst_0 : boolean;
+	main-res-inst_1 : boolean;
+	main-res-inst_2 : boolean;
+	main-res-inst_3 : boolean;
+	main-res-inst_4 : boolean;
+	main-res-inst_5 : boolean;
+	main-res-inst_6 : boolean;
+ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-UART____ASSUME__HIST & (main-usr-WPM____ASSUME__HIST & (main-usr-FPLN____ASSUME__HIST & main-usr-RADIO____ASSUME__HIST)));
+	init(main-impl-usr-__GUARANTEE0) := main-usr-4-waypoint-crc;
+	init(main-impl-usr-__GUARANTEE1) := (0 <= main-usr-4-send_status-alt & main-usr-4-send_status-alt <= 15000);
+	init(main-impl-usr-__GUARANTEE2) := (((((((0 <= (main-usr-2-4-4-waypoint-wps-alt[0]) & (main-usr-2-4-4-waypoint-wps-alt[0]) <= 15000) & 0 <= (main-usr-2-4-4-waypoint-wps-alt[1])) & (main-usr-2-4-4-waypoint-wps-alt[1]) <= 15000) & 0 <= (main-usr-2-4-4-waypoint-wps-alt[2])) & (main-usr-2-4-4-waypoint-wps-alt[2]) <= 15000) & 0 <= (main-usr-2-4-4-waypoint-wps-alt[3])) & (main-usr-2-4-4-waypoint-wps-alt[3]) <= 15000);
+	init(main-res-glocal_2) := main-usr-5-recv_map-HMAC;
+	init(main-res-glocal_3) := (((((((0 <= (main-usr-2-4-4-recv_map-Map-alt[0]) & (main-usr-2-4-4-recv_map-Map-alt[0]) <= 15000) & 0 <= (main-usr-2-4-4-recv_map-Map-alt[1])) & (main-usr-2-4-4-recv_map-Map-alt[1]) <= 15000) & 0 <= (main-usr-2-4-4-recv_map-Map-alt[2])) & (main-usr-2-4-4-recv_map-Map-alt[2]) <= 15000) & 0 <= (main-usr-2-4-4-recv_map-Map-alt[3])) & (main-usr-2-4-4-recv_map-Map-alt[3]) <= 15000);
+	init(main-res-glocal_4) := (0 <= main-usr-4-position_status-alt & main-usr-4-position_status-alt <= 15000);
+	init(main-res-glocal_5) := (main-usr-time = main-usr-RADIO__time);
+	init(main-res-glocal_7) := main-res-call_6._TOP__RADIO-usr-__ASSERT;
+	init(main-res-glocal_9) := (main-usr-RADIO____ASSUME__HIST = main-res-call_8.__HIST-usr-hist);
+	init(main-res-glocal_10) := (main-usr-time = main-usr-FPLN__time);
+	init(main-res-glocal_12) := main-res-call_11._TOP__FPLN-usr-__ASSERT;
+	init(main-res-glocal_14) := (main-usr-FPLN____ASSUME__HIST = main-res-call_13.__HIST-usr-hist);
+	init(main-res-glocal_15) := (main-usr-time = main-usr-WPM__time);
+	init(main-res-glocal_17) := main-res-call_16._TOP__WPM-usr-__ASSERT;
+	init(main-res-gklocal_18) := TRUE;
+	init(main-res-glocal_20) := (main-usr-WPM____ASSUME__HIST = main-res-call_19.__HIST-usr-hist);
+	init(main-res-glocal_21) := (main-usr-time = main-usr-UART__time);
+	init(main-res-glocal_23) := main-res-call_22._TOP__UART-usr-__ASSERT;
+	init(main-res-glocal_24) := (main-usr-UART____ASSUME__HIST = main-res-call_19.__HIST-usr-hist);
+	init(main-res-glocal_25) := ((((((((((((((main-usr-5-recv_map-HMAC = main-usr-5-RADIO__recv_map_in-HMAC) & (main-usr-2-4-4-recv_map-Map-alt = main-usr-2-4-4-RADIO__recv_map_in-Map-alt)) & (main-usr-2-4-4-recv_map-Map-alt = main-usr-2-4-4-RADIO__recv_map_in-Map-alt)) & (main-usr-2-4-4-recv_map-Map-alt = main-usr-2-4-4-RADIO__recv_map_in-Map-alt)) & (main-usr-2-4-4-recv_map-Map-alt = main-usr-2-4-4-RADIO__recv_map_in-Map-alt)) & (main-usr-2-4-4-recv_map-Map-lat = main-usr-2-4-4-RADIO__recv_map_in-Map-lat)) & (main-usr-2-4-4-recv_map-Map-lat = main-usr-2-4-4-RADIO__recv_map_in-Map-lat)) & (main-usr-2-4-4-recv_map-Map-lat = main-usr-2-4-4-RADIO__recv_map_in-Map-lat)) & (main-usr-2-4-4-recv_map-Map-lat = main-usr-2-4-4-RADIO__recv_map_in-Map-lat)) & (main-usr-2-5-4-recv_map-Map-long = main-usr-2-5-4-RADIO__recv_map_in-Map-long)) & (main-usr-2-5-4-recv_map-Map-long = main-usr-2-5-4-RADIO__recv_map_in-Map-long)) & (main-usr-2-5-4-recv_map-Map-long = main-usr-2-5-4-RADIO__recv_map_in-Map-long)) & (main-usr-2-5-4-recv_map-Map-long = main-usr-2-5-4-RADIO__recv_map_in-Map-long)) & (main-usr-8-recv_map-Pattern = main-usr-8-RADIO__recv_map_in-Pattern));
+	init(main-res-glocal_26) := (main-usr-recv_map___EVENT_ = main-usr-RADIO__recv_map_in___EVENT_);
+	init(main-res-glocal_27) := (((main-usr-4-position_status-alt = main-usr-4-UART__position_status_in-alt) & (main-usr-4-position_status-lat = main-usr-4-UART__position_status_in-lat)) & (main-usr-5-position_status-long = main-usr-5-UART__position_status_in-long));
+	init(main-res-glocal_28) := (main-usr-position_status___EVENT_ = main-usr-UART__position_status_in___EVENT_);
+	init(main-res-glocal_29) := (((main-usr-4-RADIO__send_status_out-alt = main-usr-4-send_status-alt) & (main-usr-4-RADIO__send_status_out-lat = main-usr-4-send_status-lat)) & (main-usr-5-RADIO__send_status_out-long = main-usr-5-send_status-long));
+	init(main-res-glocal_30) := (main-usr-RADIO__send_status_out___EVENT_ = main-usr-send_status___EVENT_);
+	init(main-res-glocal_31) := ((((((((((((((main-usr-5-RADIO__recv_map_out-HMAC = main-usr-5-FPLN__recv_map-HMAC) & (main-usr-2-4-4-RADIO__recv_map_out-Map-alt = main-usr-2-4-4-FPLN__recv_map-Map-alt)) & (main-usr-2-4-4-RADIO__recv_map_out-Map-alt = main-usr-2-4-4-FPLN__recv_map-Map-alt)) & (main-usr-2-4-4-RADIO__recv_map_out-Map-alt = main-usr-2-4-4-FPLN__recv_map-Map-alt)) & (main-usr-2-4-4-RADIO__recv_map_out-Map-alt = main-usr-2-4-4-FPLN__recv_map-Map-alt)) & (main-usr-2-4-4-RADIO__recv_map_out-Map-lat = main-usr-2-4-4-FPLN__recv_map-Map-lat)) & (main-usr-2-4-4-RADIO__recv_map_out-Map-lat = main-usr-2-4-4-FPLN__recv_map-Map-lat)) & (main-usr-2-4-4-RADIO__recv_map_out-Map-lat = main-usr-2-4-4-FPLN__recv_map-Map-lat)) & (main-usr-2-4-4-RADIO__recv_map_out-Map-lat = main-usr-2-4-4-FPLN__recv_map-Map-lat)) & (main-usr-2-5-4-RADIO__recv_map_out-Map-long = main-usr-2-5-4-FPLN__recv_map-Map-long)) & (main-usr-2-5-4-RADIO__recv_map_out-Map-long = main-usr-2-5-4-FPLN__recv_map-Map-long)) & (main-usr-2-5-4-RADIO__recv_map_out-Map-long = main-usr-2-5-4-FPLN__recv_map-Map-long)) & (main-usr-2-5-4-RADIO__recv_map_out-Map-long = main-usr-2-5-4-FPLN__recv_map-Map-long)) & (main-usr-8-RADIO__recv_map_out-Pattern = main-usr-8-FPLN__recv_map-Pattern));
+	init(main-res-glocal_32) := (main-usr-RADIO__recv_map_out___EVENT_ = main-usr-FPLN__recv_map___EVENT_);
+	init(main-res-glocal_33) := ((((main-usr-2-4-FPLN__flight_plan-alt[0]) = (main-usr-2-4-WPM__flight_plan-alt[0])) & ((main-usr-2-4-FPLN__flight_plan-lat[0]) = (main-usr-2-4-WPM__flight_plan-lat[0]))) & ((main-usr-2-5-FPLN__flight_plan-long[0]) = (main-usr-2-5-WPM__flight_plan-long[0])));
+	init(main-res-glocal_34) := ((((main-usr-2-4-FPLN__flight_plan-alt[1]) = (main-usr-2-4-WPM__flight_plan-alt[1])) & ((main-usr-2-4-FPLN__flight_plan-lat[1]) = (main-usr-2-4-WPM__flight_plan-lat[1]))) & ((main-usr-2-5-FPLN__flight_plan-long[1]) = (main-usr-2-5-WPM__flight_plan-long[1])));
+	init(main-res-glocal_35) := ((((main-usr-2-4-FPLN__flight_plan-alt[2]) = (main-usr-2-4-WPM__flight_plan-alt[2])) & ((main-usr-2-4-FPLN__flight_plan-lat[2]) = (main-usr-2-4-WPM__flight_plan-lat[2]))) & ((main-usr-2-5-FPLN__flight_plan-long[2]) = (main-usr-2-5-WPM__flight_plan-long[2])));
+	init(main-res-glocal_36) := ((((main-usr-2-4-FPLN__flight_plan-alt[3]) = (main-usr-2-4-WPM__flight_plan-alt[3])) & ((main-usr-2-4-FPLN__flight_plan-lat[3]) = (main-usr-2-4-WPM__flight_plan-lat[3]))) & ((main-usr-2-5-FPLN__flight_plan-long[3]) = (main-usr-2-5-WPM__flight_plan-long[3])));
+	init(main-res-glocal_37) := ((((main-usr-2-4-FPLN__flight_plan-alt[4]) = (main-usr-2-4-WPM__flight_plan-alt[4])) & ((main-usr-2-4-FPLN__flight_plan-lat[4]) = (main-usr-2-4-WPM__flight_plan-lat[4]))) & ((main-usr-2-5-FPLN__flight_plan-long[4]) = (main-usr-2-5-WPM__flight_plan-long[4])));
+	init(main-res-glocal_38) := ((((main-usr-2-4-FPLN__flight_plan-alt[5]) = (main-usr-2-4-WPM__flight_plan-alt[5])) & ((main-usr-2-4-FPLN__flight_plan-lat[5]) = (main-usr-2-4-WPM__flight_plan-lat[5]))) & ((main-usr-2-5-FPLN__flight_plan-long[5]) = (main-usr-2-5-WPM__flight_plan-long[5])));
+	init(main-res-glocal_39) := ((((main-usr-2-4-FPLN__flight_plan-alt[6]) = (main-usr-2-4-WPM__flight_plan-alt[6])) & ((main-usr-2-4-FPLN__flight_plan-lat[6]) = (main-usr-2-4-WPM__flight_plan-lat[6]))) & ((main-usr-2-5-FPLN__flight_plan-long[6]) = (main-usr-2-5-WPM__flight_plan-long[6])));
+	init(main-res-glocal_40) := ((((main-usr-2-4-FPLN__flight_plan-alt[7]) = (main-usr-2-4-WPM__flight_plan-alt[7])) & ((main-usr-2-4-FPLN__flight_plan-lat[7]) = (main-usr-2-4-WPM__flight_plan-lat[7]))) & ((main-usr-2-5-FPLN__flight_plan-long[7]) = (main-usr-2-5-WPM__flight_plan-long[7])));
+	init(main-res-glocal_41) := ((((main-usr-2-4-FPLN__flight_plan-alt[8]) = (main-usr-2-4-WPM__flight_plan-alt[8])) & ((main-usr-2-4-FPLN__flight_plan-lat[8]) = (main-usr-2-4-WPM__flight_plan-lat[8]))) & ((main-usr-2-5-FPLN__flight_plan-long[8]) = (main-usr-2-5-WPM__flight_plan-long[8])));
+	init(main-res-glocal_42) := ((((main-usr-2-4-FPLN__flight_plan-alt[9]) = (main-usr-2-4-WPM__flight_plan-alt[9])) & ((main-usr-2-4-FPLN__flight_plan-lat[9]) = (main-usr-2-4-WPM__flight_plan-lat[9]))) & ((main-usr-2-5-FPLN__flight_plan-long[9]) = (main-usr-2-5-WPM__flight_plan-long[9])));
+	init(main-res-glocal_43) := (((((((((((((main-usr-4-WPM__waypoint-crc = main-usr-4-UART__waypoint_in-crc) & (main-usr-2-4-4-WPM__waypoint-wps-alt = main-usr-2-4-4-UART__waypoint_in-wps-alt)) & (main-usr-2-4-4-WPM__waypoint-wps-alt = main-usr-2-4-4-UART__waypoint_in-wps-alt)) & (main-usr-2-4-4-WPM__waypoint-wps-alt = main-usr-2-4-4-UART__waypoint_in-wps-alt)) & (main-usr-2-4-4-WPM__waypoint-wps-alt = main-usr-2-4-4-UART__waypoint_in-wps-alt)) & (main-usr-2-4-4-WPM__waypoint-wps-lat = main-usr-2-4-4-UART__waypoint_in-wps-lat)) & (main-usr-2-4-4-WPM__waypoint-wps-lat = main-usr-2-4-4-UART__waypoint_in-wps-lat)) & (main-usr-2-4-4-WPM__waypoint-wps-lat = main-usr-2-4-4-UART__waypoint_in-wps-lat)) & (main-usr-2-4-4-WPM__waypoint-wps-lat = main-usr-2-4-4-UART__waypoint_in-wps-lat)) & (main-usr-2-5-4-WPM__waypoint-wps-long = main-usr-2-5-4-UART__waypoint_in-wps-long)) & (main-usr-2-5-4-WPM__waypoint-wps-long = main-usr-2-5-4-UART__waypoint_in-wps-long)) & (main-usr-2-5-4-WPM__waypoint-wps-long = main-usr-2-5-4-UART__waypoint_in-wps-long)) & (main-usr-2-5-4-WPM__waypoint-wps-long = main-usr-2-5-4-UART__waypoint_in-wps-long));
+	init(main-res-glocal_44) := (main-usr-WPM__waypoint___EVENT_ = main-usr-UART__waypoint_in___EVENT_);
+	init(main-res-glocal_45) := (((((((((((((main-usr-4-UART__waypoint_out-crc = main-usr-4-waypoint-crc) & (main-usr-2-4-4-UART__waypoint_out-wps-alt = main-usr-2-4-4-waypoint-wps-alt)) & (main-usr-2-4-4-UART__waypoint_out-wps-alt = main-usr-2-4-4-waypoint-wps-alt)) & (main-usr-2-4-4-UART__waypoint_out-wps-alt = main-usr-2-4-4-waypoint-wps-alt)) & (main-usr-2-4-4-UART__waypoint_out-wps-alt = main-usr-2-4-4-waypoint-wps-alt)) & (main-usr-2-4-4-UART__waypoint_out-wps-lat = main-usr-2-4-4-waypoint-wps-lat)) & (main-usr-2-4-4-UART__waypoint_out-wps-lat = main-usr-2-4-4-waypoint-wps-lat)) & (main-usr-2-4-4-UART__waypoint_out-wps-lat = main-usr-2-4-4-waypoint-wps-lat)) & (main-usr-2-4-4-UART__waypoint_out-wps-lat = main-usr-2-4-4-waypoint-wps-lat)) & (main-usr-2-5-4-UART__waypoint_out-wps-long = main-usr-2-5-4-waypoint-wps-long)) & (main-usr-2-5-4-UART__waypoint_out-wps-long = main-usr-2-5-4-waypoint-wps-long)) & (main-usr-2-5-4-UART__waypoint_out-wps-long = main-usr-2-5-4-waypoint-wps-long)) & (main-usr-2-5-4-UART__waypoint_out-wps-long = main-usr-2-5-4-waypoint-wps-long));
+	init(main-res-glocal_46) := (main-usr-UART__waypoint_out___EVENT_ = main-usr-waypoint___EVENT_);
+	init(main-res-glocal_47) := (((main-usr-4-UART__position_status_out-alt = main-usr-4-WPM__position_status-alt) & (main-usr-4-UART__position_status_out-lat = main-usr-4-WPM__position_status-lat)) & (main-usr-5-UART__position_status_out-long = main-usr-5-WPM__position_status-long));
+	init(main-res-glocal_48) := (main-usr-UART__position_status_out___EVENT_ = main-usr-WPM__position_status___EVENT_);
+	init(main-res-glocal_49) := (((main-usr-4-UART__position_status_out-alt = main-usr-4-FPLN__position_status-alt) & (main-usr-4-UART__position_status_out-lat = main-usr-4-FPLN__position_status-lat)) & (main-usr-5-UART__position_status_out-long = main-usr-5-FPLN__position_status-long));
+	init(main-res-glocal_50) := (main-usr-UART__position_status_out___EVENT_ = main-usr-FPLN__position_status___EVENT_);
+	init(main-res-glocal_51) := (((main-usr-4-UART__position_status_out-alt = main-usr-4-RADIO__send_status_in-alt) & (main-usr-4-UART__position_status_out-lat = main-usr-4-RADIO__send_status_in-lat)) & (main-usr-5-UART__position_status_out-long = main-usr-5-RADIO__send_status_in-long));
+	init(main-res-glocal_52) := (main-usr-UART__position_status_out___EVENT_ = main-usr-RADIO__send_status_in___EVENT_);
+	init(main-res-glocal_53) := TRUE;
+	init(main-res-glocal_54) := (main-usr-time = 0);
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-UART____ASSUME__HIST) & (next(main-usr-WPM____ASSUME__HIST) & (next(main-usr-FPLN____ASSUME__HIST) & next(main-usr-RADIO____ASSUME__HIST))));
+	next(main-impl-usr-__GUARANTEE0) := next(main-usr-4-waypoint-crc);
+	next(main-impl-usr-__GUARANTEE1) := (0 <= next(main-usr-4-send_status-alt) & next(main-usr-4-send_status-alt) <= 15000);
+	next(main-impl-usr-__GUARANTEE2) := (((((((0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[0]) & (next(main-usr-2-4-4-waypoint-wps-alt)[0]) <= 15000) & 0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[1])) & (next(main-usr-2-4-4-waypoint-wps-alt)[1]) <= 15000) & 0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[2])) & (next(main-usr-2-4-4-waypoint-wps-alt)[2]) <= 15000) & 0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[3])) & (next(main-usr-2-4-4-waypoint-wps-alt)[3]) <= 15000);
+	next(main-res-glocal_2) := next(main-usr-5-recv_map-HMAC);
+	next(main-res-glocal_3) := (((((((0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[0]) & (next(main-usr-2-4-4-recv_map-Map-alt)[0]) <= 15000) & 0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[1])) & (next(main-usr-2-4-4-recv_map-Map-alt)[1]) <= 15000) & 0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[2])) & (next(main-usr-2-4-4-recv_map-Map-alt)[2]) <= 15000) & 0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[3])) & (next(main-usr-2-4-4-recv_map-Map-alt)[3]) <= 15000);
+	next(main-res-glocal_4) := (0 <= next(main-usr-4-position_status-alt) & next(main-usr-4-position_status-alt) <= 15000);
+	next(main-res-glocal_5) := (next(main-usr-time) = next(main-usr-RADIO__time));
+	next(main-res-glocal_7) := main-res-call_6._TOP__RADIO-usr-__ASSERT;
+	next(main-res-glocal_9) := (next(main-usr-RADIO____ASSUME__HIST) = main-res-call_8.__HIST-usr-hist);
+	next(main-res-glocal_10) := (next(main-usr-time) = next(main-usr-FPLN__time));
+	next(main-res-glocal_12) := main-res-call_11._TOP__FPLN-usr-__ASSERT;
+	next(main-res-glocal_14) := (next(main-usr-FPLN____ASSUME__HIST) = main-res-call_13.__HIST-usr-hist);
+	next(main-res-glocal_15) := (next(main-usr-time) = next(main-usr-WPM__time));
+	next(main-res-glocal_17) := main-res-call_16._TOP__WPM-usr-__ASSERT;
+	next(main-res-gklocal_18) := TRUE;
+	next(main-res-glocal_20) := (next(main-usr-WPM____ASSUME__HIST) = main-res-call_19.__HIST-usr-hist);
+	next(main-res-glocal_21) := (next(main-usr-time) = next(main-usr-UART__time));
+	next(main-res-glocal_23) := main-res-call_22._TOP__UART-usr-__ASSERT;
+	next(main-res-glocal_24) := (next(main-usr-UART____ASSUME__HIST) = main-res-call_19.__HIST-usr-hist);
+	next(main-res-glocal_25) := ((((((((((((((next(main-usr-5-recv_map-HMAC) = next(main-usr-5-RADIO__recv_map_in-HMAC)) & (next(main-usr-2-4-4-recv_map-Map-alt) = next(main-usr-2-4-4-RADIO__recv_map_in-Map-alt))) & (next(main-usr-2-4-4-recv_map-Map-alt) = next(main-usr-2-4-4-RADIO__recv_map_in-Map-alt))) & (next(main-usr-2-4-4-recv_map-Map-alt) = next(main-usr-2-4-4-RADIO__recv_map_in-Map-alt))) & (next(main-usr-2-4-4-recv_map-Map-alt) = next(main-usr-2-4-4-RADIO__recv_map_in-Map-alt))) & (next(main-usr-2-4-4-recv_map-Map-lat) = next(main-usr-2-4-4-RADIO__recv_map_in-Map-lat))) & (next(main-usr-2-4-4-recv_map-Map-lat) = next(main-usr-2-4-4-RADIO__recv_map_in-Map-lat))) & (next(main-usr-2-4-4-recv_map-Map-lat) = next(main-usr-2-4-4-RADIO__recv_map_in-Map-lat))) & (next(main-usr-2-4-4-recv_map-Map-lat) = next(main-usr-2-4-4-RADIO__recv_map_in-Map-lat))) & (next(main-usr-2-5-4-recv_map-Map-long) = next(main-usr-2-5-4-RADIO__recv_map_in-Map-long))) & (next(main-usr-2-5-4-recv_map-Map-long) = next(main-usr-2-5-4-RADIO__recv_map_in-Map-long))) & (next(main-usr-2-5-4-recv_map-Map-long) = next(main-usr-2-5-4-RADIO__recv_map_in-Map-long))) & (next(main-usr-2-5-4-recv_map-Map-long) = next(main-usr-2-5-4-RADIO__recv_map_in-Map-long))) & (next(main-usr-8-recv_map-Pattern) = next(main-usr-8-RADIO__recv_map_in-Pattern)));
+	next(main-res-glocal_26) := (next(main-usr-recv_map___EVENT_) = next(main-usr-RADIO__recv_map_in___EVENT_));
+	next(main-res-glocal_27) := (((next(main-usr-4-position_status-alt) = next(main-usr-4-UART__position_status_in-alt)) & (next(main-usr-4-position_status-lat) = next(main-usr-4-UART__position_status_in-lat))) & (next(main-usr-5-position_status-long) = next(main-usr-5-UART__position_status_in-long)));
+	next(main-res-glocal_28) := (next(main-usr-position_status___EVENT_) = next(main-usr-UART__position_status_in___EVENT_));
+	next(main-res-glocal_29) := (((next(main-usr-4-RADIO__send_status_out-alt) = next(main-usr-4-send_status-alt)) & (next(main-usr-4-RADIO__send_status_out-lat) = next(main-usr-4-send_status-lat))) & (next(main-usr-5-RADIO__send_status_out-long) = next(main-usr-5-send_status-long)));
+	next(main-res-glocal_30) := (next(main-usr-RADIO__send_status_out___EVENT_) = next(main-usr-send_status___EVENT_));
+	next(main-res-glocal_31) := ((((((((((((((next(main-usr-5-RADIO__recv_map_out-HMAC) = next(main-usr-5-FPLN__recv_map-HMAC)) & (next(main-usr-2-4-4-RADIO__recv_map_out-Map-alt) = next(main-usr-2-4-4-FPLN__recv_map-Map-alt))) & (next(main-usr-2-4-4-RADIO__recv_map_out-Map-alt) = next(main-usr-2-4-4-FPLN__recv_map-Map-alt))) & (next(main-usr-2-4-4-RADIO__recv_map_out-Map-alt) = next(main-usr-2-4-4-FPLN__recv_map-Map-alt))) & (next(main-usr-2-4-4-RADIO__recv_map_out-Map-alt) = next(main-usr-2-4-4-FPLN__recv_map-Map-alt))) & (next(main-usr-2-4-4-RADIO__recv_map_out-Map-lat) = next(main-usr-2-4-4-FPLN__recv_map-Map-lat))) & (next(main-usr-2-4-4-RADIO__recv_map_out-Map-lat) = next(main-usr-2-4-4-FPLN__recv_map-Map-lat))) & (next(main-usr-2-4-4-RADIO__recv_map_out-Map-lat) = next(main-usr-2-4-4-FPLN__recv_map-Map-lat))) & (next(main-usr-2-4-4-RADIO__recv_map_out-Map-lat) = next(main-usr-2-4-4-FPLN__recv_map-Map-lat))) & (next(main-usr-2-5-4-RADIO__recv_map_out-Map-long) = next(main-usr-2-5-4-FPLN__recv_map-Map-long))) & (next(main-usr-2-5-4-RADIO__recv_map_out-Map-long) = next(main-usr-2-5-4-FPLN__recv_map-Map-long))) & (next(main-usr-2-5-4-RADIO__recv_map_out-Map-long) = next(main-usr-2-5-4-FPLN__recv_map-Map-long))) & (next(main-usr-2-5-4-RADIO__recv_map_out-Map-long) = next(main-usr-2-5-4-FPLN__recv_map-Map-long))) & (next(main-usr-8-RADIO__recv_map_out-Pattern) = next(main-usr-8-FPLN__recv_map-Pattern)));
+	next(main-res-glocal_32) := (next(main-usr-RADIO__recv_map_out___EVENT_) = next(main-usr-FPLN__recv_map___EVENT_));
+	next(main-res-glocal_33) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[0]) = (next(main-usr-2-4-WPM__flight_plan-alt)[0])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[0]) = (next(main-usr-2-4-WPM__flight_plan-lat)[0]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[0]) = (next(main-usr-2-5-WPM__flight_plan-long)[0])));
+	next(main-res-glocal_34) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[1]) = (next(main-usr-2-4-WPM__flight_plan-alt)[1])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[1]) = (next(main-usr-2-4-WPM__flight_plan-lat)[1]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[1]) = (next(main-usr-2-5-WPM__flight_plan-long)[1])));
+	next(main-res-glocal_35) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[2]) = (next(main-usr-2-4-WPM__flight_plan-alt)[2])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[2]) = (next(main-usr-2-4-WPM__flight_plan-lat)[2]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[2]) = (next(main-usr-2-5-WPM__flight_plan-long)[2])));
+	next(main-res-glocal_36) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[3]) = (next(main-usr-2-4-WPM__flight_plan-alt)[3])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[3]) = (next(main-usr-2-4-WPM__flight_plan-lat)[3]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[3]) = (next(main-usr-2-5-WPM__flight_plan-long)[3])));
+	next(main-res-glocal_37) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[4]) = (next(main-usr-2-4-WPM__flight_plan-alt)[4])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[4]) = (next(main-usr-2-4-WPM__flight_plan-lat)[4]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[4]) = (next(main-usr-2-5-WPM__flight_plan-long)[4])));
+	next(main-res-glocal_38) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[5]) = (next(main-usr-2-4-WPM__flight_plan-alt)[5])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[5]) = (next(main-usr-2-4-WPM__flight_plan-lat)[5]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[5]) = (next(main-usr-2-5-WPM__flight_plan-long)[5])));
+	next(main-res-glocal_39) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[6]) = (next(main-usr-2-4-WPM__flight_plan-alt)[6])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[6]) = (next(main-usr-2-4-WPM__flight_plan-lat)[6]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[6]) = (next(main-usr-2-5-WPM__flight_plan-long)[6])));
+	next(main-res-glocal_40) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[7]) = (next(main-usr-2-4-WPM__flight_plan-alt)[7])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[7]) = (next(main-usr-2-4-WPM__flight_plan-lat)[7]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[7]) = (next(main-usr-2-5-WPM__flight_plan-long)[7])));
+	next(main-res-glocal_41) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[8]) = (next(main-usr-2-4-WPM__flight_plan-alt)[8])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[8]) = (next(main-usr-2-4-WPM__flight_plan-lat)[8]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[8]) = (next(main-usr-2-5-WPM__flight_plan-long)[8])));
+	next(main-res-glocal_42) := ((((next(main-usr-2-4-FPLN__flight_plan-alt)[9]) = (next(main-usr-2-4-WPM__flight_plan-alt)[9])) & ((next(main-usr-2-4-FPLN__flight_plan-lat)[9]) = (next(main-usr-2-4-WPM__flight_plan-lat)[9]))) & ((next(main-usr-2-5-FPLN__flight_plan-long)[9]) = (next(main-usr-2-5-WPM__flight_plan-long)[9])));
+	next(main-res-glocal_43) := (((((((((((((next(main-usr-4-WPM__waypoint-crc) = next(main-usr-4-UART__waypoint_in-crc)) & (next(main-usr-2-4-4-WPM__waypoint-wps-alt) = next(main-usr-2-4-4-UART__waypoint_in-wps-alt))) & (next(main-usr-2-4-4-WPM__waypoint-wps-alt) = next(main-usr-2-4-4-UART__waypoint_in-wps-alt))) & (next(main-usr-2-4-4-WPM__waypoint-wps-alt) = next(main-usr-2-4-4-UART__waypoint_in-wps-alt))) & (next(main-usr-2-4-4-WPM__waypoint-wps-alt) = next(main-usr-2-4-4-UART__waypoint_in-wps-alt))) & (next(main-usr-2-4-4-WPM__waypoint-wps-lat) = next(main-usr-2-4-4-UART__waypoint_in-wps-lat))) & (next(main-usr-2-4-4-WPM__waypoint-wps-lat) = next(main-usr-2-4-4-UART__waypoint_in-wps-lat))) & (next(main-usr-2-4-4-WPM__waypoint-wps-lat) = next(main-usr-2-4-4-UART__waypoint_in-wps-lat))) & (next(main-usr-2-4-4-WPM__waypoint-wps-lat) = next(main-usr-2-4-4-UART__waypoint_in-wps-lat))) & (next(main-usr-2-5-4-WPM__waypoint-wps-long) = next(main-usr-2-5-4-UART__waypoint_in-wps-long))) & (next(main-usr-2-5-4-WPM__waypoint-wps-long) = next(main-usr-2-5-4-UART__waypoint_in-wps-long))) & (next(main-usr-2-5-4-WPM__waypoint-wps-long) = next(main-usr-2-5-4-UART__waypoint_in-wps-long))) & (next(main-usr-2-5-4-WPM__waypoint-wps-long) = next(main-usr-2-5-4-UART__waypoint_in-wps-long)));
+	next(main-res-glocal_44) := (next(main-usr-WPM__waypoint___EVENT_) = next(main-usr-UART__waypoint_in___EVENT_));
+	next(main-res-glocal_45) := (((((((((((((next(main-usr-4-UART__waypoint_out-crc) = next(main-usr-4-waypoint-crc)) & (next(main-usr-2-4-4-UART__waypoint_out-wps-alt) = next(main-usr-2-4-4-waypoint-wps-alt))) & (next(main-usr-2-4-4-UART__waypoint_out-wps-alt) = next(main-usr-2-4-4-waypoint-wps-alt))) & (next(main-usr-2-4-4-UART__waypoint_out-wps-alt) = next(main-usr-2-4-4-waypoint-wps-alt))) & (next(main-usr-2-4-4-UART__waypoint_out-wps-alt) = next(main-usr-2-4-4-waypoint-wps-alt))) & (next(main-usr-2-4-4-UART__waypoint_out-wps-lat) = next(main-usr-2-4-4-waypoint-wps-lat))) & (next(main-usr-2-4-4-UART__waypoint_out-wps-lat) = next(main-usr-2-4-4-waypoint-wps-lat))) & (next(main-usr-2-4-4-UART__waypoint_out-wps-lat) = next(main-usr-2-4-4-waypoint-wps-lat))) & (next(main-usr-2-4-4-UART__waypoint_out-wps-lat) = next(main-usr-2-4-4-waypoint-wps-lat))) & (next(main-usr-2-5-4-UART__waypoint_out-wps-long) = next(main-usr-2-5-4-waypoint-wps-long))) & (next(main-usr-2-5-4-UART__waypoint_out-wps-long) = next(main-usr-2-5-4-waypoint-wps-long))) & (next(main-usr-2-5-4-UART__waypoint_out-wps-long) = next(main-usr-2-5-4-waypoint-wps-long))) & (next(main-usr-2-5-4-UART__waypoint_out-wps-long) = next(main-usr-2-5-4-waypoint-wps-long)));
+	next(main-res-glocal_46) := (next(main-usr-UART__waypoint_out___EVENT_) = next(main-usr-waypoint___EVENT_));
+	next(main-res-glocal_47) := (((next(main-usr-4-UART__position_status_out-alt) = next(main-usr-4-WPM__position_status-alt)) & (next(main-usr-4-UART__position_status_out-lat) = next(main-usr-4-WPM__position_status-lat))) & (next(main-usr-5-UART__position_status_out-long) = next(main-usr-5-WPM__position_status-long)));
+	next(main-res-glocal_48) := (next(main-usr-UART__position_status_out___EVENT_) = next(main-usr-WPM__position_status___EVENT_));
+	next(main-res-glocal_49) := (((next(main-usr-4-UART__position_status_out-alt) = next(main-usr-4-FPLN__position_status-alt)) & (next(main-usr-4-UART__position_status_out-lat) = next(main-usr-4-FPLN__position_status-lat))) & (next(main-usr-5-UART__position_status_out-long) = next(main-usr-5-FPLN__position_status-long)));
+	next(main-res-glocal_50) := (next(main-usr-UART__position_status_out___EVENT_) = next(main-usr-FPLN__position_status___EVENT_));
+	next(main-res-glocal_51) := (((next(main-usr-4-UART__position_status_out-alt) = next(main-usr-4-RADIO__send_status_in-alt)) & (next(main-usr-4-UART__position_status_out-lat) = next(main-usr-4-RADIO__send_status_in-lat))) & (next(main-usr-5-UART__position_status_out-long) = next(main-usr-5-RADIO__send_status_in-long)));
+	next(main-res-glocal_52) := (next(main-usr-UART__position_status_out___EVENT_) = next(main-usr-RADIO__send_status_in___EVENT_));
+	next(main-res-glocal_53) := TRUE;
+	next(main-res-glocal_54) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+  INVAR main-res-glocal_54;
+	INVAR main-res-glocal_53;
+	INVAR main-res-glocal_52;
+	INVAR main-res-glocal_51;
+	INVAR main-res-glocal_50;
+	INVAR main-res-glocal_49;
+	INVAR main-res-glocal_48;
+	INVAR main-res-glocal_47;
+	INVAR main-res-glocal_46;
+	INVAR main-res-glocal_45;
+	INVAR main-res-glocal_44;
+	INVAR main-res-glocal_43;
+	INVAR main-res-glocal_42;
+	INVAR main-res-glocal_41;
+	INVAR main-res-glocal_40;
+	INVAR main-res-glocal_39;
+	INVAR main-res-glocal_38;
+	INVAR main-res-glocal_37;
+	INVAR main-res-glocal_36;
+	INVAR main-res-glocal_35;
+	INVAR main-res-glocal_34;
+	INVAR main-res-glocal_33;
+	INVAR main-res-glocal_32;
+	INVAR main-res-glocal_31;
+	INVAR main-res-glocal_30;
+	INVAR main-res-glocal_29;
+	INVAR main-res-glocal_28;
+	INVAR main-res-glocal_27;
+	INVAR main-res-glocal_26;
+	INVAR main-res-glocal_25;
+	INVAR main-res-glocal_24;
+	INVAR main-res-glocal_23;
+	INVAR main-res-glocal_21;
+	INVAR main-res-glocal_20;
+	INVAR main-res-glocal_17;
+	INVAR main-res-glocal_15;
+	INVAR main-res-glocal_14;
+	INVAR main-res-glocal_12;
+	INVAR main-res-glocal_10;
+	INVAR main-res-glocal_9;
+	INVAR main-res-glocal_7;
+	INVAR main-res-glocal_5;
+	INVAR main-res-glocal_4;
+	INVAR main-res-glocal_3;
+	INVAR main-res-glocal_2;
+
+LTLSPEC G
+((main-impl-usr-__GUARANTEE2) & (main-impl-usr-__GUARANTEE1) & (main-impl-usr-__GUARANTEE0) & 
+ (main-impl-usr-__ASSUME__HIST) & (main-usr-FPLN____ASSUME0) & (main-usr-RADIO____ASSUME0));

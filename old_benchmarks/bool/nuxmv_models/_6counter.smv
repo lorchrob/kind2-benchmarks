@@ -1,0 +1,26 @@
+
+MODULE main () 
+VAR
+
+	top-usr-OK : boolean;
+	top-impl-usr-a : boolean;
+	top-impl-usr-b : boolean;
+	top-impl-usr-c : boolean;
+	top-res-glocal_1 : boolean;
+ASSIGN
+	init(top-usr-OK) := TRUE;
+	init(top-impl-usr-b) := FALSE;
+	init(top-impl-usr-a) := FALSE;
+	init(top-impl-usr-c) := FALSE;
+	init(top-res-glocal_1) := TRUE;
+
+	next(top-impl-usr-b) := ((top-impl-usr-b & !top-impl-usr-a) | ((!top-impl-usr-c & !top-impl-usr-b) & top-impl-usr-a));
+	next(top-usr-OK) := (top-res-glocal_1 = !next(top-impl-usr-b));
+	next(top-impl-usr-a) := !top-impl-usr-a;
+	next(top-impl-usr-c) := ((top-impl-usr-b & top-impl-usr-a) | (top-impl-usr-c & !top-impl-usr-a));
+	next(top-res-glocal_1) := top-impl-usr-b;
+
+
+INVARSPEC 
+((top-usr-OK));
+
