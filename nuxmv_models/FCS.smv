@@ -1,7 +1,6 @@
 
 MODULE _TOP__AP (_TOP__AP-usr-__ASSUME__HIST, _TOP__AP-usr-12-5-GC_L-cmds-Pitch_Delta, _TOP__AP-usr-12-5-GC_L-cmds-Pitch_Valid, _TOP__AP-usr-7-4-GC_L-mds-active, _TOP__AP-usr-11-4-4-GC_L-mds-lat-HDG_active, _TOP__AP-usr-12-4-4-GC_L-mds-lat-ROLL_active, _TOP__AP-usr-4-4-GC_L-mds-ver, _TOP__AP-usr-12-5-GC_R-cmds-Pitch_Delta, _TOP__AP-usr-12-5-GC_R-cmds-Pitch_Valid, _TOP__AP-usr-7-4-GC_R-mds-active, _TOP__AP-usr-11-4-4-GC_R-mds-lat-HDG_active, _TOP__AP-usr-12-4-4-GC_R-mds-lat-ROLL_active, _TOP__AP-usr-4-4-GC_R-mds-ver, _TOP__AP-usr-time, _TOP__AP-usr-leader_pitch_delta, _TOP__AP-usr-leader_pitch_delta_correct, _TOP__AP-usr-16-CSA-CSA_Pitch_Delta, _TOP__AP-usr-16-CSA-CSA_Pitch_Valid)
 VAR
-
 	_TOP__AP-usr-__ASSERT : boolean;
 ASSIGN
 	init(_TOP__AP-usr-__ASSERT) := ((_TOP__AP-usr-leader_pitch_delta_correct = (((_TOP__AP-usr-leader_pitch_delta > 0) -> ((_TOP__AP-usr-16-CSA-CSA_Pitch_Delta > 0) & _TOP__AP-usr-16-CSA-CSA_Pitch_Delta <= _TOP__AP-usr-leader_pitch_delta)) & (_TOP__AP-usr-leader_pitch_delta <= 0 -> (_TOP__AP-usr-16-CSA-CSA_Pitch_Delta <= 0 & _TOP__AP-usr-16-CSA-CSA_Pitch_Delta >= _TOP__AP-usr-leader_pitch_delta)))) & ((_TOP__AP-usr-leader_pitch_delta = (_TOP__AP-usr-7-4-GC_L-mds-active ? _TOP__AP-usr-12-5-GC_L-cmds-Pitch_Delta : (_TOP__AP-usr-7-4-GC_R-mds-active ? _TOP__AP-usr-12-5-GC_R-cmds-Pitch_Delta : 0))) & (_TOP__AP-usr-__ASSUME__HIST -> _TOP__AP-usr-leader_pitch_delta_correct)));
@@ -12,7 +11,6 @@ ASSIGN
 
 MODULE FGS__Flight_Guidance_System__abs (FGS__Flight_Guidance_System__abs-usr-x)
 VAR
-
 	FGS__Flight_Guidance_System__abs-usr-_outvar : real;
 ASSIGN
 	init(FGS__Flight_Guidance_System__abs-usr-_outvar) := ((FGS__Flight_Guidance_System__abs-usr-x > 0) ? FGS__Flight_Guidance_System__abs-usr-x : -FGS__Flight_Guidance_System__abs-usr-x);
@@ -23,14 +21,8 @@ ASSIGN
 
 MODULE _TOP__FGS_L (_TOP__FGS_L-usr-__ASSUME__HIST, _TOP__FGS_L-usr-4-9-AD-AirSpeed-Val, _TOP__FGS_L-usr-6-9-AD-AirSpeed-Valid, _TOP__FGS_L-usr-4-6-AD-Pitch-Val, _TOP__FGS_L-usr-6-6-AD-Pitch-Valid, _TOP__FGS_L-usr-7-LSI-Leader, _TOP__FGS_L-usr-6-LSI-Valid, _TOP__FGS_L-usr-time, _TOP__FGS_L-usr-this_side_in_control, _TOP__FGS_L-usr-active_implies_valid, _TOP__FGS_L-usr-leader_implies_active, _TOP__FGS_L-usr-gc_ok, _TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta, _TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Valid, _TOP__FGS_L-usr-7-4-GC-mds-active, _TOP__FGS_L-usr-11-4-4-GC-mds-lat-HDG_active, _TOP__FGS_L-usr-12-4-4-GC-mds-lat-ROLL_active, _TOP__FGS_L-usr-4-4-GC-mds-ver, _TOP__FGS_L-usr-7-LSO-Leader, _TOP__FGS_L-usr-6-LSO-Valid)
 VAR
-
-	_TOP__FGS_L-usr-__ASSERT : boolean;
-	_TOP__FGS_L-res-glocal_4 : real;
-	_TOP__FGS_L-res-gklocal_5 : real;
-	_TOP__FGS_L-res-gklocal_7 : real;
-	_TOP__FGS_L-res-call_6 : FGS__Flight_Guidance_System__abs(_TOP__FGS_L-res-gklocal_5);
+	_TOP__FGS_L-usr-__ASSERT : boolean;	_TOP__FGS_L-res-glocal_4 : real;	_TOP__FGS_L-res-gklocal_5 : real;	_TOP__FGS_L-res-gklocal_7 : real;	_TOP__FGS_L-res-call_6 : FGS__Flight_Guidance_System__abs(_TOP__FGS_L-res-gklocal_5);
 	_TOP__FGS_L-res-call_8 : FGS__Flight_Guidance_System__abs(_TOP__FGS_L-res-gklocal_7);
-
 
 ASSIGN
 	init(_TOP__FGS_L-res-gklocal_7) := _TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta;
@@ -47,7 +39,6 @@ ASSIGN
 
 MODULE FCS__Flight_Control_System__abs (FCS__Flight_Control_System__abs-usr-x)
 VAR
-
 	FCS__Flight_Control_System__abs-usr-_outvar : real;
 ASSIGN
 	init(FCS__Flight_Control_System__abs-usr-_outvar) := ((FCS__Flight_Control_System__abs-usr-x > 0) ? FCS__Flight_Control_System__abs-usr-x : -FCS__Flight_Control_System__abs-usr-x);
@@ -58,14 +49,8 @@ ASSIGN
 
 MODULE _TOP__FGS_R (_TOP__FGS_R-usr-__ASSUME__HIST, _TOP__FGS_R-usr-4-9-AD-AirSpeed-Val, _TOP__FGS_R-usr-6-9-AD-AirSpeed-Valid, _TOP__FGS_R-usr-4-6-AD-Pitch-Val, _TOP__FGS_R-usr-6-6-AD-Pitch-Valid, _TOP__FGS_R-usr-7-LSI-Leader, _TOP__FGS_R-usr-6-LSI-Valid, _TOP__FGS_R-usr-time, _TOP__FGS_R-usr-this_side_in_control, _TOP__FGS_R-usr-active_implies_valid, _TOP__FGS_R-usr-leader_implies_active, _TOP__FGS_R-usr-gc_ok, _TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta, _TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Valid, _TOP__FGS_R-usr-7-4-GC-mds-active, _TOP__FGS_R-usr-11-4-4-GC-mds-lat-HDG_active, _TOP__FGS_R-usr-12-4-4-GC-mds-lat-ROLL_active, _TOP__FGS_R-usr-4-4-GC-mds-ver, _TOP__FGS_R-usr-7-LSO-Leader, _TOP__FGS_R-usr-6-LSO-Valid)
 VAR
-
-	_TOP__FGS_R-usr-__ASSERT : boolean;
-	_TOP__FGS_R-res-glocal_9 : real;
-	_TOP__FGS_R-res-gklocal_10 : real;
-	_TOP__FGS_R-res-gklocal_12 : real;
-	_TOP__FGS_R-res-call_11 : FGS__Flight_Guidance_System__abs(_TOP__FGS_R-res-gklocal_10);
+	_TOP__FGS_R-usr-__ASSERT : boolean;	_TOP__FGS_R-res-glocal_9 : real;	_TOP__FGS_R-res-gklocal_10 : real;	_TOP__FGS_R-res-gklocal_12 : real;	_TOP__FGS_R-res-call_11 : FGS__Flight_Guidance_System__abs(_TOP__FGS_R-res-gklocal_10);
 	_TOP__FGS_R-res-call_13 : FGS__Flight_Guidance_System__abs(_TOP__FGS_R-res-gklocal_12);
-
 
 ASSIGN
 	init(_TOP__FGS_R-res-gklocal_12) := _TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta;
@@ -82,7 +67,6 @@ ASSIGN
 
 MODULE __HIST (__HIST-usr-input)
 VAR
-
 	__HIST-usr-hist : boolean;
 ASSIGN
 	init(__HIST-usr-hist) := __HIST-usr-input;
@@ -92,152 +76,7 @@ ASSIGN
 
 MODULE main () 
 VAR
-
-	main-usr-AP__leader_pitch_delta : real;
-	main-usr-AP__leader_pitch_delta_correct : boolean;
-	main-usr-16-AP__CSA-CSA_Pitch_Delta : real;
-	main-usr-16-AP__CSA-CSA_Pitch_Valid : boolean;
-	main-usr-AP____ASSUME__HIST : boolean;
-	main-usr-FGS_L__this_side_in_control : boolean;
-	main-usr-FGS_L__active_implies_valid : boolean;
-	main-usr-FGS_L__leader_implies_active : boolean;
-	main-usr-FGS_L__gc_ok : boolean;
-	main-usr-12-5-FGS_L__GC-cmds-Pitch_Delta : real;
-	main-usr-12-5-FGS_L__GC-cmds-Pitch_Valid : boolean;
-	main-usr-7-4-FGS_L__GC-mds-active : boolean;
-	main-usr-11-4-4-FGS_L__GC-mds-lat-HDG_active : boolean;
-	main-usr-12-4-4-FGS_L__GC-mds-lat-ROLL_active : boolean;
-	main-usr-4-4-FGS_L__GC-mds-ver : integer;
-	main-usr-7-FGS_L__LSO-Leader : integer;
-	main-usr-6-FGS_L__LSO-Valid : boolean;
-	main-usr-FGS_L____ASSUME__HIST : boolean;
-	main-usr-FGS_R__this_side_in_control : boolean;
-	main-usr-FGS_R__active_implies_valid : boolean;
-	main-usr-FGS_R__leader_implies_active : boolean;
-	main-usr-FGS_R__gc_ok : boolean;
-	main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta : real;
-	main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid : boolean;
-	main-usr-7-4-FGS_R__GC-mds-active : boolean;
-	main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active : boolean;
-	main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active : boolean;
-	main-usr-4-4-FGS_R__GC-mds-ver : integer;
-	main-usr-7-FGS_R__LSO-Leader : integer;
-	main-usr-6-FGS_R__LSO-Valid : boolean;
-	main-usr-FGS_R____ASSUME__HIST : boolean;
-	main-usr-prop2 : boolean;
-	main-usr-prop1 : boolean;
-	main-usr-AD_L_Pitch_Step_Delta_Valid : boolean;
-	main-usr-AD_R_Pitch_Step_Delta_Valid : boolean;
-	main-usr-pitch_lr_ok : boolean;
-	main-usr-left_side_valid : boolean;
-	main-usr-right_side_valid : boolean;
-	main-usr-some_side_valid : boolean;
-	main-usr-12-5-FD_L-cmds-Pitch_Delta : real;
-	main-usr-12-5-FD_L-cmds-Pitch_Valid : boolean;
-	main-usr-7-4-FD_L-mds-active : boolean;
-	main-usr-11-4-4-FD_L-mds-lat-HDG_active : boolean;
-	main-usr-12-4-4-FD_L-mds-lat-ROLL_active : boolean;
-	main-usr-4-4-FD_L-mds-ver : integer;
-	main-usr-12-5-FD_R-cmds-Pitch_Delta : real;
-	main-usr-12-5-FD_R-cmds-Pitch_Valid : boolean;
-	main-usr-7-4-FD_R-mds-active : boolean;
-	main-usr-11-4-4-FD_R-mds-lat-HDG_active : boolean;
-	main-usr-12-4-4-FD_R-mds-lat-ROLL_active : boolean;
-	main-usr-4-4-FD_R-mds-ver : integer;
-	main-usr-16-CSA-CSA_Pitch_Delta : real;
-	main-usr-16-CSA-CSA_Pitch_Valid : boolean;
-	main-usr-12-5-AP__GC_L-cmds-Pitch_Delta : real;
-	main-usr-12-5-AP__GC_L-cmds-Pitch_Valid : boolean;
-	main-usr-7-4-AP__GC_L-mds-active : boolean;
-	main-usr-11-4-4-AP__GC_L-mds-lat-HDG_active : boolean;
-	main-usr-12-4-4-AP__GC_L-mds-lat-ROLL_active : boolean;
-	main-usr-4-4-AP__GC_L-mds-ver : integer;
-	main-usr-12-5-AP__GC_R-cmds-Pitch_Delta : real;
-	main-usr-12-5-AP__GC_R-cmds-Pitch_Valid : boolean;
-	main-usr-7-4-AP__GC_R-mds-active : boolean;
-	main-usr-11-4-4-AP__GC_R-mds-lat-HDG_active : boolean;
-	main-usr-12-4-4-AP__GC_R-mds-lat-ROLL_active : boolean;
-	main-usr-4-4-AP__GC_R-mds-ver : integer;
-	main-usr-AP__time : real;
-	main-usr-4-9-FGS_L__AD-AirSpeed-Val : real;
-	main-usr-6-9-FGS_L__AD-AirSpeed-Valid : boolean;
-	main-usr-4-6-FGS_L__AD-Pitch-Val : real;
-	main-usr-6-6-FGS_L__AD-Pitch-Valid : boolean;
-	main-usr-7-FGS_L__LSI-Leader : integer;
-	main-usr-6-FGS_L__LSI-Valid : boolean;
-	main-usr-FGS_L__time : real;
-	main-usr-4-9-FGS_R__AD-AirSpeed-Val : real;
-	main-usr-6-9-FGS_R__AD-AirSpeed-Valid : boolean;
-	main-usr-4-6-FGS_R__AD-Pitch-Val : real;
-	main-usr-6-6-FGS_R__AD-Pitch-Valid : boolean;
-	main-usr-7-FGS_R__LSI-Leader : integer;
-	main-usr-6-FGS_R__LSI-Valid : boolean;
-	main-usr-FGS_R__time : real;
-	main-usr-4-9-AD_L-AirSpeed-Val : real;
-	main-usr-6-9-AD_L-AirSpeed-Valid : boolean;
-	main-usr-4-6-AD_L-Pitch-Val : real;
-	main-usr-6-6-AD_L-Pitch-Valid : boolean;
-	main-usr-4-9-AD_R-AirSpeed-Val : real;
-	main-usr-6-9-AD_R-AirSpeed-Valid : boolean;
-	main-usr-4-6-AD_R-Pitch-Val : real;
-	main-usr-6-6-AD_R-Pitch-Valid : boolean;
-	main-usr-time : real;
-	main-impl-usr-__ASSUME__HIST : boolean;
-	main-impl-usr-__GUARANTEE0 : boolean;
-	main-impl-usr-__GUARANTEE1 : boolean;
-	main-res-glocal_14 : boolean;
-	main-res-glocal_15 : boolean;
-	main-res-glocal_18 : real;
-	main-res-glocal_21 : boolean;
-	main-res-glocal_22 : boolean;
-	main-res-glocal_23 : boolean;
-	main-res-glocal_24 : boolean;
-	main-res-glocal_26 : boolean;
-	main-res-glocal_29 : boolean;
-	main-res-glocal_30 : boolean;
-	main-res-glocal_32 : boolean;
-	main-res-glocal_33 : boolean;
-	main-res-glocal_34 : boolean;
-	main-res-glocal_36 : boolean;
-	main-res-glocal_37 : boolean;
-	main-res-glocal_38 : boolean;
-	main-res-glocal_39 : boolean;
-	main-res-glocal_40 : boolean;
-	main-res-glocal_41 : boolean;
-	main-res-glocal_42 : boolean;
-	main-res-glocal_43 : boolean;
-	main-res-glocal_44 : boolean;
-	main-res-glocal_45 : boolean;
-	main-res-glocal_46 : boolean;
-	main-res-glocal_47 : boolean;
-	main-res-glocal_48 : boolean;
-	main-res-glocal_49 : boolean;
-	main-res-glocal_50 : boolean;
-	main-res-glocal_51 : boolean;
-	main-res-glocal_52 : boolean;
-	main-res-glocal_53 : boolean;
-	main-res-glocal_54 : boolean;
-	main-res-glocal_55 : boolean;
-	main-res-glocal_56 : boolean;
-	main-res-glocal_57 : boolean;
-	main-res-glocal_58 : boolean;
-	main-res-glocal_59 : real;
-	main-res-glocal_62 : boolean;
-	main-res-glocal_63 : real;
-	main-res-glocal_66 : boolean;
-	main-res-glocal_69 : boolean;
-	main-res-glocal_70 : boolean;
-	main-res-glocal_71 : boolean;
-	main-res-glocal_72 : boolean;
-	main-res-glocal_73 : boolean;
-	main-res-glocal_74 : boolean;
-	main-res-gklocal_67 : real;
-	main-res-gklocal_64 : real;
-	main-res-gklocal_60 : real;
-	main-res-gklocal_27 : boolean;
-	main-res-gklocal_19 : real;
-	main-res-gklocal_16 : real;
-	main-res-call_68 : FCS__Flight_Control_System__abs(main-res-gklocal_67);
+	main-usr-AP__leader_pitch_delta : real;	main-usr-AP__leader_pitch_delta_correct : boolean;	main-usr-16-AP__CSA-CSA_Pitch_Delta : real;	main-usr-16-AP__CSA-CSA_Pitch_Valid : boolean;	main-usr-AP____ASSUME__HIST : boolean;	main-usr-FGS_L__this_side_in_control : boolean;	main-usr-FGS_L__active_implies_valid : boolean;	main-usr-FGS_L__leader_implies_active : boolean;	main-usr-FGS_L__gc_ok : boolean;	main-usr-12-5-FGS_L__GC-cmds-Pitch_Delta : real;	main-usr-12-5-FGS_L__GC-cmds-Pitch_Valid : boolean;	main-usr-7-4-FGS_L__GC-mds-active : boolean;	main-usr-11-4-4-FGS_L__GC-mds-lat-HDG_active : boolean;	main-usr-12-4-4-FGS_L__GC-mds-lat-ROLL_active : boolean;	main-usr-4-4-FGS_L__GC-mds-ver : integer;	main-usr-7-FGS_L__LSO-Leader : integer;	main-usr-6-FGS_L__LSO-Valid : boolean;	main-usr-FGS_L____ASSUME__HIST : boolean;	main-usr-FGS_R__this_side_in_control : boolean;	main-usr-FGS_R__active_implies_valid : boolean;	main-usr-FGS_R__leader_implies_active : boolean;	main-usr-FGS_R__gc_ok : boolean;	main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta : real;	main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid : boolean;	main-usr-7-4-FGS_R__GC-mds-active : boolean;	main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active : boolean;	main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active : boolean;	main-usr-4-4-FGS_R__GC-mds-ver : integer;	main-usr-7-FGS_R__LSO-Leader : integer;	main-usr-6-FGS_R__LSO-Valid : boolean;	main-usr-FGS_R____ASSUME__HIST : boolean;	main-usr-prop2 : boolean;	main-usr-prop1 : boolean;	main-usr-AD_L_Pitch_Step_Delta_Valid : boolean;	main-usr-AD_R_Pitch_Step_Delta_Valid : boolean;	main-usr-pitch_lr_ok : boolean;	main-usr-left_side_valid : boolean;	main-usr-right_side_valid : boolean;	main-usr-some_side_valid : boolean;	main-usr-12-5-FD_L-cmds-Pitch_Delta : real;	main-usr-12-5-FD_L-cmds-Pitch_Valid : boolean;	main-usr-7-4-FD_L-mds-active : boolean;	main-usr-11-4-4-FD_L-mds-lat-HDG_active : boolean;	main-usr-12-4-4-FD_L-mds-lat-ROLL_active : boolean;	main-usr-4-4-FD_L-mds-ver : integer;	main-usr-12-5-FD_R-cmds-Pitch_Delta : real;	main-usr-12-5-FD_R-cmds-Pitch_Valid : boolean;	main-usr-7-4-FD_R-mds-active : boolean;	main-usr-11-4-4-FD_R-mds-lat-HDG_active : boolean;	main-usr-12-4-4-FD_R-mds-lat-ROLL_active : boolean;	main-usr-4-4-FD_R-mds-ver : integer;	main-usr-16-CSA-CSA_Pitch_Delta : real;	main-usr-16-CSA-CSA_Pitch_Valid : boolean;	main-usr-12-5-AP__GC_L-cmds-Pitch_Delta : real;	main-usr-12-5-AP__GC_L-cmds-Pitch_Valid : boolean;	main-usr-7-4-AP__GC_L-mds-active : boolean;	main-usr-11-4-4-AP__GC_L-mds-lat-HDG_active : boolean;	main-usr-12-4-4-AP__GC_L-mds-lat-ROLL_active : boolean;	main-usr-4-4-AP__GC_L-mds-ver : integer;	main-usr-12-5-AP__GC_R-cmds-Pitch_Delta : real;	main-usr-12-5-AP__GC_R-cmds-Pitch_Valid : boolean;	main-usr-7-4-AP__GC_R-mds-active : boolean;	main-usr-11-4-4-AP__GC_R-mds-lat-HDG_active : boolean;	main-usr-12-4-4-AP__GC_R-mds-lat-ROLL_active : boolean;	main-usr-4-4-AP__GC_R-mds-ver : integer;	main-usr-AP__time : real;	main-usr-4-9-FGS_L__AD-AirSpeed-Val : real;	main-usr-6-9-FGS_L__AD-AirSpeed-Valid : boolean;	main-usr-4-6-FGS_L__AD-Pitch-Val : real;	main-usr-6-6-FGS_L__AD-Pitch-Valid : boolean;	main-usr-7-FGS_L__LSI-Leader : integer;	main-usr-6-FGS_L__LSI-Valid : boolean;	main-usr-FGS_L__time : real;	main-usr-4-9-FGS_R__AD-AirSpeed-Val : real;	main-usr-6-9-FGS_R__AD-AirSpeed-Valid : boolean;	main-usr-4-6-FGS_R__AD-Pitch-Val : real;	main-usr-6-6-FGS_R__AD-Pitch-Valid : boolean;	main-usr-7-FGS_R__LSI-Leader : integer;	main-usr-6-FGS_R__LSI-Valid : boolean;	main-usr-FGS_R__time : real;	main-usr-4-9-AD_L-AirSpeed-Val : real;	main-usr-6-9-AD_L-AirSpeed-Valid : boolean;	main-usr-4-6-AD_L-Pitch-Val : real;	main-usr-6-6-AD_L-Pitch-Valid : boolean;	main-usr-4-9-AD_R-AirSpeed-Val : real;	main-usr-6-9-AD_R-AirSpeed-Valid : boolean;	main-usr-4-6-AD_R-Pitch-Val : real;	main-usr-6-6-AD_R-Pitch-Valid : boolean;	main-usr-time : real;	main-impl-usr-__ASSUME__HIST : boolean;	main-impl-usr-__GUARANTEE0 : boolean;	main-impl-usr-__GUARANTEE1 : boolean;	main-res-glocal_14 : boolean;	main-res-glocal_15 : boolean;	main-res-glocal_18 : real;	main-res-glocal_21 : boolean;	main-res-glocal_22 : boolean;	main-res-glocal_23 : boolean;	main-res-glocal_24 : boolean;	main-res-glocal_26 : boolean;	main-res-glocal_29 : boolean;	main-res-glocal_30 : boolean;	main-res-glocal_32 : boolean;	main-res-glocal_33 : boolean;	main-res-glocal_34 : boolean;	main-res-glocal_36 : boolean;	main-res-glocal_37 : boolean;	main-res-glocal_38 : boolean;	main-res-glocal_39 : boolean;	main-res-glocal_40 : boolean;	main-res-glocal_41 : boolean;	main-res-glocal_42 : boolean;	main-res-glocal_43 : boolean;	main-res-glocal_44 : boolean;	main-res-glocal_45 : boolean;	main-res-glocal_46 : boolean;	main-res-glocal_47 : boolean;	main-res-glocal_48 : boolean;	main-res-glocal_49 : boolean;	main-res-glocal_50 : boolean;	main-res-glocal_51 : boolean;	main-res-glocal_52 : boolean;	main-res-glocal_53 : boolean;	main-res-glocal_54 : boolean;	main-res-glocal_55 : boolean;	main-res-glocal_56 : boolean;	main-res-glocal_57 : boolean;	main-res-glocal_58 : boolean;	main-res-glocal_59 : real;	main-res-glocal_62 : boolean;	main-res-glocal_63 : real;	main-res-glocal_66 : boolean;	main-res-glocal_69 : boolean;	main-res-glocal_70 : boolean;	main-res-glocal_71 : boolean;	main-res-glocal_72 : boolean;	main-res-glocal_73 : boolean;	main-res-glocal_74 : boolean;	main-res-gklocal_67 : real;	main-res-gklocal_64 : real;	main-res-gklocal_60 : real;	main-res-gklocal_27 : boolean;	main-res-gklocal_19 : real;	main-res-gklocal_16 : real;	main-res-call_68 : FCS__Flight_Control_System__abs(main-res-gklocal_67);
 	main-res-call_65 : FCS__Flight_Control_System__abs(main-res-gklocal_64);
 	main-res-call_61 : FCS__Flight_Control_System__abs(main-res-gklocal_60);
 	main-res-call_35 : _TOP__FGS_R(main-usr-FGS_R____ASSUME__HIST, main-usr-4-9-FGS_R__AD-AirSpeed-Val, main-usr-6-9-FGS_R__AD-AirSpeed-Valid, main-usr-4-6-FGS_R__AD-Pitch-Val, main-usr-6-6-FGS_R__AD-Pitch-Valid, main-usr-7-FGS_R__LSI-Leader, main-usr-6-FGS_R__LSI-Valid, main-usr-FGS_R__time, main-usr-FGS_R__this_side_in_control, main-usr-FGS_R__active_implies_valid, main-usr-FGS_R__leader_implies_active, main-usr-FGS_R__gc_ok, main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta, main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid, main-usr-7-4-FGS_R__GC-mds-active, main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active, main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active, main-usr-4-4-FGS_R__GC-mds-ver, main-usr-7-FGS_R__LSO-Leader, main-usr-6-FGS_R__LSO-Valid);
@@ -246,28 +85,6 @@ VAR
 	main-res-call_25 : _TOP__AP(main-usr-AP____ASSUME__HIST, main-usr-12-5-AP__GC_L-cmds-Pitch_Delta, main-usr-12-5-AP__GC_L-cmds-Pitch_Valid, main-usr-7-4-AP__GC_L-mds-active, main-usr-11-4-4-AP__GC_L-mds-lat-HDG_active, main-usr-12-4-4-AP__GC_L-mds-lat-ROLL_active, main-usr-4-4-AP__GC_L-mds-ver, main-usr-12-5-AP__GC_R-cmds-Pitch_Delta, main-usr-12-5-AP__GC_R-cmds-Pitch_Valid, main-usr-7-4-AP__GC_R-mds-active, main-usr-11-4-4-AP__GC_R-mds-lat-HDG_active, main-usr-12-4-4-AP__GC_R-mds-lat-ROLL_active, main-usr-4-4-AP__GC_R-mds-ver, main-usr-AP__time, main-usr-AP__leader_pitch_delta, main-usr-AP__leader_pitch_delta_correct, main-usr-16-AP__CSA-CSA_Pitch_Delta, main-usr-16-AP__CSA-CSA_Pitch_Valid);
 	main-res-call_20 : FCS__Flight_Control_System__abs(main-res-gklocal_19);
 	main-res-call_17 : FCS__Flight_Control_System__abs(main-res-gklocal_16);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ASSIGN
 	init(main-impl-usr-__ASSUME__HIST) := (main-usr-FGS_R____ASSUME__HIST & (main-usr-FGS_L____ASSUME__HIST & main-usr-AP____ASSUME__HIST));

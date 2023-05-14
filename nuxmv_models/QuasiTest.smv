@@ -1,9 +1,7 @@
 
 MODULE Defs__rising (Defs__rising-usr-signal)
 VAR
-
-	Defs__rising-usr-result : boolean;
-	Defs__rising-res-glocal_1 : boolean;
+	Defs__rising-usr-result : boolean;	Defs__rising-res-glocal_1 : boolean;
 ASSIGN
 	init(Defs__rising-usr-result) := FALSE;
 	init(Defs__rising-res-glocal_1) := !Defs__rising-usr-signal;
@@ -15,34 +13,8 @@ ASSIGN
 
 MODULE main () 
 VAR
-
-	main-usr-is_pending : boolean;
-	main-usr-state : integer;
-	main-usr-left_shift : boolean;
-	main-usr-right_shift : boolean;
-	main-usr-neighbor_state0 : integer;
-	main-usr-neighbor_state1 : integer;
-	main-usr-time : real;
-	main-impl-usr-__ASSUME__HIST : boolean;
-	main-impl-usr-__GUARANTEE0 : boolean;
-	main-impl-usr-__GUARANTEE1 : boolean;
-	main-impl-usr-__GUARANTEE2 : boolean;
-	main-impl-usr-__GUARANTEE3 : boolean;
-	main-impl-usr-__GUARANTEE4 : boolean;
-	main-impl-usr-__GUARANTEE5 : boolean;
-	main-impl-usr-__GUARANTEE6 : boolean;
-	main-impl-usr-__GUARANTEE7 : boolean;
-	main-impl-usr-__GUARANTEE8 : boolean;
-	main-res-glocal_9 : boolean;
-	main-res-glocal_10 : boolean;
-	main-res-glocal_11 : boolean;
-	main-res-glocal_12 : boolean;
-	main-res-glocal_13 : boolean;
-	main-res-call_7 : Defs__rising(main-usr-left_shift);
+	main-usr-is_pending : boolean;	main-usr-state : integer;	main-usr-left_shift : boolean;	main-usr-right_shift : boolean;	main-usr-neighbor_state0 : integer;	main-usr-neighbor_state1 : integer;	main-usr-time : real;	main-impl-usr-__ASSUME__HIST : boolean;	main-impl-usr-__GUARANTEE0 : boolean;	main-impl-usr-__GUARANTEE1 : boolean;	main-impl-usr-__GUARANTEE2 : boolean;	main-impl-usr-__GUARANTEE3 : boolean;	main-impl-usr-__GUARANTEE4 : boolean;	main-impl-usr-__GUARANTEE5 : boolean;	main-impl-usr-__GUARANTEE6 : boolean;	main-impl-usr-__GUARANTEE7 : boolean;	main-impl-usr-__GUARANTEE8 : boolean;	main-res-glocal_9 : boolean;	main-res-glocal_10 : boolean;	main-res-glocal_11 : boolean;	main-res-glocal_12 : boolean;	main-res-glocal_13 : boolean;	main-res-call_7 : Defs__rising(main-usr-left_shift);
 	main-res-call_8 : Defs__rising(main-usr-right_shift);
-
-
-
 
 ASSIGN
 	init(main-impl-usr-__ASSUME__HIST) := TRUE;

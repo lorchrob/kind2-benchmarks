@@ -1,7 +1,6 @@
 
 MODULE _TOP__A (_TOP__A-usr-__ASSUME__HIST, _TOP__A-usr-time, _TOP__A-usr-Request_out___EVENT_, _TOP__A-usr-3-Request_out-ID, _TOP__A-usr-12-Request_out-msg_details)
 VAR
-
 	_TOP__A-usr-__ASSERT : boolean;
 ASSIGN
 	init(_TOP__A-usr-__ASSERT) := (_TOP__A-usr-__ASSUME__HIST -> (_TOP__A-usr-Request_out___EVENT_ -> (_TOP__A-usr-3-Request_out-ID = 1)));
@@ -12,7 +11,6 @@ ASSIGN
 
 MODULE _TOP__B (_TOP__B-usr-__ASSUME__HIST, _TOP__B-usr-time, _TOP__B-usr-Request_out___EVENT_, _TOP__B-usr-3-Request_out-ID, _TOP__B-usr-12-Request_out-msg_details)
 VAR
-
 	_TOP__B-usr-__ASSERT : boolean;
 ASSIGN
 	init(_TOP__B-usr-__ASSERT) := (_TOP__B-usr-__ASSUME__HIST -> (_TOP__B-usr-Request_out___EVENT_ -> (_TOP__B-usr-3-Request_out-ID = 2)));
@@ -23,9 +21,7 @@ ASSIGN
 
 MODULE _TOP__C (_TOP__C-usr-__ASSUME__HIST, _TOP__C-usr-Request_in___EVENT_, _TOP__C-usr-3-Request_in-ID, _TOP__C-usr-12-Request_in-msg_details, _TOP__C-usr-time, _TOP__C-usr-Response_out___EVENT_, _TOP__C-usr-3-Response_out-ID, _TOP__C-usr-12-Response_out-msg_details)
 VAR
-
-	_TOP__C-usr-__ASSERT : boolean;
-	_TOP__C-res-glocal_1 : integer;
+	_TOP__C-usr-__ASSERT : boolean;	_TOP__C-res-glocal_1 : integer;
 ASSIGN
 	init(_TOP__C-usr-__ASSERT) := (_TOP__C-usr-__ASSUME__HIST -> ((_TOP__C-usr-Response_out___EVENT_ -> (_TOP__C-usr-3-Response_out-ID = 0)) & !_TOP__C-usr-Response_out___EVENT_));
 	init(_TOP__C-res-glocal_1) := _TOP__C-usr-3-Request_in-ID;
@@ -37,7 +33,6 @@ ASSIGN
 
 MODULE __HIST (__HIST-usr-input)
 VAR
-
 	__HIST-usr-hist : boolean;
 ASSIGN
 	init(__HIST-usr-hist) := __HIST-usr-input;
@@ -47,56 +42,10 @@ ASSIGN
 
 MODULE main () 
 VAR
-
-	main-usr-A__Request_out___EVENT_ : boolean;
-	main-usr-3-A__Request_out-ID : integer;
-	main-usr-12-A__Request_out-msg_details : integer;
-	main-usr-A____ASSUME__HIST : boolean;
-	main-usr-B__Request_out___EVENT_ : boolean;
-	main-usr-3-B__Request_out-ID : integer;
-	main-usr-12-B__Request_out-msg_details : integer;
-	main-usr-B____ASSUME__HIST : boolean;
-	main-usr-C__Response_out___EVENT_ : boolean;
-	main-usr-3-C__Response_out-ID : integer;
-	main-usr-12-C__Response_out-msg_details : integer;
-	main-usr-C____ASSUME__HIST : boolean;
-	main-usr-flip_a_coin : boolean;
-	main-usr-A__time : real;
-	main-usr-B__time : real;
-	main-usr-C__Request_in___EVENT_ : boolean;
-	main-usr-3-C__Request_in-ID : integer;
-	main-usr-12-C__Request_in-msg_details : integer;
-	main-usr-C__time : real;
-	main-usr-time : real;
-	main-impl-usr-__ASSUME__HIST : boolean;
-	main-impl-usr-__LEMMA0 : boolean;
-	main-impl-usr-__LEMMA1 : boolean;
-	main-res-glocal_3 : boolean;
-	main-res-glocal_5 : boolean;
-	main-res-glocal_8 : boolean;
-	main-res-glocal_9 : boolean;
-	main-res-glocal_11 : boolean;
-	main-res-glocal_12 : boolean;
-	main-res-glocal_13 : boolean;
-	main-res-glocal_15 : boolean;
-	main-res-glocal_16 : boolean;
-	main-res-glocal_17 : boolean;
-	main-res-glocal_18 : boolean;
-	main-res-glocal_19 : boolean;
-	main-res-glocal_20 : boolean;
-	main-res-glocal_21 : boolean;
-	main-res-glocal_22 : boolean;
-	main-res-glocal_23 : boolean;
-	main-res-glocal_24 : boolean;
-	main-res-gklocal_6 : boolean;
-	main-res-call_14 : _TOP__C(main-usr-C____ASSUME__HIST, main-usr-C__Request_in___EVENT_, main-usr-3-C__Request_in-ID, main-usr-12-C__Request_in-msg_details, main-usr-C__time, main-usr-C__Response_out___EVENT_, main-usr-3-C__Response_out-ID, main-usr-12-C__Response_out-msg_details);
+	main-usr-A__Request_out___EVENT_ : boolean;	main-usr-3-A__Request_out-ID : integer;	main-usr-12-A__Request_out-msg_details : integer;	main-usr-A____ASSUME__HIST : boolean;	main-usr-B__Request_out___EVENT_ : boolean;	main-usr-3-B__Request_out-ID : integer;	main-usr-12-B__Request_out-msg_details : integer;	main-usr-B____ASSUME__HIST : boolean;	main-usr-C__Response_out___EVENT_ : boolean;	main-usr-3-C__Response_out-ID : integer;	main-usr-12-C__Response_out-msg_details : integer;	main-usr-C____ASSUME__HIST : boolean;	main-usr-flip_a_coin : boolean;	main-usr-A__time : real;	main-usr-B__time : real;	main-usr-C__Request_in___EVENT_ : boolean;	main-usr-3-C__Request_in-ID : integer;	main-usr-12-C__Request_in-msg_details : integer;	main-usr-C__time : real;	main-usr-time : real;	main-impl-usr-__ASSUME__HIST : boolean;	main-impl-usr-__LEMMA0 : boolean;	main-impl-usr-__LEMMA1 : boolean;	main-res-glocal_3 : boolean;	main-res-glocal_5 : boolean;	main-res-glocal_8 : boolean;	main-res-glocal_9 : boolean;	main-res-glocal_11 : boolean;	main-res-glocal_12 : boolean;	main-res-glocal_13 : boolean;	main-res-glocal_15 : boolean;	main-res-glocal_16 : boolean;	main-res-glocal_17 : boolean;	main-res-glocal_18 : boolean;	main-res-glocal_19 : boolean;	main-res-glocal_20 : boolean;	main-res-glocal_21 : boolean;	main-res-glocal_22 : boolean;	main-res-glocal_23 : boolean;	main-res-glocal_24 : boolean;	main-res-gklocal_6 : boolean;	main-res-call_14 : _TOP__C(main-usr-C____ASSUME__HIST, main-usr-C__Request_in___EVENT_, main-usr-3-C__Request_in-ID, main-usr-12-C__Request_in-msg_details, main-usr-C__time, main-usr-C__Response_out___EVENT_, main-usr-3-C__Response_out-ID, main-usr-12-C__Response_out-msg_details);
 	main-res-call_10 : _TOP__B(main-usr-B____ASSUME__HIST, main-usr-B__time, main-usr-B__Request_out___EVENT_, main-usr-3-B__Request_out-ID, main-usr-12-B__Request_out-msg_details);
 	main-res-call_7 : __HIST(main-res-gklocal_6);
 	main-res-call_4 : _TOP__A(main-usr-A____ASSUME__HIST, main-usr-A__time, main-usr-A__Request_out___EVENT_, main-usr-3-A__Request_out-ID, main-usr-12-A__Request_out-msg_details);
-
-
-
-
 
 ASSIGN
 	init(main-impl-usr-__ASSUME__HIST) := (main-usr-C____ASSUME__HIST & (main-usr-B____ASSUME__HIST & main-usr-A____ASSUME__HIST));
