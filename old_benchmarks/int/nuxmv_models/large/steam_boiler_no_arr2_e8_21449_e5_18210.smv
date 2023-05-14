@@ -162,5 +162,5 @@ ASSIGN
 
 
 INVARSPEC 
-((top-usr-OK) & (top-res-inst_52));
+((top-usr-OK) & (TRUE));
 

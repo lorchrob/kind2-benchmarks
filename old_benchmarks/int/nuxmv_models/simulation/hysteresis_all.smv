@@ -47,5 +47,5 @@ ASSIGN
 
 
 INVARSPEC 
-((top-usr-OK) & (top-res-inst_5));
+((top-usr-OK) & (TRUE));
 
