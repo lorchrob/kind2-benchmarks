@@ -1,0 +1,63 @@
+
+MODULE voiture (voiture-usr-m, voiture-usr-s)
+VAR
+	voiture-usr-toofast : boolean;	voiture-usr-stop : boolean;	voiture-usr-bump : boolean;	voiture-usr-dist : integer;	voiture-usr-speed : integer;	voiture-usr-time : integer;	voiture-usr-move : boolean;	voiture-usr-second : boolean;	voiture-usr-meter : boolean;	voiture-res-glocal_1 : boolean;
+ASSIGN
+	init(voiture-usr-speed) := 0;
+	init(voiture-usr-toofast) := voiture-usr-speed >= 3;
+	init(voiture-usr-move) := TRUE;
+	init(voiture-usr-time) := 0;
+	init(voiture-usr-dist) := 0;
+	init(voiture-usr-bump) := (voiture-usr-dist = 10);
+	init(voiture-usr-stop) := voiture-usr-time >= 4;
+	init(voiture-res-glocal_1) := (((voiture-usr-move & !voiture-usr-stop) & !voiture-usr-toofast) & !voiture-usr-bump);
+	init(voiture-usr-second) := FALSE;
+	init(voiture-usr-meter) := FALSE;
+
+	next(voiture-usr-meter) := (next(voiture-usr-m) & !next(voiture-usr-s));
+	next(voiture-usr-second) := next(voiture-usr-s);
+	next(voiture-usr-move) := voiture-res-glocal_1;
+	next(voiture-usr-speed) := ((!next(voiture-usr-move) & next(voiture-usr-second)) ? 0 : ((next(voiture-usr-move) & next(voiture-usr-meter)) ? voiture-usr-speed + 1 : voiture-usr-speed));
+	next(voiture-usr-toofast) := next(voiture-usr-speed) >= 3;
+	next(voiture-usr-time) := (next(voiture-usr-second) ? voiture-usr-time + 1 : voiture-usr-time);
+	next(voiture-usr-dist) := ((next(voiture-usr-move) & next(voiture-usr-meter)) ? voiture-usr-dist + 1 : voiture-usr-dist);
+	next(voiture-usr-bump) := (next(voiture-usr-dist) = 10);
+	next(voiture-usr-stop) := next(voiture-usr-time) >= 4;
+	next(voiture-res-glocal_1) := (((next(voiture-usr-move) & !next(voiture-usr-stop)) & !next(voiture-usr-toofast)) & !next(voiture-usr-bump));
+
+
+
+MODULE excludes2 (excludes2-usr-X1, excludes2-usr-X2)
+VAR
+	excludes2-usr-excludes : boolean;
+ASSIGN
+	init(excludes2-usr-excludes) := !(excludes2-usr-X1 & excludes2-usr-X2);
+
+	next(excludes2-usr-excludes) := !(next(excludes2-usr-X1) & next(excludes2-usr-X2));
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+
+
+
+MODULE main () 
+VAR
+	top-usr-m : boolean;	top-usr-s : boolean;	top-usr-OK : boolean;	top-res-call_3 : excludes2(top-usr-m, top-usr-s);
+	top-res-call_4 : Sofar(top-res-call_3.excludes2-usr-excludes);
+	top-res-2-call_2 : voiture(top-usr-m, top-usr-s);
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_4.Sofar-usr-Sofar -> (top-res-2-call_2.voiture-usr-speed < 4));
+
+	next(top-usr-OK) := (next(top-res-call_4.Sofar-usr-Sofar) -> (next(top-res-2-call_2.voiture-usr-speed) < 4));
+
+
+INVARSPEC 
+((top-usr-OK));
+

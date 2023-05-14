@@ -1,0 +1,43 @@
+
+MODULE loop6counter (loop6counter-usr-x)
+VAR
+	loop6counter-usr-out : boolean;	loop6counter-impl-usr-a : boolean;	loop6counter-impl-usr-b : boolean;	loop6counter-impl-usr-c : boolean;
+ASSIGN
+	init(loop6counter-impl-usr-c) := FALSE;
+	init(loop6counter-impl-usr-a) := FALSE;
+	init(loop6counter-usr-out) := (loop6counter-impl-usr-a & loop6counter-impl-usr-c);
+	init(loop6counter-impl-usr-b) := FALSE;
+
+	next(loop6counter-impl-usr-c) := !loop6counter-impl-usr-c;
+	next(loop6counter-impl-usr-a) := (((loop6counter-usr-x & loop6counter-impl-usr-a) & !loop6counter-impl-usr-c) | (loop6counter-impl-usr-b & loop6counter-impl-usr-c));
+	next(loop6counter-usr-out) := (next(loop6counter-impl-usr-a) & next(loop6counter-impl-usr-c));
+	next(loop6counter-impl-usr-b) := ((!loop6counter-usr-x & loop6counter-impl-usr-a) | ((loop6counter-impl-usr-b & !loop6counter-impl-usr-c) | (!loop6counter-impl-usr-b & loop6counter-impl-usr-c)));
+
+
+
+MODULE intloop6counter (intloop6counter-usr-x)
+VAR
+	intloop6counter-usr-out : boolean;	intloop6counter-impl-usr-time : integer;
+ASSIGN
+	init(intloop6counter-impl-usr-time) := 0;
+	init(intloop6counter-usr-out) := (intloop6counter-impl-usr-time = 5);
+
+	next(intloop6counter-impl-usr-time) := ((intloop6counter-impl-usr-time = 5) ? 2 : ((intloop6counter-impl-usr-time = 4) ? (!intloop6counter-usr-x ? 3 : 5) : intloop6counter-impl-usr-time + 1));
+	next(intloop6counter-usr-out) := (next(intloop6counter-impl-usr-time) = 5);
+
+
+
+MODULE main () 
+VAR
+	top-usr-x : boolean;	top-usr-OK : boolean;	top-res-call_2 : intloop6counter(top-usr-x);
+	top-res-call_1 : loop6counter(top-usr-x);
+
+ASSIGN
+	init(top-usr-OK) := ((top-res-call_1.loop6counter-usr-out = top-res-call_2.intloop6counter-usr-out) | !top-usr-x);
+
+	next(top-usr-OK) := ((next(top-res-call_1.loop6counter-usr-out) = next(top-res-call_2.intloop6counter-usr-out)) | !next(top-usr-x));
+
+
+INVARSPEC 
+((top-usr-OK));
+

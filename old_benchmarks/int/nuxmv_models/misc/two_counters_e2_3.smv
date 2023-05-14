@@ -1,0 +1,41 @@
+
+MODULE greycounter (greycounter-usr-x)
+VAR
+	greycounter-usr-out : boolean;	greycounter-impl-usr-a : boolean;	greycounter-impl-usr-b : boolean;
+ASSIGN
+	init(greycounter-impl-usr-b) := FALSE;
+	init(greycounter-impl-usr-a) := FALSE;
+	init(greycounter-usr-out) := (greycounter-impl-usr-a & greycounter-impl-usr-b);
+
+	next(greycounter-impl-usr-b) := greycounter-impl-usr-a;
+	next(greycounter-impl-usr-a) := !greycounter-impl-usr-b;
+	next(greycounter-usr-out) := (next(greycounter-impl-usr-a) & next(greycounter-impl-usr-b));
+
+
+
+MODULE intloopcounter (intloopcounter-usr-x)
+VAR
+	intloopcounter-usr-out : boolean;	intloopcounter-impl-usr-time : integer;
+ASSIGN
+	init(intloopcounter-impl-usr-time) := 0;
+	init(intloopcounter-usr-out) := (intloopcounter-impl-usr-time = 2);
+
+	next(intloopcounter-impl-usr-time) := ((intloopcounter-impl-usr-time = 3) ? 0 : (intloopcounter-impl-usr-time - 1) + 1);
+	next(intloopcounter-usr-out) := (next(intloopcounter-impl-usr-time) = 2);
+
+
+
+MODULE main () 
+VAR
+	top-usr-x : boolean;	top-usr-OK : boolean;	top-res-call_2 : intloopcounter(top-usr-x);
+	top-res-call_1 : greycounter(top-usr-x);
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_1.greycounter-usr-out = top-res-call_2.intloopcounter-usr-out);
+
+	next(top-usr-OK) := (next(top-res-call_1.greycounter-usr-out) = next(top-res-call_2.intloopcounter-usr-out));
+
+
+INVARSPEC 
+((top-usr-OK));
+

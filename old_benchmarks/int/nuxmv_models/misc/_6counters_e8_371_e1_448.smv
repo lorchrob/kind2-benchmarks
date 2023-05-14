@@ -1,0 +1,43 @@
+
+MODULE int6I (int6I-usr-x)
+VAR
+	int6I-usr-out : boolean;	int6I-impl-usr-time : integer;
+ASSIGN
+	init(int6I-impl-usr-time) := 0;
+	init(int6I-usr-out) := (int6I-impl-usr-time = 5);
+
+	next(int6I-impl-usr-time) := ((int6I-impl-usr-time = 5) ? 1 : int6I-impl-usr-time + 1 + 1);
+	next(int6I-usr-out) := (next(int6I-impl-usr-time) = 5);
+
+
+
+MODULE bool6 (bool6-usr-x)
+VAR
+	bool6-usr-out : boolean;	bool6-impl-usr-a : boolean;	bool6-impl-usr-b : boolean;	bool6-impl-usr-c : boolean;
+ASSIGN
+	init(bool6-impl-usr-c) := FALSE;
+	init(bool6-impl-usr-a) := FALSE;
+	init(bool6-usr-out) := (bool6-impl-usr-a & bool6-impl-usr-c);
+	init(bool6-impl-usr-b) := FALSE;
+
+	next(bool6-impl-usr-c) := ((bool6-impl-usr-c & !bool6-impl-usr-a) & (bool6-impl-usr-b & bool6-impl-usr-a));
+	next(bool6-impl-usr-a) := !bool6-impl-usr-a;
+	next(bool6-usr-out) := (next(bool6-impl-usr-a) & next(bool6-impl-usr-c));
+	next(bool6-impl-usr-b) := ((bool6-impl-usr-b & !bool6-impl-usr-a) | ((!bool6-impl-usr-c & !bool6-impl-usr-b) & bool6-impl-usr-a));
+
+
+
+MODULE main () 
+VAR
+	top-usr-x : boolean;	top-usr-OK : boolean;	top-res-call_2 : bool6(top-usr-x);
+	top-res-call_1 : int6I(top-usr-x);
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_1.int6I-usr-out = top-res-call_2.bool6-usr-out);
+
+	next(top-usr-OK) := (next(top-res-call_1.int6I-usr-out) = next(top-res-call_2.bool6-usr-out));
+
+
+INVARSPEC 
+((top-usr-OK));
+

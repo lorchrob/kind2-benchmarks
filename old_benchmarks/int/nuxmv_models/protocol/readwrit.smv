@@ -1,0 +1,48 @@
+
+MODULE readwrite (readwrite-usr-etat1, readwrite-usr-etat2, readwrite-usr-etat3, readwrite-usr-etat4, readwrite-usr-etat5, readwrite-usr-etat6, readwrite-usr-etat7, readwrite-usr-etat8, readwrite-usr-etat9)
+VAR
+	readwrite-usr-x0 : integer;	readwrite-usr-x1 : integer;	readwrite-usr-x2 : integer;	readwrite-usr-x3 : integer;	readwrite-usr-x4 : integer;	readwrite-usr-x5 : integer;	readwrite-usr-x6 : integer;	readwrite-usr-x7 : integer;	readwrite-usr-x8 : integer;	readwrite-usr-x9 : integer;	readwrite-usr-x10 : integer;	readwrite-usr-x11 : integer;	readwrite-usr-x12 : integer;	readwrite-res-oracle_15 : integer;	readwrite-res-oracle_16 : integer;	readwrite-res-oracle_12 : integer;	readwrite-res-oracle_13 : integer;	readwrite-res-oracle_14 : integer;	readwrite-res-oracle_10 : integer;	readwrite-res-oracle_11 : integer;	readwrite-res-oracle_8 : integer;	readwrite-res-oracle_9 : integer;	readwrite-res-oracle_7 : integer;	readwrite-res-oracle_6 : integer;	readwrite-res-oracle_4 : integer;	readwrite-res-oracle_5 : integer;	readwrite-res-oracle_2 : integer;	readwrite-res-oracle_3 : integer;	readwrite-res-oracle_1 : integer;
+ASSIGN
+	init(readwrite-usr-x0) := 0;
+	init(readwrite-usr-x1) := 0;
+	init(readwrite-usr-x2) := 1;
+	init(readwrite-usr-x11) := 1;
+	init(readwrite-usr-x9) := 0;
+	init(readwrite-usr-x10) := 0;
+	init(readwrite-usr-x4) := 0;
+	init(readwrite-usr-x3) := 0;
+	init(readwrite-usr-x7) := 0;
+	init(readwrite-usr-x6) := 0;
+	init(readwrite-usr-x8) := 1;
+	init(readwrite-usr-x12) := 1;
+	init(readwrite-usr-x5) := 0;
+
+	next(readwrite-usr-x0) := (next(readwrite-usr-etat1) ? (readwrite-usr-x0 >= 1 ? (readwrite-usr-x0 - 1) : readwrite-usr-x0) : (next(readwrite-usr-etat2) ? ((readwrite-usr-x1 >= 1 & readwrite-usr-x4 >= 1) ? readwrite-usr-x0 + 1 : readwrite-usr-x0) : readwrite-usr-x0));
+	next(readwrite-usr-x1) := (next(readwrite-usr-etat1) ? (readwrite-usr-x0 >= 1 ? readwrite-usr-x1 + 1 : readwrite-usr-x1) : (next(readwrite-usr-etat2) ? ((readwrite-usr-x1 >= 1 & readwrite-usr-x4 >= 1) ? (readwrite-usr-x1 - 1) : readwrite-usr-x1) : (next(readwrite-usr-etat3) ? ((readwrite-usr-x2 >= 1 & readwrite-usr-x11 >= 1) ? readwrite-usr-x1 + 1 : readwrite-usr-x1) : (next(readwrite-usr-etat4) ? (readwrite-usr-x1 >= 1 ? (readwrite-usr-x1 - 1) : readwrite-usr-x1) : readwrite-usr-x1))));
+	next(readwrite-usr-x2) := (next(readwrite-usr-etat3) ? ((readwrite-usr-x2 >= 1 & readwrite-usr-x11 >= 1) ? (readwrite-usr-x2 - 1) : readwrite-usr-x2) : (next(readwrite-usr-etat4) ? (readwrite-usr-x1 >= 1 ? readwrite-usr-x2 + 1 : readwrite-usr-x2) : readwrite-usr-x2));
+	next(readwrite-usr-x11) := (next(readwrite-usr-etat3) ? ((readwrite-usr-x2 >= 1 & readwrite-usr-x11 >= 1) ? (readwrite-usr-x11 - 1) : readwrite-usr-x11) : (next(readwrite-usr-etat9) ? ((readwrite-usr-x9 >= 1 & readwrite-usr-x10 >= 1) ? readwrite-usr-x11 + 1 : readwrite-usr-x11) : readwrite-usr-x11));
+	next(readwrite-usr-x9) := (next(readwrite-usr-etat4) ? (readwrite-usr-x1 >= 1 ? readwrite-usr-x9 + 1 : readwrite-usr-x9) : (next(readwrite-usr-etat9) ? ((readwrite-usr-x9 >= 1 & readwrite-usr-x10 >= 1) ? (readwrite-usr-x9 - 1) : readwrite-usr-x9) : readwrite-usr-x9));
+	next(readwrite-usr-x10) := (next(readwrite-usr-etat8) ? (((readwrite-usr-x4 >= 5 & readwrite-usr-x5 >= 1) & readwrite-usr-x7 >= 1) ? readwrite-usr-x10 + 1 : readwrite-usr-x10) : (next(readwrite-usr-etat9) ? ((readwrite-usr-x9 >= 1 & readwrite-usr-x10 >= 1) ? (readwrite-usr-x10 - 1) : readwrite-usr-x10) : readwrite-usr-x10));
+	next(readwrite-usr-x4) := (next(readwrite-usr-etat2) ? ((readwrite-usr-x1 >= 1 & readwrite-usr-x4 >= 1) ? (readwrite-usr-x4 - 1) : readwrite-usr-x4) : (next(readwrite-usr-etat6) ? ((readwrite-usr-x3 >= 1 & readwrite-usr-x7 >= 1) ? readwrite-usr-x4 + 1 : readwrite-usr-x4) : (next(readwrite-usr-etat7) ? ((readwrite-usr-x8 >= 1 & readwrite-usr-x12 >= 1) ? readwrite-usr-x4 + 5 : readwrite-usr-x4) : (next(readwrite-usr-etat8) ? (((readwrite-usr-x4 >= 5 & readwrite-usr-x5 >= 1) & readwrite-usr-x7 >= 1) ? (readwrite-usr-x4 - 5) : readwrite-usr-x4) : readwrite-usr-x4))));
+	next(readwrite-usr-x3) := (next(readwrite-usr-etat2) ? ((readwrite-usr-x1 >= 1 & readwrite-usr-x4 >= 1) ? readwrite-usr-x3 + 1 : readwrite-usr-x3) : (next(readwrite-usr-etat6) ? ((readwrite-usr-x3 >= 1 & readwrite-usr-x7 >= 1) ? (readwrite-usr-x3 - 1) : readwrite-usr-x3) : readwrite-usr-x3));
+	next(readwrite-usr-x7) := (next(readwrite-usr-etat5) ? (readwrite-usr-x6 >= 1 ? readwrite-usr-x7 + 1 : readwrite-usr-x7) : (next(readwrite-usr-etat6) ? ((readwrite-usr-x3 >= 1 & readwrite-usr-x7 >= 1) ? (readwrite-usr-x7 - 1) : readwrite-usr-x7) : (next(readwrite-usr-etat7) ? ((readwrite-usr-x8 >= 1 & readwrite-usr-x12 >= 1) ? readwrite-usr-x7 + 1 : readwrite-usr-x7) : (next(readwrite-usr-etat8) ? (((readwrite-usr-x4 >= 5 & readwrite-usr-x5 >= 1) & readwrite-usr-x7 >= 1) ? (readwrite-usr-x7 - 1) : readwrite-usr-x7) : readwrite-usr-x7))));
+	next(readwrite-usr-x6) := (next(readwrite-usr-etat5) ? (readwrite-usr-x6 >= 1 ? (readwrite-usr-x6 - 1) : readwrite-usr-x6) : (next(readwrite-usr-etat6) ? ((readwrite-usr-x3 >= 1 & readwrite-usr-x7 >= 1) ? readwrite-usr-x6 + 1 : readwrite-usr-x6) : readwrite-usr-x6));
+	next(readwrite-usr-x8) := (next(readwrite-usr-etat7) ? ((readwrite-usr-x8 >= 1 & readwrite-usr-x12 >= 1) ? (readwrite-usr-x8 - 1) : readwrite-usr-x8) : (next(readwrite-usr-etat8) ? (((readwrite-usr-x4 >= 5 & readwrite-usr-x5 >= 1) & readwrite-usr-x7 >= 1) ? readwrite-usr-x8 + 1 : readwrite-usr-x8) : readwrite-usr-x8));
+	next(readwrite-usr-x12) := (next(readwrite-usr-etat7) ? ((readwrite-usr-x8 >= 1 & readwrite-usr-x12 >= 1) ? (readwrite-usr-x12 - 1) : readwrite-usr-x12) : (next(readwrite-usr-etat9) ? ((readwrite-usr-x9 >= 1 & readwrite-usr-x10 >= 1) ? readwrite-usr-x12 + 1 : readwrite-usr-x12) : readwrite-usr-x12));
+	next(readwrite-usr-x5) := (next(readwrite-usr-etat4) ? (readwrite-usr-x6 >= 1 ? readwrite-usr-x5 + 1 : readwrite-usr-x5) : (next(readwrite-usr-etat8) ? (((readwrite-usr-x4 >= 5 & readwrite-usr-x5 >= 1) & readwrite-usr-x7 >= 1) ? (readwrite-usr-x5 - 1) : readwrite-usr-x5) : readwrite-usr-x5));
+
+
+
+MODULE main () 
+VAR
+	top-usr-etat1 : boolean;	top-usr-etat2 : boolean;	top-usr-etat3 : boolean;	top-usr-etat4 : boolean;	top-usr-etat5 : boolean;	top-usr-etat6 : boolean;	top-usr-etat7 : boolean;	top-usr-etat8 : boolean;	top-usr-etat9 : boolean;	top-usr-OK : boolean;	top-res-2-call_17 : readwrite(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9, top-res-3-call_17.readwrite-usr-x10, top-res-3-call_17.readwrite-usr-x11, top-res-3-call_17.readwrite-usr-x12);
+	top-res-3-call_17 : readwrite(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9, top-res-2-call_17.readwrite-usr-x0, top-res-2-call_17.readwrite-usr-x1, top-res-2-call_17.readwrite-usr-x2, top-res-2-call_17.readwrite-usr-x3, top-res-2-call_17.readwrite-usr-x4, top-res-2-call_17.readwrite-usr-x5, top-res-2-call_17.readwrite-usr-x6, top-res-2-call_17.readwrite-usr-x7, top-res-2-call_17.readwrite-usr-x8, top-res-2-call_17.readwrite-usr-x9);
+	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;	top-res-poracle_4 : integer;	top-res-poracle_5 : integer;	top-res-poracle_6 : integer;	top-res-poracle_7 : integer;	top-res-poracle_8 : integer;	top-res-poracle_9 : integer;	top-res-poracle_10 : integer;	top-res-poracle_11 : integer;	top-res-poracle_12 : integer;	top-res-poracle_13 : integer;	top-res-poracle_14 : integer;	top-res-poracle_15 : integer;	top-res-poracle_16 : integer;
+ASSIGN
+	init(top-usr-OK) := top-res-2-call_17.readwrite-usr-x0 >= 0;
+	next(top-usr-OK) := next(top-res-2-call_17.readwrite-usr-x0) >= 0;
+
+
+INVARSPEC 
+((top-usr-OK));
+

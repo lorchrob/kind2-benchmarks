@@ -1,0 +1,80 @@
+
+MODULE PRODUCER_CONSUMMER (PRODUCER_CONSUMMER-usr-etat1, PRODUCER_CONSUMMER-usr-etat2, PRODUCER_CONSUMMER-usr-etat3, PRODUCER_CONSUMMER-usr-a_init)
+VAR
+	PRODUCER_CONSUMMER-usr-i : integer;	PRODUCER_CONSUMMER-usr-b : integer;	PRODUCER_CONSUMMER-usr-a : integer;	PRODUCER_CONSUMMER-usr-o1 : integer;	PRODUCER_CONSUMMER-usr-o2 : integer;	PRODUCER_CONSUMMER-res-oracle_3 : integer;	PRODUCER_CONSUMMER-res-oracle_2 : integer;	PRODUCER_CONSUMMER-res-oracle_1 : integer;
+ASSIGN
+	init(PRODUCER_CONSUMMER-usr-a) := PRODUCER_CONSUMMER-usr-a_init;
+	init(PRODUCER_CONSUMMER-usr-i) := PRODUCER_CONSUMMER-usr-a;
+	init(PRODUCER_CONSUMMER-usr-b) := 0;
+	init(PRODUCER_CONSUMMER-usr-o1) := 0;
+	init(PRODUCER_CONSUMMER-usr-o2) := 0;
+
+	next(PRODUCER_CONSUMMER-usr-i) := (next(PRODUCER_CONSUMMER-usr-etat1) ? (PRODUCER_CONSUMMER-usr-i >= 1 ? (PRODUCER_CONSUMMER-usr-i - 1) : PRODUCER_CONSUMMER-usr-i) : PRODUCER_CONSUMMER-usr-i);
+	next(PRODUCER_CONSUMMER-usr-a) := PRODUCER_CONSUMMER-usr-a;
+	next(PRODUCER_CONSUMMER-usr-b) := (next(PRODUCER_CONSUMMER-usr-etat1) ? (PRODUCER_CONSUMMER-usr-i >= 1 ? PRODUCER_CONSUMMER-usr-b + 1 : PRODUCER_CONSUMMER-usr-b) : (next(PRODUCER_CONSUMMER-usr-etat2) ? (PRODUCER_CONSUMMER-usr-b >= 1 ? (PRODUCER_CONSUMMER-usr-b - 1) : PRODUCER_CONSUMMER-usr-b) : (PRODUCER_CONSUMMER-usr-b >= 1 ? (PRODUCER_CONSUMMER-usr-b - 1) : PRODUCER_CONSUMMER-usr-b)));
+	next(PRODUCER_CONSUMMER-usr-o1) := (next(PRODUCER_CONSUMMER-usr-etat2) ? (PRODUCER_CONSUMMER-usr-b >= 1 ? PRODUCER_CONSUMMER-usr-o1 + 1 : PRODUCER_CONSUMMER-usr-o1) : PRODUCER_CONSUMMER-usr-o1);
+	next(PRODUCER_CONSUMMER-usr-o2) := (next(PRODUCER_CONSUMMER-usr-etat3) ? (PRODUCER_CONSUMMER-usr-b >= 1 ? PRODUCER_CONSUMMER-usr-o2 + 1 : PRODUCER_CONSUMMER-usr-o2) : PRODUCER_CONSUMMER-usr-o2);
+
+
+
+MODULE excludes3 (excludes3-usr-X1, excludes3-usr-X2, excludes3-usr-X3)
+VAR
+	excludes3-usr-excludes : boolean;
+ASSIGN
+	init(excludes3-usr-excludes) := !((excludes3-usr-X2 & excludes3-usr-X3) | ((excludes3-usr-X1 & excludes3-usr-X3) | (excludes3-usr-X1 & excludes3-usr-X2)));
+
+	next(excludes3-usr-excludes) := !((next(excludes3-usr-X2) & next(excludes3-usr-X3)) | ((next(excludes3-usr-X1) & next(excludes3-usr-X3)) | (next(excludes3-usr-X1) & next(excludes3-usr-X2))));
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-usr-First : integer;
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	next(First-usr-First) := First-usr-First;
+
+
+
+MODULE FirstB (FirstB-usr-X)
+VAR
+	FirstB-usr-First : boolean;
+ASSIGN
+	init(FirstB-usr-First) := FirstB-usr-X;
+	next(FirstB-usr-First) := FirstB-usr-First;
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+
+
+
+MODULE main () 
+VAR
+	top-usr-etat1 : boolean;	top-usr-etat2 : boolean;	top-usr-etat3 : boolean;	top-usr-a_init : integer;	top-usr-OK : boolean;	top-impl-usr-a : integer;	top-res-gklocal_6 : boolean;	top-res-gklocal_8 : boolean;	top-res-call_11 : First(top-impl-usr-a);
+	top-res-call_5 : excludes3(top-usr-etat1, top-usr-etat2, top-usr-etat3);
+	top-res-call_7 : Sofar(top-res-gklocal_6);
+	top-res-call_9 : FirstB(top-res-gklocal_8);
+	top-res-call_10 : First(top-usr-a_init);
+	top-res-2-call_4 : PRODUCER_CONSUMMER(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-a_init);
+	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;
+ASSIGN
+	init(top-res-gklocal_8) := !(top-usr-etat3 | (top-usr-etat2 | top-usr-etat1));
+	init(top-res-gklocal_6) := (!(top-usr-etat3 | (top-usr-etat2 | top-usr-etat1)) | top-res-call_5.excludes3-usr-excludes);
+	init(top-impl-usr-a) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-a;
+	init(top-usr-OK) := (((top-res-call_7.Sofar-usr-Sofar & top-res-call_9.FirstB-usr-First) & (top-res-call_10.First-usr-First > 0)) -> top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1 + top-res-2-call_4.PRODUCER_CONSUMMER-usr-o2 <= top-res-call_11.First-usr-First);
+
+	next(top-res-gklocal_6) := (!(next(top-usr-etat3) | (next(top-usr-etat2) | next(top-usr-etat1))) | next(top-res-call_5.excludes3-usr-excludes));
+	next(top-usr-OK) := (((next(top-res-call_7.Sofar-usr-Sofar) & next(top-res-call_9.FirstB-usr-First)) & (next(top-res-call_10.First-usr-First) > 0)) -> next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1) + next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-o2) <= next(top-res-call_11.First-usr-First));
+	next(top-res-gklocal_8) := !(next(top-usr-etat3) | (next(top-usr-etat2) | next(top-usr-etat1)));
+	next(top-impl-usr-a) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-a);
+
+
+INVARSPEC 
+((top-usr-OK));
+

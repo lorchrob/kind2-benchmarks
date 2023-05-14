@@ -1,0 +1,40 @@
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+
+
+
+MODULE Age (Age-usr-p)
+VAR
+	Age-usr-age_of_p : integer;
+ASSIGN
+	init(Age-usr-age_of_p) := 0;
+	next(Age-usr-age_of_p) := (Age-usr-p ? (Age-usr-age_of_p - 1) : 0);
+
+
+
+MODULE main () 
+VAR
+	top-usr-k0 : integer;	top-usr-m0 : integer;	top-usr-p : boolean;	top-usr-q : boolean;	top-usr-OK : boolean;	top-impl-usr-k : integer;	top-impl-usr-m : integer;	top-res-gklocal_3 : boolean;	top-res-call_1 : Age(top-usr-p);
+	top-res-call_2 : Age(top-usr-q);
+	top-res-call_4 : Sofar(top-res-gklocal_3);
+
+ASSIGN
+	init(top-impl-usr-m) := top-usr-m0;
+	init(top-impl-usr-k) := top-usr-k0;
+	init(top-res-gklocal_3) := (((top-impl-usr-k >= 1 & top-impl-usr-m >= 1) & (top-res-call_1.Age-usr-age_of_p >= top-impl-usr-k -> top-usr-q)) & top-res-call_2.Age-usr-age_of_p <= top-impl-usr-m);
+	init(top-usr-OK) := (top-res-call_4.Sofar-usr-Sofar -> top-res-call_1.Age-usr-age_of_p <= top-impl-usr-k + top-impl-usr-m);
+
+	next(top-impl-usr-m) := top-impl-usr-m;
+	next(top-impl-usr-k) := top-impl-usr-k;
+	next(top-res-gklocal_3) := (((next(top-impl-usr-k) >= 1 & next(top-impl-usr-m) >= 1) & (next(top-res-call_1.Age-usr-age_of_p) >= next(top-impl-usr-k) -> next(top-usr-q))) & next(top-res-call_2.Age-usr-age_of_p) <= next(top-impl-usr-m));
+	next(top-usr-OK) := (next(top-res-call_4.Sofar-usr-Sofar) -> next(top-res-call_1.Age-usr-age_of_p) <= next(top-impl-usr-k) + next(top-impl-usr-m));
+
+
+INVARSPEC 
+((top-usr-OK));
+

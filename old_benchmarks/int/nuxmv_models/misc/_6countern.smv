@@ -1,0 +1,15 @@
+
+MODULE main () 
+VAR
+	top-usr-OK : boolean;	top-impl-usr-time : integer;
+ASSIGN
+	init(top-impl-usr-time) := 0;
+	init(top-usr-OK) := (top-impl-usr-time < 0);
+
+	next(top-impl-usr-time) := ((top-impl-usr-time = 5) ? 0 : top-impl-usr-time + 1);
+	next(top-usr-OK) := (next(top-impl-usr-time) < 0);
+
+
+INVARSPEC 
+((top-usr-OK));
+

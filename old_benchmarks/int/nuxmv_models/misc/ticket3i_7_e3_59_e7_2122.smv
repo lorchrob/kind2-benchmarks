@@ -1,0 +1,63 @@
+
+MODULE ticket3i (ticket3i-usr-e1, ticket3i-usr-e2, ticket3i-usr-e3, ticket3i-usr-e4, ticket3i-usr-e5, ticket3i-usr-e6, ticket3i-usr-e7, ticket3i-usr-e8, ticket3i-usr-e9, ticket3i-usr-init_a1, ticket3i-usr-init_a2, ticket3i-usr-init_a3, ticket3i-usr-init_t)
+VAR
+	ticket3i-usr-p1 : integer;	ticket3i-usr-p2 : integer;	ticket3i-usr-p3 : integer;	ticket3i-usr-t : integer;	ticket3i-usr-s : integer;	ticket3i-usr-a1 : integer;	ticket3i-usr-a2 : integer;	ticket3i-usr-a3 : integer;	ticket3i-usr-erreur_ticket3i : boolean;	ticket3i-res-oracle_12 : integer;	ticket3i-res-oracle_10 : integer;	ticket3i-res-oracle_11 : integer;	ticket3i-res-oracle_9 : integer;	ticket3i-res-oracle_8 : integer;	ticket3i-res-oracle_6 : integer;	ticket3i-res-oracle_7 : integer;	ticket3i-res-oracle_5 : integer;	ticket3i-res-oracle_4 : integer;	ticket3i-res-oracle_2 : integer;	ticket3i-res-oracle_3 : integer;	ticket3i-res-oracle_1 : integer;
+ASSIGN
+	init(ticket3i-usr-p1) := 0;
+	init(ticket3i-usr-a1) := ticket3i-usr-init_a1;
+	init(ticket3i-usr-t) := ticket3i-usr-init_t;
+	init(ticket3i-usr-s) := ticket3i-usr-t;
+	init(ticket3i-usr-p2) := 0;
+	init(ticket3i-usr-a2) := ticket3i-usr-init_a2;
+	init(ticket3i-usr-p3) := 0;
+	init(ticket3i-usr-a3) := ticket3i-usr-init_a3;
+	init(ticket3i-usr-erreur_ticket3i) := ((ticket3i-usr-p3 >= 3 | (ticket3i-usr-p2 >= 3 | ticket3i-usr-p1 >= 3)) ? TRUE : FALSE);
+
+	next(ticket3i-usr-a1) := (next(ticket3i-usr-e1) ? ((ticket3i-usr-p1 = 0) ? ticket3i-usr-t : ticket3i-usr-a1) : ticket3i-usr-a1);
+	next(ticket3i-usr-p1) := (next(ticket3i-usr-e1) ? ((ticket3i-usr-p1 = 0) ? 1 : ticket3i-usr-p1) : (next(ticket3i-usr-e2) ? (((ticket3i-usr-p1 = 1) & ticket3i-usr-s >= next(ticket3i-usr-a1)) ? 2 : ticket3i-usr-p1) : (next(ticket3i-usr-e3) ? ((ticket3i-usr-p1 = 2) ? 0 : ticket3i-usr-p1) : ticket3i-usr-p1)));
+	next(ticket3i-usr-s) := (next(ticket3i-usr-e3) ? ((ticket3i-usr-p1 = 2) ? ticket3i-usr-s + 1 : ticket3i-usr-s) : (next(ticket3i-usr-e6) ? ((ticket3i-usr-p2 = 2) ? ticket3i-usr-s + 1 : ticket3i-usr-s) : (next(ticket3i-usr-e9) ? ((ticket3i-usr-p3 = 2) ? ticket3i-usr-s + 1 : ticket3i-usr-s) : ticket3i-usr-s)));
+	next(ticket3i-usr-t) := (next(ticket3i-usr-e1) ? ((ticket3i-usr-p1 = 0) ? ticket3i-usr-t + 1 : ticket3i-usr-t) : (next(ticket3i-usr-e4) ? ((ticket3i-usr-p2 = 0) ? ticket3i-usr-t + 1 : ticket3i-usr-t) : (next(ticket3i-usr-e7) ? ((ticket3i-usr-p3 = 0) ? ticket3i-usr-t + 1 : ticket3i-usr-t) : ticket3i-usr-t)));
+	next(ticket3i-usr-a2) := (next(ticket3i-usr-e4) ? ((ticket3i-usr-p2 = 0) ? ticket3i-usr-t : ticket3i-usr-a2) : ticket3i-usr-a2);
+	next(ticket3i-usr-p2) := (next(ticket3i-usr-e4) ? ((ticket3i-usr-p2 = 0) ? 1 : ticket3i-usr-p2) : (next(ticket3i-usr-e5) ? (((ticket3i-usr-p2 = 1) & ticket3i-usr-s >= next(ticket3i-usr-a2)) ? 2 : ticket3i-usr-p2) : (next(ticket3i-usr-e6) ? ((ticket3i-usr-p2 = 2) ? 0 : ticket3i-usr-p2) : ticket3i-usr-p2)));
+	next(ticket3i-usr-a3) := (next(ticket3i-usr-e7) ? ((ticket3i-usr-p3 = 0) ? ticket3i-usr-t : ticket3i-usr-a3) : ticket3i-usr-a3);
+	next(ticket3i-usr-p3) := (next(ticket3i-usr-e7) ? ((ticket3i-usr-p3 = 0) ? 1 : ticket3i-usr-p3) : (next(ticket3i-usr-e8) ? (((ticket3i-usr-p3 = 1) & ticket3i-usr-s >= next(ticket3i-usr-a3)) ? 2 : ticket3i-usr-p3) : (next(ticket3i-usr-e9) ? ((ticket3i-usr-p3 = 2) ? 0 : ticket3i-usr-p3) : ticket3i-usr-p3)));
+	next(ticket3i-usr-erreur_ticket3i) := ((next(ticket3i-usr-p3) >= 3 | (next(ticket3i-usr-p2) >= 3 | next(ticket3i-usr-p1) >= 3)) ? TRUE : FALSE);
+
+
+
+MODULE excludes9 (excludes9-usr-X1, excludes9-usr-X2, excludes9-usr-X3, excludes9-usr-X4, excludes9-usr-X5, excludes9-usr-X6, excludes9-usr-X7, excludes9-usr-X8, excludes9-usr-X9)
+VAR
+	excludes9-usr-excludes : boolean;
+ASSIGN
+	init(excludes9-usr-excludes) := (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | ((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9))))))))));
+
+	next(excludes9-usr-excludes) := (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | ((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)))))))))));
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+
+
+
+MODULE main () 
+VAR
+	top-usr-e1 : boolean;	top-usr-e2 : boolean;	top-usr-e3 : boolean;	top-usr-e4 : boolean;	top-usr-e5 : boolean;	top-usr-e6 : boolean;	top-usr-e7 : boolean;	top-usr-e8 : boolean;	top-usr-e9 : boolean;	top-usr-init_a1 : integer;	top-usr-init_a2 : integer;	top-usr-init_a3 : integer;	top-usr-init_t : integer;	top-usr-OK : boolean;	top-res-gklocal_15 : boolean;	top-res-call_14 : excludes9(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9);
+	top-res-call_16 : Sofar(top-res-gklocal_15);
+	top-res-2-call_13 : ticket3i(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9, top-usr-init_a1, top-usr-init_a2, top-usr-init_a3, top-usr-init_t);
+	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;	top-res-poracle_4 : integer;	top-res-poracle_5 : integer;	top-res-poracle_6 : integer;	top-res-poracle_7 : integer;	top-res-poracle_8 : integer;	top-res-poracle_9 : integer;	top-res-poracle_10 : integer;	top-res-poracle_11 : integer;	top-res-poracle_12 : integer;
+ASSIGN
+	init(top-res-gklocal_15) := ((((top-res-call_14.excludes9-usr-excludes & top-usr-init_a1 >= 0) & top-usr-init_a2 >= 0) & top-usr-init_a3 >= 0) & top-usr-init_t >= 0);
+	init(top-usr-OK) := (top-res-call_16.Sofar-usr-Sofar -> ((((((0 <= top-res-2-call_13.ticket3i-usr-p1 & top-res-2-call_13.ticket3i-usr-p1 <= 3) & 0 <= top-res-2-call_13.ticket3i-usr-p2) & top-res-2-call_13.ticket3i-usr-p2 <= 3) & 0 <= top-res-2-call_13.ticket3i-usr-p3) & top-res-2-call_13.ticket3i-usr-p3 <= 3) & (top-res-2-call_13.ticket3i-usr-p1 - top-res-2-call_13.ticket3i-usr-p2) + top-res-2-call_13.ticket3i-usr-p3 <= 9));
+
+	next(top-res-gklocal_15) := ((((next(top-res-call_14.excludes9-usr-excludes) & next(top-usr-init_a1) >= 0) & next(top-usr-init_a2) >= 0) & next(top-usr-init_a3) >= 0) & next(top-usr-init_t) >= 0);
+	next(top-usr-OK) := (next(top-res-call_16.Sofar-usr-Sofar) -> ((((((0 <= next(top-res-2-call_13.ticket3i-usr-p1) & next(top-res-2-call_13.ticket3i-usr-p1) <= 3) & 0 <= next(top-res-2-call_13.ticket3i-usr-p2)) & next(top-res-2-call_13.ticket3i-usr-p2) <= 3) & 0 <= next(top-res-2-call_13.ticket3i-usr-p3)) & next(top-res-2-call_13.ticket3i-usr-p3) <= 3) & (next(top-res-2-call_13.ticket3i-usr-p1) - next(top-res-2-call_13.ticket3i-usr-p2)) + next(top-res-2-call_13.ticket3i-usr-p3) <= 9));
+
+
+INVARSPEC 
+((top-usr-OK));
+

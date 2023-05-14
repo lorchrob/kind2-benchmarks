@@ -1,0 +1,69 @@
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+
+
+
+MODULE Environment (Environment-usr-diff, Environment-usr-plus, Environment-usr-minus)
+VAR
+	Environment-usr-ok : boolean;
+ASSIGN
+	init(Environment-usr-ok) := ((-4 <= Environment-usr-diff & Environment-usr-diff <= 4) & Environment-usr-diff >= 1);
+
+	next(Environment-usr-ok) := (((-4 <= next(Environment-usr-diff) & next(Environment-usr-diff) <= 4) & (Environment-usr-plus ? next(Environment-usr-diff) >= 1 : TRUE)) & (Environment-usr-minus ? next(Environment-usr-diff) <= -1 : TRUE));
+
+
+
+MODULE Property (Property-usr-speed)
+VAR
+	Property-usr-ok : boolean;	Property-impl-usr-cpt : integer;
+ASSIGN
+	init(Property-usr-ok) := TRUE;
+	init(Property-impl-usr-cpt) := 0;
+	next(Property-usr-ok) := Property-impl-usr-cpt <= 7;
+	next(Property-impl-usr-cpt) := ((8 <= next(Property-usr-speed) & next(Property-usr-speed) <= 12) ? 0 : Property-impl-usr-cpt + 1);
+
+
+
+MODULE Controller (Controller-usr-diff)
+VAR
+	Controller-usr-speed : integer;	Controller-usr-plus : boolean;	Controller-usr-minus : boolean;
+ASSIGN
+	init(Controller-usr-speed) := 0;
+	init(Controller-usr-plus) := Controller-usr-speed <= 9;
+	init(Controller-usr-minus) := Controller-usr-speed >= 11;
+
+	next(Controller-usr-speed) := Controller-usr-speed + next(Controller-usr-diff);
+	next(Controller-usr-plus) := next(Controller-usr-speed) <= 9;
+	next(Controller-usr-minus) := next(Controller-usr-speed) >= 11;
+
+
+
+MODULE main () 
+VAR
+	top-usr-diff : integer;	top-usr-OK : boolean;	top-impl-usr-speed : integer;	top-impl-usr-plus : boolean;	top-impl-usr-minus : boolean;	top-res-gklocal_3 : boolean;	top-res-call_4 : Sofar(top-res-gklocal_3);
+	top-res-call_5 : Property(top-impl-usr-speed);
+	top-res-call_2 : Environment(top-usr-diff, top-impl-usr-plus, top-impl-usr-minus);
+	top-res-2-call_1 : Controller(top-usr-diff);
+
+ASSIGN
+	init(top-impl-usr-speed) := top-res-2-call_1.Controller-usr-speed;
+	init(top-res-gklocal_3) := ((top-res-call_2.Environment-usr-ok & 0 <= top-impl-usr-speed) & (top-impl-usr-speed < 16));
+	init(top-usr-OK) := (top-res-call_4.Sofar-usr-Sofar -> top-res-call_5.Property-usr-ok);
+	init(top-impl-usr-plus) := top-res-2-call_1.Controller-usr-plus;
+	init(top-impl-usr-minus) := top-res-2-call_1.Controller-usr-minus;
+
+	next(top-impl-usr-speed) := next(top-res-2-call_1.Controller-usr-speed);
+	next(top-res-gklocal_3) := ((next(top-res-call_2.Environment-usr-ok) & 0 <= next(top-impl-usr-speed)) & (next(top-impl-usr-speed) < 16));
+	next(top-usr-OK) := (next(top-res-call_4.Sofar-usr-Sofar) -> next(top-res-call_5.Property-usr-ok));
+	next(top-impl-usr-plus) := next(top-res-2-call_1.Controller-usr-plus);
+	next(top-impl-usr-minus) := next(top-res-2-call_1.Controller-usr-minus);
+
+
+INVARSPEC 
+((top-usr-OK));
+
