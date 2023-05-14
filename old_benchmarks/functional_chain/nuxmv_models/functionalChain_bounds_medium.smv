@@ -1,0 +1,297 @@
+
+MODULE conf1 (conf1-usr-signal, conf1-usr-n)
+VAR
+	conf1-usr-out : boolean;	conf1-impl-usr-cpt : integer;
+ASSIGN
+	init(conf1-impl-usr-cpt) := (conf1-usr-signal ? ((0 < conf1-usr-n) ? 0 + 1 : 0) : 0);
+	init(conf1-usr-out) := conf1-impl-usr-cpt >= conf1-usr-n;
+
+	next(conf1-impl-usr-cpt) := (next(conf1-usr-signal) ? ((conf1-impl-usr-cpt < next(conf1-usr-n)) ? conf1-impl-usr-cpt + 1 : conf1-impl-usr-cpt) : 0);
+	next(conf1-usr-out) := next(conf1-impl-usr-cpt) >= next(conf1-usr-n);
+
+
+
+MODULE priority (priority-usr-command, priority-usr-safe_command_value, priority-usr-command_failure, priority-usr-other_in_command, priority-usr-n)
+VAR
+	priority-usr-safe_command : real;	priority-usr-in_command : boolean;	priority-res-gklocal_14 : boolean;	priority-res-call_15 : conf1(priority-res-gklocal_14, priority-usr-n);
+
+ASSIGN
+	init(priority-res-gklocal_14) := !priority-usr-other_in_command;
+	init(priority-usr-in_command) := (!priority-usr-command_failure & priority-res-call_15.conf1-usr-out);
+	init(priority-usr-safe_command) := (priority-usr-in_command ? priority-usr-command : priority-usr-safe_command_value);
+
+	next(priority-res-gklocal_14) := !next(priority-usr-other_in_command);
+	next(priority-usr-in_command) := (!next(priority-usr-command_failure) & next(priority-res-call_15.conf1-usr-out));
+	next(priority-usr-safe_command) := (next(priority-usr-in_command) ? next(priority-usr-command) : next(priority-usr-safe_command_value));
+
+
+
+MODULE latch (latch-usr-in)
+VAR
+	latch-usr-out : boolean;
+ASSIGN
+	init(latch-usr-out) := (latch-usr-in | latch-usr-in);
+	next(latch-usr-out) := (latch-usr-out | next(latch-usr-in));
+
+
+
+MODULE range_monitor (range_monitor-usr-signal, range_monitor-usr-default_signal, range_monitor-usr-n)
+VAR
+	range_monitor-usr-min : real;	range_monitor-usr-max : real;	range_monitor-usr-out_of_range : boolean;	range_monitor-usr-corrupt : boolean;	range_monitor-usr-ranged_signal : real;	range_monitor-res-glocal_11 : boolean;	range_monitor-res-call_12 : conf1(range_monitor-usr-out_of_range, range_monitor-usr-n);
+	range_monitor-res-call_13 : latch(range_monitor-res-call_12.conf1-usr-out);
+
+ASSIGN
+	init(range_monitor-usr-out_of_range) := ((range_monitor-usr-min < range_monitor-usr-signal) | (range_monitor-usr-signal > range_monitor-usr-max));
+	init(range_monitor-usr-corrupt) := range_monitor-res-call_13.latch-usr-out;
+	init(range_monitor-usr-ranged_signal) := (range_monitor-usr-corrupt ? range_monitor-usr-default_signal : ((range_monitor-usr-signal > range_monitor-usr-max) ? range_monitor-usr-max : ((range_monitor-usr-signal < range_monitor-usr-min) ? range_monitor-usr-min : range_monitor-usr-signal)));
+	init(range_monitor-res-glocal_11) := (range_monitor-usr-min < range_monitor-usr-max);
+
+	next(range_monitor-usr-out_of_range) := ((next(range_monitor-usr-min) < next(range_monitor-usr-signal)) | (next(range_monitor-usr-signal) > next(range_monitor-usr-max)));
+	next(range_monitor-usr-corrupt) := next(range_monitor-res-call_13.latch-usr-out);
+	next(range_monitor-usr-ranged_signal) := (next(range_monitor-usr-corrupt) ? next(range_monitor-usr-default_signal) : ((next(range_monitor-usr-signal) > next(range_monitor-usr-max)) ? next(range_monitor-usr-max) : ((next(range_monitor-usr-signal) < next(range_monitor-usr-min)) ? next(range_monitor-usr-min) : next(range_monitor-usr-signal))));
+	next(range_monitor-res-glocal_11) := (next(range_monitor-usr-min) < next(range_monitor-usr-max));
+
+	INVAR range_monitor-res-glocal_11;
+
+
+MODULE reconfiguration ()
+VAR
+	reconfiguration-usr-sensor_value1 : real;	reconfiguration-usr-sensor_value2 : real;	reconfiguration-usr-sensor_value3 : real;	reconfiguration-usr-command : real;	reconfiguration-usr-no_command : boolean;	reconfiguration-impl-usr-in_command1 : boolean;	reconfiguration-impl-usr-ok : boolean;	reconfiguration-impl-usr-ranged_sensor1 : real;	reconfiguration-impl-usr-ranged_sensor2 : real;	reconfiguration-impl-usr-ranged_sensor3 : real;	reconfiguration-impl-usr-max : real;	reconfiguration-impl-usr-min : real;	reconfiguration-impl-usr-default_value : real;	reconfiguration-impl-usr-corrupt1 : boolean;	reconfiguration-impl-usr-corrupt2 : boolean;	reconfiguration-impl-usr-corrupt3 : boolean;	reconfiguration-impl-usr-safe_value : real;	reconfiguration-impl-usr-n1 : integer;	reconfiguration-impl-usr-n2 : integer;	reconfiguration-impl-usr-n3 : integer;	reconfiguration-impl-usr-m1 : integer;	reconfiguration-impl-usr-m2 : integer;	reconfiguration-impl-usr-m3 : integer;	reconfiguration-res-glocal_27 : boolean;	reconfiguration-res-glocal_28 : boolean;	reconfiguration-res-glocal_29 : boolean;	reconfiguration-res-subrange_21 : boolean;	reconfiguration-res-subrange_22 : boolean;	reconfiguration-res-subrange_23 : boolean;	reconfiguration-res-subrange_24 : boolean;	reconfiguration-res-subrange_25 : boolean;	reconfiguration-res-subrange_26 : boolean;	reconfiguration-res-gklocal_36 : boolean;	reconfiguration-res-gklocal_33 : boolean;	reconfiguration-res-call_38 : conf1(reconfiguration-usr-no_command, reconfiguration-impl-usr-m3);
+	reconfiguration-res-2-call_37 : priority(reconfiguration-impl-usr-ranged_sensor3, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt3, reconfiguration-res-gklocal_36, reconfiguration-impl-usr-m3);
+	reconfiguration-res-2-call_35 : priority(reconfiguration-impl-usr-ranged_sensor2, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt2, reconfiguration-impl-usr-in_command1, reconfiguration-impl-usr-m2);
+	reconfiguration-res-2-call_34 : priority(reconfiguration-impl-usr-ranged_sensor1, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt1, reconfiguration-res-gklocal_33, reconfiguration-impl-usr-m1);
+	reconfiguration-res-2-call_32 : range_monitor(reconfiguration-usr-sensor_value3, reconfiguration-impl-usr-default_value, reconfiguration-impl-usr-min, reconfiguration-impl-usr-max, reconfiguration-impl-usr-n3);
+	reconfiguration-res-2-call_31 : range_monitor(reconfiguration-usr-sensor_value2, reconfiguration-impl-usr-default_value, reconfiguration-impl-usr-min, reconfiguration-impl-usr-max, reconfiguration-impl-usr-n2);
+	reconfiguration-res-2-call_30 : range_monitor(reconfiguration-usr-sensor_value1, reconfiguration-impl-usr-default_value, reconfiguration-impl-usr-min, reconfiguration-impl-usr-max, reconfiguration-impl-usr-n1);
+
+ASSIGN
+	init(reconfiguration-impl-usr-n1) := 10;
+	init(reconfiguration-impl-usr-default_value) := 0;
+	init(reconfiguration-impl-usr-min) := -25;
+	init(reconfiguration-impl-usr-max) := 25;
+	init(reconfiguration-impl-usr-n2) := 12;
+	init(reconfiguration-impl-usr-n3) := 15;
+	init(reconfiguration-res-gklocal_33) := FALSE;
+	init(reconfiguration-impl-usr-m1) := 10;
+	init(reconfiguration-impl-usr-corrupt1) := reconfiguration-res-2-call_30.range_monitor-usr-corrupt;
+	init(reconfiguration-impl-usr-safe_value) := 0;
+	init(reconfiguration-impl-usr-ranged_sensor1) := reconfiguration-res-2-call_30.range_monitor-usr-ranged_signal;
+	init(reconfiguration-impl-usr-m2) := 20;
+	init(reconfiguration-impl-usr-corrupt2) := reconfiguration-res-2-call_31.range_monitor-usr-corrupt;
+	init(reconfiguration-impl-usr-in_command1) := reconfiguration-res-2-call_34.priority-usr-in_command;
+	init(reconfiguration-impl-usr-ranged_sensor2) := reconfiguration-res-2-call_31.range_monitor-usr-ranged_signal;
+	init(reconfiguration-res-gklocal_36) := (reconfiguration-res-2-call_35.priority-usr-in_command | reconfiguration-impl-usr-in_command1);
+	init(reconfiguration-impl-usr-m3) := 30;
+	init(reconfiguration-impl-usr-corrupt3) := reconfiguration-res-2-call_32.range_monitor-usr-corrupt;
+	init(reconfiguration-impl-usr-ranged_sensor3) := reconfiguration-res-2-call_32.range_monitor-usr-ranged_signal;
+	init(reconfiguration-usr-command) := reconfiguration-res-2-call_34.priority-usr-safe_command + reconfiguration-res-2-call_35.priority-usr-safe_command + reconfiguration-res-2-call_37.priority-usr-safe_command;
+	init(reconfiguration-usr-no_command) := !(reconfiguration-res-2-call_37.priority-usr-in_command | (reconfiguration-res-2-call_35.priority-usr-in_command | reconfiguration-impl-usr-in_command1));
+	init(reconfiguration-impl-usr-ok) := !reconfiguration-res-call_38.conf1-usr-out;
+	init(reconfiguration-res-glocal_27) := (!reconfiguration-impl-usr-corrupt3 | (!reconfiguration-impl-usr-corrupt2 | !reconfiguration-impl-usr-corrupt1));
+	init(reconfiguration-res-glocal_28) := ((reconfiguration-impl-usr-m1 < reconfiguration-impl-usr-m2) & (reconfiguration-impl-usr-m2 < reconfiguration-impl-usr-m3));
+	init(reconfiguration-res-glocal_29) := (reconfiguration-impl-usr-safe_value = 0);
+	init(reconfiguration-res-subrange_21) := (10 <= reconfiguration-impl-usr-n1 & reconfiguration-impl-usr-n1 <= 10);
+	init(reconfiguration-res-subrange_22) := (12 <= reconfiguration-impl-usr-n2 & reconfiguration-impl-usr-n2 <= 12);
+	init(reconfiguration-res-subrange_23) := (15 <= reconfiguration-impl-usr-n3 & reconfiguration-impl-usr-n3 <= 15);
+	init(reconfiguration-res-subrange_24) := (10 <= reconfiguration-impl-usr-m1 & reconfiguration-impl-usr-m1 <= 10);
+	init(reconfiguration-res-subrange_25) := (20 <= reconfiguration-impl-usr-m2 & reconfiguration-impl-usr-m2 <= 20);
+	init(reconfiguration-res-subrange_26) := (30 <= reconfiguration-impl-usr-m3 & reconfiguration-impl-usr-m3 <= 30);
+
+	next(reconfiguration-impl-usr-n1) := 10;
+	next(reconfiguration-impl-usr-default_value) := 0;
+	next(reconfiguration-impl-usr-min) := -25;
+	next(reconfiguration-impl-usr-max) := 25;
+	next(reconfiguration-impl-usr-n2) := 12;
+	next(reconfiguration-impl-usr-n3) := 15;
+	next(reconfiguration-res-gklocal_33) := FALSE;
+	next(reconfiguration-impl-usr-m1) := 10;
+	next(reconfiguration-impl-usr-corrupt1) := next(reconfiguration-res-2-call_30.range_monitor-usr-corrupt);
+	next(reconfiguration-impl-usr-safe_value) := 0;
+	next(reconfiguration-impl-usr-ranged_sensor1) := next(reconfiguration-res-2-call_30.range_monitor-usr-ranged_signal);
+	next(reconfiguration-impl-usr-m2) := 20;
+	next(reconfiguration-impl-usr-corrupt2) := next(reconfiguration-res-2-call_31.range_monitor-usr-corrupt);
+	next(reconfiguration-impl-usr-in_command1) := next(reconfiguration-res-2-call_34.priority-usr-in_command);
+	next(reconfiguration-impl-usr-ranged_sensor2) := next(reconfiguration-res-2-call_31.range_monitor-usr-ranged_signal);
+	next(reconfiguration-res-gklocal_36) := (next(reconfiguration-res-2-call_35.priority-usr-in_command) | next(reconfiguration-impl-usr-in_command1));
+	next(reconfiguration-impl-usr-m3) := 30;
+	next(reconfiguration-impl-usr-corrupt3) := next(reconfiguration-res-2-call_32.range_monitor-usr-corrupt);
+	next(reconfiguration-impl-usr-ranged_sensor3) := next(reconfiguration-res-2-call_32.range_monitor-usr-ranged_signal);
+	next(reconfiguration-usr-command) := next(reconfiguration-res-2-call_34.priority-usr-safe_command) + next(reconfiguration-res-2-call_35.priority-usr-safe_command) + next(reconfiguration-res-2-call_37.priority-usr-safe_command);
+	next(reconfiguration-usr-no_command) := !(next(reconfiguration-res-2-call_37.priority-usr-in_command) | (next(reconfiguration-res-2-call_35.priority-usr-in_command) | next(reconfiguration-impl-usr-in_command1)));
+	next(reconfiguration-impl-usr-ok) := !next(reconfiguration-res-call_38.conf1-usr-out);
+	next(reconfiguration-res-glocal_27) := (!next(reconfiguration-impl-usr-corrupt3) | (!next(reconfiguration-impl-usr-corrupt2) | !next(reconfiguration-impl-usr-corrupt1)));
+	next(reconfiguration-res-glocal_28) := ((next(reconfiguration-impl-usr-m1) < next(reconfiguration-impl-usr-m2)) & (next(reconfiguration-impl-usr-m2) < next(reconfiguration-impl-usr-m3)));
+	next(reconfiguration-res-glocal_29) := (next(reconfiguration-impl-usr-safe_value) = 0);
+	next(reconfiguration-res-subrange_21) := (10 <= next(reconfiguration-impl-usr-n1) & next(reconfiguration-impl-usr-n1) <= 10);
+	next(reconfiguration-res-subrange_22) := (12 <= next(reconfiguration-impl-usr-n2) & next(reconfiguration-impl-usr-n2) <= 12);
+	next(reconfiguration-res-subrange_23) := (15 <= next(reconfiguration-impl-usr-n3) & next(reconfiguration-impl-usr-n3) <= 15);
+	next(reconfiguration-res-subrange_24) := (10 <= next(reconfiguration-impl-usr-m1) & next(reconfiguration-impl-usr-m1) <= 10);
+	next(reconfiguration-res-subrange_25) := (20 <= next(reconfiguration-impl-usr-m2) & next(reconfiguration-impl-usr-m2) <= 20);
+	next(reconfiguration-res-subrange_26) := (30 <= next(reconfiguration-impl-usr-m3) & next(reconfiguration-impl-usr-m3) <= 30);
+
+	INVAR reconfiguration-res-glocal_29;
+	INVAR reconfiguration-res-glocal_28;
+	INVAR reconfiguration-res-glocal_27;
+
+
+MODULE controlLaw ()
+VAR
+	controlLaw-usr-in1 : real;	controlLaw-usr-in2 : real;	controlLaw-usr-integ : real;	controlLaw-impl-usr-dtf : real;	controlLaw-impl-usr-out_stable : boolean;	controlLaw-res-glocal_7 : boolean;
+ASSIGN
+	init(controlLaw-usr-integ) := 0;
+	init(controlLaw-impl-usr-dtf) := 0;
+	init(controlLaw-impl-usr-out_stable) := (-25 <= controlLaw-usr-integ & controlLaw-usr-integ <= 25);
+	init(controlLaw-res-glocal_7) := (((-18/5 <= controlLaw-usr-in1 & controlLaw-usr-in1 <= 18/5) & -18/5 <= controlLaw-usr-in2) & controlLaw-usr-in2 <= 18/5);
+
+	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201/1250 * controlLaw-impl-usr-dtf);
+	next(controlLaw-usr-integ) := controlLaw-usr-integ + ((((1/25 * controlLaw-usr-integ) + (3/20 * (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)))) <= -1 & ((next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf))) > 0)) | (((1/25 * controlLaw-usr-integ) + (3/20 * (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)))) >= 1 & ((next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf))) < 0)) | ((1/25 * controlLaw-usr-integ) + (3/20 * (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)))) <= 1 & (1/25 * controlLaw-usr-integ) + (3/20 * (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)))) >= -1))) ? (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf))) : 0);
+	next(controlLaw-impl-usr-out_stable) := (-25 <= next(controlLaw-usr-integ) & next(controlLaw-usr-integ) <= 25);
+	next(controlLaw-res-glocal_7) := (((-18/5 <= next(controlLaw-usr-in1) & next(controlLaw-usr-in1) <= 18/5) & -18/5 <= next(controlLaw-usr-in2)) & next(controlLaw-usr-in2) <= 18/5);
+
+	INVAR controlLaw-res-glocal_7;
+
+
+MODULE saturation (saturation-usr-in, saturation-usr-min, saturation-usr-max)
+VAR
+	saturation-usr-out : real;
+ASSIGN
+	init(saturation-usr-out) := ((saturation-usr-in < saturation-usr-min) ? saturation-usr-min : ((saturation-usr-in > saturation-usr-max) ? saturation-usr-max : saturation-usr-in));
+
+	next(saturation-usr-out) := ((next(saturation-usr-in) < next(saturation-usr-min)) ? next(saturation-usr-min) : ((next(saturation-usr-in) > next(saturation-usr-max)) ? next(saturation-usr-max) : next(saturation-usr-in)));
+
+
+
+MODULE saturation3 (saturation3-usr-inA, saturation3-usr-inB, saturation3-usr-inC, saturation3-usr-min, saturation3-usr-max)
+VAR
+	saturation3-usr-outA : real;	saturation3-usr-outB : real;	saturation3-usr-outC : real;	saturation3-res-call_10 : saturation(saturation3-usr-inC, saturation3-usr-min, saturation3-usr-max);
+	saturation3-res-call_9 : saturation(saturation3-usr-inB, saturation3-usr-min, saturation3-usr-max);
+	saturation3-res-call_8 : saturation(saturation3-usr-inA, saturation3-usr-min, saturation3-usr-max);
+
+ASSIGN
+	init(saturation3-usr-outA) := saturation3-res-call_8.saturation-usr-out;
+	init(saturation3-usr-outB) := saturation3-res-call_9.saturation-usr-out;
+	init(saturation3-usr-outC) := saturation3-res-call_10.saturation-usr-out;
+
+	next(saturation3-usr-outA) := next(saturation3-res-call_8.saturation-usr-out);
+	next(saturation3-usr-outB) := next(saturation3-res-call_9.saturation-usr-out);
+	next(saturation3-usr-outC) := next(saturation3-res-call_10.saturation-usr-out);
+
+
+
+MODULE voter ()
+VAR
+	voter-usr-input1 : real;	voter-usr-input2 : real;	voter-usr-input3 : real;	voter-usr-output : real;	voter-impl-usr-equalization1 : real;	voter-impl-usr-equalization2 : real;	voter-impl-usr-equalization3 : real;	voter-impl-usr-satCentering : real;	voter-impl-usr-st1 : real;	voter-impl-usr-st2 : real;	voter-impl-usr-st3 : real;	voter-impl-usr-eqs_stable : boolean;	voter-impl-usr-out_stable : boolean;	voter-res-glocal_1 : boolean;	voter-res-glocal_2 : boolean;	voter-res-glocal_3 : boolean;	voter-res-glocal_4 : boolean;	voter-res-glocal_5 : boolean;	voter-res-glocal_6 : boolean;
+ASSIGN
+	init(voter-impl-usr-equalization3) := 0;
+	init(voter-impl-usr-equalization1) := 0;
+	init(voter-impl-usr-equalization2) := 0;
+	init(voter-usr-output) := (((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1))) !! 3);
+	init(voter-impl-usr-satCentering) := (((((voter-impl-usr-equalization1 > voter-impl-usr-equalization2) = (voter-impl-usr-equalization2 > voter-impl-usr-equalization3)) ? voter-impl-usr-equalization2 : (((voter-impl-usr-equalization2 > voter-impl-usr-equalization3) = (voter-impl-usr-equalization3 > voter-impl-usr-equalization1)) ? voter-impl-usr-equalization3 : voter-impl-usr-equalization1)) > 1/4) ? 1/4 : (((((voter-impl-usr-equalization1 > voter-impl-usr-equalization2) = (voter-impl-usr-equalization2 > voter-impl-usr-equalization3)) ? voter-impl-usr-equalization2 : (((voter-impl-usr-equalization2 > voter-impl-usr-equalization3) = (voter-impl-usr-equalization3 > voter-impl-usr-equalization1)) ? voter-impl-usr-equalization3 : voter-impl-usr-equalization1)) < -1/4) ? -1/4 : (((voter-impl-usr-equalization1 > voter-impl-usr-equalization2) = (voter-impl-usr-equalization2 > voter-impl-usr-equalization3)) ? voter-impl-usr-equalization2 : (((voter-impl-usr-equalization2 > voter-impl-usr-equalization3) = (voter-impl-usr-equalization3 > voter-impl-usr-equalization1)) ? voter-impl-usr-equalization3 : voter-impl-usr-equalization1))));
+	init(voter-impl-usr-st2) := ((((voter-usr-input2 - voter-impl-usr-equalization2) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) > 1/2) ? 1/2 : ((((voter-usr-input2 - voter-impl-usr-equalization2) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) < -1/2) ? -1/2 : ((voter-usr-input2 - voter-impl-usr-equalization2) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1))))));
+	init(voter-impl-usr-st3) := ((((voter-usr-input3 - voter-impl-usr-equalization3) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) > 1/2) ? 1/2 : ((((voter-usr-input3 - voter-impl-usr-equalization3) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) < -1/2) ? -1/2 : ((voter-usr-input3 - voter-impl-usr-equalization3) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1))))));
+	init(voter-impl-usr-st1) := ((((voter-usr-input1 - voter-impl-usr-equalization1) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) > 1/2) ? 1/2 : ((((voter-usr-input1 - voter-impl-usr-equalization1) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) < -1/2) ? -1/2 : ((voter-usr-input1 - voter-impl-usr-equalization1) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1))))));
+	init(voter-impl-usr-eqs_stable) := (((((voter-impl-usr-equalization1 <= 12/5 & voter-impl-usr-equalization1 >= -12/5) & voter-impl-usr-equalization2 <= 12/5) & voter-impl-usr-equalization2 >= -12/5) & voter-impl-usr-equalization3 <= 12/5) & voter-impl-usr-equalization3 >= -12/5);
+	init(voter-impl-usr-out_stable) := (-6/5 <= voter-usr-output & voter-usr-output <= 6/5);
+	init(voter-res-glocal_1) := (voter-usr-input1 < 6/5);
+	init(voter-res-glocal_2) := (voter-usr-input1 > -6/5);
+	init(voter-res-glocal_3) := (voter-usr-input2 < 6/5);
+	init(voter-res-glocal_4) := (voter-usr-input2 > -6/5);
+	init(voter-res-glocal_5) := (voter-usr-input3 < 6/5);
+	init(voter-res-glocal_6) := (voter-usr-input3 > -6/5);
+
+	next(voter-impl-usr-equalization3) := voter-impl-usr-equalization3 + ((voter-impl-usr-st3 - voter-impl-usr-satCentering) * 1/20);
+	next(voter-impl-usr-equalization1) := voter-impl-usr-equalization1 + ((voter-impl-usr-st1 - voter-impl-usr-satCentering) * 1/20);
+	next(voter-impl-usr-equalization2) := voter-impl-usr-equalization2 + ((voter-impl-usr-st2 - voter-impl-usr-satCentering) * 1/20);
+	next(voter-usr-output) := (((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) !! 3);
+	next(voter-impl-usr-satCentering) := (((((next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2)) = (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3))) ? next(voter-impl-usr-equalization2) : (((next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3)) = (next(voter-impl-usr-equalization3) > next(voter-impl-usr-equalization1))) ? next(voter-impl-usr-equalization3) : next(voter-impl-usr-equalization1))) > 1/4) ? 1/4 : (((((next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2)) = (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3))) ? next(voter-impl-usr-equalization2) : (((next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3)) = (next(voter-impl-usr-equalization3) > next(voter-impl-usr-equalization1))) ? next(voter-impl-usr-equalization3) : next(voter-impl-usr-equalization1))) < -1/4) ? -1/4 : (((next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2)) = (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3))) ? next(voter-impl-usr-equalization2) : (((next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3)) = (next(voter-impl-usr-equalization3) > next(voter-impl-usr-equalization1))) ? next(voter-impl-usr-equalization3) : next(voter-impl-usr-equalization1)))));
+	next(voter-impl-usr-st2) := ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) > 1/2) ? 1/2 : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) < -1/2) ? -1/2 : ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))))));
+	next(voter-impl-usr-st3) := ((((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) > 1/2) ? 1/2 : ((((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) < -1/2) ? -1/2 : ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))))));
+	next(voter-impl-usr-st1) := ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) > 1/2) ? 1/2 : ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) < -1/2) ? -1/2 : ((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))))));
+	next(voter-impl-usr-eqs_stable) := (((((next(voter-impl-usr-equalization1) <= 12/5 & next(voter-impl-usr-equalization1) >= -12/5) & next(voter-impl-usr-equalization2) <= 12/5) & next(voter-impl-usr-equalization2) >= -12/5) & next(voter-impl-usr-equalization3) <= 12/5) & next(voter-impl-usr-equalization3) >= -12/5);
+	next(voter-impl-usr-out_stable) := (-6/5 <= next(voter-usr-output) & next(voter-usr-output) <= 6/5);
+	next(voter-res-glocal_1) := (next(voter-usr-input1) < 6/5);
+	next(voter-res-glocal_2) := (next(voter-usr-input1) > -6/5);
+	next(voter-res-glocal_3) := (next(voter-usr-input2) < 6/5);
+	next(voter-res-glocal_4) := (next(voter-usr-input2) > -6/5);
+	next(voter-res-glocal_5) := (next(voter-usr-input3) < 6/5);
+	next(voter-res-glocal_6) := (next(voter-usr-input3) > -6/5);
+
+	INVAR voter-res-glocal_6;
+	INVAR voter-res-glocal_5;
+	INVAR voter-res-glocal_4;
+	INVAR voter-res-glocal_3;
+	INVAR voter-res-glocal_2;
+	INVAR voter-res-glocal_1;
+
+
+MODULE channel (channel-usr-in1a, channel-usr-in1b, channel-usr-in1c, channel-usr-in2a, channel-usr-in2b, channel-usr-in2c)
+VAR
+	channel-usr-output : real;	channel-impl-usr-satMin : real;	channel-impl-usr-satMax : real;	channel-impl-usr-sat1a : real;	channel-impl-usr-sat1b : real;	channel-impl-usr-sat1c : real;	channel-impl-usr-sat2a : real;	channel-impl-usr-sat2b : real;	channel-impl-usr-sat2c : real;	channel-impl-usr-v1 : real;	channel-impl-usr-v2 : real;	channel-impl-usr-out_stable : boolean;	channel-res-call_20 : controlLaw(channel-impl-usr-v1, channel-impl-usr-v2);
+	channel-res-call_19 : voter(channel-impl-usr-sat2a, channel-impl-usr-sat2b, channel-impl-usr-sat2c);
+	channel-res-call_18 : voter(channel-impl-usr-sat1a, channel-impl-usr-sat1b, channel-impl-usr-sat1c);
+	channel-res-2-call_17 : saturation3(channel-usr-in2a, channel-usr-in2b, channel-usr-in2c, channel-impl-usr-satMin, channel-impl-usr-satMax);
+	channel-res-2-call_16 : saturation3(channel-usr-in1a, channel-usr-in1b, channel-usr-in1c, channel-impl-usr-satMin, channel-impl-usr-satMax);
+
+ASSIGN
+	init(channel-usr-output) := channel-res-call_20.controlLaw-usr-integ;
+	init(channel-impl-usr-satMax) := 6/5;
+	init(channel-impl-usr-satMin) := -6/5;
+	init(channel-impl-usr-sat1c) := channel-res-2-call_16.saturation3-usr-outC;
+	init(channel-impl-usr-sat1b) := channel-res-2-call_16.saturation3-usr-outB;
+	init(channel-impl-usr-sat1a) := channel-res-2-call_16.saturation3-usr-outA;
+	init(channel-impl-usr-v1) := channel-res-call_18.voter-usr-output;
+	init(channel-impl-usr-sat2c) := channel-res-2-call_17.saturation3-usr-outC;
+	init(channel-impl-usr-sat2b) := channel-res-2-call_17.saturation3-usr-outB;
+	init(channel-impl-usr-sat2a) := channel-res-2-call_17.saturation3-usr-outA;
+	init(channel-impl-usr-v2) := channel-res-call_19.voter-usr-output;
+	init(channel-impl-usr-out_stable) := (-25 <= channel-usr-output & channel-usr-output <= 25);
+
+	next(channel-impl-usr-satMax) := 6/5;
+	next(channel-impl-usr-satMin) := -6/5;
+	next(channel-impl-usr-sat1c) := next(channel-res-2-call_16.saturation3-usr-outC);
+	next(channel-impl-usr-sat1b) := next(channel-res-2-call_16.saturation3-usr-outB);
+	next(channel-impl-usr-sat1a) := next(channel-res-2-call_16.saturation3-usr-outA);
+	next(channel-impl-usr-sat2c) := next(channel-res-2-call_17.saturation3-usr-outC);
+	next(channel-impl-usr-sat2b) := next(channel-res-2-call_17.saturation3-usr-outB);
+	next(channel-impl-usr-sat2a) := next(channel-res-2-call_17.saturation3-usr-outA);
+	next(channel-impl-usr-v2) := next(channel-res-call_19.voter-usr-output);
+	next(channel-impl-usr-v1) := next(channel-res-call_18.voter-usr-output);
+	next(channel-usr-output) := next(channel-res-call_20.controlLaw-usr-integ);
+	next(channel-impl-usr-out_stable) := (-25 <= next(channel-usr-output) & next(channel-usr-output) <= 25);
+
+
+
+MODULE main () 
+VAR
+	top-usr-in11a : real;	top-usr-in11b : real;	top-usr-in11c : real;	top-usr-in12a : real;	top-usr-in12b : real;	top-usr-in12c : real;	top-usr-in21a : real;	top-usr-in21b : real;	top-usr-in21c : real;	top-usr-in22a : real;	top-usr-in22b : real;	top-usr-in22c : real;	top-usr-in31a : real;	top-usr-in31b : real;	top-usr-in31c : real;	top-usr-in32a : real;	top-usr-in32b : real;	top-usr-in32c : real;	top-usr-command : real;	top-impl-usr-channel1 : real;	top-impl-usr-channel2 : real;	top-impl-usr-channel3 : real;	top-impl-usr-stability : boolean;	top-impl-usr-no_one_in_command : boolean;	top-impl-usr-no_command_bounded : boolean;	top-res-gklocal_43 : integer;	top-res-call_44 : conf1(top-impl-usr-no_one_in_command, top-res-gklocal_43);
+	top-res-2-call_42 : reconfiguration(top-impl-usr-channel1, top-impl-usr-channel2, top-impl-usr-channel3);
+	top-res-call_41 : channel(top-usr-in31a, top-usr-in31b, top-usr-in31c, top-usr-in32a, top-usr-in32b, top-usr-in32c);
+	top-res-call_40 : channel(top-usr-in21a, top-usr-in21b, top-usr-in21c, top-usr-in22a, top-usr-in22b, top-usr-in22c);
+	top-res-call_39 : channel(top-usr-in11a, top-usr-in11b, top-usr-in11c, top-usr-in12a, top-usr-in12b, top-usr-in12c);
+
+ASSIGN
+	init(top-impl-usr-channel3) := top-res-call_41.channel-usr-output;
+	init(top-impl-usr-channel2) := top-res-call_40.channel-usr-output;
+	init(top-impl-usr-channel1) := top-res-call_39.channel-usr-output;
+	init(top-usr-command) := top-res-2-call_42.reconfiguration-usr-command;
+	init(top-impl-usr-stability) := (-25 <= top-usr-command & top-usr-command <= 25);
+	init(top-res-gklocal_43) := 25;
+	init(top-impl-usr-no_one_in_command) := top-res-2-call_42.reconfiguration-usr-no_command;
+	init(top-impl-usr-no_command_bounded) := !top-res-call_44.conf1-usr-out;
+
+	next(top-impl-usr-channel3) := next(top-res-call_41.channel-usr-output);
+	next(top-impl-usr-channel2) := next(top-res-call_40.channel-usr-output);
+	next(top-impl-usr-channel1) := next(top-res-call_39.channel-usr-output);
+	next(top-usr-command) := next(top-res-2-call_42.reconfiguration-usr-command);
+	next(top-impl-usr-stability) := (-25 <= next(top-usr-command) & next(top-usr-command) <= 25);
+	next(top-res-gklocal_43) := 25;
+	next(top-impl-usr-no_one_in_command) := next(top-res-2-call_42.reconfiguration-usr-no_command);
+	next(top-impl-usr-no_command_bounded) := !next(top-res-call_44.conf1-usr-out);
+
+
+INVARSPEC 
+((top-impl-usr-no_command_bounded) & (top-impl-usr-stability) & (TRUE) & 
+ (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & 
+ (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & 
+ (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE));
+

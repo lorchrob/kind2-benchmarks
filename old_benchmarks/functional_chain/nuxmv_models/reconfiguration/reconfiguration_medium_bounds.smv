@@ -1,0 +1,142 @@
+
+MODULE conf1 (conf1-usr-signal)
+VAR
+	conf1-usr-n : integer;	conf1-usr-out : boolean;	conf1-impl-usr-cpt : integer;	conf1-res-glocal_1 : boolean;
+ASSIGN
+	init(conf1-impl-usr-cpt) := (conf1-usr-signal ? ((0 < conf1-usr-n) ? 0 + 1 : 0) : 0);
+	init(conf1-usr-out) := conf1-impl-usr-cpt >= conf1-usr-n;
+	init(conf1-res-glocal_1) := (0 <= 0 & 0 <= conf1-usr-n);
+
+	next(conf1-impl-usr-cpt) := (next(conf1-usr-signal) ? ((conf1-impl-usr-cpt < next(conf1-usr-n)) ? conf1-impl-usr-cpt + 1 : conf1-impl-usr-cpt) : 0);
+	next(conf1-usr-out) := next(conf1-impl-usr-cpt) >= next(conf1-usr-n);
+	next(conf1-res-glocal_1) := (0 <= conf1-impl-usr-cpt & conf1-impl-usr-cpt <= next(conf1-usr-n));
+
+	INVAR conf1-res-glocal_1;
+
+
+MODULE latch (latch-usr-in)
+VAR
+	latch-usr-out : boolean;
+ASSIGN
+	init(latch-usr-out) := (latch-usr-in | latch-usr-in);
+	next(latch-usr-out) := (latch-usr-out | next(latch-usr-in));
+
+
+
+MODULE range_monitor (range_monitor-usr-signal, range_monitor-usr-default_signal, range_monitor-usr-n)
+VAR
+	range_monitor-usr-min : real;	range_monitor-usr-max : real;	range_monitor-usr-out_of_range : boolean;	range_monitor-usr-corrupt : boolean;	range_monitor-usr-ranged_signal : real;	range_monitor-res-glocal_2 : boolean;	range_monitor-res-call_3 : conf1(range_monitor-usr-out_of_range, range_monitor-usr-n);
+	range_monitor-res-call_4 : latch(range_monitor-res-call_3.conf1-usr-out);
+
+ASSIGN
+	init(range_monitor-usr-out_of_range) := ((range_monitor-usr-min < range_monitor-usr-signal) | (range_monitor-usr-signal > range_monitor-usr-max));
+	init(range_monitor-usr-corrupt) := range_monitor-res-call_4.latch-usr-out;
+	init(range_monitor-usr-ranged_signal) := (range_monitor-usr-corrupt ? range_monitor-usr-default_signal : ((range_monitor-usr-signal > range_monitor-usr-max) ? range_monitor-usr-max : ((range_monitor-usr-signal < range_monitor-usr-min) ? range_monitor-usr-min : range_monitor-usr-signal)));
+	init(range_monitor-res-glocal_2) := (range_monitor-usr-min < range_monitor-usr-max);
+
+	next(range_monitor-usr-out_of_range) := ((next(range_monitor-usr-min) < next(range_monitor-usr-signal)) | (next(range_monitor-usr-signal) > next(range_monitor-usr-max)));
+	next(range_monitor-usr-corrupt) := next(range_monitor-res-call_4.latch-usr-out);
+	next(range_monitor-usr-ranged_signal) := (next(range_monitor-usr-corrupt) ? next(range_monitor-usr-default_signal) : ((next(range_monitor-usr-signal) > next(range_monitor-usr-max)) ? next(range_monitor-usr-max) : ((next(range_monitor-usr-signal) < next(range_monitor-usr-min)) ? next(range_monitor-usr-min) : next(range_monitor-usr-signal))));
+	next(range_monitor-res-glocal_2) := (next(range_monitor-usr-min) < next(range_monitor-usr-max));
+
+	INVAR range_monitor-res-glocal_2;
+
+
+MODULE priority (priority-usr-command, priority-usr-safe_command_value, priority-usr-command_failure, priority-usr-other_in_command, priority-usr-n)
+VAR
+	priority-usr-safe_command : real;	priority-usr-in_command : boolean;	priority-res-gklocal_5 : boolean;	priority-res-call_6 : conf1(priority-res-gklocal_5, priority-usr-n);
+
+ASSIGN
+	init(priority-res-gklocal_5) := !priority-usr-other_in_command;
+	init(priority-usr-in_command) := (!priority-usr-command_failure & priority-res-call_6.conf1-usr-out);
+	init(priority-usr-safe_command) := (priority-usr-in_command ? priority-usr-command : priority-usr-safe_command_value);
+
+	next(priority-res-gklocal_5) := !next(priority-usr-other_in_command);
+	next(priority-usr-in_command) := (!next(priority-usr-command_failure) & next(priority-res-call_6.conf1-usr-out));
+	next(priority-usr-safe_command) := (next(priority-usr-in_command) ? next(priority-usr-command) : next(priority-usr-safe_command_value));
+
+
+
+MODULE main () 
+VAR
+	reconfiguration-usr-sensor_value1 : real;	reconfiguration-usr-sensor_value2 : real;	reconfiguration-usr-sensor_value3 : real;	reconfiguration-usr-no_command : boolean;	reconfiguration-impl-usr-in_command1 : boolean;	reconfiguration-impl-usr-ok : boolean;	reconfiguration-impl-usr-ranged_sensor1 : real;	reconfiguration-impl-usr-ranged_sensor2 : real;	reconfiguration-impl-usr-ranged_sensor3 : real;	reconfiguration-impl-usr-max : real;	reconfiguration-impl-usr-min : real;	reconfiguration-impl-usr-default_value : real;	reconfiguration-impl-usr-corrupt1 : boolean;	reconfiguration-impl-usr-corrupt2 : boolean;	reconfiguration-impl-usr-corrupt3 : boolean;	reconfiguration-impl-usr-safe_value : real;	reconfiguration-impl-usr-n1 : integer;	reconfiguration-impl-usr-n2 : integer;	reconfiguration-impl-usr-n3 : integer;	reconfiguration-impl-usr-m1 : integer;	reconfiguration-impl-usr-m2 : integer;	reconfiguration-impl-usr-m3 : integer;	reconfiguration-res-glocal_13 : boolean;	reconfiguration-res-glocal_14 : boolean;	reconfiguration-res-glocal_15 : boolean;	reconfiguration-res-subrange_7 : boolean;	reconfiguration-res-subrange_8 : boolean;	reconfiguration-res-subrange_9 : boolean;	reconfiguration-res-subrange_10 : boolean;	reconfiguration-res-subrange_11 : boolean;	reconfiguration-res-subrange_12 : boolean;	reconfiguration-res-gklocal_22 : boolean;	reconfiguration-res-gklocal_19 : boolean;	reconfiguration-res-call_24 : conf1(reconfiguration-usr-no_command, reconfiguration-impl-usr-m3);
+	reconfiguration-res-2-call_23 : priority(reconfiguration-impl-usr-ranged_sensor3, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt3, reconfiguration-res-gklocal_22, reconfiguration-impl-usr-m3);
+	reconfiguration-res-2-call_21 : priority(reconfiguration-impl-usr-ranged_sensor2, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt2, reconfiguration-impl-usr-in_command1, reconfiguration-impl-usr-m2);
+	reconfiguration-res-2-call_20 : priority(reconfiguration-impl-usr-ranged_sensor1, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt1, reconfiguration-res-gklocal_19, reconfiguration-impl-usr-m1);
+	reconfiguration-res-2-call_18 : range_monitor(reconfiguration-usr-sensor_value3, reconfiguration-impl-usr-default_value, reconfiguration-impl-usr-min, reconfiguration-impl-usr-max, reconfiguration-impl-usr-n3);
+	reconfiguration-res-2-call_17 : range_monitor(reconfiguration-usr-sensor_value2, reconfiguration-impl-usr-default_value, reconfiguration-impl-usr-min, reconfiguration-impl-usr-max, reconfiguration-impl-usr-n2);
+	reconfiguration-res-2-call_16 : range_monitor(reconfiguration-usr-sensor_value1, reconfiguration-impl-usr-default_value, reconfiguration-impl-usr-min, reconfiguration-impl-usr-max, reconfiguration-impl-usr-n1);
+
+ASSIGN
+	init(reconfiguration-impl-usr-n1) := 10;
+	init(reconfiguration-impl-usr-min) := -25;
+	init(reconfiguration-impl-usr-max) := 25;
+	init(reconfiguration-impl-usr-n2) := 12;
+	init(reconfiguration-impl-usr-n3) := 15;
+	init(reconfiguration-res-gklocal_19) := FALSE;
+	init(reconfiguration-impl-usr-m1) := 10;
+	init(reconfiguration-impl-usr-corrupt1) := reconfiguration-res-2-call_16.range_monitor-usr-corrupt;
+	init(reconfiguration-impl-usr-m2) := 20;
+	init(reconfiguration-impl-usr-corrupt2) := reconfiguration-res-2-call_17.range_monitor-usr-corrupt;
+	init(reconfiguration-impl-usr-in_command1) := reconfiguration-res-2-call_20.priority-usr-in_command;
+	init(reconfiguration-res-gklocal_22) := (reconfiguration-res-2-call_21.priority-usr-in_command | reconfiguration-impl-usr-in_command1);
+	init(reconfiguration-impl-usr-m3) := 30;
+	init(reconfiguration-impl-usr-corrupt3) := reconfiguration-res-2-call_18.range_monitor-usr-corrupt;
+	init(reconfiguration-usr-no_command) := !(reconfiguration-res-2-call_23.priority-usr-in_command | (reconfiguration-res-2-call_21.priority-usr-in_command | reconfiguration-impl-usr-in_command1));
+	init(reconfiguration-impl-usr-ok) := !reconfiguration-res-call_24.conf1-usr-out;
+	init(reconfiguration-impl-usr-default_value) := 0;
+	init(reconfiguration-impl-usr-ranged_sensor1) := reconfiguration-res-2-call_16.range_monitor-usr-ranged_signal;
+	init(reconfiguration-impl-usr-safe_value) := 0;
+	init(reconfiguration-impl-usr-ranged_sensor2) := reconfiguration-res-2-call_17.range_monitor-usr-ranged_signal;
+	init(reconfiguration-impl-usr-ranged_sensor3) := reconfiguration-res-2-call_18.range_monitor-usr-ranged_signal;
+	init(reconfiguration-res-glocal_13) := (!reconfiguration-impl-usr-corrupt3 | (!reconfiguration-impl-usr-corrupt2 | !reconfiguration-impl-usr-corrupt1));
+	init(reconfiguration-res-glocal_14) := ((reconfiguration-impl-usr-m1 < reconfiguration-impl-usr-m2) & (reconfiguration-impl-usr-m2 < reconfiguration-impl-usr-m3));
+	init(reconfiguration-res-glocal_15) := (reconfiguration-impl-usr-safe_value = 0);
+	init(reconfiguration-res-subrange_7) := (10 <= reconfiguration-impl-usr-n1 & reconfiguration-impl-usr-n1 <= 10);
+	init(reconfiguration-res-subrange_8) := (12 <= reconfiguration-impl-usr-n2 & reconfiguration-impl-usr-n2 <= 12);
+	init(reconfiguration-res-subrange_9) := (15 <= reconfiguration-impl-usr-n3 & reconfiguration-impl-usr-n3 <= 15);
+	init(reconfiguration-res-subrange_10) := (10 <= reconfiguration-impl-usr-m1 & reconfiguration-impl-usr-m1 <= 10);
+	init(reconfiguration-res-subrange_11) := (20 <= reconfiguration-impl-usr-m2 & reconfiguration-impl-usr-m2 <= 20);
+	init(reconfiguration-res-subrange_12) := (30 <= reconfiguration-impl-usr-m3 & reconfiguration-impl-usr-m3 <= 30);
+
+	next(reconfiguration-impl-usr-n1) := 10;
+	next(reconfiguration-impl-usr-min) := -25;
+	next(reconfiguration-impl-usr-max) := 25;
+	next(reconfiguration-impl-usr-n2) := 12;
+	next(reconfiguration-impl-usr-n3) := 15;
+	next(reconfiguration-res-gklocal_19) := FALSE;
+	next(reconfiguration-impl-usr-m1) := 10;
+	next(reconfiguration-impl-usr-corrupt1) := next(reconfiguration-res-2-call_16.range_monitor-usr-corrupt);
+	next(reconfiguration-impl-usr-m2) := 20;
+	next(reconfiguration-impl-usr-corrupt2) := next(reconfiguration-res-2-call_17.range_monitor-usr-corrupt);
+	next(reconfiguration-impl-usr-in_command1) := next(reconfiguration-res-2-call_20.priority-usr-in_command);
+	next(reconfiguration-res-gklocal_22) := (next(reconfiguration-res-2-call_21.priority-usr-in_command) | next(reconfiguration-impl-usr-in_command1));
+	next(reconfiguration-impl-usr-m3) := 30;
+	next(reconfiguration-impl-usr-corrupt3) := next(reconfiguration-res-2-call_18.range_monitor-usr-corrupt);
+	next(reconfiguration-usr-no_command) := !(next(reconfiguration-res-2-call_23.priority-usr-in_command) | (next(reconfiguration-res-2-call_21.priority-usr-in_command) | next(reconfiguration-impl-usr-in_command1)));
+	next(reconfiguration-impl-usr-ok) := !next(reconfiguration-res-call_24.conf1-usr-out);
+	next(reconfiguration-impl-usr-default_value) := 0;
+	next(reconfiguration-impl-usr-ranged_sensor1) := next(reconfiguration-res-2-call_16.range_monitor-usr-ranged_signal);
+	next(reconfiguration-impl-usr-safe_value) := 0;
+	next(reconfiguration-impl-usr-ranged_sensor2) := next(reconfiguration-res-2-call_17.range_monitor-usr-ranged_signal);
+	next(reconfiguration-impl-usr-ranged_sensor3) := next(reconfiguration-res-2-call_18.range_monitor-usr-ranged_signal);
+	next(reconfiguration-res-glocal_13) := (!next(reconfiguration-impl-usr-corrupt3) | (!next(reconfiguration-impl-usr-corrupt2) | !next(reconfiguration-impl-usr-corrupt1)));
+	next(reconfiguration-res-glocal_14) := ((next(reconfiguration-impl-usr-m1) < next(reconfiguration-impl-usr-m2)) & (next(reconfiguration-impl-usr-m2) < next(reconfiguration-impl-usr-m3)));
+	next(reconfiguration-res-glocal_15) := (next(reconfiguration-impl-usr-safe_value) = 0);
+	next(reconfiguration-res-subrange_7) := (10 <= next(reconfiguration-impl-usr-n1) & next(reconfiguration-impl-usr-n1) <= 10);
+	next(reconfiguration-res-subrange_8) := (12 <= next(reconfiguration-impl-usr-n2) & next(reconfiguration-impl-usr-n2) <= 12);
+	next(reconfiguration-res-subrange_9) := (15 <= next(reconfiguration-impl-usr-n3) & next(reconfiguration-impl-usr-n3) <= 15);
+	next(reconfiguration-res-subrange_10) := (10 <= next(reconfiguration-impl-usr-m1) & next(reconfiguration-impl-usr-m1) <= 10);
+	next(reconfiguration-res-subrange_11) := (20 <= next(reconfiguration-impl-usr-m2) & next(reconfiguration-impl-usr-m2) <= 20);
+	next(reconfiguration-res-subrange_12) := (30 <= next(reconfiguration-impl-usr-m3) & next(reconfiguration-impl-usr-m3) <= 30);
+
+	INVAR reconfiguration-res-glocal_15;
+	INVAR reconfiguration-res-glocal_14;
+	INVAR reconfiguration-res-glocal_13;
+
+INVARSPEC 
+((reconfiguration-res-subrange_12) & (reconfiguration-res-subrange_11) & 
+ (reconfiguration-res-subrange_10) & (reconfiguration-res-subrange_9) & 
+ (reconfiguration-res-subrange_8) & (reconfiguration-res-subrange_7) & 
+ (reconfiguration-impl-usr-ok));
+

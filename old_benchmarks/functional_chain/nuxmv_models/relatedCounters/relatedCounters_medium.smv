@@ -1,0 +1,21 @@
+
+MODULE main () 
+VAR
+	top-usr-a : boolean;	top-usr-b : boolean;	top-usr-c : boolean;	top-usr-ok : boolean;	top-impl-usr-x : integer;	top-impl-usr-y : integer;	top-res-subrange_1 : boolean;	top-res-subrange_2 : boolean;
+ASSIGN
+	init(top-impl-usr-y) := (top-usr-c ? 0 : ((top-usr-a & (0 < 60)) ? 0 + 1 : 0));
+	init(top-impl-usr-x) := ((top-usr-c | top-usr-b) ? 0 : ((top-usr-a & (0 < 100)) ? 0 + 1 : 0));
+	init(top-usr-ok) := ((top-impl-usr-x = 100) -> (top-impl-usr-y = 60));
+	init(top-res-subrange_1) := (100 <= 100 & 100 <= 100);
+	init(top-res-subrange_2) := (60 <= 60 & 60 <= 60);
+
+	next(top-impl-usr-y) := (next(top-usr-c) ? 0 : ((next(top-usr-a) & (top-impl-usr-y < 60)) ? top-impl-usr-y + 1 : top-impl-usr-y));
+	next(top-impl-usr-x) := ((next(top-usr-c) | next(top-usr-b)) ? 0 : ((next(top-usr-a) & (top-impl-usr-x < 100)) ? top-impl-usr-x + 1 : top-impl-usr-x));
+	next(top-usr-ok) := ((next(top-impl-usr-x) = 100) -> (next(top-impl-usr-y) = 60));
+	next(top-res-subrange_1) := (100 <= 100 & 100 <= 100);
+	next(top-res-subrange_2) := (60 <= 60 & 60 <= 60);
+
+
+INVARSPEC 
+((top-res-subrange_2) & (top-res-subrange_1) & (top-usr-ok));
+
