@@ -1,7 +1,7 @@
 
-MODULE conf1 (conf1-usr-signal)
+MODULE conf1 (conf1-usr-signal, conf1-usr-n)
 VAR
-	conf1-usr-n : integer;	conf1-usr-out : boolean;	conf1-impl-usr-cpt : integer;	conf1-res-glocal_1 : boolean;
+	conf1-usr-out : boolean;	conf1-impl-usr-cpt : integer;	conf1-res-glocal_1 : boolean;
 ASSIGN
 	init(conf1-impl-usr-cpt) := (conf1-usr-signal ? ((0 < conf1-usr-n) ? 0 + 1 : 0) : 0);
 	init(conf1-usr-out) := conf1-impl-usr-cpt >= conf1-usr-n;
@@ -23,9 +23,9 @@ ASSIGN
 
 
 
-MODULE range_monitor (range_monitor-usr-signal, range_monitor-usr-default_signal, range_monitor-usr-n)
+MODULE range_monitor (range_monitor-usr-signal, range_monitor-usr-default_signal, range_monitor-usr-min, range_monitor-usr-max, range_monitor-usr-n)
 VAR
-	range_monitor-usr-min : real;	range_monitor-usr-max : real;	range_monitor-usr-out_of_range : boolean;	range_monitor-usr-corrupt : boolean;	range_monitor-usr-ranged_signal : real;	range_monitor-res-glocal_2 : boolean;	range_monitor-res-call_3 : conf1(range_monitor-usr-out_of_range, range_monitor-usr-n);
+	range_monitor-usr-out_of_range : boolean;	range_monitor-usr-corrupt : boolean;	range_monitor-usr-ranged_signal : real;	range_monitor-res-glocal_2 : boolean;	range_monitor-res-call_3 : conf1(range_monitor-usr-out_of_range, range_monitor-usr-n);
 	range_monitor-res-call_4 : latch(range_monitor-res-call_3.conf1-usr-out);
 
 ASSIGN

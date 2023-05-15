@@ -1,7 +1,7 @@
 
-MODULE controlLaw ()
+MODULE controlLaw (controlLaw-usr-in1, controlLaw-usr-in2)
 VAR
-	controlLaw-usr-in1 : real;	controlLaw-usr-in2 : real;	controlLaw-usr-integ : real;	controlLaw-impl-usr-dtf : real;	controlLaw-impl-usr-out_stable : boolean;	controlLaw-res-glocal_7 : boolean;
+	controlLaw-usr-integ : real;	controlLaw-impl-usr-dtf : real;	controlLaw-impl-usr-out_stable : boolean;	controlLaw-res-glocal_7 : boolean;
 ASSIGN
 	init(controlLaw-usr-integ) := 0;
 	init(controlLaw-impl-usr-dtf) := 0;
@@ -43,9 +43,9 @@ ASSIGN
 
 
 
-MODULE voter ()
+MODULE voter (voter-usr-input1, voter-usr-input2, voter-usr-input3)
 VAR
-	voter-usr-input1 : real;	voter-usr-input2 : real;	voter-usr-input3 : real;	voter-usr-output : real;	voter-impl-usr-equalization1 : real;	voter-impl-usr-equalization2 : real;	voter-impl-usr-equalization3 : real;	voter-impl-usr-satCentering : real;	voter-impl-usr-st1 : real;	voter-impl-usr-st2 : real;	voter-impl-usr-st3 : real;	voter-impl-usr-eqs_stable : boolean;	voter-impl-usr-out_stable : boolean;	voter-res-glocal_1 : boolean;	voter-res-glocal_2 : boolean;	voter-res-glocal_3 : boolean;	voter-res-glocal_4 : boolean;	voter-res-glocal_5 : boolean;	voter-res-glocal_6 : boolean;
+	voter-usr-output : real;	voter-impl-usr-equalization1 : real;	voter-impl-usr-equalization2 : real;	voter-impl-usr-equalization3 : real;	voter-impl-usr-satCentering : real;	voter-impl-usr-st1 : real;	voter-impl-usr-st2 : real;	voter-impl-usr-st3 : real;	voter-impl-usr-eqs_stable : boolean;	voter-impl-usr-out_stable : boolean;	voter-res-glocal_1 : boolean;	voter-res-glocal_2 : boolean;	voter-res-glocal_3 : boolean;	voter-res-glocal_4 : boolean;	voter-res-glocal_5 : boolean;	voter-res-glocal_6 : boolean;
 ASSIGN
 	init(voter-impl-usr-equalization3) := 0;
 	init(voter-impl-usr-equalization1) := 0;

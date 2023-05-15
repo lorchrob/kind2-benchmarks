@@ -20,9 +20,9 @@ ASSIGN
 
 
 
-MODULE range_monitor (range_monitor-usr-signal, range_monitor-usr-default_signal, range_monitor-usr-n)
+MODULE range_monitor (range_monitor-usr-signal, range_monitor-usr-default_signal, range_monitor-usr-min, range_monitor-usr-max, range_monitor-usr-n)
 VAR
-	range_monitor-usr-min : real;	range_monitor-usr-max : real;	range_monitor-usr-out_of_range : boolean;	range_monitor-usr-corrupt : boolean;	range_monitor-usr-ranged_signal : real;	range_monitor-res-glocal_1 : boolean;	range_monitor-res-call_2 : conf1(range_monitor-usr-out_of_range, range_monitor-usr-n);
+	range_monitor-usr-out_of_range : boolean;	range_monitor-usr-corrupt : boolean;	range_monitor-usr-ranged_signal : real;	range_monitor-res-glocal_1 : boolean;	range_monitor-res-call_2 : conf1(range_monitor-usr-out_of_range, range_monitor-usr-n);
 	range_monitor-res-call_3 : latch(range_monitor-res-call_2.conf1-usr-out);
 
 ASSIGN

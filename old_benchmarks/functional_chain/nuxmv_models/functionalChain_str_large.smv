@@ -1,7 +1,7 @@
 
-MODULE conf1 (conf1-usr-signal)
+MODULE conf1 (conf1-usr-signal, conf1-usr-n)
 VAR
-	conf1-usr-n : integer;	conf1-usr-out : boolean;	conf1-impl-usr-cpt : integer;	conf1-res-glocal_8 : boolean;
+	conf1-usr-out : boolean;	conf1-impl-usr-cpt : integer;	conf1-res-glocal_8 : boolean;
 ASSIGN
 	init(conf1-impl-usr-cpt) := (conf1-usr-signal ? ((0 < conf1-usr-n) ? 0 + 1 : 0) : 0);
 	init(conf1-usr-out) := conf1-impl-usr-cpt >= conf1-usr-n;
@@ -38,9 +38,9 @@ ASSIGN
 
 
 
-MODULE range_monitor (range_monitor-usr-signal, range_monitor-usr-default_signal, range_monitor-usr-n)
+MODULE range_monitor (range_monitor-usr-signal, range_monitor-usr-default_signal, range_monitor-usr-min, range_monitor-usr-max, range_monitor-usr-n)
 VAR
-	range_monitor-usr-min : real;	range_monitor-usr-max : real;	range_monitor-usr-out_of_range : boolean;	range_monitor-usr-corrupt : boolean;	range_monitor-usr-ranged_signal : real;	range_monitor-res-glocal_12 : boolean;	range_monitor-res-call_13 : conf1(range_monitor-usr-out_of_range, range_monitor-usr-n);
+	range_monitor-usr-out_of_range : boolean;	range_monitor-usr-corrupt : boolean;	range_monitor-usr-ranged_signal : real;	range_monitor-res-glocal_12 : boolean;	range_monitor-res-call_13 : conf1(range_monitor-usr-out_of_range, range_monitor-usr-n);
 	range_monitor-res-call_14 : latch(range_monitor-res-call_13.conf1-usr-out);
 
 ASSIGN
@@ -57,9 +57,9 @@ ASSIGN
 	INVAR range_monitor-res-glocal_12;
 
 
-MODULE reconfiguration ()
+MODULE reconfiguration (reconfiguration-usr-sensor_value1, reconfiguration-usr-sensor_value2, reconfiguration-usr-sensor_value3)
 VAR
-	reconfiguration-usr-sensor_value1 : real;	reconfiguration-usr-sensor_value2 : real;	reconfiguration-usr-sensor_value3 : real;	reconfiguration-usr-command : real;	reconfiguration-usr-no_command : boolean;	reconfiguration-impl-usr-in_command1 : boolean;	reconfiguration-impl-usr-ok : boolean;	reconfiguration-impl-usr-ranged_sensor1 : real;	reconfiguration-impl-usr-ranged_sensor2 : real;	reconfiguration-impl-usr-ranged_sensor3 : real;	reconfiguration-impl-usr-max : real;	reconfiguration-impl-usr-min : real;	reconfiguration-impl-usr-default_value : real;	reconfiguration-impl-usr-corrupt1 : boolean;	reconfiguration-impl-usr-corrupt2 : boolean;	reconfiguration-impl-usr-corrupt3 : boolean;	reconfiguration-impl-usr-safe_value : real;	reconfiguration-impl-usr-n1 : integer;	reconfiguration-impl-usr-n2 : integer;	reconfiguration-impl-usr-n3 : integer;	reconfiguration-impl-usr-m1 : integer;	reconfiguration-impl-usr-m2 : integer;	reconfiguration-impl-usr-m3 : integer;	reconfiguration-res-glocal_28 : boolean;	reconfiguration-res-glocal_29 : boolean;	reconfiguration-res-glocal_30 : boolean;	reconfiguration-res-subrange_22 : boolean;	reconfiguration-res-subrange_23 : boolean;	reconfiguration-res-subrange_24 : boolean;	reconfiguration-res-subrange_25 : boolean;	reconfiguration-res-subrange_26 : boolean;	reconfiguration-res-subrange_27 : boolean;	reconfiguration-res-gklocal_37 : boolean;	reconfiguration-res-gklocal_34 : boolean;	reconfiguration-res-call_39 : conf1(reconfiguration-usr-no_command, reconfiguration-impl-usr-m3);
+	reconfiguration-usr-command : real;	reconfiguration-usr-no_command : boolean;	reconfiguration-impl-usr-in_command1 : boolean;	reconfiguration-impl-usr-ok : boolean;	reconfiguration-impl-usr-ranged_sensor1 : real;	reconfiguration-impl-usr-ranged_sensor2 : real;	reconfiguration-impl-usr-ranged_sensor3 : real;	reconfiguration-impl-usr-max : real;	reconfiguration-impl-usr-min : real;	reconfiguration-impl-usr-default_value : real;	reconfiguration-impl-usr-corrupt1 : boolean;	reconfiguration-impl-usr-corrupt2 : boolean;	reconfiguration-impl-usr-corrupt3 : boolean;	reconfiguration-impl-usr-safe_value : real;	reconfiguration-impl-usr-n1 : integer;	reconfiguration-impl-usr-n2 : integer;	reconfiguration-impl-usr-n3 : integer;	reconfiguration-impl-usr-m1 : integer;	reconfiguration-impl-usr-m2 : integer;	reconfiguration-impl-usr-m3 : integer;	reconfiguration-res-glocal_28 : boolean;	reconfiguration-res-glocal_29 : boolean;	reconfiguration-res-glocal_30 : boolean;	reconfiguration-res-subrange_22 : boolean;	reconfiguration-res-subrange_23 : boolean;	reconfiguration-res-subrange_24 : boolean;	reconfiguration-res-subrange_25 : boolean;	reconfiguration-res-subrange_26 : boolean;	reconfiguration-res-subrange_27 : boolean;	reconfiguration-res-gklocal_37 : boolean;	reconfiguration-res-gklocal_34 : boolean;	reconfiguration-res-call_39 : conf1(reconfiguration-usr-no_command, reconfiguration-impl-usr-m3);
 	reconfiguration-res-2-call_38 : priority(reconfiguration-impl-usr-ranged_sensor3, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt3, reconfiguration-res-gklocal_37, reconfiguration-impl-usr-m3);
 	reconfiguration-res-2-call_36 : priority(reconfiguration-impl-usr-ranged_sensor2, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt2, reconfiguration-impl-usr-in_command1, reconfiguration-impl-usr-m2);
 	reconfiguration-res-2-call_35 : priority(reconfiguration-impl-usr-ranged_sensor1, reconfiguration-impl-usr-safe_value, reconfiguration-impl-usr-corrupt1, reconfiguration-res-gklocal_34, reconfiguration-impl-usr-m1);
@@ -137,9 +137,9 @@ ASSIGN
 	INVAR reconfiguration-res-glocal_28;
 
 
-MODULE controlLaw ()
+MODULE controlLaw (controlLaw-usr-in1, controlLaw-usr-in2)
 VAR
-	controlLaw-usr-in1 : real;	controlLaw-usr-in2 : real;	controlLaw-usr-integ : real;	controlLaw-impl-usr-dtf : real;	controlLaw-impl-usr-out_stable : boolean;	controlLaw-res-glocal_7 : boolean;
+	controlLaw-usr-integ : real;	controlLaw-impl-usr-dtf : real;	controlLaw-impl-usr-out_stable : boolean;	controlLaw-res-glocal_7 : boolean;
 ASSIGN
 	init(controlLaw-usr-integ) := 0;
 	init(controlLaw-impl-usr-dtf) := 0;
@@ -181,9 +181,9 @@ ASSIGN
 
 
 
-MODULE voter ()
+MODULE voter (voter-usr-input1, voter-usr-input2, voter-usr-input3)
 VAR
-	voter-usr-input1 : real;	voter-usr-input2 : real;	voter-usr-input3 : real;	voter-usr-output : real;	voter-impl-usr-equalization1 : real;	voter-impl-usr-equalization2 : real;	voter-impl-usr-equalization3 : real;	voter-impl-usr-satCentering : real;	voter-impl-usr-st1 : real;	voter-impl-usr-st2 : real;	voter-impl-usr-st3 : real;	voter-impl-usr-str_invariant : boolean;	voter-impl-usr-eqs_stable : boolean;	voter-impl-usr-out_stable : boolean;	voter-res-glocal_1 : boolean;	voter-res-glocal_2 : boolean;	voter-res-glocal_3 : boolean;	voter-res-glocal_4 : boolean;	voter-res-glocal_5 : boolean;	voter-res-glocal_6 : boolean;
+	voter-usr-output : real;	voter-impl-usr-equalization1 : real;	voter-impl-usr-equalization2 : real;	voter-impl-usr-equalization3 : real;	voter-impl-usr-satCentering : real;	voter-impl-usr-st1 : real;	voter-impl-usr-st2 : real;	voter-impl-usr-st3 : real;	voter-impl-usr-str_invariant : boolean;	voter-impl-usr-eqs_stable : boolean;	voter-impl-usr-out_stable : boolean;	voter-res-glocal_1 : boolean;	voter-res-glocal_2 : boolean;	voter-res-glocal_3 : boolean;	voter-res-glocal_4 : boolean;	voter-res-glocal_5 : boolean;	voter-res-glocal_6 : boolean;
 ASSIGN
 	init(voter-impl-usr-equalization3) := 0;
 	init(voter-impl-usr-equalization1) := 0;
