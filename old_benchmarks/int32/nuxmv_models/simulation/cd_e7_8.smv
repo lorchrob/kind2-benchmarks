@@ -1,0 +1,89 @@
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
+
+
+
+MODULE Environment (Environment-usr-diff, Environment-usr-plus, Environment-usr-minus)
+VAR
+	Environment-usr-ok : boolean;
+
+ASSIGN
+	init(Environment-usr-ok) := (((bvneg0sh32_00000004 <= Environment-usr-diff) & (Environment-usr-diff <= 0sh32_00000004)) & (Environment-usr-diff >= 0sh32_00000001));
+
+	next(Environment-usr-ok) := ((((bvneg0sh32_00000004 <= next(Environment-usr-diff)) & (next(Environment-usr-diff) <= 0sh32_00000004)) & (Environment-usr-plus ? (next(Environment-usr-diff) >= 0sh32_00000001) : TRUE)) & (Environment-usr-minus ? (next(Environment-usr-diff) <= bvneg0sh32_00000001) : TRUE));
+
+
+
+MODULE Property (Property-usr-speed)
+VAR
+	Property-usr-ok : boolean;
+	Property-impl-usr-cpt : signed word[32];
+	Property-impl-usr-acceptable : boolean;
+
+ASSIGN
+	init(Property-usr-ok) := TRUE;
+	init(Property-impl-usr-cpt) := 0sh32_00000000;
+	init(Property-impl-usr-acceptable) := ((0sh32_00000008 <= Property-usr-speed) & (Property-usr-speed <= 0sh32_0000000C));
+
+	next(Property-usr-ok) := (Property-impl-usr-cpt <= 0sh32_00000007);
+	next(Property-impl-usr-acceptable) := ((0sh32_00000008 <= next(Property-usr-speed)) & (next(Property-usr-speed) <= 0sh32_0000000C));
+	next(Property-impl-usr-cpt) := (next(Property-impl-usr-acceptable) ? 0sh32_00000000 : (Property-impl-usr-cpt + 0sh32_00000001));
+
+
+
+MODULE Controller (Controller-usr-diff)
+VAR
+	Controller-usr-speed : signed word[32];
+	Controller-usr-plus : boolean;
+	Controller-usr-minus : boolean;
+
+ASSIGN
+	init(Controller-usr-speed) := 0sh32_00000000;
+	init(Controller-usr-plus) := (Controller-usr-speed <= 0sh32_00000009);
+	init(Controller-usr-minus) := (Controller-usr-speed >= 0sh32_0000000B);
+
+	next(Controller-usr-speed) := (Controller-usr-speed + next(Controller-usr-diff));
+	next(Controller-usr-plus) := (next(Controller-usr-speed) <= 0sh32_00000009);
+	next(Controller-usr-minus) := (next(Controller-usr-speed) >= 0sh32_0000000B);
+
+
+
+MODULE main () 
+VAR
+	top-usr-diff : signed word[32];
+	top-usr-OK : boolean;
+	top-impl-usr-speed : signed word[32];
+	top-impl-usr-plus : boolean;
+	top-impl-usr-minus : boolean;
+	top-impl-usr-realistic : boolean;
+	top-res-gklocal_3 : boolean;
+	top-res-call_4 : Sofar(top-res-gklocal_3);
+	top-res-call_5 : Property(top-impl-usr-speed);
+	top-res-call_2 : Environment(top-usr-diff, top-impl-usr-plus, top-impl-usr-minus);
+	top-res-2-call_1 : Controller(top-usr-diff);
+
+ASSIGN
+	init(top-impl-usr-realistic) := top-res-call_2.Environment-usr-ok;
+	init(top-impl-usr-speed) := top-res-2-call_1.Controller-usr-speed;
+	init(top-res-gklocal_3) := ((top-impl-usr-realistic & (0sh32_00000000 <= top-impl-usr-speed)) & (top-impl-usr-speed < 0sh32_00000010));
+	init(top-usr-OK) := (top-res-call_4.Sofar-usr-Sofar -> top-res-call_5.Property-usr-ok);
+	init(top-impl-usr-plus) := top-res-2-call_1.Controller-usr-plus;
+	init(top-impl-usr-minus) := top-res-2-call_1.Controller-usr-minus;
+
+	next(top-impl-usr-realistic) := next(top-res-call_2.Environment-usr-ok);
+	next(top-impl-usr-speed) := next(top-res-2-call_1.Controller-usr-speed);
+	next(top-res-gklocal_3) := ((next(top-impl-usr-realistic) & (0sh32_00000000 <= next(top-impl-usr-speed))) & (next(top-impl-usr-speed) < 0sh32_00000010));
+	next(top-usr-OK) := (next(top-res-call_4.Sofar-usr-Sofar) -> next(top-res-call_5.Property-usr-ok));
+	next(top-impl-usr-plus) := next(top-res-2-call_1.Controller-usr-plus);
+	next(top-impl-usr-minus) := next(top-res-2-call_1.Controller-usr-minus);
+
+
+INVARSPEC 
+((top-usr-OK));
+

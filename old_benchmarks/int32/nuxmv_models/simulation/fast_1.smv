@@ -1,0 +1,179 @@
+
+MODULE Edge (Edge-usr-X)
+VAR
+	Edge-usr-Y : boolean;
+
+ASSIGN
+	init(Edge-usr-Y) := FALSE;
+	next(Edge-usr-Y) := ((!next(Edge-usr-X) & Edge-usr-X) | (next(Edge-usr-X) & !Edge-usr-X));
+
+
+
+MODULE MoreThanOneSec (MoreThanOneSec-usr-X)
+VAR
+	MoreThanOneSec-usr-Y : boolean;
+
+ASSIGN
+	init(MoreThanOneSec-usr-Y) := FALSE;
+	next(MoreThanOneSec-usr-Y) := (MoreThanOneSec-usr-X & next(MoreThanOneSec-usr-X));
+
+
+
+MODULE MoreThanTwoSec (MoreThanTwoSec-usr-X)
+VAR
+	MoreThanTwoSec-usr-Y : boolean;
+	MoreThanTwoSec-res-glocal_1 : boolean;
+
+ASSIGN
+	init(MoreThanTwoSec-usr-Y) := FALSE;
+	init(MoreThanTwoSec-res-glocal_1) := FALSE;
+
+	next(MoreThanTwoSec-usr-Y) := (MoreThanTwoSec-res-glocal_1 & next(MoreThanTwoSec-usr-X));
+	next(MoreThanTwoSec-res-glocal_1) := (MoreThanTwoSec-usr-X & next(MoreThanTwoSec-usr-X));
+
+
+
+MODULE cc_allowed (cc_allowed-usr-ccont, cc_allowed-usr-igsw, cc_allowed-usr-bpa, cc_allowed-usr-cccanc, cc_allowed-usr-battok, cc_allowed-usr-gearok, cc_allowed-usr-qfok, cc_allowed-usr-sdok, cc_allowed-usr-accok, cc_allowed-usr-vs)
+VAR
+	cc_allowed-usr-ccall : boolean;
+	cc_allowed-res-call_7 : MoreThanOneSec(cc_allowed-usr-sdok);
+	cc_allowed-res-call_8 : MoreThanTwoSec(cc_allowed-usr-accok);
+
+ASSIGN
+	init(cc_allowed-usr-ccall) := (((((((((cc_allowed-usr-ccont & !cc_allowed-usr-bpa) & cc_allowed-usr-battok) & cc_allowed-usr-gearok) & cc_allowed-usr-qfok) & cc_allowed-res-call_7.MoreThanOneSec-usr-Y) & (0sh32_00000023 <= cc_allowed-usr-vs)) & (cc_allowed-usr-vs <= 0sh32_000000C8)) & cc_allowed-res-call_8.MoreThanTwoSec-usr-Y) & !cc_allowed-usr-cccanc);
+
+	next(cc_allowed-usr-ccall) := (((((((((next(cc_allowed-usr-ccont) & !next(cc_allowed-usr-bpa)) & next(cc_allowed-usr-battok)) & next(cc_allowed-usr-gearok)) & next(cc_allowed-usr-qfok)) & next(cc_allowed-res-call_7.MoreThanOneSec-usr-Y)) & (0sh32_00000023 <= next(cc_allowed-usr-vs))) & (next(cc_allowed-usr-vs) <= 0sh32_000000C8)) & next(cc_allowed-res-call_8.MoreThanTwoSec-usr-Y)) & !next(cc_allowed-usr-cccanc));
+
+
+
+MODULE one_button (one_button-usr-ccseti, one_button-usr-ccsetd, one_button-usr-ccr)
+VAR
+	one_button-usr-ob : boolean;
+
+ASSIGN
+	init(one_button-usr-ob) := (((!one_button-usr-ccseti & !one_button-usr-ccsetd) & one_button-usr-ccr) | (((!one_button-usr-ccseti & one_button-usr-ccsetd) & !one_button-usr-ccr) | ((one_button-usr-ccseti & !one_button-usr-ccsetd) & !one_button-usr-ccr)));
+
+	next(one_button-usr-ob) := (((!next(one_button-usr-ccseti) & !next(one_button-usr-ccsetd)) & next(one_button-usr-ccr)) | (((!next(one_button-usr-ccseti) & next(one_button-usr-ccsetd)) & !next(one_button-usr-ccr)) | ((next(one_button-usr-ccseti) & !next(one_button-usr-ccsetd)) & !next(one_button-usr-ccr))));
+
+
+
+MODULE AtLeastOnceSince (AtLeastOnceSince-usr-X, AtLeastOnceSince-usr-Y)
+VAR
+	AtLeastOnceSince-usr-XsinceY : boolean;
+
+ASSIGN
+	init(AtLeastOnceSince-usr-XsinceY) := (AtLeastOnceSince-usr-Y ? AtLeastOnceSince-usr-X : TRUE);
+
+	next(AtLeastOnceSince-usr-XsinceY) := (next(AtLeastOnceSince-usr-Y) ? next(AtLeastOnceSince-usr-X) : (AtLeastOnceSince-usr-XsinceY | next(AtLeastOnceSince-usr-X)));
+
+
+
+MODULE PosEdge (PosEdge-usr-X)
+VAR
+	PosEdge-usr-Y : boolean;
+
+ASSIGN
+	init(PosEdge-usr-Y) := FALSE;
+	next(PosEdge-usr-Y) := (next(PosEdge-usr-X) & !PosEdge-usr-X);
+
+
+
+MODULE prev_no_button (prev_no_button-usr-ccseti, prev_no_button-usr-ccsetd, prev_no_button-usr-ccr)
+VAR
+	prev_no_button-usr-pnb : boolean;
+	prev_no_button-res-glocal_2 : boolean;
+
+ASSIGN
+	init(prev_no_button-usr-pnb) := TRUE;
+	init(prev_no_button-res-glocal_2) := ((!prev_no_button-usr-ccseti & !prev_no_button-usr-ccsetd) & !prev_no_button-usr-ccr);
+
+	next(prev_no_button-usr-pnb) := prev_no_button-res-glocal_2;
+	next(prev_no_button-res-glocal_2) := ((!next(prev_no_button-usr-ccseti) & !next(prev_no_button-usr-ccsetd)) & !next(prev_no_button-usr-ccr));
+
+
+
+MODULE one_button_accept (one_button_accept-usr-ccseti, one_button_accept-usr-ccsetd, one_button_accept-usr-ccr, one_button_accept-usr-ccont, one_button_accept-usr-cca)
+VAR
+	one_button_accept-usr-oba : boolean;
+	one_button_accept-impl-usr-ob : boolean;
+	one_button_accept-impl-usr-pnb : boolean;
+	one_button_accept-res-call_5 : PosEdge(one_button_accept-usr-ccont);
+	one_button_accept-res-call_6 : AtLeastOnceSince(one_button_accept-usr-cca, one_button_accept-res-call_5.PosEdge-usr-Y);
+	one_button_accept-res-call_4 : one_button(one_button_accept-usr-ccseti, one_button_accept-usr-ccsetd, one_button_accept-usr-ccr);
+	one_button_accept-res-call_3 : prev_no_button(one_button_accept-usr-ccseti, one_button_accept-usr-ccsetd, one_button_accept-usr-ccr);
+
+ASSIGN
+	init(one_button_accept-impl-usr-pnb) := one_button_accept-res-call_3.prev_no_button-usr-pnb;
+	init(one_button_accept-impl-usr-ob) := one_button_accept-res-call_4.one_button-usr-ob;
+	init(one_button_accept-usr-oba) := ((one_button_accept-impl-usr-pnb & one_button_accept-impl-usr-ob) ? (!one_button_accept-usr-ccr ? TRUE : one_button_accept-res-call_6.AtLeastOnceSince-usr-XsinceY) : FALSE);
+
+	next(one_button_accept-impl-usr-pnb) := next(one_button_accept-res-call_3.prev_no_button-usr-pnb);
+	next(one_button_accept-impl-usr-ob) := next(one_button_accept-res-call_4.one_button-usr-ob);
+	next(one_button_accept-usr-oba) := ((next(one_button_accept-impl-usr-pnb) & next(one_button_accept-impl-usr-ob)) ? (!next(one_button_accept-usr-ccr) ? TRUE : next(one_button_accept-res-call_6.AtLeastOnceSince-usr-XsinceY)) : FALSE);
+
+
+
+MODULE main (main-usr-igsw, main-usr-ccd, main-usr-cconoff, main-usr-bpa, main-usr-cccanc, main-usr-battok, main-usr-gearok, main-usr-qfok, main-usr-sdok, main-usr-accok, main-usr-ccseti, main-usr-ccsetd, main-usr-ccr, main-usr-vs)
+VAR
+	main-usr-ccont : boolean;
+	main-usr-cca : boolean;
+	main-impl-usr-ccall : boolean;
+	main-res-glocal_11 : boolean;
+	main-res-gklocal_14 : boolean;
+	main-res-call_15 : one_button_accept(main-usr-ccseti, main-usr-ccsetd, main-usr-ccr, main-usr-ccont, main-res-gklocal_14);
+	main-res-call_12 : cc_allowed(main-usr-ccont, main-usr-igsw, main-usr-bpa, main-usr-cccanc, main-usr-battok, main-usr-gearok, main-usr-qfok, main-usr-sdok, main-usr-accok, main-usr-vs);
+	main-res-call_9 : Edge(main-usr-igsw);
+	main-res-call_10 : PosEdge(main-usr-cconoff);
+	main-res-oracle_13 : boolean;
+
+ASSIGN
+	init(main-usr-ccont) := FALSE;
+	init(main-res-glocal_11) := !main-usr-ccont;
+	init(main-usr-cca) := FALSE;
+	init(main-impl-usr-ccall) := main-res-call_12.cc_allowed-usr-ccall;
+	init(main-res-gklocal_14) := main-res-oracle_13;
+
+	next(main-usr-ccont) := (((main-usr-ccont & next(main-res-call_10.PosEdge-usr-Y)) | (next(main-usr-ccd) | next(main-res-call_9.Edge-usr-Y))) ? FALSE : ((main-res-glocal_11 & next(main-res-call_10.PosEdge-usr-Y)) ? TRUE : main-usr-ccont));
+	next(main-res-glocal_11) := !next(main-usr-ccont);
+	next(main-res-gklocal_14) := main-usr-cca;
+	next(main-impl-usr-ccall) := next(main-res-call_12.cc_allowed-usr-ccall);
+	next(main-usr-cca) := ((next(main-res-call_15.one_button_accept-usr-oba) & next(main-impl-usr-ccall)) ? TRUE : (!next(main-impl-usr-ccall) ? FALSE : main-usr-cca));
+
+
+
+MODULE main () 
+VAR
+	top-usr-igsw : boolean;
+	top-usr-ccd : boolean;
+	top-usr-cconoff : boolean;
+	top-usr-bpa : boolean;
+	top-usr-cccanc : boolean;
+	top-usr-battok : boolean;
+	top-usr-gearok : boolean;
+	top-usr-qfok : boolean;
+	top-usr-sdok : boolean;
+	top-usr-accok : boolean;
+	top-usr-ccseti : boolean;
+	top-usr-ccsetd : boolean;
+	top-usr-ccr : boolean;
+	top-usr-vs : signed word[32];
+	top-usr-OK : boolean;
+	top-impl-usr-cca : boolean;
+	top-res-call_17 : PosEdge(top-impl-usr-cca);
+	top-res-call_18 : PosEdge(top-usr-ccseti);
+	top-res-call_19 : PosEdge(top-usr-ccsetd);
+	top-res-call_20 : PosEdge(top-usr-ccr);
+	top-res-2-call_16 : main(top-usr-igsw, top-usr-ccd, top-usr-cconoff, top-usr-bpa, top-usr-cccanc, top-usr-battok, top-usr-gearok, top-usr-qfok, top-usr-sdok, top-usr-accok, top-usr-ccseti, top-usr-ccsetd, top-usr-ccr, top-usr-vs);
+	top-res-poracle_1 : boolean;
+
+ASSIGN
+	init(top-usr-OK) := (top-res-call_17.PosEdge-usr-Y ? (top-res-call_20.PosEdge-usr-Y | (top-res-call_19.PosEdge-usr-Y | top-res-call_18.PosEdge-usr-Y)) : TRUE);
+	init(top-impl-usr-cca) := top-res-2-call_16.main-usr-cca;
+
+	next(top-impl-usr-cca) := next(top-res-2-call_16.main-usr-cca);
+	next(top-usr-OK) := (next(top-res-call_17.PosEdge-usr-Y) ? (next(top-res-call_20.PosEdge-usr-Y) | (next(top-res-call_19.PosEdge-usr-Y) | next(top-res-call_18.PosEdge-usr-Y))) : TRUE);
+
+
+INVARSPEC 
+((top-usr-OK));
+

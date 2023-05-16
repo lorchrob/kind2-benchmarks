@@ -2,6 +2,7 @@
 MODULE transmission_failure (transmission_failure-usr-pump_state_0, transmission_failure-usr-pump_state_1, transmission_failure-usr-pump_state_2, transmission_failure-usr-pump_state_3)
 VAR
 	transmission_failure-usr-transmission_failure : boolean;
+
 ASSIGN
 	init(transmission_failure-usr-transmission_failure) := ((transmission_failure-usr-pump_state_3 = 3) | ((transmission_failure-usr-pump_state_2 = 3) | ((transmission_failure-usr-pump_state_1 = 3) | (transmission_failure-usr-pump_state_0 = 3))));
 
@@ -12,6 +13,7 @@ ASSIGN
 MODULE level_failure (level_failure-usr-level_defect)
 VAR
 	level_failure-usr-level_failure : boolean;
+
 ASSIGN
 	init(level_failure-usr-level_failure) := !(level_failure-usr-level_defect = 0);
 
@@ -22,6 +24,7 @@ ASSIGN
 MODULE dangerous_level (dangerous_level-usr-q)
 VAR
 	dangerous_level-usr-dangerous_level : boolean;
+
 ASSIGN
 	init(dangerous_level-usr-dangerous_level) := (dangerous_level-usr-q >= 850 | dangerous_level-usr-q <= 150);
 
@@ -32,6 +35,7 @@ ASSIGN
 MODULE pump_failure (pump_failure-usr-pump_defect)
 VAR
 	pump_failure-usr-pump_failure : boolean;
+
 ASSIGN
 	init(pump_failure-usr-pump_failure) := !(pump_failure-usr-pump_defect = 0);
 
@@ -42,6 +46,7 @@ ASSIGN
 MODULE AND (AND-usr-a_0, AND-usr-a_1, AND-usr-a_2, AND-usr-a_3)
 VAR
 	AND-usr-AND : boolean;
+
 ASSIGN
 	init(AND-usr-AND) := (((AND-usr-a_0 & AND-usr-a_1) & AND-usr-a_2) & AND-usr-a_3);
 
@@ -52,6 +57,7 @@ ASSIGN
 MODULE steam_failure (steam_failure-usr-steam_defect)
 VAR
 	steam_failure-usr-steam_failure : boolean;
+
 ASSIGN
 	init(steam_failure-usr-steam_failure) := !(steam_failure-usr-steam_defect = 0);
 
@@ -62,6 +68,7 @@ ASSIGN
 MODULE steam_failure_startup (steam_failure_startup-usr-steam)
 VAR
 	steam_failure_startup-usr-steam_failure_startup : boolean;
+
 ASSIGN
 	init(steam_failure_startup-usr-steam_failure_startup) := !(steam_failure_startup-usr-steam = 0);
 
@@ -71,7 +78,8 @@ ASSIGN
 
 MODULE critical_failure (critical_failure-usr-op_mode, critical_failure-usr-steam, critical_failure-usr-level_defect, critical_failure-usr-steam_defect, critical_failure-usr-pump_defect_0, critical_failure-usr-pump_defect_1, critical_failure-usr-pump_defect_2, critical_failure-usr-pump_defect_3, critical_failure-usr-q, critical_failure-usr-pump_state_0, critical_failure-usr-pump_state_1, critical_failure-usr-pump_state_2, critical_failure-usr-pump_state_3)
 VAR
-	critical_failure-usr-critical_failure : boolean;	critical_failure-res-call_43 : transmission_failure(critical_failure-usr-pump_state_0, critical_failure-usr-pump_state_1, critical_failure-usr-pump_state_2, critical_failure-usr-pump_state_3);
+	critical_failure-usr-critical_failure : boolean;
+	critical_failure-res-call_43 : transmission_failure(critical_failure-usr-pump_state_0, critical_failure-usr-pump_state_1, critical_failure-usr-pump_state_2, critical_failure-usr-pump_state_3);
 	critical_failure-res-call_44 : steam_failure_startup(critical_failure-usr-steam);
 	critical_failure-res-call_45 : level_failure(critical_failure-usr-level_defect);
 	critical_failure-res-call_46 : steam_failure(critical_failure-usr-steam_defect);
@@ -92,6 +100,7 @@ ASSIGN
 MODULE pump_control_failure (pump_control_failure-usr-pump_defect)
 VAR
 	pump_control_failure-usr-pump_failure : boolean;
+
 ASSIGN
 	init(pump_control_failure-usr-pump_failure) := !(pump_control_failure-usr-pump_defect = 0);
 
@@ -102,6 +111,7 @@ ASSIGN
 MODULE OR (OR-usr-a_0, OR-usr-a_1, OR-usr-a_2, OR-usr-a_3)
 VAR
 	OR-usr-OR : boolean;
+
 ASSIGN
 	init(OR-usr-OR) := (OR-usr-a_3 | (OR-usr-a_2 | (OR-usr-a_1 | OR-usr-a_0)));
 
@@ -111,7 +121,8 @@ ASSIGN
 
 MODULE failure (failure-usr-level_defect, failure-usr-steam_defect, failure-usr-pump_defect_0, failure-usr-pump_defect_1, failure-usr-pump_defect_2, failure-usr-pump_defect_3, failure-usr-pump_control_defect_0, failure-usr-pump_control_defect_1, failure-usr-pump_control_defect_2, failure-usr-pump_control_defect_3)
 VAR
-	failure-usr-failure : boolean;	failure-res-call_53 : level_failure(failure-usr-level_defect);
+	failure-usr-failure : boolean;
+	failure-res-call_53 : level_failure(failure-usr-level_defect);
 	failure-res-call_54 : steam_failure(failure-usr-steam_defect);
 	failure-res-call_58 : pump_failure(failure-usr-pump_defect_3);
 	failure-res-call_57 : pump_failure(failure-usr-pump_defect_2);
@@ -133,10 +144,14 @@ ASSIGN
 
 MODULE ControlMode (ControlMode-usr-steam_boiler_waiting, ControlMode-usr-physical_units_ready, ControlMode-usr-stop_request, ControlMode-usr-steam, ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-pump_control_defect_0, ControlMode-usr-pump_control_defect_1, ControlMode-usr-pump_control_defect_2, ControlMode-usr-pump_control_defect_3, ControlMode-usr-q, ControlMode-usr-pump_state_0, ControlMode-usr-pump_state_1, ControlMode-usr-pump_state_2, ControlMode-usr-pump_state_3)
 VAR
-	ControlMode-usr-op_mode : integer;	ControlMode-res-subrange_80 : boolean;	ControlMode-res-gklocal_82 : integer;	ControlMode-res-call_83 : critical_failure(ControlMode-res-gklocal_82, ControlMode-usr-steam, ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-q, ControlMode-usr-pump_state_0, ControlMode-usr-pump_state_1, ControlMode-usr-pump_state_2, ControlMode-usr-pump_state_3);
+	ControlMode-usr-op_mode : integer;
+	ControlMode-res-subrange_80 : boolean;
+	ControlMode-res-gklocal_82 : integer;
+	ControlMode-res-call_83 : critical_failure(ControlMode-res-gklocal_82, ControlMode-usr-steam, ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-q, ControlMode-usr-pump_state_0, ControlMode-usr-pump_state_1, ControlMode-usr-pump_state_2, ControlMode-usr-pump_state_3);
 	ControlMode-res-call_84 : level_failure(ControlMode-usr-level_defect);
 	ControlMode-res-call_85 : failure(ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-pump_control_defect_0, ControlMode-usr-pump_control_defect_1, ControlMode-usr-pump_control_defect_2, ControlMode-usr-pump_control_defect_3);
 	ControlMode-res-oracle_81 : integer;
+
 ASSIGN
 	init(ControlMode-usr-op_mode) := 1;
 	init(ControlMode-res-gklocal_82) := ControlMode-res-oracle_81;
@@ -150,15 +165,43 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-steam_boiler_waiting : boolean;	top-usr-physical_units_ready : boolean;	top-usr-stop_request : boolean;	top-usr-steam : integer;	top-usr-level_defect : integer;	top-usr-steam_defect : integer;	top-usr-pump_defect_0 : integer;	top-usr-pump_defect_1 : integer;	top-usr-pump_defect_2 : integer;	top-usr-pump_defect_3 : integer;	top-usr-pump_control_defect_0 : integer;	top-usr-pump_control_defect_1 : integer;	top-usr-pump_control_defect_2 : integer;	top-usr-pump_control_defect_3 : integer;	top-usr-q : integer;	top-usr-pump_state_0 : integer;	top-usr-pump_state_1 : integer;	top-usr-pump_state_2 : integer;	top-usr-pump_state_3 : integer;	top-usr-OK : boolean;	top-impl-usr-op_mode : integer;	top-res-call_113 : dangerous_level(top-usr-q);
+	top-usr-steam_boiler_waiting : boolean;
+	top-usr-physical_units_ready : boolean;
+	top-usr-stop_request : boolean;
+	top-usr-steam : integer;
+	top-usr-level_defect : integer;
+	top-usr-steam_defect : integer;
+	top-usr-pump_defect_0 : integer;
+	top-usr-pump_defect_1 : integer;
+	top-usr-pump_defect_2 : integer;
+	top-usr-pump_defect_3 : integer;
+	top-usr-pump_control_defect_0 : integer;
+	top-usr-pump_control_defect_1 : integer;
+	top-usr-pump_control_defect_2 : integer;
+	top-usr-pump_control_defect_3 : integer;
+	top-usr-q : integer;
+	top-usr-pump_state_0 : integer;
+	top-usr-pump_state_1 : integer;
+	top-usr-pump_state_2 : integer;
+	top-usr-pump_state_3 : integer;
+	top-usr-OK : boolean;
+	top-impl-usr-op_mode : integer;
+	top-impl-usr-mode_normal_then_water_level_ok : boolean;
+	top-impl-usr-mode_normal_then_no_stop_request : boolean;
+	top-res-call_113 : dangerous_level(top-usr-q);
 	top-res-call_112 : ControlMode(top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-stop_request, top-usr-steam, top-usr-level_defect, top-usr-steam_defect, top-usr-pump_defect_0, top-usr-pump_defect_1, top-usr-pump_defect_2, top-usr-pump_defect_3, top-usr-pump_control_defect_0, top-usr-pump_control_defect_1, top-usr-pump_control_defect_2, top-usr-pump_control_defect_3, top-usr-q, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3);
 	top-res-poracle_1 : integer;
+
 ASSIGN
 	init(top-impl-usr-op_mode) := top-res-call_112.ControlMode-usr-op_mode;
-	init(top-usr-OK) := (TRUE & ((top-impl-usr-op_mode = 3) -> !top-usr-stop_request));
+	init(top-impl-usr-mode_normal_then_no_stop_request) := ((top-impl-usr-op_mode = 3) -> !top-usr-stop_request);
+	init(top-impl-usr-mode_normal_then_water_level_ok) := TRUE;
+	init(top-usr-OK) := (top-impl-usr-mode_normal_then_water_level_ok & top-impl-usr-mode_normal_then_no_stop_request);
 
 	next(top-impl-usr-op_mode) := next(top-res-call_112.ControlMode-usr-op_mode);
-	next(top-usr-OK) := ((((next(top-impl-usr-op_mode) = 3) & (top-impl-usr-op_mode = 3)) -> !next(top-res-call_113.dangerous_level-usr-dangerous_level)) & ((next(top-impl-usr-op_mode) = 3) -> !next(top-usr-stop_request)));
+	next(top-impl-usr-mode_normal_then_no_stop_request) := ((next(top-impl-usr-op_mode) = 3) -> !next(top-usr-stop_request));
+	next(top-impl-usr-mode_normal_then_water_level_ok) := (((next(top-impl-usr-op_mode) = 3) & (top-impl-usr-op_mode = 3)) -> !next(top-res-call_113.dangerous_level-usr-dangerous_level));
+	next(top-usr-OK) := (next(top-impl-usr-mode_normal_then_water_level_ok) & next(top-impl-usr-mode_normal_then_no_stop_request));
 
 
 INVARSPEC 

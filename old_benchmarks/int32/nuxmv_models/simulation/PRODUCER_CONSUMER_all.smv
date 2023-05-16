@@ -1,0 +1,117 @@
+
+MODULE PRODUCER_CONSUMMER (PRODUCER_CONSUMMER-usr-etat1, PRODUCER_CONSUMMER-usr-etat2, PRODUCER_CONSUMMER-usr-etat3, PRODUCER_CONSUMMER-usr-a_init)
+VAR
+	PRODUCER_CONSUMMER-usr-i : signed word[32];
+	PRODUCER_CONSUMMER-usr-b : signed word[32];
+	PRODUCER_CONSUMMER-usr-a : signed word[32];
+	PRODUCER_CONSUMMER-usr-o1 : signed word[32];
+	PRODUCER_CONSUMMER-usr-o2 : signed word[32];
+	PRODUCER_CONSUMMER-impl-usr-garde1 : boolean;
+	PRODUCER_CONSUMMER-impl-usr-garde2 : boolean;
+	PRODUCER_CONSUMMER-impl-usr-garde3 : boolean;
+	PRODUCER_CONSUMMER-res-oracle_3 : signed word[32];
+	PRODUCER_CONSUMMER-res-oracle_2 : signed word[32];
+	PRODUCER_CONSUMMER-res-oracle_1 : signed word[32];
+
+ASSIGN
+	init(PRODUCER_CONSUMMER-usr-a) := PRODUCER_CONSUMMER-usr-a_init;
+	init(PRODUCER_CONSUMMER-usr-i) := PRODUCER_CONSUMMER-usr-a;
+	init(PRODUCER_CONSUMMER-impl-usr-garde1) := (PRODUCER_CONSUMMER-res-oracle_1 >= 0sh32_00000001);
+	init(PRODUCER_CONSUMMER-usr-b) := 0sh32_00000000;
+	init(PRODUCER_CONSUMMER-impl-usr-garde2) := (PRODUCER_CONSUMMER-res-oracle_2 >= 0sh32_00000001);
+	init(PRODUCER_CONSUMMER-impl-usr-garde3) := (PRODUCER_CONSUMMER-res-oracle_3 >= 0sh32_00000001);
+	init(PRODUCER_CONSUMMER-usr-o1) := 0sh32_00000000;
+	init(PRODUCER_CONSUMMER-usr-o2) := 0sh32_00000000;
+
+	next(PRODUCER_CONSUMMER-impl-usr-garde1) := (PRODUCER_CONSUMMER-usr-i >= 0sh32_00000001);
+	next(PRODUCER_CONSUMMER-usr-i) := (next(PRODUCER_CONSUMMER-usr-etat1) ? (next(PRODUCER_CONSUMMER-impl-usr-garde1) ? (PRODUCER_CONSUMMER-usr-i - 0sh32_00000001) : PRODUCER_CONSUMMER-usr-i) : PRODUCER_CONSUMMER-usr-i);
+	next(PRODUCER_CONSUMMER-usr-a) := PRODUCER_CONSUMMER-usr-a;
+	next(PRODUCER_CONSUMMER-impl-usr-garde3) := (PRODUCER_CONSUMMER-usr-b >= 0sh32_00000001);
+	next(PRODUCER_CONSUMMER-impl-usr-garde2) := (PRODUCER_CONSUMMER-usr-b >= 0sh32_00000001);
+	next(PRODUCER_CONSUMMER-usr-b) := (next(PRODUCER_CONSUMMER-usr-etat1) ? (next(PRODUCER_CONSUMMER-impl-usr-garde1) ? (PRODUCER_CONSUMMER-usr-b + 0sh32_00000001) : PRODUCER_CONSUMMER-usr-b) : (next(PRODUCER_CONSUMMER-usr-etat2) ? (next(PRODUCER_CONSUMMER-impl-usr-garde2) ? (PRODUCER_CONSUMMER-usr-b - 0sh32_00000001) : PRODUCER_CONSUMMER-usr-b) : (next(PRODUCER_CONSUMMER-impl-usr-garde3) ? (PRODUCER_CONSUMMER-usr-b - 0sh32_00000001) : PRODUCER_CONSUMMER-usr-b)));
+	next(PRODUCER_CONSUMMER-usr-o1) := (next(PRODUCER_CONSUMMER-usr-etat2) ? (next(PRODUCER_CONSUMMER-impl-usr-garde2) ? (PRODUCER_CONSUMMER-usr-o1 + 0sh32_00000001) : PRODUCER_CONSUMMER-usr-o1) : PRODUCER_CONSUMMER-usr-o1);
+	next(PRODUCER_CONSUMMER-usr-o2) := (next(PRODUCER_CONSUMMER-usr-etat3) ? (next(PRODUCER_CONSUMMER-impl-usr-garde3) ? (PRODUCER_CONSUMMER-usr-o2 + 0sh32_00000001) : PRODUCER_CONSUMMER-usr-o2) : PRODUCER_CONSUMMER-usr-o2);
+
+
+
+MODULE excludes3 (excludes3-usr-X1, excludes3-usr-X2, excludes3-usr-X3)
+VAR
+	excludes3-usr-excludes : boolean;
+
+ASSIGN
+	init(excludes3-usr-excludes) := !((excludes3-usr-X2 & excludes3-usr-X3) | ((excludes3-usr-X1 & excludes3-usr-X3) | (excludes3-usr-X1 & excludes3-usr-X2)));
+
+	next(excludes3-usr-excludes) := !((next(excludes3-usr-X2) & next(excludes3-usr-X3)) | ((next(excludes3-usr-X1) & next(excludes3-usr-X3)) | (next(excludes3-usr-X1) & next(excludes3-usr-X2))));
+
+
+
+MODULE First (First-usr-X)
+VAR
+	First-usr-First : signed word[32];
+
+ASSIGN
+	init(First-usr-First) := First-usr-X;
+	next(First-usr-First) := First-usr-First;
+
+
+
+MODULE FirstB (FirstB-usr-X)
+VAR
+	FirstB-usr-First : boolean;
+
+ASSIGN
+	init(FirstB-usr-First) := FirstB-usr-X;
+	next(FirstB-usr-First) := FirstB-usr-First;
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+
+
+
+MODULE main () 
+VAR
+	top-usr-etat1 : boolean;
+	top-usr-etat2 : boolean;
+	top-usr-etat3 : boolean;
+	top-usr-a_init : signed word[32];
+	top-usr-OK : boolean;
+	top-impl-usr-i : signed word[32];
+	top-impl-usr-o1 : signed word[32];
+	top-impl-usr-env : boolean;
+	top-res-gklocal_6 : boolean;
+	top-res-gklocal_8 : boolean;
+	top-res-call_5 : excludes3(top-usr-etat1, top-usr-etat2, top-usr-etat3);
+	top-res-call_7 : Sofar(top-res-gklocal_6);
+	top-res-call_9 : FirstB(top-res-gklocal_8);
+	top-res-call_10 : First(top-usr-a_init);
+	top-res-2-call_4 : PRODUCER_CONSUMMER(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-a_init);
+	top-res-poracle_1 : signed word[32];
+	top-res-poracle_2 : signed word[32];
+	top-res-poracle_3 : signed word[32];
+
+ASSIGN
+	init(top-res-gklocal_8) := !(top-usr-etat3 | (top-usr-etat2 | top-usr-etat1));
+	init(top-res-gklocal_6) := (!(top-usr-etat3 | (top-usr-etat2 | top-usr-etat1)) | top-res-call_5.excludes3-usr-excludes);
+	init(top-impl-usr-env) := ((top-res-call_7.Sofar-usr-Sofar & top-res-call_9.FirstB-usr-First) & (top-res-call_10.First-usr-First > 0sh32_00000000));
+	init(top-impl-usr-i) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-i;
+	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-i >= 0sh32_00000000));
+	init(top-impl-usr-o1) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1;
+
+	next(top-res-gklocal_6) := (!(next(top-usr-etat3) | (next(top-usr-etat2) | next(top-usr-etat1))) | next(top-res-call_5.excludes3-usr-excludes));
+	next(top-impl-usr-env) := ((next(top-res-call_7.Sofar-usr-Sofar) & next(top-res-call_9.FirstB-usr-First)) & (next(top-res-call_10.First-usr-First) > 0sh32_00000000));
+	next(top-impl-usr-o1) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1);
+	next(top-impl-usr-i) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-i);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> ((next(top-impl-usr-i) >= 0sh32_00000000) & ((top-usr-etat1 & next(top-usr-etat2)) -> ((next(top-impl-usr-o1) = top-impl-usr-o1) | (next(top-impl-usr-o1) = (top-impl-usr-o1 + 0sh32_00000001))))));
+	next(top-res-gklocal_8) := !(next(top-usr-etat3) | (next(top-usr-etat2) | next(top-usr-etat1)));
+
+
+INVARSPEC 
+((top-usr-OK));
+

@@ -1,0 +1,90 @@
+
+MODULE voiture (voiture-usr-m, voiture-usr-s)
+VAR
+	voiture-usr-toofast : boolean;
+	voiture-usr-stop : boolean;
+	voiture-usr-bump : boolean;
+	voiture-usr-dist : signed word[32];
+	voiture-usr-speed : signed word[32];
+	voiture-usr-time : signed word[32];
+	voiture-usr-move : boolean;
+	voiture-usr-second : boolean;
+	voiture-usr-meter : boolean;
+	voiture-res-glocal_1 : boolean;
+
+ASSIGN
+	init(voiture-usr-speed) := 0sh32_00000000;
+	init(voiture-usr-toofast) := (voiture-usr-speed >= 0sh32_00000003);
+	init(voiture-usr-move) := TRUE;
+	init(voiture-usr-time) := 0sh32_00000000;
+	init(voiture-usr-dist) := 0sh32_00000000;
+	init(voiture-usr-bump) := (voiture-usr-dist = 0sh32_0000000A);
+	init(voiture-usr-stop) := (voiture-usr-time >= 0sh32_00000004);
+	init(voiture-res-glocal_1) := (((voiture-usr-move & !voiture-usr-stop) & !voiture-usr-toofast) & !voiture-usr-bump);
+	init(voiture-usr-second) := FALSE;
+	init(voiture-usr-meter) := FALSE;
+
+	next(voiture-usr-meter) := (next(voiture-usr-m) & !next(voiture-usr-s));
+	next(voiture-usr-second) := next(voiture-usr-s);
+	next(voiture-usr-move) := voiture-res-glocal_1;
+	next(voiture-usr-speed) := ((!next(voiture-usr-move) & next(voiture-usr-second)) ? 0sh32_00000000 : ((next(voiture-usr-move) & next(voiture-usr-meter)) ? ((voiture-usr-speed - 0sh32_00000001) + 0sh32_00000001) : voiture-usr-speed));
+	next(voiture-usr-toofast) := (next(voiture-usr-speed) >= 0sh32_00000003);
+	next(voiture-usr-time) := (next(voiture-usr-second) ? (voiture-usr-time + 0sh32_00000001) : voiture-usr-time);
+	next(voiture-usr-dist) := ((next(voiture-usr-move) & next(voiture-usr-meter)) ? (voiture-usr-dist + 0sh32_00000001) : voiture-usr-dist);
+	next(voiture-usr-bump) := (next(voiture-usr-dist) = 0sh32_0000000A);
+	next(voiture-usr-stop) := (next(voiture-usr-time) >= 0sh32_00000004);
+	next(voiture-res-glocal_1) := (((next(voiture-usr-move) & !next(voiture-usr-stop)) & !next(voiture-usr-toofast)) & !next(voiture-usr-bump));
+
+
+
+MODULE excludes2 (excludes2-usr-X1, excludes2-usr-X2)
+VAR
+	excludes2-usr-excludes : boolean;
+
+ASSIGN
+	init(excludes2-usr-excludes) := !(excludes2-usr-X1 & excludes2-usr-X2);
+
+	next(excludes2-usr-excludes) := !(next(excludes2-usr-X1) & next(excludes2-usr-X2));
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+
+
+
+MODULE main () 
+VAR
+	top-usr-m : boolean;
+	top-usr-s : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-dist : signed word[32];
+	top-impl-usr-speed : signed word[32];
+	top-impl-usr-env : boolean;
+	top-res-gklocal_4 : boolean;
+	top-res-call_3 : excludes2(top-usr-m, top-usr-s);
+	top-res-call_5 : Sofar(top-res-gklocal_4);
+	top-res-2-call_2 : voiture(top-usr-m, top-usr-s);
+
+ASSIGN
+	init(top-impl-usr-dist) := top-res-2-call_2.voiture-usr-dist;
+	init(top-res-gklocal_4) := (top-res-call_3.excludes2-usr-excludes & (top-impl-usr-dist < 0sh32_00007FFF));
+	init(top-impl-usr-env) := top-res-call_5.Sofar-usr-Sofar;
+	init(top-impl-usr-speed) := top-res-2-call_2.voiture-usr-speed;
+	init(top-usr-OK) := (top-impl-usr-env -> ((((top-impl-usr-dist >= 0sh32_00000000) & (top-impl-usr-dist < 0sh32_0000000B)) & (top-impl-usr-speed < 0sh32_00000004)) & (top-impl-usr-speed >= 0sh32_00000000)));
+
+	next(top-impl-usr-dist) := next(top-res-2-call_2.voiture-usr-dist);
+	next(top-res-gklocal_4) := (next(top-res-call_3.excludes2-usr-excludes) & (next(top-impl-usr-dist) < 0sh32_00007FFF));
+	next(top-impl-usr-env) := next(top-res-call_5.Sofar-usr-Sofar);
+	next(top-impl-usr-speed) := next(top-res-2-call_2.voiture-usr-speed);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> ((((next(top-impl-usr-dist) >= 0sh32_00000000) & (next(top-impl-usr-dist) < 0sh32_0000000B)) & (next(top-impl-usr-speed) < 0sh32_00000004)) & (next(top-impl-usr-speed) >= 0sh32_00000000)));
+
+
+INVARSPEC 
+((top-usr-OK));
+

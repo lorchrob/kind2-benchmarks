@@ -1,0 +1,1132 @@
+
+MODULE initialization_complete (initialization_complete-usr-op_mode, initialization_complete-usr-level, initialization_complete-usr-valve)
+VAR
+	initialization_complete-usr-initialization_complete : boolean;
+
+ASSIGN
+	init(initialization_complete-usr-initialization_complete) := (((initialization_complete-usr-op_mode = 0sh32_00000002) & ((0sh32_00000190 <= initialization_complete-usr-level) & (initialization_complete-usr-level <= 0sh32_00000258))) & !initialization_complete-usr-valve);
+
+	next(initialization_complete-usr-initialization_complete) := (((next(initialization_complete-usr-op_mode) = 0sh32_00000002) & ((0sh32_00000190 <= next(initialization_complete-usr-level)) & (next(initialization_complete-usr-level) <= 0sh32_00000258))) & !next(initialization_complete-usr-valve));
+
+
+
+MODULE ControlOutput (ControlOutput-usr-op_mode, ControlOutput-usr-level, ControlOutput-usr-valve)
+VAR
+	ControlOutput-usr-program_ready : boolean;
+	ControlOutput-usr-mode : signed word[32];
+	ControlOutput-res-call_60 : initialization_complete(ControlOutput-usr-op_mode, ControlOutput-usr-level, ControlOutput-usr-valve);
+
+ASSIGN
+	init(ControlOutput-usr-program_ready) := ControlOutput-res-call_60.initialization_complete-usr-initialization_complete;
+	init(ControlOutput-usr-mode) := ControlOutput-usr-op_mode;
+
+	next(ControlOutput-usr-program_ready) := next(ControlOutput-res-call_60.initialization_complete-usr-initialization_complete);
+	next(ControlOutput-usr-mode) := next(ControlOutput-usr-op_mode);
+
+
+
+MODULE Operator (Operator-usr-stop)
+VAR
+	Operator-usr-stop_request : boolean;
+	Operator-impl-usr-nb_stops : signed word[32];
+
+ASSIGN
+	init(Operator-impl-usr-nb_stops) := (Operator-usr-stop ? 0sh32_00000001 : 0sh32_00000000);
+	init(Operator-usr-stop_request) := (Operator-impl-usr-nb_stops >= 0sh32_00000003);
+
+	next(Operator-impl-usr-nb_stops) := (next(Operator-usr-stop) ? (Operator-impl-usr-nb_stops + 0sh32_00000001) : 0sh32_00000000);
+	next(Operator-usr-stop_request) := (next(Operator-impl-usr-nb_stops) >= 0sh32_00000003);
+
+
+
+MODULE Defect (Defect-usr-statein, Defect-usr-fail_cond, Defect-usr-ack_chan, Defect-usr-repair_chan)
+VAR
+	Defect-usr-stateout : signed word[32];
+
+ASSIGN
+	init(Defect-usr-stateout) := ((Defect-usr-statein = 0sh32_00000000) ? (Defect-usr-fail_cond ? 0sh32_00000001 : 0sh32_00000000) : ((Defect-usr-statein = 0sh32_00000001) ? (Defect-usr-ack_chan ? 0sh32_00000002 : 0sh32_00000001) : (Defect-usr-repair_chan ? 0sh32_00000000 : 0sh32_00000002)));
+
+	next(Defect-usr-stateout) := ((next(Defect-usr-statein) = 0sh32_00000000) ? (next(Defect-usr-fail_cond) ? 0sh32_00000001 : 0sh32_00000000) : ((next(Defect-usr-statein) = 0sh32_00000001) ? (next(Defect-usr-ack_chan) ? 0sh32_00000002 : 0sh32_00000001) : (next(Defect-usr-repair_chan) ? 0sh32_00000000 : 0sh32_00000002)));
+
+
+
+MODULE steam_failure_detect (steam_failure_detect-usr-steam)
+VAR
+	steam_failure_detect-usr-steam_failure_detect : boolean;
+
+ASSIGN
+	init(steam_failure_detect-usr-steam_failure_detect) := ((steam_failure_detect-usr-steam > 0sh32_00000019) | (steam_failure_detect-usr-steam < 0sh32_00000000));
+
+	next(steam_failure_detect-usr-steam_failure_detect) := ((next(steam_failure_detect-usr-steam) > 0sh32_00000019) | (next(steam_failure_detect-usr-steam) < 0sh32_00000000));
+
+
+
+MODULE SteamDefect (SteamDefect-usr-steam_failure_acknowledgement, SteamDefect-usr-steam_repaired, SteamDefect-usr-steam)
+VAR
+	SteamDefect-usr-SteamDefect : signed word[32];
+	SteamDefect-res-gklocal_17 : signed word[32];
+	SteamDefect-res-call_18 : steam_failure_detect(SteamDefect-usr-steam);
+	SteamDefect-res-call_19 : Defect(SteamDefect-res-gklocal_17, SteamDefect-res-call_18.steam_failure_detect-usr-steam_failure_detect, SteamDefect-usr-steam_failure_acknowledgement, SteamDefect-usr-steam_repaired);
+	SteamDefect-res-oracle_16 : signed word[32];
+
+ASSIGN
+	init(SteamDefect-usr-SteamDefect) := 0sh32_00000000;
+	init(SteamDefect-res-gklocal_17) := SteamDefect-res-oracle_16;
+
+	next(SteamDefect-res-gklocal_17) := SteamDefect-usr-SteamDefect;
+	next(SteamDefect-usr-SteamDefect) := next(SteamDefect-res-call_19.Defect-usr-stateout);
+
+
+
+MODULE PumpsDecision (PumpsDecision-usr-q, PumpsDecision-usr-v)
+VAR
+	PumpsDecision-usr-n_pumps : signed word[32];
+	PumpsDecision-res-oracle_1 : signed word[32];
+
+ASSIGN
+	init(PumpsDecision-usr-n_pumps) := ((PumpsDecision-usr-q > 0sh32_00000258) ? (PumpsDecision-usr-v / 0sh32_0000000F) : ((PumpsDecision-usr-q < 0sh32_00000190) ? ((PumpsDecision-usr-v / 0sh32_0000000F) + 0sh32_00000001) : PumpsDecision-res-oracle_1));
+
+	next(PumpsDecision-usr-n_pumps) := ((next(PumpsDecision-usr-q) > 0sh32_00000258) ? (next(PumpsDecision-usr-v) / 0sh32_0000000F) : ((next(PumpsDecision-usr-q) < 0sh32_00000190) ? ((next(PumpsDecision-usr-v) / 0sh32_0000000F) + 0sh32_00000001) : PumpsDecision-usr-n_pumps));
+
+
+
+MODULE Valve (Valve-usr-op_mode, Valve-usr-q)
+VAR
+	Valve-usr-valve : boolean;
+	Valve-usr-valve_state : signed word[32];
+
+ASSIGN
+	init(Valve-usr-valve) := FALSE;
+	init(Valve-usr-valve_state) := 0sh32_00000000;
+
+	next(Valve-usr-valve_state) := ((next(Valve-usr-op_mode) = 0sh32_00000002) ? ((next(Valve-usr-q) > 0sh32_00000258) ? 0sh32_00000001 : ((next(Valve-usr-q) <= 0sh32_00000258) ? 0sh32_00000000 : Valve-usr-valve_state)) : Valve-usr-valve_state);
+	next(Valve-usr-valve) := !(next(Valve-usr-valve_state) = Valve-usr-valve_state);
+
+
+
+MODULE PumpsOutput (PumpsOutput-usr-op_mode, PumpsOutput-usr-pump_status_0, PumpsOutput-usr-pump_status_1, PumpsOutput-usr-pump_status_2, PumpsOutput-usr-pump_status_3, PumpsOutput-usr-pump_defect_0, PumpsOutput-usr-pump_defect_1, PumpsOutput-usr-pump_defect_2, PumpsOutput-usr-pump_defect_3, PumpsOutput-usr-pump_control_defect_0, PumpsOutput-usr-pump_control_defect_1, PumpsOutput-usr-pump_control_defect_2, PumpsOutput-usr-pump_control_defect_3, PumpsOutput-usr-pump_repaired_0, PumpsOutput-usr-pump_repaired_1, PumpsOutput-usr-pump_repaired_2, PumpsOutput-usr-pump_repaired_3, PumpsOutput-usr-pump_control_repaired_0, PumpsOutput-usr-pump_control_repaired_1, PumpsOutput-usr-pump_control_repaired_2, PumpsOutput-usr-pump_control_repaired_3)
+VAR
+	PumpsOutput-usr-open_pump_0 : boolean;
+	PumpsOutput-usr-open_pump_1 : boolean;
+	PumpsOutput-usr-open_pump_2 : boolean;
+	PumpsOutput-usr-open_pump_3 : boolean;
+	PumpsOutput-usr-close_pump_0 : boolean;
+	PumpsOutput-usr-close_pump_1 : boolean;
+	PumpsOutput-usr-close_pump_2 : boolean;
+	PumpsOutput-usr-close_pump_3 : boolean;
+	PumpsOutput-usr-pump_failure_detection_0 : boolean;
+	PumpsOutput-usr-pump_failure_detection_1 : boolean;
+	PumpsOutput-usr-pump_failure_detection_2 : boolean;
+	PumpsOutput-usr-pump_failure_detection_3 : boolean;
+	PumpsOutput-usr-pump_repaired_acknowledgement_0 : boolean;
+	PumpsOutput-usr-pump_repaired_acknowledgement_1 : boolean;
+	PumpsOutput-usr-pump_repaired_acknowledgement_2 : boolean;
+	PumpsOutput-usr-pump_repaired_acknowledgement_3 : boolean;
+	PumpsOutput-usr-pump_control_failure_detection_0 : boolean;
+	PumpsOutput-usr-pump_control_failure_detection_1 : boolean;
+	PumpsOutput-usr-pump_control_failure_detection_2 : boolean;
+	PumpsOutput-usr-pump_control_failure_detection_3 : boolean;
+	PumpsOutput-usr-pump_control_repaired_acknowledgement_0 : boolean;
+	PumpsOutput-usr-pump_control_repaired_acknowledgement_1 : boolean;
+	PumpsOutput-usr-pump_control_repaired_acknowledgement_2 : boolean;
+	PumpsOutput-usr-pump_control_repaired_acknowledgement_3 : boolean;
+	PumpsOutput-res-oracle_8 : signed word[32];
+	PumpsOutput-res-oracle_9 : signed word[32];
+	PumpsOutput-res-oracle_6 : signed word[32];
+	PumpsOutput-res-oracle_7 : signed word[32];
+	PumpsOutput-res-oracle_4 : signed word[32];
+	PumpsOutput-res-oracle_5 : signed word[32];
+	PumpsOutput-res-oracle_2 : signed word[32];
+	PumpsOutput-res-oracle_3 : signed word[32];
+
+ASSIGN
+	init(PumpsOutput-usr-open_pump_0) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_status_0 = 0sh32_00000002));
+	init(PumpsOutput-usr-open_pump_1) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_status_1 = 0sh32_00000002));
+	init(PumpsOutput-usr-open_pump_2) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_status_2 = 0sh32_00000002));
+	init(PumpsOutput-usr-open_pump_3) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_status_3 = 0sh32_00000002));
+	init(PumpsOutput-usr-close_pump_0) := (((((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_status_0 = 0sh32_00000000)) & !(PumpsOutput-res-oracle_2 = 0sh32_00000000)) & (PumpsOutput-usr-pump_defect_0 = 0sh32_00000000)) & (PumpsOutput-res-oracle_3 = 0sh32_00000000));
+	init(PumpsOutput-usr-close_pump_1) := (((((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_status_0 = 0sh32_00000000)) & !(PumpsOutput-res-oracle_4 = 0sh32_00000000)) & (PumpsOutput-usr-pump_defect_0 = 0sh32_00000000)) & (PumpsOutput-res-oracle_5 = 0sh32_00000000));
+	init(PumpsOutput-usr-close_pump_2) := (((((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_status_0 = 0sh32_00000000)) & !(PumpsOutput-res-oracle_6 = 0sh32_00000000)) & (PumpsOutput-usr-pump_defect_0 = 0sh32_00000000)) & (PumpsOutput-res-oracle_7 = 0sh32_00000000));
+	init(PumpsOutput-usr-close_pump_3) := (((((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_status_0 = 0sh32_00000000)) & !(PumpsOutput-res-oracle_8 = 0sh32_00000000)) & (PumpsOutput-usr-pump_defect_0 = 0sh32_00000000)) & (PumpsOutput-res-oracle_9 = 0sh32_00000000));
+	init(PumpsOutput-usr-pump_failure_detection_0) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_defect_0 = 0sh32_00000001));
+	init(PumpsOutput-usr-pump_failure_detection_1) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_defect_1 = 0sh32_00000001));
+	init(PumpsOutput-usr-pump_failure_detection_2) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_defect_2 = 0sh32_00000001));
+	init(PumpsOutput-usr-pump_failure_detection_3) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_defect_3 = 0sh32_00000001));
+	init(PumpsOutput-usr-pump_repaired_acknowledgement_0) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & PumpsOutput-usr-pump_repaired_0);
+	init(PumpsOutput-usr-pump_repaired_acknowledgement_1) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & PumpsOutput-usr-pump_repaired_1);
+	init(PumpsOutput-usr-pump_repaired_acknowledgement_2) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & PumpsOutput-usr-pump_repaired_2);
+	init(PumpsOutput-usr-pump_repaired_acknowledgement_3) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & PumpsOutput-usr-pump_repaired_3);
+	init(PumpsOutput-usr-pump_control_failure_detection_0) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_control_defect_0 = 0sh32_00000001));
+	init(PumpsOutput-usr-pump_control_failure_detection_1) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_control_defect_1 = 0sh32_00000001));
+	init(PumpsOutput-usr-pump_control_failure_detection_2) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_control_defect_2 = 0sh32_00000001));
+	init(PumpsOutput-usr-pump_control_failure_detection_3) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & (PumpsOutput-usr-pump_control_defect_3 = 0sh32_00000001));
+	init(PumpsOutput-usr-pump_control_repaired_acknowledgement_0) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & PumpsOutput-usr-pump_control_repaired_0);
+	init(PumpsOutput-usr-pump_control_repaired_acknowledgement_1) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & PumpsOutput-usr-pump_control_repaired_1);
+	init(PumpsOutput-usr-pump_control_repaired_acknowledgement_2) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & PumpsOutput-usr-pump_control_repaired_2);
+	init(PumpsOutput-usr-pump_control_repaired_acknowledgement_3) := ((!(PumpsOutput-usr-op_mode = 0sh32_00000006) & !(PumpsOutput-usr-op_mode = 0sh32_00000001)) & PumpsOutput-usr-pump_control_repaired_3);
+
+	next(PumpsOutput-usr-open_pump_0) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_status_0) = 0sh32_00000002));
+	next(PumpsOutput-usr-open_pump_1) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_status_1) = 0sh32_00000002));
+	next(PumpsOutput-usr-open_pump_2) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_status_2) = 0sh32_00000002));
+	next(PumpsOutput-usr-open_pump_3) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_status_3) = 0sh32_00000002));
+	next(PumpsOutput-usr-close_pump_0) := (((((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_status_0) = 0sh32_00000000)) & !(PumpsOutput-usr-pump_status_0 = 0sh32_00000000)) & (next(PumpsOutput-usr-pump_defect_0) = 0sh32_00000000)) & (PumpsOutput-usr-pump_defect_0 = 0sh32_00000000));
+	next(PumpsOutput-usr-close_pump_1) := (((((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_status_0) = 0sh32_00000000)) & !(PumpsOutput-usr-pump_status_1 = 0sh32_00000000)) & (next(PumpsOutput-usr-pump_defect_0) = 0sh32_00000000)) & (PumpsOutput-usr-pump_defect_1 = 0sh32_00000000));
+	next(PumpsOutput-usr-close_pump_2) := (((((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_status_0) = 0sh32_00000000)) & !(PumpsOutput-usr-pump_status_2 = 0sh32_00000000)) & (next(PumpsOutput-usr-pump_defect_0) = 0sh32_00000000)) & (PumpsOutput-usr-pump_defect_2 = 0sh32_00000000));
+	next(PumpsOutput-usr-close_pump_3) := (((((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_status_0) = 0sh32_00000000)) & !(PumpsOutput-usr-pump_status_3 = 0sh32_00000000)) & (next(PumpsOutput-usr-pump_defect_0) = 0sh32_00000000)) & (PumpsOutput-usr-pump_defect_3 = 0sh32_00000000));
+	next(PumpsOutput-usr-pump_failure_detection_0) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_defect_0) = 0sh32_00000001));
+	next(PumpsOutput-usr-pump_failure_detection_1) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_defect_1) = 0sh32_00000001));
+	next(PumpsOutput-usr-pump_failure_detection_2) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_defect_2) = 0sh32_00000001));
+	next(PumpsOutput-usr-pump_failure_detection_3) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_defect_3) = 0sh32_00000001));
+	next(PumpsOutput-usr-pump_repaired_acknowledgement_0) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & next(PumpsOutput-usr-pump_repaired_0));
+	next(PumpsOutput-usr-pump_repaired_acknowledgement_1) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & next(PumpsOutput-usr-pump_repaired_1));
+	next(PumpsOutput-usr-pump_repaired_acknowledgement_2) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & next(PumpsOutput-usr-pump_repaired_2));
+	next(PumpsOutput-usr-pump_repaired_acknowledgement_3) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & next(PumpsOutput-usr-pump_repaired_3));
+	next(PumpsOutput-usr-pump_control_failure_detection_0) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_control_defect_0) = 0sh32_00000001));
+	next(PumpsOutput-usr-pump_control_failure_detection_1) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_control_defect_1) = 0sh32_00000001));
+	next(PumpsOutput-usr-pump_control_failure_detection_2) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_control_defect_2) = 0sh32_00000001));
+	next(PumpsOutput-usr-pump_control_failure_detection_3) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & (next(PumpsOutput-usr-pump_control_defect_3) = 0sh32_00000001));
+	next(PumpsOutput-usr-pump_control_repaired_acknowledgement_0) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & next(PumpsOutput-usr-pump_control_repaired_0));
+	next(PumpsOutput-usr-pump_control_repaired_acknowledgement_1) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & next(PumpsOutput-usr-pump_control_repaired_1));
+	next(PumpsOutput-usr-pump_control_repaired_acknowledgement_2) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & next(PumpsOutput-usr-pump_control_repaired_2));
+	next(PumpsOutput-usr-pump_control_repaired_acknowledgement_3) := ((!(next(PumpsOutput-usr-op_mode) = 0sh32_00000006) & !(next(PumpsOutput-usr-op_mode) = 0sh32_00000001)) & next(PumpsOutput-usr-pump_control_repaired_3));
+
+
+
+MODULE SteamOutput (SteamOutput-usr-op_mode, SteamOutput-usr-steam_defect, SteamOutput-usr-steam_repaired)
+VAR
+	SteamOutput-usr-steam_outcome_failure_detection : boolean;
+	SteamOutput-usr-steam_outcome_repaired_acknowledgement : boolean;
+
+ASSIGN
+	init(SteamOutput-usr-steam_outcome_failure_detection) := (!((SteamOutput-usr-op_mode = 0sh32_00000001) | (SteamOutput-usr-op_mode = 0sh32_00000006)) & (SteamOutput-usr-steam_defect = 0sh32_00000001));
+	init(SteamOutput-usr-steam_outcome_repaired_acknowledgement) := (!((SteamOutput-usr-op_mode = 0sh32_00000001) | (SteamOutput-usr-op_mode = 0sh32_00000006)) & SteamOutput-usr-steam_repaired);
+
+	next(SteamOutput-usr-steam_outcome_failure_detection) := (!((next(SteamOutput-usr-op_mode) = 0sh32_00000001) | (next(SteamOutput-usr-op_mode) = 0sh32_00000006)) & (next(SteamOutput-usr-steam_defect) = 0sh32_00000001));
+	next(SteamOutput-usr-steam_outcome_repaired_acknowledgement) := (!((next(SteamOutput-usr-op_mode) = 0sh32_00000001) | (next(SteamOutput-usr-op_mode) = 0sh32_00000006)) & next(SteamOutput-usr-steam_repaired));
+
+
+
+MODULE LevelOutput (LevelOutput-usr-op_mode, LevelOutput-usr-level_defect, LevelOutput-usr-level_repaired)
+VAR
+	LevelOutput-usr-level_outcome_failure_detection : boolean;
+	LevelOutput-usr-level_outcome_repaired_acknowledgement : boolean;
+
+ASSIGN
+	init(LevelOutput-usr-level_outcome_failure_detection) := (!((LevelOutput-usr-op_mode = 0sh32_00000001) | (LevelOutput-usr-op_mode = 0sh32_00000006)) & (LevelOutput-usr-level_defect = 0sh32_00000001));
+	init(LevelOutput-usr-level_outcome_repaired_acknowledgement) := (!((LevelOutput-usr-op_mode = 0sh32_00000001) | (LevelOutput-usr-op_mode = 0sh32_00000006)) & LevelOutput-usr-level_repaired);
+
+	next(LevelOutput-usr-level_outcome_failure_detection) := (!((next(LevelOutput-usr-op_mode) = 0sh32_00000001) | (next(LevelOutput-usr-op_mode) = 0sh32_00000006)) & (next(LevelOutput-usr-level_defect) = 0sh32_00000001));
+	next(LevelOutput-usr-level_outcome_repaired_acknowledgement) := (!((next(LevelOutput-usr-op_mode) = 0sh32_00000001) | (next(LevelOutput-usr-op_mode) = 0sh32_00000006)) & next(LevelOutput-usr-level_repaired));
+
+
+
+MODULE pump_failure_detect (pump_failure_detect-usr-pump_status, pump_failure_detect-usr-pump_state, pump_failure_detect-usr-pump_control_state)
+VAR
+	pump_failure_detect-usr-pump_failure_detect : boolean;
+	pump_failure_detect-usr-pump_control_failure_detect : boolean;
+	pump_failure_detect-usr-flow : boolean;
+
+ASSIGN
+	init(pump_failure_detect-usr-pump_failure_detect) := ((((pump_failure_detect-usr-pump_status = 0sh32_00000002) | (pump_failure_detect-usr-pump_status = 0sh32_00000001)) & (pump_failure_detect-usr-pump_state = 0sh32_00000000)) | ((pump_failure_detect-usr-pump_status = 0sh32_00000000) & (pump_failure_detect-usr-pump_state = 0sh32_00000001)));
+	init(pump_failure_detect-usr-pump_control_failure_detect) := ((((pump_failure_detect-usr-pump_status = 0sh32_00000002) & (pump_failure_detect-usr-pump_state = 0sh32_00000001)) & pump_failure_detect-usr-pump_control_state) | ((((pump_failure_detect-usr-pump_status = 0sh32_00000001) & (pump_failure_detect-usr-pump_state = 0sh32_00000001)) & !pump_failure_detect-usr-pump_control_state) | ((((pump_failure_detect-usr-pump_status = 0sh32_00000002) | (pump_failure_detect-usr-pump_status = 0sh32_00000000)) & (pump_failure_detect-usr-pump_state = 0sh32_00000000)) & pump_failure_detect-usr-pump_control_state)));
+	init(pump_failure_detect-usr-flow) := (((pump_failure_detect-usr-pump_status = 0sh32_00000001) & (pump_failure_detect-usr-pump_state = 0sh32_00000001)) | ((((pump_failure_detect-usr-pump_status = 0sh32_00000001) & (pump_failure_detect-usr-pump_state = 0sh32_00000000)) & pump_failure_detect-usr-pump_control_state) | (((pump_failure_detect-usr-pump_status = 0sh32_00000000) & (pump_failure_detect-usr-pump_state = 0sh32_00000001)) & pump_failure_detect-usr-pump_control_state)));
+
+	next(pump_failure_detect-usr-pump_failure_detect) := ((((next(pump_failure_detect-usr-pump_status) = 0sh32_00000002) | (next(pump_failure_detect-usr-pump_status) = 0sh32_00000001)) & (next(pump_failure_detect-usr-pump_state) = 0sh32_00000000)) | ((next(pump_failure_detect-usr-pump_status) = 0sh32_00000000) & (next(pump_failure_detect-usr-pump_state) = 0sh32_00000001)));
+	next(pump_failure_detect-usr-pump_control_failure_detect) := ((((next(pump_failure_detect-usr-pump_status) = 0sh32_00000002) & (next(pump_failure_detect-usr-pump_state) = 0sh32_00000001)) & next(pump_failure_detect-usr-pump_control_state)) | ((((next(pump_failure_detect-usr-pump_status) = 0sh32_00000001) & (next(pump_failure_detect-usr-pump_state) = 0sh32_00000001)) & !next(pump_failure_detect-usr-pump_control_state)) | ((((next(pump_failure_detect-usr-pump_status) = 0sh32_00000002) | (next(pump_failure_detect-usr-pump_status) = 0sh32_00000000)) & (next(pump_failure_detect-usr-pump_state) = 0sh32_00000000)) & next(pump_failure_detect-usr-pump_control_state))));
+	next(pump_failure_detect-usr-flow) := (((next(pump_failure_detect-usr-pump_status) = 0sh32_00000001) & (next(pump_failure_detect-usr-pump_state) = 0sh32_00000001)) | ((((next(pump_failure_detect-usr-pump_status) = 0sh32_00000001) & (next(pump_failure_detect-usr-pump_state) = 0sh32_00000000)) & next(pump_failure_detect-usr-pump_control_state)) | (((next(pump_failure_detect-usr-pump_status) = 0sh32_00000000) & (next(pump_failure_detect-usr-pump_state) = 0sh32_00000001)) & next(pump_failure_detect-usr-pump_control_state))));
+
+
+
+MODULE PumpDefect (PumpDefect-usr-pump_failure_acknowledgement, PumpDefect-usr-pump_repaired, PumpDefect-usr-pump_control_failure_acknowledgement, PumpDefect-usr-pump_control_repaired, PumpDefect-usr-pump_status, PumpDefect-usr-pump_state, PumpDefect-usr-pump_control_state)
+VAR
+	PumpDefect-usr-PumpDefect : signed word[32];
+	PumpDefect-usr-PumpControlDefect : signed word[32];
+	PumpDefect-usr-Flow : boolean;
+	PumpDefect-impl-usr-pump_failure_d : boolean;
+	PumpDefect-impl-usr-pump_control_failure_d : boolean;
+	PumpDefect-res-gklocal_25 : signed word[32];
+	PumpDefect-res-gklocal_22 : signed word[32];
+	PumpDefect-res-call_26 : Defect(PumpDefect-res-gklocal_25, PumpDefect-impl-usr-pump_control_failure_d, PumpDefect-usr-pump_control_failure_acknowledgement, PumpDefect-usr-pump_control_repaired);
+	PumpDefect-res-call_23 : Defect(PumpDefect-res-gklocal_22, PumpDefect-impl-usr-pump_failure_d, PumpDefect-usr-pump_failure_acknowledgement, PumpDefect-usr-pump_repaired);
+	PumpDefect-res-2-call_20 : pump_failure_detect(PumpDefect-usr-pump_status, PumpDefect-usr-pump_state, PumpDefect-usr-pump_control_state);
+	PumpDefect-res-oracle_24 : signed word[32];
+	PumpDefect-res-oracle_21 : signed word[32];
+
+ASSIGN
+	init(PumpDefect-usr-PumpDefect) := 0sh32_00000000;
+	init(PumpDefect-res-gklocal_22) := PumpDefect-res-oracle_21;
+	init(PumpDefect-impl-usr-pump_failure_d) := PumpDefect-res-2-call_20.pump_failure_detect-usr-pump_failure_detect;
+	init(PumpDefect-usr-PumpControlDefect) := 0sh32_00000000;
+	init(PumpDefect-res-gklocal_25) := PumpDefect-res-oracle_24;
+	init(PumpDefect-impl-usr-pump_control_failure_d) := PumpDefect-res-2-call_20.pump_failure_detect-usr-pump_control_failure_detect;
+	init(PumpDefect-usr-Flow) := PumpDefect-res-2-call_20.pump_failure_detect-usr-flow;
+
+	next(PumpDefect-res-gklocal_22) := PumpDefect-usr-PumpDefect;
+	next(PumpDefect-impl-usr-pump_failure_d) := next(PumpDefect-res-2-call_20.pump_failure_detect-usr-pump_failure_detect);
+	next(PumpDefect-usr-PumpDefect) := next(PumpDefect-res-call_23.Defect-usr-stateout);
+	next(PumpDefect-res-gklocal_25) := PumpDefect-usr-PumpControlDefect;
+	next(PumpDefect-impl-usr-pump_control_failure_d) := next(PumpDefect-res-2-call_20.pump_failure_detect-usr-pump_control_failure_detect);
+	next(PumpDefect-usr-PumpControlDefect) := next(PumpDefect-res-call_26.Defect-usr-stateout);
+	next(PumpDefect-usr-Flow) := next(PumpDefect-res-2-call_20.pump_failure_detect-usr-flow);
+
+
+
+MODULE level_failure (level_failure-usr-level_defect)
+VAR
+	level_failure-usr-level_failure : boolean;
+
+ASSIGN
+	init(level_failure-usr-level_failure) := !(level_failure-usr-level_defect = 0sh32_00000000);
+
+	next(level_failure-usr-level_failure) := !(next(level_failure-usr-level_defect) = 0sh32_00000000);
+
+
+
+MODULE steam_failure (steam_failure-usr-steam_defect)
+VAR
+	steam_failure-usr-steam_failure : boolean;
+
+ASSIGN
+	init(steam_failure-usr-steam_failure) := !(steam_failure-usr-steam_defect = 0sh32_00000000);
+
+	next(steam_failure-usr-steam_failure) := !(next(steam_failure-usr-steam_defect) = 0sh32_00000000);
+
+
+
+MODULE sum (sum-usr-a_0, sum-usr-a_1, sum-usr-a_2, sum-usr-a_3)
+VAR
+	sum-usr-sum : signed word[32];
+
+ASSIGN
+	init(sum-usr-sum) := (((sum-usr-a_0 + sum-usr-a_1) + sum-usr-a_2) + sum-usr-a_3);
+
+	next(sum-usr-sum) := (((next(sum-usr-a_0) + next(sum-usr-a_1)) + next(sum-usr-a_2)) + next(sum-usr-a_3));
+
+
+
+MODULE Dynamics (Dynamics-usr-valve_state, Dynamics-usr-level, Dynamics-usr-steam, Dynamics-usr-level_defect, Dynamics-usr-steam_defect, Dynamics-usr-flow_0, Dynamics-usr-flow_1, Dynamics-usr-flow_2, Dynamics-usr-flow_3)
+VAR
+	Dynamics-usr-q : signed word[32];
+	Dynamics-usr-v : signed word[32];
+	Dynamics-usr-p_0 : signed word[32];
+	Dynamics-usr-p_1 : signed word[32];
+	Dynamics-usr-p_2 : signed word[32];
+	Dynamics-usr-p_3 : signed word[32];
+	Dynamics-res-call_29 : steam_failure(Dynamics-usr-steam_defect);
+	Dynamics-res-call_27 : level_failure(Dynamics-usr-level_defect);
+	Dynamics-res-call_28 : sum(Dynamics-usr-p_0, Dynamics-usr-p_1, Dynamics-usr-p_2, Dynamics-usr-p_3);
+
+ASSIGN
+	init(Dynamics-usr-q) := Dynamics-usr-level;
+	init(Dynamics-usr-p_0) := 0sh32_00000000;
+	init(Dynamics-usr-p_1) := 0sh32_00000000;
+	init(Dynamics-usr-p_2) := 0sh32_00000000;
+	init(Dynamics-usr-p_3) := 0sh32_00000000;
+	init(Dynamics-usr-v) := Dynamics-usr-steam;
+
+	next(Dynamics-usr-p_3) := (!next(Dynamics-usr-flow_3) ? 0sh32_00000000 : 0sh32_0000000F);
+	next(Dynamics-usr-p_2) := (!next(Dynamics-usr-flow_2) ? 0sh32_00000000 : 0sh32_0000000F);
+	next(Dynamics-usr-p_1) := (!next(Dynamics-usr-flow_1) ? 0sh32_00000000 : 0sh32_0000000F);
+	next(Dynamics-usr-p_0) := (!next(Dynamics-usr-flow_0) ? 0sh32_00000000 : 0sh32_0000000F);
+	next(Dynamics-usr-q) := (next(Dynamics-res-call_27.level_failure-usr-level_failure) ? (((((Dynamics-usr-q + 0sh32_00000001) - (next(Dynamics-usr-steam) * 0sh32_00000005)) + (next(Dynamics-res-call_28.sum-usr-sum) * 0sh32_00000005)) + 0sh32_00000001) - ((next(Dynamics-usr-valve_state) = 0sh32_00000001) ? (0sh32_0000000A * 0sh32_00000005) : 0sh32_00000000)) : next(Dynamics-usr-level));
+	next(Dynamics-usr-v) := (next(Dynamics-res-call_29.steam_failure-usr-steam_failure) ? (((Dynamics-usr-q - next(Dynamics-usr-q)) / 0sh32_00000005) + (next(Dynamics-res-call_28.sum-usr-sum) * 0sh32_00000005)) : next(Dynamics-usr-steam));
+
+
+
+MODULE pump_failure (pump_failure-usr-pump_defect)
+VAR
+	pump_failure-usr-pump_failure : boolean;
+
+ASSIGN
+	init(pump_failure-usr-pump_failure) := !(pump_failure-usr-pump_defect = 0sh32_00000000);
+
+	next(pump_failure-usr-pump_failure) := !(next(pump_failure-usr-pump_defect) = 0sh32_00000000);
+
+
+
+MODULE operate_pumps (operate_pumps-usr-n, operate_pumps-usr-n_pumps_to_open, operate_pumps-usr-pump_status_0, operate_pumps-usr-pump_status_1, operate_pumps-usr-pump_status_2, operate_pumps-usr-pump_status_3, operate_pumps-usr-pump_defect_0, operate_pumps-usr-pump_defect_1, operate_pumps-usr-pump_defect_2, operate_pumps-usr-pump_defect_3, operate_pumps-usr-flow_0, operate_pumps-usr-flow_1, operate_pumps-usr-flow_2, operate_pumps-usr-flow_3)
+VAR
+	operate_pumps-usr-operate_pumps_0 : signed word[32];
+	operate_pumps-usr-operate_pumps_1 : signed word[32];
+	operate_pumps-usr-operate_pumps_2 : signed word[32];
+	operate_pumps-usr-operate_pumps_3 : signed word[32];
+	operate_pumps-res-call_36 : pump_failure(operate_pumps-usr-pump_defect_3);
+	operate_pumps-res-call_34 : pump_failure(operate_pumps-usr-pump_defect_2);
+	operate_pumps-res-call_32 : pump_failure(operate_pumps-usr-pump_defect_1);
+	operate_pumps-res-call_30 : pump_failure(operate_pumps-usr-pump_defect_0);
+	operate_pumps-res-oracle_37 : signed word[32];
+	operate_pumps-res-oracle_35 : signed word[32];
+	operate_pumps-res-oracle_33 : signed word[32];
+	operate_pumps-res-oracle_31 : signed word[32];
+
+ASSIGN
+	init(operate_pumps-usr-operate_pumps_0) := (((((operate_pumps-usr-n_pumps_to_open > 0sh32_00000000) & !operate_pumps-usr-flow_0) & !operate_pumps-res-call_30.pump_failure-usr-pump_failure) & (operate_pumps-usr-pump_status_0 = 0sh32_00000000)) ? 0sh32_00000002 : (((((operate_pumps-usr-n_pumps_to_open < 0sh32_00000000) & operate_pumps-usr-flow_0) & !operate_pumps-res-call_30.pump_failure-usr-pump_failure) & (operate_pumps-usr-pump_status_0 = 0sh32_00000001)) ? 0sh32_00000000 : ((operate_pumps-usr-pump_status_0 = 0sh32_00000002) ? 0sh32_00000001 : (((operate_pumps-res-oracle_31 = 0sh32_00000002) & (operate_pumps-usr-pump_defect_0 = 0sh32_00000000)) ? ((operate_pumps-usr-pump_status_0 = 0sh32_00000001) ? 0sh32_00000000 : 0sh32_00000001) : operate_pumps-usr-pump_status_0))));
+	init(operate_pumps-usr-operate_pumps_1) := (((((operate_pumps-usr-n_pumps_to_open > 0sh32_00000000) & !operate_pumps-usr-flow_1) & !operate_pumps-res-call_32.pump_failure-usr-pump_failure) & (operate_pumps-usr-pump_status_1 = 0sh32_00000000)) ? 0sh32_00000002 : (((((operate_pumps-usr-n_pumps_to_open < 0sh32_00000000) & operate_pumps-usr-flow_1) & !operate_pumps-res-call_32.pump_failure-usr-pump_failure) & (operate_pumps-usr-pump_status_1 = 0sh32_00000001)) ? 0sh32_00000000 : ((operate_pumps-usr-pump_status_1 = 0sh32_00000002) ? 0sh32_00000001 : (((operate_pumps-res-oracle_33 = 0sh32_00000002) & (operate_pumps-usr-pump_defect_1 = 0sh32_00000000)) ? ((operate_pumps-usr-pump_status_1 = 0sh32_00000001) ? 0sh32_00000000 : 0sh32_00000001) : operate_pumps-usr-pump_status_1))));
+	init(operate_pumps-usr-operate_pumps_2) := (((((operate_pumps-usr-n_pumps_to_open > 0sh32_00000000) & !operate_pumps-usr-flow_2) & !operate_pumps-res-call_34.pump_failure-usr-pump_failure) & (operate_pumps-usr-pump_status_2 = 0sh32_00000000)) ? 0sh32_00000002 : (((((operate_pumps-usr-n_pumps_to_open < 0sh32_00000000) & operate_pumps-usr-flow_2) & !operate_pumps-res-call_34.pump_failure-usr-pump_failure) & (operate_pumps-usr-pump_status_2 = 0sh32_00000001)) ? 0sh32_00000000 : ((operate_pumps-usr-pump_status_2 = 0sh32_00000002) ? 0sh32_00000001 : (((operate_pumps-res-oracle_35 = 0sh32_00000002) & (operate_pumps-usr-pump_defect_2 = 0sh32_00000000)) ? ((operate_pumps-usr-pump_status_2 = 0sh32_00000001) ? 0sh32_00000000 : 0sh32_00000001) : operate_pumps-usr-pump_status_2))));
+	init(operate_pumps-usr-operate_pumps_3) := (((((operate_pumps-usr-n_pumps_to_open > 0sh32_00000000) & !operate_pumps-usr-flow_3) & !operate_pumps-res-call_36.pump_failure-usr-pump_failure) & (operate_pumps-usr-pump_status_3 = 0sh32_00000000)) ? 0sh32_00000002 : (((((operate_pumps-usr-n_pumps_to_open < 0sh32_00000000) & operate_pumps-usr-flow_3) & !operate_pumps-res-call_36.pump_failure-usr-pump_failure) & (operate_pumps-usr-pump_status_3 = 0sh32_00000001)) ? 0sh32_00000000 : ((operate_pumps-usr-pump_status_3 = 0sh32_00000002) ? 0sh32_00000001 : (((operate_pumps-res-oracle_37 = 0sh32_00000002) & (operate_pumps-usr-pump_defect_3 = 0sh32_00000000)) ? ((operate_pumps-usr-pump_status_3 = 0sh32_00000001) ? 0sh32_00000000 : 0sh32_00000001) : operate_pumps-usr-pump_status_3))));
+
+	next(operate_pumps-usr-operate_pumps_0) := (((((next(operate_pumps-usr-n_pumps_to_open) > 0sh32_00000000) & !next(operate_pumps-usr-flow_0)) & !next(operate_pumps-res-call_30.pump_failure-usr-pump_failure)) & (next(operate_pumps-usr-pump_status_0) = 0sh32_00000000)) ? 0sh32_00000002 : (((((next(operate_pumps-usr-n_pumps_to_open) < 0sh32_00000000) & next(operate_pumps-usr-flow_0)) & !next(operate_pumps-res-call_30.pump_failure-usr-pump_failure)) & (next(operate_pumps-usr-pump_status_0) = 0sh32_00000001)) ? 0sh32_00000000 : ((next(operate_pumps-usr-pump_status_0) = 0sh32_00000002) ? 0sh32_00000001 : (((operate_pumps-usr-pump_defect_0 = 0sh32_00000002) & (next(operate_pumps-usr-pump_defect_0) = 0sh32_00000000)) ? ((next(operate_pumps-usr-pump_status_0) = 0sh32_00000001) ? 0sh32_00000000 : 0sh32_00000001) : next(operate_pumps-usr-pump_status_0)))));
+	next(operate_pumps-usr-operate_pumps_1) := (((((next(operate_pumps-usr-n_pumps_to_open) > 0sh32_00000000) & !next(operate_pumps-usr-flow_1)) & !next(operate_pumps-res-call_32.pump_failure-usr-pump_failure)) & (next(operate_pumps-usr-pump_status_1) = 0sh32_00000000)) ? 0sh32_00000002 : (((((next(operate_pumps-usr-n_pumps_to_open) < 0sh32_00000000) & next(operate_pumps-usr-flow_1)) & !next(operate_pumps-res-call_32.pump_failure-usr-pump_failure)) & (next(operate_pumps-usr-pump_status_1) = 0sh32_00000001)) ? 0sh32_00000000 : ((next(operate_pumps-usr-pump_status_1) = 0sh32_00000002) ? 0sh32_00000001 : (((operate_pumps-usr-pump_defect_1 = 0sh32_00000002) & (next(operate_pumps-usr-pump_defect_1) = 0sh32_00000000)) ? ((next(operate_pumps-usr-pump_status_1) = 0sh32_00000001) ? 0sh32_00000000 : 0sh32_00000001) : next(operate_pumps-usr-pump_status_1)))));
+	next(operate_pumps-usr-operate_pumps_2) := (((((next(operate_pumps-usr-n_pumps_to_open) > 0sh32_00000000) & !next(operate_pumps-usr-flow_2)) & !next(operate_pumps-res-call_34.pump_failure-usr-pump_failure)) & (next(operate_pumps-usr-pump_status_2) = 0sh32_00000000)) ? 0sh32_00000002 : (((((next(operate_pumps-usr-n_pumps_to_open) < 0sh32_00000000) & next(operate_pumps-usr-flow_2)) & !next(operate_pumps-res-call_34.pump_failure-usr-pump_failure)) & (next(operate_pumps-usr-pump_status_2) = 0sh32_00000001)) ? 0sh32_00000000 : ((next(operate_pumps-usr-pump_status_2) = 0sh32_00000002) ? 0sh32_00000001 : (((operate_pumps-usr-pump_defect_2 = 0sh32_00000002) & (next(operate_pumps-usr-pump_defect_2) = 0sh32_00000000)) ? ((next(operate_pumps-usr-pump_status_2) = 0sh32_00000001) ? 0sh32_00000000 : 0sh32_00000001) : next(operate_pumps-usr-pump_status_2)))));
+	next(operate_pumps-usr-operate_pumps_3) := (((((next(operate_pumps-usr-n_pumps_to_open) > 0sh32_00000000) & !next(operate_pumps-usr-flow_3)) & !next(operate_pumps-res-call_36.pump_failure-usr-pump_failure)) & (next(operate_pumps-usr-pump_status_3) = 0sh32_00000000)) ? 0sh32_00000002 : (((((next(operate_pumps-usr-n_pumps_to_open) < 0sh32_00000000) & next(operate_pumps-usr-flow_3)) & !next(operate_pumps-res-call_36.pump_failure-usr-pump_failure)) & (next(operate_pumps-usr-pump_status_3) = 0sh32_00000001)) ? 0sh32_00000000 : ((next(operate_pumps-usr-pump_status_3) = 0sh32_00000002) ? 0sh32_00000001 : (((operate_pumps-usr-pump_defect_3 = 0sh32_00000002) & (next(operate_pumps-usr-pump_defect_3) = 0sh32_00000000)) ? ((next(operate_pumps-usr-pump_status_3) = 0sh32_00000001) ? 0sh32_00000000 : 0sh32_00000001) : next(operate_pumps-usr-pump_status_3)))));
+
+
+
+MODULE PumpsStatus (PumpsStatus-usr-n_pumps, PumpsStatus-usr-pump_defect_0, PumpsStatus-usr-pump_defect_1, PumpsStatus-usr-pump_defect_2, PumpsStatus-usr-pump_defect_3, PumpsStatus-usr-flow_0, PumpsStatus-usr-flow_1, PumpsStatus-usr-flow_2, PumpsStatus-usr-flow_3)
+VAR
+	PumpsStatus-usr-pump_status_0 : signed word[32];
+	PumpsStatus-usr-pump_status_1 : signed word[32];
+	PumpsStatus-usr-pump_status_2 : signed word[32];
+	PumpsStatus-usr-pump_status_3 : signed word[32];
+	PumpsStatus-impl-usr-n_pumps_flow : signed word[32];
+	PumpsStatus-impl-usr-n_pumps_to_open : signed word[32];
+	PumpsStatus-impl-usr-t0 : signed word[32];
+	PumpsStatus-impl-usr-t1 : signed word[32];
+	PumpsStatus-impl-usr-t2 : signed word[32];
+	PumpsStatus-impl-usr-t3 : signed word[32];
+	PumpsStatus-res-gklocal_72 : signed word[32];
+	PumpsStatus-res-gklocal_70 : signed word[32];
+	PumpsStatus-res-gklocal_68 : signed word[32];
+	PumpsStatus-res-gklocal_66 : signed word[32];
+	PumpsStatus-res-gklocal_64 : signed word[32];
+	PumpsStatus-res-2-call_73 : operate_pumps(PumpsStatus-res-gklocal_64, PumpsStatus-impl-usr-n_pumps_to_open, PumpsStatus-res-gklocal_66, PumpsStatus-res-gklocal_68, PumpsStatus-res-gklocal_70, PumpsStatus-res-gklocal_72, PumpsStatus-usr-pump_defect_0, PumpsStatus-usr-pump_defect_1, PumpsStatus-usr-pump_defect_2, PumpsStatus-usr-pump_defect_3, PumpsStatus-usr-flow_0, PumpsStatus-usr-flow_1, PumpsStatus-usr-flow_2, PumpsStatus-usr-flow_3);
+	PumpsStatus-res-oracle_71 : signed word[32];
+	PumpsStatus-res-oracle_69 : signed word[32];
+	PumpsStatus-res-oracle_67 : signed word[32];
+	PumpsStatus-res-oracle_65 : signed word[32];
+	PumpsStatus-res-poracle_1 : signed word[32];
+	PumpsStatus-res-poracle_2 : signed word[32];
+	PumpsStatus-res-poracle_3 : signed word[32];
+	PumpsStatus-res-poracle_4 : signed word[32];
+
+ASSIGN
+	init(PumpsStatus-usr-pump_status_0) := 0sh32_00000000;
+	init(PumpsStatus-res-gklocal_66) := PumpsStatus-res-oracle_65;
+	init(PumpsStatus-impl-usr-n_pumps_flow) := ((((PumpsStatus-usr-flow_0 ? 0sh32_00000001 : 0sh32_00000000) + (PumpsStatus-usr-flow_1 ? 0sh32_00000001 : 0sh32_00000000)) + (PumpsStatus-usr-flow_2 ? 0sh32_00000001 : 0sh32_00000000)) + (PumpsStatus-usr-flow_3 ? 0sh32_00000001 : 0sh32_00000000));
+	init(PumpsStatus-impl-usr-n_pumps_to_open) := (PumpsStatus-usr-n_pumps - PumpsStatus-impl-usr-n_pumps_flow);
+	init(PumpsStatus-impl-usr-t0) := PumpsStatus-res-2-call_73.operate_pumps-usr-operate_pumps_0;
+	init(PumpsStatus-res-gklocal_64) := 0sh32_00000004;
+	init(PumpsStatus-res-gklocal_68) := PumpsStatus-res-oracle_67;
+	init(PumpsStatus-usr-pump_status_1) := 0sh32_00000000;
+	init(PumpsStatus-impl-usr-t1) := PumpsStatus-res-2-call_73.operate_pumps-usr-operate_pumps_1;
+	init(PumpsStatus-res-gklocal_70) := PumpsStatus-res-oracle_69;
+	init(PumpsStatus-usr-pump_status_2) := 0sh32_00000000;
+	init(PumpsStatus-impl-usr-t2) := PumpsStatus-res-2-call_73.operate_pumps-usr-operate_pumps_2;
+	init(PumpsStatus-res-gklocal_72) := PumpsStatus-res-oracle_71;
+	init(PumpsStatus-usr-pump_status_3) := 0sh32_00000000;
+	init(PumpsStatus-impl-usr-t3) := PumpsStatus-res-2-call_73.operate_pumps-usr-operate_pumps_3;
+
+	next(PumpsStatus-res-gklocal_66) := PumpsStatus-usr-pump_status_0;
+	next(PumpsStatus-impl-usr-n_pumps_flow) := ((((next(PumpsStatus-usr-flow_0) ? 0sh32_00000001 : 0sh32_00000000) + (next(PumpsStatus-usr-flow_1) ? 0sh32_00000001 : 0sh32_00000000)) + (next(PumpsStatus-usr-flow_2) ? 0sh32_00000001 : 0sh32_00000000)) + (next(PumpsStatus-usr-flow_3) ? 0sh32_00000001 : 0sh32_00000000));
+	next(PumpsStatus-impl-usr-n_pumps_to_open) := (next(PumpsStatus-usr-n_pumps) - next(PumpsStatus-impl-usr-n_pumps_flow));
+	next(PumpsStatus-impl-usr-t0) := next(PumpsStatus-res-2-call_73.operate_pumps-usr-operate_pumps_0);
+	next(PumpsStatus-usr-pump_status_0) := next(PumpsStatus-impl-usr-t0);
+	next(PumpsStatus-res-gklocal_64) := 0sh32_00000004;
+	next(PumpsStatus-res-gklocal_68) := PumpsStatus-usr-pump_status_1;
+	next(PumpsStatus-impl-usr-t1) := next(PumpsStatus-res-2-call_73.operate_pumps-usr-operate_pumps_1);
+	next(PumpsStatus-usr-pump_status_1) := next(PumpsStatus-impl-usr-t1);
+	next(PumpsStatus-res-gklocal_70) := PumpsStatus-usr-pump_status_2;
+	next(PumpsStatus-impl-usr-t2) := next(PumpsStatus-res-2-call_73.operate_pumps-usr-operate_pumps_2);
+	next(PumpsStatus-usr-pump_status_2) := next(PumpsStatus-impl-usr-t2);
+	next(PumpsStatus-res-gklocal_72) := PumpsStatus-usr-pump_status_3;
+	next(PumpsStatus-impl-usr-t3) := next(PumpsStatus-res-2-call_73.operate_pumps-usr-operate_pumps_3);
+	next(PumpsStatus-usr-pump_status_3) := next(PumpsStatus-impl-usr-t3);
+
+
+
+MODULE level_failure_detect (level_failure_detect-usr-level)
+VAR
+	level_failure_detect-usr-level_failure_detect : boolean;
+
+ASSIGN
+	init(level_failure_detect-usr-level_failure_detect) := ((level_failure_detect-usr-level > 0sh32_000003E8) | (level_failure_detect-usr-level < 0sh32_00000000));
+
+	next(level_failure_detect-usr-level_failure_detect) := ((next(level_failure_detect-usr-level) > 0sh32_000003E8) | (next(level_failure_detect-usr-level) < 0sh32_00000000));
+
+
+
+MODULE LevelDefect (LevelDefect-usr-level_failure_acknowledgement, LevelDefect-usr-level_repaired, LevelDefect-usr-level)
+VAR
+	LevelDefect-usr-LevelDefect : signed word[32];
+	LevelDefect-res-gklocal_13 : signed word[32];
+	LevelDefect-res-call_14 : level_failure_detect(LevelDefect-usr-level);
+	LevelDefect-res-call_15 : Defect(LevelDefect-res-gklocal_13, LevelDefect-res-call_14.level_failure_detect-usr-level_failure_detect, LevelDefect-usr-level_failure_acknowledgement, LevelDefect-usr-level_repaired);
+	LevelDefect-res-oracle_12 : signed word[32];
+
+ASSIGN
+	init(LevelDefect-usr-LevelDefect) := 0sh32_00000000;
+	init(LevelDefect-res-gklocal_13) := LevelDefect-res-oracle_12;
+
+	next(LevelDefect-res-gklocal_13) := LevelDefect-usr-LevelDefect;
+	next(LevelDefect-usr-LevelDefect) := next(LevelDefect-res-call_15.Defect-usr-stateout);
+
+
+
+MODULE transmission_failure (transmission_failure-usr-pump_state_0, transmission_failure-usr-pump_state_1, transmission_failure-usr-pump_state_2, transmission_failure-usr-pump_state_3)
+VAR
+	transmission_failure-usr-transmission_failure : boolean;
+
+ASSIGN
+	init(transmission_failure-usr-transmission_failure) := ((transmission_failure-usr-pump_state_3 = 0sh32_00000003) | ((transmission_failure-usr-pump_state_2 = 0sh32_00000003) | ((transmission_failure-usr-pump_state_1 = 0sh32_00000003) | (transmission_failure-usr-pump_state_0 = 0sh32_00000003))));
+
+	next(transmission_failure-usr-transmission_failure) := ((next(transmission_failure-usr-pump_state_3) = 0sh32_00000003) | ((next(transmission_failure-usr-pump_state_2) = 0sh32_00000003) | ((next(transmission_failure-usr-pump_state_1) = 0sh32_00000003) | (next(transmission_failure-usr-pump_state_0) = 0sh32_00000003))));
+
+
+
+MODULE dangerous_level (dangerous_level-usr-q)
+VAR
+	dangerous_level-usr-dangerous_level : boolean;
+
+ASSIGN
+	init(dangerous_level-usr-dangerous_level) := ((dangerous_level-usr-q >= 0sh32_00000352) | (dangerous_level-usr-q <= 0sh32_00000096));
+
+	next(dangerous_level-usr-dangerous_level) := ((next(dangerous_level-usr-q) >= 0sh32_00000352) | (next(dangerous_level-usr-q) <= 0sh32_00000096));
+
+
+
+MODULE AND (AND-usr-a_0, AND-usr-a_1, AND-usr-a_2, AND-usr-a_3)
+VAR
+	AND-usr-AND : boolean;
+
+ASSIGN
+	init(AND-usr-AND) := (((AND-usr-a_0 & AND-usr-a_1) & AND-usr-a_2) & AND-usr-a_3);
+
+	next(AND-usr-AND) := (((next(AND-usr-a_0) & next(AND-usr-a_1)) & next(AND-usr-a_2)) & next(AND-usr-a_3));
+
+
+
+MODULE steam_failure_startup (steam_failure_startup-usr-steam)
+VAR
+	steam_failure_startup-usr-steam_failure_startup : boolean;
+
+ASSIGN
+	init(steam_failure_startup-usr-steam_failure_startup) := !(steam_failure_startup-usr-steam = 0sh32_00000000);
+
+	next(steam_failure_startup-usr-steam_failure_startup) := !(next(steam_failure_startup-usr-steam) = 0sh32_00000000);
+
+
+
+MODULE critical_failure (critical_failure-usr-op_mode, critical_failure-usr-steam, critical_failure-usr-level_defect, critical_failure-usr-steam_defect, critical_failure-usr-pump_defect_0, critical_failure-usr-pump_defect_1, critical_failure-usr-pump_defect_2, critical_failure-usr-pump_defect_3, critical_failure-usr-q, critical_failure-usr-pump_state_0, critical_failure-usr-pump_state_1, critical_failure-usr-pump_state_2, critical_failure-usr-pump_state_3)
+VAR
+	critical_failure-usr-critical_failure : boolean;
+	critical_failure-res-call_38 : transmission_failure(critical_failure-usr-pump_state_0, critical_failure-usr-pump_state_1, critical_failure-usr-pump_state_2, critical_failure-usr-pump_state_3);
+	critical_failure-res-call_39 : steam_failure_startup(critical_failure-usr-steam);
+	critical_failure-res-call_40 : level_failure(critical_failure-usr-level_defect);
+	critical_failure-res-call_41 : steam_failure(critical_failure-usr-steam_defect);
+	critical_failure-res-call_42 : dangerous_level(critical_failure-usr-q);
+	critical_failure-res-call_46 : pump_failure(critical_failure-usr-pump_defect_3);
+	critical_failure-res-call_45 : pump_failure(critical_failure-usr-pump_defect_2);
+	critical_failure-res-call_44 : pump_failure(critical_failure-usr-pump_defect_1);
+	critical_failure-res-call_43 : pump_failure(critical_failure-usr-pump_defect_0);
+	critical_failure-res-call_47 : AND(critical_failure-res-call_43.pump_failure-usr-pump_failure, critical_failure-res-call_44.pump_failure-usr-pump_failure, critical_failure-res-call_45.pump_failure-usr-pump_failure, critical_failure-res-call_46.pump_failure-usr-pump_failure);
+
+ASSIGN
+	init(critical_failure-usr-critical_failure) := (((critical_failure-usr-op_mode = 0sh32_00000005) & (critical_failure-res-call_47.AND-usr-AND | (critical_failure-res-call_41.steam_failure-usr-steam_failure | critical_failure-res-call_42.dangerous_level-usr-dangerous_level))) | (((critical_failure-usr-op_mode = 0sh32_00000004) & critical_failure-res-call_42.dangerous_level-usr-dangerous_level) | (((critical_failure-usr-op_mode = 0sh32_00000003) & critical_failure-res-call_42.dangerous_level-usr-dangerous_level) | (((critical_failure-usr-op_mode = 0sh32_00000002) & (critical_failure-res-call_41.steam_failure-usr-steam_failure | critical_failure-res-call_40.level_failure-usr-level_failure)) | (((critical_failure-usr-op_mode = 0sh32_00000001) & critical_failure-res-call_39.steam_failure_startup-usr-steam_failure_startup) | critical_failure-res-call_38.transmission_failure-usr-transmission_failure)))));
+
+	next(critical_failure-usr-critical_failure) := (((next(critical_failure-usr-op_mode) = 0sh32_00000005) & (next(critical_failure-res-call_47.AND-usr-AND) | (next(critical_failure-res-call_41.steam_failure-usr-steam_failure) | next(critical_failure-res-call_42.dangerous_level-usr-dangerous_level)))) | (((next(critical_failure-usr-op_mode) = 0sh32_00000004) & next(critical_failure-res-call_42.dangerous_level-usr-dangerous_level)) | (((next(critical_failure-usr-op_mode) = 0sh32_00000003) & next(critical_failure-res-call_42.dangerous_level-usr-dangerous_level)) | (((next(critical_failure-usr-op_mode) = 0sh32_00000002) & (next(critical_failure-res-call_41.steam_failure-usr-steam_failure) | next(critical_failure-res-call_40.level_failure-usr-level_failure))) | (((next(critical_failure-usr-op_mode) = 0sh32_00000001) & next(critical_failure-res-call_39.steam_failure_startup-usr-steam_failure_startup)) | next(critical_failure-res-call_38.transmission_failure-usr-transmission_failure))))));
+
+
+
+MODULE pump_control_failure (pump_control_failure-usr-pump_defect)
+VAR
+	pump_control_failure-usr-pump_failure : boolean;
+
+ASSIGN
+	init(pump_control_failure-usr-pump_failure) := !(pump_control_failure-usr-pump_defect = 0sh32_00000000);
+
+	next(pump_control_failure-usr-pump_failure) := !(next(pump_control_failure-usr-pump_defect) = 0sh32_00000000);
+
+
+
+MODULE OR (OR-usr-a_0, OR-usr-a_1, OR-usr-a_2, OR-usr-a_3)
+VAR
+	OR-usr-OR : boolean;
+
+ASSIGN
+	init(OR-usr-OR) := (OR-usr-a_3 | (OR-usr-a_2 | (OR-usr-a_1 | OR-usr-a_0)));
+
+	next(OR-usr-OR) := (next(OR-usr-a_3) | (next(OR-usr-a_2) | (next(OR-usr-a_1) | next(OR-usr-a_0))));
+
+
+
+MODULE failure (failure-usr-level_defect, failure-usr-steam_defect, failure-usr-pump_defect_0, failure-usr-pump_defect_1, failure-usr-pump_defect_2, failure-usr-pump_defect_3, failure-usr-pump_control_defect_0, failure-usr-pump_control_defect_1, failure-usr-pump_control_defect_2, failure-usr-pump_control_defect_3)
+VAR
+	failure-usr-failure : boolean;
+	failure-res-call_48 : level_failure(failure-usr-level_defect);
+	failure-res-call_49 : steam_failure(failure-usr-steam_defect);
+	failure-res-call_53 : pump_failure(failure-usr-pump_defect_3);
+	failure-res-call_52 : pump_failure(failure-usr-pump_defect_2);
+	failure-res-call_51 : pump_failure(failure-usr-pump_defect_1);
+	failure-res-call_50 : pump_failure(failure-usr-pump_defect_0);
+	failure-res-call_54 : OR(failure-res-call_50.pump_failure-usr-pump_failure, failure-res-call_51.pump_failure-usr-pump_failure, failure-res-call_52.pump_failure-usr-pump_failure, failure-res-call_53.pump_failure-usr-pump_failure);
+	failure-res-call_58 : pump_control_failure(failure-usr-pump_control_defect_3);
+	failure-res-call_57 : pump_control_failure(failure-usr-pump_control_defect_2);
+	failure-res-call_56 : pump_control_failure(failure-usr-pump_control_defect_1);
+	failure-res-call_55 : pump_control_failure(failure-usr-pump_control_defect_0);
+	failure-res-call_59 : OR(failure-res-call_55.pump_control_failure-usr-pump_failure, failure-res-call_56.pump_control_failure-usr-pump_failure, failure-res-call_57.pump_control_failure-usr-pump_failure, failure-res-call_58.pump_control_failure-usr-pump_failure);
+
+ASSIGN
+	init(failure-usr-failure) := (failure-res-call_59.OR-usr-OR | (failure-res-call_54.OR-usr-OR | (failure-res-call_49.steam_failure-usr-steam_failure | failure-res-call_48.level_failure-usr-level_failure)));
+
+	next(failure-usr-failure) := (next(failure-res-call_59.OR-usr-OR) | (next(failure-res-call_54.OR-usr-OR) | (next(failure-res-call_49.steam_failure-usr-steam_failure) | next(failure-res-call_48.level_failure-usr-level_failure))));
+
+
+
+MODULE ControlMode (ControlMode-usr-steam_boiler_waiting, ControlMode-usr-physical_units_ready, ControlMode-usr-stop_request, ControlMode-usr-steam, ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-pump_control_defect_0, ControlMode-usr-pump_control_defect_1, ControlMode-usr-pump_control_defect_2, ControlMode-usr-pump_control_defect_3, ControlMode-usr-q, ControlMode-usr-pump_state_0, ControlMode-usr-pump_state_1, ControlMode-usr-pump_state_2, ControlMode-usr-pump_state_3)
+VAR
+	ControlMode-usr-op_mode : signed word[32];
+	ControlMode-res-gklocal_75 : signed word[32];
+	ControlMode-res-call_76 : critical_failure(ControlMode-res-gklocal_75, ControlMode-usr-steam, ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-q, ControlMode-usr-pump_state_0, ControlMode-usr-pump_state_1, ControlMode-usr-pump_state_2, ControlMode-usr-pump_state_3);
+	ControlMode-res-call_77 : level_failure(ControlMode-usr-level_defect);
+	ControlMode-res-call_78 : failure(ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-pump_control_defect_0, ControlMode-usr-pump_control_defect_1, ControlMode-usr-pump_control_defect_2, ControlMode-usr-pump_control_defect_3);
+	ControlMode-res-oracle_74 : signed word[32];
+
+ASSIGN
+	init(ControlMode-usr-op_mode) := 0sh32_00000001;
+	init(ControlMode-res-gklocal_75) := ControlMode-res-oracle_74;
+
+	next(ControlMode-res-gklocal_75) := ControlMode-usr-op_mode;
+	next(ControlMode-usr-op_mode) := (((ControlMode-usr-op_mode = 0sh32_00000006) | (next(ControlMode-usr-stop_request) | next(ControlMode-res-call_76.critical_failure-usr-critical_failure))) ? 0sh32_00000006 : ((ControlMode-usr-op_mode = 0sh32_00000001) ? (next(ControlMode-usr-steam_boiler_waiting) ? 0sh32_00000002 : 0sh32_00000001) : (((ControlMode-usr-op_mode = 0sh32_00000002) & !next(ControlMode-usr-physical_units_ready)) ? 0sh32_00000002 : (next(ControlMode-res-call_77.level_failure-usr-level_failure) ? 0sh32_00000005 : (next(ControlMode-res-call_78.failure-usr-failure) ? 0sh32_00000004 : 0sh32_00000003)))));
+
+
+
+MODULE BoilerController (BoilerController-usr-stop, BoilerController-usr-steam_boiler_waiting, BoilerController-usr-physical_units_ready, BoilerController-usr-level, BoilerController-usr-steam, BoilerController-usr-pump_state_0, BoilerController-usr-pump_state_1, BoilerController-usr-pump_state_2, BoilerController-usr-pump_state_3, BoilerController-usr-pump_control_state_0, BoilerController-usr-pump_control_state_1, BoilerController-usr-pump_control_state_2, BoilerController-usr-pump_control_state_3, BoilerController-usr-pump_repaired_0, BoilerController-usr-pump_repaired_1, BoilerController-usr-pump_repaired_2, BoilerController-usr-pump_repaired_3, BoilerController-usr-pump_control_repaired_0, BoilerController-usr-pump_control_repaired_1, BoilerController-usr-pump_control_repaired_2, BoilerController-usr-pump_control_repaired_3, BoilerController-usr-level_repaired, BoilerController-usr-steam_repaired, BoilerController-usr-pump_failure_acknowledgement_0, BoilerController-usr-pump_failure_acknowledgement_1, BoilerController-usr-pump_failure_acknowledgement_2, BoilerController-usr-pump_failure_acknowledgement_3, BoilerController-usr-pump_control_failure_acknowledgement_0, BoilerController-usr-pump_control_failure_acknowledgement_1, BoilerController-usr-pump_control_failure_acknowledgement_2, BoilerController-usr-pump_control_failure_acknowledgement_3, BoilerController-usr-level_failure_acknowledgement, BoilerController-usr-steam_failure_acknowledgement)
+VAR
+	BoilerController-usr-program_ready : boolean;
+	BoilerController-usr-mode : signed word[32];
+	BoilerController-usr-valve : boolean;
+	BoilerController-usr-open_pump_0 : boolean;
+	BoilerController-usr-open_pump_1 : boolean;
+	BoilerController-usr-open_pump_2 : boolean;
+	BoilerController-usr-open_pump_3 : boolean;
+	BoilerController-usr-close_pump_0 : boolean;
+	BoilerController-usr-close_pump_1 : boolean;
+	BoilerController-usr-close_pump_2 : boolean;
+	BoilerController-usr-close_pump_3 : boolean;
+	BoilerController-usr-pump_failure_detection_0 : boolean;
+	BoilerController-usr-pump_failure_detection_1 : boolean;
+	BoilerController-usr-pump_failure_detection_2 : boolean;
+	BoilerController-usr-pump_failure_detection_3 : boolean;
+	BoilerController-usr-pump_control_failure_detection_0 : boolean;
+	BoilerController-usr-pump_control_failure_detection_1 : boolean;
+	BoilerController-usr-pump_control_failure_detection_2 : boolean;
+	BoilerController-usr-pump_control_failure_detection_3 : boolean;
+	BoilerController-usr-level_failure_detection : boolean;
+	BoilerController-usr-steam_outcome_failure_detection : boolean;
+	BoilerController-usr-pump_repaired_acknowledgement_0 : boolean;
+	BoilerController-usr-pump_repaired_acknowledgement_1 : boolean;
+	BoilerController-usr-pump_repaired_acknowledgement_2 : boolean;
+	BoilerController-usr-pump_repaired_acknowledgement_3 : boolean;
+	BoilerController-usr-pump_control_repaired_acknowledgement_0 : boolean;
+	BoilerController-usr-pump_control_repaired_acknowledgement_1 : boolean;
+	BoilerController-usr-pump_control_repaired_acknowledgement_2 : boolean;
+	BoilerController-usr-pump_control_repaired_acknowledgement_3 : boolean;
+	BoilerController-usr-level_repaired_acknowledgement : boolean;
+	BoilerController-usr-steam_outcome_repaired_acknowledgement : boolean;
+	BoilerController-impl-usr-stop_request : boolean;
+	BoilerController-impl-usr-op_mode : signed word[32];
+	BoilerController-impl-usr-q : signed word[32];
+	BoilerController-impl-usr-v : signed word[32];
+	BoilerController-impl-usr-valve_state : signed word[32];
+	BoilerController-impl-usr-n_pumps : signed word[32];
+	BoilerController-impl-usr-pump_status_0 : signed word[32];
+	BoilerController-impl-usr-pump_status_1 : signed word[32];
+	BoilerController-impl-usr-pump_status_2 : signed word[32];
+	BoilerController-impl-usr-pump_status_3 : signed word[32];
+	BoilerController-impl-usr-level_defect : signed word[32];
+	BoilerController-impl-usr-steam_defect : signed word[32];
+	BoilerController-impl-usr-pump_defect_0 : signed word[32];
+	BoilerController-impl-usr-pump_defect_1 : signed word[32];
+	BoilerController-impl-usr-pump_defect_2 : signed word[32];
+	BoilerController-impl-usr-pump_defect_3 : signed word[32];
+	BoilerController-impl-usr-pump_control_defect_0 : signed word[32];
+	BoilerController-impl-usr-pump_control_defect_1 : signed word[32];
+	BoilerController-impl-usr-pump_control_defect_2 : signed word[32];
+	BoilerController-impl-usr-pump_control_defect_3 : signed word[32];
+	BoilerController-impl-usr-flow_0 : boolean;
+	BoilerController-impl-usr-flow_1 : boolean;
+	BoilerController-impl-usr-flow_2 : boolean;
+	BoilerController-impl-usr-flow_3 : boolean;
+	BoilerController-impl-usr-t00 : signed word[32];
+	BoilerController-impl-usr-t01 : signed word[32];
+	BoilerController-impl-usr-t10 : signed word[32];
+	BoilerController-impl-usr-t20 : signed word[32];
+	BoilerController-impl-usr-t30 : signed word[32];
+	BoilerController-impl-usr-t11 : signed word[32];
+	BoilerController-impl-usr-t21 : signed word[32];
+	BoilerController-impl-usr-t31 : signed word[32];
+	BoilerController-impl-usr-t02 : boolean;
+	BoilerController-impl-usr-t12 : boolean;
+	BoilerController-impl-usr-t22 : boolean;
+	BoilerController-impl-usr-t32 : boolean;
+	BoilerController-impl-usr-u4 : boolean;
+	BoilerController-impl-usr-u6 : boolean;
+	BoilerController-impl-usr-t4 : signed word[32];
+	BoilerController-impl-usr-t5 : signed word[32];
+	BoilerController-impl-usr-u0 : signed word[32];
+	BoilerController-impl-usr-u1 : signed word[32];
+	BoilerController-impl-usr-u2 : signed word[32];
+	BoilerController-impl-usr-u3 : signed word[32];
+	BoilerController-impl-usr-u5 : signed word[32];
+	BoilerController-impl-usr-u7 : signed word[32];
+	BoilerController-impl-usr-a1 : boolean;
+	BoilerController-impl-usr-a2 : boolean;
+	BoilerController-impl-usr-a3 : boolean;
+	BoilerController-impl-usr-a4 : boolean;
+	BoilerController-impl-usr-a5 : boolean;
+	BoilerController-impl-usr-a6 : boolean;
+	BoilerController-impl-usr-a7 : boolean;
+	BoilerController-impl-usr-a8 : boolean;
+	BoilerController-impl-usr-a9 : boolean;
+	BoilerController-impl-usr-a10 : boolean;
+	BoilerController-impl-usr-a11 : boolean;
+	BoilerController-impl-usr-a12 : boolean;
+	BoilerController-impl-usr-a13 : boolean;
+	BoilerController-impl-usr-a14 : boolean;
+	BoilerController-impl-usr-a15 : boolean;
+	BoilerController-impl-usr-a16 : boolean;
+	BoilerController-impl-usr-a17 : boolean;
+	BoilerController-impl-usr-a18 : boolean;
+	BoilerController-impl-usr-a19 : boolean;
+	BoilerController-impl-usr-a20 : boolean;
+	BoilerController-impl-usr-a21 : boolean;
+	BoilerController-impl-usr-a22 : boolean;
+	BoilerController-impl-usr-a23 : boolean;
+	BoilerController-impl-usr-a24 : boolean;
+	BoilerController-impl-usr-b0 : boolean;
+	BoilerController-impl-usr-b1 : boolean;
+	BoilerController-impl-usr-b2 : boolean;
+	BoilerController-impl-usr-b3 : boolean;
+	BoilerController-res-gklocal_95 : signed word[32];
+	BoilerController-res-gklocal_92 : signed word[32];
+	BoilerController-res-gklocal_89 : signed word[32];
+	BoilerController-res-gklocal_86 : signed word[32];
+	BoilerController-res-gklocal_83 : signed word[32];
+	BoilerController-res-2-call_104 : SteamOutput(BoilerController-impl-usr-op_mode, BoilerController-impl-usr-steam_defect, BoilerController-usr-steam_repaired);
+	BoilerController-res-2-call_103 : LevelOutput(BoilerController-impl-usr-op_mode, BoilerController-impl-usr-level_defect, BoilerController-usr-level_repaired);
+	BoilerController-res-2-call_102 : PumpsOutput(BoilerController-impl-usr-op_mode, BoilerController-impl-usr-pump_status_0, BoilerController-impl-usr-pump_status_1, BoilerController-impl-usr-pump_status_2, BoilerController-impl-usr-pump_status_3, BoilerController-impl-usr-pump_defect_0, BoilerController-impl-usr-pump_defect_1, BoilerController-impl-usr-pump_defect_2, BoilerController-impl-usr-pump_defect_3, BoilerController-impl-usr-pump_control_defect_0, BoilerController-impl-usr-pump_control_defect_1, BoilerController-impl-usr-pump_control_defect_2, BoilerController-impl-usr-pump_control_defect_3, BoilerController-usr-pump_repaired_0, BoilerController-usr-pump_repaired_1, BoilerController-usr-pump_repaired_2, BoilerController-usr-pump_repaired_3, BoilerController-usr-pump_control_repaired_0, BoilerController-usr-pump_control_repaired_1, BoilerController-usr-pump_control_repaired_2, BoilerController-usr-pump_control_repaired_3);
+	BoilerController-res-3-call_102 : PumpsOutput(BoilerController-impl-usr-op_mode, BoilerController-impl-usr-pump_status_0, BoilerController-impl-usr-pump_status_1, BoilerController-impl-usr-pump_status_2, BoilerController-impl-usr-pump_status_3, BoilerController-impl-usr-pump_defect_0, BoilerController-impl-usr-pump_defect_1, BoilerController-impl-usr-pump_defect_2, BoilerController-impl-usr-pump_defect_3, BoilerController-impl-usr-pump_control_defect_0, BoilerController-impl-usr-pump_control_defect_1, BoilerController-impl-usr-pump_control_defect_2, BoilerController-impl-usr-pump_control_defect_3, BoilerController-usr-pump_repaired_0, BoilerController-usr-pump_repaired_1, BoilerController-usr-pump_repaired_2, BoilerController-usr-pump_repaired_3, BoilerController-usr-pump_control_repaired_0, BoilerController-usr-pump_control_repaired_1, BoilerController-usr-pump_control_repaired_2, BoilerController-usr-pump_control_repaired_3);
+	BoilerController-res-2-call_101 : ControlOutput(BoilerController-impl-usr-op_mode, BoilerController-usr-level, BoilerController-usr-valve);
+	BoilerController-res-2-call_100 : Valve(BoilerController-impl-usr-op_mode, BoilerController-impl-usr-q);
+	BoilerController-res-call_99 : ControlMode(BoilerController-usr-steam_boiler_waiting, BoilerController-usr-physical_units_ready, BoilerController-impl-usr-stop_request, BoilerController-usr-steam, BoilerController-impl-usr-level_defect, BoilerController-impl-usr-steam_defect, BoilerController-impl-usr-pump_defect_0, BoilerController-impl-usr-pump_defect_1, BoilerController-impl-usr-pump_defect_2, BoilerController-impl-usr-pump_defect_3, BoilerController-impl-usr-pump_control_defect_0, BoilerController-impl-usr-pump_control_defect_1, BoilerController-impl-usr-pump_control_defect_2, BoilerController-impl-usr-pump_control_defect_3, BoilerController-impl-usr-q, BoilerController-usr-pump_state_0, BoilerController-usr-pump_state_1, BoilerController-usr-pump_state_2, BoilerController-usr-pump_state_3);
+	BoilerController-res-2-call_98 : PumpsStatus(BoilerController-impl-usr-n_pumps, BoilerController-impl-usr-pump_defect_0, BoilerController-impl-usr-pump_defect_1, BoilerController-impl-usr-pump_defect_2, BoilerController-impl-usr-pump_defect_3, BoilerController-impl-usr-flow_0, BoilerController-impl-usr-flow_1, BoilerController-impl-usr-flow_2, BoilerController-impl-usr-flow_3);
+	BoilerController-res-call_97 : PumpsDecision(BoilerController-impl-usr-q, BoilerController-impl-usr-v);
+	BoilerController-res-2-call_96 : Dynamics(BoilerController-res-gklocal_95, BoilerController-usr-level, BoilerController-usr-steam, BoilerController-impl-usr-level_defect, BoilerController-impl-usr-steam_defect, BoilerController-impl-usr-flow_0, BoilerController-impl-usr-flow_1, BoilerController-impl-usr-flow_2, BoilerController-impl-usr-flow_3);
+	BoilerController-res-2-call_93 : PumpDefect(BoilerController-usr-pump_failure_acknowledgement_3, BoilerController-usr-pump_repaired_3, BoilerController-usr-pump_control_failure_acknowledgement_3, BoilerController-usr-pump_control_repaired_3, BoilerController-res-gklocal_92, BoilerController-usr-pump_state_3, BoilerController-usr-pump_control_state_3);
+	BoilerController-res-2-call_90 : PumpDefect(BoilerController-usr-pump_failure_acknowledgement_2, BoilerController-usr-pump_repaired_2, BoilerController-usr-pump_control_failure_acknowledgement_2, BoilerController-usr-pump_control_repaired_2, BoilerController-res-gklocal_89, BoilerController-usr-pump_state_2, BoilerController-usr-pump_control_state_2);
+	BoilerController-res-2-call_87 : PumpDefect(BoilerController-usr-pump_failure_acknowledgement_1, BoilerController-usr-pump_repaired_1, BoilerController-usr-pump_control_failure_acknowledgement_1, BoilerController-usr-pump_control_repaired_1, BoilerController-res-gklocal_86, BoilerController-usr-pump_state_1, BoilerController-usr-pump_control_state_1);
+	BoilerController-res-2-call_84 : PumpDefect(BoilerController-usr-pump_failure_acknowledgement_0, BoilerController-usr-pump_repaired_0, BoilerController-usr-pump_control_failure_acknowledgement_0, BoilerController-usr-pump_control_repaired_0, BoilerController-res-gklocal_83, BoilerController-usr-pump_state_0, BoilerController-usr-pump_control_state_0);
+	BoilerController-res-call_81 : SteamDefect(BoilerController-usr-steam_failure_acknowledgement, BoilerController-usr-steam_repaired, BoilerController-usr-steam);
+	BoilerController-res-call_80 : LevelDefect(BoilerController-usr-level_failure_acknowledgement, BoilerController-usr-level_repaired, BoilerController-usr-level);
+	BoilerController-res-call_79 : Operator(BoilerController-usr-stop);
+	BoilerController-res-oracle_94 : signed word[32];
+	BoilerController-res-oracle_91 : signed word[32];
+	BoilerController-res-oracle_88 : signed word[32];
+	BoilerController-res-oracle_85 : signed word[32];
+	BoilerController-res-oracle_82 : signed word[32];
+	BoilerController-res-poracle_1 : signed word[32];
+	BoilerController-res-poracle_2 : signed word[32];
+	BoilerController-res-poracle_3 : signed word[32];
+	BoilerController-res-poracle_4 : signed word[32];
+	BoilerController-res-poracle_5 : signed word[32];
+	BoilerController-res-poracle_6 : signed word[32];
+	BoilerController-res-poracle_7 : signed word[32];
+	BoilerController-res-poracle_8 : signed word[32];
+	BoilerController-res-poracle_9 : signed word[32];
+	BoilerController-res-poracle_10 : signed word[32];
+	BoilerController-res-poracle_11 : signed word[32];
+	BoilerController-res-poracle_12 : signed word[32];
+	BoilerController-res-poracle_13 : signed word[32];
+	BoilerController-res-poracle_14 : signed word[32];
+	BoilerController-res-poracle_15 : signed word[32];
+	BoilerController-res-poracle_16 : signed word[32];
+	BoilerController-res-poracle_17 : signed word[32];
+	BoilerController-res-poracle_18 : signed word[32];
+	BoilerController-res-poracle_19 : signed word[32];
+	BoilerController-res-poracle_20 : signed word[32];
+	BoilerController-res-poracle_21 : signed word[32];
+	BoilerController-res-poracle_22 : signed word[32];
+	BoilerController-res-poracle_23 : signed word[32];
+	BoilerController-res-poracle_24 : signed word[32];
+	BoilerController-res-poracle_25 : signed word[32];
+	BoilerController-res-poracle_26 : signed word[32];
+	BoilerController-res-poracle_27 : signed word[32];
+	BoilerController-res-poracle_28 : signed word[32];
+
+ASSIGN
+	init(BoilerController-usr-program_ready) := FALSE;
+	init(BoilerController-impl-usr-op_mode) := 0sh32_00000001;
+	init(BoilerController-usr-valve) := FALSE;
+	init(BoilerController-impl-usr-u6) := BoilerController-res-2-call_101.ControlOutput-usr-program_ready;
+	init(BoilerController-impl-usr-stop_request) := BoilerController-res-call_79.Operator-usr-stop_request;
+	init(BoilerController-impl-usr-level_defect) := 0sh32_00000000;
+	init(BoilerController-impl-usr-steam_defect) := 0sh32_00000000;
+	init(BoilerController-impl-usr-pump_defect_0) := 0sh32_00000000;
+	init(BoilerController-impl-usr-t00) := BoilerController-res-2-call_84.PumpDefect-usr-PumpDefect;
+	init(BoilerController-res-gklocal_83) := BoilerController-res-oracle_82;
+	init(BoilerController-impl-usr-pump_status_0) := 0sh32_00000000;
+	init(BoilerController-impl-usr-u0) := BoilerController-res-2-call_98.PumpsStatus-usr-pump_status_0;
+	init(BoilerController-impl-usr-n_pumps) := 0sh32_00000000;
+	init(BoilerController-impl-usr-q) := BoilerController-usr-level;
+	init(BoilerController-impl-usr-t4) := BoilerController-res-2-call_96.Dynamics-usr-q;
+	init(BoilerController-res-gklocal_95) := BoilerController-res-oracle_94;
+	init(BoilerController-impl-usr-valve_state) := 0sh32_00000000;
+	init(BoilerController-impl-usr-u5) := BoilerController-res-2-call_100.Valve-usr-valve_state;
+	init(BoilerController-impl-usr-flow_0) := FALSE;
+	init(BoilerController-impl-usr-t02) := BoilerController-res-2-call_84.PumpDefect-usr-Flow;
+	init(BoilerController-impl-usr-flow_1) := FALSE;
+	init(BoilerController-res-gklocal_86) := BoilerController-res-oracle_85;
+	init(BoilerController-impl-usr-t12) := BoilerController-res-2-call_87.PumpDefect-usr-Flow;
+	init(BoilerController-impl-usr-pump_status_1) := 0sh32_00000000;
+	init(BoilerController-impl-usr-u1) := BoilerController-res-2-call_98.PumpsStatus-usr-pump_status_1;
+	init(BoilerController-impl-usr-flow_2) := FALSE;
+	init(BoilerController-res-gklocal_89) := BoilerController-res-oracle_88;
+	init(BoilerController-impl-usr-t22) := BoilerController-res-2-call_90.PumpDefect-usr-Flow;
+	init(BoilerController-impl-usr-pump_status_2) := 0sh32_00000000;
+	init(BoilerController-impl-usr-u2) := BoilerController-res-2-call_98.PumpsStatus-usr-pump_status_2;
+	init(BoilerController-impl-usr-flow_3) := FALSE;
+	init(BoilerController-res-gklocal_92) := BoilerController-res-oracle_91;
+	init(BoilerController-impl-usr-t32) := BoilerController-res-2-call_93.PumpDefect-usr-Flow;
+	init(BoilerController-impl-usr-pump_status_3) := 0sh32_00000000;
+	init(BoilerController-impl-usr-u3) := BoilerController-res-2-call_98.PumpsStatus-usr-pump_status_3;
+	init(BoilerController-impl-usr-v) := BoilerController-usr-steam;
+	init(BoilerController-impl-usr-t5) := BoilerController-res-2-call_96.Dynamics-usr-v;
+	init(BoilerController-impl-usr-pump_defect_1) := 0sh32_00000000;
+	init(BoilerController-impl-usr-t10) := BoilerController-res-2-call_87.PumpDefect-usr-PumpDefect;
+	init(BoilerController-impl-usr-pump_defect_2) := 0sh32_00000000;
+	init(BoilerController-impl-usr-t20) := BoilerController-res-2-call_90.PumpDefect-usr-PumpDefect;
+	init(BoilerController-impl-usr-pump_defect_3) := 0sh32_00000000;
+	init(BoilerController-impl-usr-t30) := BoilerController-res-2-call_93.PumpDefect-usr-PumpDefect;
+	init(BoilerController-impl-usr-pump_control_defect_0) := 0sh32_00000000;
+	init(BoilerController-impl-usr-t01) := BoilerController-res-2-call_84.PumpDefect-usr-PumpControlDefect;
+	init(BoilerController-impl-usr-pump_control_defect_1) := 0sh32_00000000;
+	init(BoilerController-impl-usr-t11) := BoilerController-res-2-call_87.PumpDefect-usr-PumpControlDefect;
+	init(BoilerController-impl-usr-pump_control_defect_2) := 0sh32_00000000;
+	init(BoilerController-impl-usr-t21) := BoilerController-res-2-call_90.PumpDefect-usr-PumpControlDefect;
+	init(BoilerController-impl-usr-pump_control_defect_3) := 0sh32_00000000;
+	init(BoilerController-impl-usr-t31) := BoilerController-res-2-call_93.PumpDefect-usr-PumpControlDefect;
+	init(BoilerController-impl-usr-u4) := BoilerController-res-2-call_100.Valve-usr-valve;
+	init(BoilerController-usr-mode) := 0sh32_00000001;
+	init(BoilerController-impl-usr-u7) := BoilerController-res-2-call_101.ControlOutput-usr-mode;
+	init(BoilerController-impl-usr-a1) := BoilerController-res-2-call_102.PumpsOutput-usr-open_pump_0;
+	init(BoilerController-usr-open_pump_0) := BoilerController-impl-usr-a1;
+	init(BoilerController-impl-usr-a2) := BoilerController-res-2-call_102.PumpsOutput-usr-open_pump_1;
+	init(BoilerController-usr-open_pump_1) := BoilerController-impl-usr-a2;
+	init(BoilerController-impl-usr-a3) := BoilerController-res-2-call_102.PumpsOutput-usr-open_pump_2;
+	init(BoilerController-usr-open_pump_2) := BoilerController-impl-usr-a3;
+	init(BoilerController-impl-usr-a4) := BoilerController-res-2-call_102.PumpsOutput-usr-open_pump_3;
+	init(BoilerController-usr-open_pump_3) := BoilerController-impl-usr-a4;
+	init(BoilerController-impl-usr-a5) := BoilerController-res-2-call_102.PumpsOutput-usr-close_pump_0;
+	init(BoilerController-usr-close_pump_0) := BoilerController-impl-usr-a5;
+	init(BoilerController-impl-usr-a6) := BoilerController-res-2-call_102.PumpsOutput-usr-close_pump_1;
+	init(BoilerController-usr-close_pump_1) := BoilerController-impl-usr-a6;
+	init(BoilerController-impl-usr-a7) := BoilerController-res-2-call_102.PumpsOutput-usr-close_pump_2;
+	init(BoilerController-usr-close_pump_2) := BoilerController-impl-usr-a7;
+	init(BoilerController-impl-usr-a8) := BoilerController-res-2-call_102.PumpsOutput-usr-close_pump_3;
+	init(BoilerController-usr-close_pump_3) := BoilerController-impl-usr-a8;
+	init(BoilerController-impl-usr-a9) := BoilerController-res-2-call_102.PumpsOutput-usr-pump_failure_detection_0;
+	init(BoilerController-usr-pump_failure_detection_0) := BoilerController-impl-usr-a9;
+	init(BoilerController-impl-usr-a10) := BoilerController-res-2-call_102.PumpsOutput-usr-pump_failure_detection_1;
+	init(BoilerController-usr-pump_failure_detection_1) := BoilerController-impl-usr-a10;
+	init(BoilerController-impl-usr-a11) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_failure_detection_2;
+	init(BoilerController-usr-pump_failure_detection_2) := BoilerController-impl-usr-a11;
+	init(BoilerController-impl-usr-a12) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_failure_detection_3;
+	init(BoilerController-usr-pump_failure_detection_3) := BoilerController-impl-usr-a12;
+	init(BoilerController-impl-usr-a17) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_failure_detection_0;
+	init(BoilerController-usr-pump_control_failure_detection_0) := BoilerController-impl-usr-a17;
+	init(BoilerController-impl-usr-a18) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_failure_detection_1;
+	init(BoilerController-usr-pump_control_failure_detection_1) := BoilerController-impl-usr-a18;
+	init(BoilerController-impl-usr-a19) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_failure_detection_2;
+	init(BoilerController-usr-pump_control_failure_detection_2) := BoilerController-impl-usr-a19;
+	init(BoilerController-impl-usr-a20) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_failure_detection_3;
+	init(BoilerController-usr-pump_control_failure_detection_3) := BoilerController-impl-usr-a20;
+	init(BoilerController-usr-level_failure_detection) := FALSE;
+	init(BoilerController-impl-usr-b0) := BoilerController-res-2-call_103.LevelOutput-usr-level_outcome_failure_detection;
+	init(BoilerController-usr-steam_outcome_failure_detection) := FALSE;
+	init(BoilerController-impl-usr-b2) := BoilerController-res-2-call_104.SteamOutput-usr-steam_outcome_failure_detection;
+	init(BoilerController-impl-usr-a13) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_repaired_acknowledgement_0;
+	init(BoilerController-usr-pump_repaired_acknowledgement_0) := BoilerController-impl-usr-a13;
+	init(BoilerController-impl-usr-a14) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_repaired_acknowledgement_1;
+	init(BoilerController-usr-pump_repaired_acknowledgement_1) := BoilerController-impl-usr-a14;
+	init(BoilerController-impl-usr-a15) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_repaired_acknowledgement_2;
+	init(BoilerController-usr-pump_repaired_acknowledgement_2) := BoilerController-impl-usr-a15;
+	init(BoilerController-impl-usr-a16) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_repaired_acknowledgement_3;
+	init(BoilerController-usr-pump_repaired_acknowledgement_3) := BoilerController-impl-usr-a16;
+	init(BoilerController-impl-usr-a21) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_repaired_acknowledgement_0;
+	init(BoilerController-usr-pump_control_repaired_acknowledgement_0) := BoilerController-impl-usr-a21;
+	init(BoilerController-impl-usr-a22) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_repaired_acknowledgement_1;
+	init(BoilerController-usr-pump_control_repaired_acknowledgement_1) := BoilerController-impl-usr-a22;
+	init(BoilerController-impl-usr-a23) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_repaired_acknowledgement_2;
+	init(BoilerController-usr-pump_control_repaired_acknowledgement_2) := BoilerController-impl-usr-a23;
+	init(BoilerController-impl-usr-a24) := BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_repaired_acknowledgement_3;
+	init(BoilerController-usr-pump_control_repaired_acknowledgement_3) := BoilerController-impl-usr-a24;
+	init(BoilerController-usr-level_repaired_acknowledgement) := FALSE;
+	init(BoilerController-impl-usr-b1) := BoilerController-res-2-call_103.LevelOutput-usr-level_outcome_repaired_acknowledgement;
+	init(BoilerController-usr-steam_outcome_repaired_acknowledgement) := FALSE;
+	init(BoilerController-impl-usr-b3) := BoilerController-res-2-call_104.SteamOutput-usr-steam_outcome_repaired_acknowledgement;
+
+	next(BoilerController-res-gklocal_83) := BoilerController-impl-usr-pump_status_0;
+	next(BoilerController-res-gklocal_86) := BoilerController-impl-usr-pump_status_1;
+	next(BoilerController-res-gklocal_89) := BoilerController-impl-usr-pump_status_2;
+	next(BoilerController-res-gklocal_92) := BoilerController-impl-usr-pump_status_3;
+	next(BoilerController-res-gklocal_95) := BoilerController-impl-usr-valve_state;
+	next(BoilerController-impl-usr-t32) := next(BoilerController-res-2-call_93.PumpDefect-usr-Flow);
+	next(BoilerController-impl-usr-t22) := next(BoilerController-res-2-call_90.PumpDefect-usr-Flow);
+	next(BoilerController-impl-usr-t12) := next(BoilerController-res-2-call_87.PumpDefect-usr-Flow);
+	next(BoilerController-impl-usr-t02) := next(BoilerController-res-2-call_84.PumpDefect-usr-Flow);
+	next(BoilerController-impl-usr-flow_3) := next(BoilerController-impl-usr-t32);
+	next(BoilerController-impl-usr-flow_2) := next(BoilerController-impl-usr-t22);
+	next(BoilerController-impl-usr-flow_1) := next(BoilerController-impl-usr-t12);
+	next(BoilerController-impl-usr-flow_0) := next(BoilerController-impl-usr-t02);
+	next(BoilerController-impl-usr-level_defect) := next(BoilerController-res-call_80.LevelDefect-usr-LevelDefect);
+	next(BoilerController-impl-usr-t4) := next(BoilerController-res-2-call_96.Dynamics-usr-q);
+	next(BoilerController-impl-usr-t31) := next(BoilerController-res-2-call_93.PumpDefect-usr-PumpControlDefect);
+	next(BoilerController-impl-usr-t21) := next(BoilerController-res-2-call_90.PumpDefect-usr-PumpControlDefect);
+	next(BoilerController-impl-usr-t11) := next(BoilerController-res-2-call_87.PumpDefect-usr-PumpControlDefect);
+	next(BoilerController-impl-usr-t30) := next(BoilerController-res-2-call_93.PumpDefect-usr-PumpDefect);
+	next(BoilerController-impl-usr-t20) := next(BoilerController-res-2-call_90.PumpDefect-usr-PumpDefect);
+	next(BoilerController-impl-usr-t10) := next(BoilerController-res-2-call_87.PumpDefect-usr-PumpDefect);
+	next(BoilerController-impl-usr-t01) := next(BoilerController-res-2-call_84.PumpDefect-usr-PumpControlDefect);
+	next(BoilerController-impl-usr-t00) := next(BoilerController-res-2-call_84.PumpDefect-usr-PumpDefect);
+	next(BoilerController-impl-usr-pump_control_defect_3) := next(BoilerController-impl-usr-t31);
+	next(BoilerController-impl-usr-pump_control_defect_2) := next(BoilerController-impl-usr-t21);
+	next(BoilerController-impl-usr-pump_control_defect_1) := next(BoilerController-impl-usr-t11);
+	next(BoilerController-impl-usr-pump_control_defect_0) := next(BoilerController-impl-usr-t01);
+	next(BoilerController-impl-usr-pump_defect_3) := next(BoilerController-impl-usr-t30);
+	next(BoilerController-impl-usr-pump_defect_2) := next(BoilerController-impl-usr-t20);
+	next(BoilerController-impl-usr-pump_defect_1) := next(BoilerController-impl-usr-t10);
+	next(BoilerController-impl-usr-pump_defect_0) := next(BoilerController-impl-usr-t00);
+	next(BoilerController-impl-usr-steam_defect) := next(BoilerController-res-call_81.SteamDefect-usr-SteamDefect);
+	next(BoilerController-impl-usr-q) := next(BoilerController-impl-usr-t4);
+	next(BoilerController-impl-usr-stop_request) := next(BoilerController-res-call_79.Operator-usr-stop_request);
+	next(BoilerController-impl-usr-op_mode) := next(BoilerController-res-call_99.ControlMode-usr-op_mode);
+	next(BoilerController-impl-usr-u4) := next(BoilerController-res-2-call_100.Valve-usr-valve);
+	next(BoilerController-usr-valve) := next(BoilerController-impl-usr-u4);
+	next(BoilerController-impl-usr-u6) := next(BoilerController-res-2-call_101.ControlOutput-usr-program_ready);
+	next(BoilerController-usr-program_ready) := next(BoilerController-impl-usr-u6);
+	next(BoilerController-impl-usr-t5) := next(BoilerController-res-2-call_96.Dynamics-usr-v);
+	next(BoilerController-impl-usr-v) := next(BoilerController-impl-usr-t5);
+	next(BoilerController-impl-usr-n_pumps) := next(BoilerController-res-call_97.PumpsDecision-usr-n_pumps);
+	next(BoilerController-impl-usr-u0) := next(BoilerController-res-2-call_98.PumpsStatus-usr-pump_status_0);
+	next(BoilerController-impl-usr-pump_status_0) := next(BoilerController-impl-usr-u0);
+	next(BoilerController-impl-usr-u5) := next(BoilerController-res-2-call_100.Valve-usr-valve_state);
+	next(BoilerController-impl-usr-valve_state) := next(BoilerController-impl-usr-u5);
+	next(BoilerController-impl-usr-u1) := next(BoilerController-res-2-call_98.PumpsStatus-usr-pump_status_1);
+	next(BoilerController-impl-usr-pump_status_1) := next(BoilerController-impl-usr-u1);
+	next(BoilerController-impl-usr-u2) := next(BoilerController-res-2-call_98.PumpsStatus-usr-pump_status_2);
+	next(BoilerController-impl-usr-pump_status_2) := next(BoilerController-impl-usr-u2);
+	next(BoilerController-impl-usr-u3) := next(BoilerController-res-2-call_98.PumpsStatus-usr-pump_status_3);
+	next(BoilerController-impl-usr-pump_status_3) := next(BoilerController-impl-usr-u3);
+	next(BoilerController-impl-usr-u7) := next(BoilerController-res-2-call_101.ControlOutput-usr-mode);
+	next(BoilerController-usr-mode) := next(BoilerController-impl-usr-u7);
+	next(BoilerController-impl-usr-a1) := next(BoilerController-res-2-call_102.PumpsOutput-usr-open_pump_0);
+	next(BoilerController-usr-open_pump_0) := next(BoilerController-impl-usr-a1);
+	next(BoilerController-impl-usr-a2) := next(BoilerController-res-2-call_102.PumpsOutput-usr-open_pump_1);
+	next(BoilerController-usr-open_pump_1) := next(BoilerController-impl-usr-a2);
+	next(BoilerController-impl-usr-a3) := next(BoilerController-res-2-call_102.PumpsOutput-usr-open_pump_2);
+	next(BoilerController-usr-open_pump_2) := next(BoilerController-impl-usr-a3);
+	next(BoilerController-impl-usr-a4) := next(BoilerController-res-2-call_102.PumpsOutput-usr-open_pump_3);
+	next(BoilerController-usr-open_pump_3) := next(BoilerController-impl-usr-a4);
+	next(BoilerController-impl-usr-a5) := next(BoilerController-res-2-call_102.PumpsOutput-usr-close_pump_0);
+	next(BoilerController-usr-close_pump_0) := next(BoilerController-impl-usr-a5);
+	next(BoilerController-impl-usr-a6) := next(BoilerController-res-2-call_102.PumpsOutput-usr-close_pump_1);
+	next(BoilerController-usr-close_pump_1) := next(BoilerController-impl-usr-a6);
+	next(BoilerController-impl-usr-a7) := next(BoilerController-res-2-call_102.PumpsOutput-usr-close_pump_2);
+	next(BoilerController-usr-close_pump_2) := next(BoilerController-impl-usr-a7);
+	next(BoilerController-impl-usr-a8) := next(BoilerController-res-2-call_102.PumpsOutput-usr-close_pump_3);
+	next(BoilerController-usr-close_pump_3) := next(BoilerController-impl-usr-a8);
+	next(BoilerController-impl-usr-a9) := next(BoilerController-res-2-call_102.PumpsOutput-usr-pump_failure_detection_0);
+	next(BoilerController-usr-pump_failure_detection_0) := next(BoilerController-impl-usr-a9);
+	next(BoilerController-impl-usr-a10) := next(BoilerController-res-2-call_102.PumpsOutput-usr-pump_failure_detection_1);
+	next(BoilerController-usr-pump_failure_detection_1) := next(BoilerController-impl-usr-a10);
+	next(BoilerController-impl-usr-a11) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_failure_detection_2);
+	next(BoilerController-usr-pump_failure_detection_2) := next(BoilerController-impl-usr-a11);
+	next(BoilerController-impl-usr-a12) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_failure_detection_3);
+	next(BoilerController-usr-pump_failure_detection_3) := next(BoilerController-impl-usr-a12);
+	next(BoilerController-impl-usr-a17) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_failure_detection_0);
+	next(BoilerController-usr-pump_control_failure_detection_0) := next(BoilerController-impl-usr-a17);
+	next(BoilerController-impl-usr-a18) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_failure_detection_1);
+	next(BoilerController-usr-pump_control_failure_detection_1) := next(BoilerController-impl-usr-a18);
+	next(BoilerController-impl-usr-a19) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_failure_detection_2);
+	next(BoilerController-usr-pump_control_failure_detection_2) := next(BoilerController-impl-usr-a19);
+	next(BoilerController-impl-usr-a20) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_failure_detection_3);
+	next(BoilerController-usr-pump_control_failure_detection_3) := next(BoilerController-impl-usr-a20);
+	next(BoilerController-impl-usr-b0) := next(BoilerController-res-2-call_103.LevelOutput-usr-level_outcome_failure_detection);
+	next(BoilerController-usr-level_failure_detection) := next(BoilerController-impl-usr-b0);
+	next(BoilerController-impl-usr-b2) := next(BoilerController-res-2-call_104.SteamOutput-usr-steam_outcome_failure_detection);
+	next(BoilerController-usr-steam_outcome_failure_detection) := next(BoilerController-impl-usr-b2);
+	next(BoilerController-impl-usr-a13) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_repaired_acknowledgement_0);
+	next(BoilerController-usr-pump_repaired_acknowledgement_0) := next(BoilerController-impl-usr-a13);
+	next(BoilerController-impl-usr-a14) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_repaired_acknowledgement_1);
+	next(BoilerController-usr-pump_repaired_acknowledgement_1) := next(BoilerController-impl-usr-a14);
+	next(BoilerController-impl-usr-a15) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_repaired_acknowledgement_2);
+	next(BoilerController-usr-pump_repaired_acknowledgement_2) := next(BoilerController-impl-usr-a15);
+	next(BoilerController-impl-usr-a16) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_repaired_acknowledgement_3);
+	next(BoilerController-usr-pump_repaired_acknowledgement_3) := next(BoilerController-impl-usr-a16);
+	next(BoilerController-impl-usr-a21) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_repaired_acknowledgement_0);
+	next(BoilerController-usr-pump_control_repaired_acknowledgement_0) := next(BoilerController-impl-usr-a21);
+	next(BoilerController-impl-usr-a22) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_repaired_acknowledgement_1);
+	next(BoilerController-usr-pump_control_repaired_acknowledgement_1) := next(BoilerController-impl-usr-a22);
+	next(BoilerController-impl-usr-a23) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_repaired_acknowledgement_2);
+	next(BoilerController-usr-pump_control_repaired_acknowledgement_2) := next(BoilerController-impl-usr-a23);
+	next(BoilerController-impl-usr-a24) := next(BoilerController-res-3-call_102.PumpsOutput-usr-pump_control_repaired_acknowledgement_3);
+	next(BoilerController-usr-pump_control_repaired_acknowledgement_3) := next(BoilerController-impl-usr-a24);
+	next(BoilerController-impl-usr-b1) := next(BoilerController-res-2-call_103.LevelOutput-usr-level_outcome_repaired_acknowledgement);
+	next(BoilerController-usr-level_repaired_acknowledgement) := next(BoilerController-impl-usr-b1);
+	next(BoilerController-impl-usr-b3) := next(BoilerController-res-2-call_104.SteamOutput-usr-steam_outcome_repaired_acknowledgement);
+	next(BoilerController-usr-steam_outcome_repaired_acknowledgement) := next(BoilerController-impl-usr-b3);
+
+
+
+MODULE main () 
+VAR
+	top-usr-stop : boolean;
+	top-usr-steam_boiler_waiting : boolean;
+	top-usr-physical_units_ready : boolean;
+	top-usr-level : signed word[32];
+	top-usr-steam : signed word[32];
+	top-usr-pump_state_0 : signed word[32];
+	top-usr-pump_state_1 : signed word[32];
+	top-usr-pump_state_2 : signed word[32];
+	top-usr-pump_state_3 : signed word[32];
+	top-usr-pump_control_state_0 : boolean;
+	top-usr-pump_control_state_1 : boolean;
+	top-usr-pump_control_state_2 : boolean;
+	top-usr-pump_control_state_3 : boolean;
+	top-usr-pump_repaired_0 : boolean;
+	top-usr-pump_repaired_1 : boolean;
+	top-usr-pump_repaired_2 : boolean;
+	top-usr-pump_repaired_3 : boolean;
+	top-usr-pump_control_repaired_0 : boolean;
+	top-usr-pump_control_repaired_1 : boolean;
+	top-usr-pump_control_repaired_2 : boolean;
+	top-usr-pump_control_repaired_3 : boolean;
+	top-usr-level_repaired : boolean;
+	top-usr-steam_repaired : boolean;
+	top-usr-pump_failure_acknowledgement_0 : boolean;
+	top-usr-pump_failure_acknowledgement_1 : boolean;
+	top-usr-pump_failure_acknowledgement_2 : boolean;
+	top-usr-pump_failure_acknowledgement_3 : boolean;
+	top-usr-pump_control_failure_acknowledgement_0 : boolean;
+	top-usr-pump_control_failure_acknowledgement_1 : boolean;
+	top-usr-pump_control_failure_acknowledgement_2 : boolean;
+	top-usr-pump_control_failure_acknowledgement_3 : boolean;
+	top-usr-level_failure_acknowledgement : boolean;
+	top-usr-steam_failure_acknowledgement : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-mode_ok : boolean;
+	top-impl-usr-mode_normal_then_no_failure : boolean;
+	top-impl-usr-mode_normal_then_valve_off : boolean;
+	top-impl-usr-mode : signed word[32];
+	top-impl-usr-valve : boolean;
+	top-impl-usr-pump_failure_detection_0 : boolean;
+	top-impl-usr-pump_failure_detection_1 : boolean;
+	top-impl-usr-pump_failure_detection_2 : boolean;
+	top-impl-usr-pump_failure_detection_3 : boolean;
+	top-impl-usr-pump_control_failure_detection_0 : boolean;
+	top-impl-usr-pump_control_failure_detection_1 : boolean;
+	top-impl-usr-pump_control_failure_detection_2 : boolean;
+	top-impl-usr-pump_control_failure_detection_3 : boolean;
+	top-impl-usr-level_failure_detection : boolean;
+	top-impl-usr-steam_outcome_failure_detection : boolean;
+	top-res-gklocal_109 : boolean;
+	top-res-gklocal_108 : boolean;
+	top-res-gklocal_107 : boolean;
+	top-res-gklocal_106 : boolean;
+	top-res-gklocal_114 : boolean;
+	top-res-gklocal_113 : boolean;
+	top-res-gklocal_112 : boolean;
+	top-res-gklocal_111 : boolean;
+	top-res-call_110 : AND(top-res-gklocal_106, top-res-gklocal_107, top-res-gklocal_108, top-res-gklocal_109);
+	top-res-call_115 : AND(top-res-gklocal_111, top-res-gklocal_112, top-res-gklocal_113, top-res-gklocal_114);
+	top-res-2-call_105 : BoilerController(top-usr-stop, top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-level, top-usr-steam, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3, top-usr-pump_control_state_0, top-usr-pump_control_state_1, top-usr-pump_control_state_2, top-usr-pump_control_state_3, top-usr-pump_repaired_0, top-usr-pump_repaired_1, top-usr-pump_repaired_2, top-usr-pump_repaired_3, top-usr-pump_control_repaired_0, top-usr-pump_control_repaired_1, top-usr-pump_control_repaired_2, top-usr-pump_control_repaired_3, top-usr-level_repaired, top-usr-steam_repaired, top-usr-pump_failure_acknowledgement_0, top-usr-pump_failure_acknowledgement_1, top-usr-pump_failure_acknowledgement_2, top-usr-pump_failure_acknowledgement_3, top-usr-pump_control_failure_acknowledgement_0, top-usr-pump_control_failure_acknowledgement_1, top-usr-pump_control_failure_acknowledgement_2, top-usr-pump_control_failure_acknowledgement_3, top-usr-level_failure_acknowledgement, top-usr-steam_failure_acknowledgement);
+	top-res-3-call_105 : BoilerController(top-usr-stop, top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-level, top-usr-steam, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3, top-usr-pump_control_state_0, top-usr-pump_control_state_1, top-usr-pump_control_state_2, top-usr-pump_control_state_3, top-usr-pump_repaired_0, top-usr-pump_repaired_1, top-usr-pump_repaired_2, top-usr-pump_repaired_3, top-usr-pump_control_repaired_0, top-usr-pump_control_repaired_1, top-usr-pump_control_repaired_2, top-usr-pump_control_repaired_3, top-usr-level_repaired, top-usr-steam_repaired, top-usr-pump_failure_acknowledgement_0, top-usr-pump_failure_acknowledgement_1, top-usr-pump_failure_acknowledgement_2, top-usr-pump_failure_acknowledgement_3, top-usr-pump_control_failure_acknowledgement_0, top-usr-pump_control_failure_acknowledgement_1, top-usr-pump_control_failure_acknowledgement_2, top-usr-pump_control_failure_acknowledgement_3, top-usr-level_failure_acknowledgement, top-usr-steam_failure_acknowledgement);
+	top-res-poracle_1 : signed word[32];
+	top-res-poracle_2 : signed word[32];
+	top-res-poracle_3 : signed word[32];
+	top-res-poracle_4 : signed word[32];
+	top-res-poracle_5 : signed word[32];
+	top-res-poracle_6 : signed word[32];
+	top-res-poracle_7 : signed word[32];
+	top-res-poracle_8 : signed word[32];
+	top-res-poracle_9 : signed word[32];
+	top-res-poracle_10 : signed word[32];
+	top-res-poracle_11 : signed word[32];
+	top-res-poracle_12 : signed word[32];
+	top-res-poracle_13 : signed word[32];
+	top-res-poracle_14 : signed word[32];
+	top-res-poracle_15 : signed word[32];
+	top-res-poracle_16 : signed word[32];
+	top-res-poracle_17 : signed word[32];
+	top-res-poracle_18 : signed word[32];
+	top-res-poracle_19 : signed word[32];
+	top-res-poracle_20 : signed word[32];
+	top-res-poracle_21 : signed word[32];
+	top-res-poracle_22 : signed word[32];
+	top-res-poracle_23 : signed word[32];
+	top-res-poracle_24 : signed word[32];
+	top-res-poracle_25 : signed word[32];
+	top-res-poracle_26 : signed word[32];
+	top-res-poracle_27 : signed word[32];
+	top-res-poracle_28 : signed word[32];
+	top-res-poracle_29 : signed word[32];
+	top-res-poracle_30 : signed word[32];
+	top-res-poracle_31 : signed word[32];
+	top-res-poracle_32 : signed word[32];
+	top-res-poracle_33 : signed word[32];
+
+ASSIGN
+	init(top-impl-usr-pump_control_failure_detection_0) := top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_0;
+	init(top-res-gklocal_111) := !top-impl-usr-pump_control_failure_detection_0;
+	init(top-impl-usr-pump_control_failure_detection_1) := top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_1;
+	init(top-res-gklocal_112) := !top-impl-usr-pump_control_failure_detection_1;
+	init(top-impl-usr-pump_control_failure_detection_2) := top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_2;
+	init(top-res-gklocal_113) := !top-impl-usr-pump_control_failure_detection_2;
+	init(top-impl-usr-pump_control_failure_detection_3) := top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_3;
+	init(top-res-gklocal_114) := !top-impl-usr-pump_control_failure_detection_3;
+	init(top-impl-usr-pump_failure_detection_0) := top-res-3-call_105.BoilerController-usr-pump_failure_detection_0;
+	init(top-res-gklocal_106) := !top-impl-usr-pump_failure_detection_0;
+	init(top-impl-usr-pump_failure_detection_1) := top-res-3-call_105.BoilerController-usr-pump_failure_detection_1;
+	init(top-res-gklocal_107) := !top-impl-usr-pump_failure_detection_1;
+	init(top-impl-usr-pump_failure_detection_2) := top-res-3-call_105.BoilerController-usr-pump_failure_detection_2;
+	init(top-res-gklocal_108) := !top-impl-usr-pump_failure_detection_2;
+	init(top-impl-usr-pump_failure_detection_3) := top-res-3-call_105.BoilerController-usr-pump_failure_detection_3;
+	init(top-res-gklocal_109) := !top-impl-usr-pump_failure_detection_3;
+	init(top-impl-usr-steam_outcome_failure_detection) := top-res-3-call_105.BoilerController-usr-steam_outcome_failure_detection;
+	init(top-impl-usr-level_failure_detection) := top-res-3-call_105.BoilerController-usr-level_failure_detection;
+	init(top-impl-usr-valve) := top-res-2-call_105.BoilerController-usr-valve;
+	init(top-impl-usr-mode) := top-res-2-call_105.BoilerController-usr-mode;
+	init(top-impl-usr-mode_normal_then_valve_off) := ((top-impl-usr-mode = 0sh32_00000003) -> !top-impl-usr-valve);
+	init(top-impl-usr-mode_normal_then_no_failure) := ((top-impl-usr-mode = 0sh32_00000003) -> (((!top-impl-usr-level_failure_detection & !top-impl-usr-steam_outcome_failure_detection) & top-res-call_110.AND-usr-AND) & top-res-call_115.AND-usr-AND));
+	init(top-impl-usr-mode_ok) := ((top-impl-usr-mode = 0sh32_00000006) | ((top-impl-usr-mode = 0sh32_00000005) | ((top-impl-usr-mode = 0sh32_00000004) | ((top-impl-usr-mode = 0sh32_00000003) | ((top-impl-usr-mode = 0sh32_00000002) | (top-impl-usr-mode = 0sh32_00000001))))));
+	init(top-usr-OK) := ((top-impl-usr-mode_ok & top-impl-usr-mode_normal_then_no_failure) & top-impl-usr-mode_normal_then_valve_off);
+
+	next(top-impl-usr-pump_control_failure_detection_0) := next(top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_0);
+	next(top-res-gklocal_111) := !next(top-impl-usr-pump_control_failure_detection_0);
+	next(top-impl-usr-pump_control_failure_detection_1) := next(top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_1);
+	next(top-res-gklocal_112) := !next(top-impl-usr-pump_control_failure_detection_1);
+	next(top-impl-usr-pump_control_failure_detection_2) := next(top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_2);
+	next(top-res-gklocal_113) := !next(top-impl-usr-pump_control_failure_detection_2);
+	next(top-impl-usr-pump_control_failure_detection_3) := next(top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_3);
+	next(top-res-gklocal_114) := !next(top-impl-usr-pump_control_failure_detection_3);
+	next(top-impl-usr-pump_failure_detection_0) := next(top-res-3-call_105.BoilerController-usr-pump_failure_detection_0);
+	next(top-res-gklocal_106) := !next(top-impl-usr-pump_failure_detection_0);
+	next(top-impl-usr-pump_failure_detection_1) := next(top-res-3-call_105.BoilerController-usr-pump_failure_detection_1);
+	next(top-res-gklocal_107) := !next(top-impl-usr-pump_failure_detection_1);
+	next(top-impl-usr-pump_failure_detection_2) := next(top-res-3-call_105.BoilerController-usr-pump_failure_detection_2);
+	next(top-res-gklocal_108) := !next(top-impl-usr-pump_failure_detection_2);
+	next(top-impl-usr-pump_failure_detection_3) := next(top-res-3-call_105.BoilerController-usr-pump_failure_detection_3);
+	next(top-res-gklocal_109) := !next(top-impl-usr-pump_failure_detection_3);
+	next(top-impl-usr-steam_outcome_failure_detection) := next(top-res-3-call_105.BoilerController-usr-steam_outcome_failure_detection);
+	next(top-impl-usr-level_failure_detection) := next(top-res-3-call_105.BoilerController-usr-level_failure_detection);
+	next(top-impl-usr-valve) := next(top-res-2-call_105.BoilerController-usr-valve);
+	next(top-impl-usr-mode) := next(top-res-2-call_105.BoilerController-usr-mode);
+	next(top-impl-usr-mode_normal_then_valve_off) := ((next(top-impl-usr-mode) = 0sh32_00000003) -> !next(top-impl-usr-valve));
+	next(top-impl-usr-mode_normal_then_no_failure) := ((next(top-impl-usr-mode) = 0sh32_00000003) -> (((!next(top-impl-usr-level_failure_detection) & !next(top-impl-usr-steam_outcome_failure_detection)) & next(top-res-call_110.AND-usr-AND)) & next(top-res-call_115.AND-usr-AND)));
+	next(top-impl-usr-mode_ok) := ((next(top-impl-usr-mode) = 0sh32_00000006) | ((next(top-impl-usr-mode) = 0sh32_00000005) | ((next(top-impl-usr-mode) = 0sh32_00000004) | ((next(top-impl-usr-mode) = 0sh32_00000003) | ((next(top-impl-usr-mode) = 0sh32_00000002) | (next(top-impl-usr-mode) = 0sh32_00000001))))));
+	next(top-usr-OK) := ((next(top-impl-usr-mode_ok) & next(top-impl-usr-mode_normal_then_no_failure)) & next(top-impl-usr-mode_normal_then_valve_off));
+
+
+INVARSPEC 
+((top-usr-OK));
+

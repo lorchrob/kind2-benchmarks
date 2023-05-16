@@ -1,0 +1,54 @@
+
+MODULE greycounter (greycounter-usr-x)
+VAR
+	greycounter-usr-out : boolean;
+	greycounter-impl-usr-a : boolean;
+	greycounter-impl-usr-b : boolean;
+
+ASSIGN
+	init(greycounter-impl-usr-b) := FALSE;
+	init(greycounter-impl-usr-a) := FALSE;
+	init(greycounter-usr-out) := (greycounter-impl-usr-a & greycounter-impl-usr-b);
+
+	next(greycounter-impl-usr-b) := greycounter-impl-usr-a;
+	next(greycounter-impl-usr-a) := !greycounter-impl-usr-b;
+	next(greycounter-usr-out) := (next(greycounter-impl-usr-a) & next(greycounter-impl-usr-b));
+
+
+
+MODULE intloopcounter (intloopcounter-usr-x)
+VAR
+	intloopcounter-usr-out : boolean;
+	intloopcounter-impl-usr-time : signed word[32];
+
+ASSIGN
+	init(intloopcounter-impl-usr-time) := 0sh32_00000000;
+	init(intloopcounter-usr-out) := (intloopcounter-impl-usr-time = 0sh32_00000002);
+
+	next(intloopcounter-impl-usr-time) := ((intloopcounter-impl-usr-time = 0sh32_00000003) ? 0sh32_00000000 : (intloopcounter-impl-usr-time - 0sh32_00000001));
+	next(intloopcounter-usr-out) := (next(intloopcounter-impl-usr-time) = 0sh32_00000002);
+
+
+
+MODULE main () 
+VAR
+	top-usr-x : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-b : boolean;
+	top-impl-usr-d : boolean;
+	top-res-call_2 : intloopcounter(top-usr-x);
+	top-res-call_1 : greycounter(top-usr-x);
+
+ASSIGN
+	init(top-impl-usr-d) := top-res-call_2.intloopcounter-usr-out;
+	init(top-impl-usr-b) := top-res-call_1.greycounter-usr-out;
+	init(top-usr-OK) := (top-impl-usr-b = top-impl-usr-d);
+
+	next(top-impl-usr-d) := next(top-res-call_2.intloopcounter-usr-out);
+	next(top-impl-usr-b) := next(top-res-call_1.greycounter-usr-out);
+	next(top-usr-OK) := (next(top-impl-usr-b) = next(top-impl-usr-d));
+
+
+INVARSPEC 
+((top-usr-OK));
+

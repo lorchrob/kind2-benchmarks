@@ -1,0 +1,134 @@
+
+MODULE readwrite (readwrite-usr-etat1, readwrite-usr-etat2, readwrite-usr-etat3, readwrite-usr-etat4, readwrite-usr-etat5, readwrite-usr-etat6, readwrite-usr-etat7, readwrite-usr-etat8, readwrite-usr-etat9)
+VAR
+	readwrite-usr-x0 : signed word[32];
+	readwrite-usr-x1 : signed word[32];
+	readwrite-usr-x2 : signed word[32];
+	readwrite-usr-x3 : signed word[32];
+	readwrite-usr-x4 : signed word[32];
+	readwrite-usr-x5 : signed word[32];
+	readwrite-usr-x6 : signed word[32];
+	readwrite-usr-x7 : signed word[32];
+	readwrite-usr-x8 : signed word[32];
+	readwrite-usr-x9 : signed word[32];
+	readwrite-usr-x10 : signed word[32];
+	readwrite-usr-x11 : signed word[32];
+	readwrite-usr-x12 : signed word[32];
+	readwrite-impl-usr-garde1 : boolean;
+	readwrite-impl-usr-garde2 : boolean;
+	readwrite-impl-usr-garde3 : boolean;
+	readwrite-impl-usr-garde4 : boolean;
+	readwrite-impl-usr-garde5 : boolean;
+	readwrite-impl-usr-garde6 : boolean;
+	readwrite-impl-usr-garde7 : boolean;
+	readwrite-impl-usr-garde8 : boolean;
+	readwrite-impl-usr-garde9 : boolean;
+	readwrite-res-oracle_15 : signed word[32];
+	readwrite-res-oracle_16 : signed word[32];
+	readwrite-res-oracle_12 : signed word[32];
+	readwrite-res-oracle_13 : signed word[32];
+	readwrite-res-oracle_14 : signed word[32];
+	readwrite-res-oracle_10 : signed word[32];
+	readwrite-res-oracle_11 : signed word[32];
+	readwrite-res-oracle_8 : signed word[32];
+	readwrite-res-oracle_9 : signed word[32];
+	readwrite-res-oracle_7 : signed word[32];
+	readwrite-res-oracle_6 : signed word[32];
+	readwrite-res-oracle_4 : signed word[32];
+	readwrite-res-oracle_5 : signed word[32];
+	readwrite-res-oracle_2 : signed word[32];
+	readwrite-res-oracle_3 : signed word[32];
+	readwrite-res-oracle_1 : signed word[32];
+
+ASSIGN
+	init(readwrite-usr-x0) := 0sh32_00000000;
+	init(readwrite-impl-usr-garde1) := (readwrite-res-oracle_1 >= 0sh32_00000001);
+	init(readwrite-impl-usr-garde2) := ((readwrite-res-oracle_2 >= 0sh32_00000001) & (readwrite-res-oracle_3 >= 0sh32_00000001));
+	init(readwrite-usr-x1) := 0sh32_00000000;
+	init(readwrite-impl-usr-garde3) := ((readwrite-res-oracle_4 >= 0sh32_00000001) & (readwrite-res-oracle_5 >= 0sh32_00000001));
+	init(readwrite-usr-x2) := 0sh32_00000001;
+	init(readwrite-impl-usr-garde4) := (readwrite-res-oracle_6 >= 0sh32_00000001);
+	init(readwrite-usr-x11) := 0sh32_00000001;
+	init(readwrite-impl-usr-garde9) := ((readwrite-res-oracle_15 >= 0sh32_00000001) & (readwrite-res-oracle_16 >= 0sh32_00000001));
+	init(readwrite-usr-x9) := 0sh32_00000000;
+	init(readwrite-usr-x10) := 0sh32_00000000;
+	init(readwrite-impl-usr-garde8) := (((readwrite-res-oracle_12 >= 0sh32_00000005) & (readwrite-res-oracle_13 >= 0sh32_00000001)) & (readwrite-res-oracle_14 >= 0sh32_00000001));
+	init(readwrite-usr-x4) := 0sh32_00000000;
+	init(readwrite-impl-usr-garde6) := ((readwrite-res-oracle_8 >= 0sh32_00000001) & (readwrite-res-oracle_9 >= 0sh32_00000001));
+	init(readwrite-usr-x3) := 0sh32_00000000;
+	init(readwrite-usr-x7) := 0sh32_00000000;
+	init(readwrite-impl-usr-garde5) := (readwrite-res-oracle_7 >= 0sh32_00000001);
+	init(readwrite-usr-x6) := 0sh32_00000000;
+	init(readwrite-impl-usr-garde7) := ((readwrite-res-oracle_10 >= 0sh32_00000001) & (readwrite-res-oracle_11 >= 0sh32_00000001));
+	init(readwrite-usr-x8) := 0sh32_00000001;
+	init(readwrite-usr-x12) := 0sh32_00000001;
+	init(readwrite-usr-x5) := 0sh32_00000000;
+
+	next(readwrite-impl-usr-garde2) := ((readwrite-usr-x1 >= 0sh32_00000001) & (readwrite-usr-x4 >= 0sh32_00000001));
+	next(readwrite-impl-usr-garde1) := (readwrite-usr-x0 >= 0sh32_00000001);
+	next(readwrite-usr-x0) := (next(readwrite-usr-etat1) ? (next(readwrite-impl-usr-garde1) ? (readwrite-usr-x0 - 0sh32_00000001) : readwrite-usr-x0) : (next(readwrite-usr-etat2) ? (next(readwrite-impl-usr-garde2) ? (readwrite-usr-x0 + 0sh32_00000001) : readwrite-usr-x0) : readwrite-usr-x0));
+	next(readwrite-impl-usr-garde4) := (readwrite-usr-x1 >= 0sh32_00000001);
+	next(readwrite-impl-usr-garde3) := ((readwrite-usr-x2 >= 0sh32_00000001) & (readwrite-usr-x11 >= 0sh32_00000001));
+	next(readwrite-usr-x1) := (next(readwrite-usr-etat1) ? (next(readwrite-impl-usr-garde1) ? (readwrite-usr-x1 + 0sh32_00000001) : readwrite-usr-x1) : (next(readwrite-usr-etat2) ? (next(readwrite-impl-usr-garde2) ? (readwrite-usr-x1 - 0sh32_00000001) : readwrite-usr-x1) : (next(readwrite-usr-etat3) ? (next(readwrite-impl-usr-garde3) ? (readwrite-usr-x1 + 0sh32_00000001) : readwrite-usr-x1) : (next(readwrite-usr-etat4) ? (next(readwrite-impl-usr-garde4) ? (readwrite-usr-x1 - 0sh32_00000001) : readwrite-usr-x1) : readwrite-usr-x1))));
+	next(readwrite-usr-x2) := (next(readwrite-usr-etat3) ? (next(readwrite-impl-usr-garde3) ? (readwrite-usr-x2 - 0sh32_00000001) : readwrite-usr-x2) : (next(readwrite-usr-etat4) ? (next(readwrite-impl-usr-garde4) ? (readwrite-usr-x2 + 0sh32_00000001) : readwrite-usr-x2) : readwrite-usr-x2));
+	next(readwrite-impl-usr-garde9) := ((readwrite-usr-x9 >= 0sh32_00000001) & (readwrite-usr-x10 >= 0sh32_00000001));
+	next(readwrite-usr-x11) := (next(readwrite-usr-etat3) ? (next(readwrite-impl-usr-garde3) ? (readwrite-usr-x11 - 0sh32_00000001) : readwrite-usr-x11) : (next(readwrite-usr-etat9) ? (next(readwrite-impl-usr-garde9) ? (readwrite-usr-x11 + 0sh32_00000001) : readwrite-usr-x11) : readwrite-usr-x11));
+	next(readwrite-usr-x9) := (next(readwrite-usr-etat4) ? (next(readwrite-impl-usr-garde4) ? (readwrite-usr-x9 + 0sh32_00000001) : readwrite-usr-x9) : (next(readwrite-usr-etat9) ? (next(readwrite-impl-usr-garde9) ? (readwrite-usr-x9 - 0sh32_00000001) : readwrite-usr-x9) : readwrite-usr-x9));
+	next(readwrite-impl-usr-garde8) := (((readwrite-usr-x4 >= 0sh32_00000005) & (readwrite-usr-x5 >= 0sh32_00000001)) & (readwrite-usr-x7 >= 0sh32_00000001));
+	next(readwrite-usr-x10) := (next(readwrite-usr-etat8) ? (next(readwrite-impl-usr-garde8) ? (readwrite-usr-x10 + 0sh32_00000001) : readwrite-usr-x10) : (next(readwrite-usr-etat9) ? (next(readwrite-impl-usr-garde9) ? (readwrite-usr-x10 - 0sh32_00000001) : readwrite-usr-x10) : readwrite-usr-x10));
+	next(readwrite-impl-usr-garde7) := ((readwrite-usr-x8 >= 0sh32_00000001) & (readwrite-usr-x12 >= 0sh32_00000001));
+	next(readwrite-impl-usr-garde6) := ((readwrite-usr-x3 >= 0sh32_00000001) & (readwrite-usr-x7 >= 0sh32_00000001));
+	next(readwrite-usr-x4) := (next(readwrite-usr-etat2) ? (next(readwrite-impl-usr-garde2) ? (readwrite-usr-x4 - 0sh32_00000001) : readwrite-usr-x4) : (next(readwrite-usr-etat6) ? (next(readwrite-impl-usr-garde6) ? (readwrite-usr-x4 + 0sh32_00000001) : readwrite-usr-x4) : (next(readwrite-usr-etat7) ? (next(readwrite-impl-usr-garde7) ? (readwrite-usr-x4 + 0sh32_00000005) : readwrite-usr-x4) : (next(readwrite-usr-etat8) ? (next(readwrite-impl-usr-garde8) ? (readwrite-usr-x4 - 0sh32_00000005) : readwrite-usr-x4) : readwrite-usr-x4))));
+	next(readwrite-usr-x3) := (next(readwrite-usr-etat2) ? (next(readwrite-impl-usr-garde2) ? (readwrite-usr-x3 + 0sh32_00000001) : readwrite-usr-x3) : (next(readwrite-usr-etat6) ? (next(readwrite-impl-usr-garde6) ? (readwrite-usr-x3 - 0sh32_00000001) : readwrite-usr-x3) : readwrite-usr-x3));
+	next(readwrite-impl-usr-garde5) := (readwrite-usr-x6 >= 0sh32_00000001);
+	next(readwrite-usr-x7) := (next(readwrite-usr-etat5) ? (next(readwrite-impl-usr-garde5) ? (readwrite-usr-x7 + 0sh32_00000001) : readwrite-usr-x7) : (next(readwrite-usr-etat6) ? (next(readwrite-impl-usr-garde6) ? (readwrite-usr-x7 - 0sh32_00000001) : readwrite-usr-x7) : (next(readwrite-usr-etat7) ? (next(readwrite-impl-usr-garde7) ? (readwrite-usr-x7 + 0sh32_00000001) : readwrite-usr-x7) : (next(readwrite-usr-etat8) ? (next(readwrite-impl-usr-garde8) ? (readwrite-usr-x7 - 0sh32_00000001) : readwrite-usr-x7) : readwrite-usr-x7))));
+	next(readwrite-usr-x6) := (next(readwrite-usr-etat5) ? (next(readwrite-impl-usr-garde5) ? (readwrite-usr-x6 - 0sh32_00000001) : readwrite-usr-x6) : (next(readwrite-usr-etat6) ? (next(readwrite-impl-usr-garde6) ? (readwrite-usr-x6 + 0sh32_00000001) : readwrite-usr-x6) : readwrite-usr-x6));
+	next(readwrite-usr-x8) := (next(readwrite-usr-etat7) ? (next(readwrite-impl-usr-garde7) ? (readwrite-usr-x8 - 0sh32_00000001) : readwrite-usr-x8) : (next(readwrite-usr-etat8) ? (next(readwrite-impl-usr-garde8) ? (readwrite-usr-x8 + 0sh32_00000001) : readwrite-usr-x8) : readwrite-usr-x8));
+	next(readwrite-usr-x12) := (next(readwrite-usr-etat7) ? (next(readwrite-impl-usr-garde7) ? (readwrite-usr-x12 - 0sh32_00000001) : readwrite-usr-x12) : (next(readwrite-usr-etat9) ? (next(readwrite-impl-usr-garde9) ? (readwrite-usr-x12 + 0sh32_00000001) : readwrite-usr-x12) : readwrite-usr-x12));
+	next(readwrite-usr-x5) := (next(readwrite-usr-etat4) ? (next(readwrite-impl-usr-garde5) ? (readwrite-usr-x5 + 0sh32_00000001) : readwrite-usr-x5) : (next(readwrite-usr-etat8) ? (next(readwrite-impl-usr-garde8) ? (readwrite-usr-x5 - 0sh32_00000001) : readwrite-usr-x5) : readwrite-usr-x5));
+
+
+
+MODULE main () 
+VAR
+	top-usr-etat1 : boolean;
+	top-usr-etat2 : boolean;
+	top-usr-etat3 : boolean;
+	top-usr-etat4 : boolean;
+	top-usr-etat5 : boolean;
+	top-usr-etat6 : boolean;
+	top-usr-etat7 : boolean;
+	top-usr-etat8 : boolean;
+	top-usr-etat9 : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-x0 : signed word[32];
+	top-res-2-call_17 : readwrite(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9);
+	top-res-3-call_17 : readwrite(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9);
+	top-res-poracle_1 : signed word[32];
+	top-res-poracle_2 : signed word[32];
+	top-res-poracle_3 : signed word[32];
+	top-res-poracle_4 : signed word[32];
+	top-res-poracle_5 : signed word[32];
+	top-res-poracle_6 : signed word[32];
+	top-res-poracle_7 : signed word[32];
+	top-res-poracle_8 : signed word[32];
+	top-res-poracle_9 : signed word[32];
+	top-res-poracle_10 : signed word[32];
+	top-res-poracle_11 : signed word[32];
+	top-res-poracle_12 : signed word[32];
+	top-res-poracle_13 : signed word[32];
+	top-res-poracle_14 : signed word[32];
+	top-res-poracle_15 : signed word[32];
+	top-res-poracle_16 : signed word[32];
+
+ASSIGN
+	init(top-impl-usr-x0) := top-res-2-call_17.readwrite-usr-x0;
+	init(top-usr-OK) := (top-impl-usr-x0 >= 0sh32_00000000);
+
+	next(top-impl-usr-x0) := next(top-res-2-call_17.readwrite-usr-x0);
+	next(top-usr-OK) := (next(top-impl-usr-x0) >= 0sh32_00000000);
+
+
+INVARSPEC 
+((top-usr-OK));
+

@@ -1,0 +1,67 @@
+
+MODULE counter (counter-usr-init, counter-usr-incr, counter-usr-x, counter-usr-reset)
+VAR
+	counter-usr-c : signed word[32];
+	counter-impl-usr-pc : signed word[32];
+
+ASSIGN
+	init(counter-impl-usr-pc) := counter-usr-init;
+	init(counter-usr-c) := (counter-usr-reset ? counter-usr-init : (((counter-usr-x & (counter-impl-usr-pc > bvneg0sh32_000003E8)) & (counter-impl-usr-pc < 0sh32_000003E8)) ? (counter-impl-usr-pc + counter-usr-incr) : counter-impl-usr-pc));
+
+	next(counter-impl-usr-pc) := counter-usr-c;
+	next(counter-usr-c) := (next(counter-usr-reset) ? next(counter-usr-init) : (((next(counter-usr-x) & (next(counter-impl-usr-pc) > bvneg0sh32_000003E8)) & (next(counter-impl-usr-pc) < 0sh32_000003E8)) ? (next(counter-impl-usr-pc) + next(counter-usr-incr)) : next(counter-impl-usr-pc)));
+
+
+
+MODULE speed (speed-usr-beacon, speed-usr-second)
+VAR
+	speed-usr-late : boolean;
+	speed-usr-early : boolean;
+	speed-impl-usr-diff : signed word[32];
+	speed-impl-usr-incr : signed word[32];
+	speed-res-gklocal_3 : boolean;
+	speed-res-gklocal_2 : boolean;
+	speed-res-gklocal_1 : signed word[32];
+	speed-res-call_4 : counter(speed-res-gklocal_1, speed-impl-usr-incr, speed-res-gklocal_2, speed-res-gklocal_3);
+
+ASSIGN
+	init(speed-usr-late) := FALSE;
+	init(speed-res-gklocal_1) := 0sh32_00000000;
+	init(speed-res-gklocal_2) := (speed-usr-second | speed-usr-beacon);
+	init(speed-res-gklocal_3) := FALSE;
+	init(speed-impl-usr-incr) := ((speed-usr-beacon & !speed-usr-second) ? 0sh32_00000001 : ((speed-usr-second & !speed-usr-beacon) ? bvneg0sh32_00000001 : 0sh32_00000000));
+	init(speed-impl-usr-diff) := speed-res-call_4.counter-usr-c;
+	init(speed-usr-early) := FALSE;
+
+	next(speed-res-gklocal_1) := 0sh32_00000000;
+	next(speed-res-gklocal_2) := (next(speed-usr-second) | next(speed-usr-beacon));
+	next(speed-res-gklocal_3) := FALSE;
+	next(speed-impl-usr-incr) := ((next(speed-usr-beacon) & !next(speed-usr-second)) ? 0sh32_00000001 : ((next(speed-usr-second) & !next(speed-usr-beacon)) ? bvneg0sh32_00000001 : 0sh32_00000000));
+	next(speed-impl-usr-diff) := next(speed-res-call_4.counter-usr-c);
+	next(speed-usr-late) := (speed-usr-late ? (next(speed-impl-usr-diff) < 0sh32_00000000) : (next(speed-impl-usr-diff) <= bvneg0sh32_0000000A));
+	next(speed-usr-early) := (speed-usr-early ? (next(speed-impl-usr-diff) > 0sh32_00000000) : (next(speed-impl-usr-diff) >= 0sh32_0000000A));
+
+
+
+MODULE main () 
+VAR
+	top-usr-beacon : boolean;
+	top-usr-second : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-late : boolean;
+	top-impl-usr-early : boolean;
+	top-res-2-call_5 : speed(top-usr-beacon, top-usr-second);
+
+ASSIGN
+	init(top-impl-usr-early) := top-res-2-call_5.speed-usr-early;
+	init(top-impl-usr-late) := top-res-2-call_5.speed-usr-late;
+	init(top-usr-OK) := !(top-impl-usr-late & top-impl-usr-early);
+
+	next(top-impl-usr-early) := next(top-res-2-call_5.speed-usr-early);
+	next(top-impl-usr-late) := next(top-res-2-call_5.speed-usr-late);
+	next(top-usr-OK) := !(next(top-impl-usr-late) & next(top-impl-usr-early));
+
+
+INVARSPEC 
+((top-usr-OK));
+

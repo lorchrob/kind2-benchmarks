@@ -1,0 +1,47 @@
+
+MODULE Store (Store-usr-Delta)
+VAR
+	Store-usr-Total : signed word[32];
+	Store-impl-usr-Prev : signed word[32];
+
+ASSIGN
+	init(Store-impl-usr-Prev) := 0sh32_00000000;
+	init(Store-usr-Total) := (((Store-impl-usr-Prev > 0sh32_00000000) | (Store-usr-Delta < 0sh32_00000000)) ? (Store-impl-usr-Prev + Store-usr-Delta) : (((Store-usr-Delta > 0sh32_00000000) & (Store-impl-usr-Prev < 0sh32_0000000A)) ? (Store-impl-usr-Prev + Store-usr-Delta) : Store-impl-usr-Prev));
+
+	next(Store-impl-usr-Prev) := Store-usr-Total;
+	next(Store-usr-Total) := (((next(Store-impl-usr-Prev) > 0sh32_00000000) | (next(Store-usr-Delta) < 0sh32_00000000)) ? (next(Store-impl-usr-Prev) + next(Store-usr-Delta)) : (((next(Store-usr-Delta) > 0sh32_00000000) & (next(Store-impl-usr-Prev) < 0sh32_0000000A)) ? (next(Store-impl-usr-Prev) + next(Store-usr-Delta)) : next(Store-impl-usr-Prev)));
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Y : boolean;
+
+ASSIGN
+	init(Sofar-usr-Y) := TRUE;
+	next(Sofar-usr-Y) := (next(Sofar-usr-X) | Sofar-usr-Y);
+
+
+
+MODULE main () 
+VAR
+	top-usr-Delta : signed word[32];
+	top-usr-OK : boolean;
+	top-impl-usr-Total : signed word[32];
+	top-res-gklocal_2 : boolean;
+	top-res-call_3 : Sofar(top-res-gklocal_2);
+	top-res-call_1 : Store(top-usr-Delta);
+
+ASSIGN
+	init(top-impl-usr-Total) := top-res-call_1.Store-usr-Total;
+	init(top-usr-OK) := (top-res-call_3.Sofar-usr-Y -> ((0sh32_00000000 <= top-impl-usr-Total) & (top-impl-usr-Total <= 0sh32_00000014)));
+	init(top-res-gklocal_2) := ((bvneg0sh32_00000001 <= top-usr-Delta) & (top-usr-Delta <= 0sh32_00000001));
+
+	next(top-res-gklocal_2) := ((bvneg0sh32_00000001 <= next(top-usr-Delta)) & (next(top-usr-Delta) <= 0sh32_00000001));
+	next(top-impl-usr-Total) := next(top-res-call_1.Store-usr-Total);
+	next(top-usr-OK) := (next(top-res-call_3.Sofar-usr-Y) -> ((0sh32_00000000 <= next(top-impl-usr-Total)) & (next(top-impl-usr-Total) <= 0sh32_00000014)));
+
+
+INVARSPEC 
+((top-usr-OK));
+

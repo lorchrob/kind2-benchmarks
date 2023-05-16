@@ -1,0 +1,157 @@
+
+MODULE rtp (rtp-usr-e01, rtp-usr-e02, rtp-usr-e03, rtp-usr-e04, rtp-usr-e05, rtp-usr-e06, rtp-usr-e07, rtp-usr-e08, rtp-usr-e09, rtp-usr-e10, rtp-usr-e11, rtp-usr-e12)
+VAR
+	rtp-usr-X1 : signed word[32];
+	rtp-usr-X2 : signed word[32];
+	rtp-usr-X3 : signed word[32];
+	rtp-usr-X4 : signed word[32];
+	rtp-usr-X5 : signed word[32];
+	rtp-usr-X6 : signed word[32];
+	rtp-usr-X7 : signed word[32];
+	rtp-usr-X8 : signed word[32];
+	rtp-usr-X9 : signed word[32];
+	rtp-usr-erreur : boolean;
+	rtp-impl-usr-g01 : boolean;
+	rtp-impl-usr-g02 : boolean;
+	rtp-impl-usr-g03 : boolean;
+	rtp-impl-usr-g04 : boolean;
+	rtp-impl-usr-g05 : boolean;
+	rtp-impl-usr-g06 : boolean;
+	rtp-impl-usr-g07 : boolean;
+	rtp-impl-usr-g08 : boolean;
+	rtp-impl-usr-g09 : boolean;
+	rtp-impl-usr-g10 : boolean;
+	rtp-impl-usr-g11 : boolean;
+	rtp-impl-usr-g12 : boolean;
+	rtp-res-oracle_12 : signed word[32];
+	rtp-res-oracle_11 : signed word[32];
+	rtp-res-oracle_10 : signed word[32];
+	rtp-res-oracle_9 : signed word[32];
+	rtp-res-oracle_8 : signed word[32];
+	rtp-res-oracle_7 : signed word[32];
+	rtp-res-oracle_6 : signed word[32];
+	rtp-res-oracle_5 : signed word[32];
+	rtp-res-oracle_4 : signed word[32];
+	rtp-res-oracle_3 : signed word[32];
+	rtp-res-oracle_2 : signed word[32];
+	rtp-res-oracle_1 : signed word[32];
+
+ASSIGN
+	init(rtp-usr-X1) := 0sh32_00000001;
+	init(rtp-impl-usr-g01) := (rtp-res-oracle_1 >= 0sh32_00000001);
+	init(rtp-usr-X2) := 0sh32_00000000;
+	init(rtp-impl-usr-g02) := (rtp-res-oracle_2 >= 0sh32_00000001);
+	init(rtp-impl-usr-g12) := (rtp-res-oracle_12 >= 0sh32_00000001);
+	init(rtp-usr-X9) := 0sh32_00000000;
+	init(rtp-impl-usr-g05) := (rtp-res-oracle_5 >= 0sh32_00000001);
+	init(rtp-usr-X4) := 0sh32_00000000;
+	init(rtp-impl-usr-g03) := (rtp-res-oracle_3 >= 0sh32_00000001);
+	init(rtp-usr-X3) := 0sh32_00000000;
+	init(rtp-impl-usr-g04) := (rtp-res-oracle_4 >= 0sh32_00000001);
+	init(rtp-impl-usr-g07) := (rtp-res-oracle_7 >= 0sh32_00000001);
+	init(rtp-usr-X6) := 0sh32_00000000;
+	init(rtp-impl-usr-g06) := (rtp-res-oracle_6 >= 0sh32_00000001);
+	init(rtp-usr-X5) := 0sh32_00000000;
+	init(rtp-impl-usr-g08) := (rtp-res-oracle_8 >= 0sh32_00000001);
+	init(rtp-impl-usr-g09) := (rtp-res-oracle_9 >= 0sh32_00000001);
+	init(rtp-impl-usr-g10) := (rtp-res-oracle_10 >= 0sh32_00000001);
+	init(rtp-usr-X7) := 0sh32_00000000;
+	init(rtp-impl-usr-g11) := (rtp-res-oracle_11 >= 0sh32_00000001);
+	init(rtp-usr-X8) := 0sh32_00000000;
+	init(rtp-usr-erreur) := ((rtp-usr-X1 >= 0sh32_00000002) ? TRUE : FALSE);
+
+	next(rtp-impl-usr-g01) := (rtp-usr-X1 >= 0sh32_00000001);
+	next(rtp-usr-X1) := (next(rtp-usr-e01) ? (next(rtp-impl-usr-g01) ? (rtp-usr-X1 - 0sh32_00000001) : rtp-usr-X1) : rtp-usr-X1);
+	next(rtp-impl-usr-g12) := (rtp-usr-X9 >= 0sh32_00000001);
+	next(rtp-impl-usr-g02) := (rtp-usr-X2 >= 0sh32_00000001);
+	next(rtp-usr-X2) := (next(rtp-usr-e01) ? (next(rtp-impl-usr-g01) ? (rtp-usr-X2 + 0sh32_00000001) : rtp-usr-X2) : (next(rtp-usr-e02) ? (next(rtp-impl-usr-g02) ? (rtp-usr-X2 - 0sh32_00000001) : rtp-usr-X2) : (next(rtp-usr-e12) ? (next(rtp-impl-usr-g12) ? (rtp-usr-X2 + 0sh32_00000001) : rtp-usr-X2) : rtp-usr-X2)));
+	next(rtp-impl-usr-g11) := (rtp-usr-X8 >= 0sh32_00000001);
+	next(rtp-impl-usr-g10) := (rtp-usr-X7 >= 0sh32_00000001);
+	next(rtp-impl-usr-g07) := (rtp-usr-X6 >= 0sh32_00000001);
+	next(rtp-impl-usr-g05) := (rtp-usr-X4 >= 0sh32_00000001);
+	next(rtp-usr-X9) := (next(rtp-usr-e05) ? (next(rtp-impl-usr-g05) ? (rtp-usr-X9 + 0sh32_00000001) : rtp-usr-X9) : (next(rtp-usr-e07) ? (next(rtp-impl-usr-g07) ? (rtp-usr-X9 + 0sh32_00000001) : rtp-usr-X9) : (next(rtp-usr-e10) ? (next(rtp-impl-usr-g10) ? (rtp-usr-X9 + 0sh32_00000001) : rtp-usr-X9) : (next(rtp-usr-e11) ? (next(rtp-impl-usr-g11) ? (rtp-usr-X9 + 0sh32_00000001) : rtp-usr-X9) : (next(rtp-usr-e12) ? (next(rtp-impl-usr-g12) ? (rtp-usr-X9 - 0sh32_00000001) : rtp-usr-X9) : rtp-usr-X9)))));
+	next(rtp-impl-usr-g04) := (rtp-usr-X4 >= 0sh32_00000001);
+	next(rtp-impl-usr-g03) := (rtp-usr-X3 >= 0sh32_00000001);
+	next(rtp-usr-X4) := (next(rtp-usr-e03) ? (next(rtp-impl-usr-g03) ? (rtp-usr-X4 + 0sh32_00000001) : rtp-usr-X4) : (next(rtp-usr-e04) ? (next(rtp-impl-usr-g04) ? (rtp-usr-X4 - 0sh32_00000001) : rtp-usr-X4) : (next(rtp-usr-e05) ? (next(rtp-impl-usr-g05) ? (rtp-usr-X4 - 0sh32_00000001) : rtp-usr-X4) : rtp-usr-X4)));
+	next(rtp-usr-X3) := (next(rtp-usr-e02) ? (next(rtp-impl-usr-g02) ? (rtp-usr-X3 + 0sh32_00000001) : rtp-usr-X3) : (next(rtp-usr-e03) ? (next(rtp-impl-usr-g03) ? (rtp-usr-X3 - 0sh32_00000001) : rtp-usr-X3) : rtp-usr-X3));
+	next(rtp-impl-usr-g09) := (rtp-usr-X6 >= 0sh32_00000001);
+	next(rtp-impl-usr-g08) := (rtp-usr-X6 >= 0sh32_00000001);
+	next(rtp-impl-usr-g06) := (rtp-usr-X5 >= 0sh32_00000001);
+	next(rtp-usr-X6) := (next(rtp-usr-e06) ? (next(rtp-impl-usr-g06) ? (rtp-usr-X6 + 0sh32_00000001) : rtp-usr-X6) : (next(rtp-usr-e07) ? (next(rtp-impl-usr-g07) ? (rtp-usr-X6 - 0sh32_00000001) : rtp-usr-X6) : (next(rtp-usr-e08) ? (next(rtp-impl-usr-g08) ? (rtp-usr-X6 - 0sh32_00000001) : rtp-usr-X6) : (next(rtp-usr-e09) ? (next(rtp-impl-usr-g09) ? (rtp-usr-X6 - 0sh32_00000001) : rtp-usr-X6) : rtp-usr-X6))));
+	next(rtp-usr-X5) := (next(rtp-usr-e04) ? (next(rtp-impl-usr-g04) ? (rtp-usr-X5 + 0sh32_00000001) : rtp-usr-X5) : (next(rtp-usr-e06) ? (next(rtp-impl-usr-g06) ? (rtp-usr-X5 - 0sh32_00000001) : rtp-usr-X5) : rtp-usr-X5));
+	next(rtp-usr-X7) := (next(rtp-usr-e08) ? (next(rtp-impl-usr-g08) ? (rtp-usr-X7 + 0sh32_00000001) : rtp-usr-X7) : (next(rtp-usr-e10) ? (next(rtp-impl-usr-g10) ? (rtp-usr-X7 - 0sh32_00000001) : rtp-usr-X7) : rtp-usr-X7));
+	next(rtp-usr-X8) := (next(rtp-usr-e09) ? (next(rtp-impl-usr-g09) ? (rtp-usr-X8 + 0sh32_00000001) : rtp-usr-X8) : (next(rtp-usr-e11) ? (next(rtp-impl-usr-g11) ? (rtp-usr-X8 - 0sh32_00000001) : rtp-usr-X8) : rtp-usr-X8));
+	next(rtp-usr-erreur) := ((next(rtp-usr-X1) >= 0sh32_00000002) ? TRUE : FALSE);
+
+
+
+MODULE excludes12 (excludes12-usr-X1, excludes12-usr-X2, excludes12-usr-X3, excludes12-usr-X4, excludes12-usr-X5, excludes12-usr-X6, excludes12-usr-X7, excludes12-usr-X8, excludes12-usr-X9, excludes12-usr-X10, excludes12-usr-X11, excludes12-usr-X12)
+VAR
+	excludes12-usr-excludes : boolean;
+
+ASSIGN
+	init(excludes12-usr-excludes) := ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | (((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12)))))))))))));
+
+	next(excludes12-usr-excludes) := ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((!next(excludes12-usr-X1) & next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | ((((((((((((next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12)) | (((((((((((!next(excludes12-usr-X1) & !next(excludes12-usr-X2)) & !next(excludes12-usr-X3)) & !next(excludes12-usr-X4)) & !next(excludes12-usr-X5)) & !next(excludes12-usr-X6)) & !next(excludes12-usr-X7)) & !next(excludes12-usr-X8)) & !next(excludes12-usr-X9)) & !next(excludes12-usr-X10)) & !next(excludes12-usr-X11)) & !next(excludes12-usr-X12))))))))))))));
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+
+
+
+MODULE main () 
+VAR
+	top-usr-e01 : boolean;
+	top-usr-e02 : boolean;
+	top-usr-e03 : boolean;
+	top-usr-e04 : boolean;
+	top-usr-e05 : boolean;
+	top-usr-e06 : boolean;
+	top-usr-e07 : boolean;
+	top-usr-e08 : boolean;
+	top-usr-e09 : boolean;
+	top-usr-e10 : boolean;
+	top-usr-e11 : boolean;
+	top-usr-e12 : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-X4 : signed word[32];
+	top-impl-usr-env : boolean;
+	top-res-gklocal_15 : boolean;
+	top-res-call_14 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
+	top-res-call_16 : Sofar(top-res-gklocal_15);
+	top-res-2-call_13 : rtp(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
+	top-res-poracle_1 : signed word[32];
+	top-res-poracle_2 : signed word[32];
+	top-res-poracle_3 : signed word[32];
+	top-res-poracle_4 : signed word[32];
+	top-res-poracle_5 : signed word[32];
+	top-res-poracle_6 : signed word[32];
+	top-res-poracle_7 : signed word[32];
+	top-res-poracle_8 : signed word[32];
+	top-res-poracle_9 : signed word[32];
+	top-res-poracle_10 : signed word[32];
+	top-res-poracle_11 : signed word[32];
+	top-res-poracle_12 : signed word[32];
+
+ASSIGN
+	init(top-impl-usr-X4) := top-res-2-call_13.rtp-usr-X4;
+	init(top-res-gklocal_15) := (top-res-call_14.excludes12-usr-excludes & (top-impl-usr-X4 < 0sh32_00007FFF));
+	init(top-impl-usr-env) := top-res-call_16.Sofar-usr-Sofar;
+	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-X4 >= 0sh32_00000000));
+
+	next(top-impl-usr-X4) := next(top-res-2-call_13.rtp-usr-X4);
+	next(top-res-gklocal_15) := (next(top-res-call_14.excludes12-usr-excludes) & (next(top-impl-usr-X4) < 0sh32_00007FFF));
+	next(top-impl-usr-env) := next(top-res-call_16.Sofar-usr-Sofar);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-X4) >= 0sh32_00000000));
+
+
+INVARSPEC 
+((top-usr-OK));
+

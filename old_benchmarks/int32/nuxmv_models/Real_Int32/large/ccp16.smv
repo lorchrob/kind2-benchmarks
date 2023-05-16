@@ -1,0 +1,12 @@
+
+MODULE main () 
+VAR
+	top-usr-OK : boolean;
+
+ASSIGN
+	init(top-usr-OK) := TRUE;
+	next(top-usr-OK) := TRUE;
+
+INVARSPEC 
+((top-usr-OK));
+

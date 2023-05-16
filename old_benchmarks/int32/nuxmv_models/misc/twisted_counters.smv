@@ -1,0 +1,57 @@
+
+MODULE loop6counter (loop6counter-usr-x)
+VAR
+	loop6counter-usr-out : boolean;
+	loop6counter-impl-usr-a : boolean;
+	loop6counter-impl-usr-b : boolean;
+	loop6counter-impl-usr-c : boolean;
+
+ASSIGN
+	init(loop6counter-impl-usr-c) := FALSE;
+	init(loop6counter-impl-usr-a) := FALSE;
+	init(loop6counter-usr-out) := (loop6counter-impl-usr-a & loop6counter-impl-usr-c);
+	init(loop6counter-impl-usr-b) := FALSE;
+
+	next(loop6counter-impl-usr-c) := !loop6counter-impl-usr-c;
+	next(loop6counter-impl-usr-a) := (((loop6counter-usr-x & loop6counter-impl-usr-a) & !loop6counter-impl-usr-c) | (loop6counter-impl-usr-b & loop6counter-impl-usr-c));
+	next(loop6counter-usr-out) := (next(loop6counter-impl-usr-a) & next(loop6counter-impl-usr-c));
+	next(loop6counter-impl-usr-b) := ((!loop6counter-usr-x & loop6counter-impl-usr-a) | ((loop6counter-impl-usr-b & !loop6counter-impl-usr-c) | (!loop6counter-impl-usr-b & loop6counter-impl-usr-c)));
+
+
+
+MODULE intloop6counter (intloop6counter-usr-x)
+VAR
+	intloop6counter-usr-out : boolean;
+	intloop6counter-impl-usr-time : signed word[32];
+
+ASSIGN
+	init(intloop6counter-impl-usr-time) := 0sh32_00000000;
+	init(intloop6counter-usr-out) := (intloop6counter-impl-usr-time = 0sh32_00000005);
+
+	next(intloop6counter-impl-usr-time) := ((intloop6counter-impl-usr-time = 0sh32_00000005) ? 0sh32_00000002 : ((intloop6counter-impl-usr-time = 0sh32_00000004) ? (!intloop6counter-usr-x ? 0sh32_00000003 : 0sh32_00000005) : (intloop6counter-impl-usr-time + 0sh32_00000001)));
+	next(intloop6counter-usr-out) := (next(intloop6counter-impl-usr-time) = 0sh32_00000005);
+
+
+
+MODULE main () 
+VAR
+	top-usr-x : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-b : boolean;
+	top-impl-usr-d : boolean;
+	top-res-call_2 : intloop6counter(top-usr-x);
+	top-res-call_1 : loop6counter(top-usr-x);
+
+ASSIGN
+	init(top-impl-usr-d) := top-res-call_2.intloop6counter-usr-out;
+	init(top-impl-usr-b) := top-res-call_1.loop6counter-usr-out;
+	init(top-usr-OK) := ((top-impl-usr-b = top-impl-usr-d) | !top-usr-x);
+
+	next(top-impl-usr-d) := next(top-res-call_2.intloop6counter-usr-out);
+	next(top-impl-usr-b) := next(top-res-call_1.loop6counter-usr-out);
+	next(top-usr-OK) := ((next(top-impl-usr-b) = next(top-impl-usr-d)) | !next(top-usr-x));
+
+
+INVARSPEC 
+((top-usr-OK));
+

@@ -1,0 +1,206 @@
+
+MODULE transmission_failure (transmission_failure-usr-pump_state_0, transmission_failure-usr-pump_state_1, transmission_failure-usr-pump_state_2, transmission_failure-usr-pump_state_3)
+VAR
+	transmission_failure-usr-transmission_failure : boolean;
+
+ASSIGN
+	init(transmission_failure-usr-transmission_failure) := ((transmission_failure-usr-pump_state_3 = 0sh32_00000003) | ((transmission_failure-usr-pump_state_2 = 0sh32_00000003) | ((transmission_failure-usr-pump_state_1 = 0sh32_00000003) | (transmission_failure-usr-pump_state_0 = 0sh32_00000003))));
+
+	next(transmission_failure-usr-transmission_failure) := ((next(transmission_failure-usr-pump_state_3) = 0sh32_00000003) | ((next(transmission_failure-usr-pump_state_2) = 0sh32_00000003) | ((next(transmission_failure-usr-pump_state_1) = 0sh32_00000003) | (next(transmission_failure-usr-pump_state_0) = 0sh32_00000003))));
+
+
+
+MODULE level_failure (level_failure-usr-level_defect)
+VAR
+	level_failure-usr-level_failure : boolean;
+
+ASSIGN
+	init(level_failure-usr-level_failure) := !(level_failure-usr-level_defect = 0sh32_00000000);
+
+	next(level_failure-usr-level_failure) := !(next(level_failure-usr-level_defect) = 0sh32_00000000);
+
+
+
+MODULE dangerous_level (dangerous_level-usr-q)
+VAR
+	dangerous_level-usr-dangerous_level : boolean;
+
+ASSIGN
+	init(dangerous_level-usr-dangerous_level) := ((dangerous_level-usr-q >= 0sh32_00000352) | (dangerous_level-usr-q <= 0sh32_00000096));
+
+	next(dangerous_level-usr-dangerous_level) := ((next(dangerous_level-usr-q) >= 0sh32_00000352) | (next(dangerous_level-usr-q) <= 0sh32_00000096));
+
+
+
+MODULE pump_failure (pump_failure-usr-pump_defect)
+VAR
+	pump_failure-usr-pump_failure : boolean;
+
+ASSIGN
+	init(pump_failure-usr-pump_failure) := !(pump_failure-usr-pump_defect = 0sh32_00000000);
+
+	next(pump_failure-usr-pump_failure) := !(next(pump_failure-usr-pump_defect) = 0sh32_00000000);
+
+
+
+MODULE AND (AND-usr-a_0, AND-usr-a_1, AND-usr-a_2, AND-usr-a_3)
+VAR
+	AND-usr-AND : boolean;
+
+ASSIGN
+	init(AND-usr-AND) := (((AND-usr-a_0 & AND-usr-a_1) & AND-usr-a_2) & AND-usr-a_3);
+
+	next(AND-usr-AND) := (((next(AND-usr-a_0) & next(AND-usr-a_1)) & next(AND-usr-a_2)) & next(AND-usr-a_3));
+
+
+
+MODULE steam_failure (steam_failure-usr-steam_defect)
+VAR
+	steam_failure-usr-steam_failure : boolean;
+
+ASSIGN
+	init(steam_failure-usr-steam_failure) := !(steam_failure-usr-steam_defect = 0sh32_00000000);
+
+	next(steam_failure-usr-steam_failure) := !(next(steam_failure-usr-steam_defect) = 0sh32_00000000);
+
+
+
+MODULE steam_failure_startup (steam_failure_startup-usr-steam)
+VAR
+	steam_failure_startup-usr-steam_failure_startup : boolean;
+
+ASSIGN
+	init(steam_failure_startup-usr-steam_failure_startup) := !(steam_failure_startup-usr-steam = 0sh32_00000000);
+
+	next(steam_failure_startup-usr-steam_failure_startup) := !(next(steam_failure_startup-usr-steam) = 0sh32_00000000);
+
+
+
+MODULE critical_failure (critical_failure-usr-op_mode, critical_failure-usr-steam, critical_failure-usr-level_defect, critical_failure-usr-steam_defect, critical_failure-usr-pump_defect_0, critical_failure-usr-pump_defect_1, critical_failure-usr-pump_defect_2, critical_failure-usr-pump_defect_3, critical_failure-usr-q, critical_failure-usr-pump_state_0, critical_failure-usr-pump_state_1, critical_failure-usr-pump_state_2, critical_failure-usr-pump_state_3)
+VAR
+	critical_failure-usr-critical_failure : boolean;
+	critical_failure-res-call_38 : transmission_failure(critical_failure-usr-pump_state_0, critical_failure-usr-pump_state_1, critical_failure-usr-pump_state_2, critical_failure-usr-pump_state_3);
+	critical_failure-res-call_39 : steam_failure_startup(critical_failure-usr-steam);
+	critical_failure-res-call_40 : level_failure(critical_failure-usr-level_defect);
+	critical_failure-res-call_41 : steam_failure(critical_failure-usr-steam_defect);
+	critical_failure-res-call_42 : dangerous_level(critical_failure-usr-q);
+	critical_failure-res-call_46 : pump_failure(critical_failure-usr-pump_defect_3);
+	critical_failure-res-call_45 : pump_failure(critical_failure-usr-pump_defect_2);
+	critical_failure-res-call_44 : pump_failure(critical_failure-usr-pump_defect_1);
+	critical_failure-res-call_43 : pump_failure(critical_failure-usr-pump_defect_0);
+	critical_failure-res-call_47 : AND(critical_failure-res-call_43.pump_failure-usr-pump_failure, critical_failure-res-call_44.pump_failure-usr-pump_failure, critical_failure-res-call_45.pump_failure-usr-pump_failure, critical_failure-res-call_46.pump_failure-usr-pump_failure);
+
+ASSIGN
+	init(critical_failure-usr-critical_failure) := (((critical_failure-usr-op_mode = 0sh32_00000005) & (critical_failure-res-call_47.AND-usr-AND | (critical_failure-res-call_41.steam_failure-usr-steam_failure | critical_failure-res-call_42.dangerous_level-usr-dangerous_level))) | (((critical_failure-usr-op_mode = 0sh32_00000004) & critical_failure-res-call_42.dangerous_level-usr-dangerous_level) | (((critical_failure-usr-op_mode = 0sh32_00000003) & critical_failure-res-call_42.dangerous_level-usr-dangerous_level) | (((critical_failure-usr-op_mode = 0sh32_00000002) & (critical_failure-res-call_41.steam_failure-usr-steam_failure | critical_failure-res-call_40.level_failure-usr-level_failure)) | (((critical_failure-usr-op_mode = 0sh32_00000001) & critical_failure-res-call_39.steam_failure_startup-usr-steam_failure_startup) | critical_failure-res-call_38.transmission_failure-usr-transmission_failure)))));
+
+	next(critical_failure-usr-critical_failure) := (((next(critical_failure-usr-op_mode) = 0sh32_00000005) & (next(critical_failure-res-call_47.AND-usr-AND) | (next(critical_failure-res-call_41.steam_failure-usr-steam_failure) | next(critical_failure-res-call_42.dangerous_level-usr-dangerous_level)))) | (((next(critical_failure-usr-op_mode) = 0sh32_00000004) & next(critical_failure-res-call_42.dangerous_level-usr-dangerous_level)) | (((next(critical_failure-usr-op_mode) = 0sh32_00000003) & next(critical_failure-res-call_42.dangerous_level-usr-dangerous_level)) | (((next(critical_failure-usr-op_mode) = 0sh32_00000002) & (next(critical_failure-res-call_41.steam_failure-usr-steam_failure) | next(critical_failure-res-call_40.level_failure-usr-level_failure))) | (((next(critical_failure-usr-op_mode) = 0sh32_00000001) & next(critical_failure-res-call_39.steam_failure_startup-usr-steam_failure_startup)) | next(critical_failure-res-call_38.transmission_failure-usr-transmission_failure))))));
+
+
+
+MODULE pump_control_failure (pump_control_failure-usr-pump_defect)
+VAR
+	pump_control_failure-usr-pump_failure : boolean;
+
+ASSIGN
+	init(pump_control_failure-usr-pump_failure) := !(pump_control_failure-usr-pump_defect = 0sh32_00000000);
+
+	next(pump_control_failure-usr-pump_failure) := !(next(pump_control_failure-usr-pump_defect) = 0sh32_00000000);
+
+
+
+MODULE OR (OR-usr-a_0, OR-usr-a_1, OR-usr-a_2, OR-usr-a_3)
+VAR
+	OR-usr-OR : boolean;
+
+ASSIGN
+	init(OR-usr-OR) := (OR-usr-a_3 | (OR-usr-a_2 | (OR-usr-a_0 & OR-usr-a_1)));
+
+	next(OR-usr-OR) := (next(OR-usr-a_3) | (next(OR-usr-a_2) | (next(OR-usr-a_0) & next(OR-usr-a_1))));
+
+
+
+MODULE failure (failure-usr-level_defect, failure-usr-steam_defect, failure-usr-pump_defect_0, failure-usr-pump_defect_1, failure-usr-pump_defect_2, failure-usr-pump_defect_3, failure-usr-pump_control_defect_0, failure-usr-pump_control_defect_1, failure-usr-pump_control_defect_2, failure-usr-pump_control_defect_3)
+VAR
+	failure-usr-failure : boolean;
+	failure-res-call_48 : level_failure(failure-usr-level_defect);
+	failure-res-call_49 : steam_failure(failure-usr-steam_defect);
+	failure-res-call_53 : pump_failure(failure-usr-pump_defect_3);
+	failure-res-call_52 : pump_failure(failure-usr-pump_defect_2);
+	failure-res-call_51 : pump_failure(failure-usr-pump_defect_1);
+	failure-res-call_50 : pump_failure(failure-usr-pump_defect_0);
+	failure-res-call_54 : OR(failure-res-call_50.pump_failure-usr-pump_failure, failure-res-call_51.pump_failure-usr-pump_failure, failure-res-call_52.pump_failure-usr-pump_failure, failure-res-call_53.pump_failure-usr-pump_failure);
+	failure-res-call_58 : pump_control_failure(failure-usr-pump_control_defect_3);
+	failure-res-call_57 : pump_control_failure(failure-usr-pump_control_defect_2);
+	failure-res-call_56 : pump_control_failure(failure-usr-pump_control_defect_1);
+	failure-res-call_55 : pump_control_failure(failure-usr-pump_control_defect_0);
+	failure-res-call_59 : OR(failure-res-call_55.pump_control_failure-usr-pump_failure, failure-res-call_56.pump_control_failure-usr-pump_failure, failure-res-call_57.pump_control_failure-usr-pump_failure, failure-res-call_58.pump_control_failure-usr-pump_failure);
+
+ASSIGN
+	init(failure-usr-failure) := (failure-res-call_59.OR-usr-OR | (failure-res-call_54.OR-usr-OR | (failure-res-call_49.steam_failure-usr-steam_failure | failure-res-call_48.level_failure-usr-level_failure)));
+
+	next(failure-usr-failure) := (next(failure-res-call_59.OR-usr-OR) | (next(failure-res-call_54.OR-usr-OR) | (next(failure-res-call_49.steam_failure-usr-steam_failure) | next(failure-res-call_48.level_failure-usr-level_failure))));
+
+
+
+MODULE ControlMode (ControlMode-usr-steam_boiler_waiting, ControlMode-usr-physical_units_ready, ControlMode-usr-stop_request, ControlMode-usr-steam, ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-pump_control_defect_0, ControlMode-usr-pump_control_defect_1, ControlMode-usr-pump_control_defect_2, ControlMode-usr-pump_control_defect_3, ControlMode-usr-q, ControlMode-usr-pump_state_0, ControlMode-usr-pump_state_1, ControlMode-usr-pump_state_2, ControlMode-usr-pump_state_3)
+VAR
+	ControlMode-usr-op_mode : signed word[32];
+	ControlMode-res-gklocal_75 : signed word[32];
+	ControlMode-res-call_76 : critical_failure(ControlMode-res-gklocal_75, ControlMode-usr-steam, ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-q, ControlMode-usr-pump_state_0, ControlMode-usr-pump_state_1, ControlMode-usr-pump_state_2, ControlMode-usr-pump_state_3);
+	ControlMode-res-call_77 : level_failure(ControlMode-usr-level_defect);
+	ControlMode-res-call_78 : failure(ControlMode-usr-level_defect, ControlMode-usr-steam_defect, ControlMode-usr-pump_defect_0, ControlMode-usr-pump_defect_1, ControlMode-usr-pump_defect_2, ControlMode-usr-pump_defect_3, ControlMode-usr-pump_control_defect_0, ControlMode-usr-pump_control_defect_1, ControlMode-usr-pump_control_defect_2, ControlMode-usr-pump_control_defect_3);
+	ControlMode-res-oracle_74 : signed word[32];
+
+ASSIGN
+	init(ControlMode-usr-op_mode) := 0sh32_00000001;
+	init(ControlMode-res-gklocal_75) := ControlMode-res-oracle_74;
+
+	next(ControlMode-res-gklocal_75) := ControlMode-usr-op_mode;
+	next(ControlMode-usr-op_mode) := (((ControlMode-usr-op_mode = 0sh32_00000006) | (next(ControlMode-usr-stop_request) | next(ControlMode-res-call_76.critical_failure-usr-critical_failure))) ? 0sh32_00000006 : ((ControlMode-usr-op_mode = 0sh32_00000001) ? (next(ControlMode-usr-steam_boiler_waiting) ? 0sh32_00000002 : 0sh32_00000001) : (((ControlMode-usr-op_mode = 0sh32_00000002) & !next(ControlMode-usr-physical_units_ready)) ? 0sh32_00000002 : (next(ControlMode-res-call_77.level_failure-usr-level_failure) ? 0sh32_00000005 : (next(ControlMode-res-call_78.failure-usr-failure) ? 0sh32_00000004 : 0sh32_00000003)))));
+
+
+
+MODULE main () 
+VAR
+	top-usr-steam_boiler_waiting : boolean;
+	top-usr-physical_units_ready : boolean;
+	top-usr-stop_request : boolean;
+	top-usr-steam : signed word[32];
+	top-usr-level_defect : signed word[32];
+	top-usr-steam_defect : signed word[32];
+	top-usr-pump_defect_0 : signed word[32];
+	top-usr-pump_defect_1 : signed word[32];
+	top-usr-pump_defect_2 : signed word[32];
+	top-usr-pump_defect_3 : signed word[32];
+	top-usr-pump_control_defect_0 : signed word[32];
+	top-usr-pump_control_defect_1 : signed word[32];
+	top-usr-pump_control_defect_2 : signed word[32];
+	top-usr-pump_control_defect_3 : signed word[32];
+	top-usr-q : signed word[32];
+	top-usr-pump_state_0 : signed word[32];
+	top-usr-pump_state_1 : signed word[32];
+	top-usr-pump_state_2 : signed word[32];
+	top-usr-pump_state_3 : signed word[32];
+	top-usr-OK : boolean;
+	top-impl-usr-op_mode : signed word[32];
+	top-impl-usr-mode_normal_then_water_level_ok : boolean;
+	top-impl-usr-mode_normal_then_no_stop_request : boolean;
+	top-res-call_106 : dangerous_level(top-usr-q);
+	top-res-call_105 : ControlMode(top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-stop_request, top-usr-steam, top-usr-level_defect, top-usr-steam_defect, top-usr-pump_defect_0, top-usr-pump_defect_1, top-usr-pump_defect_2, top-usr-pump_defect_3, top-usr-pump_control_defect_0, top-usr-pump_control_defect_1, top-usr-pump_control_defect_2, top-usr-pump_control_defect_3, top-usr-q, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3);
+	top-res-poracle_1 : signed word[32];
+
+ASSIGN
+	init(top-impl-usr-op_mode) := top-res-call_105.ControlMode-usr-op_mode;
+	init(top-impl-usr-mode_normal_then_no_stop_request) := ((top-impl-usr-op_mode = 0sh32_00000003) -> !top-usr-stop_request);
+	init(top-impl-usr-mode_normal_then_water_level_ok) := TRUE;
+	init(top-usr-OK) := (top-impl-usr-mode_normal_then_water_level_ok & top-impl-usr-mode_normal_then_no_stop_request);
+
+	next(top-impl-usr-op_mode) := next(top-res-call_105.ControlMode-usr-op_mode);
+	next(top-impl-usr-mode_normal_then_no_stop_request) := ((next(top-impl-usr-op_mode) = 0sh32_00000003) -> !next(top-usr-stop_request));
+	next(top-impl-usr-mode_normal_then_water_level_ok) := (((next(top-impl-usr-op_mode) = 0sh32_00000003) & (top-impl-usr-op_mode = 0sh32_00000003)) -> !next(top-res-call_106.dangerous_level-usr-dangerous_level));
+	next(top-usr-OK) := (next(top-impl-usr-mode_normal_then_water_level_ok) & next(top-impl-usr-mode_normal_then_no_stop_request));
+
+
+INVARSPEC 
+((top-usr-OK));
+

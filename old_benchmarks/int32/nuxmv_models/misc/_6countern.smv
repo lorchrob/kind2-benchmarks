@@ -1,0 +1,17 @@
+
+MODULE main () 
+VAR
+	top-usr-OK : boolean;
+	top-impl-usr-time : signed word[32];
+
+ASSIGN
+	init(top-impl-usr-time) := 0sh32_00000000;
+	init(top-usr-OK) := (top-impl-usr-time < 0sh32_00000000);
+
+	next(top-impl-usr-time) := ((top-impl-usr-time = 0sh32_00000005) ? 0sh32_00000000 : (top-impl-usr-time + 0sh32_00000001));
+	next(top-usr-OK) := (next(top-impl-usr-time) < 0sh32_00000000);
+
+
+INVARSPEC 
+((top-usr-OK));
+

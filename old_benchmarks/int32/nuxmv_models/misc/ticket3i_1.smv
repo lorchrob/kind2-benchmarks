@@ -1,0 +1,143 @@
+
+MODULE ticket3i (ticket3i-usr-e1, ticket3i-usr-e2, ticket3i-usr-e3, ticket3i-usr-e4, ticket3i-usr-e5, ticket3i-usr-e6, ticket3i-usr-e7, ticket3i-usr-e8, ticket3i-usr-e9, ticket3i-usr-init_a1, ticket3i-usr-init_a2, ticket3i-usr-init_a3, ticket3i-usr-init_t)
+VAR
+	ticket3i-usr-p1 : signed word[32];
+	ticket3i-usr-p2 : signed word[32];
+	ticket3i-usr-p3 : signed word[32];
+	ticket3i-usr-t : signed word[32];
+	ticket3i-usr-s : signed word[32];
+	ticket3i-usr-a1 : signed word[32];
+	ticket3i-usr-a2 : signed word[32];
+	ticket3i-usr-a3 : signed word[32];
+	ticket3i-usr-erreur_ticket3i : boolean;
+	ticket3i-impl-usr-g1 : boolean;
+	ticket3i-impl-usr-g2 : boolean;
+	ticket3i-impl-usr-g3 : boolean;
+	ticket3i-impl-usr-g4 : boolean;
+	ticket3i-impl-usr-g5 : boolean;
+	ticket3i-impl-usr-g6 : boolean;
+	ticket3i-impl-usr-g7 : boolean;
+	ticket3i-impl-usr-g8 : boolean;
+	ticket3i-impl-usr-g9 : boolean;
+	ticket3i-res-oracle_12 : signed word[32];
+	ticket3i-res-oracle_10 : signed word[32];
+	ticket3i-res-oracle_11 : signed word[32];
+	ticket3i-res-oracle_9 : signed word[32];
+	ticket3i-res-oracle_8 : signed word[32];
+	ticket3i-res-oracle_6 : signed word[32];
+	ticket3i-res-oracle_7 : signed word[32];
+	ticket3i-res-oracle_5 : signed word[32];
+	ticket3i-res-oracle_4 : signed word[32];
+	ticket3i-res-oracle_2 : signed word[32];
+	ticket3i-res-oracle_3 : signed word[32];
+	ticket3i-res-oracle_1 : signed word[32];
+
+ASSIGN
+	init(ticket3i-usr-p1) := 0sh32_00000000;
+	init(ticket3i-impl-usr-g1) := (ticket3i-res-oracle_1 = 0sh32_00000000);
+	init(ticket3i-usr-a1) := ticket3i-usr-init_a1;
+	init(ticket3i-impl-usr-g2) := ((ticket3i-res-oracle_2 = 0sh32_00000001) & (ticket3i-res-oracle_3 >= ticket3i-usr-a1));
+	init(ticket3i-usr-t) := ticket3i-usr-init_t;
+	init(ticket3i-usr-s) := ticket3i-usr-t;
+	init(ticket3i-impl-usr-g4) := (ticket3i-res-oracle_5 = 0sh32_00000000);
+	init(ticket3i-usr-p2) := 0sh32_00000000;
+	init(ticket3i-usr-a2) := ticket3i-usr-init_a2;
+	init(ticket3i-impl-usr-g5) := ((ticket3i-res-oracle_6 = 0sh32_00000001) & (ticket3i-res-oracle_7 >= ticket3i-usr-a2));
+	init(ticket3i-impl-usr-g6) := (ticket3i-res-oracle_8 = 0sh32_00000002);
+	init(ticket3i-impl-usr-g7) := (ticket3i-res-oracle_9 = 0sh32_00000000);
+	init(ticket3i-usr-p3) := 0sh32_00000000;
+	init(ticket3i-usr-a3) := ticket3i-usr-init_a3;
+	init(ticket3i-impl-usr-g8) := ((ticket3i-res-oracle_10 = 0sh32_00000001) & (ticket3i-res-oracle_11 >= ticket3i-usr-a3));
+	init(ticket3i-impl-usr-g9) := (ticket3i-res-oracle_12 = 0sh32_00000002);
+	init(ticket3i-impl-usr-g3) := (ticket3i-res-oracle_4 = 0sh32_00000002);
+	init(ticket3i-usr-erreur_ticket3i) := (((ticket3i-usr-p3 >= 0sh32_00000003) | ((ticket3i-usr-p2 >= 0sh32_00000003) | (ticket3i-usr-p1 >= 0sh32_00000003))) ? TRUE : FALSE);
+
+	next(ticket3i-impl-usr-g3) := (ticket3i-usr-p1 = 0sh32_00000002);
+	next(ticket3i-impl-usr-g1) := (ticket3i-usr-p1 = 0sh32_00000000);
+	next(ticket3i-usr-a1) := (next(ticket3i-usr-e1) ? (next(ticket3i-impl-usr-g1) ? ticket3i-usr-t : ticket3i-usr-a1) : ticket3i-usr-a1);
+	next(ticket3i-impl-usr-g2) := ((ticket3i-usr-p1 = 0sh32_00000001) & (ticket3i-usr-s >= next(ticket3i-usr-a1)));
+	next(ticket3i-usr-p1) := (next(ticket3i-usr-e1) ? (next(ticket3i-impl-usr-g1) ? 0sh32_00000001 : ticket3i-usr-p1) : (next(ticket3i-usr-e2) ? (next(ticket3i-impl-usr-g2) ? 0sh32_00000002 : ticket3i-usr-p1) : (next(ticket3i-usr-e3) ? (next(ticket3i-impl-usr-g3) ? 0sh32_00000000 : ticket3i-usr-p1) : ticket3i-usr-p1)));
+	next(ticket3i-impl-usr-g9) := (ticket3i-usr-p3 = 0sh32_00000002);
+	next(ticket3i-impl-usr-g6) := (ticket3i-usr-p2 = 0sh32_00000002);
+	next(ticket3i-usr-s) := (next(ticket3i-usr-e3) ? (next(ticket3i-impl-usr-g3) ? (ticket3i-usr-s + 0sh32_00000001) : ticket3i-usr-s) : (next(ticket3i-usr-e6) ? (next(ticket3i-impl-usr-g6) ? (ticket3i-usr-s + 0sh32_00000001) : ticket3i-usr-s) : (next(ticket3i-usr-e9) ? (next(ticket3i-impl-usr-g9) ? (ticket3i-usr-s + 0sh32_00000001) : ticket3i-usr-s) : ticket3i-usr-s)));
+	next(ticket3i-impl-usr-g7) := (ticket3i-usr-p3 = 0sh32_00000000);
+	next(ticket3i-impl-usr-g4) := (ticket3i-usr-p2 = 0sh32_00000000);
+	next(ticket3i-usr-t) := (next(ticket3i-usr-e1) ? (next(ticket3i-impl-usr-g1) ? (ticket3i-usr-t + 0sh32_00000001) : ticket3i-usr-t) : (next(ticket3i-usr-e4) ? (next(ticket3i-impl-usr-g4) ? (ticket3i-usr-t + 0sh32_00000001) : ticket3i-usr-t) : (next(ticket3i-usr-e7) ? (next(ticket3i-impl-usr-g7) ? (ticket3i-usr-t + 0sh32_00000001) : ticket3i-usr-t) : ticket3i-usr-t)));
+	next(ticket3i-usr-a2) := (next(ticket3i-usr-e4) ? (next(ticket3i-impl-usr-g4) ? ticket3i-usr-t : ticket3i-usr-a2) : ticket3i-usr-a2);
+	next(ticket3i-impl-usr-g5) := ((ticket3i-usr-p2 = 0sh32_00000001) & (ticket3i-usr-s >= next(ticket3i-usr-a2)));
+	next(ticket3i-usr-p2) := (next(ticket3i-usr-e4) ? (next(ticket3i-impl-usr-g4) ? 0sh32_00000001 : ticket3i-usr-p2) : (next(ticket3i-usr-e5) ? (next(ticket3i-impl-usr-g5) ? 0sh32_00000002 : ticket3i-usr-p2) : (next(ticket3i-usr-e6) ? (next(ticket3i-impl-usr-g6) ? 0sh32_00000000 : ticket3i-usr-p2) : ticket3i-usr-p2)));
+	next(ticket3i-usr-a3) := (next(ticket3i-usr-e7) ? (next(ticket3i-impl-usr-g7) ? ticket3i-usr-t : ticket3i-usr-a3) : ticket3i-usr-a3);
+	next(ticket3i-impl-usr-g8) := ((ticket3i-usr-p3 = 0sh32_00000001) & (ticket3i-usr-s >= next(ticket3i-usr-a3)));
+	next(ticket3i-usr-p3) := (next(ticket3i-usr-e7) ? (next(ticket3i-impl-usr-g7) ? 0sh32_00000001 : ticket3i-usr-p3) : (next(ticket3i-usr-e8) ? (next(ticket3i-impl-usr-g8) ? 0sh32_00000002 : ticket3i-usr-p3) : (next(ticket3i-usr-e9) ? (next(ticket3i-impl-usr-g9) ? 0sh32_00000000 : ticket3i-usr-p3) : ticket3i-usr-p3)));
+	next(ticket3i-usr-erreur_ticket3i) := (((next(ticket3i-usr-p3) >= 0sh32_00000003) | ((next(ticket3i-usr-p2) >= 0sh32_00000003) | (next(ticket3i-usr-p1) >= 0sh32_00000003))) ? TRUE : FALSE);
+
+
+
+MODULE excludes9 (excludes9-usr-X1, excludes9-usr-X2, excludes9-usr-X3, excludes9-usr-X4, excludes9-usr-X5, excludes9-usr-X6, excludes9-usr-X7, excludes9-usr-X8, excludes9-usr-X9)
+VAR
+	excludes9-usr-excludes : boolean;
+
+ASSIGN
+	init(excludes9-usr-excludes) := (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | ((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9))))))))));
+
+	next(excludes9-usr-excludes) := (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | ((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)))))))))));
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+
+
+
+MODULE main () 
+VAR
+	top-usr-e1 : boolean;
+	top-usr-e2 : boolean;
+	top-usr-e3 : boolean;
+	top-usr-e4 : boolean;
+	top-usr-e5 : boolean;
+	top-usr-e6 : boolean;
+	top-usr-e7 : boolean;
+	top-usr-e8 : boolean;
+	top-usr-e9 : boolean;
+	top-usr-init_a1 : signed word[32];
+	top-usr-init_a2 : signed word[32];
+	top-usr-init_a3 : signed word[32];
+	top-usr-init_t : signed word[32];
+	top-usr-OK : boolean;
+	top-impl-usr-erreur_ticket3i : boolean;
+	top-res-gklocal_15 : boolean;
+	top-res-call_14 : excludes9(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9);
+	top-res-call_16 : Sofar(top-res-gklocal_15);
+	top-res-2-call_13 : ticket3i(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9, top-usr-init_a1, top-usr-init_a2, top-usr-init_a3, top-usr-init_t);
+	top-res-poracle_1 : signed word[32];
+	top-res-poracle_2 : signed word[32];
+	top-res-poracle_3 : signed word[32];
+	top-res-poracle_4 : signed word[32];
+	top-res-poracle_5 : signed word[32];
+	top-res-poracle_6 : signed word[32];
+	top-res-poracle_7 : signed word[32];
+	top-res-poracle_8 : signed word[32];
+	top-res-poracle_9 : signed word[32];
+	top-res-poracle_10 : signed word[32];
+	top-res-poracle_11 : signed word[32];
+	top-res-poracle_12 : signed word[32];
+
+ASSIGN
+	init(top-res-gklocal_15) := ((((top-res-call_14.excludes9-usr-excludes & (top-usr-init_a1 >= 0sh32_00000000)) & (top-usr-init_a2 >= 0sh32_00000000)) & (top-usr-init_a3 >= 0sh32_00000000)) & (top-usr-init_t >= 0sh32_00000000));
+	init(top-impl-usr-erreur_ticket3i) := top-res-2-call_13.ticket3i-usr-erreur_ticket3i;
+	init(top-usr-OK) := (top-res-call_16.Sofar-usr-Sofar -> !top-impl-usr-erreur_ticket3i);
+
+	next(top-res-gklocal_15) := ((((next(top-res-call_14.excludes9-usr-excludes) & (next(top-usr-init_a1) >= 0sh32_00000000)) & (next(top-usr-init_a2) >= 0sh32_00000000)) & (next(top-usr-init_a3) >= 0sh32_00000000)) & (next(top-usr-init_t) >= 0sh32_00000000));
+	next(top-impl-usr-erreur_ticket3i) := next(top-res-2-call_13.ticket3i-usr-erreur_ticket3i);
+	next(top-usr-OK) := (next(top-res-call_16.Sofar-usr-Sofar) -> !next(top-impl-usr-erreur_ticket3i));
+
+
+INVARSPEC 
+((top-usr-OK));
+
