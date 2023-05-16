@@ -1,0 +1,60 @@
+
+MODULE Defs__rising (Defs__rising-usr-signal)
+VAR
+	Defs__rising-usr-result : boolean;
+	Defs__rising-res-glocal_1 : boolean;
+
+ASSIGN
+	init(Defs__rising-usr-result) := FALSE;
+	init(Defs__rising-res-glocal_1) := !Defs__rising-usr-signal;
+
+	next(Defs__rising-usr-result) := (Defs__rising-res-glocal_1 & next(Defs__rising-usr-signal));
+	next(Defs__rising-res-glocal_1) := !next(Defs__rising-usr-signal);
+
+
+
+MODULE main () 
+VAR
+	main-usr-is_pending : boolean;
+	main-usr-state : integer;
+	main-usr-left_shift : boolean;
+	main-usr-right_shift : boolean;
+	main-usr-neighbor_state0 : integer;
+	main-usr-neighbor_state1 : integer;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
+	main-res-glocal_9 : boolean;
+	main-res-glocal_10 : boolean;
+	main-res-glocal_11 : boolean;
+	main-res-glocal_12 : boolean;
+	main-res-glocal_13 : boolean;
+	main-res-call_7 : Defs__rising(main-usr-left_shift);
+	main-res-call_8 : Defs__rising(main-usr-right_shift);
+
+ASSIGN
+	init(main-impl-usr-__GUARANTEE1) := TRUE;
+	init(main-impl-usr-__ASSUME0) := !(main-usr-left_shift & main-usr-right_shift);
+	init(main-res-glocal_9) := main-impl-usr-__ASSUME0;
+	init(main-res-glocal_10) := (main-usr-state = 0);
+	init(main-res-glocal_11) := (main-usr-is_pending = (main-usr-state <= 5 | main-usr-state >= 3));
+	init(main-res-glocal_12) := TRUE;
+	init(main-res-glocal_13) := (main-usr-time = 0);
+
+	next(main-impl-usr-__GUARANTEE1) := (((next(main-res-call_7.Defs__rising-usr-result) & (main-usr-state = 0)) -> (next(main-usr-state) = 4)) & ((next(main-res-call_8.Defs__rising-usr-result) & (main-usr-state = 0)) -> (next(main-usr-state) = 5)));
+	next(main-impl-usr-__ASSUME0) := !(next(main-usr-left_shift) & next(main-usr-right_shift));
+	next(main-res-glocal_9) := next(main-impl-usr-__ASSUME0);
+	next(main-res-glocal_10) := (next(main-usr-state) = ((((main-usr-state = 3) & !(main-usr-neighbor_state0 = 0)) & !(main-usr-neighbor_state1 = 0)) ? 0 : ((((main-usr-state = 5) & !(main-usr-neighbor_state0 = 2)) & !(main-usr-neighbor_state1 = 2)) ? 2 : ((((main-usr-state = 4) & !(main-usr-neighbor_state0 = 1)) & !(main-usr-neighbor_state1 = 1)) ? 1 : (next(main-res-call_7.Defs__rising-usr-result) ? ((main-usr-state = 0) ? 4 : ((main-usr-state = 1) ? 5 : ((main-usr-state = 2) ? 3 : main-usr-state))) : (next(main-res-call_8.Defs__rising-usr-result) ? ((main-usr-state = 0) ? 5 : ((main-usr-state = 1) ? 3 : ((main-usr-state = 2) ? 4 : main-usr-state))) : main-usr-state))))));
+	next(main-res-glocal_11) := (next(main-usr-is_pending) = (next(main-usr-state) <= 5 | next(main-usr-state) >= 3));
+	next(main-res-glocal_12) := TRUE;
+	next(main-res-glocal_13) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_13;
+	INVAR main-res-glocal_12;
+	INVAR main-res-glocal_11;
+	INVAR main-res-glocal_10;
+	INVAR main-res-glocal_9;
+
+INVARSPEC 
+((main-impl-usr-__GUARANTEE1));
+

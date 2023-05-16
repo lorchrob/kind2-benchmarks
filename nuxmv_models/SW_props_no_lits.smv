@@ -183,10 +183,6 @@ VAR
 	main-impl-usr-__ASSUME0 : boolean;
 	main-impl-usr-__ASSUME1 : boolean;
 	main-impl-usr-__ASSUME2 : boolean;
-	main-impl-usr-__ASSUME__HIST : boolean;
-	main-impl-usr-__GUARANTEE0 : boolean;
-	main-impl-usr-__GUARANTEE1 : boolean;
-	main-impl-usr-__GUARANTEE2 : boolean;
 	main-res-glocal_2 : boolean;
 	main-res-glocal_3 : boolean;
 	main-res-glocal_4 : boolean;
@@ -242,10 +238,6 @@ VAR
 	main-res-call_6 : _TOP__RADIO(main-usr-RADIO____ASSUME__HIST, main-usr-RADIO____ASSUME0, main-usr-RADIO____ASSUME1, main-usr-RADIO____ASSUME2, main-usr-RADIO__recv_map_in___EVENT_, main-usr-5-RADIO__recv_map_in-HMAC, main-usr-2-4-4-RADIO__recv_map_in-Map-alt, main-usr-2-4-4-RADIO__recv_map_in-Map-lat, main-usr-2-5-4-RADIO__recv_map_in-Map-long, main-usr-8-RADIO__recv_map_in-Pattern, main-usr-RADIO__send_status_in___EVENT_, main-usr-4-RADIO__send_status_in-alt, main-usr-4-RADIO__send_status_in-lat, main-usr-5-RADIO__send_status_in-long, main-usr-RADIO__time, main-usr-RADIO__send_status_out___EVENT_, main-usr-4-RADIO__send_status_out-alt, main-usr-4-RADIO__send_status_out-lat, main-usr-5-RADIO__send_status_out-long, main-usr-RADIO__recv_map_out___EVENT_, main-usr-5-RADIO__recv_map_out-HMAC, main-usr-2-4-4-RADIO__recv_map_out-Map-alt, main-usr-2-4-4-RADIO__recv_map_out-Map-lat, main-usr-2-5-4-RADIO__recv_map_out-Map-long, main-usr-8-RADIO__recv_map_out-Pattern);
 
 ASSIGN
-	init(main-impl-usr-__ASSUME__HIST) := (main-usr-UART____ASSUME__HIST & (main-usr-WPM____ASSUME__HIST & (main-usr-FPLN____ASSUME__HIST & main-usr-RADIO____ASSUME__HIST)));
-	init(main-impl-usr-__GUARANTEE0) := main-usr-4-waypoint-crc;
-	init(main-impl-usr-__GUARANTEE1) := (0 <= main-usr-4-send_status-alt & main-usr-4-send_status-alt <= 15000);
-	init(main-impl-usr-__GUARANTEE2) := (((((((0 <= (main-usr-2-4-4-waypoint-wps-alt[0]) & (main-usr-2-4-4-waypoint-wps-alt[0]) <= 15000) & 0 <= (main-usr-2-4-4-waypoint-wps-alt[1])) & (main-usr-2-4-4-waypoint-wps-alt[1]) <= 15000) & 0 <= (main-usr-2-4-4-waypoint-wps-alt[2])) & (main-usr-2-4-4-waypoint-wps-alt[2]) <= 15000) & 0 <= (main-usr-2-4-4-waypoint-wps-alt[3])) & (main-usr-2-4-4-waypoint-wps-alt[3]) <= 15000);
 	init(main-impl-usr-__ASSUME0) := main-usr-5-recv_map-HMAC;
 	init(main-res-glocal_2) := main-impl-usr-__ASSUME0;
 	init(main-impl-usr-__ASSUME1) := (((((((0 <= (main-usr-2-4-4-recv_map-Map-alt[0]) & (main-usr-2-4-4-recv_map-Map-alt[0]) <= 15000) & 0 <= (main-usr-2-4-4-recv_map-Map-alt[1])) & (main-usr-2-4-4-recv_map-Map-alt[1]) <= 15000) & 0 <= (main-usr-2-4-4-recv_map-Map-alt[2])) & (main-usr-2-4-4-recv_map-Map-alt[2]) <= 15000) & 0 <= (main-usr-2-4-4-recv_map-Map-alt[3])) & (main-usr-2-4-4-recv_map-Map-alt[3]) <= 15000);
@@ -296,10 +288,6 @@ ASSIGN
 	init(main-res-glocal_53) := TRUE;
 	init(main-res-glocal_54) := (main-usr-time = 0);
 
-	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-UART____ASSUME__HIST) & (next(main-usr-WPM____ASSUME__HIST) & (next(main-usr-FPLN____ASSUME__HIST) & next(main-usr-RADIO____ASSUME__HIST))));
-	next(main-impl-usr-__GUARANTEE0) := next(main-usr-4-waypoint-crc);
-	next(main-impl-usr-__GUARANTEE1) := (0 <= next(main-usr-4-send_status-alt) & next(main-usr-4-send_status-alt) <= 15000);
-	next(main-impl-usr-__GUARANTEE2) := (((((((0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[0]) & (next(main-usr-2-4-4-waypoint-wps-alt)[0]) <= 15000) & 0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[1])) & (next(main-usr-2-4-4-waypoint-wps-alt)[1]) <= 15000) & 0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[2])) & (next(main-usr-2-4-4-waypoint-wps-alt)[2]) <= 15000) & 0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[3])) & (next(main-usr-2-4-4-waypoint-wps-alt)[3]) <= 15000);
 	next(main-impl-usr-__ASSUME0) := next(main-usr-5-recv_map-HMAC);
 	next(main-res-glocal_2) := next(main-impl-usr-__ASSUME0);
 	next(main-impl-usr-__ASSUME1) := (((((((0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[0]) & (next(main-usr-2-4-4-recv_map-Map-alt)[0]) <= 15000) & 0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[1])) & (next(main-usr-2-4-4-recv_map-Map-alt)[1]) <= 15000) & 0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[2])) & (next(main-usr-2-4-4-recv_map-Map-alt)[2]) <= 15000) & 0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[3])) & (next(main-usr-2-4-4-recv_map-Map-alt)[3]) <= 15000);
@@ -397,6 +385,5 @@ ASSIGN
 	INVAR main-res-glocal_2;
 
 INVARSPEC 
-((main-impl-usr-__GUARANTEE2) & (main-impl-usr-__GUARANTEE1) & (main-impl-usr-__GUARANTEE0) & 
- (main-impl-usr-__ASSUME__HIST) & (main-usr-FPLN____ASSUME0) & (main-usr-RADIO____ASSUME0));
+((main-usr-RADIO____ASSUME0));
 

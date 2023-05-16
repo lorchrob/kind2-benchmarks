@@ -1,0 +1,191 @@
+type MultipleFanInToEventPort__Message__impl = struct {ID : int; msg_details : int};
+type Base_Types__Boolean = bool;
+type Base_Types__Unsigned = int;
+type Base_Types__Unsigned_64 = int;
+type Base_Types__Unsigned_32 = int;
+type Base_Types__Unsigned_16 = int;
+type Base_Types__Unsigned_8 = int;
+type Base_Types__Integer = int;
+type Base_Types__Integer_64 = int;
+type Base_Types__Integer_32 = int;
+type Base_Types__Integer_16 = int;
+type Base_Types__Integer_8 = int;
+type Base_Types__Float = real;
+type Base_Types__Float_32 = real;
+type Base_Types__Float_64 = real;
+
+node _TOP__A(
+  __ASSUME__HIST : bool;
+  time : real;
+  Request_out___EVENT_ : bool;
+  Request_out : MultipleFanInToEventPort__Message__impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (Request_out___EVENT_ => (Request_out.ID = 1));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__B(
+  __ASSUME__HIST : bool;
+  time : real;
+  Request_out___EVENT_ : bool;
+  Request_out : MultipleFanInToEventPort__Message__impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (Request_out___EVENT_ => (Request_out.ID = 2));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__C(
+  __ASSUME__HIST : bool;
+  Request_in___EVENT_ : bool;
+  Request_in : MultipleFanInToEventPort__Message__impl;
+  time : real;
+  Response_out___EVENT_ : bool;
+  Response_out : MultipleFanInToEventPort__Message__impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+let
+  __GUARANTEE0 = (Response_out___EVENT_ => (false -> (pre Request_in___EVENT_)));
+
+  __GUARANTEE1 = (Response_out___EVENT_ => (Response_out.ID = (0 -> (pre Request_in.ID))));
+
+  __ASSERT = (__ASSUME__HIST => (__GUARANTEE1 and __GUARANTEE0));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1;
+
+tel;
+
+node main(
+  A__Request_out___EVENT_ : bool;
+  A__Request_out : MultipleFanInToEventPort__Message__impl;
+  A____ASSUME__HIST : bool;
+  B__Request_out___EVENT_ : bool;
+  B__Request_out : MultipleFanInToEventPort__Message__impl;
+  B____ASSUME__HIST : bool;
+  C__Response_out___EVENT_ : bool;
+  C__Response_out : MultipleFanInToEventPort__Message__impl;
+  C____ASSUME__HIST : bool;
+  flip_a_coin : bool;
+  A__time : real;
+  B__time : real;
+  C__Request_in___EVENT_ : bool;
+  C__Request_in : MultipleFanInToEventPort__Message__impl;
+  C__time : real;
+  time : real
+) returns (
+
+);
+var
+  __ASSUME__HIST : bool;
+  __LEMMA0 : bool;
+  __LEMMA1 : bool;
+let
+  --%MAIN;
+  __ASSUME__HIST = (C____ASSUME__HIST and (B____ASSUME__HIST and (A____ASSUME__HIST and true)));
+
+  __LEMMA0 = (C__Request_in___EVENT_ = (A__Request_out___EVENT_ or B__Request_out___EVENT_));
+
+  __LEMMA1 = (true -> (C__Response_out___EVENT_ => ((C__Response_out.ID = 1) or (C__Response_out.ID = 2))));
+
+  assert (time = A__time);
+
+  assert _TOP__A(A____ASSUME__HIST, A__time, A__Request_out___EVENT_, A__Request_out);
+
+  assert (A____ASSUME__HIST = __HIST(true));
+
+  assert (time = B__time);
+
+  assert _TOP__B(B____ASSUME__HIST, B__time, B__Request_out___EVENT_, B__Request_out);
+
+  assert (B____ASSUME__HIST = __HIST(true));
+
+  assert (time = C__time);
+
+  assert _TOP__C(C____ASSUME__HIST, C__Request_in___EVENT_, C__Request_in, C__time, C__Response_out___EVENT_, C__Response_out);
+
+  assert (C____ASSUME__HIST = __HIST(true));
+
+  assert true;
+
+  assert true;
+
+  assert ((not (A__Request_out___EVENT_ or B__Request_out___EVENT_)) => (not C__Request_in___EVENT_));
+
+  assert ((A__Request_out___EVENT_ and (not B__Request_out___EVENT_)) => (C__Request_in___EVENT_ and (C__Request_in = A__Request_out)));
+
+  assert ((B__Request_out___EVENT_ and (not A__Request_out___EVENT_)) => (C__Request_in___EVENT_ and (C__Request_in = B__Request_out)));
+
+  assert ((A__Request_out___EVENT_ and B__Request_out___EVENT_) => (C__Request_in___EVENT_ and (C__Request_in = (if flip_a_coin then A__Request_out else B__Request_out))));
+
+  assert true;
+
+  assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
+
+  -- %PROPERTY __ASSUME__HIST;
+  --%PROPERTY __LEMMA0;
+  -- %PROPERTY __LEMMA1;
+
+tel;
+
+node __HIST(
+  input : bool
+) returns (
+  hist : bool
+);
+let
+  hist = (input -> ((pre hist) and input));
+
+tel;
+
+node __MinPos(
+  a : real;
+  b : real
+) returns (
+  ret : real
+);
+let
+  ret = (if (a <= 0.0) then b else (if (b <= 0.0) then a else (if (a <= b) then a else b)));
+
+tel;
+
+node __Rise(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = (input -> ((pre (not input)) and input));
+
+tel;
+
+node __Fall(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = ((not input) -> ((pre input) and (not input)));
+
+tel;
+

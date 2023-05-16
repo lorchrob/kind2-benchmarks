@@ -1,0 +1,154 @@
+type Base_Types__Boolean = bool;
+type Base_Types__Unsigned = int;
+type Base_Types__Unsigned_64 = int;
+type Base_Types__Unsigned_32 = int;
+type Base_Types__Unsigned_16 = int;
+type Base_Types__Unsigned_8 = int;
+type Base_Types__Integer = int;
+type Base_Types__Integer_64 = int;
+type Base_Types__Integer_32 = int;
+type Base_Types__Integer_16 = int;
+type Base_Types__Integer_8 = int;
+type Base_Types__Float = real;
+type Base_Types__Float_32 = real;
+type Base_Types__Float_64 = real;
+
+node main(
+  is_pending : bool;
+  state : int;
+  left_shift : bool;
+  right_shift : bool;
+  neighbor_state0 : int;
+  neighbor_state1 : int;
+  time : real
+) returns (
+
+);
+var
+  __ASSUME0 : bool;
+  __ASSUME__HIST : bool;
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+let
+  --%MAIN;
+  __ASSUME0 = (not (left_shift and right_shift));
+
+  __ASSUME__HIST = true;
+
+  __GUARANTEE0 = ((state >= 0) and (state <= 5));
+
+  __GUARANTEE1 = (true -> (((Defs__rising(left_shift) and ((pre state) = 0)) => (state = 4)) and ((Defs__rising(right_shift) and ((pre state) = 0)) => (state = 5))));
+
+  __GUARANTEE2 = (true -> (((Defs__rising(left_shift) and ((pre state) = 1)) => (state = 5)) and ((Defs__rising(right_shift) and ((pre state) = 1)) => (state = 3))));
+
+  __GUARANTEE3 = (true -> (((Defs__rising(left_shift) and ((pre state) = 2)) => (state = 3)) and ((Defs__rising(right_shift) and ((pre state) = 2)) => (state = 4))));
+
+  __GUARANTEE4 = ((state = 0) -> true);
+
+  __GUARANTEE5 = (true -> (((not (Defs__rising(left_shift) or Defs__rising(right_shift))) and ((pre state) <= 2)) => (state = (pre state))));
+
+  __GUARANTEE6 = (true -> (((pre state) = 3) => (if (((pre neighbor_state0) <> 0) and ((pre neighbor_state1) <> 0)) then (state = 0) else (state = 3))));
+
+  __GUARANTEE7 = (true -> (((pre state) = 5) => (if (((pre neighbor_state0) <> 2) and ((pre neighbor_state1) <> 2)) then (state = 2) else (state = 5))));
+
+  __GUARANTEE8 = (true -> (((pre state) = 4) => (if (((pre neighbor_state0) <> 1) and ((pre neighbor_state1) <> 1)) then (state = 1) else (state = 4))));
+
+  assert __ASSUME0;
+
+  assert (state = (0 -> (if ((((pre state) = 3) and ((pre neighbor_state0) <> 0)) and ((pre neighbor_state1) <> 0)) then 0 else (if ((((pre state) = 5) and ((pre neighbor_state0) <> 2)) and ((pre neighbor_state1) <> 2)) then 2 else (if ((((pre state) = 4) and ((pre neighbor_state0) <> 1)) and ((pre neighbor_state1) <> 1)) then 1 else (if Defs__rising(left_shift) then (if ((pre state) = 0) then 4 else (if ((pre state) = 1) then 5 else (if ((pre state) = 2) then 3 else (pre state)))) else (if Defs__rising(right_shift) then (if ((pre state) = 0) then 5 else (if ((pre state) = 1) then 3 else (if ((pre state) = 2) then 4 else (pre state)))) else (pre state))))))));
+
+  assert (is_pending = ((state >= 3) or (state <= 5)));
+
+  assert true;
+
+  assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
+
+  -- %PROPERTY __ASSUME__HIST;
+  -- %PROPERTY __GUARANTEE0;
+  -- %PROPERTY __GUARANTEE1;
+  -- %PROPERTY __GUARANTEE2;
+  -- %PROPERTY __GUARANTEE3;
+  -- %PROPERTY __GUARANTEE4;
+  -- %PROPERTY __GUARANTEE5;
+  --%PROPERTY __GUARANTEE6;
+  -- %PROPERTY __GUARANTEE7;
+  -- %PROPERTY __GUARANTEE8;
+
+  --%IVC __ASSUME0;
+
+tel;
+
+node Defs__rising(
+  signal : bool
+) returns (
+  result : bool
+);
+let
+  result = (false -> ((pre (not signal)) and signal));
+
+tel;
+
+node _CLOCKED_Defs__rising(
+  _CLK : bool;
+  _INIT : bool;
+  signal : bool
+) returns (
+  result : bool
+);
+var
+  _STATE0 : bool;
+let
+  result = (if _CLK then (if _INIT then false else (_STATE0 and signal)) else (pre result));
+
+  _STATE0 = (if _CLK then (pre (not signal)) else (pre _STATE0));
+
+tel;
+
+node __HIST(
+  input : bool
+) returns (
+  hist : bool
+);
+let
+  hist = (input -> ((pre hist) and input));
+
+tel;
+
+node __MinPos(
+  a : real;
+  b : real
+) returns (
+  ret : real
+);
+let
+  ret = (if (a <= 0.0) then b else (if (b <= 0.0) then a else (if (a <= b) then a else b)));
+
+tel;
+
+node __Rise(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = (input -> ((pre (not input)) and input));
+
+tel;
+
+node __Fall(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = ((not input) -> ((pre input) and (not input)));
+
+tel;
+

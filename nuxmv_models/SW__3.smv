@@ -1,0 +1,831 @@
+
+MODULE _TOP__RADIO (_TOP__RADIO-usr-__ASSUME__HIST, _TOP__RADIO-usr-__ASSUME0, _TOP__RADIO-usr-recv_map_in___EVENT_, _TOP__RADIO-usr-5-recv_map_in-HMAC, _TOP__RADIO-usr-4-4-4-recv_map_in-Map-wp1-alt, _TOP__RADIO-usr-4-4-4-recv_map_in-Map-wp1-lat, _TOP__RADIO-usr-5-4-4-recv_map_in-Map-wp1-long, _TOP__RADIO-usr-4-4-4-recv_map_in-Map-wp2-alt, _TOP__RADIO-usr-4-4-4-recv_map_in-Map-wp2-lat, _TOP__RADIO-usr-5-4-4-recv_map_in-Map-wp2-long, _TOP__RADIO-usr-4-4-4-recv_map_in-Map-wp3-alt, _TOP__RADIO-usr-4-4-4-recv_map_in-Map-wp3-lat, _TOP__RADIO-usr-5-4-4-recv_map_in-Map-wp3-long, _TOP__RADIO-usr-4-4-4-recv_map_in-Map-wp4-alt, _TOP__RADIO-usr-4-4-4-recv_map_in-Map-wp4-lat, _TOP__RADIO-usr-5-4-4-recv_map_in-Map-wp4-long, _TOP__RADIO-usr-8-recv_map_in-Pattern, _TOP__RADIO-usr-send_status_in___EVENT_, _TOP__RADIO-usr-4-send_status_in-alt, _TOP__RADIO-usr-4-send_status_in-lat, _TOP__RADIO-usr-5-send_status_in-long, _TOP__RADIO-usr-time, _TOP__RADIO-usr-send_status_out___EVENT_, _TOP__RADIO-usr-4-send_status_out-alt, _TOP__RADIO-usr-4-send_status_out-lat, _TOP__RADIO-usr-5-send_status_out-long, _TOP__RADIO-usr-recv_map_out___EVENT_, _TOP__RADIO-usr-5-recv_map_out-HMAC, _TOP__RADIO-usr-4-4-4-recv_map_out-Map-wp1-alt, _TOP__RADIO-usr-4-4-4-recv_map_out-Map-wp1-lat, _TOP__RADIO-usr-5-4-4-recv_map_out-Map-wp1-long, _TOP__RADIO-usr-4-4-4-recv_map_out-Map-wp2-alt, _TOP__RADIO-usr-4-4-4-recv_map_out-Map-wp2-lat, _TOP__RADIO-usr-5-4-4-recv_map_out-Map-wp2-long, _TOP__RADIO-usr-4-4-4-recv_map_out-Map-wp3-alt, _TOP__RADIO-usr-4-4-4-recv_map_out-Map-wp3-lat, _TOP__RADIO-usr-5-4-4-recv_map_out-Map-wp3-long, _TOP__RADIO-usr-4-4-4-recv_map_out-Map-wp4-alt, _TOP__RADIO-usr-4-4-4-recv_map_out-Map-wp4-lat, _TOP__RADIO-usr-5-4-4-recv_map_out-Map-wp4-long, _TOP__RADIO-usr-8-recv_map_out-Pattern)
+VAR
+	_TOP__RADIO-usr-__ASSERT : boolean;
+	_TOP__RADIO-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__RADIO-impl-usr-__GUARANTEE0) := _TOP__RADIO-usr-5-recv_map_out-HMAC;
+	init(_TOP__RADIO-usr-__ASSERT) := ((_TOP__RADIO-usr-__ASSUME__HIST -> _TOP__RADIO-impl-usr-__GUARANTEE0) & (_TOP__RADIO-usr-__ASSUME0 = _TOP__RADIO-usr-5-recv_map_in-HMAC));
+
+	next(_TOP__RADIO-impl-usr-__GUARANTEE0) := next(_TOP__RADIO-usr-5-recv_map_out-HMAC);
+	next(_TOP__RADIO-usr-__ASSERT) := ((next(_TOP__RADIO-usr-__ASSUME__HIST) -> next(_TOP__RADIO-impl-usr-__GUARANTEE0)) & (next(_TOP__RADIO-usr-__ASSUME0) = next(_TOP__RADIO-usr-5-recv_map_in-HMAC)));
+
+
+
+MODULE SW__good_coordinate (SW__good_coordinate-usr-4-coord-alt, SW__good_coordinate-usr-4-coord-lat, SW__good_coordinate-usr-5-coord-long)
+VAR
+	SW__good_coordinate-usr-_outvar : boolean;
+
+ASSIGN
+	init(SW__good_coordinate-usr-_outvar) := (((((SW__good_coordinate-usr-4-coord-lat >= -90 & SW__good_coordinate-usr-4-coord-lat <= 90) & SW__good_coordinate-usr-5-coord-long >= -180) & SW__good_coordinate-usr-5-coord-long <= 180) & SW__good_coordinate-usr-4-coord-alt >= 0) & SW__good_coordinate-usr-4-coord-alt <= 15000);
+
+	next(SW__good_coordinate-usr-_outvar) := (((((next(SW__good_coordinate-usr-4-coord-lat) >= -90 & next(SW__good_coordinate-usr-4-coord-lat) <= 90) & next(SW__good_coordinate-usr-5-coord-long) >= -180) & next(SW__good_coordinate-usr-5-coord-long) <= 180) & next(SW__good_coordinate-usr-4-coord-alt) >= 0) & next(SW__good_coordinate-usr-4-coord-alt) <= 15000);
+
+
+
+MODULE SW__good_mission (SW__good_mission-usr-4-4-mission-wp1-alt, SW__good_mission-usr-4-4-mission-wp1-lat, SW__good_mission-usr-5-4-mission-wp1-long, SW__good_mission-usr-4-5-mission-wp10-alt, SW__good_mission-usr-4-5-mission-wp10-lat, SW__good_mission-usr-5-5-mission-wp10-long, SW__good_mission-usr-4-4-mission-wp2-alt, SW__good_mission-usr-4-4-mission-wp2-lat, SW__good_mission-usr-5-4-mission-wp2-long, SW__good_mission-usr-4-4-mission-wp3-alt, SW__good_mission-usr-4-4-mission-wp3-lat, SW__good_mission-usr-5-4-mission-wp3-long, SW__good_mission-usr-4-4-mission-wp4-alt, SW__good_mission-usr-4-4-mission-wp4-lat, SW__good_mission-usr-5-4-mission-wp4-long, SW__good_mission-usr-4-4-mission-wp5-alt, SW__good_mission-usr-4-4-mission-wp5-lat, SW__good_mission-usr-5-4-mission-wp5-long, SW__good_mission-usr-4-4-mission-wp6-alt, SW__good_mission-usr-4-4-mission-wp6-lat, SW__good_mission-usr-5-4-mission-wp6-long, SW__good_mission-usr-4-4-mission-wp7-alt, SW__good_mission-usr-4-4-mission-wp7-lat, SW__good_mission-usr-5-4-mission-wp7-long, SW__good_mission-usr-4-4-mission-wp8-alt, SW__good_mission-usr-4-4-mission-wp8-lat, SW__good_mission-usr-5-4-mission-wp8-long, SW__good_mission-usr-4-4-mission-wp9-alt, SW__good_mission-usr-4-4-mission-wp9-lat, SW__good_mission-usr-5-4-mission-wp9-long)
+VAR
+	SW__good_mission-usr-_outvar : boolean;
+	SW__good_mission-res-4-gklocal_5-alt : integer;
+	SW__good_mission-res-4-gklocal_5-lat : integer;
+	SW__good_mission-res-5-gklocal_5-long : integer;
+	SW__good_mission-res-4-gklocal_7-alt : integer;
+	SW__good_mission-res-4-gklocal_7-lat : integer;
+	SW__good_mission-res-5-gklocal_7-long : integer;
+	SW__good_mission-res-4-gklocal_9-alt : integer;
+	SW__good_mission-res-4-gklocal_9-lat : integer;
+	SW__good_mission-res-5-gklocal_9-long : integer;
+	SW__good_mission-res-4-gklocal_11-alt : integer;
+	SW__good_mission-res-4-gklocal_11-lat : integer;
+	SW__good_mission-res-5-gklocal_11-long : integer;
+	SW__good_mission-res-4-gklocal_13-alt : integer;
+	SW__good_mission-res-4-gklocal_13-lat : integer;
+	SW__good_mission-res-5-gklocal_13-long : integer;
+	SW__good_mission-res-4-gklocal_15-alt : integer;
+	SW__good_mission-res-4-gklocal_15-lat : integer;
+	SW__good_mission-res-5-gklocal_15-long : integer;
+	SW__good_mission-res-4-gklocal_17-alt : integer;
+	SW__good_mission-res-4-gklocal_17-lat : integer;
+	SW__good_mission-res-5-gklocal_17-long : integer;
+	SW__good_mission-res-4-gklocal_19-alt : integer;
+	SW__good_mission-res-4-gklocal_19-lat : integer;
+	SW__good_mission-res-5-gklocal_19-long : integer;
+	SW__good_mission-res-4-gklocal_21-alt : integer;
+	SW__good_mission-res-4-gklocal_21-lat : integer;
+	SW__good_mission-res-5-gklocal_21-long : integer;
+	SW__good_mission-res-4-gklocal_23-alt : integer;
+	SW__good_mission-res-4-gklocal_23-lat : integer;
+	SW__good_mission-res-5-gklocal_23-long : integer;
+	SW__good_mission-res-call_6 : SW__good_coordinate(SW__good_mission-res-4-gklocal_5-alt, SW__good_mission-res-4-gklocal_5-lat, SW__good_mission-res-5-gklocal_5-long);
+	SW__good_mission-res-call_8 : SW__good_coordinate(SW__good_mission-res-4-gklocal_7-alt, SW__good_mission-res-4-gklocal_7-lat, SW__good_mission-res-5-gklocal_7-long);
+	SW__good_mission-res-call_10 : SW__good_coordinate(SW__good_mission-res-4-gklocal_9-alt, SW__good_mission-res-4-gklocal_9-lat, SW__good_mission-res-5-gklocal_9-long);
+	SW__good_mission-res-call_12 : SW__good_coordinate(SW__good_mission-res-4-gklocal_11-alt, SW__good_mission-res-4-gklocal_11-lat, SW__good_mission-res-5-gklocal_11-long);
+	SW__good_mission-res-call_14 : SW__good_coordinate(SW__good_mission-res-4-gklocal_13-alt, SW__good_mission-res-4-gklocal_13-lat, SW__good_mission-res-5-gklocal_13-long);
+	SW__good_mission-res-call_16 : SW__good_coordinate(SW__good_mission-res-4-gklocal_15-alt, SW__good_mission-res-4-gklocal_15-lat, SW__good_mission-res-5-gklocal_15-long);
+	SW__good_mission-res-call_18 : SW__good_coordinate(SW__good_mission-res-4-gklocal_17-alt, SW__good_mission-res-4-gklocal_17-lat, SW__good_mission-res-5-gklocal_17-long);
+	SW__good_mission-res-call_20 : SW__good_coordinate(SW__good_mission-res-4-gklocal_19-alt, SW__good_mission-res-4-gklocal_19-lat, SW__good_mission-res-5-gklocal_19-long);
+	SW__good_mission-res-call_22 : SW__good_coordinate(SW__good_mission-res-4-gklocal_21-alt, SW__good_mission-res-4-gklocal_21-lat, SW__good_mission-res-5-gklocal_21-long);
+	SW__good_mission-res-call_24 : SW__good_coordinate(SW__good_mission-res-4-gklocal_23-alt, SW__good_mission-res-4-gklocal_23-lat, SW__good_mission-res-5-gklocal_23-long);
+
+ASSIGN
+	init(SW__good_mission-res-5-gklocal_23-long) := SW__good_mission-usr-5-5-mission-wp10-long;
+	init(SW__good_mission-res-4-gklocal_23-lat) := SW__good_mission-usr-4-5-mission-wp10-lat;
+	init(SW__good_mission-res-4-gklocal_23-alt) := SW__good_mission-usr-4-5-mission-wp10-alt;
+	init(SW__good_mission-res-5-gklocal_21-long) := SW__good_mission-usr-5-4-mission-wp9-long;
+	init(SW__good_mission-res-4-gklocal_21-lat) := SW__good_mission-usr-4-4-mission-wp9-lat;
+	init(SW__good_mission-res-4-gklocal_21-alt) := SW__good_mission-usr-4-4-mission-wp9-alt;
+	init(SW__good_mission-res-5-gklocal_19-long) := SW__good_mission-usr-5-4-mission-wp8-long;
+	init(SW__good_mission-res-4-gklocal_19-lat) := SW__good_mission-usr-4-4-mission-wp8-lat;
+	init(SW__good_mission-res-4-gklocal_19-alt) := SW__good_mission-usr-4-4-mission-wp8-alt;
+	init(SW__good_mission-res-5-gklocal_17-long) := SW__good_mission-usr-5-4-mission-wp7-long;
+	init(SW__good_mission-res-4-gklocal_17-lat) := SW__good_mission-usr-4-4-mission-wp7-lat;
+	init(SW__good_mission-res-4-gklocal_17-alt) := SW__good_mission-usr-4-4-mission-wp7-alt;
+	init(SW__good_mission-res-5-gklocal_15-long) := SW__good_mission-usr-5-4-mission-wp6-long;
+	init(SW__good_mission-res-4-gklocal_15-lat) := SW__good_mission-usr-4-4-mission-wp6-lat;
+	init(SW__good_mission-res-4-gklocal_15-alt) := SW__good_mission-usr-4-4-mission-wp6-alt;
+	init(SW__good_mission-res-5-gklocal_13-long) := SW__good_mission-usr-5-4-mission-wp5-long;
+	init(SW__good_mission-res-4-gklocal_13-lat) := SW__good_mission-usr-4-4-mission-wp5-lat;
+	init(SW__good_mission-res-4-gklocal_13-alt) := SW__good_mission-usr-4-4-mission-wp5-alt;
+	init(SW__good_mission-res-5-gklocal_11-long) := SW__good_mission-usr-5-4-mission-wp4-long;
+	init(SW__good_mission-res-4-gklocal_11-lat) := SW__good_mission-usr-4-4-mission-wp4-lat;
+	init(SW__good_mission-res-4-gklocal_11-alt) := SW__good_mission-usr-4-4-mission-wp4-alt;
+	init(SW__good_mission-res-5-gklocal_9-long) := SW__good_mission-usr-5-4-mission-wp3-long;
+	init(SW__good_mission-res-4-gklocal_9-lat) := SW__good_mission-usr-4-4-mission-wp3-lat;
+	init(SW__good_mission-res-4-gklocal_9-alt) := SW__good_mission-usr-4-4-mission-wp3-alt;
+	init(SW__good_mission-res-5-gklocal_7-long) := SW__good_mission-usr-5-4-mission-wp2-long;
+	init(SW__good_mission-res-4-gklocal_7-lat) := SW__good_mission-usr-4-4-mission-wp2-lat;
+	init(SW__good_mission-res-4-gklocal_7-alt) := SW__good_mission-usr-4-4-mission-wp2-alt;
+	init(SW__good_mission-res-5-gklocal_5-long) := SW__good_mission-usr-5-4-mission-wp1-long;
+	init(SW__good_mission-res-4-gklocal_5-lat) := SW__good_mission-usr-4-4-mission-wp1-lat;
+	init(SW__good_mission-res-4-gklocal_5-alt) := SW__good_mission-usr-4-4-mission-wp1-alt;
+	init(SW__good_mission-usr-_outvar) := (((((((((SW__good_mission-res-call_6.SW__good_coordinate-usr-_outvar & SW__good_mission-res-call_8.SW__good_coordinate-usr-_outvar) & SW__good_mission-res-call_10.SW__good_coordinate-usr-_outvar) & SW__good_mission-res-call_12.SW__good_coordinate-usr-_outvar) & SW__good_mission-res-call_14.SW__good_coordinate-usr-_outvar) & SW__good_mission-res-call_16.SW__good_coordinate-usr-_outvar) & SW__good_mission-res-call_18.SW__good_coordinate-usr-_outvar) & SW__good_mission-res-call_20.SW__good_coordinate-usr-_outvar) & SW__good_mission-res-call_22.SW__good_coordinate-usr-_outvar) & SW__good_mission-res-call_24.SW__good_coordinate-usr-_outvar);
+
+	next(SW__good_mission-res-5-gklocal_23-long) := next(SW__good_mission-usr-5-5-mission-wp10-long);
+	next(SW__good_mission-res-4-gklocal_23-lat) := next(SW__good_mission-usr-4-5-mission-wp10-lat);
+	next(SW__good_mission-res-4-gklocal_23-alt) := next(SW__good_mission-usr-4-5-mission-wp10-alt);
+	next(SW__good_mission-res-5-gklocal_21-long) := next(SW__good_mission-usr-5-4-mission-wp9-long);
+	next(SW__good_mission-res-4-gklocal_21-lat) := next(SW__good_mission-usr-4-4-mission-wp9-lat);
+	next(SW__good_mission-res-4-gklocal_21-alt) := next(SW__good_mission-usr-4-4-mission-wp9-alt);
+	next(SW__good_mission-res-5-gklocal_19-long) := next(SW__good_mission-usr-5-4-mission-wp8-long);
+	next(SW__good_mission-res-4-gklocal_19-lat) := next(SW__good_mission-usr-4-4-mission-wp8-lat);
+	next(SW__good_mission-res-4-gklocal_19-alt) := next(SW__good_mission-usr-4-4-mission-wp8-alt);
+	next(SW__good_mission-res-5-gklocal_17-long) := next(SW__good_mission-usr-5-4-mission-wp7-long);
+	next(SW__good_mission-res-4-gklocal_17-lat) := next(SW__good_mission-usr-4-4-mission-wp7-lat);
+	next(SW__good_mission-res-4-gklocal_17-alt) := next(SW__good_mission-usr-4-4-mission-wp7-alt);
+	next(SW__good_mission-res-5-gklocal_15-long) := next(SW__good_mission-usr-5-4-mission-wp6-long);
+	next(SW__good_mission-res-4-gklocal_15-lat) := next(SW__good_mission-usr-4-4-mission-wp6-lat);
+	next(SW__good_mission-res-4-gklocal_15-alt) := next(SW__good_mission-usr-4-4-mission-wp6-alt);
+	next(SW__good_mission-res-5-gklocal_13-long) := next(SW__good_mission-usr-5-4-mission-wp5-long);
+	next(SW__good_mission-res-4-gklocal_13-lat) := next(SW__good_mission-usr-4-4-mission-wp5-lat);
+	next(SW__good_mission-res-4-gklocal_13-alt) := next(SW__good_mission-usr-4-4-mission-wp5-alt);
+	next(SW__good_mission-res-5-gklocal_11-long) := next(SW__good_mission-usr-5-4-mission-wp4-long);
+	next(SW__good_mission-res-4-gklocal_11-lat) := next(SW__good_mission-usr-4-4-mission-wp4-lat);
+	next(SW__good_mission-res-4-gklocal_11-alt) := next(SW__good_mission-usr-4-4-mission-wp4-alt);
+	next(SW__good_mission-res-5-gklocal_9-long) := next(SW__good_mission-usr-5-4-mission-wp3-long);
+	next(SW__good_mission-res-4-gklocal_9-lat) := next(SW__good_mission-usr-4-4-mission-wp3-lat);
+	next(SW__good_mission-res-4-gklocal_9-alt) := next(SW__good_mission-usr-4-4-mission-wp3-alt);
+	next(SW__good_mission-res-5-gklocal_7-long) := next(SW__good_mission-usr-5-4-mission-wp2-long);
+	next(SW__good_mission-res-4-gklocal_7-lat) := next(SW__good_mission-usr-4-4-mission-wp2-lat);
+	next(SW__good_mission-res-4-gklocal_7-alt) := next(SW__good_mission-usr-4-4-mission-wp2-alt);
+	next(SW__good_mission-res-5-gklocal_5-long) := next(SW__good_mission-usr-5-4-mission-wp1-long);
+	next(SW__good_mission-res-4-gklocal_5-lat) := next(SW__good_mission-usr-4-4-mission-wp1-lat);
+	next(SW__good_mission-res-4-gklocal_5-alt) := next(SW__good_mission-usr-4-4-mission-wp1-alt);
+	next(SW__good_mission-usr-_outvar) := (((((((((next(SW__good_mission-res-call_6.SW__good_coordinate-usr-_outvar) & next(SW__good_mission-res-call_8.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission-res-call_10.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission-res-call_12.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission-res-call_14.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission-res-call_16.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission-res-call_18.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission-res-call_20.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission-res-call_22.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission-res-call_24.SW__good_coordinate-usr-_outvar));
+
+
+
+MODULE SW__good_map (SW__good_map-usr-4-4-map-wp1-alt, SW__good_map-usr-4-4-map-wp1-lat, SW__good_map-usr-5-4-map-wp1-long, SW__good_map-usr-4-4-map-wp2-alt, SW__good_map-usr-4-4-map-wp2-lat, SW__good_map-usr-5-4-map-wp2-long, SW__good_map-usr-4-4-map-wp3-alt, SW__good_map-usr-4-4-map-wp3-lat, SW__good_map-usr-5-4-map-wp3-long, SW__good_map-usr-4-4-map-wp4-alt, SW__good_map-usr-4-4-map-wp4-lat, SW__good_map-usr-5-4-map-wp4-long)
+VAR
+	SW__good_map-usr-_outvar : boolean;
+	SW__good_map-res-4-gklocal_33-alt : integer;
+	SW__good_map-res-4-gklocal_33-lat : integer;
+	SW__good_map-res-5-gklocal_33-long : integer;
+	SW__good_map-res-4-gklocal_35-alt : integer;
+	SW__good_map-res-4-gklocal_35-lat : integer;
+	SW__good_map-res-5-gklocal_35-long : integer;
+	SW__good_map-res-4-gklocal_37-alt : integer;
+	SW__good_map-res-4-gklocal_37-lat : integer;
+	SW__good_map-res-5-gklocal_37-long : integer;
+	SW__good_map-res-4-gklocal_39-alt : integer;
+	SW__good_map-res-4-gklocal_39-lat : integer;
+	SW__good_map-res-5-gklocal_39-long : integer;
+	SW__good_map-res-call_34 : SW__good_coordinate(SW__good_map-res-4-gklocal_33-alt, SW__good_map-res-4-gklocal_33-lat, SW__good_map-res-5-gklocal_33-long);
+	SW__good_map-res-call_36 : SW__good_coordinate(SW__good_map-res-4-gklocal_35-alt, SW__good_map-res-4-gklocal_35-lat, SW__good_map-res-5-gklocal_35-long);
+	SW__good_map-res-call_38 : SW__good_coordinate(SW__good_map-res-4-gklocal_37-alt, SW__good_map-res-4-gklocal_37-lat, SW__good_map-res-5-gklocal_37-long);
+	SW__good_map-res-call_40 : SW__good_coordinate(SW__good_map-res-4-gklocal_39-alt, SW__good_map-res-4-gklocal_39-lat, SW__good_map-res-5-gklocal_39-long);
+
+ASSIGN
+	init(SW__good_map-res-5-gklocal_39-long) := SW__good_map-usr-5-4-map-wp4-long;
+	init(SW__good_map-res-4-gklocal_39-lat) := SW__good_map-usr-4-4-map-wp4-lat;
+	init(SW__good_map-res-4-gklocal_39-alt) := SW__good_map-usr-4-4-map-wp4-alt;
+	init(SW__good_map-res-5-gklocal_37-long) := SW__good_map-usr-5-4-map-wp3-long;
+	init(SW__good_map-res-4-gklocal_37-lat) := SW__good_map-usr-4-4-map-wp3-lat;
+	init(SW__good_map-res-4-gklocal_37-alt) := SW__good_map-usr-4-4-map-wp3-alt;
+	init(SW__good_map-res-5-gklocal_35-long) := SW__good_map-usr-5-4-map-wp2-long;
+	init(SW__good_map-res-4-gklocal_35-lat) := SW__good_map-usr-4-4-map-wp2-lat;
+	init(SW__good_map-res-4-gklocal_35-alt) := SW__good_map-usr-4-4-map-wp2-alt;
+	init(SW__good_map-res-5-gklocal_33-long) := SW__good_map-usr-5-4-map-wp1-long;
+	init(SW__good_map-res-4-gklocal_33-lat) := SW__good_map-usr-4-4-map-wp1-lat;
+	init(SW__good_map-res-4-gklocal_33-alt) := SW__good_map-usr-4-4-map-wp1-alt;
+	init(SW__good_map-usr-_outvar) := (((SW__good_map-res-call_34.SW__good_coordinate-usr-_outvar & SW__good_map-res-call_36.SW__good_coordinate-usr-_outvar) & SW__good_map-res-call_38.SW__good_coordinate-usr-_outvar) & SW__good_map-res-call_40.SW__good_coordinate-usr-_outvar);
+
+	next(SW__good_map-res-5-gklocal_39-long) := next(SW__good_map-usr-5-4-map-wp4-long);
+	next(SW__good_map-res-4-gklocal_39-lat) := next(SW__good_map-usr-4-4-map-wp4-lat);
+	next(SW__good_map-res-4-gklocal_39-alt) := next(SW__good_map-usr-4-4-map-wp4-alt);
+	next(SW__good_map-res-5-gklocal_37-long) := next(SW__good_map-usr-5-4-map-wp3-long);
+	next(SW__good_map-res-4-gklocal_37-lat) := next(SW__good_map-usr-4-4-map-wp3-lat);
+	next(SW__good_map-res-4-gklocal_37-alt) := next(SW__good_map-usr-4-4-map-wp3-alt);
+	next(SW__good_map-res-5-gklocal_35-long) := next(SW__good_map-usr-5-4-map-wp2-long);
+	next(SW__good_map-res-4-gklocal_35-lat) := next(SW__good_map-usr-4-4-map-wp2-lat);
+	next(SW__good_map-res-4-gklocal_35-alt) := next(SW__good_map-usr-4-4-map-wp2-alt);
+	next(SW__good_map-res-5-gklocal_33-long) := next(SW__good_map-usr-5-4-map-wp1-long);
+	next(SW__good_map-res-4-gklocal_33-lat) := next(SW__good_map-usr-4-4-map-wp1-lat);
+	next(SW__good_map-res-4-gklocal_33-alt) := next(SW__good_map-usr-4-4-map-wp1-alt);
+	next(SW__good_map-usr-_outvar) := (((next(SW__good_map-res-call_34.SW__good_coordinate-usr-_outvar) & next(SW__good_map-res-call_36.SW__good_coordinate-usr-_outvar)) & next(SW__good_map-res-call_38.SW__good_coordinate-usr-_outvar)) & next(SW__good_map-res-call_40.SW__good_coordinate-usr-_outvar));
+
+
+
+MODULE SW__good_HMAC (SW__good_HMAC-usr-hmac)
+VAR
+	SW__good_HMAC-usr-_outvar : boolean;
+
+ASSIGN
+	init(SW__good_HMAC-usr-_outvar) := (!SW__good_HMAC-usr-hmac | SW__good_HMAC-usr-hmac);
+
+	next(SW__good_HMAC-usr-_outvar) := (!next(SW__good_HMAC-usr-hmac) | next(SW__good_HMAC-usr-hmac));
+
+
+
+MODULE SW__good_pattern (SW__good_pattern-usr-pattern)
+VAR
+	SW__good_pattern-usr-_outvar : boolean;
+
+ASSIGN
+	init(SW__good_pattern-usr-_outvar) := ((SW__good_pattern-usr-pattern = 2) | ((SW__good_pattern-usr-pattern = 1) | (SW__good_pattern-usr-pattern = 0)));
+
+	next(SW__good_pattern-usr-_outvar) := ((next(SW__good_pattern-usr-pattern) = 2) | ((next(SW__good_pattern-usr-pattern) = 1) | (next(SW__good_pattern-usr-pattern) = 0)));
+
+
+
+MODULE SW__good_gs_command (SW__good_gs_command-usr-5-cmd-HMAC, SW__good_gs_command-usr-4-4-4-cmd-Map-wp1-alt, SW__good_gs_command-usr-4-4-4-cmd-Map-wp1-lat, SW__good_gs_command-usr-5-4-4-cmd-Map-wp1-long, SW__good_gs_command-usr-4-4-4-cmd-Map-wp2-alt, SW__good_gs_command-usr-4-4-4-cmd-Map-wp2-lat, SW__good_gs_command-usr-5-4-4-cmd-Map-wp2-long, SW__good_gs_command-usr-4-4-4-cmd-Map-wp3-alt, SW__good_gs_command-usr-4-4-4-cmd-Map-wp3-lat, SW__good_gs_command-usr-5-4-4-cmd-Map-wp3-long, SW__good_gs_command-usr-4-4-4-cmd-Map-wp4-alt, SW__good_gs_command-usr-4-4-4-cmd-Map-wp4-lat, SW__good_gs_command-usr-5-4-4-cmd-Map-wp4-long, SW__good_gs_command-usr-8-cmd-Pattern)
+VAR
+	SW__good_gs_command-usr-_outvar : boolean;
+	SW__good_gs_command-res-4-4-gklocal_80-wp1-alt : integer;
+	SW__good_gs_command-res-4-4-gklocal_80-wp1-lat : integer;
+	SW__good_gs_command-res-5-4-gklocal_80-wp1-long : integer;
+	SW__good_gs_command-res-4-4-gklocal_80-wp2-alt : integer;
+	SW__good_gs_command-res-4-4-gklocal_80-wp2-lat : integer;
+	SW__good_gs_command-res-5-4-gklocal_80-wp2-long : integer;
+	SW__good_gs_command-res-4-4-gklocal_80-wp3-alt : integer;
+	SW__good_gs_command-res-4-4-gklocal_80-wp3-lat : integer;
+	SW__good_gs_command-res-5-4-gklocal_80-wp3-long : integer;
+	SW__good_gs_command-res-4-4-gklocal_80-wp4-alt : integer;
+	SW__good_gs_command-res-4-4-gklocal_80-wp4-lat : integer;
+	SW__good_gs_command-res-5-4-gklocal_80-wp4-long : integer;
+	SW__good_gs_command-res-gklocal_82 : 0 .. 2;
+	SW__good_gs_command-res-gklocal_84 : boolean;
+	SW__good_gs_command-res-call_81 : SW__good_map(SW__good_gs_command-res-4-4-gklocal_80-wp1-alt, SW__good_gs_command-res-4-4-gklocal_80-wp1-lat, SW__good_gs_command-res-5-4-gklocal_80-wp1-long, SW__good_gs_command-res-4-4-gklocal_80-wp2-alt, SW__good_gs_command-res-4-4-gklocal_80-wp2-lat, SW__good_gs_command-res-5-4-gklocal_80-wp2-long, SW__good_gs_command-res-4-4-gklocal_80-wp3-alt, SW__good_gs_command-res-4-4-gklocal_80-wp3-lat, SW__good_gs_command-res-5-4-gklocal_80-wp3-long, SW__good_gs_command-res-4-4-gklocal_80-wp4-alt, SW__good_gs_command-res-4-4-gklocal_80-wp4-lat, SW__good_gs_command-res-5-4-gklocal_80-wp4-long);
+	SW__good_gs_command-res-call_83 : SW__good_pattern(SW__good_gs_command-res-gklocal_82);
+	SW__good_gs_command-res-call_85 : SW__good_HMAC(SW__good_gs_command-res-gklocal_84);
+
+ASSIGN
+	init(SW__good_gs_command-res-gklocal_84) := SW__good_gs_command-usr-5-cmd-HMAC;
+	init(SW__good_gs_command-res-gklocal_82) := SW__good_gs_command-usr-8-cmd-Pattern;
+	init(SW__good_gs_command-res-5-4-gklocal_80-wp4-long) := SW__good_gs_command-usr-5-4-4-cmd-Map-wp4-long;
+	init(SW__good_gs_command-res-4-4-gklocal_80-wp4-lat) := SW__good_gs_command-usr-4-4-4-cmd-Map-wp4-lat;
+	init(SW__good_gs_command-res-4-4-gklocal_80-wp4-alt) := SW__good_gs_command-usr-4-4-4-cmd-Map-wp4-alt;
+	init(SW__good_gs_command-res-5-4-gklocal_80-wp3-long) := SW__good_gs_command-usr-5-4-4-cmd-Map-wp3-long;
+	init(SW__good_gs_command-res-4-4-gklocal_80-wp3-lat) := SW__good_gs_command-usr-4-4-4-cmd-Map-wp3-lat;
+	init(SW__good_gs_command-res-4-4-gklocal_80-wp3-alt) := SW__good_gs_command-usr-4-4-4-cmd-Map-wp3-alt;
+	init(SW__good_gs_command-res-5-4-gklocal_80-wp2-long) := SW__good_gs_command-usr-5-4-4-cmd-Map-wp2-long;
+	init(SW__good_gs_command-res-4-4-gklocal_80-wp2-lat) := SW__good_gs_command-usr-4-4-4-cmd-Map-wp2-lat;
+	init(SW__good_gs_command-res-4-4-gklocal_80-wp2-alt) := SW__good_gs_command-usr-4-4-4-cmd-Map-wp2-alt;
+	init(SW__good_gs_command-res-5-4-gklocal_80-wp1-long) := SW__good_gs_command-usr-5-4-4-cmd-Map-wp1-long;
+	init(SW__good_gs_command-res-4-4-gklocal_80-wp1-lat) := SW__good_gs_command-usr-4-4-4-cmd-Map-wp1-lat;
+	init(SW__good_gs_command-res-4-4-gklocal_80-wp1-alt) := SW__good_gs_command-usr-4-4-4-cmd-Map-wp1-alt;
+	init(SW__good_gs_command-usr-_outvar) := ((SW__good_gs_command-res-call_81.SW__good_map-usr-_outvar & SW__good_gs_command-res-call_83.SW__good_pattern-usr-_outvar) & SW__good_gs_command-res-call_85.SW__good_HMAC-usr-_outvar);
+
+	next(SW__good_gs_command-res-gklocal_84) := next(SW__good_gs_command-usr-5-cmd-HMAC);
+	next(SW__good_gs_command-res-gklocal_82) := next(SW__good_gs_command-usr-8-cmd-Pattern);
+	next(SW__good_gs_command-res-5-4-gklocal_80-wp4-long) := next(SW__good_gs_command-usr-5-4-4-cmd-Map-wp4-long);
+	next(SW__good_gs_command-res-4-4-gklocal_80-wp4-lat) := next(SW__good_gs_command-usr-4-4-4-cmd-Map-wp4-lat);
+	next(SW__good_gs_command-res-4-4-gklocal_80-wp4-alt) := next(SW__good_gs_command-usr-4-4-4-cmd-Map-wp4-alt);
+	next(SW__good_gs_command-res-5-4-gklocal_80-wp3-long) := next(SW__good_gs_command-usr-5-4-4-cmd-Map-wp3-long);
+	next(SW__good_gs_command-res-4-4-gklocal_80-wp3-lat) := next(SW__good_gs_command-usr-4-4-4-cmd-Map-wp3-lat);
+	next(SW__good_gs_command-res-4-4-gklocal_80-wp3-alt) := next(SW__good_gs_command-usr-4-4-4-cmd-Map-wp3-alt);
+	next(SW__good_gs_command-res-5-4-gklocal_80-wp2-long) := next(SW__good_gs_command-usr-5-4-4-cmd-Map-wp2-long);
+	next(SW__good_gs_command-res-4-4-gklocal_80-wp2-lat) := next(SW__good_gs_command-usr-4-4-4-cmd-Map-wp2-lat);
+	next(SW__good_gs_command-res-4-4-gklocal_80-wp2-alt) := next(SW__good_gs_command-usr-4-4-4-cmd-Map-wp2-alt);
+	next(SW__good_gs_command-res-5-4-gklocal_80-wp1-long) := next(SW__good_gs_command-usr-5-4-4-cmd-Map-wp1-long);
+	next(SW__good_gs_command-res-4-4-gklocal_80-wp1-lat) := next(SW__good_gs_command-usr-4-4-4-cmd-Map-wp1-lat);
+	next(SW__good_gs_command-res-4-4-gklocal_80-wp1-alt) := next(SW__good_gs_command-usr-4-4-4-cmd-Map-wp1-alt);
+	next(SW__good_gs_command-usr-_outvar) := ((next(SW__good_gs_command-res-call_81.SW__good_map-usr-_outvar) & next(SW__good_gs_command-res-call_83.SW__good_pattern-usr-_outvar)) & next(SW__good_gs_command-res-call_85.SW__good_HMAC-usr-_outvar));
+
+
+
+MODULE _TOP__FPLN (_TOP__FPLN-usr-__ASSUME__HIST, _TOP__FPLN-usr-__ASSUME0, _TOP__FPLN-usr-__ASSUME1, _TOP__FPLN-usr-recv_map___EVENT_, _TOP__FPLN-usr-5-recv_map-HMAC, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp1-alt, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp1-lat, _TOP__FPLN-usr-5-4-4-recv_map-Map-wp1-long, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp2-alt, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp2-lat, _TOP__FPLN-usr-5-4-4-recv_map-Map-wp2-long, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp3-alt, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp3-lat, _TOP__FPLN-usr-5-4-4-recv_map-Map-wp3-long, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp4-alt, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp4-lat, _TOP__FPLN-usr-5-4-4-recv_map-Map-wp4-long, _TOP__FPLN-usr-8-recv_map-Pattern, _TOP__FPLN-usr-position_status___EVENT_, _TOP__FPLN-usr-4-position_status-alt, _TOP__FPLN-usr-4-position_status-lat, _TOP__FPLN-usr-5-position_status-long, _TOP__FPLN-usr-time, _TOP__FPLN-usr-4-4-flight_plan-wp1-alt, _TOP__FPLN-usr-4-4-flight_plan-wp1-lat, _TOP__FPLN-usr-5-4-flight_plan-wp1-long, _TOP__FPLN-usr-4-5-flight_plan-wp10-alt, _TOP__FPLN-usr-4-5-flight_plan-wp10-lat, _TOP__FPLN-usr-5-5-flight_plan-wp10-long, _TOP__FPLN-usr-4-4-flight_plan-wp2-alt, _TOP__FPLN-usr-4-4-flight_plan-wp2-lat, _TOP__FPLN-usr-5-4-flight_plan-wp2-long, _TOP__FPLN-usr-4-4-flight_plan-wp3-alt, _TOP__FPLN-usr-4-4-flight_plan-wp3-lat, _TOP__FPLN-usr-5-4-flight_plan-wp3-long, _TOP__FPLN-usr-4-4-flight_plan-wp4-alt, _TOP__FPLN-usr-4-4-flight_plan-wp4-lat, _TOP__FPLN-usr-5-4-flight_plan-wp4-long, _TOP__FPLN-usr-4-4-flight_plan-wp5-alt, _TOP__FPLN-usr-4-4-flight_plan-wp5-lat, _TOP__FPLN-usr-5-4-flight_plan-wp5-long, _TOP__FPLN-usr-4-4-flight_plan-wp6-alt, _TOP__FPLN-usr-4-4-flight_plan-wp6-lat, _TOP__FPLN-usr-5-4-flight_plan-wp6-long, _TOP__FPLN-usr-4-4-flight_plan-wp7-alt, _TOP__FPLN-usr-4-4-flight_plan-wp7-lat, _TOP__FPLN-usr-5-4-flight_plan-wp7-long, _TOP__FPLN-usr-4-4-flight_plan-wp8-alt, _TOP__FPLN-usr-4-4-flight_plan-wp8-lat, _TOP__FPLN-usr-5-4-flight_plan-wp8-long, _TOP__FPLN-usr-4-4-flight_plan-wp9-alt, _TOP__FPLN-usr-4-4-flight_plan-wp9-lat, _TOP__FPLN-usr-5-4-flight_plan-wp9-long)
+VAR
+	_TOP__FPLN-usr-__ASSERT : boolean;
+	_TOP__FPLN-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__FPLN-res-call_98 : SW__good_gs_command(_TOP__FPLN-usr-5-recv_map-HMAC, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp1-alt, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp1-lat, _TOP__FPLN-usr-5-4-4-recv_map-Map-wp1-long, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp2-alt, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp2-lat, _TOP__FPLN-usr-5-4-4-recv_map-Map-wp2-long, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp3-alt, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp3-lat, _TOP__FPLN-usr-5-4-4-recv_map-Map-wp3-long, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp4-alt, _TOP__FPLN-usr-4-4-4-recv_map-Map-wp4-lat, _TOP__FPLN-usr-5-4-4-recv_map-Map-wp4-long, _TOP__FPLN-usr-8-recv_map-Pattern);
+	_TOP__FPLN-res-call_97 : SW__good_mission(_TOP__FPLN-usr-4-4-flight_plan-wp1-alt, _TOP__FPLN-usr-4-4-flight_plan-wp1-lat, _TOP__FPLN-usr-5-4-flight_plan-wp1-long, _TOP__FPLN-usr-4-5-flight_plan-wp10-alt, _TOP__FPLN-usr-4-5-flight_plan-wp10-lat, _TOP__FPLN-usr-5-5-flight_plan-wp10-long, _TOP__FPLN-usr-4-4-flight_plan-wp2-alt, _TOP__FPLN-usr-4-4-flight_plan-wp2-lat, _TOP__FPLN-usr-5-4-flight_plan-wp2-long, _TOP__FPLN-usr-4-4-flight_plan-wp3-alt, _TOP__FPLN-usr-4-4-flight_plan-wp3-lat, _TOP__FPLN-usr-5-4-flight_plan-wp3-long, _TOP__FPLN-usr-4-4-flight_plan-wp4-alt, _TOP__FPLN-usr-4-4-flight_plan-wp4-lat, _TOP__FPLN-usr-5-4-flight_plan-wp4-long, _TOP__FPLN-usr-4-4-flight_plan-wp5-alt, _TOP__FPLN-usr-4-4-flight_plan-wp5-lat, _TOP__FPLN-usr-5-4-flight_plan-wp5-long, _TOP__FPLN-usr-4-4-flight_plan-wp6-alt, _TOP__FPLN-usr-4-4-flight_plan-wp6-lat, _TOP__FPLN-usr-5-4-flight_plan-wp6-long, _TOP__FPLN-usr-4-4-flight_plan-wp7-alt, _TOP__FPLN-usr-4-4-flight_plan-wp7-lat, _TOP__FPLN-usr-5-4-flight_plan-wp7-long, _TOP__FPLN-usr-4-4-flight_plan-wp8-alt, _TOP__FPLN-usr-4-4-flight_plan-wp8-lat, _TOP__FPLN-usr-5-4-flight_plan-wp8-long, _TOP__FPLN-usr-4-4-flight_plan-wp9-alt, _TOP__FPLN-usr-4-4-flight_plan-wp9-lat, _TOP__FPLN-usr-5-4-flight_plan-wp9-long);
+
+ASSIGN
+	init(_TOP__FPLN-impl-usr-__GUARANTEE0) := _TOP__FPLN-res-call_97.SW__good_mission-usr-_outvar;
+	init(_TOP__FPLN-usr-__ASSERT) := ((_TOP__FPLN-usr-__ASSUME__HIST -> _TOP__FPLN-impl-usr-__GUARANTEE0) & ((_TOP__FPLN-usr-__ASSUME1 = _TOP__FPLN-res-call_98.SW__good_gs_command-usr-_outvar) & (_TOP__FPLN-usr-__ASSUME0 = _TOP__FPLN-usr-5-recv_map-HMAC)));
+
+	next(_TOP__FPLN-impl-usr-__GUARANTEE0) := next(_TOP__FPLN-res-call_97.SW__good_mission-usr-_outvar);
+	next(_TOP__FPLN-usr-__ASSERT) := ((next(_TOP__FPLN-usr-__ASSUME__HIST) -> next(_TOP__FPLN-impl-usr-__GUARANTEE0)) & ((next(_TOP__FPLN-usr-__ASSUME1) = next(_TOP__FPLN-res-call_98.SW__good_gs_command-usr-_outvar)) & (next(_TOP__FPLN-usr-__ASSUME0) = next(_TOP__FPLN-usr-5-recv_map-HMAC))));
+
+
+
+MODULE SW__good_mission_window (SW__good_mission_window-usr-4-win-crc, SW__good_mission_window-usr-4-4-win-wp1-alt, SW__good_mission_window-usr-4-4-win-wp1-lat, SW__good_mission_window-usr-5-4-win-wp1-long, SW__good_mission_window-usr-4-4-win-wp2-alt, SW__good_mission_window-usr-4-4-win-wp2-lat, SW__good_mission_window-usr-5-4-win-wp2-long, SW__good_mission_window-usr-4-4-win-wp3-alt, SW__good_mission_window-usr-4-4-win-wp3-lat, SW__good_mission_window-usr-5-4-win-wp3-long, SW__good_mission_window-usr-4-4-win-wp4-alt, SW__good_mission_window-usr-4-4-win-wp4-lat, SW__good_mission_window-usr-5-4-win-wp4-long)
+VAR
+	SW__good_mission_window-usr-_outvar : boolean;
+	SW__good_mission_window-res-4-gklocal_25-alt : integer;
+	SW__good_mission_window-res-4-gklocal_25-lat : integer;
+	SW__good_mission_window-res-5-gklocal_25-long : integer;
+	SW__good_mission_window-res-4-gklocal_27-alt : integer;
+	SW__good_mission_window-res-4-gklocal_27-lat : integer;
+	SW__good_mission_window-res-5-gklocal_27-long : integer;
+	SW__good_mission_window-res-4-gklocal_29-alt : integer;
+	SW__good_mission_window-res-4-gklocal_29-lat : integer;
+	SW__good_mission_window-res-5-gklocal_29-long : integer;
+	SW__good_mission_window-res-4-gklocal_31-alt : integer;
+	SW__good_mission_window-res-4-gklocal_31-lat : integer;
+	SW__good_mission_window-res-5-gklocal_31-long : integer;
+	SW__good_mission_window-res-call_26 : SW__good_coordinate(SW__good_mission_window-res-4-gklocal_25-alt, SW__good_mission_window-res-4-gklocal_25-lat, SW__good_mission_window-res-5-gklocal_25-long);
+	SW__good_mission_window-res-call_28 : SW__good_coordinate(SW__good_mission_window-res-4-gklocal_27-alt, SW__good_mission_window-res-4-gklocal_27-lat, SW__good_mission_window-res-5-gklocal_27-long);
+	SW__good_mission_window-res-call_30 : SW__good_coordinate(SW__good_mission_window-res-4-gklocal_29-alt, SW__good_mission_window-res-4-gklocal_29-lat, SW__good_mission_window-res-5-gklocal_29-long);
+	SW__good_mission_window-res-call_32 : SW__good_coordinate(SW__good_mission_window-res-4-gklocal_31-alt, SW__good_mission_window-res-4-gklocal_31-lat, SW__good_mission_window-res-5-gklocal_31-long);
+
+ASSIGN
+	init(SW__good_mission_window-res-5-gklocal_31-long) := SW__good_mission_window-usr-5-4-win-wp4-long;
+	init(SW__good_mission_window-res-4-gklocal_31-lat) := SW__good_mission_window-usr-4-4-win-wp4-lat;
+	init(SW__good_mission_window-res-4-gklocal_31-alt) := SW__good_mission_window-usr-4-4-win-wp4-alt;
+	init(SW__good_mission_window-res-5-gklocal_29-long) := SW__good_mission_window-usr-5-4-win-wp3-long;
+	init(SW__good_mission_window-res-4-gklocal_29-lat) := SW__good_mission_window-usr-4-4-win-wp3-lat;
+	init(SW__good_mission_window-res-4-gklocal_29-alt) := SW__good_mission_window-usr-4-4-win-wp3-alt;
+	init(SW__good_mission_window-res-5-gklocal_27-long) := SW__good_mission_window-usr-5-4-win-wp2-long;
+	init(SW__good_mission_window-res-4-gklocal_27-lat) := SW__good_mission_window-usr-4-4-win-wp2-lat;
+	init(SW__good_mission_window-res-4-gklocal_27-alt) := SW__good_mission_window-usr-4-4-win-wp2-alt;
+	init(SW__good_mission_window-res-5-gklocal_25-long) := SW__good_mission_window-usr-5-4-win-wp1-long;
+	init(SW__good_mission_window-res-4-gklocal_25-lat) := SW__good_mission_window-usr-4-4-win-wp1-lat;
+	init(SW__good_mission_window-res-4-gklocal_25-alt) := SW__good_mission_window-usr-4-4-win-wp1-alt;
+	init(SW__good_mission_window-usr-_outvar) := (((SW__good_mission_window-res-call_26.SW__good_coordinate-usr-_outvar & SW__good_mission_window-res-call_28.SW__good_coordinate-usr-_outvar) & SW__good_mission_window-res-call_30.SW__good_coordinate-usr-_outvar) & SW__good_mission_window-res-call_32.SW__good_coordinate-usr-_outvar);
+
+	next(SW__good_mission_window-res-5-gklocal_31-long) := next(SW__good_mission_window-usr-5-4-win-wp4-long);
+	next(SW__good_mission_window-res-4-gklocal_31-lat) := next(SW__good_mission_window-usr-4-4-win-wp4-lat);
+	next(SW__good_mission_window-res-4-gklocal_31-alt) := next(SW__good_mission_window-usr-4-4-win-wp4-alt);
+	next(SW__good_mission_window-res-5-gklocal_29-long) := next(SW__good_mission_window-usr-5-4-win-wp3-long);
+	next(SW__good_mission_window-res-4-gklocal_29-lat) := next(SW__good_mission_window-usr-4-4-win-wp3-lat);
+	next(SW__good_mission_window-res-4-gklocal_29-alt) := next(SW__good_mission_window-usr-4-4-win-wp3-alt);
+	next(SW__good_mission_window-res-5-gklocal_27-long) := next(SW__good_mission_window-usr-5-4-win-wp2-long);
+	next(SW__good_mission_window-res-4-gklocal_27-lat) := next(SW__good_mission_window-usr-4-4-win-wp2-lat);
+	next(SW__good_mission_window-res-4-gklocal_27-alt) := next(SW__good_mission_window-usr-4-4-win-wp2-alt);
+	next(SW__good_mission_window-res-5-gklocal_25-long) := next(SW__good_mission_window-usr-5-4-win-wp1-long);
+	next(SW__good_mission_window-res-4-gklocal_25-lat) := next(SW__good_mission_window-usr-4-4-win-wp1-lat);
+	next(SW__good_mission_window-res-4-gklocal_25-alt) := next(SW__good_mission_window-usr-4-4-win-wp1-alt);
+	next(SW__good_mission_window-usr-_outvar) := (((next(SW__good_mission_window-res-call_26.SW__good_coordinate-usr-_outvar) & next(SW__good_mission_window-res-call_28.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission_window-res-call_30.SW__good_coordinate-usr-_outvar)) & next(SW__good_mission_window-res-call_32.SW__good_coordinate-usr-_outvar));
+
+
+
+MODULE _TOP__UART (_TOP__UART-usr-__ASSUME__HIST, _TOP__UART-usr-__ASSUME0, _TOP__UART-usr-position_status_in___EVENT_, _TOP__UART-usr-4-position_status_in-alt, _TOP__UART-usr-4-position_status_in-lat, _TOP__UART-usr-5-position_status_in-long, _TOP__UART-usr-waypoint_in___EVENT_, _TOP__UART-usr-4-waypoint_in-crc, _TOP__UART-usr-4-4-waypoint_in-wp1-alt, _TOP__UART-usr-4-4-waypoint_in-wp1-lat, _TOP__UART-usr-5-4-waypoint_in-wp1-long, _TOP__UART-usr-4-4-waypoint_in-wp2-alt, _TOP__UART-usr-4-4-waypoint_in-wp2-lat, _TOP__UART-usr-5-4-waypoint_in-wp2-long, _TOP__UART-usr-4-4-waypoint_in-wp3-alt, _TOP__UART-usr-4-4-waypoint_in-wp3-lat, _TOP__UART-usr-5-4-waypoint_in-wp3-long, _TOP__UART-usr-4-4-waypoint_in-wp4-alt, _TOP__UART-usr-4-4-waypoint_in-wp4-lat, _TOP__UART-usr-5-4-waypoint_in-wp4-long, _TOP__UART-usr-time, _TOP__UART-usr-waypoint_out___EVENT_, _TOP__UART-usr-4-waypoint_out-crc, _TOP__UART-usr-4-4-waypoint_out-wp1-alt, _TOP__UART-usr-4-4-waypoint_out-wp1-lat, _TOP__UART-usr-5-4-waypoint_out-wp1-long, _TOP__UART-usr-4-4-waypoint_out-wp2-alt, _TOP__UART-usr-4-4-waypoint_out-wp2-lat, _TOP__UART-usr-5-4-waypoint_out-wp2-long, _TOP__UART-usr-4-4-waypoint_out-wp3-alt, _TOP__UART-usr-4-4-waypoint_out-wp3-lat, _TOP__UART-usr-5-4-waypoint_out-wp3-long, _TOP__UART-usr-4-4-waypoint_out-wp4-alt, _TOP__UART-usr-4-4-waypoint_out-wp4-lat, _TOP__UART-usr-5-4-waypoint_out-wp4-long, _TOP__UART-usr-position_status_out___EVENT_, _TOP__UART-usr-4-position_status_out-alt, _TOP__UART-usr-4-position_status_out-lat, _TOP__UART-usr-5-position_status_out-long)
+VAR
+	_TOP__UART-usr-__ASSERT : boolean;
+	_TOP__UART-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__UART-res-call_88 : SW__good_mission_window(_TOP__UART-usr-4-waypoint_in-crc, _TOP__UART-usr-4-4-waypoint_in-wp1-alt, _TOP__UART-usr-4-4-waypoint_in-wp1-lat, _TOP__UART-usr-5-4-waypoint_in-wp1-long, _TOP__UART-usr-4-4-waypoint_in-wp2-alt, _TOP__UART-usr-4-4-waypoint_in-wp2-lat, _TOP__UART-usr-5-4-waypoint_in-wp2-long, _TOP__UART-usr-4-4-waypoint_in-wp3-alt, _TOP__UART-usr-4-4-waypoint_in-wp3-lat, _TOP__UART-usr-5-4-waypoint_in-wp3-long, _TOP__UART-usr-4-4-waypoint_in-wp4-alt, _TOP__UART-usr-4-4-waypoint_in-wp4-lat, _TOP__UART-usr-5-4-waypoint_in-wp4-long);
+
+ASSIGN
+	init(_TOP__UART-impl-usr-__GUARANTEE0) := _TOP__UART-usr-4-waypoint_out-crc;
+	init(_TOP__UART-usr-__ASSERT) := ((_TOP__UART-usr-__ASSUME__HIST -> _TOP__UART-impl-usr-__GUARANTEE0) & (_TOP__UART-usr-__ASSUME0 = _TOP__UART-res-call_88.SW__good_mission_window-usr-_outvar));
+
+	next(_TOP__UART-impl-usr-__GUARANTEE0) := next(_TOP__UART-usr-4-waypoint_out-crc);
+	next(_TOP__UART-usr-__ASSERT) := ((next(_TOP__UART-usr-__ASSUME__HIST) -> next(_TOP__UART-impl-usr-__GUARANTEE0)) & (next(_TOP__UART-usr-__ASSUME0) = next(_TOP__UART-res-call_88.SW__good_mission_window-usr-_outvar)));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE _TOP__WPM (_TOP__WPM-usr-__ASSUME__HIST, _TOP__WPM-usr-__ASSUME0, _TOP__WPM-usr-4-4-flight_plan-wp1-alt, _TOP__WPM-usr-4-4-flight_plan-wp1-lat, _TOP__WPM-usr-5-4-flight_plan-wp1-long, _TOP__WPM-usr-4-5-flight_plan-wp10-alt, _TOP__WPM-usr-4-5-flight_plan-wp10-lat, _TOP__WPM-usr-5-5-flight_plan-wp10-long, _TOP__WPM-usr-4-4-flight_plan-wp2-alt, _TOP__WPM-usr-4-4-flight_plan-wp2-lat, _TOP__WPM-usr-5-4-flight_plan-wp2-long, _TOP__WPM-usr-4-4-flight_plan-wp3-alt, _TOP__WPM-usr-4-4-flight_plan-wp3-lat, _TOP__WPM-usr-5-4-flight_plan-wp3-long, _TOP__WPM-usr-4-4-flight_plan-wp4-alt, _TOP__WPM-usr-4-4-flight_plan-wp4-lat, _TOP__WPM-usr-5-4-flight_plan-wp4-long, _TOP__WPM-usr-4-4-flight_plan-wp5-alt, _TOP__WPM-usr-4-4-flight_plan-wp5-lat, _TOP__WPM-usr-5-4-flight_plan-wp5-long, _TOP__WPM-usr-4-4-flight_plan-wp6-alt, _TOP__WPM-usr-4-4-flight_plan-wp6-lat, _TOP__WPM-usr-5-4-flight_plan-wp6-long, _TOP__WPM-usr-4-4-flight_plan-wp7-alt, _TOP__WPM-usr-4-4-flight_plan-wp7-lat, _TOP__WPM-usr-5-4-flight_plan-wp7-long, _TOP__WPM-usr-4-4-flight_plan-wp8-alt, _TOP__WPM-usr-4-4-flight_plan-wp8-lat, _TOP__WPM-usr-5-4-flight_plan-wp8-long, _TOP__WPM-usr-4-4-flight_plan-wp9-alt, _TOP__WPM-usr-4-4-flight_plan-wp9-lat, _TOP__WPM-usr-5-4-flight_plan-wp9-long, _TOP__WPM-usr-position_status___EVENT_, _TOP__WPM-usr-4-position_status-alt, _TOP__WPM-usr-4-position_status-lat, _TOP__WPM-usr-5-position_status-long, _TOP__WPM-usr-time, _TOP__WPM-usr-waypoint___EVENT_, _TOP__WPM-usr-4-waypoint-crc, _TOP__WPM-usr-4-4-waypoint-wp1-alt, _TOP__WPM-usr-4-4-waypoint-wp1-lat, _TOP__WPM-usr-5-4-waypoint-wp1-long, _TOP__WPM-usr-4-4-waypoint-wp2-alt, _TOP__WPM-usr-4-4-waypoint-wp2-lat, _TOP__WPM-usr-5-4-waypoint-wp2-long, _TOP__WPM-usr-4-4-waypoint-wp3-alt, _TOP__WPM-usr-4-4-waypoint-wp3-lat, _TOP__WPM-usr-5-4-waypoint-wp3-long, _TOP__WPM-usr-4-4-waypoint-wp4-alt, _TOP__WPM-usr-4-4-waypoint-wp4-lat, _TOP__WPM-usr-5-4-waypoint-wp4-long)
+VAR
+	_TOP__WPM-usr-__ASSERT : boolean;
+	_TOP__WPM-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__WPM-res-call_87 : SW__good_mission(_TOP__WPM-usr-4-4-flight_plan-wp1-alt, _TOP__WPM-usr-4-4-flight_plan-wp1-lat, _TOP__WPM-usr-5-4-flight_plan-wp1-long, _TOP__WPM-usr-4-5-flight_plan-wp10-alt, _TOP__WPM-usr-4-5-flight_plan-wp10-lat, _TOP__WPM-usr-5-5-flight_plan-wp10-long, _TOP__WPM-usr-4-4-flight_plan-wp2-alt, _TOP__WPM-usr-4-4-flight_plan-wp2-lat, _TOP__WPM-usr-5-4-flight_plan-wp2-long, _TOP__WPM-usr-4-4-flight_plan-wp3-alt, _TOP__WPM-usr-4-4-flight_plan-wp3-lat, _TOP__WPM-usr-5-4-flight_plan-wp3-long, _TOP__WPM-usr-4-4-flight_plan-wp4-alt, _TOP__WPM-usr-4-4-flight_plan-wp4-lat, _TOP__WPM-usr-5-4-flight_plan-wp4-long, _TOP__WPM-usr-4-4-flight_plan-wp5-alt, _TOP__WPM-usr-4-4-flight_plan-wp5-lat, _TOP__WPM-usr-5-4-flight_plan-wp5-long, _TOP__WPM-usr-4-4-flight_plan-wp6-alt, _TOP__WPM-usr-4-4-flight_plan-wp6-lat, _TOP__WPM-usr-5-4-flight_plan-wp6-long, _TOP__WPM-usr-4-4-flight_plan-wp7-alt, _TOP__WPM-usr-4-4-flight_plan-wp7-lat, _TOP__WPM-usr-5-4-flight_plan-wp7-long, _TOP__WPM-usr-4-4-flight_plan-wp8-alt, _TOP__WPM-usr-4-4-flight_plan-wp8-lat, _TOP__WPM-usr-5-4-flight_plan-wp8-long, _TOP__WPM-usr-4-4-flight_plan-wp9-alt, _TOP__WPM-usr-4-4-flight_plan-wp9-lat, _TOP__WPM-usr-5-4-flight_plan-wp9-long);
+	_TOP__WPM-res-call_86 : SW__good_mission_window(_TOP__WPM-usr-4-waypoint-crc, _TOP__WPM-usr-4-4-waypoint-wp1-alt, _TOP__WPM-usr-4-4-waypoint-wp1-lat, _TOP__WPM-usr-5-4-waypoint-wp1-long, _TOP__WPM-usr-4-4-waypoint-wp2-alt, _TOP__WPM-usr-4-4-waypoint-wp2-lat, _TOP__WPM-usr-5-4-waypoint-wp2-long, _TOP__WPM-usr-4-4-waypoint-wp3-alt, _TOP__WPM-usr-4-4-waypoint-wp3-lat, _TOP__WPM-usr-5-4-waypoint-wp3-long, _TOP__WPM-usr-4-4-waypoint-wp4-alt, _TOP__WPM-usr-4-4-waypoint-wp4-lat, _TOP__WPM-usr-5-4-waypoint-wp4-long);
+
+ASSIGN
+	init(_TOP__WPM-impl-usr-__GUARANTEE0) := _TOP__WPM-res-call_86.SW__good_mission_window-usr-_outvar;
+	init(_TOP__WPM-usr-__ASSERT) := ((_TOP__WPM-usr-__ASSUME__HIST -> _TOP__WPM-impl-usr-__GUARANTEE0) & (_TOP__WPM-usr-__ASSUME0 = _TOP__WPM-res-call_87.SW__good_mission-usr-_outvar));
+
+	next(_TOP__WPM-impl-usr-__GUARANTEE0) := next(_TOP__WPM-res-call_86.SW__good_mission_window-usr-_outvar);
+	next(_TOP__WPM-usr-__ASSERT) := ((next(_TOP__WPM-usr-__ASSUME__HIST) -> next(_TOP__WPM-impl-usr-__GUARANTEE0)) & (next(_TOP__WPM-usr-__ASSUME0) = next(_TOP__WPM-res-call_87.SW__good_mission-usr-_outvar)));
+
+
+
+MODULE _TOP__FLT (_TOP__FLT-usr-__ASSUME__HIST, _TOP__FLT-usr-filter_in___EVENT_, _TOP__FLT-usr-5-filter_in-HMAC, _TOP__FLT-usr-4-4-4-filter_in-Map-wp1-alt, _TOP__FLT-usr-4-4-4-filter_in-Map-wp1-lat, _TOP__FLT-usr-5-4-4-filter_in-Map-wp1-long, _TOP__FLT-usr-4-4-4-filter_in-Map-wp2-alt, _TOP__FLT-usr-4-4-4-filter_in-Map-wp2-lat, _TOP__FLT-usr-5-4-4-filter_in-Map-wp2-long, _TOP__FLT-usr-4-4-4-filter_in-Map-wp3-alt, _TOP__FLT-usr-4-4-4-filter_in-Map-wp3-lat, _TOP__FLT-usr-5-4-4-filter_in-Map-wp3-long, _TOP__FLT-usr-4-4-4-filter_in-Map-wp4-alt, _TOP__FLT-usr-4-4-4-filter_in-Map-wp4-lat, _TOP__FLT-usr-5-4-4-filter_in-Map-wp4-long, _TOP__FLT-usr-8-filter_in-Pattern, _TOP__FLT-usr-time, _TOP__FLT-usr-filter_out___EVENT_, _TOP__FLT-usr-5-filter_out-HMAC, _TOP__FLT-usr-4-4-4-filter_out-Map-wp1-alt, _TOP__FLT-usr-4-4-4-filter_out-Map-wp1-lat, _TOP__FLT-usr-5-4-4-filter_out-Map-wp1-long, _TOP__FLT-usr-4-4-4-filter_out-Map-wp2-alt, _TOP__FLT-usr-4-4-4-filter_out-Map-wp2-lat, _TOP__FLT-usr-5-4-4-filter_out-Map-wp2-long, _TOP__FLT-usr-4-4-4-filter_out-Map-wp3-alt, _TOP__FLT-usr-4-4-4-filter_out-Map-wp3-lat, _TOP__FLT-usr-5-4-4-filter_out-Map-wp3-long, _TOP__FLT-usr-4-4-4-filter_out-Map-wp4-alt, _TOP__FLT-usr-4-4-4-filter_out-Map-wp4-lat, _TOP__FLT-usr-5-4-4-filter_out-Map-wp4-long, _TOP__FLT-usr-8-filter_out-Pattern)
+VAR
+	_TOP__FLT-usr-__ASSERT : boolean;
+	_TOP__FLT-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__FLT-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__FLT-res-call_96 : SW__good_gs_command(_TOP__FLT-usr-5-filter_out-HMAC, _TOP__FLT-usr-4-4-4-filter_out-Map-wp1-alt, _TOP__FLT-usr-4-4-4-filter_out-Map-wp1-lat, _TOP__FLT-usr-5-4-4-filter_out-Map-wp1-long, _TOP__FLT-usr-4-4-4-filter_out-Map-wp2-alt, _TOP__FLT-usr-4-4-4-filter_out-Map-wp2-lat, _TOP__FLT-usr-5-4-4-filter_out-Map-wp2-long, _TOP__FLT-usr-4-4-4-filter_out-Map-wp3-alt, _TOP__FLT-usr-4-4-4-filter_out-Map-wp3-lat, _TOP__FLT-usr-5-4-4-filter_out-Map-wp3-long, _TOP__FLT-usr-4-4-4-filter_out-Map-wp4-alt, _TOP__FLT-usr-4-4-4-filter_out-Map-wp4-lat, _TOP__FLT-usr-5-4-4-filter_out-Map-wp4-long, _TOP__FLT-usr-8-filter_out-Pattern);
+
+ASSIGN
+	init(_TOP__FLT-impl-usr-__GUARANTEE1) := _TOP__FLT-res-call_96.SW__good_gs_command-usr-_outvar;
+	init(_TOP__FLT-impl-usr-__GUARANTEE0) := _TOP__FLT-usr-5-filter_out-HMAC;
+	init(_TOP__FLT-usr-__ASSERT) := (_TOP__FLT-usr-__ASSUME__HIST -> (_TOP__FLT-impl-usr-__GUARANTEE1 & _TOP__FLT-impl-usr-__GUARANTEE0));
+
+	next(_TOP__FLT-impl-usr-__GUARANTEE1) := next(_TOP__FLT-res-call_96.SW__good_gs_command-usr-_outvar);
+	next(_TOP__FLT-impl-usr-__GUARANTEE0) := next(_TOP__FLT-usr-5-filter_out-HMAC);
+	next(_TOP__FLT-usr-__ASSERT) := (next(_TOP__FLT-usr-__ASSUME__HIST) -> (next(_TOP__FLT-impl-usr-__GUARANTEE1) & next(_TOP__FLT-impl-usr-__GUARANTEE0)));
+
+
+
+MODULE main () 
+VAR
+	main-usr-RADIO__send_status_out___EVENT_ : boolean;
+	main-usr-4-RADIO__send_status_out-alt : integer;
+	main-usr-4-RADIO__send_status_out-lat : integer;
+	main-usr-5-RADIO__send_status_out-long : integer;
+	main-usr-RADIO__recv_map_out___EVENT_ : boolean;
+	main-usr-5-RADIO__recv_map_out-HMAC : boolean;
+	main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-alt : integer;
+	main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-lat : integer;
+	main-usr-5-4-4-RADIO__recv_map_out-Map-wp1-long : integer;
+	main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-alt : integer;
+	main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-lat : integer;
+	main-usr-5-4-4-RADIO__recv_map_out-Map-wp2-long : integer;
+	main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-alt : integer;
+	main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-lat : integer;
+	main-usr-5-4-4-RADIO__recv_map_out-Map-wp3-long : integer;
+	main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-alt : integer;
+	main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-lat : integer;
+	main-usr-5-4-4-RADIO__recv_map_out-Map-wp4-long : integer;
+	main-usr-8-RADIO__recv_map_out-Pattern : 0 .. 2;
+	main-usr-RADIO____ASSUME0 : boolean;
+	main-usr-RADIO____ASSUME__HIST : boolean;
+	main-usr-FLT__filter_out___EVENT_ : boolean;
+	main-usr-5-FLT__filter_out-HMAC : boolean;
+	main-usr-4-4-4-FLT__filter_out-Map-wp1-alt : integer;
+	main-usr-4-4-4-FLT__filter_out-Map-wp1-lat : integer;
+	main-usr-5-4-4-FLT__filter_out-Map-wp1-long : integer;
+	main-usr-4-4-4-FLT__filter_out-Map-wp2-alt : integer;
+	main-usr-4-4-4-FLT__filter_out-Map-wp2-lat : integer;
+	main-usr-5-4-4-FLT__filter_out-Map-wp2-long : integer;
+	main-usr-4-4-4-FLT__filter_out-Map-wp3-alt : integer;
+	main-usr-4-4-4-FLT__filter_out-Map-wp3-lat : integer;
+	main-usr-5-4-4-FLT__filter_out-Map-wp3-long : integer;
+	main-usr-4-4-4-FLT__filter_out-Map-wp4-alt : integer;
+	main-usr-4-4-4-FLT__filter_out-Map-wp4-lat : integer;
+	main-usr-5-4-4-FLT__filter_out-Map-wp4-long : integer;
+	main-usr-8-FLT__filter_out-Pattern : 0 .. 2;
+	main-usr-FLT____ASSUME__HIST : boolean;
+	main-usr-4-4-FPLN__flight_plan-wp1-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp1-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp1-long : integer;
+	main-usr-4-5-FPLN__flight_plan-wp10-alt : integer;
+	main-usr-4-5-FPLN__flight_plan-wp10-lat : integer;
+	main-usr-5-5-FPLN__flight_plan-wp10-long : integer;
+	main-usr-4-4-FPLN__flight_plan-wp2-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp2-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp2-long : integer;
+	main-usr-4-4-FPLN__flight_plan-wp3-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp3-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp3-long : integer;
+	main-usr-4-4-FPLN__flight_plan-wp4-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp4-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp4-long : integer;
+	main-usr-4-4-FPLN__flight_plan-wp5-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp5-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp5-long : integer;
+	main-usr-4-4-FPLN__flight_plan-wp6-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp6-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp6-long : integer;
+	main-usr-4-4-FPLN__flight_plan-wp7-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp7-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp7-long : integer;
+	main-usr-4-4-FPLN__flight_plan-wp8-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp8-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp8-long : integer;
+	main-usr-4-4-FPLN__flight_plan-wp9-alt : integer;
+	main-usr-4-4-FPLN__flight_plan-wp9-lat : integer;
+	main-usr-5-4-FPLN__flight_plan-wp9-long : integer;
+	main-usr-FPLN____ASSUME0 : boolean;
+	main-usr-FPLN____ASSUME1 : boolean;
+	main-usr-FPLN____ASSUME__HIST : boolean;
+	main-usr-WPM__waypoint___EVENT_ : boolean;
+	main-usr-4-WPM__waypoint-crc : boolean;
+	main-usr-4-4-WPM__waypoint-wp1-alt : integer;
+	main-usr-4-4-WPM__waypoint-wp1-lat : integer;
+	main-usr-5-4-WPM__waypoint-wp1-long : integer;
+	main-usr-4-4-WPM__waypoint-wp2-alt : integer;
+	main-usr-4-4-WPM__waypoint-wp2-lat : integer;
+	main-usr-5-4-WPM__waypoint-wp2-long : integer;
+	main-usr-4-4-WPM__waypoint-wp3-alt : integer;
+	main-usr-4-4-WPM__waypoint-wp3-lat : integer;
+	main-usr-5-4-WPM__waypoint-wp3-long : integer;
+	main-usr-4-4-WPM__waypoint-wp4-alt : integer;
+	main-usr-4-4-WPM__waypoint-wp4-lat : integer;
+	main-usr-5-4-WPM__waypoint-wp4-long : integer;
+	main-usr-WPM____ASSUME0 : boolean;
+	main-usr-WPM____ASSUME__HIST : boolean;
+	main-usr-UART__waypoint_out___EVENT_ : boolean;
+	main-usr-4-UART__waypoint_out-crc : boolean;
+	main-usr-4-4-UART__waypoint_out-wp1-alt : integer;
+	main-usr-4-4-UART__waypoint_out-wp1-lat : integer;
+	main-usr-5-4-UART__waypoint_out-wp1-long : integer;
+	main-usr-4-4-UART__waypoint_out-wp2-alt : integer;
+	main-usr-4-4-UART__waypoint_out-wp2-lat : integer;
+	main-usr-5-4-UART__waypoint_out-wp2-long : integer;
+	main-usr-4-4-UART__waypoint_out-wp3-alt : integer;
+	main-usr-4-4-UART__waypoint_out-wp3-lat : integer;
+	main-usr-5-4-UART__waypoint_out-wp3-long : integer;
+	main-usr-4-4-UART__waypoint_out-wp4-alt : integer;
+	main-usr-4-4-UART__waypoint_out-wp4-lat : integer;
+	main-usr-5-4-UART__waypoint_out-wp4-long : integer;
+	main-usr-UART__position_status_out___EVENT_ : boolean;
+	main-usr-4-UART__position_status_out-alt : integer;
+	main-usr-4-UART__position_status_out-lat : integer;
+	main-usr-5-UART__position_status_out-long : integer;
+	main-usr-UART____ASSUME0 : boolean;
+	main-usr-UART____ASSUME__HIST : boolean;
+	main-usr-send_status___EVENT_ : boolean;
+	main-usr-4-send_status-alt : integer;
+	main-usr-4-send_status-lat : integer;
+	main-usr-5-send_status-long : integer;
+	main-usr-waypoint___EVENT_ : boolean;
+	main-usr-4-waypoint-crc : boolean;
+	main-usr-4-4-waypoint-wp1-alt : integer;
+	main-usr-4-4-waypoint-wp1-lat : integer;
+	main-usr-5-4-waypoint-wp1-long : integer;
+	main-usr-4-4-waypoint-wp2-alt : integer;
+	main-usr-4-4-waypoint-wp2-lat : integer;
+	main-usr-5-4-waypoint-wp2-long : integer;
+	main-usr-4-4-waypoint-wp3-alt : integer;
+	main-usr-4-4-waypoint-wp3-lat : integer;
+	main-usr-5-4-waypoint-wp3-long : integer;
+	main-usr-4-4-waypoint-wp4-alt : integer;
+	main-usr-4-4-waypoint-wp4-lat : integer;
+	main-usr-5-4-waypoint-wp4-long : integer;
+	main-usr-RADIO__recv_map_in___EVENT_ : boolean;
+	main-usr-5-RADIO__recv_map_in-HMAC : boolean;
+	main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-alt : integer;
+	main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-lat : integer;
+	main-usr-5-4-4-RADIO__recv_map_in-Map-wp1-long : integer;
+	main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-alt : integer;
+	main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-lat : integer;
+	main-usr-5-4-4-RADIO__recv_map_in-Map-wp2-long : integer;
+	main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-alt : integer;
+	main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-lat : integer;
+	main-usr-5-4-4-RADIO__recv_map_in-Map-wp3-long : integer;
+	main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-alt : integer;
+	main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-lat : integer;
+	main-usr-5-4-4-RADIO__recv_map_in-Map-wp4-long : integer;
+	main-usr-8-RADIO__recv_map_in-Pattern : 0 .. 2;
+	main-usr-RADIO__send_status_in___EVENT_ : boolean;
+	main-usr-4-RADIO__send_status_in-alt : integer;
+	main-usr-4-RADIO__send_status_in-lat : integer;
+	main-usr-5-RADIO__send_status_in-long : integer;
+	main-usr-RADIO__time : real;
+	main-usr-FLT__filter_in___EVENT_ : boolean;
+	main-usr-5-FLT__filter_in-HMAC : boolean;
+	main-usr-4-4-4-FLT__filter_in-Map-wp1-alt : integer;
+	main-usr-4-4-4-FLT__filter_in-Map-wp1-lat : integer;
+	main-usr-5-4-4-FLT__filter_in-Map-wp1-long : integer;
+	main-usr-4-4-4-FLT__filter_in-Map-wp2-alt : integer;
+	main-usr-4-4-4-FLT__filter_in-Map-wp2-lat : integer;
+	main-usr-5-4-4-FLT__filter_in-Map-wp2-long : integer;
+	main-usr-4-4-4-FLT__filter_in-Map-wp3-alt : integer;
+	main-usr-4-4-4-FLT__filter_in-Map-wp3-lat : integer;
+	main-usr-5-4-4-FLT__filter_in-Map-wp3-long : integer;
+	main-usr-4-4-4-FLT__filter_in-Map-wp4-alt : integer;
+	main-usr-4-4-4-FLT__filter_in-Map-wp4-lat : integer;
+	main-usr-5-4-4-FLT__filter_in-Map-wp4-long : integer;
+	main-usr-8-FLT__filter_in-Pattern : 0 .. 2;
+	main-usr-FLT__time : real;
+	main-usr-FPLN__recv_map___EVENT_ : boolean;
+	main-usr-5-FPLN__recv_map-HMAC : boolean;
+	main-usr-4-4-4-FPLN__recv_map-Map-wp1-alt : integer;
+	main-usr-4-4-4-FPLN__recv_map-Map-wp1-lat : integer;
+	main-usr-5-4-4-FPLN__recv_map-Map-wp1-long : integer;
+	main-usr-4-4-4-FPLN__recv_map-Map-wp2-alt : integer;
+	main-usr-4-4-4-FPLN__recv_map-Map-wp2-lat : integer;
+	main-usr-5-4-4-FPLN__recv_map-Map-wp2-long : integer;
+	main-usr-4-4-4-FPLN__recv_map-Map-wp3-alt : integer;
+	main-usr-4-4-4-FPLN__recv_map-Map-wp3-lat : integer;
+	main-usr-5-4-4-FPLN__recv_map-Map-wp3-long : integer;
+	main-usr-4-4-4-FPLN__recv_map-Map-wp4-alt : integer;
+	main-usr-4-4-4-FPLN__recv_map-Map-wp4-lat : integer;
+	main-usr-5-4-4-FPLN__recv_map-Map-wp4-long : integer;
+	main-usr-8-FPLN__recv_map-Pattern : 0 .. 2;
+	main-usr-FPLN__position_status___EVENT_ : boolean;
+	main-usr-4-FPLN__position_status-alt : integer;
+	main-usr-4-FPLN__position_status-lat : integer;
+	main-usr-5-FPLN__position_status-long : integer;
+	main-usr-FPLN__time : real;
+	main-usr-4-4-WPM__flight_plan-wp1-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp1-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp1-long : integer;
+	main-usr-4-5-WPM__flight_plan-wp10-alt : integer;
+	main-usr-4-5-WPM__flight_plan-wp10-lat : integer;
+	main-usr-5-5-WPM__flight_plan-wp10-long : integer;
+	main-usr-4-4-WPM__flight_plan-wp2-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp2-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp2-long : integer;
+	main-usr-4-4-WPM__flight_plan-wp3-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp3-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp3-long : integer;
+	main-usr-4-4-WPM__flight_plan-wp4-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp4-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp4-long : integer;
+	main-usr-4-4-WPM__flight_plan-wp5-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp5-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp5-long : integer;
+	main-usr-4-4-WPM__flight_plan-wp6-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp6-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp6-long : integer;
+	main-usr-4-4-WPM__flight_plan-wp7-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp7-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp7-long : integer;
+	main-usr-4-4-WPM__flight_plan-wp8-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp8-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp8-long : integer;
+	main-usr-4-4-WPM__flight_plan-wp9-alt : integer;
+	main-usr-4-4-WPM__flight_plan-wp9-lat : integer;
+	main-usr-5-4-WPM__flight_plan-wp9-long : integer;
+	main-usr-WPM__position_status___EVENT_ : boolean;
+	main-usr-4-WPM__position_status-alt : integer;
+	main-usr-4-WPM__position_status-lat : integer;
+	main-usr-5-WPM__position_status-long : integer;
+	main-usr-WPM__time : real;
+	main-usr-UART__position_status_in___EVENT_ : boolean;
+	main-usr-4-UART__position_status_in-alt : integer;
+	main-usr-4-UART__position_status_in-lat : integer;
+	main-usr-5-UART__position_status_in-long : integer;
+	main-usr-UART__waypoint_in___EVENT_ : boolean;
+	main-usr-4-UART__waypoint_in-crc : boolean;
+	main-usr-4-4-UART__waypoint_in-wp1-alt : integer;
+	main-usr-4-4-UART__waypoint_in-wp1-lat : integer;
+	main-usr-5-4-UART__waypoint_in-wp1-long : integer;
+	main-usr-4-4-UART__waypoint_in-wp2-alt : integer;
+	main-usr-4-4-UART__waypoint_in-wp2-lat : integer;
+	main-usr-5-4-UART__waypoint_in-wp2-long : integer;
+	main-usr-4-4-UART__waypoint_in-wp3-alt : integer;
+	main-usr-4-4-UART__waypoint_in-wp3-lat : integer;
+	main-usr-5-4-UART__waypoint_in-wp3-long : integer;
+	main-usr-4-4-UART__waypoint_in-wp4-alt : integer;
+	main-usr-4-4-UART__waypoint_in-wp4-lat : integer;
+	main-usr-5-4-UART__waypoint_in-wp4-long : integer;
+	main-usr-UART__time : real;
+	main-usr-recv_map___EVENT_ : boolean;
+	main-usr-5-recv_map-HMAC : boolean;
+	main-usr-4-4-4-recv_map-Map-wp1-alt : integer;
+	main-usr-4-4-4-recv_map-Map-wp1-lat : integer;
+	main-usr-5-4-4-recv_map-Map-wp1-long : integer;
+	main-usr-4-4-4-recv_map-Map-wp2-alt : integer;
+	main-usr-4-4-4-recv_map-Map-wp2-lat : integer;
+	main-usr-5-4-4-recv_map-Map-wp2-long : integer;
+	main-usr-4-4-4-recv_map-Map-wp3-alt : integer;
+	main-usr-4-4-4-recv_map-Map-wp3-lat : integer;
+	main-usr-5-4-4-recv_map-Map-wp3-long : integer;
+	main-usr-4-4-4-recv_map-Map-wp4-alt : integer;
+	main-usr-4-4-4-recv_map-Map-wp4-lat : integer;
+	main-usr-5-4-4-recv_map-Map-wp4-long : integer;
+	main-usr-8-recv_map-Pattern : 0 .. 2;
+	main-usr-position_status___EVENT_ : boolean;
+	main-usr-4-position_status-alt : integer;
+	main-usr-4-position_status-lat : integer;
+	main-usr-5-position_status-long : integer;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME0 : boolean;
+	main-res-glocal_99 : boolean;
+	main-res-glocal_100 : boolean;
+	main-res-glocal_102 : boolean;
+	main-res-glocal_104 : boolean;
+	main-res-glocal_105 : boolean;
+	main-res-glocal_107 : boolean;
+	main-res-glocal_110 : boolean;
+	main-res-glocal_111 : boolean;
+	main-res-glocal_113 : boolean;
+	main-res-glocal_116 : boolean;
+	main-res-glocal_117 : boolean;
+	main-res-glocal_119 : boolean;
+	main-res-glocal_121 : boolean;
+	main-res-glocal_122 : boolean;
+	main-res-glocal_124 : boolean;
+	main-res-glocal_126 : boolean;
+	main-res-glocal_127 : boolean;
+	main-res-glocal_128 : boolean;
+	main-res-glocal_129 : boolean;
+	main-res-glocal_130 : boolean;
+	main-res-glocal_131 : boolean;
+	main-res-glocal_132 : boolean;
+	main-res-glocal_133 : boolean;
+	main-res-glocal_134 : boolean;
+	main-res-glocal_135 : boolean;
+	main-res-glocal_136 : boolean;
+	main-res-glocal_137 : boolean;
+	main-res-glocal_138 : boolean;
+	main-res-glocal_139 : boolean;
+	main-res-glocal_140 : boolean;
+	main-res-glocal_141 : boolean;
+	main-res-glocal_142 : boolean;
+	main-res-glocal_143 : boolean;
+	main-res-glocal_144 : boolean;
+	main-res-glocal_145 : boolean;
+	main-res-glocal_146 : boolean;
+	main-res-glocal_147 : boolean;
+	main-res-glocal_148 : boolean;
+	main-res-glocal_149 : boolean;
+	main-res-gklocal_114 : boolean;
+	main-res-gklocal_108 : boolean;
+	main-res-call_125 : __HIST(main-usr-UART____ASSUME0);
+	main-res-call_123 : _TOP__UART(main-usr-UART____ASSUME__HIST, main-usr-UART____ASSUME0, main-usr-UART__position_status_in___EVENT_, main-usr-4-UART__position_status_in-alt, main-usr-4-UART__position_status_in-lat, main-usr-5-UART__position_status_in-long, main-usr-UART__waypoint_in___EVENT_, main-usr-4-UART__waypoint_in-crc, main-usr-4-4-UART__waypoint_in-wp1-alt, main-usr-4-4-UART__waypoint_in-wp1-lat, main-usr-5-4-UART__waypoint_in-wp1-long, main-usr-4-4-UART__waypoint_in-wp2-alt, main-usr-4-4-UART__waypoint_in-wp2-lat, main-usr-5-4-UART__waypoint_in-wp2-long, main-usr-4-4-UART__waypoint_in-wp3-alt, main-usr-4-4-UART__waypoint_in-wp3-lat, main-usr-5-4-UART__waypoint_in-wp3-long, main-usr-4-4-UART__waypoint_in-wp4-alt, main-usr-4-4-UART__waypoint_in-wp4-lat, main-usr-5-4-UART__waypoint_in-wp4-long, main-usr-UART__time, main-usr-UART__waypoint_out___EVENT_, main-usr-4-UART__waypoint_out-crc, main-usr-4-4-UART__waypoint_out-wp1-alt, main-usr-4-4-UART__waypoint_out-wp1-lat, main-usr-5-4-UART__waypoint_out-wp1-long, main-usr-4-4-UART__waypoint_out-wp2-alt, main-usr-4-4-UART__waypoint_out-wp2-lat, main-usr-5-4-UART__waypoint_out-wp2-long, main-usr-4-4-UART__waypoint_out-wp3-alt, main-usr-4-4-UART__waypoint_out-wp3-lat, main-usr-5-4-UART__waypoint_out-wp3-long, main-usr-4-4-UART__waypoint_out-wp4-alt, main-usr-4-4-UART__waypoint_out-wp4-lat, main-usr-5-4-UART__waypoint_out-wp4-long, main-usr-UART__position_status_out___EVENT_, main-usr-4-UART__position_status_out-alt, main-usr-4-UART__position_status_out-lat, main-usr-5-UART__position_status_out-long);
+	main-res-call_120 : __HIST(main-usr-WPM____ASSUME0);
+	main-res-call_118 : _TOP__WPM(main-usr-WPM____ASSUME__HIST, main-usr-WPM____ASSUME0, main-usr-4-4-WPM__flight_plan-wp1-alt, main-usr-4-4-WPM__flight_plan-wp1-lat, main-usr-5-4-WPM__flight_plan-wp1-long, main-usr-4-5-WPM__flight_plan-wp10-alt, main-usr-4-5-WPM__flight_plan-wp10-lat, main-usr-5-5-WPM__flight_plan-wp10-long, main-usr-4-4-WPM__flight_plan-wp2-alt, main-usr-4-4-WPM__flight_plan-wp2-lat, main-usr-5-4-WPM__flight_plan-wp2-long, main-usr-4-4-WPM__flight_plan-wp3-alt, main-usr-4-4-WPM__flight_plan-wp3-lat, main-usr-5-4-WPM__flight_plan-wp3-long, main-usr-4-4-WPM__flight_plan-wp4-alt, main-usr-4-4-WPM__flight_plan-wp4-lat, main-usr-5-4-WPM__flight_plan-wp4-long, main-usr-4-4-WPM__flight_plan-wp5-alt, main-usr-4-4-WPM__flight_plan-wp5-lat, main-usr-5-4-WPM__flight_plan-wp5-long, main-usr-4-4-WPM__flight_plan-wp6-alt, main-usr-4-4-WPM__flight_plan-wp6-lat, main-usr-5-4-WPM__flight_plan-wp6-long, main-usr-4-4-WPM__flight_plan-wp7-alt, main-usr-4-4-WPM__flight_plan-wp7-lat, main-usr-5-4-WPM__flight_plan-wp7-long, main-usr-4-4-WPM__flight_plan-wp8-alt, main-usr-4-4-WPM__flight_plan-wp8-lat, main-usr-5-4-WPM__flight_plan-wp8-long, main-usr-4-4-WPM__flight_plan-wp9-alt, main-usr-4-4-WPM__flight_plan-wp9-lat, main-usr-5-4-WPM__flight_plan-wp9-long, main-usr-WPM__position_status___EVENT_, main-usr-4-WPM__position_status-alt, main-usr-4-WPM__position_status-lat, main-usr-5-WPM__position_status-long, main-usr-WPM__time, main-usr-WPM__waypoint___EVENT_, main-usr-4-WPM__waypoint-crc, main-usr-4-4-WPM__waypoint-wp1-alt, main-usr-4-4-WPM__waypoint-wp1-lat, main-usr-5-4-WPM__waypoint-wp1-long, main-usr-4-4-WPM__waypoint-wp2-alt, main-usr-4-4-WPM__waypoint-wp2-lat, main-usr-5-4-WPM__waypoint-wp2-long, main-usr-4-4-WPM__waypoint-wp3-alt, main-usr-4-4-WPM__waypoint-wp3-lat, main-usr-5-4-WPM__waypoint-wp3-long, main-usr-4-4-WPM__waypoint-wp4-alt, main-usr-4-4-WPM__waypoint-wp4-lat, main-usr-5-4-WPM__waypoint-wp4-long);
+	main-res-call_115 : __HIST(main-res-gklocal_114);
+	main-res-call_112 : _TOP__FPLN(main-usr-FPLN____ASSUME__HIST, main-usr-FPLN____ASSUME0, main-usr-FPLN____ASSUME1, main-usr-FPLN__recv_map___EVENT_, main-usr-5-FPLN__recv_map-HMAC, main-usr-4-4-4-FPLN__recv_map-Map-wp1-alt, main-usr-4-4-4-FPLN__recv_map-Map-wp1-lat, main-usr-5-4-4-FPLN__recv_map-Map-wp1-long, main-usr-4-4-4-FPLN__recv_map-Map-wp2-alt, main-usr-4-4-4-FPLN__recv_map-Map-wp2-lat, main-usr-5-4-4-FPLN__recv_map-Map-wp2-long, main-usr-4-4-4-FPLN__recv_map-Map-wp3-alt, main-usr-4-4-4-FPLN__recv_map-Map-wp3-lat, main-usr-5-4-4-FPLN__recv_map-Map-wp3-long, main-usr-4-4-4-FPLN__recv_map-Map-wp4-alt, main-usr-4-4-4-FPLN__recv_map-Map-wp4-lat, main-usr-5-4-4-FPLN__recv_map-Map-wp4-long, main-usr-8-FPLN__recv_map-Pattern, main-usr-FPLN__position_status___EVENT_, main-usr-4-FPLN__position_status-alt, main-usr-4-FPLN__position_status-lat, main-usr-5-FPLN__position_status-long, main-usr-FPLN__time, main-usr-4-4-FPLN__flight_plan-wp1-alt, main-usr-4-4-FPLN__flight_plan-wp1-lat, main-usr-5-4-FPLN__flight_plan-wp1-long, main-usr-4-5-FPLN__flight_plan-wp10-alt, main-usr-4-5-FPLN__flight_plan-wp10-lat, main-usr-5-5-FPLN__flight_plan-wp10-long, main-usr-4-4-FPLN__flight_plan-wp2-alt, main-usr-4-4-FPLN__flight_plan-wp2-lat, main-usr-5-4-FPLN__flight_plan-wp2-long, main-usr-4-4-FPLN__flight_plan-wp3-alt, main-usr-4-4-FPLN__flight_plan-wp3-lat, main-usr-5-4-FPLN__flight_plan-wp3-long, main-usr-4-4-FPLN__flight_plan-wp4-alt, main-usr-4-4-FPLN__flight_plan-wp4-lat, main-usr-5-4-FPLN__flight_plan-wp4-long, main-usr-4-4-FPLN__flight_plan-wp5-alt, main-usr-4-4-FPLN__flight_plan-wp5-lat, main-usr-5-4-FPLN__flight_plan-wp5-long, main-usr-4-4-FPLN__flight_plan-wp6-alt, main-usr-4-4-FPLN__flight_plan-wp6-lat, main-usr-5-4-FPLN__flight_plan-wp6-long, main-usr-4-4-FPLN__flight_plan-wp7-alt, main-usr-4-4-FPLN__flight_plan-wp7-lat, main-usr-5-4-FPLN__flight_plan-wp7-long, main-usr-4-4-FPLN__flight_plan-wp8-alt, main-usr-4-4-FPLN__flight_plan-wp8-lat, main-usr-5-4-FPLN__flight_plan-wp8-long, main-usr-4-4-FPLN__flight_plan-wp9-alt, main-usr-4-4-FPLN__flight_plan-wp9-lat, main-usr-5-4-FPLN__flight_plan-wp9-long);
+	main-res-call_109 : __HIST(main-res-gklocal_108);
+	main-res-call_106 : _TOP__FLT(main-usr-FLT____ASSUME__HIST, main-usr-FLT__filter_in___EVENT_, main-usr-5-FLT__filter_in-HMAC, main-usr-4-4-4-FLT__filter_in-Map-wp1-alt, main-usr-4-4-4-FLT__filter_in-Map-wp1-lat, main-usr-5-4-4-FLT__filter_in-Map-wp1-long, main-usr-4-4-4-FLT__filter_in-Map-wp2-alt, main-usr-4-4-4-FLT__filter_in-Map-wp2-lat, main-usr-5-4-4-FLT__filter_in-Map-wp2-long, main-usr-4-4-4-FLT__filter_in-Map-wp3-alt, main-usr-4-4-4-FLT__filter_in-Map-wp3-lat, main-usr-5-4-4-FLT__filter_in-Map-wp3-long, main-usr-4-4-4-FLT__filter_in-Map-wp4-alt, main-usr-4-4-4-FLT__filter_in-Map-wp4-lat, main-usr-5-4-4-FLT__filter_in-Map-wp4-long, main-usr-8-FLT__filter_in-Pattern, main-usr-FLT__time, main-usr-FLT__filter_out___EVENT_, main-usr-5-FLT__filter_out-HMAC, main-usr-4-4-4-FLT__filter_out-Map-wp1-alt, main-usr-4-4-4-FLT__filter_out-Map-wp1-lat, main-usr-5-4-4-FLT__filter_out-Map-wp1-long, main-usr-4-4-4-FLT__filter_out-Map-wp2-alt, main-usr-4-4-4-FLT__filter_out-Map-wp2-lat, main-usr-5-4-4-FLT__filter_out-Map-wp2-long, main-usr-4-4-4-FLT__filter_out-Map-wp3-alt, main-usr-4-4-4-FLT__filter_out-Map-wp3-lat, main-usr-5-4-4-FLT__filter_out-Map-wp3-long, main-usr-4-4-4-FLT__filter_out-Map-wp4-alt, main-usr-4-4-4-FLT__filter_out-Map-wp4-lat, main-usr-5-4-4-FLT__filter_out-Map-wp4-long, main-usr-8-FLT__filter_out-Pattern);
+	main-res-call_103 : __HIST(main-usr-RADIO____ASSUME0);
+	main-res-call_101 : _TOP__RADIO(main-usr-RADIO____ASSUME__HIST, main-usr-RADIO____ASSUME0, main-usr-RADIO__recv_map_in___EVENT_, main-usr-5-RADIO__recv_map_in-HMAC, main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-alt, main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-lat, main-usr-5-4-4-RADIO__recv_map_in-Map-wp1-long, main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-alt, main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-lat, main-usr-5-4-4-RADIO__recv_map_in-Map-wp2-long, main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-alt, main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-lat, main-usr-5-4-4-RADIO__recv_map_in-Map-wp3-long, main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-alt, main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-lat, main-usr-5-4-4-RADIO__recv_map_in-Map-wp4-long, main-usr-8-RADIO__recv_map_in-Pattern, main-usr-RADIO__send_status_in___EVENT_, main-usr-4-RADIO__send_status_in-alt, main-usr-4-RADIO__send_status_in-lat, main-usr-5-RADIO__send_status_in-long, main-usr-RADIO__time, main-usr-RADIO__send_status_out___EVENT_, main-usr-4-RADIO__send_status_out-alt, main-usr-4-RADIO__send_status_out-lat, main-usr-5-RADIO__send_status_out-long, main-usr-RADIO__recv_map_out___EVENT_, main-usr-5-RADIO__recv_map_out-HMAC, main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-alt, main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-lat, main-usr-5-4-4-RADIO__recv_map_out-Map-wp1-long, main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-alt, main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-lat, main-usr-5-4-4-RADIO__recv_map_out-Map-wp2-long, main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-alt, main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-lat, main-usr-5-4-4-RADIO__recv_map_out-Map-wp3-long, main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-alt, main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-lat, main-usr-5-4-4-RADIO__recv_map_out-Map-wp4-long, main-usr-8-RADIO__recv_map_out-Pattern);
+
+ASSIGN
+	init(main-impl-usr-__ASSUME0) := main-usr-5-recv_map-HMAC;
+	init(main-res-glocal_99) := main-impl-usr-__ASSUME0;
+	init(main-res-glocal_100) := (main-usr-time = main-usr-RADIO__time);
+	init(main-res-glocal_102) := main-res-call_101._TOP__RADIO-usr-__ASSERT;
+	init(main-res-glocal_104) := (main-usr-RADIO____ASSUME__HIST = main-res-call_103.__HIST-usr-hist);
+	init(main-res-glocal_105) := (main-usr-time = main-usr-FLT__time);
+	init(main-res-glocal_107) := main-res-call_106._TOP__FLT-usr-__ASSERT;
+	init(main-res-gklocal_108) := TRUE;
+	init(main-res-glocal_110) := (main-usr-FLT____ASSUME__HIST = main-res-call_109.__HIST-usr-hist);
+	init(main-res-glocal_111) := (main-usr-time = main-usr-FPLN__time);
+	init(main-res-glocal_113) := main-res-call_112._TOP__FPLN-usr-__ASSERT;
+	init(main-res-gklocal_114) := (main-usr-FPLN____ASSUME1 & main-usr-FPLN____ASSUME0);
+	init(main-res-glocal_116) := (main-usr-FPLN____ASSUME__HIST = main-res-call_115.__HIST-usr-hist);
+	init(main-res-glocal_117) := (main-usr-time = main-usr-WPM__time);
+	init(main-res-glocal_119) := main-res-call_118._TOP__WPM-usr-__ASSERT;
+	init(main-res-glocal_121) := (main-usr-WPM____ASSUME__HIST = main-res-call_120.__HIST-usr-hist);
+	init(main-res-glocal_122) := (main-usr-time = main-usr-UART__time);
+	init(main-res-glocal_124) := main-res-call_123._TOP__UART-usr-__ASSERT;
+	init(main-res-glocal_126) := (main-usr-UART____ASSUME__HIST = main-res-call_125.__HIST-usr-hist);
+	init(main-res-glocal_127) := ((((((((((((((main-usr-5-recv_map-HMAC = main-usr-5-RADIO__recv_map_in-HMAC) & (main-usr-4-4-4-recv_map-Map-wp1-alt = main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-alt)) & (main-usr-4-4-4-recv_map-Map-wp1-lat = main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-lat)) & (main-usr-5-4-4-recv_map-Map-wp1-long = main-usr-5-4-4-RADIO__recv_map_in-Map-wp1-long)) & (main-usr-4-4-4-recv_map-Map-wp2-alt = main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-alt)) & (main-usr-4-4-4-recv_map-Map-wp2-lat = main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-lat)) & (main-usr-5-4-4-recv_map-Map-wp2-long = main-usr-5-4-4-RADIO__recv_map_in-Map-wp2-long)) & (main-usr-4-4-4-recv_map-Map-wp3-alt = main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-alt)) & (main-usr-4-4-4-recv_map-Map-wp3-lat = main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-lat)) & (main-usr-5-4-4-recv_map-Map-wp3-long = main-usr-5-4-4-RADIO__recv_map_in-Map-wp3-long)) & (main-usr-4-4-4-recv_map-Map-wp4-alt = main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-alt)) & (main-usr-4-4-4-recv_map-Map-wp4-lat = main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-lat)) & (main-usr-5-4-4-recv_map-Map-wp4-long = main-usr-5-4-4-RADIO__recv_map_in-Map-wp4-long)) & (main-usr-8-recv_map-Pattern = main-usr-8-RADIO__recv_map_in-Pattern));
+	init(main-res-glocal_128) := (main-usr-recv_map___EVENT_ = main-usr-RADIO__recv_map_in___EVENT_);
+	init(main-res-glocal_129) := (((main-usr-4-position_status-alt = main-usr-4-UART__position_status_in-alt) & (main-usr-4-position_status-lat = main-usr-4-UART__position_status_in-lat)) & (main-usr-5-position_status-long = main-usr-5-UART__position_status_in-long));
+	init(main-res-glocal_130) := (main-usr-position_status___EVENT_ = main-usr-UART__position_status_in___EVENT_);
+	init(main-res-glocal_131) := (((main-usr-4-RADIO__send_status_out-alt = main-usr-4-send_status-alt) & (main-usr-4-RADIO__send_status_out-lat = main-usr-4-send_status-lat)) & (main-usr-5-RADIO__send_status_out-long = main-usr-5-send_status-long));
+	init(main-res-glocal_132) := (main-usr-RADIO__send_status_out___EVENT_ = main-usr-send_status___EVENT_);
+	init(main-res-glocal_133) := ((((((((((((((main-usr-5-RADIO__recv_map_out-HMAC = main-usr-5-FLT__filter_in-HMAC) & (main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-alt = main-usr-4-4-4-FLT__filter_in-Map-wp1-alt)) & (main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-lat = main-usr-4-4-4-FLT__filter_in-Map-wp1-lat)) & (main-usr-5-4-4-RADIO__recv_map_out-Map-wp1-long = main-usr-5-4-4-FLT__filter_in-Map-wp1-long)) & (main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-alt = main-usr-4-4-4-FLT__filter_in-Map-wp2-alt)) & (main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-lat = main-usr-4-4-4-FLT__filter_in-Map-wp2-lat)) & (main-usr-5-4-4-RADIO__recv_map_out-Map-wp2-long = main-usr-5-4-4-FLT__filter_in-Map-wp2-long)) & (main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-alt = main-usr-4-4-4-FLT__filter_in-Map-wp3-alt)) & (main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-lat = main-usr-4-4-4-FLT__filter_in-Map-wp3-lat)) & (main-usr-5-4-4-RADIO__recv_map_out-Map-wp3-long = main-usr-5-4-4-FLT__filter_in-Map-wp3-long)) & (main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-alt = main-usr-4-4-4-FLT__filter_in-Map-wp4-alt)) & (main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-lat = main-usr-4-4-4-FLT__filter_in-Map-wp4-lat)) & (main-usr-5-4-4-RADIO__recv_map_out-Map-wp4-long = main-usr-5-4-4-FLT__filter_in-Map-wp4-long)) & (main-usr-8-RADIO__recv_map_out-Pattern = main-usr-8-FLT__filter_in-Pattern));
+	init(main-res-glocal_134) := (main-usr-RADIO__recv_map_out___EVENT_ = main-usr-FLT__filter_in___EVENT_);
+	init(main-res-glocal_135) := ((((((((((((((main-usr-5-FLT__filter_out-HMAC = main-usr-5-FPLN__recv_map-HMAC) & (main-usr-4-4-4-FLT__filter_out-Map-wp1-alt = main-usr-4-4-4-FPLN__recv_map-Map-wp1-alt)) & (main-usr-4-4-4-FLT__filter_out-Map-wp1-lat = main-usr-4-4-4-FPLN__recv_map-Map-wp1-lat)) & (main-usr-5-4-4-FLT__filter_out-Map-wp1-long = main-usr-5-4-4-FPLN__recv_map-Map-wp1-long)) & (main-usr-4-4-4-FLT__filter_out-Map-wp2-alt = main-usr-4-4-4-FPLN__recv_map-Map-wp2-alt)) & (main-usr-4-4-4-FLT__filter_out-Map-wp2-lat = main-usr-4-4-4-FPLN__recv_map-Map-wp2-lat)) & (main-usr-5-4-4-FLT__filter_out-Map-wp2-long = main-usr-5-4-4-FPLN__recv_map-Map-wp2-long)) & (main-usr-4-4-4-FLT__filter_out-Map-wp3-alt = main-usr-4-4-4-FPLN__recv_map-Map-wp3-alt)) & (main-usr-4-4-4-FLT__filter_out-Map-wp3-lat = main-usr-4-4-4-FPLN__recv_map-Map-wp3-lat)) & (main-usr-5-4-4-FLT__filter_out-Map-wp3-long = main-usr-5-4-4-FPLN__recv_map-Map-wp3-long)) & (main-usr-4-4-4-FLT__filter_out-Map-wp4-alt = main-usr-4-4-4-FPLN__recv_map-Map-wp4-alt)) & (main-usr-4-4-4-FLT__filter_out-Map-wp4-lat = main-usr-4-4-4-FPLN__recv_map-Map-wp4-lat)) & (main-usr-5-4-4-FLT__filter_out-Map-wp4-long = main-usr-5-4-4-FPLN__recv_map-Map-wp4-long)) & (main-usr-8-FLT__filter_out-Pattern = main-usr-8-FPLN__recv_map-Pattern));
+	init(main-res-glocal_136) := (main-usr-FLT__filter_out___EVENT_ = main-usr-FPLN__recv_map___EVENT_);
+	init(main-res-glocal_137) := ((((((((((((((((((((((((((((((main-usr-4-4-FPLN__flight_plan-wp1-alt = main-usr-4-4-WPM__flight_plan-wp1-alt) & (main-usr-4-4-FPLN__flight_plan-wp1-lat = main-usr-4-4-WPM__flight_plan-wp1-lat)) & (main-usr-5-4-FPLN__flight_plan-wp1-long = main-usr-5-4-WPM__flight_plan-wp1-long)) & (main-usr-4-5-FPLN__flight_plan-wp10-alt = main-usr-4-5-WPM__flight_plan-wp10-alt)) & (main-usr-4-5-FPLN__flight_plan-wp10-lat = main-usr-4-5-WPM__flight_plan-wp10-lat)) & (main-usr-5-5-FPLN__flight_plan-wp10-long = main-usr-5-5-WPM__flight_plan-wp10-long)) & (main-usr-4-4-FPLN__flight_plan-wp2-alt = main-usr-4-4-WPM__flight_plan-wp2-alt)) & (main-usr-4-4-FPLN__flight_plan-wp2-lat = main-usr-4-4-WPM__flight_plan-wp2-lat)) & (main-usr-5-4-FPLN__flight_plan-wp2-long = main-usr-5-4-WPM__flight_plan-wp2-long)) & (main-usr-4-4-FPLN__flight_plan-wp3-alt = main-usr-4-4-WPM__flight_plan-wp3-alt)) & (main-usr-4-4-FPLN__flight_plan-wp3-lat = main-usr-4-4-WPM__flight_plan-wp3-lat)) & (main-usr-5-4-FPLN__flight_plan-wp3-long = main-usr-5-4-WPM__flight_plan-wp3-long)) & (main-usr-4-4-FPLN__flight_plan-wp4-alt = main-usr-4-4-WPM__flight_plan-wp4-alt)) & (main-usr-4-4-FPLN__flight_plan-wp4-lat = main-usr-4-4-WPM__flight_plan-wp4-lat)) & (main-usr-5-4-FPLN__flight_plan-wp4-long = main-usr-5-4-WPM__flight_plan-wp4-long)) & (main-usr-4-4-FPLN__flight_plan-wp5-alt = main-usr-4-4-WPM__flight_plan-wp5-alt)) & (main-usr-4-4-FPLN__flight_plan-wp5-lat = main-usr-4-4-WPM__flight_plan-wp5-lat)) & (main-usr-5-4-FPLN__flight_plan-wp5-long = main-usr-5-4-WPM__flight_plan-wp5-long)) & (main-usr-4-4-FPLN__flight_plan-wp6-alt = main-usr-4-4-WPM__flight_plan-wp6-alt)) & (main-usr-4-4-FPLN__flight_plan-wp6-lat = main-usr-4-4-WPM__flight_plan-wp6-lat)) & (main-usr-5-4-FPLN__flight_plan-wp6-long = main-usr-5-4-WPM__flight_plan-wp6-long)) & (main-usr-4-4-FPLN__flight_plan-wp7-alt = main-usr-4-4-WPM__flight_plan-wp7-alt)) & (main-usr-4-4-FPLN__flight_plan-wp7-lat = main-usr-4-4-WPM__flight_plan-wp7-lat)) & (main-usr-5-4-FPLN__flight_plan-wp7-long = main-usr-5-4-WPM__flight_plan-wp7-long)) & (main-usr-4-4-FPLN__flight_plan-wp8-alt = main-usr-4-4-WPM__flight_plan-wp8-alt)) & (main-usr-4-4-FPLN__flight_plan-wp8-lat = main-usr-4-4-WPM__flight_plan-wp8-lat)) & (main-usr-5-4-FPLN__flight_plan-wp8-long = main-usr-5-4-WPM__flight_plan-wp8-long)) & (main-usr-4-4-FPLN__flight_plan-wp9-alt = main-usr-4-4-WPM__flight_plan-wp9-alt)) & (main-usr-4-4-FPLN__flight_plan-wp9-lat = main-usr-4-4-WPM__flight_plan-wp9-lat)) & (main-usr-5-4-FPLN__flight_plan-wp9-long = main-usr-5-4-WPM__flight_plan-wp9-long));
+	init(main-res-glocal_138) := (((((((((((((main-usr-4-WPM__waypoint-crc = main-usr-4-UART__waypoint_in-crc) & (main-usr-4-4-WPM__waypoint-wp1-alt = main-usr-4-4-UART__waypoint_in-wp1-alt)) & (main-usr-4-4-WPM__waypoint-wp1-lat = main-usr-4-4-UART__waypoint_in-wp1-lat)) & (main-usr-5-4-WPM__waypoint-wp1-long = main-usr-5-4-UART__waypoint_in-wp1-long)) & (main-usr-4-4-WPM__waypoint-wp2-alt = main-usr-4-4-UART__waypoint_in-wp2-alt)) & (main-usr-4-4-WPM__waypoint-wp2-lat = main-usr-4-4-UART__waypoint_in-wp2-lat)) & (main-usr-5-4-WPM__waypoint-wp2-long = main-usr-5-4-UART__waypoint_in-wp2-long)) & (main-usr-4-4-WPM__waypoint-wp3-alt = main-usr-4-4-UART__waypoint_in-wp3-alt)) & (main-usr-4-4-WPM__waypoint-wp3-lat = main-usr-4-4-UART__waypoint_in-wp3-lat)) & (main-usr-5-4-WPM__waypoint-wp3-long = main-usr-5-4-UART__waypoint_in-wp3-long)) & (main-usr-4-4-WPM__waypoint-wp4-alt = main-usr-4-4-UART__waypoint_in-wp4-alt)) & (main-usr-4-4-WPM__waypoint-wp4-lat = main-usr-4-4-UART__waypoint_in-wp4-lat)) & (main-usr-5-4-WPM__waypoint-wp4-long = main-usr-5-4-UART__waypoint_in-wp4-long));
+	init(main-res-glocal_139) := (main-usr-WPM__waypoint___EVENT_ = main-usr-UART__waypoint_in___EVENT_);
+	init(main-res-glocal_140) := (((((((((((((main-usr-4-UART__waypoint_out-crc = main-usr-4-waypoint-crc) & (main-usr-4-4-UART__waypoint_out-wp1-alt = main-usr-4-4-waypoint-wp1-alt)) & (main-usr-4-4-UART__waypoint_out-wp1-lat = main-usr-4-4-waypoint-wp1-lat)) & (main-usr-5-4-UART__waypoint_out-wp1-long = main-usr-5-4-waypoint-wp1-long)) & (main-usr-4-4-UART__waypoint_out-wp2-alt = main-usr-4-4-waypoint-wp2-alt)) & (main-usr-4-4-UART__waypoint_out-wp2-lat = main-usr-4-4-waypoint-wp2-lat)) & (main-usr-5-4-UART__waypoint_out-wp2-long = main-usr-5-4-waypoint-wp2-long)) & (main-usr-4-4-UART__waypoint_out-wp3-alt = main-usr-4-4-waypoint-wp3-alt)) & (main-usr-4-4-UART__waypoint_out-wp3-lat = main-usr-4-4-waypoint-wp3-lat)) & (main-usr-5-4-UART__waypoint_out-wp3-long = main-usr-5-4-waypoint-wp3-long)) & (main-usr-4-4-UART__waypoint_out-wp4-alt = main-usr-4-4-waypoint-wp4-alt)) & (main-usr-4-4-UART__waypoint_out-wp4-lat = main-usr-4-4-waypoint-wp4-lat)) & (main-usr-5-4-UART__waypoint_out-wp4-long = main-usr-5-4-waypoint-wp4-long));
+	init(main-res-glocal_141) := (main-usr-UART__waypoint_out___EVENT_ = main-usr-waypoint___EVENT_);
+	init(main-res-glocal_142) := (((main-usr-4-UART__position_status_out-alt = main-usr-4-WPM__position_status-alt) & (main-usr-4-UART__position_status_out-lat = main-usr-4-WPM__position_status-lat)) & (main-usr-5-UART__position_status_out-long = main-usr-5-WPM__position_status-long));
+	init(main-res-glocal_143) := (main-usr-UART__position_status_out___EVENT_ = main-usr-WPM__position_status___EVENT_);
+	init(main-res-glocal_144) := (((main-usr-4-UART__position_status_out-alt = main-usr-4-FPLN__position_status-alt) & (main-usr-4-UART__position_status_out-lat = main-usr-4-FPLN__position_status-lat)) & (main-usr-5-UART__position_status_out-long = main-usr-5-FPLN__position_status-long));
+	init(main-res-glocal_145) := (main-usr-UART__position_status_out___EVENT_ = main-usr-FPLN__position_status___EVENT_);
+	init(main-res-glocal_146) := (((main-usr-4-UART__position_status_out-alt = main-usr-4-RADIO__send_status_in-alt) & (main-usr-4-UART__position_status_out-lat = main-usr-4-RADIO__send_status_in-lat)) & (main-usr-5-UART__position_status_out-long = main-usr-5-RADIO__send_status_in-long));
+	init(main-res-glocal_147) := (main-usr-UART__position_status_out___EVENT_ = main-usr-RADIO__send_status_in___EVENT_);
+	init(main-res-glocal_148) := TRUE;
+	init(main-res-glocal_149) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME0) := next(main-usr-5-recv_map-HMAC);
+	next(main-res-glocal_99) := next(main-impl-usr-__ASSUME0);
+	next(main-res-glocal_100) := (next(main-usr-time) = next(main-usr-RADIO__time));
+	next(main-res-glocal_102) := next(main-res-call_101._TOP__RADIO-usr-__ASSERT);
+	next(main-res-glocal_104) := (next(main-usr-RADIO____ASSUME__HIST) = next(main-res-call_103.__HIST-usr-hist));
+	next(main-res-glocal_105) := (next(main-usr-time) = next(main-usr-FLT__time));
+	next(main-res-glocal_107) := next(main-res-call_106._TOP__FLT-usr-__ASSERT);
+	next(main-res-gklocal_108) := TRUE;
+	next(main-res-glocal_110) := (next(main-usr-FLT____ASSUME__HIST) = next(main-res-call_109.__HIST-usr-hist));
+	next(main-res-glocal_111) := (next(main-usr-time) = next(main-usr-FPLN__time));
+	next(main-res-glocal_113) := next(main-res-call_112._TOP__FPLN-usr-__ASSERT);
+	next(main-res-gklocal_114) := (next(main-usr-FPLN____ASSUME1) & next(main-usr-FPLN____ASSUME0));
+	next(main-res-glocal_116) := (next(main-usr-FPLN____ASSUME__HIST) = next(main-res-call_115.__HIST-usr-hist));
+	next(main-res-glocal_117) := (next(main-usr-time) = next(main-usr-WPM__time));
+	next(main-res-glocal_119) := next(main-res-call_118._TOP__WPM-usr-__ASSERT);
+	next(main-res-glocal_121) := (next(main-usr-WPM____ASSUME__HIST) = next(main-res-call_120.__HIST-usr-hist));
+	next(main-res-glocal_122) := (next(main-usr-time) = next(main-usr-UART__time));
+	next(main-res-glocal_124) := next(main-res-call_123._TOP__UART-usr-__ASSERT);
+	next(main-res-glocal_126) := (next(main-usr-UART____ASSUME__HIST) = next(main-res-call_125.__HIST-usr-hist));
+	next(main-res-glocal_127) := ((((((((((((((next(main-usr-5-recv_map-HMAC) = next(main-usr-5-RADIO__recv_map_in-HMAC)) & (next(main-usr-4-4-4-recv_map-Map-wp1-alt) = next(main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-alt))) & (next(main-usr-4-4-4-recv_map-Map-wp1-lat) = next(main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-lat))) & (next(main-usr-5-4-4-recv_map-Map-wp1-long) = next(main-usr-5-4-4-RADIO__recv_map_in-Map-wp1-long))) & (next(main-usr-4-4-4-recv_map-Map-wp2-alt) = next(main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-alt))) & (next(main-usr-4-4-4-recv_map-Map-wp2-lat) = next(main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-lat))) & (next(main-usr-5-4-4-recv_map-Map-wp2-long) = next(main-usr-5-4-4-RADIO__recv_map_in-Map-wp2-long))) & (next(main-usr-4-4-4-recv_map-Map-wp3-alt) = next(main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-alt))) & (next(main-usr-4-4-4-recv_map-Map-wp3-lat) = next(main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-lat))) & (next(main-usr-5-4-4-recv_map-Map-wp3-long) = next(main-usr-5-4-4-RADIO__recv_map_in-Map-wp3-long))) & (next(main-usr-4-4-4-recv_map-Map-wp4-alt) = next(main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-alt))) & (next(main-usr-4-4-4-recv_map-Map-wp4-lat) = next(main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-lat))) & (next(main-usr-5-4-4-recv_map-Map-wp4-long) = next(main-usr-5-4-4-RADIO__recv_map_in-Map-wp4-long))) & (next(main-usr-8-recv_map-Pattern) = next(main-usr-8-RADIO__recv_map_in-Pattern)));
+	next(main-res-glocal_128) := (next(main-usr-recv_map___EVENT_) = next(main-usr-RADIO__recv_map_in___EVENT_));
+	next(main-res-glocal_129) := (((next(main-usr-4-position_status-alt) = next(main-usr-4-UART__position_status_in-alt)) & (next(main-usr-4-position_status-lat) = next(main-usr-4-UART__position_status_in-lat))) & (next(main-usr-5-position_status-long) = next(main-usr-5-UART__position_status_in-long)));
+	next(main-res-glocal_130) := (next(main-usr-position_status___EVENT_) = next(main-usr-UART__position_status_in___EVENT_));
+	next(main-res-glocal_131) := (((next(main-usr-4-RADIO__send_status_out-alt) = next(main-usr-4-send_status-alt)) & (next(main-usr-4-RADIO__send_status_out-lat) = next(main-usr-4-send_status-lat))) & (next(main-usr-5-RADIO__send_status_out-long) = next(main-usr-5-send_status-long)));
+	next(main-res-glocal_132) := (next(main-usr-RADIO__send_status_out___EVENT_) = next(main-usr-send_status___EVENT_));
+	next(main-res-glocal_133) := ((((((((((((((next(main-usr-5-RADIO__recv_map_out-HMAC) = next(main-usr-5-FLT__filter_in-HMAC)) & (next(main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-alt) = next(main-usr-4-4-4-FLT__filter_in-Map-wp1-alt))) & (next(main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-lat) = next(main-usr-4-4-4-FLT__filter_in-Map-wp1-lat))) & (next(main-usr-5-4-4-RADIO__recv_map_out-Map-wp1-long) = next(main-usr-5-4-4-FLT__filter_in-Map-wp1-long))) & (next(main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-alt) = next(main-usr-4-4-4-FLT__filter_in-Map-wp2-alt))) & (next(main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-lat) = next(main-usr-4-4-4-FLT__filter_in-Map-wp2-lat))) & (next(main-usr-5-4-4-RADIO__recv_map_out-Map-wp2-long) = next(main-usr-5-4-4-FLT__filter_in-Map-wp2-long))) & (next(main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-alt) = next(main-usr-4-4-4-FLT__filter_in-Map-wp3-alt))) & (next(main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-lat) = next(main-usr-4-4-4-FLT__filter_in-Map-wp3-lat))) & (next(main-usr-5-4-4-RADIO__recv_map_out-Map-wp3-long) = next(main-usr-5-4-4-FLT__filter_in-Map-wp3-long))) & (next(main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-alt) = next(main-usr-4-4-4-FLT__filter_in-Map-wp4-alt))) & (next(main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-lat) = next(main-usr-4-4-4-FLT__filter_in-Map-wp4-lat))) & (next(main-usr-5-4-4-RADIO__recv_map_out-Map-wp4-long) = next(main-usr-5-4-4-FLT__filter_in-Map-wp4-long))) & (next(main-usr-8-RADIO__recv_map_out-Pattern) = next(main-usr-8-FLT__filter_in-Pattern)));
+	next(main-res-glocal_134) := (next(main-usr-RADIO__recv_map_out___EVENT_) = next(main-usr-FLT__filter_in___EVENT_));
+	next(main-res-glocal_135) := ((((((((((((((next(main-usr-5-FLT__filter_out-HMAC) = next(main-usr-5-FPLN__recv_map-HMAC)) & (next(main-usr-4-4-4-FLT__filter_out-Map-wp1-alt) = next(main-usr-4-4-4-FPLN__recv_map-Map-wp1-alt))) & (next(main-usr-4-4-4-FLT__filter_out-Map-wp1-lat) = next(main-usr-4-4-4-FPLN__recv_map-Map-wp1-lat))) & (next(main-usr-5-4-4-FLT__filter_out-Map-wp1-long) = next(main-usr-5-4-4-FPLN__recv_map-Map-wp1-long))) & (next(main-usr-4-4-4-FLT__filter_out-Map-wp2-alt) = next(main-usr-4-4-4-FPLN__recv_map-Map-wp2-alt))) & (next(main-usr-4-4-4-FLT__filter_out-Map-wp2-lat) = next(main-usr-4-4-4-FPLN__recv_map-Map-wp2-lat))) & (next(main-usr-5-4-4-FLT__filter_out-Map-wp2-long) = next(main-usr-5-4-4-FPLN__recv_map-Map-wp2-long))) & (next(main-usr-4-4-4-FLT__filter_out-Map-wp3-alt) = next(main-usr-4-4-4-FPLN__recv_map-Map-wp3-alt))) & (next(main-usr-4-4-4-FLT__filter_out-Map-wp3-lat) = next(main-usr-4-4-4-FPLN__recv_map-Map-wp3-lat))) & (next(main-usr-5-4-4-FLT__filter_out-Map-wp3-long) = next(main-usr-5-4-4-FPLN__recv_map-Map-wp3-long))) & (next(main-usr-4-4-4-FLT__filter_out-Map-wp4-alt) = next(main-usr-4-4-4-FPLN__recv_map-Map-wp4-alt))) & (next(main-usr-4-4-4-FLT__filter_out-Map-wp4-lat) = next(main-usr-4-4-4-FPLN__recv_map-Map-wp4-lat))) & (next(main-usr-5-4-4-FLT__filter_out-Map-wp4-long) = next(main-usr-5-4-4-FPLN__recv_map-Map-wp4-long))) & (next(main-usr-8-FLT__filter_out-Pattern) = next(main-usr-8-FPLN__recv_map-Pattern)));
+	next(main-res-glocal_136) := (next(main-usr-FLT__filter_out___EVENT_) = next(main-usr-FPLN__recv_map___EVENT_));
+	next(main-res-glocal_137) := ((((((((((((((((((((((((((((((next(main-usr-4-4-FPLN__flight_plan-wp1-alt) = next(main-usr-4-4-WPM__flight_plan-wp1-alt)) & (next(main-usr-4-4-FPLN__flight_plan-wp1-lat) = next(main-usr-4-4-WPM__flight_plan-wp1-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp1-long) = next(main-usr-5-4-WPM__flight_plan-wp1-long))) & (next(main-usr-4-5-FPLN__flight_plan-wp10-alt) = next(main-usr-4-5-WPM__flight_plan-wp10-alt))) & (next(main-usr-4-5-FPLN__flight_plan-wp10-lat) = next(main-usr-4-5-WPM__flight_plan-wp10-lat))) & (next(main-usr-5-5-FPLN__flight_plan-wp10-long) = next(main-usr-5-5-WPM__flight_plan-wp10-long))) & (next(main-usr-4-4-FPLN__flight_plan-wp2-alt) = next(main-usr-4-4-WPM__flight_plan-wp2-alt))) & (next(main-usr-4-4-FPLN__flight_plan-wp2-lat) = next(main-usr-4-4-WPM__flight_plan-wp2-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp2-long) = next(main-usr-5-4-WPM__flight_plan-wp2-long))) & (next(main-usr-4-4-FPLN__flight_plan-wp3-alt) = next(main-usr-4-4-WPM__flight_plan-wp3-alt))) & (next(main-usr-4-4-FPLN__flight_plan-wp3-lat) = next(main-usr-4-4-WPM__flight_plan-wp3-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp3-long) = next(main-usr-5-4-WPM__flight_plan-wp3-long))) & (next(main-usr-4-4-FPLN__flight_plan-wp4-alt) = next(main-usr-4-4-WPM__flight_plan-wp4-alt))) & (next(main-usr-4-4-FPLN__flight_plan-wp4-lat) = next(main-usr-4-4-WPM__flight_plan-wp4-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp4-long) = next(main-usr-5-4-WPM__flight_plan-wp4-long))) & (next(main-usr-4-4-FPLN__flight_plan-wp5-alt) = next(main-usr-4-4-WPM__flight_plan-wp5-alt))) & (next(main-usr-4-4-FPLN__flight_plan-wp5-lat) = next(main-usr-4-4-WPM__flight_plan-wp5-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp5-long) = next(main-usr-5-4-WPM__flight_plan-wp5-long))) & (next(main-usr-4-4-FPLN__flight_plan-wp6-alt) = next(main-usr-4-4-WPM__flight_plan-wp6-alt))) & (next(main-usr-4-4-FPLN__flight_plan-wp6-lat) = next(main-usr-4-4-WPM__flight_plan-wp6-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp6-long) = next(main-usr-5-4-WPM__flight_plan-wp6-long))) & (next(main-usr-4-4-FPLN__flight_plan-wp7-alt) = next(main-usr-4-4-WPM__flight_plan-wp7-alt))) & (next(main-usr-4-4-FPLN__flight_plan-wp7-lat) = next(main-usr-4-4-WPM__flight_plan-wp7-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp7-long) = next(main-usr-5-4-WPM__flight_plan-wp7-long))) & (next(main-usr-4-4-FPLN__flight_plan-wp8-alt) = next(main-usr-4-4-WPM__flight_plan-wp8-alt))) & (next(main-usr-4-4-FPLN__flight_plan-wp8-lat) = next(main-usr-4-4-WPM__flight_plan-wp8-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp8-long) = next(main-usr-5-4-WPM__flight_plan-wp8-long))) & (next(main-usr-4-4-FPLN__flight_plan-wp9-alt) = next(main-usr-4-4-WPM__flight_plan-wp9-alt))) & (next(main-usr-4-4-FPLN__flight_plan-wp9-lat) = next(main-usr-4-4-WPM__flight_plan-wp9-lat))) & (next(main-usr-5-4-FPLN__flight_plan-wp9-long) = next(main-usr-5-4-WPM__flight_plan-wp9-long)));
+	next(main-res-glocal_138) := (((((((((((((next(main-usr-4-WPM__waypoint-crc) = next(main-usr-4-UART__waypoint_in-crc)) & (next(main-usr-4-4-WPM__waypoint-wp1-alt) = next(main-usr-4-4-UART__waypoint_in-wp1-alt))) & (next(main-usr-4-4-WPM__waypoint-wp1-lat) = next(main-usr-4-4-UART__waypoint_in-wp1-lat))) & (next(main-usr-5-4-WPM__waypoint-wp1-long) = next(main-usr-5-4-UART__waypoint_in-wp1-long))) & (next(main-usr-4-4-WPM__waypoint-wp2-alt) = next(main-usr-4-4-UART__waypoint_in-wp2-alt))) & (next(main-usr-4-4-WPM__waypoint-wp2-lat) = next(main-usr-4-4-UART__waypoint_in-wp2-lat))) & (next(main-usr-5-4-WPM__waypoint-wp2-long) = next(main-usr-5-4-UART__waypoint_in-wp2-long))) & (next(main-usr-4-4-WPM__waypoint-wp3-alt) = next(main-usr-4-4-UART__waypoint_in-wp3-alt))) & (next(main-usr-4-4-WPM__waypoint-wp3-lat) = next(main-usr-4-4-UART__waypoint_in-wp3-lat))) & (next(main-usr-5-4-WPM__waypoint-wp3-long) = next(main-usr-5-4-UART__waypoint_in-wp3-long))) & (next(main-usr-4-4-WPM__waypoint-wp4-alt) = next(main-usr-4-4-UART__waypoint_in-wp4-alt))) & (next(main-usr-4-4-WPM__waypoint-wp4-lat) = next(main-usr-4-4-UART__waypoint_in-wp4-lat))) & (next(main-usr-5-4-WPM__waypoint-wp4-long) = next(main-usr-5-4-UART__waypoint_in-wp4-long)));
+	next(main-res-glocal_139) := (next(main-usr-WPM__waypoint___EVENT_) = next(main-usr-UART__waypoint_in___EVENT_));
+	next(main-res-glocal_140) := (((((((((((((next(main-usr-4-UART__waypoint_out-crc) = next(main-usr-4-waypoint-crc)) & (next(main-usr-4-4-UART__waypoint_out-wp1-alt) = next(main-usr-4-4-waypoint-wp1-alt))) & (next(main-usr-4-4-UART__waypoint_out-wp1-lat) = next(main-usr-4-4-waypoint-wp1-lat))) & (next(main-usr-5-4-UART__waypoint_out-wp1-long) = next(main-usr-5-4-waypoint-wp1-long))) & (next(main-usr-4-4-UART__waypoint_out-wp2-alt) = next(main-usr-4-4-waypoint-wp2-alt))) & (next(main-usr-4-4-UART__waypoint_out-wp2-lat) = next(main-usr-4-4-waypoint-wp2-lat))) & (next(main-usr-5-4-UART__waypoint_out-wp2-long) = next(main-usr-5-4-waypoint-wp2-long))) & (next(main-usr-4-4-UART__waypoint_out-wp3-alt) = next(main-usr-4-4-waypoint-wp3-alt))) & (next(main-usr-4-4-UART__waypoint_out-wp3-lat) = next(main-usr-4-4-waypoint-wp3-lat))) & (next(main-usr-5-4-UART__waypoint_out-wp3-long) = next(main-usr-5-4-waypoint-wp3-long))) & (next(main-usr-4-4-UART__waypoint_out-wp4-alt) = next(main-usr-4-4-waypoint-wp4-alt))) & (next(main-usr-4-4-UART__waypoint_out-wp4-lat) = next(main-usr-4-4-waypoint-wp4-lat))) & (next(main-usr-5-4-UART__waypoint_out-wp4-long) = next(main-usr-5-4-waypoint-wp4-long)));
+	next(main-res-glocal_141) := (next(main-usr-UART__waypoint_out___EVENT_) = next(main-usr-waypoint___EVENT_));
+	next(main-res-glocal_142) := (((next(main-usr-4-UART__position_status_out-alt) = next(main-usr-4-WPM__position_status-alt)) & (next(main-usr-4-UART__position_status_out-lat) = next(main-usr-4-WPM__position_status-lat))) & (next(main-usr-5-UART__position_status_out-long) = next(main-usr-5-WPM__position_status-long)));
+	next(main-res-glocal_143) := (next(main-usr-UART__position_status_out___EVENT_) = next(main-usr-WPM__position_status___EVENT_));
+	next(main-res-glocal_144) := (((next(main-usr-4-UART__position_status_out-alt) = next(main-usr-4-FPLN__position_status-alt)) & (next(main-usr-4-UART__position_status_out-lat) = next(main-usr-4-FPLN__position_status-lat))) & (next(main-usr-5-UART__position_status_out-long) = next(main-usr-5-FPLN__position_status-long)));
+	next(main-res-glocal_145) := (next(main-usr-UART__position_status_out___EVENT_) = next(main-usr-FPLN__position_status___EVENT_));
+	next(main-res-glocal_146) := (((next(main-usr-4-UART__position_status_out-alt) = next(main-usr-4-RADIO__send_status_in-alt)) & (next(main-usr-4-UART__position_status_out-lat) = next(main-usr-4-RADIO__send_status_in-lat))) & (next(main-usr-5-UART__position_status_out-long) = next(main-usr-5-RADIO__send_status_in-long)));
+	next(main-res-glocal_147) := (next(main-usr-UART__position_status_out___EVENT_) = next(main-usr-RADIO__send_status_in___EVENT_));
+	next(main-res-glocal_148) := TRUE;
+	next(main-res-glocal_149) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_149;
+	INVAR main-res-glocal_148;
+	INVAR main-res-glocal_147;
+	INVAR main-res-glocal_146;
+	INVAR main-res-glocal_145;
+	INVAR main-res-glocal_144;
+	INVAR main-res-glocal_143;
+	INVAR main-res-glocal_142;
+	INVAR main-res-glocal_141;
+	INVAR main-res-glocal_140;
+	INVAR main-res-glocal_139;
+	INVAR main-res-glocal_138;
+	INVAR main-res-glocal_137;
+	INVAR main-res-glocal_136;
+	INVAR main-res-glocal_135;
+	INVAR main-res-glocal_134;
+	INVAR main-res-glocal_133;
+	INVAR main-res-glocal_132;
+	INVAR main-res-glocal_131;
+	INVAR main-res-glocal_130;
+	INVAR main-res-glocal_129;
+	INVAR main-res-glocal_128;
+	INVAR main-res-glocal_127;
+	INVAR main-res-glocal_126;
+	INVAR main-res-glocal_124;
+	INVAR main-res-glocal_122;
+	INVAR main-res-glocal_121;
+	INVAR main-res-glocal_119;
+	INVAR main-res-glocal_117;
+	INVAR main-res-glocal_116;
+	INVAR main-res-glocal_113;
+	INVAR main-res-glocal_111;
+	INVAR main-res-glocal_110;
+	INVAR main-res-glocal_107;
+	INVAR main-res-glocal_105;
+	INVAR main-res-glocal_104;
+	INVAR main-res-glocal_102;
+	INVAR main-res-glocal_100;
+	INVAR main-res-glocal_99;
+
+INVARSPEC 
+((main-usr-FPLN____ASSUME1));
+

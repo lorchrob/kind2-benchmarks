@@ -1,0 +1,426 @@
+
+MODULE _TOP__AP (_TOP__AP-usr-__ASSUME__HIST, _TOP__AP-usr-12-5-GC_L-cmds-Pitch_Delta, _TOP__AP-usr-12-5-GC_L-cmds-Pitch_Valid, _TOP__AP-usr-7-4-GC_L-mds-active, _TOP__AP-usr-11-4-4-GC_L-mds-lat-HDG_active, _TOP__AP-usr-12-4-4-GC_L-mds-lat-ROLL_active, _TOP__AP-usr-4-4-GC_L-mds-ver, _TOP__AP-usr-12-5-GC_R-cmds-Pitch_Delta, _TOP__AP-usr-12-5-GC_R-cmds-Pitch_Valid, _TOP__AP-usr-7-4-GC_R-mds-active, _TOP__AP-usr-11-4-4-GC_R-mds-lat-HDG_active, _TOP__AP-usr-12-4-4-GC_R-mds-lat-ROLL_active, _TOP__AP-usr-4-4-GC_R-mds-ver, _TOP__AP-usr-time, _TOP__AP-usr-leader_pitch_delta, _TOP__AP-usr-leader_pitch_delta_correct, _TOP__AP-usr-16-CSA-CSA_Pitch_Delta, _TOP__AP-usr-16-CSA-CSA_Pitch_Valid)
+VAR
+	_TOP__AP-usr-__ASSERT : boolean;
+	_TOP__AP-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__AP-impl-usr-__GUARANTEE0) := _TOP__AP-usr-leader_pitch_delta_correct;
+	init(_TOP__AP-usr-__ASSERT) := ((_TOP__AP-usr-leader_pitch_delta_correct = (((_TOP__AP-usr-leader_pitch_delta > 0) -> ((_TOP__AP-usr-16-CSA-CSA_Pitch_Delta > 0) & _TOP__AP-usr-16-CSA-CSA_Pitch_Delta <= _TOP__AP-usr-leader_pitch_delta)) & (_TOP__AP-usr-leader_pitch_delta <= 0 -> (_TOP__AP-usr-16-CSA-CSA_Pitch_Delta <= 0 & _TOP__AP-usr-16-CSA-CSA_Pitch_Delta >= _TOP__AP-usr-leader_pitch_delta)))) & ((_TOP__AP-usr-leader_pitch_delta = (_TOP__AP-usr-7-4-GC_L-mds-active ? _TOP__AP-usr-12-5-GC_L-cmds-Pitch_Delta : (_TOP__AP-usr-7-4-GC_R-mds-active ? _TOP__AP-usr-12-5-GC_R-cmds-Pitch_Delta : 0))) & (_TOP__AP-usr-__ASSUME__HIST -> _TOP__AP-impl-usr-__GUARANTEE0)));
+
+	next(_TOP__AP-impl-usr-__GUARANTEE0) := next(_TOP__AP-usr-leader_pitch_delta_correct);
+	next(_TOP__AP-usr-__ASSERT) := ((next(_TOP__AP-usr-leader_pitch_delta_correct) = (((next(_TOP__AP-usr-leader_pitch_delta) > 0) -> ((next(_TOP__AP-usr-16-CSA-CSA_Pitch_Delta) > 0) & next(_TOP__AP-usr-16-CSA-CSA_Pitch_Delta) <= next(_TOP__AP-usr-leader_pitch_delta))) & (next(_TOP__AP-usr-leader_pitch_delta) <= 0 -> (next(_TOP__AP-usr-16-CSA-CSA_Pitch_Delta) <= 0 & next(_TOP__AP-usr-16-CSA-CSA_Pitch_Delta) >= next(_TOP__AP-usr-leader_pitch_delta))))) & ((next(_TOP__AP-usr-leader_pitch_delta) = (next(_TOP__AP-usr-7-4-GC_L-mds-active) ? next(_TOP__AP-usr-12-5-GC_L-cmds-Pitch_Delta) : (next(_TOP__AP-usr-7-4-GC_R-mds-active) ? next(_TOP__AP-usr-12-5-GC_R-cmds-Pitch_Delta) : _TOP__AP-usr-leader_pitch_delta))) & (next(_TOP__AP-usr-__ASSUME__HIST) -> next(_TOP__AP-impl-usr-__GUARANTEE0))));
+
+
+
+MODULE FGS__Flight_Guidance_System__abs (FGS__Flight_Guidance_System__abs-usr-x)
+VAR
+	FGS__Flight_Guidance_System__abs-usr-_outvar : real;
+
+ASSIGN
+	init(FGS__Flight_Guidance_System__abs-usr-_outvar) := ((FGS__Flight_Guidance_System__abs-usr-x > 0) ? FGS__Flight_Guidance_System__abs-usr-x : -FGS__Flight_Guidance_System__abs-usr-x);
+
+	next(FGS__Flight_Guidance_System__abs-usr-_outvar) := ((next(FGS__Flight_Guidance_System__abs-usr-x) > 0) ? next(FGS__Flight_Guidance_System__abs-usr-x) : -next(FGS__Flight_Guidance_System__abs-usr-x));
+
+
+
+MODULE _TOP__FGS_L (_TOP__FGS_L-usr-__ASSUME__HIST, _TOP__FGS_L-usr-4-9-AD-AirSpeed-Val, _TOP__FGS_L-usr-6-9-AD-AirSpeed-Valid, _TOP__FGS_L-usr-4-6-AD-Pitch-Val, _TOP__FGS_L-usr-6-6-AD-Pitch-Valid, _TOP__FGS_L-usr-7-LSI-Leader, _TOP__FGS_L-usr-6-LSI-Valid, _TOP__FGS_L-usr-time, _TOP__FGS_L-usr-this_side_in_control, _TOP__FGS_L-usr-active_implies_valid, _TOP__FGS_L-usr-leader_implies_active, _TOP__FGS_L-usr-gc_ok, _TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta, _TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Valid, _TOP__FGS_L-usr-7-4-GC-mds-active, _TOP__FGS_L-usr-11-4-4-GC-mds-lat-HDG_active, _TOP__FGS_L-usr-12-4-4-GC-mds-lat-ROLL_active, _TOP__FGS_L-usr-4-4-GC-mds-ver, _TOP__FGS_L-usr-7-LSO-Leader, _TOP__FGS_L-usr-6-LSO-Valid)
+VAR
+	_TOP__FGS_L-usr-__ASSERT : boolean;
+	_TOP__FGS_L-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__FGS_L-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__FGS_L-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__FGS_L-impl-usr-__GUARANTEE3 : boolean;
+	_TOP__FGS_L-impl-usr-__GUARANTEE4 : boolean;
+	_TOP__FGS_L-res-glocal_4 : real;
+	_TOP__FGS_L-res-gklocal_5 : real;
+	_TOP__FGS_L-res-gklocal_7 : real;
+	_TOP__FGS_L-res-call_6 : FGS__Flight_Guidance_System__abs(_TOP__FGS_L-res-gklocal_5);
+	_TOP__FGS_L-res-call_8 : FGS__Flight_Guidance_System__abs(_TOP__FGS_L-res-gklocal_7);
+
+ASSIGN
+	init(_TOP__FGS_L-res-gklocal_7) := _TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta;
+	init(_TOP__FGS_L-impl-usr-__GUARANTEE4) := (_TOP__FGS_L-usr-this_side_in_control -> (_TOP__FGS_L-usr-4-6-AD-Pitch-Val = _TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta));
+	init(_TOP__FGS_L-impl-usr-__GUARANTEE3) := (_TOP__FGS_L-usr-this_side_in_control -> _TOP__FGS_L-usr-gc_ok);
+	init(_TOP__FGS_L-impl-usr-__GUARANTEE2) := (_TOP__FGS_L-usr-6-LSO-Valid = _TOP__FGS_L-usr-6-6-AD-Pitch-Valid);
+	init(_TOP__FGS_L-impl-usr-__GUARANTEE1) := _TOP__FGS_L-usr-leader_implies_active;
+	init(_TOP__FGS_L-impl-usr-__GUARANTEE0) := _TOP__FGS_L-usr-active_implies_valid;
+	init(_TOP__FGS_L-usr-__ASSERT) := ((_TOP__FGS_L-usr-gc_ok = (_TOP__FGS_L-res-call_8.FGS__Flight_Guidance_System__abs-usr-_outvar < 5)) & ((_TOP__FGS_L-usr-leader_implies_active = ((_TOP__FGS_L-usr-7-LSO-Leader = 1) -> _TOP__FGS_L-usr-7-4-GC-mds-active)) & ((_TOP__FGS_L-usr-active_implies_valid = (_TOP__FGS_L-usr-this_side_in_control -> _TOP__FGS_L-usr-6-LSO-Valid)) & ((_TOP__FGS_L-usr-this_side_in_control = _TOP__FGS_L-usr-7-4-GC-mds-active) & (_TOP__FGS_L-usr-__ASSUME__HIST -> (_TOP__FGS_L-impl-usr-__GUARANTEE4 & (_TOP__FGS_L-impl-usr-__GUARANTEE3 & (_TOP__FGS_L-impl-usr-__GUARANTEE2 & (_TOP__FGS_L-impl-usr-__GUARANTEE1 & _TOP__FGS_L-impl-usr-__GUARANTEE0)))))))));
+	init(_TOP__FGS_L-res-gklocal_5) := (_TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta - 0);
+	init(_TOP__FGS_L-res-glocal_4) := _TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta;
+
+	next(_TOP__FGS_L-res-gklocal_7) := next(_TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta);
+	next(_TOP__FGS_L-res-gklocal_5) := (next(_TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta) - _TOP__FGS_L-res-glocal_4);
+	next(_TOP__FGS_L-impl-usr-__GUARANTEE4) := (next(_TOP__FGS_L-usr-this_side_in_control) -> (next(_TOP__FGS_L-usr-4-6-AD-Pitch-Val) = next(_TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta)));
+	next(_TOP__FGS_L-impl-usr-__GUARANTEE3) := (next(_TOP__FGS_L-usr-this_side_in_control) -> next(_TOP__FGS_L-usr-gc_ok));
+	next(_TOP__FGS_L-impl-usr-__GUARANTEE2) := (next(_TOP__FGS_L-usr-6-LSO-Valid) = next(_TOP__FGS_L-usr-6-6-AD-Pitch-Valid));
+	next(_TOP__FGS_L-impl-usr-__GUARANTEE1) := next(_TOP__FGS_L-usr-leader_implies_active);
+	next(_TOP__FGS_L-impl-usr-__GUARANTEE0) := next(_TOP__FGS_L-usr-active_implies_valid);
+	next(_TOP__FGS_L-usr-__ASSERT) := ((next(_TOP__FGS_L-usr-gc_ok) = ((next(_TOP__FGS_L-res-call_6.FGS__Flight_Guidance_System__abs-usr-_outvar) < 1) & (next(_TOP__FGS_L-res-call_8.FGS__Flight_Guidance_System__abs-usr-_outvar) < 5))) & ((next(_TOP__FGS_L-usr-leader_implies_active) = ((next(_TOP__FGS_L-usr-7-LSO-Leader) = 1) -> next(_TOP__FGS_L-usr-7-4-GC-mds-active))) & ((next(_TOP__FGS_L-usr-active_implies_valid) = (next(_TOP__FGS_L-usr-this_side_in_control) -> next(_TOP__FGS_L-usr-6-LSO-Valid))) & ((next(_TOP__FGS_L-usr-this_side_in_control) = next(_TOP__FGS_L-usr-7-4-GC-mds-active)) & (next(_TOP__FGS_L-usr-__ASSUME__HIST) -> (next(_TOP__FGS_L-impl-usr-__GUARANTEE4) & (next(_TOP__FGS_L-impl-usr-__GUARANTEE3) & (next(_TOP__FGS_L-impl-usr-__GUARANTEE2) & (next(_TOP__FGS_L-impl-usr-__GUARANTEE1) & next(_TOP__FGS_L-impl-usr-__GUARANTEE0))))))))));
+	next(_TOP__FGS_L-res-glocal_4) := next(_TOP__FGS_L-usr-12-5-GC-cmds-Pitch_Delta);
+
+
+
+MODULE FCS__Flight_Control_System__abs (FCS__Flight_Control_System__abs-usr-x)
+VAR
+	FCS__Flight_Control_System__abs-usr-_outvar : real;
+
+ASSIGN
+	init(FCS__Flight_Control_System__abs-usr-_outvar) := ((FCS__Flight_Control_System__abs-usr-x > 0) ? FCS__Flight_Control_System__abs-usr-x : -FCS__Flight_Control_System__abs-usr-x);
+
+	next(FCS__Flight_Control_System__abs-usr-_outvar) := ((next(FCS__Flight_Control_System__abs-usr-x) > 0) ? next(FCS__Flight_Control_System__abs-usr-x) : -next(FCS__Flight_Control_System__abs-usr-x));
+
+
+
+MODULE _TOP__FGS_R (_TOP__FGS_R-usr-__ASSUME__HIST, _TOP__FGS_R-usr-4-9-AD-AirSpeed-Val, _TOP__FGS_R-usr-6-9-AD-AirSpeed-Valid, _TOP__FGS_R-usr-4-6-AD-Pitch-Val, _TOP__FGS_R-usr-6-6-AD-Pitch-Valid, _TOP__FGS_R-usr-7-LSI-Leader, _TOP__FGS_R-usr-6-LSI-Valid, _TOP__FGS_R-usr-time, _TOP__FGS_R-usr-this_side_in_control, _TOP__FGS_R-usr-active_implies_valid, _TOP__FGS_R-usr-leader_implies_active, _TOP__FGS_R-usr-gc_ok, _TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta, _TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Valid, _TOP__FGS_R-usr-7-4-GC-mds-active, _TOP__FGS_R-usr-11-4-4-GC-mds-lat-HDG_active, _TOP__FGS_R-usr-12-4-4-GC-mds-lat-ROLL_active, _TOP__FGS_R-usr-4-4-GC-mds-ver, _TOP__FGS_R-usr-7-LSO-Leader, _TOP__FGS_R-usr-6-LSO-Valid)
+VAR
+	_TOP__FGS_R-usr-__ASSERT : boolean;
+	_TOP__FGS_R-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__FGS_R-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__FGS_R-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__FGS_R-impl-usr-__GUARANTEE3 : boolean;
+	_TOP__FGS_R-impl-usr-__GUARANTEE4 : boolean;
+	_TOP__FGS_R-res-glocal_9 : real;
+	_TOP__FGS_R-res-gklocal_10 : real;
+	_TOP__FGS_R-res-gklocal_12 : real;
+	_TOP__FGS_R-res-call_11 : FGS__Flight_Guidance_System__abs(_TOP__FGS_R-res-gklocal_10);
+	_TOP__FGS_R-res-call_13 : FGS__Flight_Guidance_System__abs(_TOP__FGS_R-res-gklocal_12);
+
+ASSIGN
+	init(_TOP__FGS_R-res-gklocal_12) := _TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta;
+	init(_TOP__FGS_R-impl-usr-__GUARANTEE4) := (_TOP__FGS_R-usr-this_side_in_control -> (_TOP__FGS_R-usr-4-6-AD-Pitch-Val = _TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta));
+	init(_TOP__FGS_R-impl-usr-__GUARANTEE3) := (_TOP__FGS_R-usr-this_side_in_control -> _TOP__FGS_R-usr-gc_ok);
+	init(_TOP__FGS_R-impl-usr-__GUARANTEE2) := (_TOP__FGS_R-usr-6-LSO-Valid = _TOP__FGS_R-usr-6-6-AD-Pitch-Valid);
+	init(_TOP__FGS_R-impl-usr-__GUARANTEE1) := _TOP__FGS_R-usr-leader_implies_active;
+	init(_TOP__FGS_R-impl-usr-__GUARANTEE0) := _TOP__FGS_R-usr-active_implies_valid;
+	init(_TOP__FGS_R-usr-__ASSERT) := ((_TOP__FGS_R-usr-gc_ok = (_TOP__FGS_R-res-call_13.FGS__Flight_Guidance_System__abs-usr-_outvar < 5)) & ((_TOP__FGS_R-usr-leader_implies_active = ((_TOP__FGS_R-usr-7-LSO-Leader = 2) -> _TOP__FGS_R-usr-7-4-GC-mds-active)) & ((_TOP__FGS_R-usr-active_implies_valid = (_TOP__FGS_R-usr-this_side_in_control -> _TOP__FGS_R-usr-6-LSO-Valid)) & ((_TOP__FGS_R-usr-this_side_in_control = _TOP__FGS_R-usr-7-4-GC-mds-active) & (_TOP__FGS_R-usr-__ASSUME__HIST -> (_TOP__FGS_R-impl-usr-__GUARANTEE4 & (_TOP__FGS_R-impl-usr-__GUARANTEE3 & (_TOP__FGS_R-impl-usr-__GUARANTEE2 & (_TOP__FGS_R-impl-usr-__GUARANTEE1 & _TOP__FGS_R-impl-usr-__GUARANTEE0)))))))));
+	init(_TOP__FGS_R-res-gklocal_10) := (_TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta - 0);
+	init(_TOP__FGS_R-res-glocal_9) := _TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta;
+
+	next(_TOP__FGS_R-res-gklocal_12) := next(_TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta);
+	next(_TOP__FGS_R-res-gklocal_10) := (next(_TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta) - _TOP__FGS_R-res-glocal_9);
+	next(_TOP__FGS_R-impl-usr-__GUARANTEE4) := (next(_TOP__FGS_R-usr-this_side_in_control) -> (next(_TOP__FGS_R-usr-4-6-AD-Pitch-Val) = next(_TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta)));
+	next(_TOP__FGS_R-impl-usr-__GUARANTEE3) := (next(_TOP__FGS_R-usr-this_side_in_control) -> next(_TOP__FGS_R-usr-gc_ok));
+	next(_TOP__FGS_R-impl-usr-__GUARANTEE2) := (next(_TOP__FGS_R-usr-6-LSO-Valid) = next(_TOP__FGS_R-usr-6-6-AD-Pitch-Valid));
+	next(_TOP__FGS_R-impl-usr-__GUARANTEE1) := next(_TOP__FGS_R-usr-leader_implies_active);
+	next(_TOP__FGS_R-impl-usr-__GUARANTEE0) := next(_TOP__FGS_R-usr-active_implies_valid);
+	next(_TOP__FGS_R-usr-__ASSERT) := ((next(_TOP__FGS_R-usr-gc_ok) = ((next(_TOP__FGS_R-res-call_11.FGS__Flight_Guidance_System__abs-usr-_outvar) < 1) & (next(_TOP__FGS_R-res-call_13.FGS__Flight_Guidance_System__abs-usr-_outvar) < 5))) & ((next(_TOP__FGS_R-usr-leader_implies_active) = ((next(_TOP__FGS_R-usr-7-LSO-Leader) = 2) -> next(_TOP__FGS_R-usr-7-4-GC-mds-active))) & ((next(_TOP__FGS_R-usr-active_implies_valid) = (next(_TOP__FGS_R-usr-this_side_in_control) -> next(_TOP__FGS_R-usr-6-LSO-Valid))) & ((next(_TOP__FGS_R-usr-this_side_in_control) = next(_TOP__FGS_R-usr-7-4-GC-mds-active)) & (next(_TOP__FGS_R-usr-__ASSUME__HIST) -> (next(_TOP__FGS_R-impl-usr-__GUARANTEE4) & (next(_TOP__FGS_R-impl-usr-__GUARANTEE3) & (next(_TOP__FGS_R-impl-usr-__GUARANTEE2) & (next(_TOP__FGS_R-impl-usr-__GUARANTEE1) & next(_TOP__FGS_R-impl-usr-__GUARANTEE0))))))))));
+	next(_TOP__FGS_R-res-glocal_9) := next(_TOP__FGS_R-usr-12-5-GC-cmds-Pitch_Delta);
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE main () 
+VAR
+	main-usr-AP__leader_pitch_delta : real;
+	main-usr-AP__leader_pitch_delta_correct : boolean;
+	main-usr-16-AP__CSA-CSA_Pitch_Delta : real;
+	main-usr-16-AP__CSA-CSA_Pitch_Valid : boolean;
+	main-usr-AP____ASSUME__HIST : boolean;
+	main-usr-FGS_L__this_side_in_control : boolean;
+	main-usr-FGS_L__active_implies_valid : boolean;
+	main-usr-FGS_L__leader_implies_active : boolean;
+	main-usr-FGS_L__gc_ok : boolean;
+	main-usr-12-5-FGS_L__GC-cmds-Pitch_Delta : real;
+	main-usr-12-5-FGS_L__GC-cmds-Pitch_Valid : boolean;
+	main-usr-7-4-FGS_L__GC-mds-active : boolean;
+	main-usr-11-4-4-FGS_L__GC-mds-lat-HDG_active : boolean;
+	main-usr-12-4-4-FGS_L__GC-mds-lat-ROLL_active : boolean;
+	main-usr-4-4-FGS_L__GC-mds-ver : integer;
+	main-usr-7-FGS_L__LSO-Leader : integer;
+	main-usr-6-FGS_L__LSO-Valid : boolean;
+	main-usr-FGS_L____ASSUME__HIST : boolean;
+	main-usr-FGS_R__this_side_in_control : boolean;
+	main-usr-FGS_R__active_implies_valid : boolean;
+	main-usr-FGS_R__leader_implies_active : boolean;
+	main-usr-FGS_R__gc_ok : boolean;
+	main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta : real;
+	main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid : boolean;
+	main-usr-7-4-FGS_R__GC-mds-active : boolean;
+	main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active : boolean;
+	main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active : boolean;
+	main-usr-4-4-FGS_R__GC-mds-ver : integer;
+	main-usr-7-FGS_R__LSO-Leader : integer;
+	main-usr-6-FGS_R__LSO-Valid : boolean;
+	main-usr-FGS_R____ASSUME__HIST : boolean;
+	main-usr-prop2 : boolean;
+	main-usr-prop1 : boolean;
+	main-usr-AD_L_Pitch_Step_Delta_Valid : boolean;
+	main-usr-AD_R_Pitch_Step_Delta_Valid : boolean;
+	main-usr-pitch_lr_ok : boolean;
+	main-usr-left_side_valid : boolean;
+	main-usr-right_side_valid : boolean;
+	main-usr-some_side_valid : boolean;
+	main-usr-12-5-FD_L-cmds-Pitch_Delta : real;
+	main-usr-12-5-FD_L-cmds-Pitch_Valid : boolean;
+	main-usr-7-4-FD_L-mds-active : boolean;
+	main-usr-11-4-4-FD_L-mds-lat-HDG_active : boolean;
+	main-usr-12-4-4-FD_L-mds-lat-ROLL_active : boolean;
+	main-usr-4-4-FD_L-mds-ver : integer;
+	main-usr-12-5-FD_R-cmds-Pitch_Delta : real;
+	main-usr-12-5-FD_R-cmds-Pitch_Valid : boolean;
+	main-usr-7-4-FD_R-mds-active : boolean;
+	main-usr-11-4-4-FD_R-mds-lat-HDG_active : boolean;
+	main-usr-12-4-4-FD_R-mds-lat-ROLL_active : boolean;
+	main-usr-4-4-FD_R-mds-ver : integer;
+	main-usr-16-CSA-CSA_Pitch_Delta : real;
+	main-usr-16-CSA-CSA_Pitch_Valid : boolean;
+	main-usr-12-5-AP__GC_L-cmds-Pitch_Delta : real;
+	main-usr-12-5-AP__GC_L-cmds-Pitch_Valid : boolean;
+	main-usr-7-4-AP__GC_L-mds-active : boolean;
+	main-usr-11-4-4-AP__GC_L-mds-lat-HDG_active : boolean;
+	main-usr-12-4-4-AP__GC_L-mds-lat-ROLL_active : boolean;
+	main-usr-4-4-AP__GC_L-mds-ver : integer;
+	main-usr-12-5-AP__GC_R-cmds-Pitch_Delta : real;
+	main-usr-12-5-AP__GC_R-cmds-Pitch_Valid : boolean;
+	main-usr-7-4-AP__GC_R-mds-active : boolean;
+	main-usr-11-4-4-AP__GC_R-mds-lat-HDG_active : boolean;
+	main-usr-12-4-4-AP__GC_R-mds-lat-ROLL_active : boolean;
+	main-usr-4-4-AP__GC_R-mds-ver : integer;
+	main-usr-AP__time : real;
+	main-usr-4-9-FGS_L__AD-AirSpeed-Val : real;
+	main-usr-6-9-FGS_L__AD-AirSpeed-Valid : boolean;
+	main-usr-4-6-FGS_L__AD-Pitch-Val : real;
+	main-usr-6-6-FGS_L__AD-Pitch-Valid : boolean;
+	main-usr-7-FGS_L__LSI-Leader : integer;
+	main-usr-6-FGS_L__LSI-Valid : boolean;
+	main-usr-FGS_L__time : real;
+	main-usr-4-9-FGS_R__AD-AirSpeed-Val : real;
+	main-usr-6-9-FGS_R__AD-AirSpeed-Valid : boolean;
+	main-usr-4-6-FGS_R__AD-Pitch-Val : real;
+	main-usr-6-6-FGS_R__AD-Pitch-Valid : boolean;
+	main-usr-7-FGS_R__LSI-Leader : integer;
+	main-usr-6-FGS_R__LSI-Valid : boolean;
+	main-usr-FGS_R__time : real;
+	main-usr-4-9-AD_L-AirSpeed-Val : real;
+	main-usr-6-9-AD_L-AirSpeed-Valid : boolean;
+	main-usr-4-6-AD_L-Pitch-Val : real;
+	main-usr-6-6-AD_L-Pitch-Valid : boolean;
+	main-usr-4-9-AD_R-AirSpeed-Val : real;
+	main-usr-6-9-AD_R-AirSpeed-Valid : boolean;
+	main-usr-4-6-AD_R-Pitch-Val : real;
+	main-usr-6-6-AD_R-Pitch-Valid : boolean;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME0 : boolean;
+	main-impl-usr-__ASSUME1 : boolean;
+	main-impl-usr-__ASSUME2 : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-res-glocal_14 : boolean;
+	main-res-glocal_15 : boolean;
+	main-res-glocal_21 : boolean;
+	main-res-glocal_22 : boolean;
+	main-res-glocal_23 : boolean;
+	main-res-glocal_24 : boolean;
+	main-res-glocal_26 : boolean;
+	main-res-glocal_29 : boolean;
+	main-res-glocal_30 : boolean;
+	main-res-glocal_32 : boolean;
+	main-res-glocal_33 : boolean;
+	main-res-glocal_34 : boolean;
+	main-res-glocal_36 : boolean;
+	main-res-glocal_37 : boolean;
+	main-res-glocal_38 : boolean;
+	main-res-glocal_39 : boolean;
+	main-res-glocal_40 : boolean;
+	main-res-glocal_41 : boolean;
+	main-res-glocal_42 : boolean;
+	main-res-glocal_43 : boolean;
+	main-res-glocal_44 : boolean;
+	main-res-glocal_45 : boolean;
+	main-res-glocal_46 : boolean;
+	main-res-glocal_47 : boolean;
+	main-res-glocal_48 : boolean;
+	main-res-glocal_49 : boolean;
+	main-res-glocal_50 : boolean;
+	main-res-glocal_51 : boolean;
+	main-res-glocal_52 : boolean;
+	main-res-glocal_53 : boolean;
+	main-res-glocal_54 : boolean;
+	main-res-glocal_55 : boolean;
+	main-res-glocal_56 : boolean;
+	main-res-glocal_57 : boolean;
+	main-res-glocal_58 : boolean;
+	main-res-glocal_59 : real;
+	main-res-glocal_62 : boolean;
+	main-res-glocal_63 : real;
+	main-res-glocal_66 : boolean;
+	main-res-glocal_69 : boolean;
+	main-res-glocal_70 : boolean;
+	main-res-glocal_71 : boolean;
+	main-res-glocal_72 : boolean;
+	main-res-glocal_73 : boolean;
+	main-res-glocal_74 : boolean;
+	main-res-gklocal_67 : real;
+	main-res-gklocal_64 : real;
+	main-res-gklocal_60 : real;
+	main-res-gklocal_27 : boolean;
+	main-res-gklocal_16 : real;
+	main-res-call_68 : FCS__Flight_Control_System__abs(main-res-gklocal_67);
+	main-res-call_65 : FCS__Flight_Control_System__abs(main-res-gklocal_64);
+	main-res-call_61 : FCS__Flight_Control_System__abs(main-res-gklocal_60);
+	main-res-call_35 : _TOP__FGS_R(main-usr-FGS_R____ASSUME__HIST, main-usr-4-9-FGS_R__AD-AirSpeed-Val, main-usr-6-9-FGS_R__AD-AirSpeed-Valid, main-usr-4-6-FGS_R__AD-Pitch-Val, main-usr-6-6-FGS_R__AD-Pitch-Valid, main-usr-7-FGS_R__LSI-Leader, main-usr-6-FGS_R__LSI-Valid, main-usr-FGS_R__time, main-usr-FGS_R__this_side_in_control, main-usr-FGS_R__active_implies_valid, main-usr-FGS_R__leader_implies_active, main-usr-FGS_R__gc_ok, main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta, main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid, main-usr-7-4-FGS_R__GC-mds-active, main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active, main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active, main-usr-4-4-FGS_R__GC-mds-ver, main-usr-7-FGS_R__LSO-Leader, main-usr-6-FGS_R__LSO-Valid);
+	main-res-call_31 : _TOP__FGS_L(main-usr-FGS_L____ASSUME__HIST, main-usr-4-9-FGS_L__AD-AirSpeed-Val, main-usr-6-9-FGS_L__AD-AirSpeed-Valid, main-usr-4-6-FGS_L__AD-Pitch-Val, main-usr-6-6-FGS_L__AD-Pitch-Valid, main-usr-7-FGS_L__LSI-Leader, main-usr-6-FGS_L__LSI-Valid, main-usr-FGS_L__time, main-usr-FGS_L__this_side_in_control, main-usr-FGS_L__active_implies_valid, main-usr-FGS_L__leader_implies_active, main-usr-FGS_L__gc_ok, main-usr-12-5-FGS_L__GC-cmds-Pitch_Delta, main-usr-12-5-FGS_L__GC-cmds-Pitch_Valid, main-usr-7-4-FGS_L__GC-mds-active, main-usr-11-4-4-FGS_L__GC-mds-lat-HDG_active, main-usr-12-4-4-FGS_L__GC-mds-lat-ROLL_active, main-usr-4-4-FGS_L__GC-mds-ver, main-usr-7-FGS_L__LSO-Leader, main-usr-6-FGS_L__LSO-Valid);
+	main-res-call_28 : __HIST(main-res-gklocal_27);
+	main-res-call_25 : _TOP__AP(main-usr-AP____ASSUME__HIST, main-usr-12-5-AP__GC_L-cmds-Pitch_Delta, main-usr-12-5-AP__GC_L-cmds-Pitch_Valid, main-usr-7-4-AP__GC_L-mds-active, main-usr-11-4-4-AP__GC_L-mds-lat-HDG_active, main-usr-12-4-4-AP__GC_L-mds-lat-ROLL_active, main-usr-4-4-AP__GC_L-mds-ver, main-usr-12-5-AP__GC_R-cmds-Pitch_Delta, main-usr-12-5-AP__GC_R-cmds-Pitch_Valid, main-usr-7-4-AP__GC_R-mds-active, main-usr-11-4-4-AP__GC_R-mds-lat-HDG_active, main-usr-12-4-4-AP__GC_R-mds-lat-ROLL_active, main-usr-4-4-AP__GC_R-mds-ver, main-usr-AP__time, main-usr-AP__leader_pitch_delta, main-usr-AP__leader_pitch_delta_correct, main-usr-16-AP__CSA-CSA_Pitch_Delta, main-usr-16-AP__CSA-CSA_Pitch_Valid);
+	main-res-call_17 : FCS__Flight_Control_System__abs(main-res-gklocal_16);
+
+ASSIGN
+	init(main-impl-usr-__GUARANTEE0) := TRUE;
+	init(main-res-gklocal_16) := main-usr-16-CSA-CSA_Pitch_Delta;
+	init(main-impl-usr-__ASSUME0) := main-usr-some_side_valid;
+	init(main-res-glocal_21) := main-impl-usr-__ASSUME0;
+	init(main-impl-usr-__ASSUME1) := TRUE;
+	init(main-res-glocal_22) := main-impl-usr-__ASSUME1;
+	init(main-res-glocal_15) := FALSE;
+	init(main-res-glocal_14) := !main-usr-left_side_valid;
+	init(main-impl-usr-__ASSUME2) := ((main-usr-AD_L_Pitch_Step_Delta_Valid & main-usr-AD_R_Pitch_Step_Delta_Valid) & main-usr-pitch_lr_ok);
+	init(main-res-glocal_23) := main-impl-usr-__ASSUME2;
+	init(main-res-glocal_24) := (main-usr-time = main-usr-AP__time);
+	init(main-res-glocal_26) := main-res-call_25._TOP__AP-usr-__ASSERT;
+	init(main-res-gklocal_27) := TRUE;
+	init(main-res-glocal_29) := (main-usr-AP____ASSUME__HIST = main-res-call_28.__HIST-usr-hist);
+	init(main-res-glocal_30) := (main-usr-time = main-usr-FGS_L__time);
+	init(main-res-glocal_32) := main-res-call_31._TOP__FGS_L-usr-__ASSERT;
+	init(main-res-glocal_33) := (main-usr-FGS_L____ASSUME__HIST = main-res-call_28.__HIST-usr-hist);
+	init(main-res-glocal_34) := (main-usr-time = main-usr-FGS_R__time);
+	init(main-res-glocal_36) := main-res-call_35._TOP__FGS_R-usr-__ASSERT;
+	init(main-res-glocal_37) := (main-usr-FGS_R____ASSUME__HIST = main-res-call_28.__HIST-usr-hist);
+	init(main-res-glocal_38) := ((((main-usr-4-9-AD_L-AirSpeed-Val = main-usr-4-9-FGS_L__AD-AirSpeed-Val) & (main-usr-6-9-AD_L-AirSpeed-Valid = main-usr-6-9-FGS_L__AD-AirSpeed-Valid)) & (main-usr-4-6-AD_L-Pitch-Val = main-usr-4-6-FGS_L__AD-Pitch-Val)) & (main-usr-6-6-AD_L-Pitch-Valid = main-usr-6-6-FGS_L__AD-Pitch-Valid));
+	init(main-res-glocal_39) := ((((main-usr-4-9-AD_R-AirSpeed-Val = main-usr-4-9-FGS_R__AD-AirSpeed-Val) & (main-usr-6-9-AD_R-AirSpeed-Valid = main-usr-6-9-FGS_R__AD-AirSpeed-Valid)) & (main-usr-4-6-AD_R-Pitch-Val = main-usr-4-6-FGS_R__AD-Pitch-Val)) & (main-usr-6-6-AD_R-Pitch-Valid = main-usr-6-6-FGS_R__AD-Pitch-Valid));
+	init(main-res-glocal_40) := ((main-usr-16-AP__CSA-CSA_Pitch_Delta = main-usr-16-CSA-CSA_Pitch_Delta) & (main-usr-16-AP__CSA-CSA_Pitch_Valid = main-usr-16-CSA-CSA_Pitch_Valid));
+	init(main-res-glocal_41) := ((main-usr-7-FGS_L__LSO-Leader = main-usr-7-FGS_R__LSI-Leader) & (main-usr-6-FGS_L__LSO-Valid = main-usr-6-FGS_R__LSI-Valid));
+	init(main-res-glocal_42) := ((((((main-usr-12-5-FGS_L__GC-cmds-Pitch_Delta = main-usr-12-5-AP__GC_L-cmds-Pitch_Delta) & (main-usr-12-5-FGS_L__GC-cmds-Pitch_Valid = main-usr-12-5-AP__GC_L-cmds-Pitch_Valid)) & (main-usr-7-4-FGS_L__GC-mds-active = main-usr-7-4-AP__GC_L-mds-active)) & (main-usr-11-4-4-FGS_L__GC-mds-lat-HDG_active = main-usr-11-4-4-AP__GC_L-mds-lat-HDG_active)) & (main-usr-12-4-4-FGS_L__GC-mds-lat-ROLL_active = main-usr-12-4-4-AP__GC_L-mds-lat-ROLL_active)) & (main-usr-4-4-FGS_L__GC-mds-ver = main-usr-4-4-AP__GC_L-mds-ver));
+	init(main-res-glocal_43) := ((((((main-usr-12-5-FGS_L__GC-cmds-Pitch_Delta = main-usr-12-5-FD_L-cmds-Pitch_Delta) & (main-usr-12-5-FGS_L__GC-cmds-Pitch_Valid = main-usr-12-5-FD_L-cmds-Pitch_Valid)) & (main-usr-7-4-FGS_L__GC-mds-active = main-usr-7-4-FD_L-mds-active)) & (main-usr-11-4-4-FGS_L__GC-mds-lat-HDG_active = main-usr-11-4-4-FD_L-mds-lat-HDG_active)) & (main-usr-12-4-4-FGS_L__GC-mds-lat-ROLL_active = main-usr-12-4-4-FD_L-mds-lat-ROLL_active)) & (main-usr-4-4-FGS_L__GC-mds-ver = main-usr-4-4-FD_L-mds-ver));
+	init(main-res-glocal_44) := ((main-usr-7-FGS_R__LSO-Leader = main-usr-7-FGS_L__LSI-Leader) & (main-usr-6-FGS_R__LSO-Valid = main-usr-6-FGS_L__LSI-Valid));
+	init(main-res-glocal_45) := ((((((main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta = main-usr-12-5-AP__GC_R-cmds-Pitch_Delta) & (main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid = main-usr-12-5-AP__GC_R-cmds-Pitch_Valid)) & (main-usr-7-4-FGS_R__GC-mds-active = main-usr-7-4-AP__GC_R-mds-active)) & (main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active = main-usr-11-4-4-AP__GC_R-mds-lat-HDG_active)) & (main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active = main-usr-12-4-4-AP__GC_R-mds-lat-ROLL_active)) & (main-usr-4-4-FGS_R__GC-mds-ver = main-usr-4-4-AP__GC_R-mds-ver));
+	init(main-res-glocal_46) := ((((((main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta = main-usr-12-5-FD_R-cmds-Pitch_Delta) & (main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid = main-usr-12-5-FD_R-cmds-Pitch_Valid)) & (main-usr-7-4-FGS_R__GC-mds-active = main-usr-7-4-FD_R-mds-active)) & (main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active = main-usr-11-4-4-FD_R-mds-lat-HDG_active)) & (main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active = main-usr-12-4-4-FD_R-mds-lat-ROLL_active)) & (main-usr-4-4-FGS_R__GC-mds-ver = main-usr-4-4-FD_R-mds-ver));
+	init(main-res-glocal_47) := ((main-usr-6-FGS_L__LSO-Valid & main-usr-6-FGS_R__LSO-Valid) -> (main-usr-7-FGS_L__LSO-Leader = main-usr-7-FGS_R__LSO-Leader));
+	init(main-res-glocal_49) := TRUE;
+	init(main-res-glocal_48) := !main-usr-6-FGS_L__LSO-Valid;
+	init(main-res-glocal_51) := TRUE;
+	init(main-res-glocal_50) := !main-usr-6-FGS_R__LSO-Valid;
+	init(main-res-glocal_53) := TRUE;
+	init(main-res-glocal_52) := (main-usr-6-FGS_R__LSO-Valid | main-usr-6-FGS_L__LSO-Valid);
+	init(main-res-glocal_54) := (main-usr-prop1 & main-usr-prop2);
+	init(main-res-glocal_56) := main-usr-prop2;
+	init(main-res-glocal_55) := (main-usr-6-FGS_L__LSO-Valid & (main-usr-7-FGS_L__LSO-Leader = 1));
+	init(main-res-glocal_58) := main-usr-prop1;
+	init(main-res-glocal_57) := (main-usr-6-FGS_R__LSO-Valid & (main-usr-7-FGS_R__LSO-Leader = 2));
+	init(main-res-glocal_62) := main-usr-AD_L_Pitch_Step_Delta_Valid;
+	init(main-res-gklocal_60) := (main-usr-4-6-AD_L-Pitch-Val - 0);
+	init(main-res-glocal_59) := main-usr-4-6-AD_L-Pitch-Val;
+	init(main-res-glocal_66) := main-usr-AD_R_Pitch_Step_Delta_Valid;
+	init(main-res-gklocal_64) := (main-usr-4-6-AD_R-Pitch-Val - 0);
+	init(main-res-glocal_63) := main-usr-4-6-AD_R-Pitch-Val;
+	init(main-res-gklocal_67) := (main-usr-4-6-AD_L-Pitch-Val - main-usr-4-6-AD_R-Pitch-Val);
+	init(main-res-glocal_69) := (main-usr-pitch_lr_ok = (main-res-call_68.FCS__Flight_Control_System__abs-usr-_outvar < 2));
+	init(main-res-glocal_70) := (main-usr-left_side_valid = main-usr-6-6-AD_L-Pitch-Valid);
+	init(main-res-glocal_71) := (main-usr-right_side_valid = main-usr-6-6-AD_R-Pitch-Valid);
+	init(main-res-glocal_72) := (main-usr-some_side_valid = (main-usr-right_side_valid | main-usr-left_side_valid));
+	init(main-res-glocal_73) := TRUE;
+	init(main-res-glocal_74) := (main-usr-time = 0);
+
+	next(main-res-gklocal_16) := next(main-usr-16-CSA-CSA_Pitch_Delta);
+	next(main-impl-usr-__GUARANTEE0) := (next(main-res-call_17.FCS__Flight_Control_System__abs-usr-_outvar) < 5);
+	next(main-impl-usr-__ASSUME0) := next(main-usr-some_side_valid);
+	next(main-res-glocal_21) := next(main-impl-usr-__ASSUME0);
+	next(main-impl-usr-__ASSUME1) := ((main-res-glocal_15 & main-usr-left_side_valid) -> next(main-usr-left_side_valid));
+	next(main-res-glocal_22) := next(main-impl-usr-__ASSUME1);
+	next(main-res-glocal_15) := main-res-glocal_14;
+	next(main-res-glocal_14) := !next(main-usr-left_side_valid);
+	next(main-impl-usr-__ASSUME2) := ((next(main-usr-AD_L_Pitch_Step_Delta_Valid) & next(main-usr-AD_R_Pitch_Step_Delta_Valid)) & next(main-usr-pitch_lr_ok));
+	next(main-res-glocal_23) := next(main-impl-usr-__ASSUME2);
+	next(main-res-glocal_24) := (next(main-usr-time) = next(main-usr-AP__time));
+	next(main-res-glocal_26) := next(main-res-call_25._TOP__AP-usr-__ASSERT);
+	next(main-res-gklocal_27) := TRUE;
+	next(main-res-glocal_29) := (next(main-usr-AP____ASSUME__HIST) = next(main-res-call_28.__HIST-usr-hist));
+	next(main-res-glocal_30) := (next(main-usr-time) = next(main-usr-FGS_L__time));
+	next(main-res-glocal_32) := next(main-res-call_31._TOP__FGS_L-usr-__ASSERT);
+	next(main-res-glocal_33) := (next(main-usr-FGS_L____ASSUME__HIST) = next(main-res-call_28.__HIST-usr-hist));
+	next(main-res-glocal_34) := (next(main-usr-time) = next(main-usr-FGS_R__time));
+	next(main-res-glocal_36) := next(main-res-call_35._TOP__FGS_R-usr-__ASSERT);
+	next(main-res-glocal_37) := (next(main-usr-FGS_R____ASSUME__HIST) = next(main-res-call_28.__HIST-usr-hist));
+	next(main-res-glocal_38) := ((((next(main-usr-4-9-AD_L-AirSpeed-Val) = next(main-usr-4-9-FGS_L__AD-AirSpeed-Val)) & (next(main-usr-6-9-AD_L-AirSpeed-Valid) = next(main-usr-6-9-FGS_L__AD-AirSpeed-Valid))) & (next(main-usr-4-6-AD_L-Pitch-Val) = next(main-usr-4-6-FGS_L__AD-Pitch-Val))) & (next(main-usr-6-6-AD_L-Pitch-Valid) = next(main-usr-6-6-FGS_L__AD-Pitch-Valid)));
+	next(main-res-glocal_39) := ((((next(main-usr-4-9-AD_R-AirSpeed-Val) = next(main-usr-4-9-FGS_R__AD-AirSpeed-Val)) & (next(main-usr-6-9-AD_R-AirSpeed-Valid) = next(main-usr-6-9-FGS_R__AD-AirSpeed-Valid))) & (next(main-usr-4-6-AD_R-Pitch-Val) = next(main-usr-4-6-FGS_R__AD-Pitch-Val))) & (next(main-usr-6-6-AD_R-Pitch-Valid) = next(main-usr-6-6-FGS_R__AD-Pitch-Valid)));
+	next(main-res-glocal_40) := ((next(main-usr-16-AP__CSA-CSA_Pitch_Delta) = next(main-usr-16-CSA-CSA_Pitch_Delta)) & (next(main-usr-16-AP__CSA-CSA_Pitch_Valid) = next(main-usr-16-CSA-CSA_Pitch_Valid)));
+	next(main-res-glocal_41) := ((next(main-usr-7-FGS_L__LSO-Leader) = next(main-usr-7-FGS_R__LSI-Leader)) & (next(main-usr-6-FGS_L__LSO-Valid) = next(main-usr-6-FGS_R__LSI-Valid)));
+	next(main-res-glocal_42) := ((((((next(main-usr-12-5-FGS_L__GC-cmds-Pitch_Delta) = next(main-usr-12-5-AP__GC_L-cmds-Pitch_Delta)) & (next(main-usr-12-5-FGS_L__GC-cmds-Pitch_Valid) = next(main-usr-12-5-AP__GC_L-cmds-Pitch_Valid))) & (next(main-usr-7-4-FGS_L__GC-mds-active) = next(main-usr-7-4-AP__GC_L-mds-active))) & (next(main-usr-11-4-4-FGS_L__GC-mds-lat-HDG_active) = next(main-usr-11-4-4-AP__GC_L-mds-lat-HDG_active))) & (next(main-usr-12-4-4-FGS_L__GC-mds-lat-ROLL_active) = next(main-usr-12-4-4-AP__GC_L-mds-lat-ROLL_active))) & (next(main-usr-4-4-FGS_L__GC-mds-ver) = next(main-usr-4-4-AP__GC_L-mds-ver)));
+	next(main-res-glocal_43) := ((((((next(main-usr-12-5-FGS_L__GC-cmds-Pitch_Delta) = next(main-usr-12-5-FD_L-cmds-Pitch_Delta)) & (next(main-usr-12-5-FGS_L__GC-cmds-Pitch_Valid) = next(main-usr-12-5-FD_L-cmds-Pitch_Valid))) & (next(main-usr-7-4-FGS_L__GC-mds-active) = next(main-usr-7-4-FD_L-mds-active))) & (next(main-usr-11-4-4-FGS_L__GC-mds-lat-HDG_active) = next(main-usr-11-4-4-FD_L-mds-lat-HDG_active))) & (next(main-usr-12-4-4-FGS_L__GC-mds-lat-ROLL_active) = next(main-usr-12-4-4-FD_L-mds-lat-ROLL_active))) & (next(main-usr-4-4-FGS_L__GC-mds-ver) = next(main-usr-4-4-FD_L-mds-ver)));
+	next(main-res-glocal_44) := ((next(main-usr-7-FGS_R__LSO-Leader) = next(main-usr-7-FGS_L__LSI-Leader)) & (next(main-usr-6-FGS_R__LSO-Valid) = next(main-usr-6-FGS_L__LSI-Valid)));
+	next(main-res-glocal_45) := ((((((next(main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta) = next(main-usr-12-5-AP__GC_R-cmds-Pitch_Delta)) & (next(main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid) = next(main-usr-12-5-AP__GC_R-cmds-Pitch_Valid))) & (next(main-usr-7-4-FGS_R__GC-mds-active) = next(main-usr-7-4-AP__GC_R-mds-active))) & (next(main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active) = next(main-usr-11-4-4-AP__GC_R-mds-lat-HDG_active))) & (next(main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active) = next(main-usr-12-4-4-AP__GC_R-mds-lat-ROLL_active))) & (next(main-usr-4-4-FGS_R__GC-mds-ver) = next(main-usr-4-4-AP__GC_R-mds-ver)));
+	next(main-res-glocal_46) := ((((((next(main-usr-12-5-FGS_R__GC-cmds-Pitch_Delta) = next(main-usr-12-5-FD_R-cmds-Pitch_Delta)) & (next(main-usr-12-5-FGS_R__GC-cmds-Pitch_Valid) = next(main-usr-12-5-FD_R-cmds-Pitch_Valid))) & (next(main-usr-7-4-FGS_R__GC-mds-active) = next(main-usr-7-4-FD_R-mds-active))) & (next(main-usr-11-4-4-FGS_R__GC-mds-lat-HDG_active) = next(main-usr-11-4-4-FD_R-mds-lat-HDG_active))) & (next(main-usr-12-4-4-FGS_R__GC-mds-lat-ROLL_active) = next(main-usr-12-4-4-FD_R-mds-lat-ROLL_active))) & (next(main-usr-4-4-FGS_R__GC-mds-ver) = next(main-usr-4-4-FD_R-mds-ver)));
+	next(main-res-glocal_47) := ((next(main-usr-6-FGS_L__LSO-Valid) & next(main-usr-6-FGS_R__LSO-Valid)) -> (next(main-usr-7-FGS_L__LSO-Leader) = next(main-usr-7-FGS_R__LSO-Leader)));
+	next(main-res-glocal_49) := (main-res-glocal_48 -> (next(main-usr-6-FGS_R__LSO-Valid) -> !(next(main-usr-7-FGS_R__LSO-Leader) = 1)));
+	next(main-res-glocal_48) := !next(main-usr-6-FGS_L__LSO-Valid);
+	next(main-res-glocal_51) := (main-res-glocal_50 -> (next(main-usr-6-FGS_L__LSO-Valid) -> !(next(main-usr-7-FGS_L__LSO-Leader) = 2)));
+	next(main-res-glocal_50) := !next(main-usr-6-FGS_R__LSO-Valid);
+	next(main-res-glocal_53) := (main-res-glocal_52 -> ((next(main-usr-6-FGS_L__LSO-Valid) -> (next(main-usr-7-FGS_L__LSO-Leader) >= 1 & next(main-usr-7-FGS_L__LSO-Leader) <= 2)) & (next(main-usr-6-FGS_R__LSO-Valid) -> (next(main-usr-7-FGS_R__LSO-Leader) >= 1 & next(main-usr-7-FGS_R__LSO-Leader) <= 2))));
+	next(main-res-glocal_52) := (next(main-usr-6-FGS_R__LSO-Valid) | next(main-usr-6-FGS_L__LSO-Valid));
+	next(main-res-glocal_54) := (next(main-usr-prop1) & next(main-usr-prop2));
+	next(main-res-glocal_56) := (next(main-usr-prop2) = (main-res-glocal_55 -> (next(main-usr-6-FGS_L__LSO-Valid) -> (next(main-usr-7-FGS_L__LSO-Leader) = 1))));
+	next(main-res-glocal_55) := (next(main-usr-6-FGS_L__LSO-Valid) & (next(main-usr-7-FGS_L__LSO-Leader) = 1));
+	next(main-res-glocal_58) := (next(main-usr-prop1) = (main-res-glocal_57 -> (next(main-usr-6-FGS_R__LSO-Valid) -> (next(main-usr-7-FGS_R__LSO-Leader) = 2))));
+	next(main-res-glocal_57) := (next(main-usr-6-FGS_R__LSO-Valid) & (next(main-usr-7-FGS_R__LSO-Leader) = 2));
+	next(main-res-gklocal_60) := (next(main-usr-4-6-AD_L-Pitch-Val) - main-res-glocal_59);
+	next(main-res-glocal_62) := (next(main-usr-AD_L_Pitch_Step_Delta_Valid) = (next(main-res-call_61.FCS__Flight_Control_System__abs-usr-_outvar) < 1));
+	next(main-res-glocal_59) := next(main-usr-4-6-AD_L-Pitch-Val);
+	next(main-res-gklocal_64) := (next(main-usr-4-6-AD_R-Pitch-Val) - main-res-glocal_63);
+	next(main-res-glocal_66) := (next(main-usr-AD_R_Pitch_Step_Delta_Valid) = (next(main-res-call_65.FCS__Flight_Control_System__abs-usr-_outvar) < 1));
+	next(main-res-glocal_63) := next(main-usr-4-6-AD_R-Pitch-Val);
+	next(main-res-gklocal_67) := (next(main-usr-4-6-AD_L-Pitch-Val) - next(main-usr-4-6-AD_R-Pitch-Val));
+	next(main-res-glocal_69) := (next(main-usr-pitch_lr_ok) = (next(main-res-call_68.FCS__Flight_Control_System__abs-usr-_outvar) < 2));
+	next(main-res-glocal_70) := (next(main-usr-left_side_valid) = next(main-usr-6-6-AD_L-Pitch-Valid));
+	next(main-res-glocal_71) := (next(main-usr-right_side_valid) = next(main-usr-6-6-AD_R-Pitch-Valid));
+	next(main-res-glocal_72) := (next(main-usr-some_side_valid) = (next(main-usr-right_side_valid) | next(main-usr-left_side_valid)));
+	next(main-res-glocal_73) := TRUE;
+	next(main-res-glocal_74) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_74;
+	INVAR main-res-glocal_73;
+	INVAR main-res-glocal_72;
+	INVAR main-res-glocal_71;
+	INVAR main-res-glocal_70;
+	INVAR main-res-glocal_69;
+	INVAR main-res-glocal_66;
+	INVAR main-res-glocal_62;
+	INVAR main-res-glocal_58;
+	INVAR main-res-glocal_56;
+	INVAR main-res-glocal_54;
+	INVAR main-res-glocal_53;
+	INVAR main-res-glocal_51;
+	INVAR main-res-glocal_49;
+	INVAR main-res-glocal_47;
+	INVAR main-res-glocal_46;
+	INVAR main-res-glocal_45;
+	INVAR main-res-glocal_44;
+	INVAR main-res-glocal_43;
+	INVAR main-res-glocal_42;
+	INVAR main-res-glocal_41;
+	INVAR main-res-glocal_40;
+	INVAR main-res-glocal_39;
+	INVAR main-res-glocal_38;
+	INVAR main-res-glocal_37;
+	INVAR main-res-glocal_36;
+	INVAR main-res-glocal_34;
+	INVAR main-res-glocal_33;
+	INVAR main-res-glocal_32;
+	INVAR main-res-glocal_30;
+	INVAR main-res-glocal_29;
+	INVAR main-res-glocal_26;
+	INVAR main-res-glocal_24;
+	INVAR main-res-glocal_23;
+	INVAR main-res-glocal_22;
+	INVAR main-res-glocal_21;
+
+INVARSPEC 
+((main-impl-usr-__GUARANTEE0));
+

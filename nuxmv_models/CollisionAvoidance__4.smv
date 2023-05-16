@@ -1,0 +1,598 @@
+
+MODULE Collision_Avoidance__CONFLICT_DETECTED (Collision_Avoidance__CONFLICT_DETECTED-usr-6-ADSB-speed, Collision_Avoidance__CONFLICT_DETECTED-usr-2-ADSB-x, Collision_Avoidance__CONFLICT_DETECTED-usr-2-ADSB-y)
+VAR
+	Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar : boolean;
+
+ASSIGN
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE Collision_Avoidance__SELECT_PLAN (Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed, Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x, Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y, Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed, Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x, Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y, Collision_Avoidance__SELECT_PLAN-usr-Selection)
+VAR
+	Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed : real;
+	Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x : real;
+	Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y : real;
+
+ASSIGN
+	init(Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed : Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed);
+	init(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x : Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x);
+	init(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y : Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y);
+
+	next(Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed) : next(Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed));
+	next(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x) : next(Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x));
+	next(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y) : next(Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y));
+
+
+
+MODULE _TOP__Plan_Switch (_TOP__Plan_Switch-usr-__ASSUME__HIST, _TOP__Plan_Switch-usr-BAF_Manuever___EVENT_, _TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-LEC_Manuever___EVENT_, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan___EVENT_, _TOP__Plan_Switch-usr-Selected_Plan, _TOP__Plan_Switch-usr-time, _TOP__Plan_Switch-usr-Plan_Decision___EVENT_, _TOP__Plan_Switch-usr-6-Plan_Decision-speed, _TOP__Plan_Switch-usr-2-Plan_Decision-x, _TOP__Plan_Switch-usr-2-Plan_Decision-y)
+VAR
+	_TOP__Plan_Switch-usr-__ASSERT : boolean;
+	_TOP__Plan_Switch-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__Plan_Switch-res-6-call_5 : Collision_Avoidance__SELECT_PLAN(_TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan);
+	_TOP__Plan_Switch-res-2-call_5 : Collision_Avoidance__SELECT_PLAN(_TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan);
+
+ASSIGN
+	init(_TOP__Plan_Switch-impl-usr-__GUARANTEE0) := (((_TOP__Plan_Switch-usr-BAF_Manuever___EVENT_ & _TOP__Plan_Switch-usr-LEC_Manuever___EVENT_) & _TOP__Plan_Switch-usr-Selected_Plan___EVENT_) -> (_TOP__Plan_Switch-usr-Plan_Decision___EVENT_ & (((_TOP__Plan_Switch-usr-6-Plan_Decision-speed = _TOP__Plan_Switch-res-6-call_5.Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) & (_TOP__Plan_Switch-usr-2-Plan_Decision-x = _TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x)) & (_TOP__Plan_Switch-usr-2-Plan_Decision-y = _TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y))));
+	init(_TOP__Plan_Switch-usr-__ASSERT) := (_TOP__Plan_Switch-usr-__ASSUME__HIST -> _TOP__Plan_Switch-impl-usr-__GUARANTEE0);
+
+	next(_TOP__Plan_Switch-impl-usr-__GUARANTEE0) := (((next(_TOP__Plan_Switch-usr-BAF_Manuever___EVENT_) & next(_TOP__Plan_Switch-usr-LEC_Manuever___EVENT_)) & next(_TOP__Plan_Switch-usr-Selected_Plan___EVENT_)) -> (next(_TOP__Plan_Switch-usr-Plan_Decision___EVENT_) & (((next(_TOP__Plan_Switch-usr-6-Plan_Decision-speed) = next(_TOP__Plan_Switch-res-6-call_5.Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed)) & (next(_TOP__Plan_Switch-usr-2-Plan_Decision-x) = next(_TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x))) & (next(_TOP__Plan_Switch-usr-2-Plan_Decision-y) = next(_TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y)))));
+	next(_TOP__Plan_Switch-usr-__ASSERT) := (next(_TOP__Plan_Switch-usr-__ASSUME__HIST) -> next(_TOP__Plan_Switch-impl-usr-__GUARANTEE0));
+
+
+
+MODULE Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT (Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-4-A-PMD, Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-10-A-Plan_Safe, Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-12-A-Plan_Source, Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-11-A-Plan_Valid, Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-5-A-TCPA)
+VAR
+	Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar : boolean;
+
+ASSIGN
+	init(Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar) := Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-10-A-Plan_Safe;
+
+	next(Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar) := next(Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-10-A-Plan_Safe);
+
+
+
+MODULE Collision_Avoidance__CALC_TRAJECTORY_2 (Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-S-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-y, Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-D-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-y)
+VAR
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed : real;
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x : real;
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y : real;
+
+ASSIGN
+
+
+MODULE Collision_Avoidance__ASSESS_TRAJECTORY (Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Own-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-y, Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Intruder-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-y)
+VAR
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-4-_outvar-PMD : real;
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-10-_outvar-Plan_Safe : boolean;
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-12-_outvar-Plan_Source : boolean;
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-11-_outvar-Plan_Valid : boolean;
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-5-_outvar-TCPA : integer;
+
+ASSIGN
+
+
+MODULE Collision_Avoidance__IS_SAFE_MANUEVER (Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-A-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-A-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-A-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-State-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-State-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-State-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-Intruder-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-y)
+VAR
+	Collision_Avoidance__IS_SAFE_MANUEVER-usr-_outvar : boolean;
+	Collision_Avoidance__IS_SAFE_MANUEVER-res-6-call_6 : Collision_Avoidance__CALC_TRAJECTORY_2(Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-State-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-State-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-State-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-A-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-A-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-A-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6 : Collision_Avoidance__CALC_TRAJECTORY_2(Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-State-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-State-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-State-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-A-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-A-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-A-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER-res-4-call_7 : Collision_Avoidance__ASSESS_TRAJECTORY(Collision_Avoidance__IS_SAFE_MANUEVER-res-6-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-Intruder-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER-res-10-call_7 : Collision_Avoidance__ASSESS_TRAJECTORY(Collision_Avoidance__IS_SAFE_MANUEVER-res-6-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-Intruder-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER-res-12-call_7 : Collision_Avoidance__ASSESS_TRAJECTORY(Collision_Avoidance__IS_SAFE_MANUEVER-res-6-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-Intruder-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER-res-11-call_7 : Collision_Avoidance__ASSESS_TRAJECTORY(Collision_Avoidance__IS_SAFE_MANUEVER-res-6-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-Intruder-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER-res-5-call_7 : Collision_Avoidance__ASSESS_TRAJECTORY(Collision_Avoidance__IS_SAFE_MANUEVER-res-6-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x, Collision_Avoidance__IS_SAFE_MANUEVER-res-2-call_6.Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-Intruder-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER-res-call_8 : Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(Collision_Avoidance__IS_SAFE_MANUEVER-res-4-call_7.Collision_Avoidance__ASSESS_TRAJECTORY-usr-4-_outvar-PMD, Collision_Avoidance__IS_SAFE_MANUEVER-res-10-call_7.Collision_Avoidance__ASSESS_TRAJECTORY-usr-10-_outvar-Plan_Safe, Collision_Avoidance__IS_SAFE_MANUEVER-res-12-call_7.Collision_Avoidance__ASSESS_TRAJECTORY-usr-12-_outvar-Plan_Source, Collision_Avoidance__IS_SAFE_MANUEVER-res-11-call_7.Collision_Avoidance__ASSESS_TRAJECTORY-usr-11-_outvar-Plan_Valid, Collision_Avoidance__IS_SAFE_MANUEVER-res-5-call_7.Collision_Avoidance__ASSESS_TRAJECTORY-usr-5-_outvar-TCPA);
+
+ASSIGN
+	init(Collision_Avoidance__IS_SAFE_MANUEVER-usr-_outvar) := Collision_Avoidance__IS_SAFE_MANUEVER-res-call_8.Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar;
+
+	next(Collision_Avoidance__IS_SAFE_MANUEVER-usr-_outvar) := next(Collision_Avoidance__IS_SAFE_MANUEVER-res-call_8.Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar);
+
+
+
+MODULE Collision_Avoidance__CALC_INTRUDER_TRAJECTORY (Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-ADSB-speed, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-x, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-y)
+VAR
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-_outvar-speed : real;
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-x : real;
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-y : real;
+
+ASSIGN
+
+
+MODULE Collision_Avoidance__IS_SAFE_MANUEVER_2 (Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-A-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-A-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-A-y, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-State-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-State-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-State-y, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-ADSB-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-ADSB-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-ADSB-y)
+VAR
+	Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar : boolean;
+	Collision_Avoidance__IS_SAFE_MANUEVER_2-res-6-call_13 : Collision_Avoidance__CALC_INTRUDER_TRAJECTORY(Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-ADSB-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-ADSB-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-ADSB-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER_2-res-2-call_13 : Collision_Avoidance__CALC_INTRUDER_TRAJECTORY(Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-ADSB-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-ADSB-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-ADSB-y);
+	Collision_Avoidance__IS_SAFE_MANUEVER_2-res-call_14 : Collision_Avoidance__IS_SAFE_MANUEVER(Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-A-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-A-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-A-y, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-State-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-State-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-State-y, Collision_Avoidance__IS_SAFE_MANUEVER_2-res-6-call_13.Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-_outvar-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-res-2-call_13.Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-res-2-call_13.Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-y);
+
+ASSIGN
+	init(Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar) := Collision_Avoidance__IS_SAFE_MANUEVER_2-res-call_14.Collision_Avoidance__IS_SAFE_MANUEVER-usr-_outvar;
+
+	next(Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar) := next(Collision_Avoidance__IS_SAFE_MANUEVER_2-res-call_14.Collision_Avoidance__IS_SAFE_MANUEVER-usr-_outvar);
+
+
+
+MODULE _TOP__High_Assurance_System (_TOP__High_Assurance_System-usr-__ASSUME__HIST, _TOP__High_Assurance_System-usr-ADSB_In___EVENT_, _TOP__High_Assurance_System-usr-6-ADSB_In-speed, _TOP__High_Assurance_System-usr-2-ADSB_In-x, _TOP__High_Assurance_System-usr-2-ADSB_In-y, _TOP__High_Assurance_System-usr-STATE_In___EVENT_, _TOP__High_Assurance_System-usr-6-STATE_In-speed, _TOP__High_Assurance_System-usr-2-STATE_In-x, _TOP__High_Assurance_System-usr-2-STATE_In-y, _TOP__High_Assurance_System-usr-LEC_Manuever_In___EVENT_, _TOP__High_Assurance_System-usr-6-LEC_Manuever_In-speed, _TOP__High_Assurance_System-usr-2-LEC_Manuever_In-x, _TOP__High_Assurance_System-usr-2-LEC_Manuever_In-y, _TOP__High_Assurance_System-usr-BAF_Manuever_In___EVENT_, _TOP__High_Assurance_System-usr-6-BAF_Manuever_In-speed, _TOP__High_Assurance_System-usr-2-BAF_Manuever_In-x, _TOP__High_Assurance_System-usr-2-BAF_Manuever_In-y, _TOP__High_Assurance_System-usr-time, _TOP__High_Assurance_System-usr-event_cta_plan_assessment, _TOP__High_Assurance_System-usr-cta_plan_assessment_contains_baf, _TOP__High_Assurance_System-usr-cta_plan_assessment_contains_lec, _TOP__High_Assurance_System-usr-event_ks_selected_plan, _TOP__High_Assurance_System-usr-ks_selected_plan, _TOP__High_Assurance_System-usr-ks_selected_plan_is_safe, _TOP__High_Assurance_System-usr-is_baf_safe, _TOP__High_Assurance_System-usr-is_lec_safe, _TOP__High_Assurance_System-usr-4-ks_plan_assessment_1-PMD, _TOP__High_Assurance_System-usr-10-ks_plan_assessment_1-Plan_Safe, _TOP__High_Assurance_System-usr-12-ks_plan_assessment_1-Plan_Source, _TOP__High_Assurance_System-usr-11-ks_plan_assessment_1-Plan_Valid, _TOP__High_Assurance_System-usr-5-ks_plan_assessment_1-TCPA, _TOP__High_Assurance_System-usr-4-ks_plan_assessment_2-PMD, _TOP__High_Assurance_System-usr-10-ks_plan_assessment_2-Plan_Safe, _TOP__High_Assurance_System-usr-12-ks_plan_assessment_2-Plan_Source, _TOP__High_Assurance_System-usr-11-ks_plan_assessment_2-Plan_Valid, _TOP__High_Assurance_System-usr-5-ks_plan_assessment_2-TCPA, _TOP__High_Assurance_System-usr-Selected_Plan_Out___EVENT_, _TOP__High_Assurance_System-usr-Selected_Plan_Out, _TOP__High_Assurance_System-usr-LEC_Manuever_Out___EVENT_, _TOP__High_Assurance_System-usr-6-LEC_Manuever_Out-speed, _TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-x, _TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-y, _TOP__High_Assurance_System-usr-BAF_Manuever_Out___EVENT_, _TOP__High_Assurance_System-usr-6-BAF_Manuever_Out-speed, _TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-x, _TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-y)
+VAR
+	_TOP__High_Assurance_System-usr-__ASSERT : boolean;
+	_TOP__High_Assurance_System-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__High_Assurance_System-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__High_Assurance_System-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__High_Assurance_System-impl-usr-__GUARANTEE3 : boolean;
+	_TOP__High_Assurance_System-res-call_19 : Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(_TOP__High_Assurance_System-usr-4-ks_plan_assessment_1-PMD, _TOP__High_Assurance_System-usr-10-ks_plan_assessment_1-Plan_Safe, _TOP__High_Assurance_System-usr-12-ks_plan_assessment_1-Plan_Source, _TOP__High_Assurance_System-usr-11-ks_plan_assessment_1-Plan_Valid, _TOP__High_Assurance_System-usr-5-ks_plan_assessment_1-TCPA);
+	_TOP__High_Assurance_System-res-call_20 : Collision_Avoidance__IS_SAFE_MANUEVER_2(_TOP__High_Assurance_System-usr-6-BAF_Manuever_Out-speed, _TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-x, _TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-y, _TOP__High_Assurance_System-usr-6-STATE_In-speed, _TOP__High_Assurance_System-usr-2-STATE_In-x, _TOP__High_Assurance_System-usr-2-STATE_In-y, _TOP__High_Assurance_System-usr-6-ADSB_In-speed, _TOP__High_Assurance_System-usr-2-ADSB_In-x, _TOP__High_Assurance_System-usr-2-ADSB_In-y);
+	_TOP__High_Assurance_System-res-call_21 : Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(_TOP__High_Assurance_System-usr-4-ks_plan_assessment_2-PMD, _TOP__High_Assurance_System-usr-10-ks_plan_assessment_2-Plan_Safe, _TOP__High_Assurance_System-usr-12-ks_plan_assessment_2-Plan_Source, _TOP__High_Assurance_System-usr-11-ks_plan_assessment_2-Plan_Valid, _TOP__High_Assurance_System-usr-5-ks_plan_assessment_2-TCPA);
+	_TOP__High_Assurance_System-res-call_22 : Collision_Avoidance__IS_SAFE_MANUEVER_2(_TOP__High_Assurance_System-usr-6-LEC_Manuever_Out-speed, _TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-x, _TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-y, _TOP__High_Assurance_System-usr-6-STATE_In-speed, _TOP__High_Assurance_System-usr-2-STATE_In-x, _TOP__High_Assurance_System-usr-2-STATE_In-y, _TOP__High_Assurance_System-usr-6-ADSB_In-speed, _TOP__High_Assurance_System-usr-2-ADSB_In-x, _TOP__High_Assurance_System-usr-2-ADSB_In-y);
+	_TOP__High_Assurance_System-res-call_18 : Collision_Avoidance__IS_SAFE_MANUEVER_2(_TOP__High_Assurance_System-usr-6-BAF_Manuever_In-speed, _TOP__High_Assurance_System-usr-2-BAF_Manuever_In-x, _TOP__High_Assurance_System-usr-2-BAF_Manuever_In-y, _TOP__High_Assurance_System-usr-6-STATE_In-speed, _TOP__High_Assurance_System-usr-2-STATE_In-x, _TOP__High_Assurance_System-usr-2-STATE_In-y, _TOP__High_Assurance_System-usr-6-ADSB_In-speed, _TOP__High_Assurance_System-usr-2-ADSB_In-x, _TOP__High_Assurance_System-usr-2-ADSB_In-y);
+
+ASSIGN
+	init(_TOP__High_Assurance_System-impl-usr-__GUARANTEE3) := (((((_TOP__High_Assurance_System-usr-6-BAF_Manuever_Out-speed = _TOP__High_Assurance_System-usr-6-BAF_Manuever_In-speed) & (_TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-x = _TOP__High_Assurance_System-usr-2-BAF_Manuever_In-x)) & (_TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-y = _TOP__High_Assurance_System-usr-2-BAF_Manuever_In-y)) & (((_TOP__High_Assurance_System-usr-6-LEC_Manuever_Out-speed = _TOP__High_Assurance_System-usr-6-LEC_Manuever_In-speed) & (_TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-x = _TOP__High_Assurance_System-usr-2-LEC_Manuever_In-x)) & (_TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-y = _TOP__High_Assurance_System-usr-2-LEC_Manuever_In-y))) -> ((_TOP__High_Assurance_System-res-call_19.Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar = _TOP__High_Assurance_System-res-call_20.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar) & (_TOP__High_Assurance_System-res-call_21.Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar = _TOP__High_Assurance_System-res-call_22.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar)));
+	init(_TOP__High_Assurance_System-impl-usr-__GUARANTEE2) := ((((((_TOP__High_Assurance_System-usr-BAF_Manuever_In___EVENT_ & _TOP__High_Assurance_System-usr-LEC_Manuever_In___EVENT_) & _TOP__High_Assurance_System-usr-STATE_In___EVENT_) & _TOP__High_Assurance_System-usr-ADSB_In___EVENT_) & _TOP__High_Assurance_System-res-call_18.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar) & _TOP__High_Assurance_System-usr-event_ks_selected_plan) -> _TOP__High_Assurance_System-usr-ks_selected_plan_is_safe);
+	init(_TOP__High_Assurance_System-impl-usr-__GUARANTEE1) := ((((_TOP__High_Assurance_System-usr-BAF_Manuever_In___EVENT_ & _TOP__High_Assurance_System-usr-LEC_Manuever_In___EVENT_) & _TOP__High_Assurance_System-usr-STATE_In___EVENT_) & _TOP__High_Assurance_System-usr-ADSB_In___EVENT_) -> _TOP__High_Assurance_System-usr-event_ks_selected_plan);
+	init(_TOP__High_Assurance_System-impl-usr-__GUARANTEE0) := ((((_TOP__High_Assurance_System-usr-BAF_Manuever_In___EVENT_ & _TOP__High_Assurance_System-usr-LEC_Manuever_In___EVENT_) & _TOP__High_Assurance_System-usr-STATE_In___EVENT_) & _TOP__High_Assurance_System-usr-ADSB_In___EVENT_) -> ((((((_TOP__High_Assurance_System-usr-BAF_Manuever_Out___EVENT_ & (((_TOP__High_Assurance_System-usr-6-BAF_Manuever_Out-speed = _TOP__High_Assurance_System-usr-6-BAF_Manuever_In-speed) & (_TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-x = _TOP__High_Assurance_System-usr-2-BAF_Manuever_In-x)) & (_TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-y = _TOP__High_Assurance_System-usr-2-BAF_Manuever_In-y))) & _TOP__High_Assurance_System-usr-LEC_Manuever_Out___EVENT_) & (((_TOP__High_Assurance_System-usr-6-LEC_Manuever_Out-speed = _TOP__High_Assurance_System-usr-6-LEC_Manuever_In-speed) & (_TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-x = _TOP__High_Assurance_System-usr-2-LEC_Manuever_In-x)) & (_TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-y = _TOP__High_Assurance_System-usr-2-LEC_Manuever_In-y))) & _TOP__High_Assurance_System-usr-event_cta_plan_assessment) & _TOP__High_Assurance_System-usr-cta_plan_assessment_contains_baf) & _TOP__High_Assurance_System-usr-cta_plan_assessment_contains_lec));
+	init(_TOP__High_Assurance_System-usr-__ASSERT) := (_TOP__High_Assurance_System-usr-__ASSUME__HIST -> (_TOP__High_Assurance_System-impl-usr-__GUARANTEE3 & (_TOP__High_Assurance_System-impl-usr-__GUARANTEE2 & (_TOP__High_Assurance_System-impl-usr-__GUARANTEE1 & _TOP__High_Assurance_System-impl-usr-__GUARANTEE0))));
+
+	next(_TOP__High_Assurance_System-impl-usr-__GUARANTEE3) := (((((next(_TOP__High_Assurance_System-usr-6-BAF_Manuever_Out-speed) = next(_TOP__High_Assurance_System-usr-6-BAF_Manuever_In-speed)) & (next(_TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-x) = next(_TOP__High_Assurance_System-usr-2-BAF_Manuever_In-x))) & (next(_TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-y) = next(_TOP__High_Assurance_System-usr-2-BAF_Manuever_In-y))) & (((next(_TOP__High_Assurance_System-usr-6-LEC_Manuever_Out-speed) = next(_TOP__High_Assurance_System-usr-6-LEC_Manuever_In-speed)) & (next(_TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-x) = next(_TOP__High_Assurance_System-usr-2-LEC_Manuever_In-x))) & (next(_TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-y) = next(_TOP__High_Assurance_System-usr-2-LEC_Manuever_In-y)))) -> ((next(_TOP__High_Assurance_System-res-call_19.Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar) = next(_TOP__High_Assurance_System-res-call_20.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar)) & (next(_TOP__High_Assurance_System-res-call_21.Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar) = next(_TOP__High_Assurance_System-res-call_22.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar))));
+	next(_TOP__High_Assurance_System-impl-usr-__GUARANTEE2) := ((((((next(_TOP__High_Assurance_System-usr-BAF_Manuever_In___EVENT_) & next(_TOP__High_Assurance_System-usr-LEC_Manuever_In___EVENT_)) & next(_TOP__High_Assurance_System-usr-STATE_In___EVENT_)) & next(_TOP__High_Assurance_System-usr-ADSB_In___EVENT_)) & next(_TOP__High_Assurance_System-res-call_18.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar)) & next(_TOP__High_Assurance_System-usr-event_ks_selected_plan)) -> next(_TOP__High_Assurance_System-usr-ks_selected_plan_is_safe));
+	next(_TOP__High_Assurance_System-impl-usr-__GUARANTEE1) := ((((next(_TOP__High_Assurance_System-usr-BAF_Manuever_In___EVENT_) & next(_TOP__High_Assurance_System-usr-LEC_Manuever_In___EVENT_)) & next(_TOP__High_Assurance_System-usr-STATE_In___EVENT_)) & next(_TOP__High_Assurance_System-usr-ADSB_In___EVENT_)) -> next(_TOP__High_Assurance_System-usr-event_ks_selected_plan));
+	next(_TOP__High_Assurance_System-impl-usr-__GUARANTEE0) := ((((next(_TOP__High_Assurance_System-usr-BAF_Manuever_In___EVENT_) & next(_TOP__High_Assurance_System-usr-LEC_Manuever_In___EVENT_)) & next(_TOP__High_Assurance_System-usr-STATE_In___EVENT_)) & next(_TOP__High_Assurance_System-usr-ADSB_In___EVENT_)) -> ((((((next(_TOP__High_Assurance_System-usr-BAF_Manuever_Out___EVENT_) & (((next(_TOP__High_Assurance_System-usr-6-BAF_Manuever_Out-speed) = next(_TOP__High_Assurance_System-usr-6-BAF_Manuever_In-speed)) & (next(_TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-x) = next(_TOP__High_Assurance_System-usr-2-BAF_Manuever_In-x))) & (next(_TOP__High_Assurance_System-usr-2-BAF_Manuever_Out-y) = next(_TOP__High_Assurance_System-usr-2-BAF_Manuever_In-y)))) & next(_TOP__High_Assurance_System-usr-LEC_Manuever_Out___EVENT_)) & (((next(_TOP__High_Assurance_System-usr-6-LEC_Manuever_Out-speed) = next(_TOP__High_Assurance_System-usr-6-LEC_Manuever_In-speed)) & (next(_TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-x) = next(_TOP__High_Assurance_System-usr-2-LEC_Manuever_In-x))) & (next(_TOP__High_Assurance_System-usr-2-LEC_Manuever_Out-y) = next(_TOP__High_Assurance_System-usr-2-LEC_Manuever_In-y)))) & next(_TOP__High_Assurance_System-usr-event_cta_plan_assessment)) & next(_TOP__High_Assurance_System-usr-cta_plan_assessment_contains_baf)) & next(_TOP__High_Assurance_System-usr-cta_plan_assessment_contains_lec)));
+	next(_TOP__High_Assurance_System-usr-__ASSERT) := (next(_TOP__High_Assurance_System-usr-__ASSUME__HIST) -> (next(_TOP__High_Assurance_System-impl-usr-__GUARANTEE3) & (next(_TOP__High_Assurance_System-impl-usr-__GUARANTEE2) & (next(_TOP__High_Assurance_System-impl-usr-__GUARANTEE1) & next(_TOP__High_Assurance_System-impl-usr-__GUARANTEE0)))));
+
+
+
+MODULE _TOP__LEC (_TOP__LEC-usr-__ASSUME__HIST, _TOP__LEC-usr-ADSB_In___EVENT_, _TOP__LEC-usr-6-ADSB_In-speed, _TOP__LEC-usr-2-ADSB_In-x, _TOP__LEC-usr-2-ADSB_In-y, _TOP__LEC-usr-STATE_In___EVENT_, _TOP__LEC-usr-6-STATE_In-speed, _TOP__LEC-usr-2-STATE_In-x, _TOP__LEC-usr-2-STATE_In-y, _TOP__LEC-usr-BAF_Manuever_In___EVENT_, _TOP__LEC-usr-6-BAF_Manuever_In-speed, _TOP__LEC-usr-2-BAF_Manuever_In-x, _TOP__LEC-usr-2-BAF_Manuever_In-y, _TOP__LEC-usr-time, _TOP__LEC-usr-ADSB_Out___EVENT_, _TOP__LEC-usr-6-ADSB_Out-speed, _TOP__LEC-usr-2-ADSB_Out-x, _TOP__LEC-usr-2-ADSB_Out-y, _TOP__LEC-usr-STATE_Out___EVENT_, _TOP__LEC-usr-6-STATE_Out-speed, _TOP__LEC-usr-2-STATE_Out-x, _TOP__LEC-usr-2-STATE_Out-y, _TOP__LEC-usr-BAF_Manuever_Out___EVENT_, _TOP__LEC-usr-6-BAF_Manuever_Out-speed, _TOP__LEC-usr-2-BAF_Manuever_Out-x, _TOP__LEC-usr-2-BAF_Manuever_Out-y, _TOP__LEC-usr-LEC_Manuever_Out___EVENT_, _TOP__LEC-usr-6-LEC_Manuever_Out-speed, _TOP__LEC-usr-2-LEC_Manuever_Out-x, _TOP__LEC-usr-2-LEC_Manuever_Out-y)
+VAR
+	_TOP__LEC-usr-__ASSERT : boolean;
+	_TOP__LEC-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__LEC-impl-usr-__GUARANTEE0) := (((_TOP__LEC-usr-ADSB_In___EVENT_ & _TOP__LEC-usr-STATE_In___EVENT_) & _TOP__LEC-usr-BAF_Manuever_In___EVENT_) -> ((((((_TOP__LEC-usr-LEC_Manuever_Out___EVENT_ & _TOP__LEC-usr-BAF_Manuever_Out___EVENT_) & (((_TOP__LEC-usr-6-BAF_Manuever_Out-speed = _TOP__LEC-usr-6-BAF_Manuever_In-speed) & (_TOP__LEC-usr-2-BAF_Manuever_Out-x = _TOP__LEC-usr-2-BAF_Manuever_In-x)) & (_TOP__LEC-usr-2-BAF_Manuever_Out-y = _TOP__LEC-usr-2-BAF_Manuever_In-y))) & _TOP__LEC-usr-ADSB_Out___EVENT_) & (((_TOP__LEC-usr-6-ADSB_Out-speed = _TOP__LEC-usr-6-ADSB_In-speed) & (_TOP__LEC-usr-2-ADSB_Out-x = _TOP__LEC-usr-2-ADSB_In-x)) & (_TOP__LEC-usr-2-ADSB_Out-y = _TOP__LEC-usr-2-ADSB_In-y))) & _TOP__LEC-usr-STATE_Out___EVENT_) & (((_TOP__LEC-usr-6-STATE_Out-speed = _TOP__LEC-usr-6-STATE_In-speed) & (_TOP__LEC-usr-2-STATE_Out-x = _TOP__LEC-usr-2-STATE_In-x)) & (_TOP__LEC-usr-2-STATE_Out-y = _TOP__LEC-usr-2-STATE_In-y))));
+	init(_TOP__LEC-usr-__ASSERT) := (_TOP__LEC-usr-__ASSUME__HIST -> _TOP__LEC-impl-usr-__GUARANTEE0);
+
+	next(_TOP__LEC-impl-usr-__GUARANTEE0) := (((next(_TOP__LEC-usr-ADSB_In___EVENT_) & next(_TOP__LEC-usr-STATE_In___EVENT_)) & next(_TOP__LEC-usr-BAF_Manuever_In___EVENT_)) -> ((((((next(_TOP__LEC-usr-LEC_Manuever_Out___EVENT_) & next(_TOP__LEC-usr-BAF_Manuever_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-BAF_Manuever_Out-speed) = next(_TOP__LEC-usr-6-BAF_Manuever_In-speed)) & (next(_TOP__LEC-usr-2-BAF_Manuever_Out-x) = next(_TOP__LEC-usr-2-BAF_Manuever_In-x))) & (next(_TOP__LEC-usr-2-BAF_Manuever_Out-y) = next(_TOP__LEC-usr-2-BAF_Manuever_In-y)))) & next(_TOP__LEC-usr-ADSB_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-ADSB_Out-speed) = next(_TOP__LEC-usr-6-ADSB_In-speed)) & (next(_TOP__LEC-usr-2-ADSB_Out-x) = next(_TOP__LEC-usr-2-ADSB_In-x))) & (next(_TOP__LEC-usr-2-ADSB_Out-y) = next(_TOP__LEC-usr-2-ADSB_In-y)))) & next(_TOP__LEC-usr-STATE_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-STATE_Out-speed) = next(_TOP__LEC-usr-6-STATE_In-speed)) & (next(_TOP__LEC-usr-2-STATE_Out-x) = next(_TOP__LEC-usr-2-STATE_In-x))) & (next(_TOP__LEC-usr-2-STATE_Out-y) = next(_TOP__LEC-usr-2-STATE_In-y)))));
+	next(_TOP__LEC-usr-__ASSERT) := (next(_TOP__LEC-usr-__ASSUME__HIST) -> next(_TOP__LEC-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__DAA (_TOP__DAA-usr-__ASSUME__HIST, _TOP__DAA-usr-ADSB_In___EVENT_, _TOP__DAA-usr-6-ADSB_In-speed, _TOP__DAA-usr-2-ADSB_In-x, _TOP__DAA-usr-2-ADSB_In-y, _TOP__DAA-usr-STATE_In___EVENT_, _TOP__DAA-usr-6-STATE_In-speed, _TOP__DAA-usr-2-STATE_In-x, _TOP__DAA-usr-2-STATE_In-y, _TOP__DAA-usr-time, _TOP__DAA-usr-ADSB_Out___EVENT_, _TOP__DAA-usr-6-ADSB_Out-speed, _TOP__DAA-usr-2-ADSB_Out-x, _TOP__DAA-usr-2-ADSB_Out-y, _TOP__DAA-usr-STATE_Out___EVENT_, _TOP__DAA-usr-6-STATE_Out-speed, _TOP__DAA-usr-2-STATE_Out-x, _TOP__DAA-usr-2-STATE_Out-y, _TOP__DAA-usr-BAF_Manuever_Out___EVENT_, _TOP__DAA-usr-6-BAF_Manuever_Out-speed, _TOP__DAA-usr-2-BAF_Manuever_Out-x, _TOP__DAA-usr-2-BAF_Manuever_Out-y)
+VAR
+	_TOP__DAA-usr-__ASSERT : boolean;
+	_TOP__DAA-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__DAA-res-call_4 : Collision_Avoidance__CONFLICT_DETECTED(_TOP__DAA-usr-6-ADSB_In-speed, _TOP__DAA-usr-2-ADSB_In-x, _TOP__DAA-usr-2-ADSB_In-y);
+
+ASSIGN
+	init(_TOP__DAA-impl-usr-__GUARANTEE0) := (((_TOP__DAA-usr-ADSB_In___EVENT_ & _TOP__DAA-usr-STATE_In___EVENT_) & _TOP__DAA-res-call_4.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) -> ((((_TOP__DAA-usr-BAF_Manuever_Out___EVENT_ & _TOP__DAA-usr-ADSB_Out___EVENT_) & (((_TOP__DAA-usr-6-ADSB_Out-speed = _TOP__DAA-usr-6-ADSB_In-speed) & (_TOP__DAA-usr-2-ADSB_Out-x = _TOP__DAA-usr-2-ADSB_In-x)) & (_TOP__DAA-usr-2-ADSB_Out-y = _TOP__DAA-usr-2-ADSB_In-y))) & _TOP__DAA-usr-STATE_Out___EVENT_) & (((_TOP__DAA-usr-6-STATE_Out-speed = _TOP__DAA-usr-6-STATE_In-speed) & (_TOP__DAA-usr-2-STATE_Out-x = _TOP__DAA-usr-2-STATE_In-x)) & (_TOP__DAA-usr-2-STATE_Out-y = _TOP__DAA-usr-2-STATE_In-y))));
+	init(_TOP__DAA-usr-__ASSERT) := (_TOP__DAA-usr-__ASSUME__HIST -> _TOP__DAA-impl-usr-__GUARANTEE0);
+
+	next(_TOP__DAA-impl-usr-__GUARANTEE0) := (((next(_TOP__DAA-usr-ADSB_In___EVENT_) & next(_TOP__DAA-usr-STATE_In___EVENT_)) & next(_TOP__DAA-res-call_4.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) -> ((((next(_TOP__DAA-usr-BAF_Manuever_Out___EVENT_) & next(_TOP__DAA-usr-ADSB_Out___EVENT_)) & (((next(_TOP__DAA-usr-6-ADSB_Out-speed) = next(_TOP__DAA-usr-6-ADSB_In-speed)) & (next(_TOP__DAA-usr-2-ADSB_Out-x) = next(_TOP__DAA-usr-2-ADSB_In-x))) & (next(_TOP__DAA-usr-2-ADSB_Out-y) = next(_TOP__DAA-usr-2-ADSB_In-y)))) & next(_TOP__DAA-usr-STATE_Out___EVENT_)) & (((next(_TOP__DAA-usr-6-STATE_Out-speed) = next(_TOP__DAA-usr-6-STATE_In-speed)) & (next(_TOP__DAA-usr-2-STATE_Out-x) = next(_TOP__DAA-usr-2-STATE_In-x))) & (next(_TOP__DAA-usr-2-STATE_Out-y) = next(_TOP__DAA-usr-2-STATE_In-y)))));
+	next(_TOP__DAA-usr-__ASSERT) := (next(_TOP__DAA-usr-__ASSUME__HIST) -> next(_TOP__DAA-impl-usr-__GUARANTEE0));
+
+
+
+MODULE main () 
+VAR
+	main-usr-DAA__ADSB_Out___EVENT_ : boolean;
+	main-usr-6-DAA__ADSB_Out-speed : real;
+	main-usr-2-DAA__ADSB_Out-x : real;
+	main-usr-2-DAA__ADSB_Out-y : real;
+	main-usr-DAA__STATE_Out___EVENT_ : boolean;
+	main-usr-6-DAA__STATE_Out-speed : real;
+	main-usr-2-DAA__STATE_Out-x : real;
+	main-usr-2-DAA__STATE_Out-y : real;
+	main-usr-DAA__BAF_Manuever_Out___EVENT_ : boolean;
+	main-usr-6-DAA__BAF_Manuever_Out-speed : real;
+	main-usr-2-DAA__BAF_Manuever_Out-x : real;
+	main-usr-2-DAA__BAF_Manuever_Out-y : real;
+	main-usr-DAA____ASSUME__HIST : boolean;
+	main-usr-LEC__ADSB_Out___EVENT_ : boolean;
+	main-usr-6-LEC__ADSB_Out-speed : real;
+	main-usr-2-LEC__ADSB_Out-x : real;
+	main-usr-2-LEC__ADSB_Out-y : real;
+	main-usr-LEC__STATE_Out___EVENT_ : boolean;
+	main-usr-6-LEC__STATE_Out-speed : real;
+	main-usr-2-LEC__STATE_Out-x : real;
+	main-usr-2-LEC__STATE_Out-y : real;
+	main-usr-LEC__BAF_Manuever_Out___EVENT_ : boolean;
+	main-usr-6-LEC__BAF_Manuever_Out-speed : real;
+	main-usr-2-LEC__BAF_Manuever_Out-x : real;
+	main-usr-2-LEC__BAF_Manuever_Out-y : real;
+	main-usr-LEC__LEC_Manuever_Out___EVENT_ : boolean;
+	main-usr-6-LEC__LEC_Manuever_Out-speed : real;
+	main-usr-2-LEC__LEC_Manuever_Out-x : real;
+	main-usr-2-LEC__LEC_Manuever_Out-y : real;
+	main-usr-LEC____ASSUME__HIST : boolean;
+	main-usr-Plan_Switch__Plan_Decision___EVENT_ : boolean;
+	main-usr-6-Plan_Switch__Plan_Decision-speed : real;
+	main-usr-2-Plan_Switch__Plan_Decision-x : real;
+	main-usr-2-Plan_Switch__Plan_Decision-y : real;
+	main-usr-Plan_Switch____ASSUME__HIST : boolean;
+	main-usr-High_Assurance_System__event_cta_plan_assessment : boolean;
+	main-usr-High_Assurance_System__cta_plan_assessment_contains_baf : boolean;
+	main-usr-High_Assurance_System__cta_plan_assessment_contains_lec : boolean;
+	main-usr-High_Assurance_System__event_ks_selected_plan : boolean;
+	main-usr-High_Assurance_System__ks_selected_plan : boolean;
+	main-usr-High_Assurance_System__ks_selected_plan_is_safe : boolean;
+	main-usr-High_Assurance_System__is_baf_safe : boolean;
+	main-usr-High_Assurance_System__is_lec_safe : boolean;
+	main-usr-4-High_Assurance_System__ks_plan_assessment_1-PMD : real;
+	main-usr-10-High_Assurance_System__ks_plan_assessment_1-Plan_Safe : boolean;
+	main-usr-12-High_Assurance_System__ks_plan_assessment_1-Plan_Source : boolean;
+	main-usr-11-High_Assurance_System__ks_plan_assessment_1-Plan_Valid : boolean;
+	main-usr-5-High_Assurance_System__ks_plan_assessment_1-TCPA : integer;
+	main-usr-4-High_Assurance_System__ks_plan_assessment_2-PMD : real;
+	main-usr-10-High_Assurance_System__ks_plan_assessment_2-Plan_Safe : boolean;
+	main-usr-12-High_Assurance_System__ks_plan_assessment_2-Plan_Source : boolean;
+	main-usr-11-High_Assurance_System__ks_plan_assessment_2-Plan_Valid : boolean;
+	main-usr-5-High_Assurance_System__ks_plan_assessment_2-TCPA : integer;
+	main-usr-High_Assurance_System__Selected_Plan_Out___EVENT_ : boolean;
+	main-usr-High_Assurance_System__Selected_Plan_Out : boolean;
+	main-usr-High_Assurance_System__LEC_Manuever_Out___EVENT_ : boolean;
+	main-usr-6-High_Assurance_System__LEC_Manuever_Out-speed : real;
+	main-usr-2-High_Assurance_System__LEC_Manuever_Out-x : real;
+	main-usr-2-High_Assurance_System__LEC_Manuever_Out-y : real;
+	main-usr-High_Assurance_System__BAF_Manuever_Out___EVENT_ : boolean;
+	main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed : real;
+	main-usr-2-High_Assurance_System__BAF_Manuever_Out-x : real;
+	main-usr-2-High_Assurance_System__BAF_Manuever_Out-y : real;
+	main-usr-High_Assurance_System____ASSUME__HIST : boolean;
+	main-usr-event_Plan_Decision : boolean;
+	main-usr-is_safe_plan_decision : boolean;
+	main-usr-event_Selected_Plan_Out : boolean;
+	main-usr-is_safe_manuever : boolean;
+	main-usr-is_baf_safe : boolean;
+	main-usr-is_lec_safe : boolean;
+	main-usr-event_LEC_Manuever_Out : boolean;
+	main-usr-event_BAF_Manuever_Out : boolean;
+	main-usr-event_ADSB_Out : boolean;
+	main-usr-event_STATE_Out : boolean;
+	main-usr-6-ADSB_Out-speed : real;
+	main-usr-2-ADSB_Out-x : real;
+	main-usr-2-ADSB_Out-y : real;
+	main-usr-6-STATE_Out-speed : real;
+	main-usr-2-STATE_Out-x : real;
+	main-usr-2-STATE_Out-y : real;
+	main-usr-Selected_Plan_Out : boolean;
+	main-usr-is_plan_decision_eq_baf : boolean;
+	main-usr-DAA__ADSB_In___EVENT_ : boolean;
+	main-usr-6-DAA__ADSB_In-speed : real;
+	main-usr-2-DAA__ADSB_In-x : real;
+	main-usr-2-DAA__ADSB_In-y : real;
+	main-usr-DAA__STATE_In___EVENT_ : boolean;
+	main-usr-6-DAA__STATE_In-speed : real;
+	main-usr-2-DAA__STATE_In-x : real;
+	main-usr-2-DAA__STATE_In-y : real;
+	main-usr-DAA__time : real;
+	main-usr-LEC__ADSB_In___EVENT_ : boolean;
+	main-usr-6-LEC__ADSB_In-speed : real;
+	main-usr-2-LEC__ADSB_In-x : real;
+	main-usr-2-LEC__ADSB_In-y : real;
+	main-usr-LEC__STATE_In___EVENT_ : boolean;
+	main-usr-6-LEC__STATE_In-speed : real;
+	main-usr-2-LEC__STATE_In-x : real;
+	main-usr-2-LEC__STATE_In-y : real;
+	main-usr-LEC__BAF_Manuever_In___EVENT_ : boolean;
+	main-usr-6-LEC__BAF_Manuever_In-speed : real;
+	main-usr-2-LEC__BAF_Manuever_In-x : real;
+	main-usr-2-LEC__BAF_Manuever_In-y : real;
+	main-usr-LEC__time : real;
+	main-usr-Plan_Switch__BAF_Manuever___EVENT_ : boolean;
+	main-usr-6-Plan_Switch__BAF_Manuever-speed : real;
+	main-usr-2-Plan_Switch__BAF_Manuever-x : real;
+	main-usr-2-Plan_Switch__BAF_Manuever-y : real;
+	main-usr-Plan_Switch__LEC_Manuever___EVENT_ : boolean;
+	main-usr-6-Plan_Switch__LEC_Manuever-speed : real;
+	main-usr-2-Plan_Switch__LEC_Manuever-x : real;
+	main-usr-2-Plan_Switch__LEC_Manuever-y : real;
+	main-usr-Plan_Switch__Selected_Plan___EVENT_ : boolean;
+	main-usr-Plan_Switch__Selected_Plan : boolean;
+	main-usr-Plan_Switch__time : real;
+	main-usr-High_Assurance_System__ADSB_In___EVENT_ : boolean;
+	main-usr-6-High_Assurance_System__ADSB_In-speed : real;
+	main-usr-2-High_Assurance_System__ADSB_In-x : real;
+	main-usr-2-High_Assurance_System__ADSB_In-y : real;
+	main-usr-High_Assurance_System__STATE_In___EVENT_ : boolean;
+	main-usr-6-High_Assurance_System__STATE_In-speed : real;
+	main-usr-2-High_Assurance_System__STATE_In-x : real;
+	main-usr-2-High_Assurance_System__STATE_In-y : real;
+	main-usr-High_Assurance_System__LEC_Manuever_In___EVENT_ : boolean;
+	main-usr-6-High_Assurance_System__LEC_Manuever_In-speed : real;
+	main-usr-2-High_Assurance_System__LEC_Manuever_In-x : real;
+	main-usr-2-High_Assurance_System__LEC_Manuever_In-y : real;
+	main-usr-High_Assurance_System__BAF_Manuever_In___EVENT_ : boolean;
+	main-usr-6-High_Assurance_System__BAF_Manuever_In-speed : real;
+	main-usr-2-High_Assurance_System__BAF_Manuever_In-x : real;
+	main-usr-2-High_Assurance_System__BAF_Manuever_In-y : real;
+	main-usr-High_Assurance_System__time : real;
+	main-usr-ADSB___EVENT_ : boolean;
+	main-usr-6-ADSB-speed : real;
+	main-usr-2-ADSB-x : real;
+	main-usr-2-ADSB-y : real;
+	main-usr-STATE___EVENT_ : boolean;
+	main-usr-6-STATE-speed : real;
+	main-usr-2-STATE-x : real;
+	main-usr-2-STATE-y : real;
+	main-usr-time : real;
+	main-impl-usr-__GUARANTEE2 : boolean;
+	main-res-glocal_24 : boolean;
+	main-res-glocal_26 : boolean;
+	main-res-glocal_29 : boolean;
+	main-res-glocal_30 : boolean;
+	main-res-glocal_32 : boolean;
+	main-res-glocal_33 : boolean;
+	main-res-glocal_34 : boolean;
+	main-res-glocal_36 : boolean;
+	main-res-glocal_37 : boolean;
+	main-res-glocal_38 : boolean;
+	main-res-glocal_40 : boolean;
+	main-res-glocal_41 : boolean;
+	main-res-glocal_42 : boolean;
+	main-res-glocal_43 : boolean;
+	main-res-glocal_44 : boolean;
+	main-res-glocal_45 : boolean;
+	main-res-glocal_46 : boolean;
+	main-res-glocal_47 : boolean;
+	main-res-glocal_48 : boolean;
+	main-res-glocal_49 : boolean;
+	main-res-glocal_50 : boolean;
+	main-res-glocal_51 : boolean;
+	main-res-glocal_52 : boolean;
+	main-res-glocal_53 : boolean;
+	main-res-glocal_54 : boolean;
+	main-res-glocal_55 : boolean;
+	main-res-glocal_56 : boolean;
+	main-res-glocal_57 : boolean;
+	main-res-glocal_58 : boolean;
+	main-res-glocal_59 : boolean;
+	main-res-glocal_60 : boolean;
+	main-res-glocal_61 : boolean;
+	main-res-glocal_62 : boolean;
+	main-res-glocal_63 : boolean;
+	main-res-glocal_64 : boolean;
+	main-res-glocal_65 : boolean;
+	main-res-glocal_66 : boolean;
+	main-res-glocal_67 : boolean;
+	main-res-glocal_68 : boolean;
+	main-res-glocal_69 : boolean;
+	main-res-glocal_70 : boolean;
+	main-res-glocal_71 : boolean;
+	main-res-glocal_72 : boolean;
+	main-res-glocal_73 : boolean;
+	main-res-glocal_74 : boolean;
+	main-res-glocal_75 : boolean;
+	main-res-glocal_76 : boolean;
+	main-res-glocal_77 : boolean;
+	main-res-glocal_78 : boolean;
+	main-res-glocal_79 : boolean;
+	main-res-glocal_80 : boolean;
+	main-res-glocal_81 : boolean;
+	main-res-glocal_84 : boolean;
+	main-res-glocal_85 : boolean;
+	main-res-glocal_86 : boolean;
+	main-res-glocal_87 : boolean;
+	main-res-glocal_89 : boolean;
+	main-res-glocal_90 : boolean;
+	main-res-glocal_92 : boolean;
+	main-res-glocal_94 : boolean;
+	main-res-glocal_95 : boolean;
+	main-res-glocal_96 : boolean;
+	main-res-gklocal_27 : boolean;
+	main-res-call_93 : Collision_Avoidance__IS_SAFE_MANUEVER_2(main-usr-6-High_Assurance_System__LEC_Manuever_Out-speed, main-usr-2-High_Assurance_System__LEC_Manuever_Out-x, main-usr-2-High_Assurance_System__LEC_Manuever_Out-y, main-usr-6-STATE-speed, main-usr-2-STATE-x, main-usr-2-STATE-y, main-usr-6-ADSB-speed, main-usr-2-ADSB-x, main-usr-2-ADSB-y);
+	main-res-call_91 : Collision_Avoidance__IS_SAFE_MANUEVER_2(main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed, main-usr-2-High_Assurance_System__BAF_Manuever_Out-x, main-usr-2-High_Assurance_System__BAF_Manuever_Out-y, main-usr-6-STATE-speed, main-usr-2-STATE-x, main-usr-2-STATE-y, main-usr-6-ADSB-speed, main-usr-2-ADSB-x, main-usr-2-ADSB-y);
+	main-res-call_88 : Collision_Avoidance__IS_SAFE_MANUEVER_2(main-usr-6-Plan_Switch__Plan_Decision-speed, main-usr-2-Plan_Switch__Plan_Decision-x, main-usr-2-Plan_Switch__Plan_Decision-y, main-usr-6-STATE-speed, main-usr-2-STATE-x, main-usr-2-STATE-y, main-usr-6-ADSB-speed, main-usr-2-ADSB-x, main-usr-2-ADSB-y);
+	main-res-6-call_82 : Collision_Avoidance__SELECT_PLAN(main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed, main-usr-2-High_Assurance_System__BAF_Manuever_Out-x, main-usr-2-High_Assurance_System__BAF_Manuever_Out-y, main-usr-6-High_Assurance_System__LEC_Manuever_Out-speed, main-usr-2-High_Assurance_System__LEC_Manuever_Out-x, main-usr-2-High_Assurance_System__LEC_Manuever_Out-y, main-usr-High_Assurance_System__Selected_Plan_Out);
+	main-res-2-call_82 : Collision_Avoidance__SELECT_PLAN(main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed, main-usr-2-High_Assurance_System__BAF_Manuever_Out-x, main-usr-2-High_Assurance_System__BAF_Manuever_Out-y, main-usr-6-High_Assurance_System__LEC_Manuever_Out-speed, main-usr-2-High_Assurance_System__LEC_Manuever_Out-x, main-usr-2-High_Assurance_System__LEC_Manuever_Out-y, main-usr-High_Assurance_System__Selected_Plan_Out);
+	main-res-call_83 : Collision_Avoidance__IS_SAFE_MANUEVER_2(main-res-6-call_82.Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed, main-res-2-call_82.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x, main-res-2-call_82.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y, main-usr-6-STATE-speed, main-usr-2-STATE-x, main-usr-2-STATE-y, main-usr-6-ADSB-speed, main-usr-2-ADSB-x, main-usr-2-ADSB-y);
+	main-res-call_39 : _TOP__High_Assurance_System(main-usr-High_Assurance_System____ASSUME__HIST, main-usr-High_Assurance_System__ADSB_In___EVENT_, main-usr-6-High_Assurance_System__ADSB_In-speed, main-usr-2-High_Assurance_System__ADSB_In-x, main-usr-2-High_Assurance_System__ADSB_In-y, main-usr-High_Assurance_System__STATE_In___EVENT_, main-usr-6-High_Assurance_System__STATE_In-speed, main-usr-2-High_Assurance_System__STATE_In-x, main-usr-2-High_Assurance_System__STATE_In-y, main-usr-High_Assurance_System__LEC_Manuever_In___EVENT_, main-usr-6-High_Assurance_System__LEC_Manuever_In-speed, main-usr-2-High_Assurance_System__LEC_Manuever_In-x, main-usr-2-High_Assurance_System__LEC_Manuever_In-y, main-usr-High_Assurance_System__BAF_Manuever_In___EVENT_, main-usr-6-High_Assurance_System__BAF_Manuever_In-speed, main-usr-2-High_Assurance_System__BAF_Manuever_In-x, main-usr-2-High_Assurance_System__BAF_Manuever_In-y, main-usr-High_Assurance_System__time, main-usr-High_Assurance_System__event_cta_plan_assessment, main-usr-High_Assurance_System__cta_plan_assessment_contains_baf, main-usr-High_Assurance_System__cta_plan_assessment_contains_lec, main-usr-High_Assurance_System__event_ks_selected_plan, main-usr-High_Assurance_System__ks_selected_plan, main-usr-High_Assurance_System__ks_selected_plan_is_safe, main-usr-High_Assurance_System__is_baf_safe, main-usr-High_Assurance_System__is_lec_safe, main-usr-4-High_Assurance_System__ks_plan_assessment_1-PMD, main-usr-10-High_Assurance_System__ks_plan_assessment_1-Plan_Safe, main-usr-12-High_Assurance_System__ks_plan_assessment_1-Plan_Source, main-usr-11-High_Assurance_System__ks_plan_assessment_1-Plan_Valid, main-usr-5-High_Assurance_System__ks_plan_assessment_1-TCPA, main-usr-4-High_Assurance_System__ks_plan_assessment_2-PMD, main-usr-10-High_Assurance_System__ks_plan_assessment_2-Plan_Safe, main-usr-12-High_Assurance_System__ks_plan_assessment_2-Plan_Source, main-usr-11-High_Assurance_System__ks_plan_assessment_2-Plan_Valid, main-usr-5-High_Assurance_System__ks_plan_assessment_2-TCPA, main-usr-High_Assurance_System__Selected_Plan_Out___EVENT_, main-usr-High_Assurance_System__Selected_Plan_Out, main-usr-High_Assurance_System__LEC_Manuever_Out___EVENT_, main-usr-6-High_Assurance_System__LEC_Manuever_Out-speed, main-usr-2-High_Assurance_System__LEC_Manuever_Out-x, main-usr-2-High_Assurance_System__LEC_Manuever_Out-y, main-usr-High_Assurance_System__BAF_Manuever_Out___EVENT_, main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed, main-usr-2-High_Assurance_System__BAF_Manuever_Out-x, main-usr-2-High_Assurance_System__BAF_Manuever_Out-y);
+	main-res-call_35 : _TOP__Plan_Switch(main-usr-Plan_Switch____ASSUME__HIST, main-usr-Plan_Switch__BAF_Manuever___EVENT_, main-usr-6-Plan_Switch__BAF_Manuever-speed, main-usr-2-Plan_Switch__BAF_Manuever-x, main-usr-2-Plan_Switch__BAF_Manuever-y, main-usr-Plan_Switch__LEC_Manuever___EVENT_, main-usr-6-Plan_Switch__LEC_Manuever-speed, main-usr-2-Plan_Switch__LEC_Manuever-x, main-usr-2-Plan_Switch__LEC_Manuever-y, main-usr-Plan_Switch__Selected_Plan___EVENT_, main-usr-Plan_Switch__Selected_Plan, main-usr-Plan_Switch__time, main-usr-Plan_Switch__Plan_Decision___EVENT_, main-usr-6-Plan_Switch__Plan_Decision-speed, main-usr-2-Plan_Switch__Plan_Decision-x, main-usr-2-Plan_Switch__Plan_Decision-y);
+	main-res-call_31 : _TOP__LEC(main-usr-LEC____ASSUME__HIST, main-usr-LEC__ADSB_In___EVENT_, main-usr-6-LEC__ADSB_In-speed, main-usr-2-LEC__ADSB_In-x, main-usr-2-LEC__ADSB_In-y, main-usr-LEC__STATE_In___EVENT_, main-usr-6-LEC__STATE_In-speed, main-usr-2-LEC__STATE_In-x, main-usr-2-LEC__STATE_In-y, main-usr-LEC__BAF_Manuever_In___EVENT_, main-usr-6-LEC__BAF_Manuever_In-speed, main-usr-2-LEC__BAF_Manuever_In-x, main-usr-2-LEC__BAF_Manuever_In-y, main-usr-LEC__time, main-usr-LEC__ADSB_Out___EVENT_, main-usr-6-LEC__ADSB_Out-speed, main-usr-2-LEC__ADSB_Out-x, main-usr-2-LEC__ADSB_Out-y, main-usr-LEC__STATE_Out___EVENT_, main-usr-6-LEC__STATE_Out-speed, main-usr-2-LEC__STATE_Out-x, main-usr-2-LEC__STATE_Out-y, main-usr-LEC__BAF_Manuever_Out___EVENT_, main-usr-6-LEC__BAF_Manuever_Out-speed, main-usr-2-LEC__BAF_Manuever_Out-x, main-usr-2-LEC__BAF_Manuever_Out-y, main-usr-LEC__LEC_Manuever_Out___EVENT_, main-usr-6-LEC__LEC_Manuever_Out-speed, main-usr-2-LEC__LEC_Manuever_Out-x, main-usr-2-LEC__LEC_Manuever_Out-y);
+	main-res-call_28 : __HIST(main-res-gklocal_27);
+	main-res-call_25 : _TOP__DAA(main-usr-DAA____ASSUME__HIST, main-usr-DAA__ADSB_In___EVENT_, main-usr-6-DAA__ADSB_In-speed, main-usr-2-DAA__ADSB_In-x, main-usr-2-DAA__ADSB_In-y, main-usr-DAA__STATE_In___EVENT_, main-usr-6-DAA__STATE_In-speed, main-usr-2-DAA__STATE_In-x, main-usr-2-DAA__STATE_In-y, main-usr-DAA__time, main-usr-DAA__ADSB_Out___EVENT_, main-usr-6-DAA__ADSB_Out-speed, main-usr-2-DAA__ADSB_Out-x, main-usr-2-DAA__ADSB_Out-y, main-usr-DAA__STATE_Out___EVENT_, main-usr-6-DAA__STATE_Out-speed, main-usr-2-DAA__STATE_Out-x, main-usr-2-DAA__STATE_Out-y, main-usr-DAA__BAF_Manuever_Out___EVENT_, main-usr-6-DAA__BAF_Manuever_Out-speed, main-usr-2-DAA__BAF_Manuever_Out-x, main-usr-2-DAA__BAF_Manuever_Out-y);
+	main-res-call_23 : Collision_Avoidance__CONFLICT_DETECTED(main-usr-6-ADSB-speed, main-usr-2-ADSB-x, main-usr-2-ADSB-y);
+
+ASSIGN
+	init(main-impl-usr-__GUARANTEE2) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> main-usr-is_safe_manuever);
+	init(main-res-glocal_24) := (main-usr-time = main-usr-DAA__time);
+	init(main-res-glocal_26) := main-res-call_25._TOP__DAA-usr-__ASSERT;
+	init(main-res-gklocal_27) := TRUE;
+	init(main-res-glocal_29) := (main-usr-DAA____ASSUME__HIST = main-res-call_28.__HIST-usr-hist);
+	init(main-res-glocal_30) := (main-usr-time = main-usr-LEC__time);
+	init(main-res-glocal_32) := main-res-call_31._TOP__LEC-usr-__ASSERT;
+	init(main-res-glocal_33) := (main-usr-LEC____ASSUME__HIST = main-res-call_28.__HIST-usr-hist);
+	init(main-res-glocal_34) := (main-usr-time = main-usr-Plan_Switch__time);
+	init(main-res-glocal_36) := main-res-call_35._TOP__Plan_Switch-usr-__ASSERT;
+	init(main-res-glocal_37) := (main-usr-Plan_Switch____ASSUME__HIST = main-res-call_28.__HIST-usr-hist);
+	init(main-res-glocal_38) := (main-usr-time = main-usr-High_Assurance_System__time);
+	init(main-res-glocal_40) := main-res-call_39._TOP__High_Assurance_System-usr-__ASSERT;
+	init(main-res-glocal_41) := (main-usr-High_Assurance_System____ASSUME__HIST = main-res-call_28.__HIST-usr-hist);
+	init(main-res-glocal_42) := (((main-usr-6-ADSB-speed = main-usr-6-DAA__ADSB_In-speed) & (main-usr-2-ADSB-x = main-usr-2-DAA__ADSB_In-x)) & (main-usr-2-ADSB-y = main-usr-2-DAA__ADSB_In-y));
+	init(main-res-glocal_43) := (main-usr-ADSB___EVENT_ = main-usr-DAA__ADSB_In___EVENT_);
+	init(main-res-glocal_44) := (((main-usr-6-STATE-speed = main-usr-6-DAA__STATE_In-speed) & (main-usr-2-STATE-x = main-usr-2-DAA__STATE_In-x)) & (main-usr-2-STATE-y = main-usr-2-DAA__STATE_In-y));
+	init(main-res-glocal_45) := (main-usr-STATE___EVENT_ = main-usr-DAA__STATE_In___EVENT_);
+	init(main-res-glocal_46) := (((main-usr-6-DAA__ADSB_Out-speed = main-usr-6-LEC__ADSB_In-speed) & (main-usr-2-DAA__ADSB_Out-x = main-usr-2-LEC__ADSB_In-x)) & (main-usr-2-DAA__ADSB_Out-y = main-usr-2-LEC__ADSB_In-y));
+	init(main-res-glocal_47) := (main-usr-DAA__ADSB_Out___EVENT_ = main-usr-LEC__ADSB_In___EVENT_);
+	init(main-res-glocal_48) := (((main-usr-6-DAA__STATE_Out-speed = main-usr-6-LEC__STATE_In-speed) & (main-usr-2-DAA__STATE_Out-x = main-usr-2-LEC__STATE_In-x)) & (main-usr-2-DAA__STATE_Out-y = main-usr-2-LEC__STATE_In-y));
+	init(main-res-glocal_49) := (main-usr-DAA__STATE_Out___EVENT_ = main-usr-LEC__STATE_In___EVENT_);
+	init(main-res-glocal_50) := (((main-usr-6-DAA__BAF_Manuever_Out-speed = main-usr-6-LEC__BAF_Manuever_In-speed) & (main-usr-2-DAA__BAF_Manuever_Out-x = main-usr-2-LEC__BAF_Manuever_In-x)) & (main-usr-2-DAA__BAF_Manuever_Out-y = main-usr-2-LEC__BAF_Manuever_In-y));
+	init(main-res-glocal_51) := (main-usr-DAA__BAF_Manuever_Out___EVENT_ = main-usr-LEC__BAF_Manuever_In___EVENT_);
+	init(main-res-glocal_52) := (((main-usr-6-LEC__ADSB_Out-speed = main-usr-6-High_Assurance_System__ADSB_In-speed) & (main-usr-2-LEC__ADSB_Out-x = main-usr-2-High_Assurance_System__ADSB_In-x)) & (main-usr-2-LEC__ADSB_Out-y = main-usr-2-High_Assurance_System__ADSB_In-y));
+	init(main-res-glocal_53) := (main-usr-LEC__ADSB_Out___EVENT_ = main-usr-High_Assurance_System__ADSB_In___EVENT_);
+	init(main-res-glocal_54) := (((main-usr-6-LEC__STATE_Out-speed = main-usr-6-High_Assurance_System__STATE_In-speed) & (main-usr-2-LEC__STATE_Out-x = main-usr-2-High_Assurance_System__STATE_In-x)) & (main-usr-2-LEC__STATE_Out-y = main-usr-2-High_Assurance_System__STATE_In-y));
+	init(main-res-glocal_55) := (main-usr-LEC__STATE_Out___EVENT_ = main-usr-High_Assurance_System__STATE_In___EVENT_);
+	init(main-res-glocal_56) := (((main-usr-6-LEC__BAF_Manuever_Out-speed = main-usr-6-High_Assurance_System__BAF_Manuever_In-speed) & (main-usr-2-LEC__BAF_Manuever_Out-x = main-usr-2-High_Assurance_System__BAF_Manuever_In-x)) & (main-usr-2-LEC__BAF_Manuever_Out-y = main-usr-2-High_Assurance_System__BAF_Manuever_In-y));
+	init(main-res-glocal_57) := (main-usr-LEC__BAF_Manuever_Out___EVENT_ = main-usr-High_Assurance_System__BAF_Manuever_In___EVENT_);
+	init(main-res-glocal_58) := (((main-usr-6-LEC__LEC_Manuever_Out-speed = main-usr-6-High_Assurance_System__LEC_Manuever_In-speed) & (main-usr-2-LEC__LEC_Manuever_Out-x = main-usr-2-High_Assurance_System__LEC_Manuever_In-x)) & (main-usr-2-LEC__LEC_Manuever_Out-y = main-usr-2-High_Assurance_System__LEC_Manuever_In-y));
+	init(main-res-glocal_59) := (main-usr-LEC__LEC_Manuever_Out___EVENT_ = main-usr-High_Assurance_System__LEC_Manuever_In___EVENT_);
+	init(main-res-glocal_60) := (main-usr-High_Assurance_System__Selected_Plan_Out = main-usr-Plan_Switch__Selected_Plan);
+	init(main-res-glocal_61) := (main-usr-High_Assurance_System__Selected_Plan_Out___EVENT_ = main-usr-Plan_Switch__Selected_Plan___EVENT_);
+	init(main-res-glocal_62) := (((main-usr-6-High_Assurance_System__LEC_Manuever_Out-speed = main-usr-6-Plan_Switch__LEC_Manuever-speed) & (main-usr-2-High_Assurance_System__LEC_Manuever_Out-x = main-usr-2-Plan_Switch__LEC_Manuever-x)) & (main-usr-2-High_Assurance_System__LEC_Manuever_Out-y = main-usr-2-Plan_Switch__LEC_Manuever-y));
+	init(main-res-glocal_63) := (main-usr-High_Assurance_System__LEC_Manuever_Out___EVENT_ = main-usr-Plan_Switch__LEC_Manuever___EVENT_);
+	init(main-res-glocal_64) := (((main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed = main-usr-6-Plan_Switch__BAF_Manuever-speed) & (main-usr-2-High_Assurance_System__BAF_Manuever_Out-x = main-usr-2-Plan_Switch__BAF_Manuever-x)) & (main-usr-2-High_Assurance_System__BAF_Manuever_Out-y = main-usr-2-Plan_Switch__BAF_Manuever-y));
+	init(main-res-glocal_65) := (main-usr-High_Assurance_System__BAF_Manuever_Out___EVENT_ = main-usr-Plan_Switch__BAF_Manuever___EVENT_);
+	init(main-res-glocal_66) := (main-usr-DAA__ADSB_Out___EVENT_ = main-usr-LEC__ADSB_In___EVENT_);
+	init(main-res-glocal_67) := (main-usr-DAA__STATE_Out___EVENT_ = main-usr-LEC__STATE_In___EVENT_);
+	init(main-res-glocal_68) := (main-usr-DAA__BAF_Manuever_Out___EVENT_ = main-usr-LEC__BAF_Manuever_In___EVENT_);
+	init(main-res-glocal_69) := (main-usr-LEC__STATE_Out___EVENT_ = main-usr-High_Assurance_System__STATE_In___EVENT_);
+	init(main-res-glocal_70) := (main-usr-LEC__ADSB_Out___EVENT_ = main-usr-High_Assurance_System__ADSB_In___EVENT_);
+	init(main-res-glocal_71) := (main-usr-LEC__BAF_Manuever_Out___EVENT_ = main-usr-High_Assurance_System__BAF_Manuever_In___EVENT_);
+	init(main-res-glocal_72) := (main-usr-LEC__LEC_Manuever_Out___EVENT_ = main-usr-High_Assurance_System__LEC_Manuever_In___EVENT_);
+	init(main-res-glocal_73) := (main-usr-High_Assurance_System__BAF_Manuever_Out___EVENT_ = main-usr-Plan_Switch__BAF_Manuever___EVENT_);
+	init(main-res-glocal_74) := (main-usr-High_Assurance_System__LEC_Manuever_Out___EVENT_ = main-usr-Plan_Switch__LEC_Manuever___EVENT_);
+	init(main-res-glocal_75) := (main-usr-High_Assurance_System__Selected_Plan_Out___EVENT_ = main-usr-Plan_Switch__Selected_Plan___EVENT_);
+	init(main-res-glocal_76) := (main-usr-event_LEC_Manuever_Out = main-usr-LEC__LEC_Manuever_Out___EVENT_);
+	init(main-res-glocal_77) := (main-usr-event_BAF_Manuever_Out = main-usr-DAA__BAF_Manuever_Out___EVENT_);
+	init(main-res-glocal_78) := (main-usr-event_ADSB_Out = main-usr-DAA__ADSB_Out___EVENT_);
+	init(main-res-glocal_79) := (main-usr-event_STATE_Out = main-usr-DAA__STATE_Out___EVENT_);
+	init(main-res-glocal_80) := (((main-usr-6-ADSB_Out-speed = main-usr-6-DAA__ADSB_Out-speed) & (main-usr-2-ADSB_Out-x = main-usr-2-DAA__ADSB_Out-x)) & (main-usr-2-ADSB_Out-y = main-usr-2-DAA__ADSB_Out-y));
+	init(main-res-glocal_81) := (((main-usr-6-STATE_Out-speed = main-usr-6-DAA__STATE_Out-speed) & (main-usr-2-STATE_Out-x = main-usr-2-DAA__STATE_Out-x)) & (main-usr-2-STATE_Out-y = main-usr-2-DAA__STATE_Out-y));
+	init(main-res-glocal_84) := (main-usr-is_safe_manuever = main-res-call_83.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar);
+	init(main-res-glocal_85) := (main-usr-event_Selected_Plan_Out = main-usr-High_Assurance_System__Selected_Plan_Out___EVENT_);
+	init(main-res-glocal_86) := (main-usr-Selected_Plan_Out = main-usr-High_Assurance_System__Selected_Plan_Out);
+	init(main-res-glocal_87) := (main-usr-event_Plan_Decision = main-usr-Plan_Switch__Plan_Decision___EVENT_);
+	init(main-res-glocal_89) := (main-usr-is_safe_plan_decision = main-res-call_88.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar);
+	init(main-res-glocal_90) := (main-usr-is_plan_decision_eq_baf = (((main-usr-6-Plan_Switch__Plan_Decision-speed = main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed) & (main-usr-2-Plan_Switch__Plan_Decision-x = main-usr-2-High_Assurance_System__BAF_Manuever_Out-x)) & (main-usr-2-Plan_Switch__Plan_Decision-y = main-usr-2-High_Assurance_System__BAF_Manuever_Out-y)));
+	init(main-res-glocal_92) := (main-usr-is_baf_safe = main-res-call_91.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar);
+	init(main-res-glocal_94) := (main-usr-is_lec_safe = main-res-call_93.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar);
+	init(main-res-glocal_95) := TRUE;
+	init(main-res-glocal_96) := (main-usr-time = 0);
+
+	next(main-impl-usr-__GUARANTEE2) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> next(main-usr-is_safe_manuever));
+	next(main-res-glocal_24) := (next(main-usr-time) = next(main-usr-DAA__time));
+	next(main-res-glocal_26) := next(main-res-call_25._TOP__DAA-usr-__ASSERT);
+	next(main-res-gklocal_27) := TRUE;
+	next(main-res-glocal_29) := (next(main-usr-DAA____ASSUME__HIST) = next(main-res-call_28.__HIST-usr-hist));
+	next(main-res-glocal_30) := (next(main-usr-time) = next(main-usr-LEC__time));
+	next(main-res-glocal_32) := next(main-res-call_31._TOP__LEC-usr-__ASSERT);
+	next(main-res-glocal_33) := (next(main-usr-LEC____ASSUME__HIST) = next(main-res-call_28.__HIST-usr-hist));
+	next(main-res-glocal_34) := (next(main-usr-time) = next(main-usr-Plan_Switch__time));
+	next(main-res-glocal_36) := next(main-res-call_35._TOP__Plan_Switch-usr-__ASSERT);
+	next(main-res-glocal_37) := (next(main-usr-Plan_Switch____ASSUME__HIST) = next(main-res-call_28.__HIST-usr-hist));
+	next(main-res-glocal_38) := (next(main-usr-time) = next(main-usr-High_Assurance_System__time));
+	next(main-res-glocal_40) := next(main-res-call_39._TOP__High_Assurance_System-usr-__ASSERT);
+	next(main-res-glocal_41) := (next(main-usr-High_Assurance_System____ASSUME__HIST) = next(main-res-call_28.__HIST-usr-hist));
+	next(main-res-glocal_42) := (((next(main-usr-6-ADSB-speed) = next(main-usr-6-DAA__ADSB_In-speed)) & (next(main-usr-2-ADSB-x) = next(main-usr-2-DAA__ADSB_In-x))) & (next(main-usr-2-ADSB-y) = next(main-usr-2-DAA__ADSB_In-y)));
+	next(main-res-glocal_43) := (next(main-usr-ADSB___EVENT_) = next(main-usr-DAA__ADSB_In___EVENT_));
+	next(main-res-glocal_44) := (((next(main-usr-6-STATE-speed) = next(main-usr-6-DAA__STATE_In-speed)) & (next(main-usr-2-STATE-x) = next(main-usr-2-DAA__STATE_In-x))) & (next(main-usr-2-STATE-y) = next(main-usr-2-DAA__STATE_In-y)));
+	next(main-res-glocal_45) := (next(main-usr-STATE___EVENT_) = next(main-usr-DAA__STATE_In___EVENT_));
+	next(main-res-glocal_46) := (((next(main-usr-6-DAA__ADSB_Out-speed) = next(main-usr-6-LEC__ADSB_In-speed)) & (next(main-usr-2-DAA__ADSB_Out-x) = next(main-usr-2-LEC__ADSB_In-x))) & (next(main-usr-2-DAA__ADSB_Out-y) = next(main-usr-2-LEC__ADSB_In-y)));
+	next(main-res-glocal_47) := (next(main-usr-DAA__ADSB_Out___EVENT_) = next(main-usr-LEC__ADSB_In___EVENT_));
+	next(main-res-glocal_48) := (((next(main-usr-6-DAA__STATE_Out-speed) = next(main-usr-6-LEC__STATE_In-speed)) & (next(main-usr-2-DAA__STATE_Out-x) = next(main-usr-2-LEC__STATE_In-x))) & (next(main-usr-2-DAA__STATE_Out-y) = next(main-usr-2-LEC__STATE_In-y)));
+	next(main-res-glocal_49) := (next(main-usr-DAA__STATE_Out___EVENT_) = next(main-usr-LEC__STATE_In___EVENT_));
+	next(main-res-glocal_50) := (((next(main-usr-6-DAA__BAF_Manuever_Out-speed) = next(main-usr-6-LEC__BAF_Manuever_In-speed)) & (next(main-usr-2-DAA__BAF_Manuever_Out-x) = next(main-usr-2-LEC__BAF_Manuever_In-x))) & (next(main-usr-2-DAA__BAF_Manuever_Out-y) = next(main-usr-2-LEC__BAF_Manuever_In-y)));
+	next(main-res-glocal_51) := (next(main-usr-DAA__BAF_Manuever_Out___EVENT_) = next(main-usr-LEC__BAF_Manuever_In___EVENT_));
+	next(main-res-glocal_52) := (((next(main-usr-6-LEC__ADSB_Out-speed) = next(main-usr-6-High_Assurance_System__ADSB_In-speed)) & (next(main-usr-2-LEC__ADSB_Out-x) = next(main-usr-2-High_Assurance_System__ADSB_In-x))) & (next(main-usr-2-LEC__ADSB_Out-y) = next(main-usr-2-High_Assurance_System__ADSB_In-y)));
+	next(main-res-glocal_53) := (next(main-usr-LEC__ADSB_Out___EVENT_) = next(main-usr-High_Assurance_System__ADSB_In___EVENT_));
+	next(main-res-glocal_54) := (((next(main-usr-6-LEC__STATE_Out-speed) = next(main-usr-6-High_Assurance_System__STATE_In-speed)) & (next(main-usr-2-LEC__STATE_Out-x) = next(main-usr-2-High_Assurance_System__STATE_In-x))) & (next(main-usr-2-LEC__STATE_Out-y) = next(main-usr-2-High_Assurance_System__STATE_In-y)));
+	next(main-res-glocal_55) := (next(main-usr-LEC__STATE_Out___EVENT_) = next(main-usr-High_Assurance_System__STATE_In___EVENT_));
+	next(main-res-glocal_56) := (((next(main-usr-6-LEC__BAF_Manuever_Out-speed) = next(main-usr-6-High_Assurance_System__BAF_Manuever_In-speed)) & (next(main-usr-2-LEC__BAF_Manuever_Out-x) = next(main-usr-2-High_Assurance_System__BAF_Manuever_In-x))) & (next(main-usr-2-LEC__BAF_Manuever_Out-y) = next(main-usr-2-High_Assurance_System__BAF_Manuever_In-y)));
+	next(main-res-glocal_57) := (next(main-usr-LEC__BAF_Manuever_Out___EVENT_) = next(main-usr-High_Assurance_System__BAF_Manuever_In___EVENT_));
+	next(main-res-glocal_58) := (((next(main-usr-6-LEC__LEC_Manuever_Out-speed) = next(main-usr-6-High_Assurance_System__LEC_Manuever_In-speed)) & (next(main-usr-2-LEC__LEC_Manuever_Out-x) = next(main-usr-2-High_Assurance_System__LEC_Manuever_In-x))) & (next(main-usr-2-LEC__LEC_Manuever_Out-y) = next(main-usr-2-High_Assurance_System__LEC_Manuever_In-y)));
+	next(main-res-glocal_59) := (next(main-usr-LEC__LEC_Manuever_Out___EVENT_) = next(main-usr-High_Assurance_System__LEC_Manuever_In___EVENT_));
+	next(main-res-glocal_60) := (next(main-usr-High_Assurance_System__Selected_Plan_Out) = next(main-usr-Plan_Switch__Selected_Plan));
+	next(main-res-glocal_61) := (next(main-usr-High_Assurance_System__Selected_Plan_Out___EVENT_) = next(main-usr-Plan_Switch__Selected_Plan___EVENT_));
+	next(main-res-glocal_62) := (((next(main-usr-6-High_Assurance_System__LEC_Manuever_Out-speed) = next(main-usr-6-Plan_Switch__LEC_Manuever-speed)) & (next(main-usr-2-High_Assurance_System__LEC_Manuever_Out-x) = next(main-usr-2-Plan_Switch__LEC_Manuever-x))) & (next(main-usr-2-High_Assurance_System__LEC_Manuever_Out-y) = next(main-usr-2-Plan_Switch__LEC_Manuever-y)));
+	next(main-res-glocal_63) := (next(main-usr-High_Assurance_System__LEC_Manuever_Out___EVENT_) = next(main-usr-Plan_Switch__LEC_Manuever___EVENT_));
+	next(main-res-glocal_64) := (((next(main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed) = next(main-usr-6-Plan_Switch__BAF_Manuever-speed)) & (next(main-usr-2-High_Assurance_System__BAF_Manuever_Out-x) = next(main-usr-2-Plan_Switch__BAF_Manuever-x))) & (next(main-usr-2-High_Assurance_System__BAF_Manuever_Out-y) = next(main-usr-2-Plan_Switch__BAF_Manuever-y)));
+	next(main-res-glocal_65) := (next(main-usr-High_Assurance_System__BAF_Manuever_Out___EVENT_) = next(main-usr-Plan_Switch__BAF_Manuever___EVENT_));
+	next(main-res-glocal_66) := (next(main-usr-DAA__ADSB_Out___EVENT_) = next(main-usr-LEC__ADSB_In___EVENT_));
+	next(main-res-glocal_67) := (next(main-usr-DAA__STATE_Out___EVENT_) = next(main-usr-LEC__STATE_In___EVENT_));
+	next(main-res-glocal_68) := (next(main-usr-DAA__BAF_Manuever_Out___EVENT_) = next(main-usr-LEC__BAF_Manuever_In___EVENT_));
+	next(main-res-glocal_69) := (next(main-usr-LEC__STATE_Out___EVENT_) = next(main-usr-High_Assurance_System__STATE_In___EVENT_));
+	next(main-res-glocal_70) := (next(main-usr-LEC__ADSB_Out___EVENT_) = next(main-usr-High_Assurance_System__ADSB_In___EVENT_));
+	next(main-res-glocal_71) := (next(main-usr-LEC__BAF_Manuever_Out___EVENT_) = next(main-usr-High_Assurance_System__BAF_Manuever_In___EVENT_));
+	next(main-res-glocal_72) := (next(main-usr-LEC__LEC_Manuever_Out___EVENT_) = next(main-usr-High_Assurance_System__LEC_Manuever_In___EVENT_));
+	next(main-res-glocal_73) := (next(main-usr-High_Assurance_System__BAF_Manuever_Out___EVENT_) = next(main-usr-Plan_Switch__BAF_Manuever___EVENT_));
+	next(main-res-glocal_74) := (next(main-usr-High_Assurance_System__LEC_Manuever_Out___EVENT_) = next(main-usr-Plan_Switch__LEC_Manuever___EVENT_));
+	next(main-res-glocal_75) := (next(main-usr-High_Assurance_System__Selected_Plan_Out___EVENT_) = next(main-usr-Plan_Switch__Selected_Plan___EVENT_));
+	next(main-res-glocal_76) := (next(main-usr-event_LEC_Manuever_Out) = next(main-usr-LEC__LEC_Manuever_Out___EVENT_));
+	next(main-res-glocal_77) := (next(main-usr-event_BAF_Manuever_Out) = next(main-usr-DAA__BAF_Manuever_Out___EVENT_));
+	next(main-res-glocal_78) := (next(main-usr-event_ADSB_Out) = next(main-usr-DAA__ADSB_Out___EVENT_));
+	next(main-res-glocal_79) := (next(main-usr-event_STATE_Out) = next(main-usr-DAA__STATE_Out___EVENT_));
+	next(main-res-glocal_80) := (((next(main-usr-6-ADSB_Out-speed) = next(main-usr-6-DAA__ADSB_Out-speed)) & (next(main-usr-2-ADSB_Out-x) = next(main-usr-2-DAA__ADSB_Out-x))) & (next(main-usr-2-ADSB_Out-y) = next(main-usr-2-DAA__ADSB_Out-y)));
+	next(main-res-glocal_81) := (((next(main-usr-6-STATE_Out-speed) = next(main-usr-6-DAA__STATE_Out-speed)) & (next(main-usr-2-STATE_Out-x) = next(main-usr-2-DAA__STATE_Out-x))) & (next(main-usr-2-STATE_Out-y) = next(main-usr-2-DAA__STATE_Out-y)));
+	next(main-res-glocal_84) := (next(main-usr-is_safe_manuever) = next(main-res-call_83.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar));
+	next(main-res-glocal_85) := (next(main-usr-event_Selected_Plan_Out) = next(main-usr-High_Assurance_System__Selected_Plan_Out___EVENT_));
+	next(main-res-glocal_86) := (next(main-usr-Selected_Plan_Out) = next(main-usr-High_Assurance_System__Selected_Plan_Out));
+	next(main-res-glocal_87) := (next(main-usr-event_Plan_Decision) = next(main-usr-Plan_Switch__Plan_Decision___EVENT_));
+	next(main-res-glocal_89) := (next(main-usr-is_safe_plan_decision) = next(main-res-call_88.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar));
+	next(main-res-glocal_90) := (next(main-usr-is_plan_decision_eq_baf) = (((next(main-usr-6-Plan_Switch__Plan_Decision-speed) = next(main-usr-6-High_Assurance_System__BAF_Manuever_Out-speed)) & (next(main-usr-2-Plan_Switch__Plan_Decision-x) = next(main-usr-2-High_Assurance_System__BAF_Manuever_Out-x))) & (next(main-usr-2-Plan_Switch__Plan_Decision-y) = next(main-usr-2-High_Assurance_System__BAF_Manuever_Out-y))));
+	next(main-res-glocal_92) := (next(main-usr-is_baf_safe) = next(main-res-call_91.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar));
+	next(main-res-glocal_94) := (next(main-usr-is_lec_safe) = next(main-res-call_93.Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-_outvar));
+	next(main-res-glocal_95) := TRUE;
+	next(main-res-glocal_96) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_96;
+	INVAR main-res-glocal_95;
+	INVAR main-res-glocal_94;
+	INVAR main-res-glocal_92;
+	INVAR main-res-glocal_90;
+	INVAR main-res-glocal_89;
+	INVAR main-res-glocal_87;
+	INVAR main-res-glocal_86;
+	INVAR main-res-glocal_85;
+	INVAR main-res-glocal_84;
+	INVAR main-res-glocal_81;
+	INVAR main-res-glocal_80;
+	INVAR main-res-glocal_79;
+	INVAR main-res-glocal_78;
+	INVAR main-res-glocal_77;
+	INVAR main-res-glocal_76;
+	INVAR main-res-glocal_75;
+	INVAR main-res-glocal_74;
+	INVAR main-res-glocal_73;
+	INVAR main-res-glocal_72;
+	INVAR main-res-glocal_71;
+	INVAR main-res-glocal_70;
+	INVAR main-res-glocal_69;
+	INVAR main-res-glocal_68;
+	INVAR main-res-glocal_67;
+	INVAR main-res-glocal_66;
+	INVAR main-res-glocal_65;
+	INVAR main-res-glocal_64;
+	INVAR main-res-glocal_63;
+	INVAR main-res-glocal_62;
+	INVAR main-res-glocal_61;
+	INVAR main-res-glocal_60;
+	INVAR main-res-glocal_59;
+	INVAR main-res-glocal_58;
+	INVAR main-res-glocal_57;
+	INVAR main-res-glocal_56;
+	INVAR main-res-glocal_55;
+	INVAR main-res-glocal_54;
+	INVAR main-res-glocal_53;
+	INVAR main-res-glocal_52;
+	INVAR main-res-glocal_51;
+	INVAR main-res-glocal_50;
+	INVAR main-res-glocal_49;
+	INVAR main-res-glocal_48;
+	INVAR main-res-glocal_47;
+	INVAR main-res-glocal_46;
+	INVAR main-res-glocal_45;
+	INVAR main-res-glocal_44;
+	INVAR main-res-glocal_43;
+	INVAR main-res-glocal_42;
+	INVAR main-res-glocal_41;
+	INVAR main-res-glocal_40;
+	INVAR main-res-glocal_38;
+	INVAR main-res-glocal_37;
+	INVAR main-res-glocal_36;
+	INVAR main-res-glocal_34;
+	INVAR main-res-glocal_33;
+	INVAR main-res-glocal_32;
+	INVAR main-res-glocal_30;
+	INVAR main-res-glocal_29;
+	INVAR main-res-glocal_26;
+	INVAR main-res-glocal_24;
+
+INVARSPEC 
+((main-impl-usr-__GUARANTEE2));
+

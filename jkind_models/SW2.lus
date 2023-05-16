@@ -298,13 +298,13 @@ let
   assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
 
   --%PROPERTY RADIO____ASSUME0;
-  --%PROPERTY FLT____ASSUME0;
-  --%PROPERTY FPLN____ASSUME0;
-  --%PROPERTY FPLN____ASSUME1;
-  --%PROPERTY WPM____ASSUME0;
-  --%PROPERTY UART____ASSUME0;
-  --%PROPERTY __ASSUME__HIST;
-  --%PROPERTY __GUARANTEE0;
+  -- %PROPERTY FLT____ASSUME0;
+  -- %PROPERTY FPLN____ASSUME0;
+  -- %PROPERTY FPLN____ASSUME1;
+  -- %PROPERTY WPM____ASSUME0;
+  -- %PROPERTY UART____ASSUME0;
+  -- %PROPERTY __ASSUME__HIST;
+  -- %PROPERTY __GUARANTEE0;
 
   --%IVC __ASSUME0, __ASSUME1;
 

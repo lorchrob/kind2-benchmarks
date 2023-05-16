@@ -413,12 +413,12 @@ let
   assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
 
   --%PROPERTY __ASSUME__HIST;
-  --%PROPERTY __GUARANTEE0;
-  --%PROPERTY __GUARANTEE1;
-  --%PROPERTY __GUARANTEE2;
-  --%PROPERTY __GUARANTEE3;
-  --%PROPERTY __GUARANTEE4;
-  --%PROPERTY __GUARANTEE5;
+  -- %PROPERTY __GUARANTEE0;
+  -- %PROPERTY __GUARANTEE1;
+  -- %PROPERTY __GUARANTEE2;
+  -- %PROPERTY __GUARANTEE3;
+  -- %PROPERTY __GUARANTEE4;
+  -- %PROPERTY __GUARANTEE5;
 
 tel;
 

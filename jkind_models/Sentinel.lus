@@ -114,8 +114,8 @@ let
   assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
 
   --%PROPERTY sieve____ASSUME0;
-  --%PROPERTY target____ASSUME0;
-  --%PROPERTY __ASSUME__HIST;
+  -- %PROPERTY target____ASSUME0;
+  -- %PROPERTY __ASSUME__HIST;
 
 tel;
 

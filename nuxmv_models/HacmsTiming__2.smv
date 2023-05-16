@@ -1,0 +1,511 @@
+
+MODULE _TOP__a1 (_TOP__a1-usr-__ASSUME__HIST, _TOP__a1-usr-input___EVENT_, _TOP__a1-usr-input, _TOP__a1-usr-time, _TOP__a1-usr-output___EVENT_, _TOP__a1-usr-output, _TOP__a1-usr-_CLK)
+VAR
+	_TOP__a1-usr-__ASSERT : boolean;
+
+ASSIGN
+	init(_TOP__a1-usr-__ASSERT) := TRUE;
+	next(_TOP__a1-usr-__ASSERT) := (!next(_TOP__a1-usr-_CLK) -> ((next(_TOP__a1-usr-output___EVENT_) = _TOP__a1-usr-output___EVENT_) & (next(_TOP__a1-usr-output) = _TOP__a1-usr-output)));
+
+
+
+MODULE _TOP__a2 (_TOP__a2-usr-__ASSUME__HIST, _TOP__a2-usr-input___EVENT_, _TOP__a2-usr-input, _TOP__a2-usr-time, _TOP__a2-usr-output___EVENT_, _TOP__a2-usr-output, _TOP__a2-usr-_CLK)
+VAR
+	_TOP__a2-usr-__ASSERT : boolean;
+
+ASSIGN
+	init(_TOP__a2-usr-__ASSERT) := TRUE;
+	next(_TOP__a2-usr-__ASSERT) := (!next(_TOP__a2-usr-_CLK) -> ((next(_TOP__a2-usr-output___EVENT_) = _TOP__a2-usr-output___EVENT_) & (next(_TOP__a2-usr-output) = _TOP__a2-usr-output)));
+
+
+
+MODULE _TOP__m2 (_TOP__m2-usr-__ASSUME__HIST, _TOP__m2-usr-input___EVENT_, _TOP__m2-usr-input, _TOP__m2-usr-time, _TOP__m2-usr-input_hold, _TOP__m2-usr-output___EVENT_, _TOP__m2-usr-output, _TOP__m2-usr-_CLK)
+VAR
+	_TOP__m2-usr-__ASSERT : boolean;
+	_TOP__m2-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__m2-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__m2-impl-usr-_TICKED : boolean;
+	_TOP__m2-impl-usr-_INIT : boolean;
+	_TOP__m2-impl-usr-_STATE0 : integer;
+	_TOP__m2-res-oracle_7 : integer;
+	_TOP__m2-res-oracle_8 : integer;
+	_TOP__m2-res-oracle_6 : boolean;
+	_TOP__m2-res-oracle_5 : boolean;
+
+ASSIGN
+	init(_TOP__m2-impl-usr-_STATE0) := (_TOP__m2-usr-_CLK ? _TOP__m2-res-oracle_7 : _TOP__m2-res-oracle_8);
+	init(_TOP__m2-impl-usr-_INIT) := _TOP__m2-usr-_CLK;
+	init(_TOP__m2-impl-usr-_TICKED) := _TOP__m2-usr-_CLK;
+	init(_TOP__m2-impl-usr-__GUARANTEE1) := (_TOP__m2-usr-_CLK ? (_TOP__m2-usr-output___EVENT_ = _TOP__m2-usr-input___EVENT_) : _TOP__m2-res-oracle_6);
+	init(_TOP__m2-impl-usr-__GUARANTEE0) := (_TOP__m2-usr-_CLK ? (_TOP__m2-usr-output = _TOP__m2-usr-input_hold) : _TOP__m2-res-oracle_5);
+	init(_TOP__m2-usr-__ASSERT) := ((!_TOP__m2-impl-usr-_TICKED -> ((_TOP__m2-usr-output = 0) & !_TOP__m2-usr-output___EVENT_)) & (_TOP__m2-usr-_CLK -> ((_TOP__m2-usr-input_hold = (_TOP__m2-usr-input___EVENT_ ? _TOP__m2-usr-input : (_TOP__m2-impl-usr-_INIT ? 0 : _TOP__m2-impl-usr-_STATE0))) & (_TOP__m2-usr-__ASSUME__HIST -> (_TOP__m2-impl-usr-__GUARANTEE1 & _TOP__m2-impl-usr-__GUARANTEE0)))));
+
+	next(_TOP__m2-impl-usr-_STATE0) := (next(_TOP__m2-usr-_CLK) ? _TOP__m2-usr-input : _TOP__m2-impl-usr-_STATE0);
+	next(_TOP__m2-impl-usr-_INIT) := (next(_TOP__m2-usr-_CLK) & !_TOP__m2-impl-usr-_TICKED);
+	next(_TOP__m2-impl-usr-_TICKED) := (_TOP__m2-impl-usr-_TICKED | next(_TOP__m2-usr-_CLK));
+	next(_TOP__m2-impl-usr-__GUARANTEE1) := (next(_TOP__m2-usr-_CLK) ? (next(_TOP__m2-usr-output___EVENT_) = next(_TOP__m2-usr-input___EVENT_)) : _TOP__m2-impl-usr-__GUARANTEE1);
+	next(_TOP__m2-impl-usr-__GUARANTEE0) := (next(_TOP__m2-usr-_CLK) ? (next(_TOP__m2-usr-output) = next(_TOP__m2-usr-input_hold)) : _TOP__m2-impl-usr-__GUARANTEE0);
+	next(_TOP__m2-usr-__ASSERT) := ((!next(_TOP__m2-impl-usr-_TICKED) -> ((next(_TOP__m2-usr-output) = 0) & !next(_TOP__m2-usr-output___EVENT_))) & ((!next(_TOP__m2-usr-_CLK) -> (((next(_TOP__m2-usr-input_hold) = _TOP__m2-usr-input_hold) & (next(_TOP__m2-usr-output___EVENT_) = _TOP__m2-usr-output___EVENT_)) & (next(_TOP__m2-usr-output) = _TOP__m2-usr-output))) & (next(_TOP__m2-usr-_CLK) -> ((next(_TOP__m2-usr-input_hold) = (next(_TOP__m2-usr-input___EVENT_) ? next(_TOP__m2-usr-input) : (next(_TOP__m2-impl-usr-_INIT) ? 0 : next(_TOP__m2-impl-usr-_STATE0)))) & (next(_TOP__m2-usr-__ASSUME__HIST) -> (next(_TOP__m2-impl-usr-__GUARANTEE1) & next(_TOP__m2-impl-usr-__GUARANTEE0)))))));
+
+
+
+MODULE HacmsTiming__top_level__i__getLastSignal (HacmsTiming__top_level__i__getLastSignal-usr-time_val, HacmsTiming__top_level__i__getLastSignal-usr-period)
+VAR
+	HacmsTiming__top_level__i__getLastSignal-usr-ret : real;
+
+ASSIGN
+	init(HacmsTiming__top_level__i__getLastSignal-usr-ret) := 0;
+	next(HacmsTiming__top_level__i__getLastSignal-usr-ret) := ((next(HacmsTiming__top_level__i__getLastSignal-usr-time_val) < HacmsTiming__top_level__i__getLastSignal-usr-ret + next(HacmsTiming__top_level__i__getLastSignal-usr-period)) ? HacmsTiming__top_level__i__getLastSignal-usr-ret : HacmsTiming__top_level__i__getLastSignal-usr-ret + next(HacmsTiming__top_level__i__getLastSignal-usr-period));
+
+
+
+MODULE HacmsTiming__top_level__i__getSignalCleared (HacmsTiming__top_level__i__getSignalCleared-usr-time_val, HacmsTiming__top_level__i__getSignalCleared-usr-clock, HacmsTiming__top_level__i__getSignalCleared-usr-exec_time, HacmsTiming__top_level__i__getSignalCleared-usr-init_clear)
+VAR
+	HacmsTiming__top_level__i__getSignalCleared-usr-ret : real;
+
+ASSIGN
+	init(HacmsTiming__top_level__i__getSignalCleared-usr-ret) := (HacmsTiming__top_level__i__getSignalCleared-usr-clock ? (HacmsTiming__top_level__i__getSignalCleared-usr-time_val - HacmsTiming__top_level__i__getSignalCleared-usr-exec_time) : HacmsTiming__top_level__i__getSignalCleared-usr-init_clear);
+
+	next(HacmsTiming__top_level__i__getSignalCleared-usr-ret) := (next(HacmsTiming__top_level__i__getSignalCleared-usr-clock) ? (next(HacmsTiming__top_level__i__getSignalCleared-usr-time_val) - next(HacmsTiming__top_level__i__getSignalCleared-usr-exec_time)) : HacmsTiming__top_level__i__getSignalCleared-usr-ret);
+
+
+
+MODULE _TOP__m3 (_TOP__m3-usr-__ASSUME__HIST, _TOP__m3-usr-input1___EVENT_, _TOP__m3-usr-input1, _TOP__m3-usr-input2___EVENT_, _TOP__m3-usr-input2, _TOP__m3-usr-time, _TOP__m3-usr-input1_hold, _TOP__m3-usr-input2_hold, _TOP__m3-usr-output___EVENT_, _TOP__m3-usr-output, _TOP__m3-usr-_CLK)
+VAR
+	_TOP__m3-usr-__ASSERT : boolean;
+	_TOP__m3-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__m3-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__m3-impl-usr-_TICKED : boolean;
+	_TOP__m3-impl-usr-_INIT : boolean;
+	_TOP__m3-impl-usr-_STATE0 : integer;
+	_TOP__m3-impl-usr-_STATE1 : integer;
+	_TOP__m3-res-oracle_13 : integer;
+	_TOP__m3-res-oracle_14 : integer;
+	_TOP__m3-res-oracle_11 : integer;
+	_TOP__m3-res-oracle_12 : integer;
+	_TOP__m3-res-oracle_10 : boolean;
+	_TOP__m3-res-oracle_9 : boolean;
+
+ASSIGN
+	init(_TOP__m3-impl-usr-_STATE1) := (_TOP__m3-usr-_CLK ? _TOP__m3-res-oracle_13 : _TOP__m3-res-oracle_14);
+	init(_TOP__m3-impl-usr-_STATE0) := (_TOP__m3-usr-_CLK ? _TOP__m3-res-oracle_11 : _TOP__m3-res-oracle_12);
+	init(_TOP__m3-impl-usr-_INIT) := _TOP__m3-usr-_CLK;
+	init(_TOP__m3-impl-usr-_TICKED) := _TOP__m3-usr-_CLK;
+	init(_TOP__m3-impl-usr-__GUARANTEE1) := (_TOP__m3-usr-_CLK ? (_TOP__m3-usr-output___EVENT_ = (_TOP__m3-usr-input2___EVENT_ | _TOP__m3-usr-input1___EVENT_)) : _TOP__m3-res-oracle_10);
+	init(_TOP__m3-impl-usr-__GUARANTEE0) := (_TOP__m3-usr-_CLK ? (_TOP__m3-usr-output = _TOP__m3-usr-input1_hold + _TOP__m3-usr-input2_hold) : _TOP__m3-res-oracle_9);
+	init(_TOP__m3-usr-__ASSERT) := ((!_TOP__m3-impl-usr-_TICKED -> (_TOP__m3-usr-output = 0)) & (_TOP__m3-usr-_CLK -> ((_TOP__m3-usr-input2_hold = (_TOP__m3-usr-input2___EVENT_ ? _TOP__m3-usr-input2 : (_TOP__m3-impl-usr-_INIT ? 0 : _TOP__m3-impl-usr-_STATE0))) & ((_TOP__m3-usr-input1_hold = (_TOP__m3-usr-input1___EVENT_ ? _TOP__m3-usr-input1 : (_TOP__m3-impl-usr-_INIT ? 0 : _TOP__m3-impl-usr-_STATE1))) & (_TOP__m3-usr-__ASSUME__HIST -> (_TOP__m3-impl-usr-__GUARANTEE1 & _TOP__m3-impl-usr-__GUARANTEE0))))));
+
+	next(_TOP__m3-impl-usr-_STATE1) := (next(_TOP__m3-usr-_CLK) ? _TOP__m3-usr-input1_hold : _TOP__m3-impl-usr-_STATE1);
+	next(_TOP__m3-impl-usr-_STATE0) := (next(_TOP__m3-usr-_CLK) ? _TOP__m3-usr-input2_hold : _TOP__m3-impl-usr-_STATE0);
+	next(_TOP__m3-impl-usr-_INIT) := (next(_TOP__m3-usr-_CLK) & !_TOP__m3-impl-usr-_TICKED);
+	next(_TOP__m3-impl-usr-_TICKED) := (_TOP__m3-impl-usr-_TICKED | next(_TOP__m3-usr-_CLK));
+	next(_TOP__m3-impl-usr-__GUARANTEE1) := (next(_TOP__m3-usr-_CLK) ? (next(_TOP__m3-usr-output___EVENT_) = (next(_TOP__m3-usr-input2___EVENT_) | next(_TOP__m3-usr-input1___EVENT_))) : _TOP__m3-impl-usr-__GUARANTEE1);
+	next(_TOP__m3-impl-usr-__GUARANTEE0) := (next(_TOP__m3-usr-_CLK) ? (next(_TOP__m3-usr-output) = next(_TOP__m3-usr-input1_hold) + next(_TOP__m3-usr-input2_hold)) : _TOP__m3-impl-usr-__GUARANTEE0);
+	next(_TOP__m3-usr-__ASSERT) := ((!next(_TOP__m3-impl-usr-_TICKED) -> (next(_TOP__m3-usr-output) = 0)) & ((!next(_TOP__m3-usr-_CLK) -> ((((next(_TOP__m3-usr-input1_hold) = _TOP__m3-usr-input1_hold) & (next(_TOP__m3-usr-input2_hold) = _TOP__m3-usr-input2_hold)) & (next(_TOP__m3-usr-output___EVENT_) = _TOP__m3-usr-output___EVENT_)) & (next(_TOP__m3-usr-output) = _TOP__m3-usr-output))) & (next(_TOP__m3-usr-_CLK) -> ((next(_TOP__m3-usr-input2_hold) = (next(_TOP__m3-usr-input2___EVENT_) ? next(_TOP__m3-usr-input2) : (next(_TOP__m3-impl-usr-_INIT) ? 0 : next(_TOP__m3-impl-usr-_STATE0)))) & ((next(_TOP__m3-usr-input1_hold) = (next(_TOP__m3-usr-input1___EVENT_) ? next(_TOP__m3-usr-input1) : (next(_TOP__m3-impl-usr-_INIT) ? 0 : next(_TOP__m3-impl-usr-_STATE1)))) & (next(_TOP__m3-usr-__ASSUME__HIST) -> (next(_TOP__m3-impl-usr-__GUARANTEE1) & next(_TOP__m3-impl-usr-__GUARANTEE0))))))));
+
+
+
+MODULE _TOP__m1 (_TOP__m1-usr-__ASSUME__HIST, _TOP__m1-usr-input___EVENT_, _TOP__m1-usr-input, _TOP__m1-usr-time, _TOP__m1-usr-input_hold, _TOP__m1-usr-output___EVENT_, _TOP__m1-usr-output, _TOP__m1-usr-_CLK)
+VAR
+	_TOP__m1-usr-__ASSERT : boolean;
+	_TOP__m1-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__m1-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__m1-impl-usr-_TICKED : boolean;
+	_TOP__m1-impl-usr-_INIT : boolean;
+	_TOP__m1-impl-usr-_STATE0 : integer;
+	_TOP__m1-res-oracle_3 : integer;
+	_TOP__m1-res-oracle_4 : integer;
+	_TOP__m1-res-oracle_2 : boolean;
+	_TOP__m1-res-oracle_1 : boolean;
+
+ASSIGN
+	init(_TOP__m1-impl-usr-_STATE0) := (_TOP__m1-usr-_CLK ? _TOP__m1-res-oracle_3 : _TOP__m1-res-oracle_4);
+	init(_TOP__m1-impl-usr-_INIT) := _TOP__m1-usr-_CLK;
+	init(_TOP__m1-impl-usr-_TICKED) := _TOP__m1-usr-_CLK;
+	init(_TOP__m1-impl-usr-__GUARANTEE1) := (_TOP__m1-usr-_CLK ? (_TOP__m1-usr-output___EVENT_ = _TOP__m1-usr-input___EVENT_) : _TOP__m1-res-oracle_2);
+	init(_TOP__m1-impl-usr-__GUARANTEE0) := (_TOP__m1-usr-_CLK ? (_TOP__m1-usr-output = _TOP__m1-usr-input_hold) : _TOP__m1-res-oracle_1);
+	init(_TOP__m1-usr-__ASSERT) := ((!_TOP__m1-impl-usr-_TICKED -> ((_TOP__m1-usr-output = 0) & !_TOP__m1-usr-output___EVENT_)) & (_TOP__m1-usr-_CLK -> ((_TOP__m1-usr-input_hold = (_TOP__m1-usr-input___EVENT_ ? _TOP__m1-usr-input : (_TOP__m1-impl-usr-_INIT ? 0 : _TOP__m1-impl-usr-_STATE0))) & (_TOP__m1-usr-__ASSUME__HIST -> (_TOP__m1-impl-usr-__GUARANTEE1 & _TOP__m1-impl-usr-__GUARANTEE0)))));
+
+	next(_TOP__m1-impl-usr-_STATE0) := (next(_TOP__m1-usr-_CLK) ? _TOP__m1-usr-input : _TOP__m1-impl-usr-_STATE0);
+	next(_TOP__m1-impl-usr-_INIT) := (next(_TOP__m1-usr-_CLK) & !_TOP__m1-impl-usr-_TICKED);
+	next(_TOP__m1-impl-usr-_TICKED) := (_TOP__m1-impl-usr-_TICKED | next(_TOP__m1-usr-_CLK));
+	next(_TOP__m1-impl-usr-__GUARANTEE1) := (next(_TOP__m1-usr-_CLK) ? (next(_TOP__m1-usr-output___EVENT_) = next(_TOP__m1-usr-input___EVENT_)) : _TOP__m1-impl-usr-__GUARANTEE1);
+	next(_TOP__m1-impl-usr-__GUARANTEE0) := (next(_TOP__m1-usr-_CLK) ? (next(_TOP__m1-usr-output) = next(_TOP__m1-usr-input_hold)) : _TOP__m1-impl-usr-__GUARANTEE0);
+	next(_TOP__m1-usr-__ASSERT) := ((!next(_TOP__m1-impl-usr-_TICKED) -> ((next(_TOP__m1-usr-output) = 0) & !next(_TOP__m1-usr-output___EVENT_))) & ((!next(_TOP__m1-usr-_CLK) -> (((next(_TOP__m1-usr-input_hold) = _TOP__m1-usr-input_hold) & (next(_TOP__m1-usr-output___EVENT_) = _TOP__m1-usr-output___EVENT_)) & (next(_TOP__m1-usr-output) = _TOP__m1-usr-output))) & (next(_TOP__m1-usr-_CLK) -> ((next(_TOP__m1-usr-input_hold) = (next(_TOP__m1-usr-input___EVENT_) ? next(_TOP__m1-usr-input) : (next(_TOP__m1-impl-usr-_INIT) ? 0 : next(_TOP__m1-impl-usr-_STATE0)))) & (next(_TOP__m1-usr-__ASSUME__HIST) -> (next(_TOP__m1-impl-usr-__GUARANTEE1) & next(_TOP__m1-impl-usr-__GUARANTEE0)))))));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE main () 
+VAR
+	main-usr-a1__output___EVENT_ : boolean;
+	main-usr-a1__output : integer;
+	main-usr-a1____ASSUME__HIST : boolean;
+	main-usr-a2__output___EVENT_ : boolean;
+	main-usr-a2__output : integer;
+	main-usr-a2____ASSUME__HIST : boolean;
+	main-usr-m1__input_hold : integer;
+	main-usr-m1__output___EVENT_ : boolean;
+	main-usr-m1__output : integer;
+	main-usr-m1____ASSUME__HIST : boolean;
+	main-usr-m2__input_hold : integer;
+	main-usr-m2__output___EVENT_ : boolean;
+	main-usr-m2__output : integer;
+	main-usr-m2____ASSUME__HIST : boolean;
+	main-usr-m3__input1_hold : integer;
+	main-usr-m3__input2_hold : integer;
+	main-usr-m3__output___EVENT_ : boolean;
+	main-usr-m3__output : integer;
+	main-usr-m3____ASSUME__HIST : boolean;
+	main-usr-a2_period : real;
+	main-usr-clock_a1 : boolean;
+	main-usr-clock_a2 : boolean;
+	main-usr-clock_m1 : boolean;
+	main-usr-clock_m2 : boolean;
+	main-usr-clock_m3 : boolean;
+	main-usr-a1_sig_last : real;
+	main-usr-a2_sig_last : real;
+	main-usr-m1_sig_last : real;
+	main-usr-m2_sig_last : real;
+	main-usr-m3_sig_last : real;
+	main-usr-a1_sig_cleared : real;
+	main-usr-a2_sig_cleared : real;
+	main-usr-m1_sig_cleared : real;
+	main-usr-m2_sig_cleared : real;
+	main-usr-m3_sig_cleared : real;
+	main-usr-sig_a1 : boolean;
+	main-usr-sig_a2 : boolean;
+	main-usr-sig_m1 : boolean;
+	main-usr-sig_m2 : boolean;
+	main-usr-sig_m3 : boolean;
+	main-usr-t : real;
+	main-usr-time_of_last_input_change : real;
+	main-usr-output___EVENT_ : boolean;
+	main-usr-output : integer;
+	main-usr-a1__input___EVENT_ : boolean;
+	main-usr-a1__input : integer;
+	main-usr-a1__time : real;
+	main-usr-a1___CLOCK_ : boolean;
+	main-usr-a2__input___EVENT_ : boolean;
+	main-usr-a2__input : integer;
+	main-usr-a2__time : real;
+	main-usr-a2___CLOCK_ : boolean;
+	main-usr-m1__input___EVENT_ : boolean;
+	main-usr-m1__input : integer;
+	main-usr-m1__time : real;
+	main-usr-m1___CLOCK_ : boolean;
+	main-usr-m2__input___EVENT_ : boolean;
+	main-usr-m2__input : integer;
+	main-usr-m2__time : real;
+	main-usr-m2___CLOCK_ : boolean;
+	main-usr-m3__input1___EVENT_ : boolean;
+	main-usr-m3__input1 : integer;
+	main-usr-m3__input2___EVENT_ : boolean;
+	main-usr-m3__input2 : integer;
+	main-usr-m3__time : real;
+	main-usr-m3___CLOCK_ : boolean;
+	main-usr-input___EVENT_ : boolean;
+	main-usr-input : integer;
+	main-usr-time : real;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-res-glocal_22 : boolean;
+	main-res-glocal_24 : boolean;
+	main-res-glocal_27 : boolean;
+	main-res-glocal_28 : boolean;
+	main-res-glocal_30 : boolean;
+	main-res-glocal_31 : boolean;
+	main-res-glocal_32 : boolean;
+	main-res-glocal_34 : boolean;
+	main-res-glocal_35 : boolean;
+	main-res-glocal_36 : boolean;
+	main-res-glocal_38 : boolean;
+	main-res-glocal_39 : boolean;
+	main-res-glocal_40 : boolean;
+	main-res-glocal_42 : boolean;
+	main-res-glocal_43 : boolean;
+	main-res-glocal_44 : boolean;
+	main-res-glocal_45 : boolean;
+	main-res-glocal_46 : boolean;
+	main-res-glocal_47 : boolean;
+	main-res-glocal_48 : boolean;
+	main-res-glocal_49 : boolean;
+	main-res-glocal_50 : boolean;
+	main-res-glocal_51 : boolean;
+	main-res-glocal_52 : boolean;
+	main-res-glocal_53 : boolean;
+	main-res-glocal_54 : boolean;
+	main-res-glocal_55 : boolean;
+	main-res-glocal_56 : boolean;
+	main-res-glocal_57 : boolean;
+	main-res-glocal_58 : boolean;
+	main-res-glocal_59 : boolean;
+	main-res-glocal_60 : boolean;
+	main-res-glocal_61 : boolean;
+	main-res-glocal_62 : boolean;
+	main-res-glocal_63 : boolean;
+	main-res-glocal_64 : boolean;
+	main-res-glocal_65 : boolean;
+	main-res-glocal_66 : boolean;
+	main-res-glocal_67 : boolean;
+	main-res-glocal_68 : boolean;
+	main-res-glocal_69 : boolean;
+	main-res-glocal_70 : boolean;
+	main-res-glocal_73 : boolean;
+	main-res-glocal_75 : boolean;
+	main-res-glocal_76 : boolean;
+	main-res-glocal_77 : boolean;
+	main-res-glocal_78 : boolean;
+	main-res-glocal_82 : boolean;
+	main-res-glocal_84 : boolean;
+	main-res-glocal_87 : boolean;
+	main-res-glocal_89 : boolean;
+	main-res-glocal_91 : boolean;
+	main-res-glocal_92 : boolean;
+	main-res-glocal_93 : boolean;
+	main-res-glocal_94 : boolean;
+	main-res-glocal_95 : boolean;
+	main-res-glocal_96 : boolean;
+	main-res-glocal_97 : boolean;
+	main-res-glocal_98 : boolean;
+	main-res-glocal_99 : boolean;
+	main-res-gklocal_85 : real;
+	main-res-gklocal_80 : real;
+	main-res-gklocal_79 : real;
+	main-res-gklocal_71 : real;
+	main-res-gklocal_25 : boolean;
+	main-res-call_90 : HacmsTiming__top_level__i__getSignalCleared(main-usr-t, main-usr-clock_m3, main-res-gklocal_79, main-res-gklocal_85);
+	main-res-call_88 : HacmsTiming__top_level__i__getSignalCleared(main-usr-t, main-usr-clock_m2, main-res-gklocal_79, main-res-gklocal_85);
+	main-res-call_86 : HacmsTiming__top_level__i__getSignalCleared(main-usr-t, main-usr-clock_m1, main-res-gklocal_79, main-res-gklocal_85);
+	main-res-call_83 : HacmsTiming__top_level__i__getSignalCleared(main-usr-t, main-usr-clock_a2, main-res-gklocal_79, main-res-gklocal_80);
+	main-res-call_81 : HacmsTiming__top_level__i__getSignalCleared(main-usr-t, main-usr-clock_a1, main-res-gklocal_79, main-res-gklocal_80);
+	main-res-call_74 : HacmsTiming__top_level__i__getLastSignal(main-usr-t, main-usr-a2_period);
+	main-res-call_72 : HacmsTiming__top_level__i__getLastSignal(main-usr-t, main-res-gklocal_71);
+	main-res-call_41 : _TOP__m3(main-usr-m3____ASSUME__HIST, main-usr-m3__input1___EVENT_, main-usr-m3__input1, main-usr-m3__input2___EVENT_, main-usr-m3__input2, main-usr-m3__time, main-usr-m3__input1_hold, main-usr-m3__input2_hold, main-usr-m3__output___EVENT_, main-usr-m3__output, main-usr-m3___CLOCK_);
+	main-res-call_37 : _TOP__m2(main-usr-m2____ASSUME__HIST, main-usr-m2__input___EVENT_, main-usr-m2__input, main-usr-m2__time, main-usr-m2__input_hold, main-usr-m2__output___EVENT_, main-usr-m2__output, main-usr-m2___CLOCK_);
+	main-res-call_33 : _TOP__m1(main-usr-m1____ASSUME__HIST, main-usr-m1__input___EVENT_, main-usr-m1__input, main-usr-m1__time, main-usr-m1__input_hold, main-usr-m1__output___EVENT_, main-usr-m1__output, main-usr-m1___CLOCK_);
+	main-res-call_29 : _TOP__a2(main-usr-a2____ASSUME__HIST, main-usr-a2__input___EVENT_, main-usr-a2__input, main-usr-a2__time, main-usr-a2__output___EVENT_, main-usr-a2__output, main-usr-a2___CLOCK_);
+	main-res-call_26 : __HIST(main-res-gklocal_25);
+	main-res-call_23 : _TOP__a1(main-usr-a1____ASSUME__HIST, main-usr-a1__input___EVENT_, main-usr-a1__input, main-usr-a1__time, main-usr-a1__output___EVENT_, main-usr-a1__output, main-usr-a1___CLOCK_);
+	main-res-poracle_1 : boolean;
+	main-res-poracle_2 : boolean;
+	main-res-poracle_3 : integer;
+	main-res-poracle_4 : integer;
+	main-res-poracle_5 : integer;
+	main-res-poracle_6 : integer;
+	main-res-poracle_7 : boolean;
+	main-res-poracle_8 : boolean;
+	main-res-poracle_9 : integer;
+	main-res-poracle_10 : integer;
+	main-res-poracle_11 : boolean;
+	main-res-poracle_12 : boolean;
+	main-res-poracle_13 : integer;
+	main-res-poracle_14 : integer;
+
+ASSIGN
+	init(main-impl-usr-__GUARANTEE0) := (!(main-usr-output = 0) -> (main-usr-time_of_last_input_change < 40));
+	init(main-res-glocal_22) := (main-usr-time = main-usr-a1__time);
+	init(main-res-glocal_24) := main-res-call_23._TOP__a1-usr-__ASSERT;
+	init(main-res-gklocal_25) := TRUE;
+	init(main-res-glocal_27) := (main-usr-a1____ASSUME__HIST = main-res-call_26.__HIST-usr-hist);
+	init(main-res-glocal_28) := (main-usr-time = main-usr-a2__time);
+	init(main-res-glocal_30) := main-res-call_29._TOP__a2-usr-__ASSERT;
+	init(main-res-glocal_31) := (main-usr-a2____ASSUME__HIST = main-res-call_26.__HIST-usr-hist);
+	init(main-res-glocal_32) := (main-usr-time = main-usr-m1__time);
+	init(main-res-glocal_34) := main-res-call_33._TOP__m1-usr-__ASSERT;
+	init(main-res-glocal_35) := (main-usr-m1____ASSUME__HIST = main-res-call_26.__HIST-usr-hist);
+	init(main-res-glocal_36) := (main-usr-time = main-usr-m2__time);
+	init(main-res-glocal_38) := main-res-call_37._TOP__m2-usr-__ASSERT;
+	init(main-res-glocal_39) := (main-usr-m2____ASSUME__HIST = main-res-call_26.__HIST-usr-hist);
+	init(main-res-glocal_40) := (main-usr-time = main-usr-m3__time);
+	init(main-res-glocal_42) := main-res-call_41._TOP__m3-usr-__ASSERT;
+	init(main-res-glocal_43) := (main-usr-m3____ASSUME__HIST = main-res-call_26.__HIST-usr-hist);
+	init(main-res-glocal_44) := (main-usr-m3___CLOCK_ | (main-usr-m2___CLOCK_ | (main-usr-m1___CLOCK_ | (main-usr-a2___CLOCK_ | main-usr-a1___CLOCK_))));
+	init(main-res-glocal_45) := (main-usr-input = main-usr-a1__input);
+	init(main-res-glocal_46) := (main-usr-input___EVENT_ = main-usr-a1__input___EVENT_);
+	init(main-res-glocal_47) := (main-usr-input = main-usr-a2__input);
+	init(main-res-glocal_48) := (main-usr-input___EVENT_ = main-usr-a2__input___EVENT_);
+	init(main-res-glocal_49) := (main-usr-a1__output = main-usr-m1__input);
+	init(main-res-glocal_50) := (main-usr-a1__output___EVENT_ = main-usr-m1__input___EVENT_);
+	init(main-res-glocal_51) := (main-usr-a2__output = main-usr-m2__input);
+	init(main-res-glocal_52) := (main-usr-a2__output___EVENT_ = main-usr-m2__input___EVENT_);
+	init(main-res-glocal_53) := (main-usr-m1__output = main-usr-m3__input1);
+	init(main-res-glocal_54) := (main-usr-m1__output___EVENT_ = main-usr-m3__input1___EVENT_);
+	init(main-res-glocal_55) := (main-usr-m2__output = main-usr-m3__input2);
+	init(main-res-glocal_56) := (main-usr-m2__output___EVENT_ = main-usr-m3__input2___EVENT_);
+	init(main-res-glocal_57) := (main-usr-m3__output = main-usr-output);
+	init(main-res-glocal_58) := (main-usr-m3__output___EVENT_ = main-usr-output___EVENT_);
+	init(main-res-glocal_59) := (80 <= main-usr-a2_period & main-usr-a2_period <= 120);
+	init(main-res-glocal_60) := main-usr-t >= 0;
+	init(main-res-glocal_61) := ((main-usr-t = 1) | ((main-usr-t = 1) | ((main-usr-t = 1) | ((main-usr-t = 1) | (main-usr-t = 1)))));
+	init(main-res-glocal_62) := (((((((((!(main-usr-clock_a1 & main-usr-clock_a2) & !(main-usr-clock_a1 & main-usr-clock_m1)) & !(main-usr-clock_a1 & main-usr-clock_m2)) & !(main-usr-clock_a1 & main-usr-clock_m3)) & !(main-usr-clock_a2 & main-usr-clock_m1)) & !(main-usr-clock_a2 & main-usr-clock_m2)) & !(main-usr-clock_a2 & main-usr-clock_m3)) & !(main-usr-clock_m1 & main-usr-clock_m2)) & !(main-usr-clock_m1 & main-usr-clock_m3)) & !(main-usr-clock_m2 & main-usr-clock_m3));
+	init(main-res-glocal_63) := (((((main-usr-clock_a1 -> main-usr-sig_a1) & (main-usr-clock_a2 -> main-usr-sig_a2)) & (main-usr-clock_m1 -> main-usr-sig_m1)) & (main-usr-clock_m2 -> main-usr-sig_m2)) & (main-usr-clock_m3 -> main-usr-sig_m3));
+	init(main-res-glocal_64) := ((main-usr-a1_sig_last - main-usr-a1_sig_cleared) < 100);
+	init(main-res-glocal_65) := ((main-usr-a2_sig_last - main-usr-a2_sig_cleared) < main-usr-a2_period);
+	init(main-res-glocal_66) := (main-usr-clock_a1 = main-usr-a1___CLOCK_);
+	init(main-res-glocal_67) := (main-usr-clock_a2 = main-usr-a2___CLOCK_);
+	init(main-res-glocal_68) := (main-usr-clock_m1 = main-usr-m1___CLOCK_);
+	init(main-res-glocal_69) := (main-usr-clock_m2 = main-usr-m2___CLOCK_);
+	init(main-res-glocal_70) := (main-usr-clock_m3 = main-usr-m3___CLOCK_);
+	init(main-res-glocal_73) := (main-usr-a1_sig_last = main-res-call_72.HacmsTiming__top_level__i__getLastSignal-usr-ret);
+	init(main-res-gklocal_71) := 100;
+	init(main-res-glocal_75) := (main-usr-a2_sig_last = main-res-call_74.HacmsTiming__top_level__i__getLastSignal-usr-ret);
+	init(main-res-glocal_76) := (main-usr-m1_sig_last = ((main-usr-clock_a1 & main-usr-m1__input___EVENT_) ? main-usr-t : 0));
+	init(main-res-glocal_77) := (main-usr-m2_sig_last = ((main-usr-clock_a2 & main-usr-m2__input___EVENT_) ? main-usr-t : 0));
+	init(main-res-glocal_78) := (main-usr-m3_sig_last = ((main-usr-clock_m1 & main-usr-m3__input1___EVENT_) ? main-usr-t : ((main-usr-clock_m2 & main-usr-m3__input2___EVENT_) ? main-usr-t : 0)));
+	init(main-res-gklocal_79) := 1;
+	init(main-res-gklocal_80) := -1;
+	init(main-res-glocal_82) := (main-usr-a1_sig_cleared = main-res-call_81.HacmsTiming__top_level__i__getSignalCleared-usr-ret);
+	init(main-res-glocal_84) := (main-usr-a2_sig_cleared = main-res-call_83.HacmsTiming__top_level__i__getSignalCleared-usr-ret);
+	init(main-res-gklocal_85) := 0;
+	init(main-res-glocal_87) := (main-usr-m1_sig_cleared = main-res-call_86.HacmsTiming__top_level__i__getSignalCleared-usr-ret);
+	init(main-res-glocal_89) := (main-usr-m2_sig_cleared = main-res-call_88.HacmsTiming__top_level__i__getSignalCleared-usr-ret);
+	init(main-res-glocal_91) := (main-usr-m3_sig_cleared = main-res-call_90.HacmsTiming__top_level__i__getSignalCleared-usr-ret);
+	init(main-res-glocal_92) := main-usr-sig_a1;
+	init(main-res-glocal_93) := main-usr-sig_a2;
+	init(main-res-glocal_94) := (main-usr-sig_m1 = (main-usr-m1_sig_last > 0));
+	init(main-res-glocal_95) := (main-usr-sig_m2 = (main-usr-m2_sig_last > 0));
+	init(main-res-glocal_96) := (main-usr-sig_m3 = (main-usr-m3_sig_last > 0));
+	init(main-res-glocal_97) := (main-usr-time_of_last_input_change = (!(main-usr-input = 0) ? main-usr-t : 0));
+	init(main-res-glocal_98) := TRUE;
+	init(main-res-glocal_99) := (main-usr-time = 0);
+
+	next(main-impl-usr-__GUARANTEE0) := (!(next(main-usr-output) = main-usr-output) -> (next(main-usr-time_of_last_input_change) < 40));
+	next(main-res-glocal_22) := (next(main-usr-time) = next(main-usr-a1__time));
+	next(main-res-glocal_24) := next(main-res-call_23._TOP__a1-usr-__ASSERT);
+	next(main-res-gklocal_25) := TRUE;
+	next(main-res-glocal_27) := (next(main-usr-a1____ASSUME__HIST) = next(main-res-call_26.__HIST-usr-hist));
+	next(main-res-glocal_28) := (next(main-usr-time) = next(main-usr-a2__time));
+	next(main-res-glocal_30) := next(main-res-call_29._TOP__a2-usr-__ASSERT);
+	next(main-res-glocal_31) := (next(main-usr-a2____ASSUME__HIST) = next(main-res-call_26.__HIST-usr-hist));
+	next(main-res-glocal_32) := (next(main-usr-time) = next(main-usr-m1__time));
+	next(main-res-glocal_34) := next(main-res-call_33._TOP__m1-usr-__ASSERT);
+	next(main-res-glocal_35) := (next(main-usr-m1____ASSUME__HIST) = next(main-res-call_26.__HIST-usr-hist));
+	next(main-res-glocal_36) := (next(main-usr-time) = next(main-usr-m2__time));
+	next(main-res-glocal_38) := next(main-res-call_37._TOP__m2-usr-__ASSERT);
+	next(main-res-glocal_39) := (next(main-usr-m2____ASSUME__HIST) = next(main-res-call_26.__HIST-usr-hist));
+	next(main-res-glocal_40) := (next(main-usr-time) = next(main-usr-m3__time));
+	next(main-res-glocal_42) := next(main-res-call_41._TOP__m3-usr-__ASSERT);
+	next(main-res-glocal_43) := (next(main-usr-m3____ASSUME__HIST) = next(main-res-call_26.__HIST-usr-hist));
+	next(main-res-glocal_44) := (next(main-usr-m3___CLOCK_) | (next(main-usr-m2___CLOCK_) | (next(main-usr-m1___CLOCK_) | (next(main-usr-a2___CLOCK_) | next(main-usr-a1___CLOCK_)))));
+	next(main-res-glocal_45) := (next(main-usr-input) = next(main-usr-a1__input));
+	next(main-res-glocal_46) := (next(main-usr-input___EVENT_) = next(main-usr-a1__input___EVENT_));
+	next(main-res-glocal_47) := (next(main-usr-input) = next(main-usr-a2__input));
+	next(main-res-glocal_48) := (next(main-usr-input___EVENT_) = next(main-usr-a2__input___EVENT_));
+	next(main-res-glocal_49) := (next(main-usr-a1__output) = next(main-usr-m1__input));
+	next(main-res-glocal_50) := (next(main-usr-a1__output___EVENT_) = next(main-usr-m1__input___EVENT_));
+	next(main-res-glocal_51) := (next(main-usr-a2__output) = next(main-usr-m2__input));
+	next(main-res-glocal_52) := (next(main-usr-a2__output___EVENT_) = next(main-usr-m2__input___EVENT_));
+	next(main-res-glocal_53) := (next(main-usr-m1__output) = next(main-usr-m3__input1));
+	next(main-res-glocal_54) := (next(main-usr-m1__output___EVENT_) = next(main-usr-m3__input1___EVENT_));
+	next(main-res-glocal_55) := (next(main-usr-m2__output) = next(main-usr-m3__input2));
+	next(main-res-glocal_56) := (next(main-usr-m2__output___EVENT_) = next(main-usr-m3__input2___EVENT_));
+	next(main-res-glocal_57) := (next(main-usr-m3__output) = next(main-usr-output));
+	next(main-res-glocal_58) := (next(main-usr-m3__output___EVENT_) = next(main-usr-output___EVENT_));
+	next(main-res-glocal_59) := (80 <= next(main-usr-a2_period) & next(main-usr-a2_period) <= 120);
+	next(main-res-glocal_60) := (next(main-usr-t) >= 0 & (next(main-usr-t) > main-usr-t));
+	next(main-res-glocal_61) := TRUE;
+	next(main-res-glocal_62) := (((((((((!(next(main-usr-clock_a1) & next(main-usr-clock_a2)) & !(next(main-usr-clock_a1) & next(main-usr-clock_m1))) & !(next(main-usr-clock_a1) & next(main-usr-clock_m2))) & !(next(main-usr-clock_a1) & next(main-usr-clock_m3))) & !(next(main-usr-clock_a2) & next(main-usr-clock_m1))) & !(next(main-usr-clock_a2) & next(main-usr-clock_m2))) & !(next(main-usr-clock_a2) & next(main-usr-clock_m3))) & !(next(main-usr-clock_m1) & next(main-usr-clock_m2))) & !(next(main-usr-clock_m1) & next(main-usr-clock_m3))) & !(next(main-usr-clock_m2) & next(main-usr-clock_m3)));
+	next(main-res-glocal_63) := (((((next(main-usr-clock_a1) -> next(main-usr-sig_a1)) & (next(main-usr-clock_a2) -> next(main-usr-sig_a2))) & (next(main-usr-clock_m1) -> next(main-usr-sig_m1))) & (next(main-usr-clock_m2) -> next(main-usr-sig_m2))) & (next(main-usr-clock_m3) -> next(main-usr-sig_m3)));
+	next(main-res-glocal_64) := ((next(main-usr-a1_sig_last) - next(main-usr-a1_sig_cleared)) < 100);
+	next(main-res-glocal_65) := ((next(main-usr-a2_sig_last) - next(main-usr-a2_sig_cleared)) < next(main-usr-a2_period));
+	next(main-res-glocal_66) := (next(main-usr-clock_a1) = next(main-usr-a1___CLOCK_));
+	next(main-res-glocal_67) := (next(main-usr-clock_a2) = next(main-usr-a2___CLOCK_));
+	next(main-res-glocal_68) := (next(main-usr-clock_m1) = next(main-usr-m1___CLOCK_));
+	next(main-res-glocal_69) := (next(main-usr-clock_m2) = next(main-usr-m2___CLOCK_));
+	next(main-res-glocal_70) := (next(main-usr-clock_m3) = next(main-usr-m3___CLOCK_));
+	next(main-res-gklocal_71) := 100;
+	next(main-res-glocal_73) := (next(main-usr-a1_sig_last) = next(main-res-call_72.HacmsTiming__top_level__i__getLastSignal-usr-ret));
+	next(main-res-glocal_75) := (next(main-usr-a2_sig_last) = next(main-res-call_74.HacmsTiming__top_level__i__getLastSignal-usr-ret));
+	next(main-res-glocal_76) := (next(main-usr-m1_sig_last) = ((next(main-usr-clock_a1) & next(main-usr-m1__input___EVENT_)) ? next(main-usr-t) : main-usr-m1_sig_last));
+	next(main-res-glocal_77) := (next(main-usr-m2_sig_last) = ((next(main-usr-clock_a2) & next(main-usr-m2__input___EVENT_)) ? next(main-usr-t) : main-usr-m2_sig_last));
+	next(main-res-glocal_78) := (next(main-usr-m3_sig_last) = ((next(main-usr-clock_m1) & next(main-usr-m3__input1___EVENT_)) ? next(main-usr-t) : ((next(main-usr-clock_m2) & next(main-usr-m3__input2___EVENT_)) ? next(main-usr-t) : main-usr-m3_sig_last)));
+	next(main-res-gklocal_79) := 1;
+	next(main-res-glocal_82) := (next(main-usr-a1_sig_cleared) = next(main-res-call_81.HacmsTiming__top_level__i__getSignalCleared-usr-ret));
+	next(main-res-gklocal_80) := -1;
+	next(main-res-glocal_84) := (next(main-usr-a2_sig_cleared) = next(main-res-call_83.HacmsTiming__top_level__i__getSignalCleared-usr-ret));
+	next(main-res-glocal_87) := (next(main-usr-m1_sig_cleared) = next(main-res-call_86.HacmsTiming__top_level__i__getSignalCleared-usr-ret));
+	next(main-res-gklocal_85) := 0;
+	next(main-res-glocal_89) := (next(main-usr-m2_sig_cleared) = next(main-res-call_88.HacmsTiming__top_level__i__getSignalCleared-usr-ret));
+	next(main-res-glocal_91) := (next(main-usr-m3_sig_cleared) = next(main-res-call_90.HacmsTiming__top_level__i__getSignalCleared-usr-ret));
+	next(main-res-glocal_92) := (next(main-usr-sig_a1) = (next(main-usr-a1_sig_last) > main-usr-a1_sig_cleared));
+	next(main-res-glocal_93) := (next(main-usr-sig_a2) = (next(main-usr-a2_sig_last) > main-usr-a2_sig_cleared));
+	next(main-res-glocal_94) := (next(main-usr-sig_m1) = (next(main-usr-m1_sig_last) > main-usr-m1_sig_cleared));
+	next(main-res-glocal_95) := (next(main-usr-sig_m2) = (next(main-usr-m2_sig_last) > main-usr-m2_sig_cleared));
+	next(main-res-glocal_96) := (next(main-usr-sig_m3) = (next(main-usr-m3_sig_last) > main-usr-m3_sig_cleared));
+	next(main-res-glocal_97) := (next(main-usr-time_of_last_input_change) = (!(next(main-usr-input) = main-usr-input) ? next(main-usr-t) : main-usr-time_of_last_input_change));
+	next(main-res-glocal_98) := TRUE;
+	next(main-res-glocal_99) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_99;
+	INVAR main-res-glocal_98;
+	INVAR main-res-glocal_97;
+	INVAR main-res-glocal_96;
+	INVAR main-res-glocal_95;
+	INVAR main-res-glocal_94;
+	INVAR main-res-glocal_93;
+	INVAR main-res-glocal_92;
+	INVAR main-res-glocal_91;
+	INVAR main-res-glocal_89;
+	INVAR main-res-glocal_87;
+	INVAR main-res-glocal_84;
+	INVAR main-res-glocal_82;
+	INVAR main-res-glocal_78;
+	INVAR main-res-glocal_77;
+	INVAR main-res-glocal_76;
+	INVAR main-res-glocal_75;
+	INVAR main-res-glocal_73;
+	INVAR main-res-glocal_70;
+	INVAR main-res-glocal_69;
+	INVAR main-res-glocal_68;
+	INVAR main-res-glocal_67;
+	INVAR main-res-glocal_66;
+	INVAR main-res-glocal_65;
+	INVAR main-res-glocal_64;
+	INVAR main-res-glocal_63;
+	INVAR main-res-glocal_62;
+	INVAR main-res-glocal_61;
+	INVAR main-res-glocal_60;
+	INVAR main-res-glocal_59;
+	INVAR main-res-glocal_58;
+	INVAR main-res-glocal_57;
+	INVAR main-res-glocal_56;
+	INVAR main-res-glocal_55;
+	INVAR main-res-glocal_54;
+	INVAR main-res-glocal_53;
+	INVAR main-res-glocal_52;
+	INVAR main-res-glocal_51;
+	INVAR main-res-glocal_50;
+	INVAR main-res-glocal_49;
+	INVAR main-res-glocal_48;
+	INVAR main-res-glocal_47;
+	INVAR main-res-glocal_46;
+	INVAR main-res-glocal_45;
+	INVAR main-res-glocal_44;
+	INVAR main-res-glocal_43;
+	INVAR main-res-glocal_42;
+	INVAR main-res-glocal_40;
+	INVAR main-res-glocal_39;
+	INVAR main-res-glocal_38;
+	INVAR main-res-glocal_36;
+	INVAR main-res-glocal_35;
+	INVAR main-res-glocal_34;
+	INVAR main-res-glocal_32;
+	INVAR main-res-glocal_31;
+	INVAR main-res-glocal_30;
+	INVAR main-res-glocal_28;
+	INVAR main-res-glocal_27;
+	INVAR main-res-glocal_24;
+	INVAR main-res-glocal_22;
+
+INVARSPEC 
+((main-impl-usr-__GUARANTEE0));
+

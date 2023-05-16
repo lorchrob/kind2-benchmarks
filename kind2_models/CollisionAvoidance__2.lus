@@ -1,0 +1,565 @@
+type Collision_Avoidance__Vehicle_State__Impl = struct {speed : real; x : real; y : real};
+type Collision_Avoidance__Plan_Assessment__Impl = struct {PMD : real; Plan_Safe : bool; Plan_Source : bool; Plan_Valid : bool; TCPA : int};
+type Base_Types__Boolean = bool;
+type Base_Types__Unsigned = int;
+type Base_Types__Unsigned_64 = int;
+type Base_Types__Unsigned_32 = int;
+type Base_Types__Unsigned_16 = int;
+type Base_Types__Unsigned_8 = int;
+type Base_Types__Integer = int;
+type Base_Types__Integer_64 = int;
+type Base_Types__Integer_32 = int;
+type Base_Types__Integer_16 = int;
+type Base_Types__Integer_8 = int;
+type Base_Types__Float = real;
+type Base_Types__Float_32 = real;
+type Base_Types__Float_64 = real;
+
+function imported Collision_Avoidance__CONFLICT_DETECTED(
+  ADSB : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  _outvar : bool
+)
+
+function imported Collision_Avoidance__ASSESS_TRAJECTORY(
+  Own : Collision_Avoidance__Vehicle_State__Impl;
+  Intruder : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  _outvar : Collision_Avoidance__Plan_Assessment__Impl
+)
+
+function imported Collision_Avoidance__CALC_TRAJECTORY_2(
+  S : Collision_Avoidance__Vehicle_State__Impl;
+  D : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  _outvar : Collision_Avoidance__Vehicle_State__Impl
+)
+
+function imported Collision_Avoidance__CALC_INTRUDER_TRAJECTORY(
+  ADSB : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  _outvar : Collision_Avoidance__Vehicle_State__Impl
+)
+
+
+node _TOP__DAA(
+  __ASSUME__HIST : bool;
+  ADSB_In___EVENT_ : bool;
+  ADSB_In : Collision_Avoidance__Vehicle_State__Impl;
+  STATE_In___EVENT_ : bool;
+  STATE_In : Collision_Avoidance__Vehicle_State__Impl;
+  time : real;
+  ADSB_Out___EVENT_ : bool;
+  ADSB_Out : Collision_Avoidance__Vehicle_State__Impl;
+  STATE_Out___EVENT_ : bool;
+  STATE_Out : Collision_Avoidance__Vehicle_State__Impl;
+  BAF_Manuever_Out___EVENT_ : bool;
+  BAF_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (((ADSB_In___EVENT_ and STATE_In___EVENT_) and Collision_Avoidance__CONFLICT_DETECTED(ADSB_In)) => ((((BAF_Manuever_Out___EVENT_ and ADSB_Out___EVENT_) and (ADSB_Out = ADSB_In)) and STATE_Out___EVENT_) and (STATE_Out = STATE_In)));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__LEC(
+  __ASSUME__HIST : bool;
+  ADSB_In___EVENT_ : bool;
+  ADSB_In : Collision_Avoidance__Vehicle_State__Impl;
+  STATE_In___EVENT_ : bool;
+  STATE_In : Collision_Avoidance__Vehicle_State__Impl;
+  BAF_Manuever_In___EVENT_ : bool;
+  BAF_Manuever_In : Collision_Avoidance__Vehicle_State__Impl;
+  time : real;
+  ADSB_Out___EVENT_ : bool;
+  ADSB_Out : Collision_Avoidance__Vehicle_State__Impl;
+  STATE_Out___EVENT_ : bool;
+  STATE_Out : Collision_Avoidance__Vehicle_State__Impl;
+  BAF_Manuever_Out___EVENT_ : bool;
+  BAF_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl;
+  LEC_Manuever_Out___EVENT_ : bool;
+  LEC_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (((ADSB_In___EVENT_ and STATE_In___EVENT_) and BAF_Manuever_In___EVENT_) => ((((((LEC_Manuever_Out___EVENT_ and BAF_Manuever_Out___EVENT_) and (BAF_Manuever_Out = BAF_Manuever_In)) and ADSB_Out___EVENT_) and (ADSB_Out = ADSB_In)) and STATE_Out___EVENT_) and (STATE_Out = STATE_In)));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__Plan_Switch(
+  __ASSUME__HIST : bool;
+  BAF_Manuever___EVENT_ : bool;
+  BAF_Manuever : Collision_Avoidance__Vehicle_State__Impl;
+  LEC_Manuever___EVENT_ : bool;
+  LEC_Manuever : Collision_Avoidance__Vehicle_State__Impl;
+  Selected_Plan___EVENT_ : bool;
+  Selected_Plan : bool;
+  time : real;
+  Plan_Decision___EVENT_ : bool;
+  Plan_Decision : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (((BAF_Manuever___EVENT_ and LEC_Manuever___EVENT_) and Selected_Plan___EVENT_) => (Plan_Decision___EVENT_ and (Plan_Decision = Collision_Avoidance__SELECT_PLAN(BAF_Manuever, LEC_Manuever, Selected_Plan))));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__High_Assurance_System(
+  __ASSUME__HIST : bool;
+  ADSB_In___EVENT_ : bool;
+  ADSB_In : Collision_Avoidance__Vehicle_State__Impl;
+  STATE_In___EVENT_ : bool;
+  STATE_In : Collision_Avoidance__Vehicle_State__Impl;
+  LEC_Manuever_In___EVENT_ : bool;
+  LEC_Manuever_In : Collision_Avoidance__Vehicle_State__Impl;
+  BAF_Manuever_In___EVENT_ : bool;
+  BAF_Manuever_In : Collision_Avoidance__Vehicle_State__Impl;
+  time : real;
+  event_cta_plan_assessment : bool;
+  cta_plan_assessment_contains_baf : bool;
+  cta_plan_assessment_contains_lec : bool;
+  event_ks_selected_plan : bool;
+  ks_selected_plan : bool;
+  ks_selected_plan_is_safe : bool;
+  is_baf_safe : bool;
+  is_lec_safe : bool;
+  ks_plan_assessment_1 : Collision_Avoidance__Plan_Assessment__Impl;
+  ks_plan_assessment_2 : Collision_Avoidance__Plan_Assessment__Impl;
+  Selected_Plan_Out___EVENT_ : bool;
+  Selected_Plan_Out : bool;
+  LEC_Manuever_Out___EVENT_ : bool;
+  LEC_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl;
+  BAF_Manuever_Out___EVENT_ : bool;
+  BAF_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+let
+  __GUARANTEE0 = ((((BAF_Manuever_In___EVENT_ and LEC_Manuever_In___EVENT_) and STATE_In___EVENT_) and ADSB_In___EVENT_) => ((((((BAF_Manuever_Out___EVENT_ and (BAF_Manuever_Out = BAF_Manuever_In)) and LEC_Manuever_Out___EVENT_) and (LEC_Manuever_Out = LEC_Manuever_In)) and event_cta_plan_assessment) and cta_plan_assessment_contains_baf) and cta_plan_assessment_contains_lec));
+
+  __GUARANTEE1 = ((((BAF_Manuever_In___EVENT_ and LEC_Manuever_In___EVENT_) and STATE_In___EVENT_) and ADSB_In___EVENT_) => event_ks_selected_plan);
+
+  __GUARANTEE2 = ((((((BAF_Manuever_In___EVENT_ and LEC_Manuever_In___EVENT_) and STATE_In___EVENT_) and ADSB_In___EVENT_) and Collision_Avoidance__IS_SAFE_MANUEVER_2(BAF_Manuever_In, STATE_In, ADSB_In)) and event_ks_selected_plan) => ks_selected_plan_is_safe);
+
+  __GUARANTEE3 = (((BAF_Manuever_Out = BAF_Manuever_In) and (LEC_Manuever_Out = LEC_Manuever_In)) => ((Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(ks_plan_assessment_1) = Collision_Avoidance__IS_SAFE_MANUEVER_2(BAF_Manuever_Out, STATE_In, ADSB_In)) and (Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(ks_plan_assessment_2) = Collision_Avoidance__IS_SAFE_MANUEVER_2(LEC_Manuever_Out, STATE_In, ADSB_In))));
+
+  __ASSERT = (__ASSUME__HIST => (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3;
+
+tel;
+
+node main(
+  DAA__ADSB_Out___EVENT_ : bool;
+  DAA__ADSB_Out : Collision_Avoidance__Vehicle_State__Impl;
+  DAA__STATE_Out___EVENT_ : bool;
+  DAA__STATE_Out : Collision_Avoidance__Vehicle_State__Impl;
+  DAA__BAF_Manuever_Out___EVENT_ : bool;
+  DAA__BAF_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl;
+  DAA____ASSUME__HIST : bool;
+  LEC__ADSB_Out___EVENT_ : bool;
+  LEC__ADSB_Out : Collision_Avoidance__Vehicle_State__Impl;
+  LEC__STATE_Out___EVENT_ : bool;
+  LEC__STATE_Out : Collision_Avoidance__Vehicle_State__Impl;
+  LEC__BAF_Manuever_Out___EVENT_ : bool;
+  LEC__BAF_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl;
+  LEC__LEC_Manuever_Out___EVENT_ : bool;
+  LEC__LEC_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl;
+  LEC____ASSUME__HIST : bool;
+  Plan_Switch__Plan_Decision___EVENT_ : bool;
+  Plan_Switch__Plan_Decision : Collision_Avoidance__Vehicle_State__Impl;
+  Plan_Switch____ASSUME__HIST : bool;
+  High_Assurance_System__event_cta_plan_assessment : bool;
+  High_Assurance_System__cta_plan_assessment_contains_baf : bool;
+  High_Assurance_System__cta_plan_assessment_contains_lec : bool;
+  High_Assurance_System__event_ks_selected_plan : bool;
+  High_Assurance_System__ks_selected_plan : bool;
+  High_Assurance_System__ks_selected_plan_is_safe : bool;
+  High_Assurance_System__is_baf_safe : bool;
+  High_Assurance_System__is_lec_safe : bool;
+  High_Assurance_System__ks_plan_assessment_1 : Collision_Avoidance__Plan_Assessment__Impl;
+  High_Assurance_System__ks_plan_assessment_2 : Collision_Avoidance__Plan_Assessment__Impl;
+  High_Assurance_System__Selected_Plan_Out___EVENT_ : bool;
+  High_Assurance_System__Selected_Plan_Out : bool;
+  High_Assurance_System__LEC_Manuever_Out___EVENT_ : bool;
+  High_Assurance_System__LEC_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl;
+  High_Assurance_System__BAF_Manuever_Out___EVENT_ : bool;
+  High_Assurance_System__BAF_Manuever_Out : Collision_Avoidance__Vehicle_State__Impl;
+  High_Assurance_System____ASSUME__HIST : bool;
+  event_Plan_Decision : bool;
+  is_safe_plan_decision : bool;
+  event_Selected_Plan_Out : bool;
+  is_safe_manuever : bool;
+  is_baf_safe : bool;
+  is_lec_safe : bool;
+  event_LEC_Manuever_Out : bool;
+  event_BAF_Manuever_Out : bool;
+  event_ADSB_Out : bool;
+  event_STATE_Out : bool;
+  ADSB_Out : Collision_Avoidance__Vehicle_State__Impl;
+  STATE_Out : Collision_Avoidance__Vehicle_State__Impl;
+  Selected_Plan_Out : bool;
+  is_plan_decision_eq_baf : bool;
+  Plan_Manuever___EVENT_ : bool;
+  Plan_Manuever : Collision_Avoidance__Vehicle_State__Impl;
+  DAA__ADSB_In___EVENT_ : bool;
+  DAA__ADSB_In : Collision_Avoidance__Vehicle_State__Impl;
+  DAA__STATE_In___EVENT_ : bool;
+  DAA__STATE_In : Collision_Avoidance__Vehicle_State__Impl;
+  DAA__time : real;
+  LEC__ADSB_In___EVENT_ : bool;
+  LEC__ADSB_In : Collision_Avoidance__Vehicle_State__Impl;
+  LEC__STATE_In___EVENT_ : bool;
+  LEC__STATE_In : Collision_Avoidance__Vehicle_State__Impl;
+  LEC__BAF_Manuever_In___EVENT_ : bool;
+  LEC__BAF_Manuever_In : Collision_Avoidance__Vehicle_State__Impl;
+  LEC__time : real;
+  Plan_Switch__BAF_Manuever___EVENT_ : bool;
+  Plan_Switch__BAF_Manuever : Collision_Avoidance__Vehicle_State__Impl;
+  Plan_Switch__LEC_Manuever___EVENT_ : bool;
+  Plan_Switch__LEC_Manuever : Collision_Avoidance__Vehicle_State__Impl;
+  Plan_Switch__Selected_Plan___EVENT_ : bool;
+  Plan_Switch__Selected_Plan : bool;
+  Plan_Switch__time : real;
+  High_Assurance_System__ADSB_In___EVENT_ : bool;
+  High_Assurance_System__ADSB_In : Collision_Avoidance__Vehicle_State__Impl;
+  High_Assurance_System__STATE_In___EVENT_ : bool;
+  High_Assurance_System__STATE_In : Collision_Avoidance__Vehicle_State__Impl;
+  High_Assurance_System__LEC_Manuever_In___EVENT_ : bool;
+  High_Assurance_System__LEC_Manuever_In : Collision_Avoidance__Vehicle_State__Impl;
+  High_Assurance_System__BAF_Manuever_In___EVENT_ : bool;
+  High_Assurance_System__BAF_Manuever_In : Collision_Avoidance__Vehicle_State__Impl;
+  High_Assurance_System__time : real;
+  ADSB___EVENT_ : bool;
+  ADSB : Collision_Avoidance__Vehicle_State__Impl;
+  STATE___EVENT_ : bool;
+  STATE : Collision_Avoidance__Vehicle_State__Impl;
+  time : real
+) returns (
+
+);
+var
+  __ASSUME__HIST : bool;
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+let
+  --%MAIN;
+  __ASSUME__HIST = (High_Assurance_System____ASSUME__HIST and (Plan_Switch____ASSUME__HIST and (LEC____ASSUME__HIST and (DAA____ASSUME__HIST and true))));
+
+  __GUARANTEE0 = (((ADSB___EVENT_ and STATE___EVENT_) and Collision_Avoidance__CONFLICT_DETECTED(ADSB)) => event_BAF_Manuever_Out);
+
+  __GUARANTEE1 = (((ADSB___EVENT_ and STATE___EVENT_) and Collision_Avoidance__CONFLICT_DETECTED(ADSB)) => event_LEC_Manuever_Out);
+
+  __GUARANTEE2 = (((((ADSB___EVENT_ and STATE___EVENT_) and Collision_Avoidance__CONFLICT_DETECTED(ADSB)) and event_Selected_Plan_Out) and is_baf_safe) => is_safe_manuever);
+
+  __GUARANTEE3 = (((((ADSB___EVENT_ and STATE___EVENT_) and Collision_Avoidance__CONFLICT_DETECTED(ADSB)) and event_Selected_Plan_Out) and is_baf_safe) => (Selected_Plan_Out = false));
+
+  __GUARANTEE4 = (((((ADSB___EVENT_ and STATE___EVENT_) and Collision_Avoidance__CONFLICT_DETECTED(ADSB)) and event_Selected_Plan_Out) and is_baf_safe) => is_safe_plan_decision);
+
+  __GUARANTEE5 = (((((ADSB___EVENT_ and STATE___EVENT_) and Collision_Avoidance__CONFLICT_DETECTED(ADSB)) and event_Selected_Plan_Out) and is_baf_safe) => is_plan_decision_eq_baf);
+
+  assert (time = DAA__time);
+
+  assert _TOP__DAA(DAA____ASSUME__HIST, DAA__ADSB_In___EVENT_, DAA__ADSB_In, DAA__STATE_In___EVENT_, DAA__STATE_In, DAA__time, DAA__ADSB_Out___EVENT_, DAA__ADSB_Out, DAA__STATE_Out___EVENT_, DAA__STATE_Out, DAA__BAF_Manuever_Out___EVENT_, DAA__BAF_Manuever_Out);
+
+  assert (DAA____ASSUME__HIST = __HIST(true));
+
+  assert (time = LEC__time);
+
+  assert _TOP__LEC(LEC____ASSUME__HIST, LEC__ADSB_In___EVENT_, LEC__ADSB_In, LEC__STATE_In___EVENT_, LEC__STATE_In, LEC__BAF_Manuever_In___EVENT_, LEC__BAF_Manuever_In, LEC__time, LEC__ADSB_Out___EVENT_, LEC__ADSB_Out, LEC__STATE_Out___EVENT_, LEC__STATE_Out, LEC__BAF_Manuever_Out___EVENT_, LEC__BAF_Manuever_Out, LEC__LEC_Manuever_Out___EVENT_, LEC__LEC_Manuever_Out);
+
+  assert (LEC____ASSUME__HIST = __HIST(true));
+
+  assert (time = Plan_Switch__time);
+
+  assert _TOP__Plan_Switch(Plan_Switch____ASSUME__HIST, Plan_Switch__BAF_Manuever___EVENT_, Plan_Switch__BAF_Manuever, Plan_Switch__LEC_Manuever___EVENT_, Plan_Switch__LEC_Manuever, Plan_Switch__Selected_Plan___EVENT_, Plan_Switch__Selected_Plan, Plan_Switch__time, Plan_Switch__Plan_Decision___EVENT_, Plan_Switch__Plan_Decision);
+
+  assert (Plan_Switch____ASSUME__HIST = __HIST(true));
+
+  assert (time = High_Assurance_System__time);
+
+  assert _TOP__High_Assurance_System(High_Assurance_System____ASSUME__HIST, High_Assurance_System__ADSB_In___EVENT_, High_Assurance_System__ADSB_In, High_Assurance_System__STATE_In___EVENT_, High_Assurance_System__STATE_In, High_Assurance_System__LEC_Manuever_In___EVENT_, High_Assurance_System__LEC_Manuever_In, High_Assurance_System__BAF_Manuever_In___EVENT_, High_Assurance_System__BAF_Manuever_In, High_Assurance_System__time, High_Assurance_System__event_cta_plan_assessment, High_Assurance_System__cta_plan_assessment_contains_baf, High_Assurance_System__cta_plan_assessment_contains_lec, High_Assurance_System__event_ks_selected_plan, High_Assurance_System__ks_selected_plan, High_Assurance_System__ks_selected_plan_is_safe, High_Assurance_System__is_baf_safe, High_Assurance_System__is_lec_safe, High_Assurance_System__ks_plan_assessment_1, High_Assurance_System__ks_plan_assessment_2, High_Assurance_System__Selected_Plan_Out___EVENT_, High_Assurance_System__Selected_Plan_Out, High_Assurance_System__LEC_Manuever_Out___EVENT_, High_Assurance_System__LEC_Manuever_Out, High_Assurance_System__BAF_Manuever_Out___EVENT_, High_Assurance_System__BAF_Manuever_Out);
+
+  assert (High_Assurance_System____ASSUME__HIST = __HIST(true));
+
+  assert (ADSB = DAA__ADSB_In);
+
+  assert (ADSB___EVENT_ = DAA__ADSB_In___EVENT_);
+
+  assert (STATE = DAA__STATE_In);
+
+  assert (STATE___EVENT_ = DAA__STATE_In___EVENT_);
+
+  assert (DAA__ADSB_Out = LEC__ADSB_In);
+
+  assert (DAA__ADSB_Out___EVENT_ = LEC__ADSB_In___EVENT_);
+
+  assert (DAA__STATE_Out = LEC__STATE_In);
+
+  assert (DAA__STATE_Out___EVENT_ = LEC__STATE_In___EVENT_);
+
+  assert (DAA__BAF_Manuever_Out = LEC__BAF_Manuever_In);
+
+  assert (DAA__BAF_Manuever_Out___EVENT_ = LEC__BAF_Manuever_In___EVENT_);
+
+  assert (LEC__ADSB_Out = High_Assurance_System__ADSB_In);
+
+  assert (LEC__ADSB_Out___EVENT_ = High_Assurance_System__ADSB_In___EVENT_);
+
+  assert (LEC__STATE_Out = High_Assurance_System__STATE_In);
+
+  assert (LEC__STATE_Out___EVENT_ = High_Assurance_System__STATE_In___EVENT_);
+
+  assert (LEC__BAF_Manuever_Out = High_Assurance_System__BAF_Manuever_In);
+
+  assert (LEC__BAF_Manuever_Out___EVENT_ = High_Assurance_System__BAF_Manuever_In___EVENT_);
+
+  assert (LEC__LEC_Manuever_Out = High_Assurance_System__LEC_Manuever_In);
+
+  assert (LEC__LEC_Manuever_Out___EVENT_ = High_Assurance_System__LEC_Manuever_In___EVENT_);
+
+  assert (High_Assurance_System__Selected_Plan_Out = Plan_Switch__Selected_Plan);
+
+  assert (High_Assurance_System__Selected_Plan_Out___EVENT_ = Plan_Switch__Selected_Plan___EVENT_);
+
+  assert (High_Assurance_System__LEC_Manuever_Out = Plan_Switch__LEC_Manuever);
+
+  assert (High_Assurance_System__LEC_Manuever_Out___EVENT_ = Plan_Switch__LEC_Manuever___EVENT_);
+
+  assert (High_Assurance_System__BAF_Manuever_Out = Plan_Switch__BAF_Manuever);
+
+  assert (High_Assurance_System__BAF_Manuever_Out___EVENT_ = Plan_Switch__BAF_Manuever___EVENT_);
+
+  assert (DAA__ADSB_Out___EVENT_ = LEC__ADSB_In___EVENT_);
+
+  assert (DAA__STATE_Out___EVENT_ = LEC__STATE_In___EVENT_);
+
+  assert (DAA__BAF_Manuever_Out___EVENT_ = LEC__BAF_Manuever_In___EVENT_);
+
+  assert (LEC__STATE_Out___EVENT_ = High_Assurance_System__STATE_In___EVENT_);
+
+  assert (LEC__ADSB_Out___EVENT_ = High_Assurance_System__ADSB_In___EVENT_);
+
+  assert (LEC__BAF_Manuever_Out___EVENT_ = High_Assurance_System__BAF_Manuever_In___EVENT_);
+
+  assert (LEC__LEC_Manuever_Out___EVENT_ = High_Assurance_System__LEC_Manuever_In___EVENT_);
+
+  assert (High_Assurance_System__BAF_Manuever_Out___EVENT_ = Plan_Switch__BAF_Manuever___EVENT_);
+
+  assert (High_Assurance_System__LEC_Manuever_Out___EVENT_ = Plan_Switch__LEC_Manuever___EVENT_);
+
+  assert (High_Assurance_System__Selected_Plan_Out___EVENT_ = Plan_Switch__Selected_Plan___EVENT_);
+
+  assert (event_LEC_Manuever_Out = LEC__LEC_Manuever_Out___EVENT_);
+
+  assert (event_BAF_Manuever_Out = DAA__BAF_Manuever_Out___EVENT_);
+
+  assert (event_ADSB_Out = DAA__ADSB_Out___EVENT_);
+
+  assert (event_STATE_Out = DAA__STATE_Out___EVENT_);
+
+  assert (ADSB_Out = DAA__ADSB_Out);
+
+  assert (STATE_Out = DAA__STATE_Out);
+
+  assert (is_safe_manuever = Collision_Avoidance__IS_SAFE_MANUEVER_2(Collision_Avoidance__SELECT_PLAN(High_Assurance_System__BAF_Manuever_Out, High_Assurance_System__LEC_Manuever_Out, High_Assurance_System__Selected_Plan_Out), STATE, ADSB));
+
+  assert (event_Selected_Plan_Out = High_Assurance_System__Selected_Plan_Out___EVENT_);
+
+  assert (Selected_Plan_Out = High_Assurance_System__Selected_Plan_Out);
+
+  assert (event_Plan_Decision = Plan_Switch__Plan_Decision___EVENT_);
+
+  assert (is_safe_plan_decision = Collision_Avoidance__IS_SAFE_MANUEVER_2(Plan_Switch__Plan_Decision, STATE, ADSB));
+
+  assert (is_plan_decision_eq_baf = (Plan_Switch__Plan_Decision = High_Assurance_System__BAF_Manuever_Out));
+
+  assert (is_baf_safe = Collision_Avoidance__IS_SAFE_MANUEVER_2(High_Assurance_System__BAF_Manuever_Out, STATE, ADSB));
+
+  assert (is_lec_safe = Collision_Avoidance__IS_SAFE_MANUEVER_2(High_Assurance_System__LEC_Manuever_Out, STATE, ADSB));
+
+  assert true;
+
+  assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
+
+  -- %PROPERTY __ASSUME__HIST;
+  --%PROPERTY __GUARANTEE0;
+  -- %PROPERTY __GUARANTEE1;
+  -- %PROPERTY __GUARANTEE2;
+  -- %PROPERTY __GUARANTEE3;
+  -- %PROPERTY __GUARANTEE4;
+  -- %PROPERTY __GUARANTEE5;
+
+tel;
+
+node Collision_Avoidance__SELECT_PLAN(
+  BAF : Collision_Avoidance__Vehicle_State__Impl;
+  LEC : Collision_Avoidance__Vehicle_State__Impl;
+  Selection : bool
+) returns (
+  _outvar : Collision_Avoidance__Vehicle_State__Impl
+);
+let
+  _outvar = (if Selection then LEC else BAF);
+
+tel;
+
+node _CLOCKED_Collision_Avoidance__SELECT_PLAN(
+  _CLK : bool;
+  _INIT : bool;
+  BAF : Collision_Avoidance__Vehicle_State__Impl;
+  LEC : Collision_Avoidance__Vehicle_State__Impl;
+  Selection : bool
+) returns (
+  _outvar : Collision_Avoidance__Vehicle_State__Impl
+);
+let
+  _outvar = (if _CLK then (if Selection then LEC else BAF) else (pre _outvar));
+
+tel;
+
+node Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(
+  A : Collision_Avoidance__Plan_Assessment__Impl
+) returns (
+  _outvar : bool
+);
+let
+  _outvar = (A.Plan_Safe = true);
+
+tel;
+
+node _CLOCKED_Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(
+  _CLK : bool;
+  _INIT : bool;
+  A : Collision_Avoidance__Plan_Assessment__Impl
+) returns (
+  _outvar : bool
+);
+let
+  _outvar = (if _CLK then (A.Plan_Safe = true) else (pre _outvar));
+
+tel;
+
+node Collision_Avoidance__IS_SAFE_MANUEVER(
+  A : Collision_Avoidance__Vehicle_State__Impl;
+  State : Collision_Avoidance__Vehicle_State__Impl;
+  Intruder : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  _outvar : bool
+);
+let
+  _outvar = Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(Collision_Avoidance__ASSESS_TRAJECTORY(Collision_Avoidance__CALC_TRAJECTORY_2(State, A), Intruder));
+
+tel;
+
+node _CLOCKED_Collision_Avoidance__IS_SAFE_MANUEVER(
+  _CLK : bool;
+  _INIT : bool;
+  A : Collision_Avoidance__Vehicle_State__Impl;
+  State : Collision_Avoidance__Vehicle_State__Impl;
+  Intruder : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  _outvar : bool
+);
+let
+  _outvar = (if _CLK then _CLOCKED_Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT(_CLK, _INIT, Collision_Avoidance__ASSESS_TRAJECTORY(Collision_Avoidance__CALC_TRAJECTORY_2(State, A), Intruder)) else (pre _outvar));
+
+tel;
+
+node Collision_Avoidance__IS_SAFE_MANUEVER_2(
+  A : Collision_Avoidance__Vehicle_State__Impl;
+  State : Collision_Avoidance__Vehicle_State__Impl;
+  ADSB : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  _outvar : bool
+);
+let
+  _outvar = Collision_Avoidance__IS_SAFE_MANUEVER(A, State, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY(ADSB));
+
+tel;
+
+node _CLOCKED_Collision_Avoidance__IS_SAFE_MANUEVER_2(
+  _CLK : bool;
+  _INIT : bool;
+  A : Collision_Avoidance__Vehicle_State__Impl;
+  State : Collision_Avoidance__Vehicle_State__Impl;
+  ADSB : Collision_Avoidance__Vehicle_State__Impl
+) returns (
+  _outvar : bool
+);
+let
+  _outvar = (if _CLK then _CLOCKED_Collision_Avoidance__IS_SAFE_MANUEVER(_CLK, _INIT, A, State, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY(ADSB)) else (pre _outvar));
+
+tel;
+
+node __HIST(
+  input : bool
+) returns (
+  hist : bool
+);
+let
+  hist = (input -> ((pre hist) and input));
+
+tel;
+
+node __MinPos(
+  a : real;
+  b : real
+) returns (
+  ret : real
+);
+let
+  ret = (if (a <= 0.0) then b else (if (b <= 0.0) then a else (if (a <= b) then a else b)));
+
+tel;
+
+node __Rise(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = (input -> ((pre (not input)) and input));
+
+tel;
+
+node __Fall(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = ((not input) -> ((pre input) and (not input)));
+
+tel;
+
