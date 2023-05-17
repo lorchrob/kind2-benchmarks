@@ -54,12 +54,3 @@ for file in *; do
   cp "/Users/lorchrob/Desktop/out.smv" "./../../nuxmv_models/simulation/${file%.*}.smv"
   echo $file
 done
-
-cd ../Real_Int/large
-for file in *; do 
-  echo $file
-  touch "./../../../nuxmv_models/Real_Int/large/${file%.*}.smv"
-  timeout 1 '/Users/lorchrob/Documents/CodeProjects/kind2_parent/kind2/bin/kind2' $file 
-  cp "/Users/lorchrob/Desktop/out.smv" "./../../../nuxmv_models/Real_Int/large/${file%.*}.smv"
-  echo $file
-done
