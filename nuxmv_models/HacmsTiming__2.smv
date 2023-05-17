@@ -295,20 +295,6 @@ VAR
 	main-res-call_29 : _TOP__a2(main-usr-a2____ASSUME__HIST, main-usr-a2__input___EVENT_, main-usr-a2__input, main-usr-a2__time, main-usr-a2__output___EVENT_, main-usr-a2__output, main-usr-a2___CLOCK_);
 	main-res-call_26 : __HIST(main-res-gklocal_25);
 	main-res-call_23 : _TOP__a1(main-usr-a1____ASSUME__HIST, main-usr-a1__input___EVENT_, main-usr-a1__input, main-usr-a1__time, main-usr-a1__output___EVENT_, main-usr-a1__output, main-usr-a1___CLOCK_);
-	main-res-poracle_1 : boolean;
-	main-res-poracle_2 : boolean;
-	main-res-poracle_3 : integer;
-	main-res-poracle_4 : integer;
-	main-res-poracle_5 : integer;
-	main-res-poracle_6 : integer;
-	main-res-poracle_7 : boolean;
-	main-res-poracle_8 : boolean;
-	main-res-poracle_9 : integer;
-	main-res-poracle_10 : integer;
-	main-res-poracle_11 : boolean;
-	main-res-poracle_12 : boolean;
-	main-res-poracle_13 : integer;
-	main-res-poracle_14 : integer;
 
 ASSIGN
 	init(main-impl-usr-__GUARANTEE0) := (!(main-usr-output = 0) -> (main-usr-time_of_last_input_change < 40));
@@ -343,8 +329,8 @@ ASSIGN
 	init(main-res-glocal_56) := (main-usr-m2__output___EVENT_ = main-usr-m3__input2___EVENT_);
 	init(main-res-glocal_57) := (main-usr-m3__output = main-usr-output);
 	init(main-res-glocal_58) := (main-usr-m3__output___EVENT_ = main-usr-output___EVENT_);
-	init(main-res-glocal_59) := (80 <= main-usr-a2_period & main-usr-a2_period <= 120);
-	init(main-res-glocal_60) := main-usr-t >= 0;
+	init(main-res-glocal_59) := ((80 <= main-usr-a2_period) & (main-usr-a2_period <= 120));
+	init(main-res-glocal_60) := (main-usr-t >= 0);
 	init(main-res-glocal_61) := ((main-usr-t = 1) | ((main-usr-t = 1) | ((main-usr-t = 1) | ((main-usr-t = 1) | (main-usr-t = 1)))));
 	init(main-res-glocal_62) := (((((((((!(main-usr-clock_a1 & main-usr-clock_a2) & !(main-usr-clock_a1 & main-usr-clock_m1)) & !(main-usr-clock_a1 & main-usr-clock_m2)) & !(main-usr-clock_a1 & main-usr-clock_m3)) & !(main-usr-clock_a2 & main-usr-clock_m1)) & !(main-usr-clock_a2 & main-usr-clock_m2)) & !(main-usr-clock_a2 & main-usr-clock_m3)) & !(main-usr-clock_m1 & main-usr-clock_m2)) & !(main-usr-clock_m1 & main-usr-clock_m3)) & !(main-usr-clock_m2 & main-usr-clock_m3));
 	init(main-res-glocal_63) := (((((main-usr-clock_a1 -> main-usr-sig_a1) & (main-usr-clock_a2 -> main-usr-sig_a2)) & (main-usr-clock_m1 -> main-usr-sig_m1)) & (main-usr-clock_m2 -> main-usr-sig_m2)) & (main-usr-clock_m3 -> main-usr-sig_m3));
@@ -410,8 +396,8 @@ ASSIGN
 	next(main-res-glocal_56) := (next(main-usr-m2__output___EVENT_) = next(main-usr-m3__input2___EVENT_));
 	next(main-res-glocal_57) := (next(main-usr-m3__output) = next(main-usr-output));
 	next(main-res-glocal_58) := (next(main-usr-m3__output___EVENT_) = next(main-usr-output___EVENT_));
-	next(main-res-glocal_59) := (80 <= next(main-usr-a2_period) & next(main-usr-a2_period) <= 120);
-	next(main-res-glocal_60) := (next(main-usr-t) >= 0 & (next(main-usr-t) > main-usr-t));
+	next(main-res-glocal_59) := ((80 <= next(main-usr-a2_period)) & (next(main-usr-a2_period) <= 120));
+	next(main-res-glocal_60) := ((next(main-usr-t) >= 0) & (next(main-usr-t) > main-usr-t));
 	next(main-res-glocal_61) := TRUE;
 	next(main-res-glocal_62) := (((((((((!(next(main-usr-clock_a1) & next(main-usr-clock_a2)) & !(next(main-usr-clock_a1) & next(main-usr-clock_m1))) & !(next(main-usr-clock_a1) & next(main-usr-clock_m2))) & !(next(main-usr-clock_a1) & next(main-usr-clock_m3))) & !(next(main-usr-clock_a2) & next(main-usr-clock_m1))) & !(next(main-usr-clock_a2) & next(main-usr-clock_m2))) & !(next(main-usr-clock_a2) & next(main-usr-clock_m3))) & !(next(main-usr-clock_m1) & next(main-usr-clock_m2))) & !(next(main-usr-clock_m1) & next(main-usr-clock_m3))) & !(next(main-usr-clock_m2) & next(main-usr-clock_m3)));
 	next(main-res-glocal_63) := (((((next(main-usr-clock_a1) -> next(main-usr-sig_a1)) & (next(main-usr-clock_a2) -> next(main-usr-sig_a2))) & (next(main-usr-clock_m1) -> next(main-usr-sig_m1))) & (next(main-usr-clock_m2) -> next(main-usr-sig_m2))) & (next(main-usr-clock_m3) -> next(main-usr-sig_m3)));

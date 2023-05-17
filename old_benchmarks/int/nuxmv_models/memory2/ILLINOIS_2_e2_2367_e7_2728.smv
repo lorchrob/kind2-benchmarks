@@ -1,23 +1,70 @@
 
 MODULE illinois (illinois-usr-e1, illinois-usr-e2, illinois-usr-e3, illinois-usr-e4, illinois-usr-e5, illinois-usr-e6, illinois-usr-e7, illinois-usr-e8, illinois-usr-e9, illinois-usr-init_invalid)
 VAR
-	illinois-usr-invalid : integer;	illinois-usr-dirty : integer;	illinois-usr-exclusive : integer;	illinois-usr-shared : integer;	illinois-res-oracle_15 : integer;	illinois-res-oracle_14 : integer;	illinois-res-oracle_13 : integer;	illinois-res-oracle_12 : integer;	illinois-res-oracle_11 : integer;	illinois-res-oracle_10 : integer;	illinois-res-oracle_7 : integer;	illinois-res-oracle_8 : integer;	illinois-res-oracle_9 : integer;	illinois-res-oracle_5 : integer;	illinois-res-oracle_6 : integer;	illinois-res-oracle_1 : integer;	illinois-res-oracle_2 : integer;	illinois-res-oracle_3 : integer;	illinois-res-oracle_4 : integer;
+	illinois-usr-invalid : integer;
+	illinois-usr-dirty : integer;
+	illinois-usr-exclusive : integer;
+	illinois-usr-shared : integer;
+	illinois-impl-usr-g1 : boolean;
+	illinois-impl-usr-g2 : boolean;
+	illinois-impl-usr-g3 : boolean;
+	illinois-impl-usr-g4 : boolean;
+	illinois-impl-usr-g5 : boolean;
+	illinois-impl-usr-g6 : boolean;
+	illinois-impl-usr-g7 : boolean;
+	illinois-impl-usr-g8 : boolean;
+	illinois-impl-usr-g9 : boolean;
+	illinois-res-oracle_15 : integer;
+	illinois-res-oracle_14 : integer;
+	illinois-res-oracle_13 : integer;
+	illinois-res-oracle_12 : integer;
+	illinois-res-oracle_11 : integer;
+	illinois-res-oracle_10 : integer;
+	illinois-res-oracle_7 : integer;
+	illinois-res-oracle_8 : integer;
+	illinois-res-oracle_9 : integer;
+	illinois-res-oracle_5 : integer;
+	illinois-res-oracle_6 : integer;
+	illinois-res-oracle_1 : integer;
+	illinois-res-oracle_2 : integer;
+	illinois-res-oracle_3 : integer;
+	illinois-res-oracle_4 : integer;
+
 ASSIGN
 	init(illinois-usr-invalid) := ((illinois-usr-init_invalid > 0) ? illinois-usr-init_invalid : (1 - illinois-usr-init_invalid));
 	init(illinois-usr-dirty) := 0;
+	init(illinois-impl-usr-g2) := (illinois-res-oracle_5 >= 1 & illinois-res-oracle_6 >= 1);
+	init(illinois-impl-usr-g4) := illinois-res-oracle_10 >= 1;
 	init(illinois-usr-exclusive) := 0;
+	init(illinois-impl-usr-g1) := (((illinois-res-oracle_1 >= 1 & (illinois-res-oracle_2 = 0)) & (illinois-res-oracle_3 = 0)) & (illinois-res-oracle_4 = 0));
 	init(illinois-usr-shared) := 0;
+	init(illinois-impl-usr-g3) := (illinois-res-oracle_7 >= 1 & illinois-res-oracle_8 + illinois-res-oracle_9 >= 1);
+	init(illinois-impl-usr-g5) := illinois-res-oracle_11 >= 1;
+	init(illinois-impl-usr-g6) := illinois-res-oracle_12 >= 1;
+	init(illinois-impl-usr-g8) := illinois-res-oracle_14 >= 1;
+	init(illinois-impl-usr-g9) := illinois-res-oracle_15 >= 1;
+	init(illinois-impl-usr-g7) := illinois-res-oracle_13 >= 1;
 
-	next(illinois-usr-invalid) := (next(illinois-usr-e1) ? ((((illinois-usr-invalid >= 1 & (illinois-usr-dirty = 0)) & (illinois-usr-shared = 0)) & (illinois-usr-exclusive = 0)) ? (illinois-usr-invalid - 1) : illinois-usr-invalid) : (next(illinois-usr-e2) ? ((illinois-usr-invalid >= 1 & illinois-usr-dirty >= 1) ? (illinois-usr-invalid - 1) : illinois-usr-invalid) : (next(illinois-usr-e3) ? ((illinois-usr-invalid >= 1 & illinois-usr-shared + illinois-usr-exclusive >= 1) ? (illinois-usr-invalid - 1) : illinois-usr-invalid) : (next(illinois-usr-e5) ? (illinois-usr-shared >= 1 ? (illinois-usr-invalid + illinois-usr-shared - 1) : illinois-usr-invalid) : (next(illinois-usr-e6) ? (illinois-usr-invalid >= 1 ? (illinois-usr-invalid + illinois-usr-dirty + illinois-usr-shared + illinois-usr-exclusive - 1) : illinois-usr-invalid) : (next(illinois-usr-e7) ? (illinois-usr-dirty >= 1 ? illinois-usr-invalid + 1 : illinois-usr-invalid) : (next(illinois-usr-e8) ? (illinois-usr-shared >= 1 ? illinois-usr-invalid + 1 : illinois-usr-invalid) : (next(illinois-usr-e9) ? (illinois-usr-exclusive >= 1 ? illinois-usr-invalid + 1 : illinois-usr-invalid) : illinois-usr-invalid))))))));
-	next(illinois-usr-dirty) := (next(illinois-usr-e2) ? ((illinois-usr-invalid >= 1 & illinois-usr-dirty >= 1) ? (illinois-usr-dirty - 1) : illinois-usr-dirty) : (next(illinois-usr-e4) ? (illinois-usr-exclusive >= 1 ? illinois-usr-dirty + 1 : illinois-usr-dirty) : (next(illinois-usr-e5) ? (illinois-usr-shared >= 1 ? illinois-usr-dirty + 1 : illinois-usr-dirty) : (next(illinois-usr-e6) ? (illinois-usr-invalid >= 1 ? 1 : illinois-usr-dirty) : (next(illinois-usr-e7) ? (illinois-usr-dirty >= 1 ? (illinois-usr-dirty - 1) : illinois-usr-dirty) : illinois-usr-dirty)))));
-	next(illinois-usr-exclusive) := (next(illinois-usr-e1) ? ((((illinois-usr-invalid >= 1 & (illinois-usr-dirty = 0)) & (illinois-usr-shared = 0)) & (illinois-usr-exclusive = 0)) ? illinois-usr-exclusive + 1 : illinois-usr-exclusive) : (next(illinois-usr-e3) ? ((illinois-usr-invalid >= 1 & illinois-usr-shared + illinois-usr-exclusive >= 1) ? 0 : illinois-usr-exclusive) : (next(illinois-usr-e4) ? (illinois-usr-exclusive >= 1 ? (illinois-usr-exclusive - 1) : illinois-usr-exclusive) : (next(illinois-usr-e6) ? (illinois-usr-invalid >= 1 ? 0 : illinois-usr-exclusive) : (next(illinois-usr-e9) ? (illinois-usr-exclusive >= 1 ? (illinois-usr-exclusive - 1) : illinois-usr-exclusive) : illinois-usr-exclusive)))));
-	next(illinois-usr-shared) := (next(illinois-usr-e2) ? ((illinois-usr-invalid >= 1 & illinois-usr-dirty >= 1) ? illinois-usr-shared + 2 : illinois-usr-shared) : (next(illinois-usr-e3) ? ((illinois-usr-invalid >= 1 & illinois-usr-shared + illinois-usr-exclusive >= 1) ? illinois-usr-shared + illinois-usr-exclusive + 1 : illinois-usr-shared) : (next(illinois-usr-e5) ? (illinois-usr-shared >= 1 ? 0 : illinois-usr-shared) : (next(illinois-usr-e6) ? (illinois-usr-invalid >= 1 ? 0 : illinois-usr-shared) : (next(illinois-usr-e8) ? (illinois-usr-shared >= 1 ? (illinois-usr-shared - 1) : illinois-usr-shared) : illinois-usr-shared)))));
+	next(illinois-impl-usr-g9) := illinois-usr-exclusive >= 1;
+	next(illinois-impl-usr-g8) := illinois-usr-shared >= 1;
+	next(illinois-impl-usr-g7) := illinois-usr-dirty >= 1;
+	next(illinois-impl-usr-g6) := illinois-usr-invalid >= 1;
+	next(illinois-impl-usr-g5) := illinois-usr-shared >= 1;
+	next(illinois-impl-usr-g3) := (illinois-usr-invalid >= 1 & illinois-usr-shared + illinois-usr-exclusive >= 1);
+	next(illinois-impl-usr-g2) := (illinois-usr-invalid >= 1 & illinois-usr-dirty >= 1);
+	next(illinois-impl-usr-g1) := (((illinois-usr-invalid >= 1 & (illinois-usr-dirty = 0)) & (illinois-usr-shared = 0)) & (illinois-usr-exclusive = 0));
+	next(illinois-usr-invalid) := (next(illinois-usr-e1) ? (next(illinois-impl-usr-g1) ? (illinois-usr-invalid - 1) : illinois-usr-invalid) : (next(illinois-usr-e2) ? (next(illinois-impl-usr-g2) ? (illinois-usr-invalid - 1) : illinois-usr-invalid) : (next(illinois-usr-e3) ? (next(illinois-impl-usr-g3) ? (illinois-usr-invalid - 1) : illinois-usr-invalid) : (next(illinois-usr-e5) ? (next(illinois-impl-usr-g5) ? (illinois-usr-invalid + illinois-usr-shared - 1) : illinois-usr-invalid) : (next(illinois-usr-e6) ? (next(illinois-impl-usr-g6) ? (illinois-usr-invalid + illinois-usr-dirty + illinois-usr-shared + illinois-usr-exclusive - 1) : illinois-usr-invalid) : (next(illinois-usr-e7) ? (next(illinois-impl-usr-g7) ? illinois-usr-invalid + 1 : illinois-usr-invalid) : (next(illinois-usr-e8) ? (next(illinois-impl-usr-g8) ? illinois-usr-invalid + 1 : illinois-usr-invalid) : (next(illinois-usr-e9) ? (next(illinois-impl-usr-g9) ? illinois-usr-invalid + 1 : illinois-usr-invalid) : illinois-usr-invalid))))))));
+	next(illinois-impl-usr-g4) := illinois-usr-exclusive >= 1;
+	next(illinois-usr-dirty) := (next(illinois-usr-e2) ? (next(illinois-impl-usr-g2) ? (illinois-usr-dirty - 1) : illinois-usr-dirty) : (next(illinois-usr-e4) ? (next(illinois-impl-usr-g4) ? illinois-usr-dirty + 1 : illinois-usr-dirty) : (next(illinois-usr-e5) ? (next(illinois-impl-usr-g5) ? illinois-usr-dirty + 1 : illinois-usr-dirty) : (next(illinois-usr-e6) ? (next(illinois-impl-usr-g6) ? 1 : illinois-usr-dirty) : (next(illinois-usr-e7) ? (next(illinois-impl-usr-g7) ? (illinois-usr-dirty - 1) : illinois-usr-dirty) : illinois-usr-dirty)))));
+	next(illinois-usr-exclusive) := (next(illinois-usr-e1) ? (next(illinois-impl-usr-g1) ? illinois-usr-exclusive + 1 : illinois-usr-exclusive) : (next(illinois-usr-e3) ? (next(illinois-impl-usr-g3) ? 0 : illinois-usr-exclusive) : (next(illinois-usr-e4) ? (next(illinois-impl-usr-g4) ? (illinois-usr-exclusive - 1) : illinois-usr-exclusive) : (next(illinois-usr-e6) ? (next(illinois-impl-usr-g6) ? 0 : illinois-usr-exclusive) : (next(illinois-usr-e9) ? (next(illinois-impl-usr-g9) ? (illinois-usr-exclusive - 1) : illinois-usr-exclusive) : illinois-usr-exclusive)))));
+	next(illinois-usr-shared) := (next(illinois-usr-e2) ? (next(illinois-impl-usr-g2) ? illinois-usr-shared + 2 : illinois-usr-shared) : (next(illinois-usr-e3) ? (next(illinois-impl-usr-g3) ? illinois-usr-shared + illinois-usr-exclusive + 1 : illinois-usr-shared) : (next(illinois-usr-e5) ? (next(illinois-impl-usr-g5) ? 0 : illinois-usr-shared) : (next(illinois-usr-e6) ? (next(illinois-impl-usr-g6) ? 0 : illinois-usr-shared) : (next(illinois-usr-e8) ? (next(illinois-impl-usr-g8) ? (illinois-usr-shared - 1) : illinois-usr-shared) : illinois-usr-shared)))));
 
 
 
 MODULE excludes9 (excludes9-usr-X1, excludes9-usr-X2, excludes9-usr-X3, excludes9-usr-X4, excludes9-usr-X5, excludes9-usr-X6, excludes9-usr-X7, excludes9-usr-X8, excludes9-usr-X9)
 VAR
 	excludes9-usr-excludes : boolean;
+
 ASSIGN
 	init(excludes9-usr-excludes) := (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | ((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9))))))))));
 
@@ -28,6 +75,7 @@ ASSIGN
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
@@ -36,16 +84,43 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-e1 : boolean;	top-usr-e2 : boolean;	top-usr-e3 : boolean;	top-usr-e4 : boolean;	top-usr-e5 : boolean;	top-usr-e6 : boolean;	top-usr-e7 : boolean;	top-usr-e8 : boolean;	top-usr-e9 : boolean;	top-usr-init_invalid : integer;	top-usr-OK : boolean;	top-res-glocal_19 : integer;	top-res-call_17 : excludes9(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9);
+	top-usr-e1 : boolean;
+	top-usr-e2 : boolean;
+	top-usr-e3 : boolean;
+	top-usr-e4 : boolean;
+	top-usr-e5 : boolean;
+	top-usr-e6 : boolean;
+	top-usr-e7 : boolean;
+	top-usr-e8 : boolean;
+	top-usr-e9 : boolean;
+	top-usr-init_invalid : integer;
+	top-usr-OK : boolean;
+	top-impl-usr-invalid : integer;
+	top-impl-usr-dirty : integer;
+	top-impl-usr-exclusive : integer;
+	top-impl-usr-shared : integer;
+	top-impl-usr-env : boolean;
+	top-res-glocal_19 : integer;
+	top-res-call_17 : excludes9(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9);
 	top-res-call_18 : Sofar(top-res-call_17.excludes9-usr-excludes);
 	top-res-2-call_16 : illinois(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9, top-usr-init_invalid);
-	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;	top-res-poracle_4 : integer;	top-res-poracle_5 : integer;	top-res-poracle_6 : integer;	top-res-poracle_7 : integer;	top-res-poracle_8 : integer;	top-res-poracle_9 : integer;	top-res-poracle_10 : integer;	top-res-poracle_11 : integer;	top-res-poracle_12 : integer;	top-res-poracle_13 : integer;	top-res-poracle_14 : integer;	top-res-poracle_15 : integer;
+
 ASSIGN
 	init(top-usr-OK) := TRUE;
-	init(top-res-glocal_19) := top-res-2-call_16.illinois-usr-invalid + top-res-2-call_16.illinois-usr-dirty + top-res-2-call_16.illinois-usr-exclusive + top-res-2-call_16.illinois-usr-shared;
+	init(top-impl-usr-invalid) := top-res-2-call_16.illinois-usr-invalid;
+	init(top-impl-usr-dirty) := top-res-2-call_16.illinois-usr-dirty;
+	init(top-impl-usr-exclusive) := top-res-2-call_16.illinois-usr-exclusive;
+	init(top-impl-usr-shared) := top-res-2-call_16.illinois-usr-shared;
+	init(top-impl-usr-env) := top-res-call_18.Sofar-usr-Sofar;
+	init(top-res-glocal_19) := top-impl-usr-invalid + top-impl-usr-dirty + top-impl-usr-exclusive + top-impl-usr-shared;
 
-	next(top-usr-OK) := (next(top-res-call_18.Sofar-usr-Sofar) -> ((next(top-res-2-call_16.illinois-usr-invalid) - 1) + next(top-res-2-call_16.illinois-usr-dirty) + next(top-res-2-call_16.illinois-usr-exclusive) + next(top-res-2-call_16.illinois-usr-shared) = top-res-glocal_19));
-	next(top-res-glocal_19) := next(top-res-2-call_16.illinois-usr-invalid) + next(top-res-2-call_16.illinois-usr-dirty) + next(top-res-2-call_16.illinois-usr-exclusive) + next(top-res-2-call_16.illinois-usr-shared);
+	next(top-impl-usr-env) := next(top-res-call_18.Sofar-usr-Sofar);
+	next(top-impl-usr-shared) := next(top-res-2-call_16.illinois-usr-shared);
+	next(top-impl-usr-exclusive) := next(top-res-2-call_16.illinois-usr-exclusive);
+	next(top-impl-usr-dirty) := next(top-res-2-call_16.illinois-usr-dirty);
+	next(top-impl-usr-invalid) := next(top-res-2-call_16.illinois-usr-invalid);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> ((next(top-impl-usr-invalid) - 1) + next(top-impl-usr-dirty) + next(top-impl-usr-exclusive) + next(top-impl-usr-shared) = top-res-glocal_19));
+	next(top-res-glocal_19) := next(top-impl-usr-invalid) + next(top-impl-usr-dirty) + next(top-impl-usr-exclusive) + next(top-impl-usr-shared);
 
 
 INVARSPEC 

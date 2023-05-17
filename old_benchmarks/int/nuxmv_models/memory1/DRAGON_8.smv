@@ -1,21 +1,95 @@
 
 MODULE DRAGON (DRAGON-usr-e01, DRAGON-usr-e02, DRAGON-usr-e03, DRAGON-usr-e04, DRAGON-usr-e05, DRAGON-usr-e06, DRAGON-usr-e07, DRAGON-usr-e08, DRAGON-usr-e09, DRAGON-usr-e10, DRAGON-usr-e11, DRAGON-usr-e12, DRAGON-usr-init_invalid)
 VAR
-	DRAGON-usr-exclusive : integer;	DRAGON-usr-shared : integer;	DRAGON-usr-shared_dirty : integer;	DRAGON-usr-dirty : integer;	DRAGON-usr-invalid : integer;	DRAGON-usr-erreur : boolean;	DRAGON-impl-usr-mem_init : integer;	DRAGON-res-oracle_31 : integer;	DRAGON-res-oracle_30 : integer;	DRAGON-res-oracle_29 : integer;	DRAGON-res-oracle_28 : integer;	DRAGON-res-oracle_23 : integer;	DRAGON-res-oracle_24 : integer;	DRAGON-res-oracle_25 : integer;	DRAGON-res-oracle_26 : integer;	DRAGON-res-oracle_27 : integer;	DRAGON-res-oracle_18 : integer;	DRAGON-res-oracle_19 : integer;	DRAGON-res-oracle_20 : integer;	DRAGON-res-oracle_21 : integer;	DRAGON-res-oracle_22 : integer;	DRAGON-res-oracle_16 : integer;	DRAGON-res-oracle_17 : integer;	DRAGON-res-oracle_14 : integer;	DRAGON-res-oracle_15 : integer;	DRAGON-res-oracle_12 : integer;	DRAGON-res-oracle_13 : integer;	DRAGON-res-oracle_11 : integer;	DRAGON-res-oracle_6 : integer;	DRAGON-res-oracle_7 : integer;	DRAGON-res-oracle_8 : integer;	DRAGON-res-oracle_9 : integer;	DRAGON-res-oracle_10 : integer;	DRAGON-res-oracle_1 : integer;	DRAGON-res-oracle_2 : integer;	DRAGON-res-oracle_3 : integer;	DRAGON-res-oracle_4 : integer;	DRAGON-res-oracle_5 : integer;
+	DRAGON-usr-exclusive : integer;
+	DRAGON-usr-shared : integer;
+	DRAGON-usr-shared_dirty : integer;
+	DRAGON-usr-dirty : integer;
+	DRAGON-usr-invalid : integer;
+	DRAGON-usr-erreur : boolean;
+	DRAGON-impl-usr-g01 : boolean;
+	DRAGON-impl-usr-g02 : boolean;
+	DRAGON-impl-usr-g03 : boolean;
+	DRAGON-impl-usr-g04 : boolean;
+	DRAGON-impl-usr-g05 : boolean;
+	DRAGON-impl-usr-g06 : boolean;
+	DRAGON-impl-usr-g07 : boolean;
+	DRAGON-impl-usr-g08 : boolean;
+	DRAGON-impl-usr-g09 : boolean;
+	DRAGON-impl-usr-g10 : boolean;
+	DRAGON-impl-usr-g11 : boolean;
+	DRAGON-impl-usr-g12 : boolean;
+	DRAGON-impl-usr-mem_init : integer;
+	DRAGON-res-oracle_31 : integer;
+	DRAGON-res-oracle_30 : integer;
+	DRAGON-res-oracle_29 : integer;
+	DRAGON-res-oracle_28 : integer;
+	DRAGON-res-oracle_23 : integer;
+	DRAGON-res-oracle_24 : integer;
+	DRAGON-res-oracle_25 : integer;
+	DRAGON-res-oracle_26 : integer;
+	DRAGON-res-oracle_27 : integer;
+	DRAGON-res-oracle_18 : integer;
+	DRAGON-res-oracle_19 : integer;
+	DRAGON-res-oracle_20 : integer;
+	DRAGON-res-oracle_21 : integer;
+	DRAGON-res-oracle_22 : integer;
+	DRAGON-res-oracle_16 : integer;
+	DRAGON-res-oracle_17 : integer;
+	DRAGON-res-oracle_14 : integer;
+	DRAGON-res-oracle_15 : integer;
+	DRAGON-res-oracle_12 : integer;
+	DRAGON-res-oracle_13 : integer;
+	DRAGON-res-oracle_11 : integer;
+	DRAGON-res-oracle_6 : integer;
+	DRAGON-res-oracle_7 : integer;
+	DRAGON-res-oracle_8 : integer;
+	DRAGON-res-oracle_9 : integer;
+	DRAGON-res-oracle_10 : integer;
+	DRAGON-res-oracle_1 : integer;
+	DRAGON-res-oracle_2 : integer;
+	DRAGON-res-oracle_3 : integer;
+	DRAGON-res-oracle_4 : integer;
+	DRAGON-res-oracle_5 : integer;
+
 ASSIGN
 	init(DRAGON-usr-exclusive) := 0;
+	init(DRAGON-impl-usr-g01) := ((((DRAGON-res-oracle_1 >= 1 & (DRAGON-res-oracle_2 = 0)) & (DRAGON-res-oracle_3 = 0)) & (DRAGON-res-oracle_4 = 0)) & (DRAGON-res-oracle_5 = 0));
 	init(DRAGON-usr-shared) := 0;
 	init(DRAGON-usr-shared_dirty) := 0;
 	init(DRAGON-usr-dirty) := 0;
+	init(DRAGON-impl-usr-g02) := (DRAGON-res-oracle_6 >= 1 & DRAGON-res-oracle_7 + DRAGON-res-oracle_8 + DRAGON-res-oracle_9 + DRAGON-res-oracle_10 >= 1);
 	init(DRAGON-impl-usr-mem_init) := DRAGON-usr-init_invalid;
 	init(DRAGON-usr-invalid) := DRAGON-impl-usr-mem_init;
+	init(DRAGON-impl-usr-g07) := ((((DRAGON-res-oracle_18 >= 1 & (DRAGON-res-oracle_19 = 0)) & (DRAGON-res-oracle_20 = 0)) & (DRAGON-res-oracle_21 = 0)) & (DRAGON-res-oracle_22 = 0));
+	init(DRAGON-impl-usr-g08) := (DRAGON-res-oracle_23 >= 1 & DRAGON-res-oracle_24 + DRAGON-res-oracle_25 + DRAGON-res-oracle_26 + DRAGON-res-oracle_27 >= 1);
+	init(DRAGON-impl-usr-g09) := DRAGON-res-oracle_28 >= 1;
+	init(DRAGON-impl-usr-g10) := DRAGON-res-oracle_29 >= 1;
+	init(DRAGON-impl-usr-g11) := DRAGON-res-oracle_30 >= 1;
+	init(DRAGON-impl-usr-g12) := DRAGON-res-oracle_31 >= 1;
+	init(DRAGON-impl-usr-g03) := DRAGON-res-oracle_11 >= 1;
+	init(DRAGON-impl-usr-g04) := ((DRAGON-res-oracle_12 = 1) & (DRAGON-res-oracle_13 = 0));
+	init(DRAGON-impl-usr-g05) := ((DRAGON-res-oracle_14 = 0) & (DRAGON-res-oracle_15 = 1));
+	init(DRAGON-impl-usr-g06) := DRAGON-res-oracle_16 + DRAGON-res-oracle_17 >= 2;
 	init(DRAGON-usr-erreur) := (DRAGON-usr-exclusive >= 2 ? TRUE : FALSE);
 
-	next(DRAGON-usr-exclusive) := (next(DRAGON-usr-e01) ? (((((DRAGON-usr-invalid >= 1 & (DRAGON-usr-dirty = 0)) & (DRAGON-usr-shared = 0)) & (DRAGON-usr-exclusive = 0)) & (DRAGON-usr-shared_dirty = 0)) ? DRAGON-usr-exclusive + 1 : DRAGON-usr-exclusive) : (next(DRAGON-usr-e02) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? 0 : DRAGON-usr-exclusive) : (next(DRAGON-usr-e03) ? (DRAGON-usr-exclusive >= 1 ? (DRAGON-usr-exclusive - 1) : DRAGON-usr-exclusive) : (next(DRAGON-usr-e08) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? 0 : DRAGON-usr-exclusive) : (next(DRAGON-usr-e12) ? (DRAGON-usr-exclusive >= 1 ? (DRAGON-usr-exclusive - 1) : DRAGON-usr-exclusive) : DRAGON-usr-exclusive)))));
-	next(DRAGON-usr-shared) := (next(DRAGON-usr-e02) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? DRAGON-usr-shared + DRAGON-usr-exclusive + 1 : DRAGON-usr-shared) : (next(DRAGON-usr-e05) ? (((DRAGON-usr-shared_dirty = 0) & (DRAGON-usr-shared = 1)) ? 0 : DRAGON-usr-shared) : (next(DRAGON-usr-e06) ? (DRAGON-usr-shared_dirty + DRAGON-usr-shared >= 2 ? (DRAGON-usr-shared + DRAGON-usr-shared_dirty - 1) : DRAGON-usr-shared) : (next(DRAGON-usr-e08) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty + DRAGON-usr-dirty : DRAGON-usr-shared) : (next(DRAGON-usr-e10) ? (DRAGON-usr-shared >= 1 ? (DRAGON-usr-shared - 1) : DRAGON-usr-shared) : DRAGON-usr-shared)))));
-	next(DRAGON-usr-shared_dirty) := (next(DRAGON-usr-e02) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? DRAGON-usr-shared_dirty + DRAGON-usr-dirty : DRAGON-usr-shared_dirty) : (next(DRAGON-usr-e04) ? (((DRAGON-usr-shared_dirty = 1) & (DRAGON-usr-shared = 0)) ? 0 : DRAGON-usr-shared_dirty) : (next(DRAGON-usr-e06) ? (DRAGON-usr-shared_dirty + DRAGON-usr-shared >= 2 ? 1 : DRAGON-usr-shared_dirty) : (next(DRAGON-usr-e08) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? 1 : DRAGON-usr-shared_dirty) : (next(DRAGON-usr-e11) ? (DRAGON-usr-shared_dirty >= 1 ? (DRAGON-usr-shared_dirty - 1) : DRAGON-usr-shared_dirty) : DRAGON-usr-shared_dirty)))));
-	next(DRAGON-usr-dirty) := (next(DRAGON-usr-e02) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? 0 : DRAGON-usr-dirty) : (next(DRAGON-usr-e03) ? (DRAGON-usr-exclusive >= 1 ? DRAGON-usr-dirty + 1 : DRAGON-usr-dirty) : (next(DRAGON-usr-e04) ? (((DRAGON-usr-shared_dirty = 1) & (DRAGON-usr-shared = 0)) ? DRAGON-usr-dirty + 1 : DRAGON-usr-dirty) : (next(DRAGON-usr-e05) ? (((DRAGON-usr-shared_dirty = 0) & (DRAGON-usr-shared = 1)) ? DRAGON-usr-dirty + 1 : DRAGON-usr-dirty) : (next(DRAGON-usr-e07) ? (((((DRAGON-usr-invalid >= 1 & (DRAGON-usr-dirty = 0)) & (DRAGON-usr-shared = 0)) & (DRAGON-usr-exclusive = 0)) & (DRAGON-usr-shared_dirty = 0)) ? DRAGON-usr-dirty + 1 : DRAGON-usr-dirty) : (next(DRAGON-usr-e08) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? 0 : DRAGON-usr-dirty) : (next(DRAGON-usr-e09) ? (DRAGON-usr-dirty >= 1 ? (DRAGON-usr-dirty - 1) : DRAGON-usr-dirty) : DRAGON-usr-dirty)))))));
-	next(DRAGON-usr-invalid) := (next(DRAGON-usr-e01) ? (((((DRAGON-usr-invalid >= 1 & (DRAGON-usr-dirty = 0)) & (DRAGON-usr-shared = 0)) & (DRAGON-usr-exclusive = 0)) & (DRAGON-usr-shared_dirty = 0)) ? (DRAGON-usr-invalid - 1) : DRAGON-usr-invalid) : (next(DRAGON-usr-e02) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? (DRAGON-usr-invalid - 1) : DRAGON-usr-invalid) : (next(DRAGON-usr-e07) ? (((((DRAGON-usr-invalid >= 1 & (DRAGON-usr-dirty = 0)) & (DRAGON-usr-shared = 0)) & (DRAGON-usr-exclusive = 0)) & (DRAGON-usr-shared_dirty = 0)) ? (DRAGON-usr-invalid - 1) : DRAGON-usr-invalid) : (next(DRAGON-usr-e08) ? ((DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1) ? (DRAGON-usr-invalid - 1) : DRAGON-usr-invalid) : (next(DRAGON-usr-e09) ? (DRAGON-usr-dirty >= 1 ? DRAGON-usr-invalid + 1 : DRAGON-usr-invalid) : (next(DRAGON-usr-e10) ? (DRAGON-usr-shared >= 1 ? DRAGON-usr-invalid + 1 : DRAGON-usr-invalid) : (next(DRAGON-usr-e11) ? (DRAGON-usr-shared_dirty >= 1 ? DRAGON-usr-invalid + 1 : DRAGON-usr-invalid) : (next(DRAGON-usr-e12) ? (DRAGON-usr-exclusive >= 1 ? DRAGON-usr-invalid + 1 : DRAGON-usr-invalid) : DRAGON-usr-invalid))))))));
+	next(DRAGON-impl-usr-g12) := DRAGON-usr-exclusive >= 1;
+	next(DRAGON-impl-usr-g08) := (DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1);
+	next(DRAGON-impl-usr-g03) := DRAGON-usr-exclusive >= 1;
+	next(DRAGON-impl-usr-g02) := (DRAGON-usr-invalid >= 1 & DRAGON-usr-dirty + DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty >= 1);
+	next(DRAGON-impl-usr-g01) := ((((DRAGON-usr-invalid >= 1 & (DRAGON-usr-dirty = 0)) & (DRAGON-usr-shared = 0)) & (DRAGON-usr-exclusive = 0)) & (DRAGON-usr-shared_dirty = 0));
+	next(DRAGON-usr-exclusive) := (next(DRAGON-usr-e01) ? (next(DRAGON-impl-usr-g01) ? DRAGON-usr-exclusive + 1 : DRAGON-usr-exclusive) : (next(DRAGON-usr-e02) ? (next(DRAGON-impl-usr-g02) ? 0 : DRAGON-usr-exclusive) : (next(DRAGON-usr-e03) ? (next(DRAGON-impl-usr-g03) ? (DRAGON-usr-exclusive - 1) : DRAGON-usr-exclusive) : (next(DRAGON-usr-e08) ? (next(DRAGON-impl-usr-g08) ? 0 : DRAGON-usr-exclusive) : (next(DRAGON-usr-e12) ? (next(DRAGON-impl-usr-g12) ? (DRAGON-usr-exclusive - 1) : DRAGON-usr-exclusive) : DRAGON-usr-exclusive)))));
+	next(DRAGON-impl-usr-g10) := DRAGON-usr-shared >= 1;
+	next(DRAGON-impl-usr-g06) := DRAGON-usr-shared_dirty + DRAGON-usr-shared >= 2;
+	next(DRAGON-impl-usr-g05) := ((DRAGON-usr-shared_dirty = 0) & (DRAGON-usr-shared = 1));
+	next(DRAGON-usr-shared) := (next(DRAGON-usr-e02) ? (next(DRAGON-impl-usr-g02) ? DRAGON-usr-shared + DRAGON-usr-exclusive + 1 : DRAGON-usr-shared) : (next(DRAGON-usr-e05) ? (next(DRAGON-impl-usr-g05) ? 0 : DRAGON-usr-shared) : (next(DRAGON-usr-e06) ? (next(DRAGON-impl-usr-g06) ? (DRAGON-usr-shared + DRAGON-usr-shared_dirty - 1) : DRAGON-usr-shared) : (next(DRAGON-usr-e08) ? (next(DRAGON-impl-usr-g08) ? DRAGON-usr-shared + DRAGON-usr-exclusive + DRAGON-usr-shared_dirty + DRAGON-usr-dirty : DRAGON-usr-shared) : (next(DRAGON-usr-e10) ? (next(DRAGON-impl-usr-g10) ? (DRAGON-usr-shared - 1) : DRAGON-usr-shared) : DRAGON-usr-shared)))));
+	next(DRAGON-impl-usr-g11) := DRAGON-usr-shared_dirty >= 1;
+	next(DRAGON-impl-usr-g04) := ((DRAGON-usr-shared_dirty = 1) & (DRAGON-usr-shared = 0));
+	next(DRAGON-usr-shared_dirty) := (next(DRAGON-usr-e02) ? (next(DRAGON-impl-usr-g02) ? DRAGON-usr-shared_dirty + DRAGON-usr-dirty : DRAGON-usr-shared_dirty) : (next(DRAGON-usr-e04) ? (next(DRAGON-impl-usr-g04) ? 0 : DRAGON-usr-shared_dirty) : (next(DRAGON-usr-e06) ? (next(DRAGON-impl-usr-g06) ? 1 : DRAGON-usr-shared_dirty) : (next(DRAGON-usr-e08) ? (next(DRAGON-impl-usr-g08) ? 1 : DRAGON-usr-shared_dirty) : (next(DRAGON-usr-e11) ? (next(DRAGON-impl-usr-g11) ? (DRAGON-usr-shared_dirty - 1) : DRAGON-usr-shared_dirty) : DRAGON-usr-shared_dirty)))));
+	next(DRAGON-impl-usr-g09) := DRAGON-usr-dirty >= 1;
+	next(DRAGON-impl-usr-g07) := ((((DRAGON-usr-invalid >= 1 & (DRAGON-usr-dirty = 0)) & (DRAGON-usr-shared = 0)) & (DRAGON-usr-exclusive = 0)) & (DRAGON-usr-shared_dirty = 0));
+	next(DRAGON-usr-dirty) := (next(DRAGON-usr-e02) ? (next(DRAGON-impl-usr-g02) ? 0 : DRAGON-usr-dirty) : (next(DRAGON-usr-e03) ? (next(DRAGON-impl-usr-g03) ? DRAGON-usr-dirty + 1 : DRAGON-usr-dirty) : (next(DRAGON-usr-e04) ? (next(DRAGON-impl-usr-g04) ? DRAGON-usr-dirty + 1 : DRAGON-usr-dirty) : (next(DRAGON-usr-e05) ? (next(DRAGON-impl-usr-g05) ? DRAGON-usr-dirty + 1 : DRAGON-usr-dirty) : (next(DRAGON-usr-e07) ? (next(DRAGON-impl-usr-g07) ? DRAGON-usr-dirty + 1 : DRAGON-usr-dirty) : (next(DRAGON-usr-e08) ? (next(DRAGON-impl-usr-g08) ? 0 : DRAGON-usr-dirty) : (next(DRAGON-usr-e09) ? (next(DRAGON-impl-usr-g09) ? (DRAGON-usr-dirty - 1) : DRAGON-usr-dirty) : DRAGON-usr-dirty)))))));
+	next(DRAGON-usr-invalid) := (next(DRAGON-usr-e01) ? (next(DRAGON-impl-usr-g01) ? (DRAGON-usr-invalid - 1) : DRAGON-usr-invalid) : (next(DRAGON-usr-e02) ? (next(DRAGON-impl-usr-g02) ? (DRAGON-usr-invalid - 1) : DRAGON-usr-invalid) : (next(DRAGON-usr-e07) ? (next(DRAGON-impl-usr-g07) ? (DRAGON-usr-invalid - 1) : DRAGON-usr-invalid) : (next(DRAGON-usr-e08) ? (next(DRAGON-impl-usr-g08) ? (DRAGON-usr-invalid - 1) : DRAGON-usr-invalid) : (next(DRAGON-usr-e09) ? (next(DRAGON-impl-usr-g09) ? DRAGON-usr-invalid + 1 : DRAGON-usr-invalid) : (next(DRAGON-usr-e10) ? (next(DRAGON-impl-usr-g10) ? DRAGON-usr-invalid + 1 : DRAGON-usr-invalid) : (next(DRAGON-usr-e11) ? (next(DRAGON-impl-usr-g11) ? DRAGON-usr-invalid + 1 : DRAGON-usr-invalid) : (next(DRAGON-usr-e12) ? (next(DRAGON-impl-usr-g12) ? DRAGON-usr-invalid + 1 : DRAGON-usr-invalid) : DRAGON-usr-invalid))))))));
 	next(DRAGON-impl-usr-mem_init) := DRAGON-impl-usr-mem_init;
 	next(DRAGON-usr-erreur) := (next(DRAGON-usr-exclusive) >= 2 ? TRUE : FALSE);
 
@@ -24,6 +98,7 @@ ASSIGN
 MODULE excludes12 (excludes12-usr-X1, excludes12-usr-X2, excludes12-usr-X3, excludes12-usr-X4, excludes12-usr-X5, excludes12-usr-X6, excludes12-usr-X7, excludes12-usr-X8, excludes12-usr-X9, excludes12-usr-X10, excludes12-usr-X11, excludes12-usr-X12)
 VAR
 	excludes12-usr-excludes : boolean;
+
 ASSIGN
 	init(excludes12-usr-excludes) := ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | (((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12)))))))))))));
 
@@ -34,6 +109,7 @@ ASSIGN
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
@@ -42,16 +118,37 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-e01 : boolean;	top-usr-e02 : boolean;	top-usr-e03 : boolean;	top-usr-e04 : boolean;	top-usr-e05 : boolean;	top-usr-e06 : boolean;	top-usr-e07 : boolean;	top-usr-e08 : boolean;	top-usr-e09 : boolean;	top-usr-e10 : boolean;	top-usr-e11 : boolean;	top-usr-e12 : boolean;	top-usr-init_invalid : integer;	top-usr-OK : boolean;	top-res-gklocal_34 : boolean;	top-res-call_33 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
+	top-usr-e01 : boolean;
+	top-usr-e02 : boolean;
+	top-usr-e03 : boolean;
+	top-usr-e04 : boolean;
+	top-usr-e05 : boolean;
+	top-usr-e06 : boolean;
+	top-usr-e07 : boolean;
+	top-usr-e08 : boolean;
+	top-usr-e09 : boolean;
+	top-usr-e10 : boolean;
+	top-usr-e11 : boolean;
+	top-usr-e12 : boolean;
+	top-usr-init_invalid : integer;
+	top-usr-OK : boolean;
+	top-impl-usr-shared_dirty : integer;
+	top-impl-usr-env : boolean;
+	top-res-gklocal_34 : boolean;
+	top-res-call_33 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
 	top-res-call_35 : Sofar(top-res-gklocal_34);
 	top-res-2-call_32 : DRAGON(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12, top-usr-init_invalid);
-	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;	top-res-poracle_4 : integer;	top-res-poracle_5 : integer;	top-res-poracle_6 : integer;	top-res-poracle_7 : integer;	top-res-poracle_8 : integer;	top-res-poracle_9 : integer;	top-res-poracle_10 : integer;	top-res-poracle_11 : integer;	top-res-poracle_12 : integer;	top-res-poracle_13 : integer;	top-res-poracle_14 : integer;	top-res-poracle_15 : integer;	top-res-poracle_16 : integer;	top-res-poracle_17 : integer;	top-res-poracle_18 : integer;	top-res-poracle_19 : integer;	top-res-poracle_20 : integer;	top-res-poracle_21 : integer;	top-res-poracle_22 : integer;	top-res-poracle_23 : integer;	top-res-poracle_24 : integer;	top-res-poracle_25 : integer;	top-res-poracle_26 : integer;	top-res-poracle_27 : integer;	top-res-poracle_28 : integer;	top-res-poracle_29 : integer;	top-res-poracle_30 : integer;	top-res-poracle_31 : integer;
+
 ASSIGN
 	init(top-res-gklocal_34) := (top-res-call_33.excludes12-usr-excludes & (top-usr-init_invalid > 0));
-	init(top-usr-OK) := (top-res-call_35.Sofar-usr-Sofar -> top-res-2-call_32.DRAGON-usr-shared_dirty >= 0);
+	init(top-impl-usr-env) := top-res-call_35.Sofar-usr-Sofar;
+	init(top-impl-usr-shared_dirty) := top-res-2-call_32.DRAGON-usr-shared_dirty;
+	init(top-usr-OK) := (top-impl-usr-env -> top-impl-usr-shared_dirty >= 0);
 
 	next(top-res-gklocal_34) := (next(top-res-call_33.excludes12-usr-excludes) & (next(top-usr-init_invalid) > 0));
-	next(top-usr-OK) := (next(top-res-call_35.Sofar-usr-Sofar) -> next(top-res-2-call_32.DRAGON-usr-shared_dirty) >= 0);
+	next(top-impl-usr-env) := next(top-res-call_35.Sofar-usr-Sofar);
+	next(top-impl-usr-shared_dirty) := next(top-res-2-call_32.DRAGON-usr-shared_dirty);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> next(top-impl-usr-shared_dirty) >= 0);
 
 
 INVARSPEC 

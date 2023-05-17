@@ -1,7 +1,17 @@
 
 MODULE voiture (voiture-usr-m, voiture-usr-s)
 VAR
-	voiture-usr-toofast : boolean;	voiture-usr-stop : boolean;	voiture-usr-bump : boolean;	voiture-usr-dist : integer;	voiture-usr-speed : integer;	voiture-usr-time : integer;	voiture-usr-move : boolean;	voiture-usr-second : boolean;	voiture-usr-meter : boolean;	voiture-res-glocal_1 : boolean;
+	voiture-usr-toofast : boolean;
+	voiture-usr-stop : boolean;
+	voiture-usr-bump : boolean;
+	voiture-usr-dist : integer;
+	voiture-usr-speed : integer;
+	voiture-usr-time : integer;
+	voiture-usr-move : boolean;
+	voiture-usr-second : boolean;
+	voiture-usr-meter : boolean;
+	voiture-res-glocal_1 : boolean;
+
 ASSIGN
 	init(voiture-usr-speed) := 0;
 	init(voiture-usr-toofast) := voiture-usr-speed >= 3;
@@ -30,6 +40,7 @@ ASSIGN
 MODULE excludes2 (excludes2-usr-X1, excludes2-usr-X2)
 VAR
 	excludes2-usr-excludes : boolean;
+
 ASSIGN
 	init(excludes2-usr-excludes) := !(excludes2-usr-X2 | excludes2-usr-X1);
 
@@ -40,6 +51,7 @@ ASSIGN
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
@@ -48,14 +60,23 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-m : boolean;	top-usr-s : boolean;	top-usr-OK : boolean;	top-res-call_3 : excludes2(top-usr-m, top-usr-s);
+	top-usr-m : boolean;
+	top-usr-s : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-dist : integer;
+	top-impl-usr-env : boolean;
+	top-res-call_3 : excludes2(top-usr-m, top-usr-s);
 	top-res-call_4 : Sofar(top-res-call_3.excludes2-usr-excludes);
 	top-res-2-call_2 : voiture(top-usr-m, top-usr-s);
 
 ASSIGN
-	init(top-usr-OK) := (top-res-call_4.Sofar-usr-Sofar -> (top-res-2-call_2.voiture-usr-dist < 11));
+	init(top-impl-usr-env) := top-res-call_4.Sofar-usr-Sofar;
+	init(top-impl-usr-dist) := top-res-2-call_2.voiture-usr-dist;
+	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-dist < 11));
 
-	next(top-usr-OK) := (next(top-res-call_4.Sofar-usr-Sofar) -> (next(top-res-2-call_2.voiture-usr-dist) < 11));
+	next(top-impl-usr-env) := next(top-res-call_4.Sofar-usr-Sofar);
+	next(top-impl-usr-dist) := next(top-res-2-call_2.voiture-usr-dist);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-dist) < 11));
 
 
 INVARSPEC 

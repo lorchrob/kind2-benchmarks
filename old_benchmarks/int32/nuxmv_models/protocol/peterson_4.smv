@@ -152,30 +152,6 @@ VAR
 	top-res-call_28 : Sofar(top-res-gklocal_27);
 	top-res-2-call_25 : peterson(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
 	top-res-3-call_25 : peterson(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
-	top-res-poracle_4 : signed word[32];
-	top-res-poracle_5 : signed word[32];
-	top-res-poracle_6 : signed word[32];
-	top-res-poracle_7 : signed word[32];
-	top-res-poracle_8 : signed word[32];
-	top-res-poracle_9 : signed word[32];
-	top-res-poracle_10 : signed word[32];
-	top-res-poracle_11 : signed word[32];
-	top-res-poracle_12 : signed word[32];
-	top-res-poracle_13 : signed word[32];
-	top-res-poracle_14 : signed word[32];
-	top-res-poracle_15 : signed word[32];
-	top-res-poracle_16 : signed word[32];
-	top-res-poracle_17 : signed word[32];
-	top-res-poracle_18 : signed word[32];
-	top-res-poracle_19 : signed word[32];
-	top-res-poracle_20 : signed word[32];
-	top-res-poracle_21 : signed word[32];
-	top-res-poracle_22 : signed word[32];
-	top-res-poracle_23 : signed word[32];
-	top-res-poracle_24 : signed word[32];
 
 ASSIGN
 	init(top-impl-usr-x3) := top-res-2-call_25.peterson-usr-x3;

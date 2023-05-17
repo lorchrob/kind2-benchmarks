@@ -104,22 +104,6 @@ VAR
 	top-impl-usr-x0 : signed word[32];
 	top-res-2-call_17 : readwrite(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9);
 	top-res-3-call_17 : readwrite(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
-	top-res-poracle_4 : signed word[32];
-	top-res-poracle_5 : signed word[32];
-	top-res-poracle_6 : signed word[32];
-	top-res-poracle_7 : signed word[32];
-	top-res-poracle_8 : signed word[32];
-	top-res-poracle_9 : signed word[32];
-	top-res-poracle_10 : signed word[32];
-	top-res-poracle_11 : signed word[32];
-	top-res-poracle_12 : signed word[32];
-	top-res-poracle_13 : signed word[32];
-	top-res-poracle_14 : signed word[32];
-	top-res-poracle_15 : signed word[32];
-	top-res-poracle_16 : signed word[32];
 
 ASSIGN
 	init(top-impl-usr-x0) := top-res-2-call_17.readwrite-usr-x0;

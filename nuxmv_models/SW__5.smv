@@ -18,9 +18,9 @@ VAR
 	SW__good_coordinate-usr-_outvar : boolean;
 
 ASSIGN
-	init(SW__good_coordinate-usr-_outvar) := (((((SW__good_coordinate-usr-4-coord-lat >= -90 & SW__good_coordinate-usr-4-coord-lat <= 90) & SW__good_coordinate-usr-5-coord-long >= -180) & SW__good_coordinate-usr-5-coord-long <= 180) & SW__good_coordinate-usr-4-coord-alt >= 0) & SW__good_coordinate-usr-4-coord-alt <= 15000);
+	init(SW__good_coordinate-usr-_outvar) := ((((((SW__good_coordinate-usr-4-coord-lat >= -90) & (SW__good_coordinate-usr-4-coord-lat <= 90)) & (SW__good_coordinate-usr-5-coord-long >= -180)) & (SW__good_coordinate-usr-5-coord-long <= 180)) & (SW__good_coordinate-usr-4-coord-alt >= 0)) & (SW__good_coordinate-usr-4-coord-alt <= 15000));
 
-	next(SW__good_coordinate-usr-_outvar) := (((((next(SW__good_coordinate-usr-4-coord-lat) >= -90 & next(SW__good_coordinate-usr-4-coord-lat) <= 90) & next(SW__good_coordinate-usr-5-coord-long) >= -180) & next(SW__good_coordinate-usr-5-coord-long) <= 180) & next(SW__good_coordinate-usr-4-coord-alt) >= 0) & next(SW__good_coordinate-usr-4-coord-alt) <= 15000);
+	next(SW__good_coordinate-usr-_outvar) := ((((((next(SW__good_coordinate-usr-4-coord-lat) >= -90) & (next(SW__good_coordinate-usr-4-coord-lat) <= 90)) & (next(SW__good_coordinate-usr-5-coord-long) >= -180)) & (next(SW__good_coordinate-usr-5-coord-long) <= 180)) & (next(SW__good_coordinate-usr-4-coord-alt) >= 0)) & (next(SW__good_coordinate-usr-4-coord-alt) <= 15000));
 
 
 

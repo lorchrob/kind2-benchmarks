@@ -1,0 +1,313 @@
+
+MODULE Deep_Taxi__abs (Deep_Taxi__abs-usr-num)
+VAR
+	Deep_Taxi__abs-usr-_outvar : real;
+
+ASSIGN
+	init(Deep_Taxi__abs-usr-_outvar) := ((Deep_Taxi__abs-usr-num >= 0) ? Deep_Taxi__abs-usr-num : -Deep_Taxi__abs-usr-num);
+
+	next(Deep_Taxi__abs-usr-_outvar) := ((next(Deep_Taxi__abs-usr-num) >= 0) ? next(Deep_Taxi__abs-usr-num) : -next(Deep_Taxi__abs-usr-num));
+
+
+
+MODULE Deep_Taxi__MONITOR_CONDITION (Deep_Taxi__MONITOR_CONDITION-usr-Actual_Heading, Deep_Taxi__MONITOR_CONDITION-usr-Estimated_Heading, Deep_Taxi__MONITOR_CONDITION-usr-Actual_CTE, Deep_Taxi__MONITOR_CONDITION-usr-Estimated_CTE)
+VAR
+	Deep_Taxi__MONITOR_CONDITION-usr-_outvar : boolean;
+	Deep_Taxi__MONITOR_CONDITION-res-gklocal_4 : real;
+	Deep_Taxi__MONITOR_CONDITION-res-gklocal_6 : real;
+	Deep_Taxi__MONITOR_CONDITION-res-call_5 : Deep_Taxi__abs(Deep_Taxi__MONITOR_CONDITION-res-gklocal_4);
+	Deep_Taxi__MONITOR_CONDITION-res-call_7 : Deep_Taxi__abs(Deep_Taxi__MONITOR_CONDITION-res-gklocal_6);
+
+ASSIGN
+	init(Deep_Taxi__MONITOR_CONDITION-res-gklocal_6) := (Deep_Taxi__MONITOR_CONDITION-usr-Actual_CTE - Deep_Taxi__MONITOR_CONDITION-usr-Estimated_CTE);
+	init(Deep_Taxi__MONITOR_CONDITION-res-gklocal_4) := (Deep_Taxi__MONITOR_CONDITION-usr-Actual_Heading - Deep_Taxi__MONITOR_CONDITION-usr-Estimated_Heading);
+	init(Deep_Taxi__MONITOR_CONDITION-usr-_outvar) := ((Deep_Taxi__MONITOR_CONDITION-res-call_5.Deep_Taxi__abs-usr-_outvar <= 5) & (Deep_Taxi__MONITOR_CONDITION-res-call_7.Deep_Taxi__abs-usr-_outvar <= 1));
+
+	next(Deep_Taxi__MONITOR_CONDITION-res-gklocal_6) := (next(Deep_Taxi__MONITOR_CONDITION-usr-Actual_CTE) - next(Deep_Taxi__MONITOR_CONDITION-usr-Estimated_CTE));
+	next(Deep_Taxi__MONITOR_CONDITION-res-gklocal_4) := (next(Deep_Taxi__MONITOR_CONDITION-usr-Actual_Heading) - next(Deep_Taxi__MONITOR_CONDITION-usr-Estimated_Heading));
+	next(Deep_Taxi__MONITOR_CONDITION-usr-_outvar) := ((next(Deep_Taxi__MONITOR_CONDITION-res-call_5.Deep_Taxi__abs-usr-_outvar) <= 5) & (next(Deep_Taxi__MONITOR_CONDITION-res-call_7.Deep_Taxi__abs-usr-_outvar) <= 1));
+
+
+
+MODULE _TOP__Monitor (_TOP__Monitor-usr-__ASSUME__HIST, _TOP__Monitor-usr-Actual_Heading___EVENT_, _TOP__Monitor-usr-Actual_Heading, _TOP__Monitor-usr-Estimated_Heading___EVENT_, _TOP__Monitor-usr-Estimated_Heading, _TOP__Monitor-usr-Actual_CTE___EVENT_, _TOP__Monitor-usr-Actual_CTE, _TOP__Monitor-usr-Estimated_CTE___EVENT_, _TOP__Monitor-usr-Estimated_CTE, _TOP__Monitor-usr-time, _TOP__Monitor-usr-Alert___EVENT_, _TOP__Monitor-usr-Alert)
+VAR
+	_TOP__Monitor-usr-__ASSERT : boolean;
+	_TOP__Monitor-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__Monitor-res-call_18 : Deep_Taxi__MONITOR_CONDITION(_TOP__Monitor-usr-Actual_Heading, _TOP__Monitor-usr-Estimated_Heading, _TOP__Monitor-usr-Actual_CTE, _TOP__Monitor-usr-Estimated_CTE);
+
+ASSIGN
+	init(_TOP__Monitor-impl-usr-__GUARANTEE0) := (_TOP__Monitor-res-call_18.Deep_Taxi__MONITOR_CONDITION-usr-_outvar ? !_TOP__Monitor-usr-Alert : _TOP__Monitor-usr-Alert);
+	init(_TOP__Monitor-usr-__ASSERT) := (_TOP__Monitor-usr-__ASSUME__HIST -> _TOP__Monitor-impl-usr-__GUARANTEE0);
+
+	next(_TOP__Monitor-impl-usr-__GUARANTEE0) := (next(_TOP__Monitor-res-call_18.Deep_Taxi__MONITOR_CONDITION-usr-_outvar) ? !next(_TOP__Monitor-usr-Alert) : next(_TOP__Monitor-usr-Alert));
+	next(_TOP__Monitor-usr-__ASSERT) := (next(_TOP__Monitor-usr-__ASSUME__HIST) -> next(_TOP__Monitor-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__Controller (_TOP__Controller-usr-__ASSUME__HIST, _TOP__Controller-usr-Heading___EVENT_, _TOP__Controller-usr-Heading, _TOP__Controller-usr-CTE___EVENT_, _TOP__Controller-usr-CTE, _TOP__Controller-usr-time, _TOP__Controller-usr-Control_Command___EVENT_, _TOP__Controller-usr-8-Control_Command-Heading, _TOP__Controller-usr-6-Control_Command-Speed)
+VAR
+	_TOP__Controller-usr-__ASSERT : boolean;
+	_TOP__Controller-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__Controller-impl-usr-__GUARANTEE0) := (_TOP__Controller-usr-6-Control_Command-Speed > 0);
+	init(_TOP__Controller-usr-__ASSERT) := (_TOP__Controller-usr-__ASSUME__HIST -> _TOP__Controller-impl-usr-__GUARANTEE0);
+
+	next(_TOP__Controller-impl-usr-__GUARANTEE0) := (next(_TOP__Controller-usr-6-Control_Command-Speed) > 0);
+	next(_TOP__Controller-usr-__ASSERT) := (next(_TOP__Controller-usr-__ASSUME__HIST) -> next(_TOP__Controller-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__Switch (_TOP__Switch-usr-__ASSUME__HIST, _TOP__Switch-usr-Safety_Trigger___EVENT_, _TOP__Switch-usr-Safety_Trigger, _TOP__Switch-usr-Control_Command___EVENT_, _TOP__Switch-usr-8-Control_Command-Heading, _TOP__Switch-usr-6-Control_Command-Speed, _TOP__Switch-usr-Safe_Command___EVENT_, _TOP__Switch-usr-8-Safe_Command-Heading, _TOP__Switch-usr-6-Safe_Command-Speed, _TOP__Switch-usr-time, _TOP__Switch-usr-Switch_Command___EVENT_, _TOP__Switch-usr-8-Switch_Command-Heading, _TOP__Switch-usr-6-Switch_Command-Speed)
+VAR
+	_TOP__Switch-usr-__ASSERT : boolean;
+	_TOP__Switch-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__Switch-impl-usr-__GUARANTEE0) := (!_TOP__Switch-usr-Safety_Trigger ? ((_TOP__Switch-usr-8-Switch_Command-Heading = _TOP__Switch-usr-8-Control_Command-Heading) & (_TOP__Switch-usr-6-Switch_Command-Speed = _TOP__Switch-usr-6-Control_Command-Speed)) : ((_TOP__Switch-usr-8-Switch_Command-Heading = _TOP__Switch-usr-8-Safe_Command-Heading) & (_TOP__Switch-usr-6-Switch_Command-Speed = _TOP__Switch-usr-6-Safe_Command-Speed)));
+	init(_TOP__Switch-usr-__ASSERT) := (_TOP__Switch-usr-__ASSUME__HIST -> _TOP__Switch-impl-usr-__GUARANTEE0);
+
+	next(_TOP__Switch-impl-usr-__GUARANTEE0) := (!next(_TOP__Switch-usr-Safety_Trigger) ? ((next(_TOP__Switch-usr-8-Switch_Command-Heading) = next(_TOP__Switch-usr-8-Control_Command-Heading)) & (next(_TOP__Switch-usr-6-Switch_Command-Speed) = next(_TOP__Switch-usr-6-Control_Command-Speed))) : ((next(_TOP__Switch-usr-8-Switch_Command-Heading) = next(_TOP__Switch-usr-8-Safe_Command-Heading)) & (next(_TOP__Switch-usr-6-Switch_Command-Speed) = next(_TOP__Switch-usr-6-Safe_Command-Speed))));
+	next(_TOP__Switch-usr-__ASSERT) := (next(_TOP__Switch-usr-__ASSUME__HIST) -> next(_TOP__Switch-impl-usr-__GUARANTEE0));
+
+
+
+MODULE Deep_Taxi__LINEAR_SIN (Deep_Taxi__LINEAR_SIN-usr-theta)
+VAR
+	Deep_Taxi__LINEAR_SIN-usr-_outvar : real;
+
+ASSIGN
+	init(Deep_Taxi__LINEAR_SIN-usr-_outvar) := (((Deep_Taxi__LINEAR_SIN-usr-theta >= -90) & (Deep_Taxi__LINEAR_SIN-usr-theta < -85)) ? -1 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -85) & (Deep_Taxi__LINEAR_SIN-usr-theta < -80)) ? -4981/5000 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -80) & (Deep_Taxi__LINEAR_SIN-usr-theta < -75)) ? -1231/1250 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -75) & (Deep_Taxi__LINEAR_SIN-usr-theta < -70)) ? -9659/10000 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -70) & (Deep_Taxi__LINEAR_SIN-usr-theta < -65)) ? -9397/10000 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -65) & (Deep_Taxi__LINEAR_SIN-usr-theta < -60)) ? -9063/10000 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -60) & (Deep_Taxi__LINEAR_SIN-usr-theta < -55)) ? -433/500 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -55) & (Deep_Taxi__LINEAR_SIN-usr-theta < -50)) ? -512/625 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -50) & (Deep_Taxi__LINEAR_SIN-usr-theta < -45)) ? -383/500 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -45) & (Deep_Taxi__LINEAR_SIN-usr-theta < -40)) ? -7071/10000 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -40) & (Deep_Taxi__LINEAR_SIN-usr-theta < -35)) ? -1607/2500 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -35) & (Deep_Taxi__LINEAR_SIN-usr-theta < -30)) ? -717/1250 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -30) & (Deep_Taxi__LINEAR_SIN-usr-theta < -25)) ? -1/2 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -25) & (Deep_Taxi__LINEAR_SIN-usr-theta < -20)) ? -2113/5000 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -20) & (Deep_Taxi__LINEAR_SIN-usr-theta < -15)) ? -171/500 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -15) & (Deep_Taxi__LINEAR_SIN-usr-theta < -10)) ? -647/2500 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -10) & (Deep_Taxi__LINEAR_SIN-usr-theta < -5)) ? -217/1250 : (((Deep_Taxi__LINEAR_SIN-usr-theta >= -5) & (Deep_Taxi__LINEAR_SIN-usr-theta < 0)) ? -109/1250 : ((Deep_Taxi__LINEAR_SIN-usr-theta = 0) ? 0 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 0) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 5)) ? 109/1250 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 5) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 10)) ? 217/1250 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 10) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 15)) ? 647/2500 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 15) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 20)) ? 171/500 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 20) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 25)) ? 2113/5000 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 25) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 30)) ? 1/2 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 30) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 35)) ? 717/1250 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 35) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 40)) ? 1607/2500 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 40) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 45)) ? 7071/10000 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 45) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 50)) ? 383/500 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 50) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 55)) ? 512/625 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 55) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 60)) ? 433/500 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 60) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 65)) ? 9063/10000 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 65) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 70)) ? 9397/10000 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 70) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 75)) ? 9659/10000 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 75) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 80)) ? 1231/1250 : (((Deep_Taxi__LINEAR_SIN-usr-theta > 80) & (Deep_Taxi__LINEAR_SIN-usr-theta <= 85)) ? 4981/5000 : 1))))))))))))))))))))))))))))))))))));
+
+	next(Deep_Taxi__LINEAR_SIN-usr-_outvar) := (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -90) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -85)) ? -1 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -85) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -80)) ? -4981/5000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -80) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -75)) ? -1231/1250 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -75) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -70)) ? -9659/10000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -70) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -65)) ? -9397/10000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -65) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -60)) ? -9063/10000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -60) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -55)) ? -433/500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -55) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -50)) ? -512/625 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -50) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -45)) ? -383/500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -45) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -40)) ? -7071/10000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -40) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -35)) ? -1607/2500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -35) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -30)) ? -717/1250 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -30) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -25)) ? -1/2 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -25) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -20)) ? -2113/5000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -20) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -15)) ? -171/500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -15) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -10)) ? -647/2500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -10) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < -5)) ? -217/1250 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) >= -5) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) < 0)) ? -109/1250 : ((next(Deep_Taxi__LINEAR_SIN-usr-theta) = 0) ? 0 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 0) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 5)) ? 109/1250 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 5) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 10)) ? 217/1250 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 10) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 15)) ? 647/2500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 15) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 20)) ? 171/500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 20) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 25)) ? 2113/5000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 25) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 30)) ? 1/2 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 30) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 35)) ? 717/1250 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 35) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 40)) ? 1607/2500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 40) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 45)) ? 7071/10000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 45) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 50)) ? 383/500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 50) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 55)) ? 512/625 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 55) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 60)) ? 433/500 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 60) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 65)) ? 9063/10000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 65) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 70)) ? 9397/10000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 70) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 75)) ? 9659/10000 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 75) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 80)) ? 1231/1250 : (((next(Deep_Taxi__LINEAR_SIN-usr-theta) > 80) & (next(Deep_Taxi__LINEAR_SIN-usr-theta) <= 85)) ? 4981/5000 : 1))))))))))))))))))))))))))))))))))));
+
+
+
+MODULE Deep_Taxi__SAFE_COMMAND (Deep_Taxi__SAFE_COMMAND-usr-Heading, Deep_Taxi__SAFE_COMMAND-usr-CTE, Deep_Taxi__SAFE_COMMAND-usr-8-Cmd-Heading, Deep_Taxi__SAFE_COMMAND-usr-6-Cmd-Speed)
+VAR
+	Deep_Taxi__SAFE_COMMAND-usr-_outvar : boolean;
+	Deep_Taxi__SAFE_COMMAND-res-gklocal_8 : real;
+	Deep_Taxi__SAFE_COMMAND-res-call_9 : Deep_Taxi__LINEAR_SIN(Deep_Taxi__SAFE_COMMAND-res-gklocal_8);
+
+ASSIGN
+	init(Deep_Taxi__SAFE_COMMAND-res-gklocal_8) := Deep_Taxi__SAFE_COMMAND-usr-Heading + Deep_Taxi__SAFE_COMMAND-usr-8-Cmd-Heading;
+	init(Deep_Taxi__SAFE_COMMAND-usr-_outvar) := ((Deep_Taxi__SAFE_COMMAND-usr-6-Cmd-Speed = 0) ? TRUE : (((Deep_Taxi__SAFE_COMMAND-usr-Heading + Deep_Taxi__SAFE_COMMAND-usr-8-Cmd-Heading >= -90) & (Deep_Taxi__SAFE_COMMAND-usr-Heading + Deep_Taxi__SAFE_COMMAND-usr-8-Cmd-Heading <= 90)) ? ((Deep_Taxi__SAFE_COMMAND-usr-CTE + Deep_Taxi__SAFE_COMMAND-res-call_9.Deep_Taxi__LINEAR_SIN-usr-_outvar < 10) ? TRUE : FALSE) : FALSE));
+
+	next(Deep_Taxi__SAFE_COMMAND-res-gklocal_8) := next(Deep_Taxi__SAFE_COMMAND-usr-Heading) + next(Deep_Taxi__SAFE_COMMAND-usr-8-Cmd-Heading);
+	next(Deep_Taxi__SAFE_COMMAND-usr-_outvar) := ((next(Deep_Taxi__SAFE_COMMAND-usr-6-Cmd-Speed) = 0) ? TRUE : (((next(Deep_Taxi__SAFE_COMMAND-usr-Heading) + next(Deep_Taxi__SAFE_COMMAND-usr-8-Cmd-Heading) >= -90) & (next(Deep_Taxi__SAFE_COMMAND-usr-Heading) + next(Deep_Taxi__SAFE_COMMAND-usr-8-Cmd-Heading) <= 90)) ? ((next(Deep_Taxi__SAFE_COMMAND-usr-CTE) + next(Deep_Taxi__SAFE_COMMAND-res-call_9.Deep_Taxi__LINEAR_SIN-usr-_outvar) < 10) ? TRUE : FALSE) : FALSE));
+
+
+
+MODULE _TOP__Safety (_TOP__Safety-usr-__ASSUME__HIST, _TOP__Safety-usr-time, _TOP__Safety-usr-Safe_Command___EVENT_, _TOP__Safety-usr-8-Safe_Command-Heading, _TOP__Safety-usr-6-Safe_Command-Speed)
+VAR
+	_TOP__Safety-usr-__ASSERT : boolean;
+	_TOP__Safety-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__Safety-impl-usr-__GUARANTEE0) := (_TOP__Safety-usr-6-Safe_Command-Speed = 0);
+	init(_TOP__Safety-usr-__ASSERT) := (_TOP__Safety-usr-__ASSUME__HIST -> _TOP__Safety-impl-usr-__GUARANTEE0);
+
+	next(_TOP__Safety-impl-usr-__GUARANTEE0) := (next(_TOP__Safety-usr-6-Safe_Command-Speed) = 0);
+	next(_TOP__Safety-usr-__ASSERT) := (next(_TOP__Safety-usr-__ASSUME__HIST) -> next(_TOP__Safety-impl-usr-__GUARANTEE0));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE main () 
+VAR
+	main-usr-Monitor__Alert___EVENT_ : boolean;
+	main-usr-Monitor__Alert : boolean;
+	main-usr-Monitor____ASSUME__HIST : boolean;
+	main-usr-Controller__Control_Command___EVENT_ : boolean;
+	main-usr-8-Controller__Control_Command-Heading : real;
+	main-usr-6-Controller__Control_Command-Speed : integer;
+	main-usr-Controller____ASSUME__HIST : boolean;
+	main-usr-Safety__Safe_Command___EVENT_ : boolean;
+	main-usr-8-Safety__Safe_Command-Heading : real;
+	main-usr-6-Safety__Safe_Command-Speed : integer;
+	main-usr-Safety____ASSUME__HIST : boolean;
+	main-usr-Switch__Switch_Command___EVENT_ : boolean;
+	main-usr-8-Switch__Switch_Command-Heading : real;
+	main-usr-6-Switch__Switch_Command-Speed : integer;
+	main-usr-Switch____ASSUME__HIST : boolean;
+	main-usr-Aircraft_Command___EVENT_ : boolean;
+	main-usr-8-Aircraft_Command-Heading : real;
+	main-usr-6-Aircraft_Command-Speed : integer;
+	main-usr-Monitor__Actual_Heading___EVENT_ : boolean;
+	main-usr-Monitor__Actual_Heading : real;
+	main-usr-Monitor__Estimated_Heading___EVENT_ : boolean;
+	main-usr-Monitor__Estimated_Heading : real;
+	main-usr-Monitor__Actual_CTE___EVENT_ : boolean;
+	main-usr-Monitor__Actual_CTE : real;
+	main-usr-Monitor__Estimated_CTE___EVENT_ : boolean;
+	main-usr-Monitor__Estimated_CTE : real;
+	main-usr-Monitor__time : real;
+	main-usr-Controller__Heading___EVENT_ : boolean;
+	main-usr-Controller__Heading : real;
+	main-usr-Controller__CTE___EVENT_ : boolean;
+	main-usr-Controller__CTE : real;
+	main-usr-Controller__time : real;
+	main-usr-Safety__time : real;
+	main-usr-Switch__Safety_Trigger___EVENT_ : boolean;
+	main-usr-Switch__Safety_Trigger : boolean;
+	main-usr-Switch__Control_Command___EVENT_ : boolean;
+	main-usr-8-Switch__Control_Command-Heading : real;
+	main-usr-6-Switch__Control_Command-Speed : integer;
+	main-usr-Switch__Safe_Command___EVENT_ : boolean;
+	main-usr-8-Switch__Safe_Command-Heading : real;
+	main-usr-6-Switch__Safe_Command-Speed : integer;
+	main-usr-Switch__time : real;
+	main-usr-IRS_Heading___EVENT_ : boolean;
+	main-usr-IRS_Heading : real;
+	main-usr-IRS_CTE___EVENT_ : boolean;
+	main-usr-IRS_CTE : real;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME0 : boolean;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-res-glocal_20 : boolean;
+	main-res-glocal_21 : boolean;
+	main-res-glocal_23 : boolean;
+	main-res-glocal_26 : boolean;
+	main-res-glocal_27 : boolean;
+	main-res-glocal_29 : boolean;
+	main-res-glocal_30 : boolean;
+	main-res-glocal_31 : boolean;
+	main-res-glocal_33 : boolean;
+	main-res-glocal_34 : boolean;
+	main-res-glocal_35 : boolean;
+	main-res-glocal_37 : boolean;
+	main-res-glocal_38 : boolean;
+	main-res-glocal_39 : boolean;
+	main-res-glocal_40 : boolean;
+	main-res-glocal_41 : boolean;
+	main-res-glocal_42 : boolean;
+	main-res-glocal_43 : boolean;
+	main-res-glocal_44 : boolean;
+	main-res-glocal_45 : boolean;
+	main-res-glocal_46 : boolean;
+	main-res-glocal_47 : boolean;
+	main-res-glocal_48 : boolean;
+	main-res-glocal_49 : boolean;
+	main-res-glocal_50 : boolean;
+	main-res-glocal_51 : boolean;
+	main-res-glocal_54 : boolean;
+	main-res-glocal_55 : boolean;
+	main-res-glocal_56 : boolean;
+	main-res-gklocal_24 : boolean;
+	main-res-call_52 : Deep_Taxi__MONITOR_CONDITION(main-usr-IRS_Heading, main-usr-Monitor__Estimated_Heading, main-usr-IRS_CTE, main-usr-Monitor__Estimated_CTE);
+	main-res-call_53 : Deep_Taxi__SAFE_COMMAND(main-usr-IRS_Heading, main-usr-IRS_CTE, main-usr-8-Controller__Control_Command-Heading, main-usr-6-Controller__Control_Command-Speed);
+	main-res-call_36 : _TOP__Switch(main-usr-Switch____ASSUME__HIST, main-usr-Switch__Safety_Trigger___EVENT_, main-usr-Switch__Safety_Trigger, main-usr-Switch__Control_Command___EVENT_, main-usr-8-Switch__Control_Command-Heading, main-usr-6-Switch__Control_Command-Speed, main-usr-Switch__Safe_Command___EVENT_, main-usr-8-Switch__Safe_Command-Heading, main-usr-6-Switch__Safe_Command-Speed, main-usr-Switch__time, main-usr-Switch__Switch_Command___EVENT_, main-usr-8-Switch__Switch_Command-Heading, main-usr-6-Switch__Switch_Command-Speed);
+	main-res-call_32 : _TOP__Safety(main-usr-Safety____ASSUME__HIST, main-usr-Safety__time, main-usr-Safety__Safe_Command___EVENT_, main-usr-8-Safety__Safe_Command-Heading, main-usr-6-Safety__Safe_Command-Speed);
+	main-res-call_28 : _TOP__Controller(main-usr-Controller____ASSUME__HIST, main-usr-Controller__Heading___EVENT_, main-usr-Controller__Heading, main-usr-Controller__CTE___EVENT_, main-usr-Controller__CTE, main-usr-Controller__time, main-usr-Controller__Control_Command___EVENT_, main-usr-8-Controller__Control_Command-Heading, main-usr-6-Controller__Control_Command-Speed);
+	main-res-call_25 : __HIST(main-res-gklocal_24);
+	main-res-call_22 : _TOP__Monitor(main-usr-Monitor____ASSUME__HIST, main-usr-Monitor__Actual_Heading___EVENT_, main-usr-Monitor__Actual_Heading, main-usr-Monitor__Estimated_Heading___EVENT_, main-usr-Monitor__Estimated_Heading, main-usr-Monitor__Actual_CTE___EVENT_, main-usr-Monitor__Actual_CTE, main-usr-Monitor__Estimated_CTE___EVENT_, main-usr-Monitor__Estimated_CTE, main-usr-Monitor__time, main-usr-Monitor__Alert___EVENT_, main-usr-Monitor__Alert);
+
+ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-Switch____ASSUME__HIST & (main-usr-Safety____ASSUME__HIST & (main-usr-Controller____ASSUME__HIST & main-usr-Monitor____ASSUME__HIST)));
+	init(main-impl-usr-__ASSUME0) := (main-usr-IRS_CTE < 10);
+	init(main-res-glocal_20) := main-impl-usr-__ASSUME0;
+	init(main-res-glocal_21) := (main-usr-time = main-usr-Monitor__time);
+	init(main-res-glocal_23) := main-res-call_22._TOP__Monitor-usr-__ASSERT;
+	init(main-res-gklocal_24) := TRUE;
+	init(main-res-glocal_26) := (main-usr-Monitor____ASSUME__HIST = main-res-call_25.__HIST-usr-hist);
+	init(main-res-glocal_27) := (main-usr-time = main-usr-Controller__time);
+	init(main-res-glocal_29) := main-res-call_28._TOP__Controller-usr-__ASSERT;
+	init(main-res-glocal_30) := (main-usr-Controller____ASSUME__HIST = main-res-call_25.__HIST-usr-hist);
+	init(main-res-glocal_31) := (main-usr-time = main-usr-Safety__time);
+	init(main-res-glocal_33) := main-res-call_32._TOP__Safety-usr-__ASSERT;
+	init(main-res-glocal_34) := (main-usr-Safety____ASSUME__HIST = main-res-call_25.__HIST-usr-hist);
+	init(main-res-glocal_35) := (main-usr-time = main-usr-Switch__time);
+	init(main-res-glocal_37) := main-res-call_36._TOP__Switch-usr-__ASSERT;
+	init(main-res-glocal_38) := (main-usr-Switch____ASSUME__HIST = main-res-call_25.__HIST-usr-hist);
+	init(main-res-glocal_39) := (main-usr-IRS_Heading = main-usr-Monitor__Actual_Heading);
+	init(main-res-glocal_40) := (main-usr-IRS_Heading___EVENT_ = main-usr-Monitor__Actual_Heading___EVENT_);
+	init(main-res-glocal_41) := (main-usr-IRS_CTE = main-usr-Monitor__Actual_CTE);
+	init(main-res-glocal_42) := (main-usr-IRS_CTE___EVENT_ = main-usr-Monitor__Actual_CTE___EVENT_);
+	init(main-res-glocal_43) := (main-usr-Monitor__Alert = main-usr-Switch__Safety_Trigger);
+	init(main-res-glocal_44) := (main-usr-Monitor__Alert___EVENT_ = main-usr-Switch__Safety_Trigger___EVENT_);
+	init(main-res-glocal_45) := ((main-usr-8-Controller__Control_Command-Heading = main-usr-8-Switch__Control_Command-Heading) & (main-usr-6-Controller__Control_Command-Speed = main-usr-6-Switch__Control_Command-Speed));
+	init(main-res-glocal_46) := (main-usr-Controller__Control_Command___EVENT_ = main-usr-Switch__Control_Command___EVENT_);
+	init(main-res-glocal_47) := ((main-usr-8-Safety__Safe_Command-Heading = main-usr-8-Switch__Safe_Command-Heading) & (main-usr-6-Safety__Safe_Command-Speed = main-usr-6-Switch__Safe_Command-Speed));
+	init(main-res-glocal_48) := (main-usr-Safety__Safe_Command___EVENT_ = main-usr-Switch__Safe_Command___EVENT_);
+	init(main-res-glocal_49) := ((main-usr-8-Switch__Switch_Command-Heading = main-usr-8-Aircraft_Command-Heading) & (main-usr-6-Switch__Switch_Command-Speed = main-usr-6-Aircraft_Command-Speed));
+	init(main-res-glocal_50) := (main-usr-Switch__Switch_Command___EVENT_ = main-usr-Aircraft_Command___EVENT_);
+	init(main-res-glocal_51) := (main-usr-6-Controller__Control_Command-Speed = 1);
+	init(main-res-glocal_54) := (main-res-call_52.Deep_Taxi__MONITOR_CONDITION-usr-_outvar -> main-res-call_53.Deep_Taxi__SAFE_COMMAND-usr-_outvar);
+	init(main-res-glocal_55) := TRUE;
+	init(main-res-glocal_56) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-Switch____ASSUME__HIST) & (next(main-usr-Safety____ASSUME__HIST) & (next(main-usr-Controller____ASSUME__HIST) & next(main-usr-Monitor____ASSUME__HIST))));
+	next(main-impl-usr-__ASSUME0) := (next(main-usr-IRS_CTE) < 10);
+	next(main-res-glocal_20) := next(main-impl-usr-__ASSUME0);
+	next(main-res-glocal_21) := (next(main-usr-time) = next(main-usr-Monitor__time));
+	next(main-res-glocal_23) := next(main-res-call_22._TOP__Monitor-usr-__ASSERT);
+	next(main-res-gklocal_24) := TRUE;
+	next(main-res-glocal_26) := (next(main-usr-Monitor____ASSUME__HIST) = next(main-res-call_25.__HIST-usr-hist));
+	next(main-res-glocal_27) := (next(main-usr-time) = next(main-usr-Controller__time));
+	next(main-res-glocal_29) := next(main-res-call_28._TOP__Controller-usr-__ASSERT);
+	next(main-res-glocal_30) := (next(main-usr-Controller____ASSUME__HIST) = next(main-res-call_25.__HIST-usr-hist));
+	next(main-res-glocal_31) := (next(main-usr-time) = next(main-usr-Safety__time));
+	next(main-res-glocal_33) := next(main-res-call_32._TOP__Safety-usr-__ASSERT);
+	next(main-res-glocal_34) := (next(main-usr-Safety____ASSUME__HIST) = next(main-res-call_25.__HIST-usr-hist));
+	next(main-res-glocal_35) := (next(main-usr-time) = next(main-usr-Switch__time));
+	next(main-res-glocal_37) := next(main-res-call_36._TOP__Switch-usr-__ASSERT);
+	next(main-res-glocal_38) := (next(main-usr-Switch____ASSUME__HIST) = next(main-res-call_25.__HIST-usr-hist));
+	next(main-res-glocal_39) := (next(main-usr-IRS_Heading) = next(main-usr-Monitor__Actual_Heading));
+	next(main-res-glocal_40) := (next(main-usr-IRS_Heading___EVENT_) = next(main-usr-Monitor__Actual_Heading___EVENT_));
+	next(main-res-glocal_41) := (next(main-usr-IRS_CTE) = next(main-usr-Monitor__Actual_CTE));
+	next(main-res-glocal_42) := (next(main-usr-IRS_CTE___EVENT_) = next(main-usr-Monitor__Actual_CTE___EVENT_));
+	next(main-res-glocal_43) := (next(main-usr-Monitor__Alert) = next(main-usr-Switch__Safety_Trigger));
+	next(main-res-glocal_44) := (next(main-usr-Monitor__Alert___EVENT_) = next(main-usr-Switch__Safety_Trigger___EVENT_));
+	next(main-res-glocal_45) := ((next(main-usr-8-Controller__Control_Command-Heading) = next(main-usr-8-Switch__Control_Command-Heading)) & (next(main-usr-6-Controller__Control_Command-Speed) = next(main-usr-6-Switch__Control_Command-Speed)));
+	next(main-res-glocal_46) := (next(main-usr-Controller__Control_Command___EVENT_) = next(main-usr-Switch__Control_Command___EVENT_));
+	next(main-res-glocal_47) := ((next(main-usr-8-Safety__Safe_Command-Heading) = next(main-usr-8-Switch__Safe_Command-Heading)) & (next(main-usr-6-Safety__Safe_Command-Speed) = next(main-usr-6-Switch__Safe_Command-Speed)));
+	next(main-res-glocal_48) := (next(main-usr-Safety__Safe_Command___EVENT_) = next(main-usr-Switch__Safe_Command___EVENT_));
+	next(main-res-glocal_49) := ((next(main-usr-8-Switch__Switch_Command-Heading) = next(main-usr-8-Aircraft_Command-Heading)) & (next(main-usr-6-Switch__Switch_Command-Speed) = next(main-usr-6-Aircraft_Command-Speed)));
+	next(main-res-glocal_50) := (next(main-usr-Switch__Switch_Command___EVENT_) = next(main-usr-Aircraft_Command___EVENT_));
+	next(main-res-glocal_51) := (next(main-usr-6-Controller__Control_Command-Speed) = 1);
+	next(main-res-glocal_54) := (next(main-res-call_52.Deep_Taxi__MONITOR_CONDITION-usr-_outvar) -> next(main-res-call_53.Deep_Taxi__SAFE_COMMAND-usr-_outvar));
+	next(main-res-glocal_55) := TRUE;
+	next(main-res-glocal_56) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_56;
+	INVAR main-res-glocal_55;
+	INVAR main-res-glocal_54;
+	INVAR main-res-glocal_51;
+	INVAR main-res-glocal_50;
+	INVAR main-res-glocal_49;
+	INVAR main-res-glocal_48;
+	INVAR main-res-glocal_47;
+	INVAR main-res-glocal_46;
+	INVAR main-res-glocal_45;
+	INVAR main-res-glocal_44;
+	INVAR main-res-glocal_43;
+	INVAR main-res-glocal_42;
+	INVAR main-res-glocal_41;
+	INVAR main-res-glocal_40;
+	INVAR main-res-glocal_39;
+	INVAR main-res-glocal_38;
+	INVAR main-res-glocal_37;
+	INVAR main-res-glocal_35;
+	INVAR main-res-glocal_34;
+	INVAR main-res-glocal_33;
+	INVAR main-res-glocal_31;
+	INVAR main-res-glocal_30;
+	INVAR main-res-glocal_29;
+	INVAR main-res-glocal_27;
+	INVAR main-res-glocal_26;
+	INVAR main-res-glocal_23;
+	INVAR main-res-glocal_21;
+	INVAR main-res-glocal_20;
+
+INVARSPEC 
+((main-impl-usr-__ASSUME__HIST));
+

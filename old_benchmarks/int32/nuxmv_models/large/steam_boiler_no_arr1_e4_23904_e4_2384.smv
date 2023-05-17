@@ -394,10 +394,6 @@ VAR
 	PumpsStatus-res-oracle_69 : signed word[32];
 	PumpsStatus-res-oracle_67 : signed word[32];
 	PumpsStatus-res-oracle_65 : signed word[32];
-	PumpsStatus-res-poracle_1 : signed word[32];
-	PumpsStatus-res-poracle_2 : signed word[32];
-	PumpsStatus-res-poracle_3 : signed word[32];
-	PumpsStatus-res-poracle_4 : signed word[32];
 
 ASSIGN
 	init(PumpsStatus-usr-pump_status_0) := 0sh32_00000000;
@@ -724,34 +720,6 @@ VAR
 	BoilerController-res-oracle_88 : signed word[32];
 	BoilerController-res-oracle_85 : signed word[32];
 	BoilerController-res-oracle_82 : signed word[32];
-	BoilerController-res-poracle_1 : signed word[32];
-	BoilerController-res-poracle_2 : signed word[32];
-	BoilerController-res-poracle_3 : signed word[32];
-	BoilerController-res-poracle_4 : signed word[32];
-	BoilerController-res-poracle_5 : signed word[32];
-	BoilerController-res-poracle_6 : signed word[32];
-	BoilerController-res-poracle_7 : signed word[32];
-	BoilerController-res-poracle_8 : signed word[32];
-	BoilerController-res-poracle_9 : signed word[32];
-	BoilerController-res-poracle_10 : signed word[32];
-	BoilerController-res-poracle_11 : signed word[32];
-	BoilerController-res-poracle_12 : signed word[32];
-	BoilerController-res-poracle_13 : signed word[32];
-	BoilerController-res-poracle_14 : signed word[32];
-	BoilerController-res-poracle_15 : signed word[32];
-	BoilerController-res-poracle_16 : signed word[32];
-	BoilerController-res-poracle_17 : signed word[32];
-	BoilerController-res-poracle_18 : signed word[32];
-	BoilerController-res-poracle_19 : signed word[32];
-	BoilerController-res-poracle_20 : signed word[32];
-	BoilerController-res-poracle_21 : signed word[32];
-	BoilerController-res-poracle_22 : signed word[32];
-	BoilerController-res-poracle_23 : signed word[32];
-	BoilerController-res-poracle_24 : signed word[32];
-	BoilerController-res-poracle_25 : signed word[32];
-	BoilerController-res-poracle_26 : signed word[32];
-	BoilerController-res-poracle_27 : signed word[32];
-	BoilerController-res-poracle_28 : signed word[32];
 
 ASSIGN
 	init(BoilerController-usr-program_ready) := FALSE;
@@ -1041,39 +1009,6 @@ VAR
 	top-res-call_115 : AND(top-res-gklocal_111, top-res-gklocal_112, top-res-gklocal_113, top-res-gklocal_114);
 	top-res-2-call_105 : BoilerController(top-usr-stop, top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-level, top-usr-steam, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3, top-usr-pump_control_state_0, top-usr-pump_control_state_1, top-usr-pump_control_state_2, top-usr-pump_control_state_3, top-usr-pump_repaired_0, top-usr-pump_repaired_1, top-usr-pump_repaired_2, top-usr-pump_repaired_3, top-usr-pump_control_repaired_0, top-usr-pump_control_repaired_1, top-usr-pump_control_repaired_2, top-usr-pump_control_repaired_3, top-usr-level_repaired, top-usr-steam_repaired, top-usr-pump_failure_acknowledgement_0, top-usr-pump_failure_acknowledgement_1, top-usr-pump_failure_acknowledgement_2, top-usr-pump_failure_acknowledgement_3, top-usr-pump_control_failure_acknowledgement_0, top-usr-pump_control_failure_acknowledgement_1, top-usr-pump_control_failure_acknowledgement_2, top-usr-pump_control_failure_acknowledgement_3, top-usr-level_failure_acknowledgement, top-usr-steam_failure_acknowledgement);
 	top-res-3-call_105 : BoilerController(top-usr-stop, top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-level, top-usr-steam, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3, top-usr-pump_control_state_0, top-usr-pump_control_state_1, top-usr-pump_control_state_2, top-usr-pump_control_state_3, top-usr-pump_repaired_0, top-usr-pump_repaired_1, top-usr-pump_repaired_2, top-usr-pump_repaired_3, top-usr-pump_control_repaired_0, top-usr-pump_control_repaired_1, top-usr-pump_control_repaired_2, top-usr-pump_control_repaired_3, top-usr-level_repaired, top-usr-steam_repaired, top-usr-pump_failure_acknowledgement_0, top-usr-pump_failure_acknowledgement_1, top-usr-pump_failure_acknowledgement_2, top-usr-pump_failure_acknowledgement_3, top-usr-pump_control_failure_acknowledgement_0, top-usr-pump_control_failure_acknowledgement_1, top-usr-pump_control_failure_acknowledgement_2, top-usr-pump_control_failure_acknowledgement_3, top-usr-level_failure_acknowledgement, top-usr-steam_failure_acknowledgement);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
-	top-res-poracle_4 : signed word[32];
-	top-res-poracle_5 : signed word[32];
-	top-res-poracle_6 : signed word[32];
-	top-res-poracle_7 : signed word[32];
-	top-res-poracle_8 : signed word[32];
-	top-res-poracle_9 : signed word[32];
-	top-res-poracle_10 : signed word[32];
-	top-res-poracle_11 : signed word[32];
-	top-res-poracle_12 : signed word[32];
-	top-res-poracle_13 : signed word[32];
-	top-res-poracle_14 : signed word[32];
-	top-res-poracle_15 : signed word[32];
-	top-res-poracle_16 : signed word[32];
-	top-res-poracle_17 : signed word[32];
-	top-res-poracle_18 : signed word[32];
-	top-res-poracle_19 : signed word[32];
-	top-res-poracle_20 : signed word[32];
-	top-res-poracle_21 : signed word[32];
-	top-res-poracle_22 : signed word[32];
-	top-res-poracle_23 : signed word[32];
-	top-res-poracle_24 : signed word[32];
-	top-res-poracle_25 : signed word[32];
-	top-res-poracle_26 : signed word[32];
-	top-res-poracle_27 : signed word[32];
-	top-res-poracle_28 : signed word[32];
-	top-res-poracle_29 : signed word[32];
-	top-res-poracle_30 : signed word[32];
-	top-res-poracle_31 : signed word[32];
-	top-res-poracle_32 : signed word[32];
-	top-res-poracle_33 : signed word[32];
 
 ASSIGN
 	init(top-impl-usr-pump_control_failure_detection_0) := top-res-3-call_105.BoilerController-usr-pump_control_failure_detection_0;

@@ -1,16 +1,32 @@
 
 MODULE synapse (synapse-usr-e_s1, synapse-usr-e_s2, synapse-usr-e_s3, synapse-usr-init_invalid_s)
 VAR
-	synapse-usr-invalid_s : integer;	synapse-usr-valid_s : integer;	synapse-usr-dirty_s : integer;	synapse-usr-mem_init_s : integer;	synapse-res-oracle_3 : integer;	synapse-res-oracle_2 : integer;	synapse-res-oracle_1 : integer;
+	synapse-usr-invalid_s : integer;
+	synapse-usr-valid_s : integer;
+	synapse-usr-dirty_s : integer;
+	synapse-usr-mem_init_s : integer;
+	synapse-impl-usr-garde_s1 : boolean;
+	synapse-impl-usr-garde_s2 : boolean;
+	synapse-impl-usr-garde_s3 : boolean;
+	synapse-res-oracle_3 : integer;
+	synapse-res-oracle_2 : integer;
+	synapse-res-oracle_1 : integer;
+
 ASSIGN
 	init(synapse-usr-mem_init_s) := synapse-usr-init_invalid_s;
 	init(synapse-usr-invalid_s) := synapse-usr-mem_init_s;
 	init(synapse-usr-valid_s) := 0;
+	init(synapse-impl-usr-garde_s1) := synapse-res-oracle_1 >= 1;
+	init(synapse-impl-usr-garde_s2) := synapse-res-oracle_2 >= 1;
+	init(synapse-impl-usr-garde_s3) := synapse-res-oracle_3 >= 1;
 	init(synapse-usr-dirty_s) := 0;
 
-	next(synapse-usr-invalid_s) := (next(synapse-usr-e_s1) ? (synapse-usr-invalid_s >= 1 ? ((synapse-usr-invalid_s - synapse-usr-dirty_s) - 1) : synapse-usr-invalid_s) : (next(synapse-usr-e_s2) ? (synapse-usr-valid_s >= 1 ? (synapse-usr-invalid_s + synapse-usr-dirty_s + synapse-usr-valid_s - 1) : synapse-usr-invalid_s) : (next(synapse-usr-e_s3) ? (synapse-usr-invalid_s >= 1 ? (synapse-usr-invalid_s + synapse-usr-dirty_s + synapse-usr-valid_s - 1) : synapse-usr-invalid_s) : synapse-usr-invalid_s)));
-	next(synapse-usr-valid_s) := (next(synapse-usr-e_s1) ? (synapse-usr-invalid_s >= 1 ? synapse-usr-valid_s + 1 : synapse-usr-valid_s) : (next(synapse-usr-e_s2) ? (synapse-usr-valid_s >= 1 ? 0 : synapse-usr-valid_s) : (next(synapse-usr-e_s3) ? (synapse-usr-invalid_s >= 1 ? 0 : synapse-usr-valid_s) : synapse-usr-valid_s)));
-	next(synapse-usr-dirty_s) := (next(synapse-usr-e_s1) ? (synapse-usr-invalid_s >= 1 ? 0 : synapse-usr-dirty_s) : (next(synapse-usr-e_s2) ? (synapse-usr-valid_s >= 1 ? 1 : synapse-usr-dirty_s) : (next(synapse-usr-e_s3) ? (synapse-usr-invalid_s >= 1 ? 1 : synapse-usr-dirty_s) : synapse-usr-dirty_s)));
+	next(synapse-impl-usr-garde_s3) := synapse-usr-invalid_s >= 1;
+	next(synapse-impl-usr-garde_s2) := synapse-usr-valid_s >= 1;
+	next(synapse-impl-usr-garde_s1) := synapse-usr-invalid_s >= 1;
+	next(synapse-usr-invalid_s) := (next(synapse-usr-e_s1) ? (next(synapse-impl-usr-garde_s1) ? ((synapse-usr-invalid_s - synapse-usr-dirty_s) - 1) : synapse-usr-invalid_s) : (next(synapse-usr-e_s2) ? (next(synapse-impl-usr-garde_s2) ? (synapse-usr-invalid_s + synapse-usr-dirty_s + synapse-usr-valid_s - 1) : synapse-usr-invalid_s) : (next(synapse-usr-e_s3) ? (next(synapse-impl-usr-garde_s3) ? (synapse-usr-invalid_s + synapse-usr-dirty_s + synapse-usr-valid_s - 1) : synapse-usr-invalid_s) : synapse-usr-invalid_s)));
+	next(synapse-usr-valid_s) := (next(synapse-usr-e_s1) ? (next(synapse-impl-usr-garde_s1) ? synapse-usr-valid_s + 1 : synapse-usr-valid_s) : (next(synapse-usr-e_s2) ? (next(synapse-impl-usr-garde_s2) ? 0 : synapse-usr-valid_s) : (next(synapse-usr-e_s3) ? (next(synapse-impl-usr-garde_s3) ? 0 : synapse-usr-valid_s) : synapse-usr-valid_s)));
+	next(synapse-usr-dirty_s) := (next(synapse-usr-e_s1) ? (next(synapse-impl-usr-garde_s1) ? 0 : synapse-usr-dirty_s) : (next(synapse-usr-e_s2) ? (next(synapse-impl-usr-garde_s2) ? 1 : synapse-usr-dirty_s) : (next(synapse-usr-e_s3) ? (next(synapse-impl-usr-garde_s3) ? 1 : synapse-usr-dirty_s) : synapse-usr-dirty_s)));
 	next(synapse-usr-mem_init_s) := synapse-usr-mem_init_s;
 
 
@@ -18,6 +34,7 @@ ASSIGN
 MODULE excludes3 (excludes3-usr-X1, excludes3-usr-X2, excludes3-usr-X3)
 VAR
 	excludes3-usr-excludes : boolean;
+
 ASSIGN
 	init(excludes3-usr-excludes) := !((excludes3-usr-X2 & excludes3-usr-X3) | ((excludes3-usr-X1 & excludes3-usr-X3) | (excludes3-usr-X1 & excludes3-usr-X2)));
 
@@ -28,6 +45,7 @@ ASSIGN
 MODULE First (First-usr-X)
 VAR
 	First-usr-First : integer;
+
 ASSIGN
 	init(First-usr-First) := First-usr-X;
 	next(First-usr-First) := First-usr-First;
@@ -37,6 +55,7 @@ ASSIGN
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (Sofar-usr-Sofar | next(Sofar-usr-X));
@@ -45,19 +64,38 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-e_s1 : boolean;	top-usr-e_s2 : boolean;	top-usr-e_s3 : boolean;	top-usr-init_invalid_s : integer;	top-usr-OK : boolean;	top-res-glocal_8 : integer;	top-res-gklocal_6 : boolean;	top-res-call_9 : First(top-usr-init_invalid_s);
+	top-usr-e_s1 : boolean;
+	top-usr-e_s2 : boolean;
+	top-usr-e_s3 : boolean;
+	top-usr-init_invalid_s : integer;
+	top-usr-OK : boolean;
+	top-impl-usr-invalid_s : integer;
+	top-impl-usr-valid_s : integer;
+	top-impl-usr-dirty_s : integer;
+	top-impl-usr-env : boolean;
+	top-res-glocal_8 : integer;
+	top-res-gklocal_6 : boolean;
+	top-res-call_9 : First(top-usr-init_invalid_s);
 	top-res-call_5 : excludes3(top-usr-e_s1, top-usr-e_s2, top-usr-e_s3);
 	top-res-call_7 : Sofar(top-res-gklocal_6);
 	top-res-2-call_4 : synapse(top-usr-e_s1, top-usr-e_s2, top-usr-e_s3, top-usr-init_invalid_s);
-	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;
+
 ASSIGN
 	init(top-res-gklocal_6) := (top-res-call_5.excludes3-usr-excludes & top-usr-init_invalid_s >= 0);
-	init(top-usr-OK) := (top-res-call_7.Sofar-usr-Sofar -> (((top-res-2-call_4.synapse-usr-dirty_s < 2) & (top-res-2-call_4.synapse-usr-invalid_s + top-res-2-call_4.synapse-usr-valid_s + top-res-2-call_4.synapse-usr-dirty_s = top-res-call_9.First-usr-First)) & ((top-res-2-call_4.synapse-usr-valid_s < 1) | (top-res-2-call_4.synapse-usr-dirty_s < 1))));
-	init(top-res-glocal_8) := top-res-2-call_4.synapse-usr-invalid_s + top-res-2-call_4.synapse-usr-valid_s + top-res-2-call_4.synapse-usr-dirty_s;
+	init(top-impl-usr-env) := top-res-call_7.Sofar-usr-Sofar;
+	init(top-impl-usr-dirty_s) := top-res-2-call_4.synapse-usr-dirty_s;
+	init(top-impl-usr-valid_s) := top-res-2-call_4.synapse-usr-valid_s;
+	init(top-impl-usr-invalid_s) := top-res-2-call_4.synapse-usr-invalid_s;
+	init(top-usr-OK) := (top-impl-usr-env -> (((top-impl-usr-dirty_s < 2) & (top-impl-usr-invalid_s + top-impl-usr-valid_s + top-impl-usr-dirty_s = top-res-call_9.First-usr-First)) & ((top-impl-usr-valid_s < 1) | (top-impl-usr-dirty_s < 1))));
+	init(top-res-glocal_8) := top-impl-usr-invalid_s + top-impl-usr-valid_s + top-impl-usr-dirty_s;
 
 	next(top-res-gklocal_6) := (next(top-res-call_5.excludes3-usr-excludes) & next(top-usr-init_invalid_s) >= 0);
-	next(top-usr-OK) := (next(top-res-call_7.Sofar-usr-Sofar) -> ((((next(top-res-2-call_4.synapse-usr-dirty_s) < 2) & (next(top-res-2-call_4.synapse-usr-invalid_s) + next(top-res-2-call_4.synapse-usr-valid_s) + next(top-res-2-call_4.synapse-usr-dirty_s) = top-res-glocal_8)) & (next(top-res-2-call_4.synapse-usr-invalid_s) + next(top-res-2-call_4.synapse-usr-valid_s) + next(top-res-2-call_4.synapse-usr-dirty_s) = next(top-res-call_9.First-usr-First))) & ((next(top-res-2-call_4.synapse-usr-valid_s) < 1) | (next(top-res-2-call_4.synapse-usr-dirty_s) < 1))));
-	next(top-res-glocal_8) := next(top-res-2-call_4.synapse-usr-invalid_s) + next(top-res-2-call_4.synapse-usr-valid_s) + next(top-res-2-call_4.synapse-usr-dirty_s);
+	next(top-impl-usr-env) := next(top-res-call_7.Sofar-usr-Sofar);
+	next(top-impl-usr-dirty_s) := next(top-res-2-call_4.synapse-usr-dirty_s);
+	next(top-impl-usr-valid_s) := next(top-res-2-call_4.synapse-usr-valid_s);
+	next(top-impl-usr-invalid_s) := next(top-res-2-call_4.synapse-usr-invalid_s);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> ((((next(top-impl-usr-dirty_s) < 2) & (next(top-impl-usr-invalid_s) + next(top-impl-usr-valid_s) + next(top-impl-usr-dirty_s) = top-res-glocal_8)) & (next(top-impl-usr-invalid_s) + next(top-impl-usr-valid_s) + next(top-impl-usr-dirty_s) = next(top-res-call_9.First-usr-First))) & ((next(top-impl-usr-valid_s) < 1) | (next(top-impl-usr-dirty_s) < 1))));
+	next(top-res-glocal_8) := next(top-impl-usr-invalid_s) + next(top-impl-usr-valid_s) + next(top-impl-usr-dirty_s);
 
 
 INVARSPEC 

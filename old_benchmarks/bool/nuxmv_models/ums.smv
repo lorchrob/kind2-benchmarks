@@ -1,28 +1,34 @@
 
 MODULE UMS (UMS-usr-on_A, UMS-usr-on_B, UMS-usr-on_C, UMS-usr-ack_AB, UMS-usr-ack_BC)
 VAR
-
 	UMS-usr-grant_access : boolean;
 	UMS-usr-grant_exit : boolean;
 	UMS-usr-do_AB : boolean;
 	UMS-usr-do_BC : boolean;
-ASSIGN
-	init(UMS-usr-grant_access) := (!(UMS-usr-on_C | (UMS-usr-on_B | UMS-usr-on_A)) & UMS-usr-ack_AB);
-	init(UMS-usr-grant_exit) := ((UMS-usr-on_B & !(UMS-usr-on_C | UMS-usr-on_A)) & UMS-usr-ack_BC);
-	init(UMS-usr-do_AB) := (!UMS-usr-ack_AB & !(UMS-usr-on_C | (UMS-usr-on_B | UMS-usr-on_A)));
-	init(UMS-usr-do_BC) := (!UMS-usr-ack_BC & (UMS-usr-on_B & !(UMS-usr-on_C | UMS-usr-on_A)));
+	UMS-impl-usr-empty_section : boolean;
+	UMS-impl-usr-only_on_B : boolean;
 
-	next(UMS-usr-grant_access) := (!(next(UMS-usr-on_C) | (next(UMS-usr-on_B) | next(UMS-usr-on_A))) & next(UMS-usr-ack_AB));
-	next(UMS-usr-grant_exit) := ((next(UMS-usr-on_B) & !(next(UMS-usr-on_C) | next(UMS-usr-on_A))) & next(UMS-usr-ack_BC));
-	next(UMS-usr-do_AB) := (!next(UMS-usr-ack_AB) & !(next(UMS-usr-on_C) | (next(UMS-usr-on_B) | next(UMS-usr-on_A))));
-	next(UMS-usr-do_BC) := (!next(UMS-usr-ack_BC) & (next(UMS-usr-on_B) & !(next(UMS-usr-on_C) | next(UMS-usr-on_A))));
+ASSIGN
+	init(UMS-impl-usr-empty_section) := !(UMS-usr-on_C | (UMS-usr-on_B | UMS-usr-on_A));
+	init(UMS-usr-grant_access) := (UMS-impl-usr-empty_section & UMS-usr-ack_AB);
+	init(UMS-impl-usr-only_on_B) := (UMS-usr-on_B & !(UMS-usr-on_C | UMS-usr-on_A));
+	init(UMS-usr-grant_exit) := (UMS-impl-usr-only_on_B & UMS-usr-ack_BC);
+	init(UMS-usr-do_AB) := (!UMS-usr-ack_AB & UMS-impl-usr-empty_section);
+	init(UMS-usr-do_BC) := (!UMS-usr-ack_BC & UMS-impl-usr-only_on_B);
+
+	next(UMS-impl-usr-empty_section) := !(next(UMS-usr-on_C) | (next(UMS-usr-on_B) | next(UMS-usr-on_A)));
+	next(UMS-usr-grant_access) := (next(UMS-impl-usr-empty_section) & next(UMS-usr-ack_AB));
+	next(UMS-impl-usr-only_on_B) := (next(UMS-usr-on_B) & !(next(UMS-usr-on_C) | next(UMS-usr-on_A)));
+	next(UMS-usr-grant_exit) := (next(UMS-impl-usr-only_on_B) & next(UMS-usr-ack_BC));
+	next(UMS-usr-do_AB) := (!next(UMS-usr-ack_AB) & next(UMS-impl-usr-empty_section));
+	next(UMS-usr-do_BC) := (!next(UMS-usr-ack_BC) & next(UMS-impl-usr-only_on_B));
 
 
 
 MODULE implies (implies-usr-A, implies-usr-B)
 VAR
-
 	implies-usr-AimpliesB : boolean;
+
 ASSIGN
 	init(implies-usr-AimpliesB) := (implies-usr-B | !implies-usr-A);
 	next(implies-usr-AimpliesB) := (next(implies-usr-B) | !next(implies-usr-A));
@@ -31,9 +37,9 @@ ASSIGN
 
 MODULE after (after-usr-A)
 VAR
-
 	after-usr-afterA : boolean;
 	after-res-glocal_1 : boolean;
+
 ASSIGN
 	init(after-usr-afterA) := FALSE;
 	init(after-res-glocal_1) := (after-usr-afterA | after-usr-A);
@@ -45,11 +51,9 @@ ASSIGN
 
 MODULE always_since (always_since-usr-B, always_since-usr-A)
 VAR
-
 	always_since-usr-alwaysBsinceA : boolean;
 	always_since-res-call_2 : after(always_since-usr-A);
 	always_since-res-oracle_3 : boolean;
-
 
 ASSIGN
 	init(always_since-usr-alwaysBsinceA) := (always_since-usr-A ? always_since-usr-B : (always_since-res-call_2.after-usr-afterA ? (always_since-usr-B & always_since-res-oracle_3) : TRUE));
@@ -60,11 +64,9 @@ ASSIGN
 
 MODULE once_since (once_since-usr-C, once_since-usr-A)
 VAR
-
 	once_since-usr-onceCsinceA : boolean;
 	once_since-res-call_4 : after(once_since-usr-A);
 	once_since-res-oracle_5 : boolean;
-
 
 ASSIGN
 	init(once_since-usr-onceCsinceA) := (once_since-usr-A ? once_since-usr-C : (once_since-res-call_4.after-usr-afterA ? (once_since-res-oracle_5 | once_since-usr-C) : TRUE));
@@ -75,25 +77,12 @@ ASSIGN
 
 MODULE always_from_to (always_from_to-usr-B, always_from_to-usr-A, always_from_to-usr-C)
 VAR
-
 	always_from_to-usr-X : boolean;
 	always_from_to-res-gklocal_9 : boolean;
 	always_from_to-res-call_7 : always_since(always_from_to-usr-B, always_from_to-usr-A);
 	always_from_to-res-call_8 : once_since(always_from_to-usr-C, always_from_to-usr-A);
 	always_from_to-res-call_6 : after(always_from_to-usr-A);
 	always_from_to-res-call_10 : implies(always_from_to-res-call_6.after-usr-afterA, always_from_to-res-gklocal_9);
-	always_from_to-res-poracle_1 : boolean;
-	always_from_to-res-poracle_2 : boolean;
-
-
-
-
-
-
-
-
-
-
 
 ASSIGN
 	init(always_from_to-res-gklocal_9) := (always_from_to-res-call_8.once_since-usr-onceCsinceA | always_from_to-res-call_7.always_since-usr-alwaysBsinceA);
@@ -106,8 +95,8 @@ ASSIGN
 
 MODULE edge (edge-usr-X)
 VAR
-
 	edge-usr-Y : boolean;
+
 ASSIGN
 	init(edge-usr-Y) := edge-usr-X;
 	next(edge-usr-Y) := (next(edge-usr-X) & !edge-usr-X);
@@ -116,8 +105,8 @@ ASSIGN
 
 MODULE Sofar (Sofar-usr-X)
 VAR
-
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
@@ -126,7 +115,6 @@ ASSIGN
 
 MODULE main () 
 VAR
-
 	top-usr-on_A : boolean;
 	top-usr-on_B : boolean;
 	top-usr-on_C : boolean;
@@ -137,8 +125,13 @@ VAR
 	top-impl-usr-grant_exit : boolean;
 	top-impl-usr-do_AB : boolean;
 	top-impl-usr-do_BC : boolean;
+	top-impl-usr-no_collision : boolean;
+	top-impl-usr-exclusive_req : boolean;
+	top-impl-usr-no_derail_AB : boolean;
+	top-impl-usr-no_derail_BC : boolean;
 	top-impl-usr-empty_section : boolean;
 	top-impl-usr-only_on_B : boolean;
+	top-impl-usr-env : boolean;
 	top-res-gklocal_17 : boolean;
 	top-res-gklocal_14 : boolean;
 	top-res-gklocal_21 : boolean;
@@ -160,111 +153,27 @@ VAR
 	top-res-call_27 : edge(top-res-gklocal_26);
 	top-res-call_29 : implies(top-res-call_27.edge-usr-Y, top-res-gklocal_28);
 	top-res-call_31 : Sofar(top-res-gklocal_30);
-	top-res-2-call_11_0 : UMS(top-usr-on_A, top-usr-on_B, top-usr-on_C, top-usr-ack_AB, top-usr-ack_BC);
-	top-res-2-call_11_1 : UMS(top-usr-on_A, top-usr-on_B, top-usr-on_C, top-usr-ack_AB, top-usr-ack_BC);
-	top-res-2-call_11_2 : UMS(top-usr-on_A, top-usr-on_B, top-usr-on_C, top-usr-ack_AB, top-usr-ack_BC);
-	top-res-2-call_11_3 : UMS(top-usr-on_A, top-usr-on_B, top-usr-on_C, top-usr-ack_AB, top-usr-ack_BC);
+	top-res-2-call_11 : UMS(top-usr-on_A, top-usr-on_B, top-usr-on_C, top-usr-ack_AB, top-usr-ack_BC);
 	top-res-oracle_16 : boolean;
 	top-res-oracle_20 : boolean;
-	top-res-poracle_1 : boolean;
-	top-res-poracle_2 : boolean;
-	top-res-poracle_3 : boolean;
-	top-res-poracle_4 : boolean;
-	top-res-poracle_5 : boolean;
-	top-res-poracle_6 : boolean;
-	top-res-poracle_7 : boolean;
-	top-res-poracle_8 : boolean;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ASSIGN
 	init(top-res-gklocal_26) := !top-usr-on_B;
 	init(top-res-gklocal_28) := (top-usr-on_C | top-usr-on_A);
 	init(top-res-gklocal_23) := !top-usr-on_A;
-	init(top-impl-usr-do_AB) := top-res-2-call_11_2.UMS-usr-do_AB;
-	init(top-impl-usr-do_BC) := top-res-2-call_11_3.UMS-usr-do_BC;
+	init(top-impl-usr-do_AB) := top-res-2-call_11.UMS-usr-do_AB;
+	init(top-impl-usr-do_BC) := top-res-2-call_11.UMS-usr-do_BC;
 	init(top-impl-usr-empty_section) := !(top-usr-on_C | (top-usr-on_B | top-usr-on_A));
 	init(top-res-gklocal_30) := (((((!(top-usr-ack_AB & top-usr-ack_BC) & top-res-call_12.always_from_to-usr-X) & top-res-call_13.always_from_to-usr-X) & top-impl-usr-empty_section) & top-res-call_25.implies-usr-AimpliesB) & top-res-call_29.implies-usr-AimpliesB);
-	init(top-impl-usr-grant_access) := top-res-2-call_11_0.UMS-usr-grant_access;
+	init(top-impl-usr-grant_access) := top-res-2-call_11.UMS-usr-grant_access;
 	init(top-impl-usr-only_on_B) := (top-usr-on_B & !(top-usr-on_C | top-usr-on_A));
-	init(top-impl-usr-grant_exit) := top-res-2-call_11_1.UMS-usr-grant_exit;
-	init(top-usr-OK) := (top-res-call_31.Sofar-usr-Sofar -> (((top-res-call_32.implies-usr-AimpliesB & !(top-impl-usr-do_AB & top-impl-usr-do_BC)) & top-res-call_33.always_from_to-usr-X) & top-res-call_34.always_from_to-usr-X));
+	init(top-impl-usr-grant_exit) := top-res-2-call_11.UMS-usr-grant_exit;
+	init(top-impl-usr-env) := top-res-call_31.Sofar-usr-Sofar;
+	init(top-impl-usr-no_derail_BC) := top-res-call_34.always_from_to-usr-X;
+	init(top-impl-usr-no_derail_AB) := top-res-call_33.always_from_to-usr-X;
+	init(top-impl-usr-exclusive_req) := !(top-impl-usr-do_AB & top-impl-usr-do_BC);
+	init(top-impl-usr-no_collision) := top-res-call_32.implies-usr-AimpliesB;
+	init(top-usr-OK) := (top-impl-usr-env -> (((top-impl-usr-no_collision & top-impl-usr-exclusive_req) & top-impl-usr-no_derail_AB) & top-impl-usr-no_derail_BC));
 	init(top-res-gklocal_14) := !top-impl-usr-empty_section;
 	init(top-res-gklocal_17) := top-res-oracle_16;
 	init(top-res-gklocal_21) := top-res-oracle_20;
@@ -276,13 +185,18 @@ ASSIGN
 	next(top-impl-usr-empty_section) := !(next(top-usr-on_C) | (next(top-usr-on_B) | next(top-usr-on_A)));
 	next(top-res-gklocal_14) := !next(top-impl-usr-empty_section);
 	next(top-res-gklocal_17) := top-impl-usr-grant_access;
-	next(top-impl-usr-do_AB) := next(top-res-2-call_11_2.UMS-usr-do_AB);
-	next(top-impl-usr-do_BC) := next(top-res-2-call_11_3.UMS-usr-do_BC);
+	next(top-impl-usr-do_AB) := next(top-res-2-call_11.UMS-usr-do_AB);
+	next(top-impl-usr-do_BC) := next(top-res-2-call_11.UMS-usr-do_BC);
 	next(top-res-gklocal_30) := ((((((!(next(top-usr-ack_AB) & next(top-usr-ack_BC)) & next(top-res-call_12.always_from_to-usr-X)) & next(top-res-call_13.always_from_to-usr-X)) & next(top-res-call_18.implies-usr-AimpliesB)) & next(top-res-call_22.implies-usr-AimpliesB)) & next(top-res-call_25.implies-usr-AimpliesB)) & next(top-res-call_29.implies-usr-AimpliesB));
-	next(top-impl-usr-grant_access) := next(top-res-2-call_11_0.UMS-usr-grant_access);
+	next(top-impl-usr-grant_access) := next(top-res-2-call_11.UMS-usr-grant_access);
 	next(top-impl-usr-only_on_B) := (next(top-usr-on_B) & !(next(top-usr-on_C) | next(top-usr-on_A)));
-	next(top-impl-usr-grant_exit) := next(top-res-2-call_11_1.UMS-usr-grant_exit);
-	next(top-usr-OK) := (next(top-res-call_31.Sofar-usr-Sofar) -> (((next(top-res-call_32.implies-usr-AimpliesB) & !(next(top-impl-usr-do_AB) & next(top-impl-usr-do_BC))) & next(top-res-call_33.always_from_to-usr-X)) & next(top-res-call_34.always_from_to-usr-X)));
+	next(top-impl-usr-grant_exit) := next(top-res-2-call_11.UMS-usr-grant_exit);
+	next(top-impl-usr-env) := next(top-res-call_31.Sofar-usr-Sofar);
+	next(top-impl-usr-no_derail_BC) := next(top-res-call_34.always_from_to-usr-X);
+	next(top-impl-usr-no_derail_AB) := next(top-res-call_33.always_from_to-usr-X);
+	next(top-impl-usr-exclusive_req) := !(next(top-impl-usr-do_AB) & next(top-impl-usr-do_BC));
+	next(top-impl-usr-no_collision) := next(top-res-call_32.implies-usr-AimpliesB);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> (((next(top-impl-usr-no_collision) & next(top-impl-usr-exclusive_req)) & next(top-impl-usr-no_derail_AB)) & next(top-impl-usr-no_derail_BC)));
 
 
 INVARSPEC 

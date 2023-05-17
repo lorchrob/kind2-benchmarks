@@ -125,14 +125,6 @@ VAR
 	main-res-call_17 : _TOP__sieve(main-usr-sieve____ASSUME__HIST, main-usr-sieve____ASSUME0, main-usr-sieve__Input, main-usr-sieve__time, main-usr-sieve__Output, main-usr-sieve___CLOCK_);
 	main-res-call_14 : __HIST(main-res-gklocal_13);
 	main-res-call_11 : _TOP__counter(main-usr-counter____ASSUME__HIST, main-usr-counter__time, main-usr-counter__Output, main-usr-counter___CLOCK_);
-	main-res-poracle_1 : integer;
-	main-res-poracle_2 : integer;
-	main-res-poracle_3 : boolean;
-	main-res-poracle_4 : integer;
-	main-res-poracle_5 : integer;
-	main-res-poracle_6 : boolean;
-	main-res-poracle_7 : integer;
-	main-res-poracle_8 : integer;
 
 ASSIGN
 	init(main-res-glocal_10) := (main-usr-time = main-usr-counter__time);

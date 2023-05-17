@@ -41,7 +41,7 @@ VAR
 
 ASSIGN
 	init(_TOP__C_sub-impl-usr-__GUARANTEE1) := (_TOP__C_sub-usr-Output = ((_TOP__C_sub-usr-mode = 3) ? _TOP__C_sub-usr-Input1 + _TOP__C_sub-usr-Input2 : 0));
-	init(_TOP__C_sub-impl-usr-__GUARANTEE0) := _TOP__C_sub-usr-mode >= 0;
+	init(_TOP__C_sub-impl-usr-__GUARANTEE0) := (_TOP__C_sub-usr-mode >= 0);
 	init(_TOP__C_sub-usr-__ASSERT) := (_TOP__C_sub-usr-__ASSUME__HIST -> (_TOP__C_sub-impl-usr-__GUARANTEE1 & _TOP__C_sub-impl-usr-__GUARANTEE0));
 
 	next(_TOP__C_sub-impl-usr-__GUARANTEE1) := (next(_TOP__C_sub-usr-Output) = ((next(_TOP__C_sub-usr-mode) = 3) ? next(_TOP__C_sub-usr-Input1) + next(_TOP__C_sub-usr-Input2) : 0));

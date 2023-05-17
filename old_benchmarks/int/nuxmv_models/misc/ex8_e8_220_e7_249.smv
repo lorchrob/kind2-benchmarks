@@ -2,16 +2,28 @@
 MODULE COUNTER (COUNTER-usr-init, COUNTER-usr-incr, COUNTER-usr-X, COUNTER-usr-reset)
 VAR
 	COUNTER-usr-C : integer;
-ASSIGN
-	init(COUNTER-usr-C) := (COUNTER-usr-reset ? COUNTER-usr-init : (COUNTER-usr-X ? COUNTER-usr-init + COUNTER-usr-incr : COUNTER-usr-init));
+	COUNTER-impl-usr-PC : integer;
 
-	next(COUNTER-usr-C) := (next(COUNTER-usr-reset) ? next(COUNTER-usr-init) : (next(COUNTER-usr-X) ? COUNTER-usr-C + next(COUNTER-usr-incr) : COUNTER-usr-C));
+ASSIGN
+	init(COUNTER-impl-usr-PC) := COUNTER-usr-init;
+	init(COUNTER-usr-C) := (COUNTER-usr-reset ? COUNTER-usr-init : (COUNTER-usr-X ? COUNTER-impl-usr-PC + COUNTER-usr-incr : COUNTER-impl-usr-PC));
+
+	next(COUNTER-impl-usr-PC) := COUNTER-usr-C;
+	next(COUNTER-usr-C) := (next(COUNTER-usr-reset) ? next(COUNTER-usr-init) : (next(COUNTER-usr-X) ? next(COUNTER-impl-usr-PC) + next(COUNTER-usr-incr) : next(COUNTER-impl-usr-PC)));
 
 
 
 MODULE speed (speed-usr-beacon, speed-usr-second)
 VAR
-	speed-usr-late : boolean;	speed-usr-early : boolean;	speed-impl-usr-incr : integer;	speed-res-subrange_1 : boolean;	speed-res-gklocal_4 : boolean;	speed-res-gklocal_3 : boolean;	speed-res-gklocal_2 : integer;	speed-res-call_5 : COUNTER(speed-res-gklocal_2, speed-impl-usr-incr, speed-res-gklocal_3, speed-res-gklocal_4);
+	speed-usr-late : boolean;
+	speed-usr-early : boolean;
+	speed-impl-usr-diff : integer;
+	speed-impl-usr-incr : integer;
+	speed-res-subrange_1 : boolean;
+	speed-res-gklocal_4 : boolean;
+	speed-res-gklocal_3 : boolean;
+	speed-res-gklocal_2 : integer;
+	speed-res-call_5 : COUNTER(speed-res-gklocal_2, speed-impl-usr-incr, speed-res-gklocal_3, speed-res-gklocal_4);
 
 ASSIGN
 	init(speed-usr-late) := FALSE;
@@ -19,6 +31,7 @@ ASSIGN
 	init(speed-res-gklocal_3) := (speed-usr-beacon & speed-usr-second);
 	init(speed-res-gklocal_4) := FALSE;
 	init(speed-impl-usr-incr) := ((!speed-usr-second | speed-usr-beacon) ? 1 : ((speed-usr-second & !speed-usr-beacon) ? 2 : 0));
+	init(speed-impl-usr-diff) := speed-res-call_5.COUNTER-usr-C;
 	init(speed-usr-early) := FALSE;
 	init(speed-res-subrange_1) := (0 <= speed-impl-usr-incr & speed-impl-usr-incr <= 2);
 
@@ -26,21 +39,29 @@ ASSIGN
 	next(speed-res-gklocal_3) := (next(speed-usr-beacon) & next(speed-usr-second));
 	next(speed-res-gklocal_4) := FALSE;
 	next(speed-impl-usr-incr) := ((!next(speed-usr-second) | next(speed-usr-beacon)) ? 1 : ((next(speed-usr-second) & !next(speed-usr-beacon)) ? 2 : 0));
-	next(speed-usr-late) := (speed-usr-late ? (next(speed-res-call_5.COUNTER-usr-C) < 0) : next(speed-res-call_5.COUNTER-usr-C) <= -10);
-	next(speed-usr-early) := (speed-usr-early ? (next(speed-res-call_5.COUNTER-usr-C) > 0) : next(speed-res-call_5.COUNTER-usr-C) >= 10);
+	next(speed-impl-usr-diff) := next(speed-res-call_5.COUNTER-usr-C);
+	next(speed-usr-late) := (speed-usr-late ? (next(speed-impl-usr-diff) < 0) : next(speed-impl-usr-diff) <= -10);
+	next(speed-usr-early) := (speed-usr-early ? (next(speed-impl-usr-diff) > 0) : next(speed-impl-usr-diff) >= 10);
 	next(speed-res-subrange_1) := (0 <= next(speed-impl-usr-incr) & next(speed-impl-usr-incr) <= 2);
 
 
 
 MODULE main () 
 VAR
-	top-usr-beacon : boolean;	top-usr-second : boolean;	top-usr-OK : boolean;	top-impl-usr-early : boolean;	top-res-2-call_6 : speed(top-usr-beacon, top-usr-second);
+	top-usr-beacon : boolean;
+	top-usr-second : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-late : boolean;
+	top-impl-usr-early : boolean;
+	top-res-2-call_6 : speed(top-usr-beacon, top-usr-second);
 
 ASSIGN
 	init(top-usr-OK) := TRUE;
+	init(top-impl-usr-late) := top-res-2-call_6.speed-usr-late;
 	init(top-impl-usr-early) := top-res-2-call_6.speed-usr-early;
 
-	next(top-usr-OK) := (!next(top-res-2-call_6.speed-usr-late) & top-impl-usr-early);
+	next(top-impl-usr-late) := next(top-res-2-call_6.speed-usr-late);
+	next(top-usr-OK) := (!next(top-impl-usr-late) & top-impl-usr-early);
 	next(top-impl-usr-early) := next(top-res-2-call_6.speed-usr-early);
 
 

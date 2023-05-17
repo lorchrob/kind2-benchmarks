@@ -164,7 +164,6 @@ VAR
 	top-res-call_19 : PosEdge(top-usr-ccsetd);
 	top-res-call_20 : PosEdge(top-usr-ccr);
 	top-res-2-call_16 : main(top-usr-igsw, top-usr-ccd, top-usr-cconoff, top-usr-bpa, top-usr-cccanc, top-usr-battok, top-usr-gearok, top-usr-qfok, top-usr-sdok, top-usr-accok, top-usr-ccseti, top-usr-ccsetd, top-usr-ccr, top-usr-vs);
-	top-res-poracle_1 : boolean;
 
 ASSIGN
 	init(top-usr-OK) := (top-res-call_17.PosEdge-usr-Y ? (top-res-call_20.PosEdge-usr-Y | (top-res-call_19.PosEdge-usr-Y | top-res-call_18.PosEdge-usr-Y)) : TRUE);

@@ -1,23 +1,44 @@
 
 MODULE mesi (mesi-usr-etat_me1, mesi-usr-etat_me2, mesi-usr-etat_me3, mesi-usr-etat_me4)
 VAR
-	mesi-usr-modified_me : integer;	mesi-usr-exclusive_me : integer;	mesi-usr-shared_me : integer;	mesi-usr-invalid_me : integer;	mesi-res-oracle_4 : integer;	mesi-res-oracle_3 : integer;	mesi-res-oracle_2 : integer;	mesi-res-oracle_1 : integer;
+	mesi-usr-modified_me : integer;
+	mesi-usr-exclusive_me : integer;
+	mesi-usr-shared_me : integer;
+	mesi-usr-invalid_me : integer;
+	mesi-impl-usr-garde_me1 : boolean;
+	mesi-impl-usr-garde_me2 : boolean;
+	mesi-impl-usr-garde_me3 : boolean;
+	mesi-impl-usr-garde_me4 : boolean;
+	mesi-res-oracle_4 : integer;
+	mesi-res-oracle_3 : integer;
+	mesi-res-oracle_2 : integer;
+	mesi-res-oracle_1 : integer;
+
 ASSIGN
 	init(mesi-usr-modified_me) := 0;
+	init(mesi-impl-usr-garde_me1) := mesi-res-oracle_1 >= 1;
 	init(mesi-usr-invalid_me) := 3;
 	init(mesi-usr-exclusive_me) := 0;
+	init(mesi-impl-usr-garde_me2) := mesi-res-oracle_2 >= 1;
+	init(mesi-impl-usr-garde_me3) := mesi-res-oracle_3 >= 1;
 	init(mesi-usr-shared_me) := 0;
+	init(mesi-impl-usr-garde_me4) := mesi-res-oracle_4 >= 1;
 
-	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
-	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
-	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (mesi-usr-exclusive_me >= 1 ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
-	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (mesi-usr-invalid_me >= 1 ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me + 1 - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (mesi-usr-shared_me >= 1 ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (mesi-usr-invalid_me >= 1 ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
+	next(mesi-impl-usr-garde_me4) := mesi-usr-invalid_me >= 1;
+	next(mesi-impl-usr-garde_me3) := mesi-usr-shared_me >= 1;
+	next(mesi-impl-usr-garde_me2) := mesi-usr-exclusive_me >= 1;
+	next(mesi-impl-usr-garde_me1) := mesi-usr-invalid_me >= 1;
+	next(mesi-usr-modified_me) := (next(mesi-usr-etat_me1) ? (next(mesi-impl-usr-garde_me1) ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me2) ? (next(mesi-impl-usr-garde_me2) ? (mesi-usr-modified_me - 1) : mesi-usr-modified_me) : (next(mesi-usr-etat_me3) ? (next(mesi-impl-usr-garde_me3) ? 0 : mesi-usr-modified_me) : (next(mesi-usr-etat_me4) ? (next(mesi-impl-usr-garde_me4) ? 0 : mesi-usr-modified_me) : mesi-usr-modified_me))));
+	next(mesi-usr-invalid_me) := (next(mesi-usr-etat_me1) ? (next(mesi-impl-usr-garde_me1) ? (mesi-usr-invalid_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me2) ? mesi-usr-invalid_me : (next(mesi-usr-etat_me3) ? (next(mesi-impl-usr-garde_me3) ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : (next(mesi-usr-etat_me4) ? (next(mesi-impl-usr-garde_me4) ? (mesi-usr-invalid_me + mesi-usr-modified_me + mesi-usr-exclusive_me + mesi-usr-shared_me - 1) : mesi-usr-invalid_me) : mesi-usr-invalid_me))));
+	next(mesi-usr-exclusive_me) := (next(mesi-usr-etat_me1) ? (next(mesi-impl-usr-garde_me1) ? 0 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me2) ? (next(mesi-impl-usr-garde_me2) ? (mesi-usr-exclusive_me - 1) : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me3) ? (next(mesi-impl-usr-garde_me3) ? 1 : mesi-usr-exclusive_me) : (next(mesi-usr-etat_me4) ? (next(mesi-impl-usr-garde_me4) ? 1 : mesi-usr-exclusive_me) : mesi-usr-exclusive_me))));
+	next(mesi-usr-shared_me) := (next(mesi-usr-etat_me1) ? (next(mesi-impl-usr-garde_me1) ? (mesi-usr-shared_me + mesi-usr-exclusive_me + mesi-usr-modified_me + 1 - 1) : mesi-usr-shared_me) : (next(mesi-usr-etat_me2) ? mesi-usr-shared_me : (next(mesi-usr-etat_me3) ? (next(mesi-impl-usr-garde_me3) ? 0 : mesi-usr-shared_me) : (next(mesi-usr-etat_me4) ? (next(mesi-impl-usr-garde_me4) ? 0 : mesi-usr-shared_me) : mesi-usr-shared_me))));
 
 
 
 MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
 VAR
 	excludes4-usr-excludes : boolean;
+
 ASSIGN
 	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | (((excludes4-usr-X1 & excludes4-usr-X2) & excludes4-usr-X1) & excludes4-usr-X3)))));
 
@@ -28,6 +49,7 @@ ASSIGN
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
@@ -36,14 +58,25 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-etat_me1 : boolean;	top-usr-etat_me2 : boolean;	top-usr-etat_me3 : boolean;	top-usr-etat_me4 : boolean;	top-usr-OK : boolean;	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
+	top-usr-etat_me1 : boolean;
+	top-usr-etat_me2 : boolean;
+	top-usr-etat_me3 : boolean;
+	top-usr-etat_me4 : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-invalid_me : integer;
+	top-impl-usr-env : boolean;
+	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
 	top-res-call_7 : Sofar(top-res-call_6.excludes4-usr-excludes);
 	top-res-2-call_5 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
-	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;	top-res-poracle_4 : integer;
-ASSIGN
-	init(top-usr-OK) := (top-res-call_7.Sofar-usr-Sofar -> top-res-2-call_5.mesi-usr-invalid_me >= 0);
 
-	next(top-usr-OK) := (next(top-res-call_7.Sofar-usr-Sofar) -> next(top-res-2-call_5.mesi-usr-invalid_me) >= 0);
+ASSIGN
+	init(top-impl-usr-env) := top-res-call_7.Sofar-usr-Sofar;
+	init(top-impl-usr-invalid_me) := top-res-2-call_5.mesi-usr-invalid_me;
+	init(top-usr-OK) := (top-impl-usr-env -> top-impl-usr-invalid_me >= 0);
+
+	next(top-impl-usr-env) := next(top-res-call_7.Sofar-usr-Sofar);
+	next(top-impl-usr-invalid_me) := next(top-res-2-call_5.mesi-usr-invalid_me);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> next(top-impl-usr-invalid_me) >= 0);
 
 
 INVARSPEC 

@@ -2,16 +2,21 @@
 MODULE Store (Store-usr-Delta)
 VAR
 	Store-usr-Total : integer;
-ASSIGN
-	init(Store-usr-Total) := (((Store-usr-Delta < 0) & (0 > 0)) ? 0 + Store-usr-Delta : (((Store-usr-Delta > 0) & (0 < 10)) ? 0 + Store-usr-Delta : 0));
+	Store-impl-usr-Prev : integer;
 
-	next(Store-usr-Total) := (((next(Store-usr-Delta) < 0) & (Store-usr-Total > 0)) ? Store-usr-Total + next(Store-usr-Delta) : (((next(Store-usr-Delta) > 0) & (Store-usr-Total < 10)) ? Store-usr-Total + next(Store-usr-Delta) : Store-usr-Total));
+ASSIGN
+	init(Store-impl-usr-Prev) := 0;
+	init(Store-usr-Total) := (((Store-usr-Delta < 0) & (Store-impl-usr-Prev > 0)) ? Store-impl-usr-Prev + Store-usr-Delta : (((Store-usr-Delta > 0) & (Store-impl-usr-Prev < 10)) ? Store-impl-usr-Prev + Store-usr-Delta : Store-impl-usr-Prev));
+
+	next(Store-impl-usr-Prev) := Store-usr-Total;
+	next(Store-usr-Total) := (((next(Store-usr-Delta) < 0) & (next(Store-impl-usr-Prev) > 0)) ? next(Store-impl-usr-Prev) + next(Store-usr-Delta) : (((next(Store-usr-Delta) > 0) & (next(Store-impl-usr-Prev) < 10)) ? next(Store-impl-usr-Prev) + next(Store-usr-Delta) : next(Store-impl-usr-Prev)));
 
 
 
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Y : boolean;
+
 ASSIGN
 	init(Sofar-usr-Y) := TRUE;
 	next(Sofar-usr-Y) := (next(Sofar-usr-X) | Sofar-usr-Y);
@@ -20,15 +25,21 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-Delta : integer;	top-usr-OK : boolean;	top-res-gklocal_2 : boolean;	top-res-call_3 : Sofar(top-res-gklocal_2);
+	top-usr-Delta : integer;
+	top-usr-OK : boolean;
+	top-impl-usr-Total : integer;
+	top-res-gklocal_2 : boolean;
+	top-res-call_3 : Sofar(top-res-gklocal_2);
 	top-res-call_1 : Store(top-usr-Delta);
 
 ASSIGN
-	init(top-usr-OK) := (top-res-call_3.Sofar-usr-Y -> (0 <= top-res-call_1.Store-usr-Total & top-res-call_1.Store-usr-Total <= 20));
+	init(top-impl-usr-Total) := top-res-call_1.Store-usr-Total;
+	init(top-usr-OK) := (top-res-call_3.Sofar-usr-Y -> (0 <= top-impl-usr-Total & top-impl-usr-Total <= 20));
 	init(top-res-gklocal_2) := (-1 <= top-usr-Delta & top-usr-Delta <= 1);
 
 	next(top-res-gklocal_2) := (-1 <= next(top-usr-Delta) & next(top-usr-Delta) <= 1);
-	next(top-usr-OK) := (next(top-res-call_3.Sofar-usr-Y) -> (0 <= next(top-res-call_1.Store-usr-Total) & next(top-res-call_1.Store-usr-Total) <= 20));
+	next(top-impl-usr-Total) := next(top-res-call_1.Store-usr-Total);
+	next(top-usr-OK) := (next(top-res-call_3.Sofar-usr-Y) -> (0 <= next(top-impl-usr-Total) & next(top-impl-usr-Total) <= 20));
 
 
 INVARSPEC 

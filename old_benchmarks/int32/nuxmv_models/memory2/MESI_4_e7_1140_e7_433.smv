@@ -70,10 +70,6 @@ VAR
 	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
 	top-res-call_8 : Sofar(top-res-gklocal_7);
 	top-res-2-call_5 : mesi(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
-	top-res-poracle_4 : signed word[32];
 
 ASSIGN
 	init(top-impl-usr-modified_me) := top-res-2-call_5.mesi-usr-modified_me;

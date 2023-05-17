@@ -1,15 +1,34 @@
 
 MODULE controlLaw (controlLaw-usr-in1, controlLaw-usr-in2)
 VAR
-	controlLaw-usr-integ : real;	controlLaw-impl-usr-dtf : real;	controlLaw-impl-usr-out_stable : boolean;	controlLaw-res-glocal_7 : boolean;
+	controlLaw-usr-integ : real;
+	controlLaw-impl-usr-inp : real;
+	controlLaw-impl-usr-sum1 : real;
+	controlLaw-impl-usr-dtf : real;
+	controlLaw-impl-usr-c1 : boolean;
+	controlLaw-impl-usr-c2 : boolean;
+	controlLaw-impl-usr-c3 : boolean;
+	controlLaw-impl-usr-out_stable : boolean;
+	controlLaw-res-glocal_7 : boolean;
+
 ASSIGN
 	init(controlLaw-usr-integ) := 0;
 	init(controlLaw-impl-usr-dtf) := 0;
+	init(controlLaw-impl-usr-inp) := (controlLaw-usr-in1 - (49/1250 * controlLaw-impl-usr-dtf));
+	init(controlLaw-impl-usr-sum1) := 0;
+	init(controlLaw-impl-usr-c1) := (controlLaw-impl-usr-sum1 <= 1 & controlLaw-impl-usr-sum1 >= -1);
+	init(controlLaw-impl-usr-c2) := (controlLaw-impl-usr-sum1 >= 1 & (controlLaw-impl-usr-inp < 0));
+	init(controlLaw-impl-usr-c3) := (controlLaw-impl-usr-sum1 <= -1 & (controlLaw-impl-usr-inp > 0));
 	init(controlLaw-impl-usr-out_stable) := (-25 <= controlLaw-usr-integ & controlLaw-usr-integ <= 25);
 	init(controlLaw-res-glocal_7) := (((-18/5 <= controlLaw-usr-in1 & controlLaw-usr-in1 <= 18/5) & -18/5 <= controlLaw-usr-in2) & controlLaw-usr-in2 <= 18/5);
 
 	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201/1250 * controlLaw-impl-usr-dtf);
-	next(controlLaw-usr-integ) := controlLaw-usr-integ + ((((1/25 * controlLaw-usr-integ) + (3/20 * (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)))) <= -1 & ((next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf))) > 0)) | (((1/25 * controlLaw-usr-integ) + (3/20 * (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)))) >= 1 & ((next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf))) < 0)) | ((1/25 * controlLaw-usr-integ) + (3/20 * (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)))) <= 1 & (1/25 * controlLaw-usr-integ) + (3/20 * (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)))) >= -1))) ? (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf))) : 0);
+	next(controlLaw-impl-usr-inp) := (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)));
+	next(controlLaw-impl-usr-sum1) := (1/25 * controlLaw-usr-integ) + (3/20 * next(controlLaw-impl-usr-inp));
+	next(controlLaw-impl-usr-c3) := (next(controlLaw-impl-usr-sum1) <= -1 & (next(controlLaw-impl-usr-inp) > 0));
+	next(controlLaw-impl-usr-c2) := (next(controlLaw-impl-usr-sum1) >= 1 & (next(controlLaw-impl-usr-inp) < 0));
+	next(controlLaw-impl-usr-c1) := (next(controlLaw-impl-usr-sum1) <= 1 & next(controlLaw-impl-usr-sum1) >= -1);
+	next(controlLaw-usr-integ) := controlLaw-usr-integ + ((next(controlLaw-impl-usr-c3) | (next(controlLaw-impl-usr-c2) | next(controlLaw-impl-usr-c1))) ? next(controlLaw-impl-usr-inp) : 0);
 	next(controlLaw-impl-usr-out_stable) := (-25 <= next(controlLaw-usr-integ) & next(controlLaw-usr-integ) <= 25);
 	next(controlLaw-res-glocal_7) := (((-18/5 <= next(controlLaw-usr-in1) & next(controlLaw-usr-in1) <= 18/5) & -18/5 <= next(controlLaw-usr-in2)) & next(controlLaw-usr-in2) <= 18/5);
 
@@ -19,6 +38,7 @@ ASSIGN
 MODULE saturation (saturation-usr-in, saturation-usr-min, saturation-usr-max)
 VAR
 	saturation-usr-out : real;
+
 ASSIGN
 	init(saturation-usr-out) := ((saturation-usr-in < saturation-usr-min) ? saturation-usr-min : ((saturation-usr-in > saturation-usr-max) ? saturation-usr-max : saturation-usr-in));
 
@@ -28,7 +48,10 @@ ASSIGN
 
 MODULE saturation3 (saturation3-usr-inA, saturation3-usr-inB, saturation3-usr-inC, saturation3-usr-min, saturation3-usr-max)
 VAR
-	saturation3-usr-outA : real;	saturation3-usr-outB : real;	saturation3-usr-outC : real;	saturation3-res-call_10 : saturation(saturation3-usr-inC, saturation3-usr-min, saturation3-usr-max);
+	saturation3-usr-outA : real;
+	saturation3-usr-outB : real;
+	saturation3-usr-outC : real;
+	saturation3-res-call_10 : saturation(saturation3-usr-inC, saturation3-usr-min, saturation3-usr-max);
 	saturation3-res-call_9 : saturation(saturation3-usr-inB, saturation3-usr-min, saturation3-usr-max);
 	saturation3-res-call_8 : saturation(saturation3-usr-inA, saturation3-usr-min, saturation3-usr-max);
 
@@ -45,16 +68,60 @@ ASSIGN
 
 MODULE voter (voter-usr-input1, voter-usr-input2, voter-usr-input3)
 VAR
-	voter-usr-output : real;	voter-impl-usr-equalization1 : real;	voter-impl-usr-equalization2 : real;	voter-impl-usr-equalization3 : real;	voter-impl-usr-satCentering : real;	voter-impl-usr-st1 : real;	voter-impl-usr-st2 : real;	voter-impl-usr-st3 : real;	voter-impl-usr-eqs_stable : boolean;	voter-impl-usr-out_stable : boolean;	voter-res-glocal_1 : boolean;	voter-res-glocal_2 : boolean;	voter-res-glocal_3 : boolean;	voter-res-glocal_4 : boolean;	voter-res-glocal_5 : boolean;	voter-res-glocal_6 : boolean;
+	voter-usr-output : real;
+	voter-impl-usr-equalized1 : real;
+	voter-impl-usr-equalized2 : real;
+	voter-impl-usr-equalized3 : real;
+	voter-impl-usr-equalization1 : real;
+	voter-impl-usr-equalization2 : real;
+	voter-impl-usr-equalization3 : real;
+	voter-impl-usr-satCentering : real;
+	voter-impl-usr-centering : real;
+	voter-impl-usr-df1 : real;
+	voter-impl-usr-df2 : real;
+	voter-impl-usr-df3 : real;
+	voter-impl-usr-st1 : real;
+	voter-impl-usr-st2 : real;
+	voter-impl-usr-st3 : real;
+	voter-impl-usr-three_output : real;
+	voter-impl-usr-c1 : boolean;
+	voter-impl-usr-c2 : boolean;
+	voter-impl-usr-c3 : boolean;
+	voter-impl-usr-d1 : boolean;
+	voter-impl-usr-d2 : boolean;
+	voter-impl-usr-d3 : boolean;
+	voter-impl-usr-eqs_stable : boolean;
+	voter-impl-usr-out_stable : boolean;
+	voter-res-glocal_1 : boolean;
+	voter-res-glocal_2 : boolean;
+	voter-res-glocal_3 : boolean;
+	voter-res-glocal_4 : boolean;
+	voter-res-glocal_5 : boolean;
+	voter-res-glocal_6 : boolean;
+
 ASSIGN
 	init(voter-impl-usr-equalization3) := 0;
 	init(voter-impl-usr-equalization1) := 0;
+	init(voter-impl-usr-equalized3) := (voter-usr-input3 - voter-impl-usr-equalization3);
+	init(voter-impl-usr-equalized1) := (voter-usr-input1 - voter-impl-usr-equalization1);
+	init(voter-impl-usr-c3) := (voter-impl-usr-equalized3 > voter-impl-usr-equalized1);
 	init(voter-impl-usr-equalization2) := 0;
-	init(voter-usr-output) := (((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1))) / 3);
-	init(voter-impl-usr-satCentering) := (((((voter-impl-usr-equalization1 > voter-impl-usr-equalization2) = (voter-impl-usr-equalization2 > voter-impl-usr-equalization3)) ? voter-impl-usr-equalization2 : (((voter-impl-usr-equalization2 > voter-impl-usr-equalization3) = (voter-impl-usr-equalization3 > voter-impl-usr-equalization1)) ? voter-impl-usr-equalization3 : voter-impl-usr-equalization1)) > 1/4) ? 1/4 : (((((voter-impl-usr-equalization1 > voter-impl-usr-equalization2) = (voter-impl-usr-equalization2 > voter-impl-usr-equalization3)) ? voter-impl-usr-equalization2 : (((voter-impl-usr-equalization2 > voter-impl-usr-equalization3) = (voter-impl-usr-equalization3 > voter-impl-usr-equalization1)) ? voter-impl-usr-equalization3 : voter-impl-usr-equalization1)) < -1/4) ? -1/4 : (((voter-impl-usr-equalization1 > voter-impl-usr-equalization2) = (voter-impl-usr-equalization2 > voter-impl-usr-equalization3)) ? voter-impl-usr-equalization2 : (((voter-impl-usr-equalization2 > voter-impl-usr-equalization3) = (voter-impl-usr-equalization3 > voter-impl-usr-equalization1)) ? voter-impl-usr-equalization3 : voter-impl-usr-equalization1))));
-	init(voter-impl-usr-st2) := ((((voter-usr-input2 - voter-impl-usr-equalization2) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) > 1/2) ? 1/2 : ((((voter-usr-input2 - voter-impl-usr-equalization2) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) < -1/2) ? -1/2 : ((voter-usr-input2 - voter-impl-usr-equalization2) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1))))));
-	init(voter-impl-usr-st3) := ((((voter-usr-input3 - voter-impl-usr-equalization3) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) > 1/2) ? 1/2 : ((((voter-usr-input3 - voter-impl-usr-equalization3) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) < -1/2) ? -1/2 : ((voter-usr-input3 - voter-impl-usr-equalization3) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1))))));
-	init(voter-impl-usr-st1) := ((((voter-usr-input1 - voter-impl-usr-equalization1) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) > 1/2) ? 1/2 : ((((voter-usr-input1 - voter-impl-usr-equalization1) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1)))) < -1/2) ? -1/2 : ((voter-usr-input1 - voter-impl-usr-equalization1) - ((((voter-usr-input1 - voter-impl-usr-equalization1) > (voter-usr-input2 - voter-impl-usr-equalization2)) = ((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3))) ? (voter-usr-input2 - voter-impl-usr-equalization2) : ((((voter-usr-input2 - voter-impl-usr-equalization2) > (voter-usr-input3 - voter-impl-usr-equalization3)) = ((voter-usr-input3 - voter-impl-usr-equalization3) > (voter-usr-input1 - voter-impl-usr-equalization1))) ? (voter-usr-input3 - voter-impl-usr-equalization3) : (voter-usr-input1 - voter-impl-usr-equalization1))))));
+	init(voter-impl-usr-equalized2) := (voter-usr-input2 - voter-impl-usr-equalization2);
+	init(voter-impl-usr-c2) := (voter-impl-usr-equalized2 > voter-impl-usr-equalized3);
+	init(voter-impl-usr-c1) := (voter-impl-usr-equalized1 > voter-impl-usr-equalized2);
+	init(voter-impl-usr-three_output) := ((voter-impl-usr-c1 = voter-impl-usr-c2) ? voter-impl-usr-equalized2 : ((voter-impl-usr-c2 = voter-impl-usr-c3) ? voter-impl-usr-equalized3 : voter-impl-usr-equalized1));
+	init(voter-usr-output) := (voter-impl-usr-three_output / 3);
+	init(voter-impl-usr-d3) := (voter-impl-usr-equalization3 > voter-impl-usr-equalization1);
+	init(voter-impl-usr-d2) := (voter-impl-usr-equalization2 > voter-impl-usr-equalization3);
+	init(voter-impl-usr-d1) := (voter-impl-usr-equalization1 > voter-impl-usr-equalization2);
+	init(voter-impl-usr-centering) := ((voter-impl-usr-d1 = voter-impl-usr-d2) ? voter-impl-usr-equalization2 : ((voter-impl-usr-d2 = voter-impl-usr-d3) ? voter-impl-usr-equalization3 : voter-impl-usr-equalization1));
+	init(voter-impl-usr-satCentering) := ((voter-impl-usr-centering > 1/4) ? 1/4 : ((voter-impl-usr-centering < -1/4) ? -1/4 : voter-impl-usr-centering));
+	init(voter-impl-usr-df2) := (voter-impl-usr-equalized2 - voter-impl-usr-three_output);
+	init(voter-impl-usr-st2) := ((voter-impl-usr-df2 > 1/2) ? 1/2 : ((voter-impl-usr-df2 < -1/2) ? -1/2 : voter-impl-usr-df2));
+	init(voter-impl-usr-df3) := (voter-impl-usr-equalized3 - voter-impl-usr-three_output);
+	init(voter-impl-usr-st3) := ((voter-impl-usr-df3 > 1/2) ? 1/2 : ((voter-impl-usr-df3 < -1/2) ? -1/2 : voter-impl-usr-df3));
+	init(voter-impl-usr-df1) := (voter-impl-usr-equalized1 - voter-impl-usr-three_output);
+	init(voter-impl-usr-st1) := ((voter-impl-usr-df1 > 1/2) ? 1/2 : ((voter-impl-usr-df1 < -1/2) ? -1/2 : voter-impl-usr-df1));
 	init(voter-impl-usr-eqs_stable) := (((((voter-impl-usr-equalization1 <= 12/5 & voter-impl-usr-equalization1 >= -12/5) & voter-impl-usr-equalization2 <= 12/5) & voter-impl-usr-equalization2 >= -12/5) & voter-impl-usr-equalization3 <= 12/5) & voter-impl-usr-equalization3 >= -12/5);
 	init(voter-impl-usr-out_stable) := (-6/5 <= voter-usr-output & voter-usr-output <= 6/5);
 	init(voter-res-glocal_1) := (voter-usr-input1 < 6/5);
@@ -66,12 +133,26 @@ ASSIGN
 
 	next(voter-impl-usr-equalization3) := voter-impl-usr-equalization3 + ((voter-impl-usr-st3 - voter-impl-usr-satCentering) * 1/20);
 	next(voter-impl-usr-equalization1) := voter-impl-usr-equalization1 + ((voter-impl-usr-st1 - voter-impl-usr-satCentering) * 1/20);
+	next(voter-impl-usr-equalized3) := (next(voter-usr-input3) - next(voter-impl-usr-equalization3));
+	next(voter-impl-usr-equalized1) := (next(voter-usr-input1) - next(voter-impl-usr-equalization1));
+	next(voter-impl-usr-c3) := (next(voter-impl-usr-equalized3) > next(voter-impl-usr-equalized1));
 	next(voter-impl-usr-equalization2) := voter-impl-usr-equalization2 + ((voter-impl-usr-st2 - voter-impl-usr-satCentering) * 1/20);
-	next(voter-usr-output) := (((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) / 3);
-	next(voter-impl-usr-satCentering) := (((((next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2)) = (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3))) ? next(voter-impl-usr-equalization2) : (((next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3)) = (next(voter-impl-usr-equalization3) > next(voter-impl-usr-equalization1))) ? next(voter-impl-usr-equalization3) : next(voter-impl-usr-equalization1))) > 1/4) ? 1/4 : (((((next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2)) = (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3))) ? next(voter-impl-usr-equalization2) : (((next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3)) = (next(voter-impl-usr-equalization3) > next(voter-impl-usr-equalization1))) ? next(voter-impl-usr-equalization3) : next(voter-impl-usr-equalization1))) < -1/4) ? -1/4 : (((next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2)) = (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3))) ? next(voter-impl-usr-equalization2) : (((next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3)) = (next(voter-impl-usr-equalization3) > next(voter-impl-usr-equalization1))) ? next(voter-impl-usr-equalization3) : next(voter-impl-usr-equalization1)))));
-	next(voter-impl-usr-st2) := ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) > 1/2) ? 1/2 : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) < -1/2) ? -1/2 : ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))))));
-	next(voter-impl-usr-st3) := ((((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) > 1/2) ? 1/2 : ((((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) < -1/2) ? -1/2 : ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))))));
-	next(voter-impl-usr-st1) := ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) > 1/2) ? 1/2 : ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1))))) < -1/2) ? -1/2 : ((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) - ((((next(voter-usr-input1) - next(voter-impl-usr-equalization1)) > (next(voter-usr-input2) - next(voter-impl-usr-equalization2))) = ((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3)))) ? (next(voter-usr-input2) - next(voter-impl-usr-equalization2)) : ((((next(voter-usr-input2) - next(voter-impl-usr-equalization2)) > (next(voter-usr-input3) - next(voter-impl-usr-equalization3))) = ((next(voter-usr-input3) - next(voter-impl-usr-equalization3)) > (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))) ? (next(voter-usr-input3) - next(voter-impl-usr-equalization3)) : (next(voter-usr-input1) - next(voter-impl-usr-equalization1)))))));
+	next(voter-impl-usr-equalized2) := (next(voter-usr-input2) - next(voter-impl-usr-equalization2));
+	next(voter-impl-usr-c2) := (next(voter-impl-usr-equalized2) > next(voter-impl-usr-equalized3));
+	next(voter-impl-usr-c1) := (next(voter-impl-usr-equalized1) > next(voter-impl-usr-equalized2));
+	next(voter-impl-usr-three_output) := ((next(voter-impl-usr-c1) = next(voter-impl-usr-c2)) ? next(voter-impl-usr-equalized2) : ((next(voter-impl-usr-c2) = next(voter-impl-usr-c3)) ? next(voter-impl-usr-equalized3) : next(voter-impl-usr-equalized1)));
+	next(voter-usr-output) := (next(voter-impl-usr-three_output) / 3);
+	next(voter-impl-usr-d3) := (next(voter-impl-usr-equalization3) > next(voter-impl-usr-equalization1));
+	next(voter-impl-usr-d2) := (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3));
+	next(voter-impl-usr-d1) := (next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2));
+	next(voter-impl-usr-centering) := ((next(voter-impl-usr-d1) = next(voter-impl-usr-d2)) ? next(voter-impl-usr-equalization2) : ((next(voter-impl-usr-d2) = next(voter-impl-usr-d3)) ? next(voter-impl-usr-equalization3) : next(voter-impl-usr-equalization1)));
+	next(voter-impl-usr-satCentering) := ((next(voter-impl-usr-centering) > 1/4) ? 1/4 : ((next(voter-impl-usr-centering) < -1/4) ? -1/4 : next(voter-impl-usr-centering)));
+	next(voter-impl-usr-df2) := (next(voter-impl-usr-equalized2) - next(voter-impl-usr-three_output));
+	next(voter-impl-usr-st2) := ((next(voter-impl-usr-df2) > 1/2) ? 1/2 : ((next(voter-impl-usr-df2) < -1/2) ? -1/2 : next(voter-impl-usr-df2)));
+	next(voter-impl-usr-df3) := (next(voter-impl-usr-equalized3) - next(voter-impl-usr-three_output));
+	next(voter-impl-usr-st3) := ((next(voter-impl-usr-df3) > 1/2) ? 1/2 : ((next(voter-impl-usr-df3) < -1/2) ? -1/2 : next(voter-impl-usr-df3)));
+	next(voter-impl-usr-df1) := (next(voter-impl-usr-equalized1) - next(voter-impl-usr-three_output));
+	next(voter-impl-usr-st1) := ((next(voter-impl-usr-df1) > 1/2) ? 1/2 : ((next(voter-impl-usr-df1) < -1/2) ? -1/2 : next(voter-impl-usr-df1)));
 	next(voter-impl-usr-eqs_stable) := (((((next(voter-impl-usr-equalization1) <= 12/5 & next(voter-impl-usr-equalization1) >= -12/5) & next(voter-impl-usr-equalization2) <= 12/5) & next(voter-impl-usr-equalization2) >= -12/5) & next(voter-impl-usr-equalization3) <= 12/5) & next(voter-impl-usr-equalization3) >= -12/5);
 	next(voter-impl-usr-out_stable) := (-6/5 <= next(voter-usr-output) & next(voter-usr-output) <= 6/5);
 	next(voter-res-glocal_1) := (next(voter-usr-input1) < 6/5);
@@ -91,7 +172,25 @@ ASSIGN
 
 MODULE main () 
 VAR
-	channel-usr-in1a : real;	channel-usr-in1b : real;	channel-usr-in1c : real;	channel-usr-in2a : real;	channel-usr-in2b : real;	channel-usr-in2c : real;	channel-usr-output : real;	channel-impl-usr-satMin : real;	channel-impl-usr-satMax : real;	channel-impl-usr-sat1a : real;	channel-impl-usr-sat1b : real;	channel-impl-usr-sat1c : real;	channel-impl-usr-sat2a : real;	channel-impl-usr-sat2b : real;	channel-impl-usr-sat2c : real;	channel-impl-usr-v1 : real;	channel-impl-usr-v2 : real;	channel-impl-usr-out_stable : boolean;	channel-res-call_15 : controlLaw(channel-impl-usr-v1, channel-impl-usr-v2);
+	channel-usr-in1a : real;
+	channel-usr-in1b : real;
+	channel-usr-in1c : real;
+	channel-usr-in2a : real;
+	channel-usr-in2b : real;
+	channel-usr-in2c : real;
+	channel-usr-output : real;
+	channel-impl-usr-satMin : real;
+	channel-impl-usr-satMax : real;
+	channel-impl-usr-sat1a : real;
+	channel-impl-usr-sat1b : real;
+	channel-impl-usr-sat1c : real;
+	channel-impl-usr-sat2a : real;
+	channel-impl-usr-sat2b : real;
+	channel-impl-usr-sat2c : real;
+	channel-impl-usr-v1 : real;
+	channel-impl-usr-v2 : real;
+	channel-impl-usr-out_stable : boolean;
+	channel-res-call_15 : controlLaw(channel-impl-usr-v1, channel-impl-usr-v2);
 	channel-res-call_14 : voter(channel-impl-usr-sat2a, channel-impl-usr-sat2b, channel-impl-usr-sat2c);
 	channel-res-call_13 : voter(channel-impl-usr-sat1a, channel-impl-usr-sat1b, channel-impl-usr-sat1c);
 	channel-res-2-call_12 : saturation3(channel-usr-in2a, channel-usr-in2b, channel-usr-in2c, channel-impl-usr-satMin, channel-impl-usr-satMax);

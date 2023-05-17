@@ -1,20 +1,43 @@
 
 MODULE moesi (moesi-usr-init_invalid_mo, moesi-usr-etat_mo1, moesi-usr-etat_mo2, moesi-usr-etat_mo3, moesi-usr-etat_mo4)
 VAR
-	moesi-usr-modified_mo : integer;	moesi-usr-exclusive_mo : integer;	moesi-usr-shared_mo : integer;	moesi-usr-invalid_mo : integer;	moesi-usr-owned_mo : integer;	moesi-usr-erreur_mo : boolean;	moesi-res-oracle_5 : integer;	moesi-res-oracle_3 : integer;	moesi-res-oracle_4 : integer;	moesi-res-oracle_2 : integer;	moesi-res-oracle_1 : integer;
+	moesi-usr-modified_mo : integer;
+	moesi-usr-exclusive_mo : integer;
+	moesi-usr-shared_mo : integer;
+	moesi-usr-invalid_mo : integer;
+	moesi-usr-owned_mo : integer;
+	moesi-usr-erreur_mo : boolean;
+	moesi-impl-usr-garde_mo1 : boolean;
+	moesi-impl-usr-garde_mo2 : boolean;
+	moesi-impl-usr-garde_mo3 : boolean;
+	moesi-impl-usr-garde_mo4 : boolean;
+	moesi-res-oracle_5 : integer;
+	moesi-res-oracle_3 : integer;
+	moesi-res-oracle_4 : integer;
+	moesi-res-oracle_2 : integer;
+	moesi-res-oracle_1 : integer;
+
 ASSIGN
 	init(moesi-usr-modified_mo) := 0;
+	init(moesi-impl-usr-garde_mo1) := moesi-res-oracle_1 >= 1;
 	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
 	init(moesi-usr-exclusive_mo) := 0;
+	init(moesi-impl-usr-garde_mo2) := moesi-res-oracle_2 >= 1;
+	init(moesi-impl-usr-garde_mo3) := moesi-res-oracle_3 + 1 + moesi-res-oracle_4 >= 1;
 	init(moesi-usr-shared_mo) := 0;
+	init(moesi-impl-usr-garde_mo4) := moesi-res-oracle_5 >= 1;
 	init(moesi-usr-owned_mo) := 0;
 	init(moesi-usr-erreur_mo) := FALSE;
 
-	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + 1 + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
-	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + 1 + moesi-usr-owned_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
-	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (moesi-usr-exclusive_mo >= 1 ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + 1 + moesi-usr-owned_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
-	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-shared_mo + 1 + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + 1 + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
-	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (moesi-usr-invalid_mo >= 1 ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (moesi-usr-shared_mo + 1 + moesi-usr-owned_mo >= 1 ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (moesi-usr-invalid_mo >= 1 ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
+	next(moesi-impl-usr-garde_mo4) := moesi-usr-invalid_mo >= 1;
+	next(moesi-impl-usr-garde_mo3) := moesi-usr-shared_mo + 1 + moesi-usr-owned_mo >= 1;
+	next(moesi-impl-usr-garde_mo2) := moesi-usr-exclusive_mo >= 1;
+	next(moesi-impl-usr-garde_mo1) := moesi-usr-invalid_mo >= 1;
+	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (next(moesi-impl-usr-garde_mo2) ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
+	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
+	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (next(moesi-impl-usr-garde_mo2) ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
+	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? moesi-usr-shared_mo + 1 + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
+	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
 	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
 
 
@@ -22,6 +45,7 @@ ASSIGN
 MODULE excludes4 (excludes4-usr-X1, excludes4-usr-X2, excludes4-usr-X3, excludes4-usr-X4)
 VAR
 	excludes4-usr-excludes : boolean;
+
 ASSIGN
 	init(excludes4-usr-excludes) := !((excludes4-usr-X3 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X4) | ((excludes4-usr-X2 & excludes4-usr-X3) | ((excludes4-usr-X1 & excludes4-usr-X4) | ((excludes4-usr-X1 & excludes4-usr-X3) | (excludes4-usr-X1 & excludes4-usr-X2))))));
 
@@ -32,6 +56,7 @@ ASSIGN
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
@@ -40,16 +65,41 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-init_invalid_mo : integer;	top-usr-etat_mo1 : boolean;	top-usr-etat_mo2 : boolean;	top-usr-etat_mo3 : boolean;	top-usr-etat_mo4 : boolean;	top-usr-OK : boolean;	top-res-glocal_9 : integer;	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
+	top-usr-init_invalid_mo : integer;
+	top-usr-etat_mo1 : boolean;
+	top-usr-etat_mo2 : boolean;
+	top-usr-etat_mo3 : boolean;
+	top-usr-etat_mo4 : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-modified_mo : integer;
+	top-impl-usr-exclusive_mo : integer;
+	top-impl-usr-shared_mo : integer;
+	top-impl-usr-invalid_mo : integer;
+	top-impl-usr-owned_mo : integer;
+	top-impl-usr-env : boolean;
+	top-res-glocal_9 : integer;
+	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
 	top-res-call_8 : Sofar(top-res-call_7.excludes4-usr-excludes);
 	top-res-2-call_6 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
-	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;	top-res-poracle_4 : integer;	top-res-poracle_5 : integer;
+
 ASSIGN
 	init(top-usr-OK) := TRUE;
-	init(top-res-glocal_9) := top-res-2-call_6.moesi-usr-modified_mo + top-res-2-call_6.moesi-usr-exclusive_mo + top-res-2-call_6.moesi-usr-shared_mo + top-res-2-call_6.moesi-usr-invalid_mo + top-res-2-call_6.moesi-usr-owned_mo;
+	init(top-impl-usr-modified_mo) := top-res-2-call_6.moesi-usr-modified_mo;
+	init(top-impl-usr-exclusive_mo) := top-res-2-call_6.moesi-usr-exclusive_mo;
+	init(top-impl-usr-shared_mo) := top-res-2-call_6.moesi-usr-shared_mo;
+	init(top-impl-usr-invalid_mo) := top-res-2-call_6.moesi-usr-invalid_mo;
+	init(top-impl-usr-owned_mo) := top-res-2-call_6.moesi-usr-owned_mo;
+	init(top-impl-usr-env) := top-res-call_8.Sofar-usr-Sofar;
+	init(top-res-glocal_9) := top-impl-usr-modified_mo + top-impl-usr-exclusive_mo + top-impl-usr-shared_mo + top-impl-usr-invalid_mo + top-impl-usr-owned_mo;
 
-	next(top-usr-OK) := (next(top-res-call_8.Sofar-usr-Sofar) -> (next(top-res-2-call_6.moesi-usr-modified_mo) + next(top-res-2-call_6.moesi-usr-exclusive_mo) + next(top-res-2-call_6.moesi-usr-shared_mo) + next(top-res-2-call_6.moesi-usr-invalid_mo) + next(top-res-2-call_6.moesi-usr-owned_mo) = top-res-glocal_9));
-	next(top-res-glocal_9) := next(top-res-2-call_6.moesi-usr-modified_mo) + next(top-res-2-call_6.moesi-usr-exclusive_mo) + next(top-res-2-call_6.moesi-usr-shared_mo) + next(top-res-2-call_6.moesi-usr-invalid_mo) + next(top-res-2-call_6.moesi-usr-owned_mo);
+	next(top-impl-usr-env) := next(top-res-call_8.Sofar-usr-Sofar);
+	next(top-impl-usr-owned_mo) := next(top-res-2-call_6.moesi-usr-owned_mo);
+	next(top-impl-usr-invalid_mo) := next(top-res-2-call_6.moesi-usr-invalid_mo);
+	next(top-impl-usr-shared_mo) := next(top-res-2-call_6.moesi-usr-shared_mo);
+	next(top-impl-usr-exclusive_mo) := next(top-res-2-call_6.moesi-usr-exclusive_mo);
+	next(top-impl-usr-modified_mo) := next(top-res-2-call_6.moesi-usr-modified_mo);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-modified_mo) + next(top-impl-usr-exclusive_mo) + next(top-impl-usr-shared_mo) + next(top-impl-usr-invalid_mo) + next(top-impl-usr-owned_mo) = top-res-glocal_9));
+	next(top-res-glocal_9) := next(top-impl-usr-modified_mo) + next(top-impl-usr-exclusive_mo) + next(top-impl-usr-shared_mo) + next(top-impl-usr-invalid_mo) + next(top-impl-usr-owned_mo);
 
 
 INVARSPEC 

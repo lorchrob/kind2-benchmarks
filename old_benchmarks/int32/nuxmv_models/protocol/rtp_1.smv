@@ -125,18 +125,6 @@ VAR
 	top-res-call_14 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
 	top-res-call_15 : Sofar(top-res-call_14.excludes12-usr-excludes);
 	top-res-2-call_13 : rtp(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
-	top-res-poracle_4 : signed word[32];
-	top-res-poracle_5 : signed word[32];
-	top-res-poracle_6 : signed word[32];
-	top-res-poracle_7 : signed word[32];
-	top-res-poracle_8 : signed word[32];
-	top-res-poracle_9 : signed word[32];
-	top-res-poracle_10 : signed word[32];
-	top-res-poracle_11 : signed word[32];
-	top-res-poracle_12 : signed word[32];
 
 ASSIGN
 	init(top-impl-usr-erreur) := top-res-2-call_13.rtp-usr-erreur;

@@ -409,10 +409,6 @@ VAR
 	PumpsStatus-res-oracle_75 : integer;
 	PumpsStatus-res-oracle_73 : integer;
 	PumpsStatus-res-oracle_71 : integer;
-	PumpsStatus-res-poracle_1 : integer;
-	PumpsStatus-res-poracle_2 : integer;
-	PumpsStatus-res-poracle_3 : integer;
-	PumpsStatus-res-poracle_4 : integer;
 
 ASSIGN
 	init(PumpsStatus-usr-pump_status_0) := 0;
@@ -744,34 +740,6 @@ VAR
 	BoilerController-res-oracle_95 : integer;
 	BoilerController-res-oracle_92 : integer;
 	BoilerController-res-oracle_89 : integer;
-	BoilerController-res-poracle_1 : integer;
-	BoilerController-res-poracle_2 : integer;
-	BoilerController-res-poracle_3 : integer;
-	BoilerController-res-poracle_4 : integer;
-	BoilerController-res-poracle_5 : integer;
-	BoilerController-res-poracle_6 : integer;
-	BoilerController-res-poracle_7 : integer;
-	BoilerController-res-poracle_8 : integer;
-	BoilerController-res-poracle_9 : integer;
-	BoilerController-res-poracle_10 : integer;
-	BoilerController-res-poracle_11 : integer;
-	BoilerController-res-poracle_12 : integer;
-	BoilerController-res-poracle_13 : integer;
-	BoilerController-res-poracle_14 : integer;
-	BoilerController-res-poracle_15 : integer;
-	BoilerController-res-poracle_16 : integer;
-	BoilerController-res-poracle_17 : integer;
-	BoilerController-res-poracle_18 : integer;
-	BoilerController-res-poracle_19 : integer;
-	BoilerController-res-poracle_20 : integer;
-	BoilerController-res-poracle_21 : integer;
-	BoilerController-res-poracle_22 : integer;
-	BoilerController-res-poracle_23 : integer;
-	BoilerController-res-poracle_24 : integer;
-	BoilerController-res-poracle_25 : integer;
-	BoilerController-res-poracle_26 : integer;
-	BoilerController-res-poracle_27 : integer;
-	BoilerController-res-poracle_28 : integer;
 
 ASSIGN
 	init(BoilerController-usr-program_ready) := FALSE;
@@ -1061,39 +1029,6 @@ VAR
 	top-res-call_122 : AND(top-res-gklocal_118, top-res-gklocal_119, top-res-gklocal_120, top-res-gklocal_121);
 	top-res-2-call_112 : BoilerController(top-usr-stop, top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-level, top-usr-steam, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3, top-usr-pump_control_state_0, top-usr-pump_control_state_1, top-usr-pump_control_state_2, top-usr-pump_control_state_3, top-usr-pump_repaired_0, top-usr-pump_repaired_1, top-usr-pump_repaired_2, top-usr-pump_repaired_3, top-usr-pump_control_repaired_0, top-usr-pump_control_repaired_1, top-usr-pump_control_repaired_2, top-usr-pump_control_repaired_3, top-usr-level_repaired, top-usr-steam_repaired, top-usr-pump_failure_acknowledgement_0, top-usr-pump_failure_acknowledgement_1, top-usr-pump_failure_acknowledgement_2, top-usr-pump_failure_acknowledgement_3, top-usr-pump_control_failure_acknowledgement_0, top-usr-pump_control_failure_acknowledgement_1, top-usr-pump_control_failure_acknowledgement_2, top-usr-pump_control_failure_acknowledgement_3, top-usr-level_failure_acknowledgement, top-usr-steam_failure_acknowledgement);
 	top-res-3-call_112 : BoilerController(top-usr-stop, top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-level, top-usr-steam, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3, top-usr-pump_control_state_0, top-usr-pump_control_state_1, top-usr-pump_control_state_2, top-usr-pump_control_state_3, top-usr-pump_repaired_0, top-usr-pump_repaired_1, top-usr-pump_repaired_2, top-usr-pump_repaired_3, top-usr-pump_control_repaired_0, top-usr-pump_control_repaired_1, top-usr-pump_control_repaired_2, top-usr-pump_control_repaired_3, top-usr-level_repaired, top-usr-steam_repaired, top-usr-pump_failure_acknowledgement_0, top-usr-pump_failure_acknowledgement_1, top-usr-pump_failure_acknowledgement_2, top-usr-pump_failure_acknowledgement_3, top-usr-pump_control_failure_acknowledgement_0, top-usr-pump_control_failure_acknowledgement_1, top-usr-pump_control_failure_acknowledgement_2, top-usr-pump_control_failure_acknowledgement_3, top-usr-level_failure_acknowledgement, top-usr-steam_failure_acknowledgement);
-	top-res-poracle_1 : integer;
-	top-res-poracle_2 : integer;
-	top-res-poracle_3 : integer;
-	top-res-poracle_4 : integer;
-	top-res-poracle_5 : integer;
-	top-res-poracle_6 : integer;
-	top-res-poracle_7 : integer;
-	top-res-poracle_8 : integer;
-	top-res-poracle_9 : integer;
-	top-res-poracle_10 : integer;
-	top-res-poracle_11 : integer;
-	top-res-poracle_12 : integer;
-	top-res-poracle_13 : integer;
-	top-res-poracle_14 : integer;
-	top-res-poracle_15 : integer;
-	top-res-poracle_16 : integer;
-	top-res-poracle_17 : integer;
-	top-res-poracle_18 : integer;
-	top-res-poracle_19 : integer;
-	top-res-poracle_20 : integer;
-	top-res-poracle_21 : integer;
-	top-res-poracle_22 : integer;
-	top-res-poracle_23 : integer;
-	top-res-poracle_24 : integer;
-	top-res-poracle_25 : integer;
-	top-res-poracle_26 : integer;
-	top-res-poracle_27 : integer;
-	top-res-poracle_28 : integer;
-	top-res-poracle_29 : integer;
-	top-res-poracle_30 : integer;
-	top-res-poracle_31 : integer;
-	top-res-poracle_32 : integer;
-	top-res-poracle_33 : integer;
 
 ASSIGN
 	init(top-impl-usr-pump_control_failure_detection_0) := top-res-3-call_112.BoilerController-usr-pump_control_failure_detection_0;

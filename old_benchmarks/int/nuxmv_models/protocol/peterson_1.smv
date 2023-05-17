@@ -1,43 +1,118 @@
 
 MODULE peterson (peterson-usr-e01, peterson-usr-e02, peterson-usr-e03, peterson-usr-e04, peterson-usr-e05, peterson-usr-e06, peterson-usr-e07, peterson-usr-e08, peterson-usr-e09, peterson-usr-e10, peterson-usr-e11, peterson-usr-e12)
 VAR
-	peterson-usr-x0 : integer;	peterson-usr-x1 : integer;	peterson-usr-x2 : integer;	peterson-usr-x3 : integer;	peterson-usr-x4 : integer;	peterson-usr-x5 : integer;	peterson-usr-x6 : integer;	peterson-usr-x7 : integer;	peterson-usr-x8 : integer;	peterson-usr-x9 : integer;	peterson-usr-x10 : integer;	peterson-usr-x11 : integer;	peterson-usr-x12 : integer;	peterson-usr-x13 : integer;	peterson-res-oracle_23 : integer;	peterson-res-oracle_24 : integer;	peterson-res-oracle_21 : integer;	peterson-res-oracle_22 : integer;	peterson-res-oracle_19 : integer;	peterson-res-oracle_20 : integer;	peterson-res-oracle_17 : integer;	peterson-res-oracle_18 : integer;	peterson-res-oracle_15 : integer;	peterson-res-oracle_16 : integer;	peterson-res-oracle_13 : integer;	peterson-res-oracle_14 : integer;	peterson-res-oracle_11 : integer;	peterson-res-oracle_12 : integer;	peterson-res-oracle_9 : integer;	peterson-res-oracle_10 : integer;	peterson-res-oracle_7 : integer;	peterson-res-oracle_8 : integer;	peterson-res-oracle_5 : integer;	peterson-res-oracle_6 : integer;	peterson-res-oracle_3 : integer;	peterson-res-oracle_4 : integer;	peterson-res-oracle_1 : integer;	peterson-res-oracle_2 : integer;
+	peterson-usr-x0 : integer;
+	peterson-usr-x1 : integer;
+	peterson-usr-x2 : integer;
+	peterson-usr-x3 : integer;
+	peterson-usr-x4 : integer;
+	peterson-usr-x5 : integer;
+	peterson-usr-x6 : integer;
+	peterson-usr-x7 : integer;
+	peterson-usr-x8 : integer;
+	peterson-usr-x9 : integer;
+	peterson-usr-x10 : integer;
+	peterson-usr-x11 : integer;
+	peterson-usr-x12 : integer;
+	peterson-usr-x13 : integer;
+	peterson-impl-usr-g01 : boolean;
+	peterson-impl-usr-g02 : boolean;
+	peterson-impl-usr-g03 : boolean;
+	peterson-impl-usr-g04 : boolean;
+	peterson-impl-usr-g05 : boolean;
+	peterson-impl-usr-g06 : boolean;
+	peterson-impl-usr-g07 : boolean;
+	peterson-impl-usr-g08 : boolean;
+	peterson-impl-usr-g09 : boolean;
+	peterson-impl-usr-g10 : boolean;
+	peterson-impl-usr-g11 : boolean;
+	peterson-impl-usr-g12 : boolean;
+	peterson-res-oracle_23 : integer;
+	peterson-res-oracle_24 : integer;
+	peterson-res-oracle_21 : integer;
+	peterson-res-oracle_22 : integer;
+	peterson-res-oracle_19 : integer;
+	peterson-res-oracle_20 : integer;
+	peterson-res-oracle_17 : integer;
+	peterson-res-oracle_18 : integer;
+	peterson-res-oracle_15 : integer;
+	peterson-res-oracle_16 : integer;
+	peterson-res-oracle_13 : integer;
+	peterson-res-oracle_14 : integer;
+	peterson-res-oracle_11 : integer;
+	peterson-res-oracle_12 : integer;
+	peterson-res-oracle_9 : integer;
+	peterson-res-oracle_10 : integer;
+	peterson-res-oracle_7 : integer;
+	peterson-res-oracle_8 : integer;
+	peterson-res-oracle_5 : integer;
+	peterson-res-oracle_6 : integer;
+	peterson-res-oracle_3 : integer;
+	peterson-res-oracle_4 : integer;
+	peterson-res-oracle_1 : integer;
+	peterson-res-oracle_2 : integer;
+
 ASSIGN
 	init(peterson-usr-x0) := 1;
+	init(peterson-impl-usr-g01) := (peterson-res-oracle_1 >= 1 & peterson-res-oracle_2 >= 1);
 	init(peterson-usr-x4) := 1;
+	init(peterson-impl-usr-g06) := (peterson-res-oracle_11 >= 1 & peterson-res-oracle_12 >= 1);
 	init(peterson-usr-x3) := 0;
+	init(peterson-impl-usr-g04) := (peterson-res-oracle_7 >= 1 & peterson-res-oracle_8 >= 1);
 	init(peterson-usr-x2) := 0;
+	init(peterson-impl-usr-g02) := (peterson-res-oracle_3 >= 1 & peterson-res-oracle_4 >= 1);
 	init(peterson-usr-x1) := 0;
+	init(peterson-impl-usr-g03) := (peterson-res-oracle_5 >= 1 & peterson-res-oracle_6 >= 1);
 	init(peterson-usr-x7) := 1;
+	init(peterson-impl-usr-g08) := (peterson-res-oracle_15 >= 1 & peterson-res-oracle_16 >= 1);
 	init(peterson-usr-x11) := 0;
+	init(peterson-impl-usr-g07) := (peterson-res-oracle_13 >= 1 & peterson-res-oracle_14 >= 1);
 	init(peterson-usr-x9) := 1;
+	init(peterson-impl-usr-g12) := (peterson-res-oracle_23 >= 1 & peterson-res-oracle_24 >= 1);
 	init(peterson-usr-x8) := 0;
 	init(peterson-usr-x13) := 0;
+	init(peterson-impl-usr-g10) := (peterson-res-oracle_19 >= 1 & peterson-res-oracle_20 >= 1);
 	init(peterson-usr-x12) := 0;
+	init(peterson-impl-usr-g09) := (peterson-res-oracle_17 >= 1 & peterson-res-oracle_18 >= 1);
 	init(peterson-usr-x6) := 0;
+	init(peterson-impl-usr-g11) := (peterson-res-oracle_21 >= 1 & peterson-res-oracle_22 >= 1);
 	init(peterson-usr-x10) := 1;
+	init(peterson-impl-usr-g05) := (peterson-res-oracle_9 >= 1 & peterson-res-oracle_10 >= 1);
 	init(peterson-usr-x5) := 0;
 
-	next(peterson-usr-x0) := (next(peterson-usr-e01) ? ((peterson-usr-x0 >= 1 & peterson-usr-x4 >= 1) ? (peterson-usr-x0 - 1) : peterson-usr-x0) : (next(peterson-usr-e06) ? ((peterson-usr-x3 >= 1 & peterson-usr-x5 >= 1) ? peterson-usr-x0 + 1 : peterson-usr-x0) : peterson-usr-x0));
-	next(peterson-usr-x4) := (next(peterson-usr-e01) ? ((peterson-usr-x0 >= 1 & peterson-usr-x4 >= 1) ? (peterson-usr-x4 - 1) : peterson-usr-x4) : (next(peterson-usr-e06) ? ((peterson-usr-x3 >= 1 & peterson-usr-x5 >= 1) ? peterson-usr-x4 + 1 : peterson-usr-x4) : peterson-usr-x4));
-	next(peterson-usr-x3) := (next(peterson-usr-e04) ? ((peterson-usr-x2 >= 1 & peterson-usr-x9 >= 1) ? peterson-usr-x3 + 1 : peterson-usr-x3) : (next(peterson-usr-e05) ? ((peterson-usr-x2 >= 1 & peterson-usr-x6 >= 1) ? peterson-usr-x3 + 1 : peterson-usr-x3) : (next(peterson-usr-e06) ? ((peterson-usr-x3 >= 1 & peterson-usr-x5 >= 1) ? (peterson-usr-x3 - 1) : peterson-usr-x3) : peterson-usr-x3)));
-	next(peterson-usr-x2) := (next(peterson-usr-e02) ? ((peterson-usr-x1 >= 1 & peterson-usr-x6 >= 1) ? peterson-usr-x2 + 1 : peterson-usr-x2) : (next(peterson-usr-e03) ? ((peterson-usr-x1 >= 1 & peterson-usr-x7 >= 1) ? peterson-usr-x2 + 1 : peterson-usr-x2) : (next(peterson-usr-e04) ? ((peterson-usr-x2 >= 1 & peterson-usr-x9 >= 1) ? (peterson-usr-x2 - 1) : peterson-usr-x2) : (next(peterson-usr-e05) ? ((peterson-usr-x2 >= 1 & peterson-usr-x6 >= 1) ? (peterson-usr-x2 - 1) : peterson-usr-x2) : peterson-usr-x2))));
-	next(peterson-usr-x1) := (next(peterson-usr-e01) ? ((peterson-usr-x0 >= 1 & peterson-usr-x4 >= 1) ? peterson-usr-x1 + 1 : peterson-usr-x1) : (next(peterson-usr-e02) ? ((peterson-usr-x1 >= 1 & peterson-usr-x6 >= 1) ? (peterson-usr-x1 - 1) : peterson-usr-x1) : (next(peterson-usr-e03) ? ((peterson-usr-x1 >= 1 & peterson-usr-x7 >= 1) ? (peterson-usr-x1 - 1) : peterson-usr-x1) : peterson-usr-x1)));
-	next(peterson-usr-x7) := (next(peterson-usr-e02) ? ((peterson-usr-x1 >= 1 & peterson-usr-x6 >= 1) ? peterson-usr-x7 + 1 : peterson-usr-x7) : (next(peterson-usr-e08) ? ((peterson-usr-x7 >= 1 & peterson-usr-x11 >= 1) ? (peterson-usr-x7 - 1) : peterson-usr-x7) : peterson-usr-x7));
-	next(peterson-usr-x11) := (next(peterson-usr-e07) ? ((peterson-usr-x9 >= 1 & peterson-usr-x10 >= 1) ? peterson-usr-x11 + 1 : peterson-usr-x11) : (next(peterson-usr-e08) ? ((peterson-usr-x7 >= 1 & peterson-usr-x11 >= 1) ? (peterson-usr-x11 - 1) : peterson-usr-x11) : (next(peterson-usr-e09) ? ((peterson-usr-x6 >= 1 & peterson-usr-x11 >= 1) ? (peterson-usr-x11 - 1) : peterson-usr-x11) : peterson-usr-x11)));
-	next(peterson-usr-x9) := (next(peterson-usr-e07) ? ((peterson-usr-x9 >= 1 & peterson-usr-x10 >= 1) ? (peterson-usr-x9 - 1) : peterson-usr-x9) : (next(peterson-usr-e12) ? ((peterson-usr-x8 >= 1 & peterson-usr-x13 >= 1) ? peterson-usr-x9 + 1 : peterson-usr-x9) : peterson-usr-x9));
-	next(peterson-usr-x8) := (next(peterson-usr-e07) ? ((peterson-usr-x9 >= 1 & peterson-usr-x10 >= 1) ? peterson-usr-x8 + 1 : peterson-usr-x8) : (next(peterson-usr-e12) ? ((peterson-usr-x8 >= 1 & peterson-usr-x13 >= 1) ? (peterson-usr-x8 - 1) : peterson-usr-x8) : peterson-usr-x8));
-	next(peterson-usr-x13) := (next(peterson-usr-e10) ? ((peterson-usr-x4 >= 1 & peterson-usr-x12 >= 1) ? peterson-usr-x13 + 1 : peterson-usr-x13) : (next(peterson-usr-e11) ? ((peterson-usr-x7 >= 1 & peterson-usr-x12 >= 1) ? peterson-usr-x13 + 1 : peterson-usr-x13) : (next(peterson-usr-e12) ? ((peterson-usr-x8 >= 1 & peterson-usr-x13 >= 1) ? (peterson-usr-x13 - 1) : peterson-usr-x13) : peterson-usr-x13)));
-	next(peterson-usr-x12) := (next(peterson-usr-e08) ? ((peterson-usr-x7 >= 1 & peterson-usr-x11 >= 1) ? peterson-usr-x12 + 1 : peterson-usr-x12) : (next(peterson-usr-e09) ? ((peterson-usr-x6 >= 1 & peterson-usr-x11 >= 1) ? peterson-usr-x12 + 1 : peterson-usr-x12) : (next(peterson-usr-e10) ? ((peterson-usr-x4 >= 1 & peterson-usr-x12 >= 1) ? (peterson-usr-x12 - 1) : peterson-usr-x12) : (next(peterson-usr-e11) ? ((peterson-usr-x7 >= 1 & peterson-usr-x12 >= 1) ? (peterson-usr-x12 - 1) : peterson-usr-x12) : peterson-usr-x12))));
-	next(peterson-usr-x6) := (next(peterson-usr-e02) ? ((peterson-usr-x1 >= 1 & peterson-usr-x6 >= 1) ? (peterson-usr-x6 - 1) : peterson-usr-x6) : (next(peterson-usr-e08) ? ((peterson-usr-x7 >= 1 & peterson-usr-x11 >= 1) ? peterson-usr-x6 + 1 : peterson-usr-x6) : peterson-usr-x6));
-	next(peterson-usr-x10) := (next(peterson-usr-e07) ? ((peterson-usr-x9 >= 1 & peterson-usr-x10 >= 1) ? (peterson-usr-x10 - 1) : peterson-usr-x10) : (next(peterson-usr-e12) ? ((peterson-usr-x8 >= 1 & peterson-usr-x13 >= 1) ? peterson-usr-x10 + 1 : peterson-usr-x10) : peterson-usr-x10));
-	next(peterson-usr-x5) := (next(peterson-usr-e01) ? ((peterson-usr-x0 >= 1 & peterson-usr-x4 >= 1) ? peterson-usr-x5 + 1 : peterson-usr-x5) : (next(peterson-usr-e06) ? ((peterson-usr-x3 >= 1 & peterson-usr-x5 >= 1) ? (peterson-usr-x5 - 1) : peterson-usr-x5) : peterson-usr-x5));
+	next(peterson-impl-usr-g06) := (peterson-usr-x3 >= 1 & peterson-usr-x5 >= 1);
+	next(peterson-impl-usr-g01) := (peterson-usr-x0 >= 1 & peterson-usr-x4 >= 1);
+	next(peterson-usr-x0) := (next(peterson-usr-e01) ? (next(peterson-impl-usr-g01) ? (peterson-usr-x0 - 1) : peterson-usr-x0) : (next(peterson-usr-e06) ? (next(peterson-impl-usr-g06) ? peterson-usr-x0 + 1 : peterson-usr-x0) : peterson-usr-x0));
+	next(peterson-usr-x4) := (next(peterson-usr-e01) ? (next(peterson-impl-usr-g01) ? (peterson-usr-x4 - 1) : peterson-usr-x4) : (next(peterson-usr-e06) ? (next(peterson-impl-usr-g06) ? peterson-usr-x4 + 1 : peterson-usr-x4) : peterson-usr-x4));
+	next(peterson-impl-usr-g05) := (peterson-usr-x2 >= 1 & peterson-usr-x6 >= 1);
+	next(peterson-impl-usr-g04) := (peterson-usr-x2 >= 1 & peterson-usr-x9 >= 1);
+	next(peterson-usr-x3) := (next(peterson-usr-e04) ? (next(peterson-impl-usr-g04) ? peterson-usr-x3 + 1 : peterson-usr-x3) : (next(peterson-usr-e05) ? (next(peterson-impl-usr-g05) ? peterson-usr-x3 + 1 : peterson-usr-x3) : (next(peterson-usr-e06) ? (next(peterson-impl-usr-g06) ? (peterson-usr-x3 - 1) : peterson-usr-x3) : peterson-usr-x3)));
+	next(peterson-impl-usr-g03) := (peterson-usr-x1 >= 1 & peterson-usr-x7 >= 1);
+	next(peterson-impl-usr-g02) := (peterson-usr-x1 >= 1 & peterson-usr-x6 >= 1);
+	next(peterson-usr-x2) := (next(peterson-usr-e02) ? (next(peterson-impl-usr-g02) ? peterson-usr-x2 + 1 : peterson-usr-x2) : (next(peterson-usr-e03) ? (next(peterson-impl-usr-g03) ? peterson-usr-x2 + 1 : peterson-usr-x2) : (next(peterson-usr-e04) ? (next(peterson-impl-usr-g04) ? (peterson-usr-x2 - 1) : peterson-usr-x2) : (next(peterson-usr-e05) ? (next(peterson-impl-usr-g05) ? (peterson-usr-x2 - 1) : peterson-usr-x2) : peterson-usr-x2))));
+	next(peterson-usr-x1) := (next(peterson-usr-e01) ? (next(peterson-impl-usr-g01) ? peterson-usr-x1 + 1 : peterson-usr-x1) : (next(peterson-usr-e02) ? (next(peterson-impl-usr-g02) ? (peterson-usr-x1 - 1) : peterson-usr-x1) : (next(peterson-usr-e03) ? (next(peterson-impl-usr-g03) ? (peterson-usr-x1 - 1) : peterson-usr-x1) : peterson-usr-x1)));
+	next(peterson-impl-usr-g08) := (peterson-usr-x7 >= 1 & peterson-usr-x11 >= 1);
+	next(peterson-usr-x7) := (next(peterson-usr-e02) ? (next(peterson-impl-usr-g02) ? peterson-usr-x7 + 1 : peterson-usr-x7) : (next(peterson-usr-e08) ? (next(peterson-impl-usr-g08) ? (peterson-usr-x7 - 1) : peterson-usr-x7) : peterson-usr-x7));
+	next(peterson-impl-usr-g09) := (peterson-usr-x6 >= 1 & peterson-usr-x11 >= 1);
+	next(peterson-impl-usr-g07) := (peterson-usr-x9 >= 1 & peterson-usr-x10 >= 1);
+	next(peterson-usr-x11) := (next(peterson-usr-e07) ? (next(peterson-impl-usr-g07) ? peterson-usr-x11 + 1 : peterson-usr-x11) : (next(peterson-usr-e08) ? (next(peterson-impl-usr-g08) ? (peterson-usr-x11 - 1) : peterson-usr-x11) : (next(peterson-usr-e09) ? (next(peterson-impl-usr-g09) ? (peterson-usr-x11 - 1) : peterson-usr-x11) : peterson-usr-x11)));
+	next(peterson-impl-usr-g12) := (peterson-usr-x8 >= 1 & peterson-usr-x13 >= 1);
+	next(peterson-usr-x9) := (next(peterson-usr-e07) ? (next(peterson-impl-usr-g07) ? (peterson-usr-x9 - 1) : peterson-usr-x9) : (next(peterson-usr-e12) ? (next(peterson-impl-usr-g12) ? peterson-usr-x9 + 1 : peterson-usr-x9) : peterson-usr-x9));
+	next(peterson-usr-x8) := (next(peterson-usr-e07) ? (next(peterson-impl-usr-g07) ? peterson-usr-x8 + 1 : peterson-usr-x8) : (next(peterson-usr-e12) ? (next(peterson-impl-usr-g12) ? (peterson-usr-x8 - 1) : peterson-usr-x8) : peterson-usr-x8));
+	next(peterson-impl-usr-g11) := (peterson-usr-x7 >= 1 & peterson-usr-x12 >= 1);
+	next(peterson-impl-usr-g10) := (peterson-usr-x4 >= 1 & peterson-usr-x12 >= 1);
+	next(peterson-usr-x13) := (next(peterson-usr-e10) ? (next(peterson-impl-usr-g10) ? peterson-usr-x13 + 1 : peterson-usr-x13) : (next(peterson-usr-e11) ? (next(peterson-impl-usr-g11) ? peterson-usr-x13 + 1 : peterson-usr-x13) : (next(peterson-usr-e12) ? (next(peterson-impl-usr-g12) ? (peterson-usr-x13 - 1) : peterson-usr-x13) : peterson-usr-x13)));
+	next(peterson-usr-x12) := (next(peterson-usr-e08) ? (next(peterson-impl-usr-g08) ? peterson-usr-x12 + 1 : peterson-usr-x12) : (next(peterson-usr-e09) ? (next(peterson-impl-usr-g09) ? peterson-usr-x12 + 1 : peterson-usr-x12) : (next(peterson-usr-e10) ? (next(peterson-impl-usr-g10) ? (peterson-usr-x12 - 1) : peterson-usr-x12) : (next(peterson-usr-e11) ? (next(peterson-impl-usr-g11) ? (peterson-usr-x12 - 1) : peterson-usr-x12) : peterson-usr-x12))));
+	next(peterson-usr-x6) := (next(peterson-usr-e02) ? (next(peterson-impl-usr-g02) ? (peterson-usr-x6 - 1) : peterson-usr-x6) : (next(peterson-usr-e08) ? (next(peterson-impl-usr-g08) ? peterson-usr-x6 + 1 : peterson-usr-x6) : peterson-usr-x6));
+	next(peterson-usr-x10) := (next(peterson-usr-e07) ? (next(peterson-impl-usr-g07) ? (peterson-usr-x10 - 1) : peterson-usr-x10) : (next(peterson-usr-e12) ? (next(peterson-impl-usr-g12) ? peterson-usr-x10 + 1 : peterson-usr-x10) : peterson-usr-x10));
+	next(peterson-usr-x5) := (next(peterson-usr-e01) ? (next(peterson-impl-usr-g01) ? peterson-usr-x5 + 1 : peterson-usr-x5) : (next(peterson-usr-e06) ? (next(peterson-impl-usr-g06) ? (peterson-usr-x5 - 1) : peterson-usr-x5) : peterson-usr-x5));
 
 
 
 MODULE excludes12 (excludes12-usr-X1, excludes12-usr-X2, excludes12-usr-X3, excludes12-usr-X4, excludes12-usr-X5, excludes12-usr-X6, excludes12-usr-X7, excludes12-usr-X8, excludes12-usr-X9, excludes12-usr-X10, excludes12-usr-X11, excludes12-usr-X12)
 VAR
 	excludes12-usr-excludes : boolean;
+
 ASSIGN
 	init(excludes12-usr-excludes) := ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((!excludes12-usr-X1 & excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | ((((((((((((excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12) | (((((((((((!excludes12-usr-X1 & !excludes12-usr-X2) & !excludes12-usr-X3) & !excludes12-usr-X4) & !excludes12-usr-X5) & !excludes12-usr-X6) & !excludes12-usr-X7) & !excludes12-usr-X8) & !excludes12-usr-X9) & !excludes12-usr-X10) & !excludes12-usr-X11) & !excludes12-usr-X12)))))))))))));
 
@@ -48,6 +123,7 @@ ASSIGN
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
@@ -56,17 +132,37 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-e01 : boolean;	top-usr-e02 : boolean;	top-usr-e03 : boolean;	top-usr-e04 : boolean;	top-usr-e05 : boolean;	top-usr-e06 : boolean;	top-usr-e07 : boolean;	top-usr-e08 : boolean;	top-usr-e09 : boolean;	top-usr-e10 : boolean;	top-usr-e11 : boolean;	top-usr-e12 : boolean;	top-usr-OK : boolean;	top-res-gklocal_27 : boolean;	top-res-call_26 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
+	top-usr-e01 : boolean;
+	top-usr-e02 : boolean;
+	top-usr-e03 : boolean;
+	top-usr-e04 : boolean;
+	top-usr-e05 : boolean;
+	top-usr-e06 : boolean;
+	top-usr-e07 : boolean;
+	top-usr-e08 : boolean;
+	top-usr-e09 : boolean;
+	top-usr-e10 : boolean;
+	top-usr-e11 : boolean;
+	top-usr-e12 : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-x0 : integer;
+	top-impl-usr-env : boolean;
+	top-res-gklocal_27 : boolean;
+	top-res-call_26 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
 	top-res-call_28 : Sofar(top-res-gklocal_27);
 	top-res-2-call_25 : peterson(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
 	top-res-3-call_25 : peterson(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
-	top-res-poracle_1 : integer;	top-res-poracle_2 : integer;	top-res-poracle_3 : integer;	top-res-poracle_4 : integer;	top-res-poracle_5 : integer;	top-res-poracle_6 : integer;	top-res-poracle_7 : integer;	top-res-poracle_8 : integer;	top-res-poracle_9 : integer;	top-res-poracle_10 : integer;	top-res-poracle_11 : integer;	top-res-poracle_12 : integer;	top-res-poracle_13 : integer;	top-res-poracle_14 : integer;	top-res-poracle_15 : integer;	top-res-poracle_16 : integer;	top-res-poracle_17 : integer;	top-res-poracle_18 : integer;	top-res-poracle_19 : integer;	top-res-poracle_20 : integer;	top-res-poracle_21 : integer;	top-res-poracle_22 : integer;	top-res-poracle_23 : integer;	top-res-poracle_24 : integer;
-ASSIGN
-	init(top-res-gklocal_27) := (top-res-call_26.excludes12-usr-excludes & (top-res-2-call_25.peterson-usr-x0 < 32767));
-	init(top-usr-OK) := (top-res-call_28.Sofar-usr-Sofar -> top-res-2-call_25.peterson-usr-x0 >= 0);
 
-	next(top-res-gklocal_27) := (next(top-res-call_26.excludes12-usr-excludes) & (next(top-res-2-call_25.peterson-usr-x0) < 32767));
-	next(top-usr-OK) := (next(top-res-call_28.Sofar-usr-Sofar) -> next(top-res-2-call_25.peterson-usr-x0) >= 0);
+ASSIGN
+	init(top-impl-usr-x0) := top-res-2-call_25.peterson-usr-x0;
+	init(top-res-gklocal_27) := (top-res-call_26.excludes12-usr-excludes & (top-impl-usr-x0 < 32767));
+	init(top-impl-usr-env) := top-res-call_28.Sofar-usr-Sofar;
+	init(top-usr-OK) := (top-impl-usr-env -> top-impl-usr-x0 >= 0);
+
+	next(top-impl-usr-x0) := next(top-res-2-call_25.peterson-usr-x0);
+	next(top-res-gklocal_27) := (next(top-res-call_26.excludes12-usr-excludes) & (next(top-impl-usr-x0) < 32767));
+	next(top-impl-usr-env) := next(top-res-call_28.Sofar-usr-Sofar);
+	next(top-usr-OK) := (next(top-impl-usr-env) -> next(top-impl-usr-x0) >= 0);
 
 
 INVARSPEC 

@@ -2,16 +2,28 @@
 MODULE counter (counter-usr-init, counter-usr-incr, counter-usr-x, counter-usr-reset)
 VAR
 	counter-usr-c : integer;
-ASSIGN
-	init(counter-usr-c) := (counter-usr-reset ? counter-usr-init : (((counter-usr-x & (counter-usr-init > -1000)) & (counter-usr-init < 1000)) ? counter-usr-init + counter-usr-incr : counter-usr-init));
+	counter-impl-usr-pc : integer;
 
-	next(counter-usr-c) := (next(counter-usr-reset) ? next(counter-usr-init) : (((next(counter-usr-x) & (counter-usr-c > -1000)) & (counter-usr-c < 1000)) ? counter-usr-c + next(counter-usr-incr) : counter-usr-c));
+ASSIGN
+	init(counter-impl-usr-pc) := counter-usr-init;
+	init(counter-usr-c) := (counter-usr-reset ? counter-usr-init : (((counter-usr-x & (counter-impl-usr-pc > -1000)) & (counter-impl-usr-pc < 1000)) ? counter-impl-usr-pc + counter-usr-incr : counter-impl-usr-pc));
+
+	next(counter-impl-usr-pc) := counter-usr-c;
+	next(counter-usr-c) := (next(counter-usr-reset) ? next(counter-usr-init) : (((next(counter-usr-x) & (next(counter-impl-usr-pc) > -1000)) & (next(counter-impl-usr-pc) < 1000)) ? next(counter-impl-usr-pc) + next(counter-usr-incr) : next(counter-impl-usr-pc)));
 
 
 
 MODULE speed (speed-usr-beacon, speed-usr-second)
 VAR
-	speed-usr-late : boolean;	speed-usr-early : boolean;	speed-impl-usr-incr : integer;	speed-res-subrange_1 : boolean;	speed-res-gklocal_4 : boolean;	speed-res-gklocal_3 : boolean;	speed-res-gklocal_2 : integer;	speed-res-call_5 : counter(speed-res-gklocal_2, speed-impl-usr-incr, speed-res-gklocal_3, speed-res-gklocal_4);
+	speed-usr-late : boolean;
+	speed-usr-early : boolean;
+	speed-impl-usr-diff : integer;
+	speed-impl-usr-incr : integer;
+	speed-res-subrange_1 : boolean;
+	speed-res-gklocal_4 : boolean;
+	speed-res-gklocal_3 : boolean;
+	speed-res-gklocal_2 : integer;
+	speed-res-call_5 : counter(speed-res-gklocal_2, speed-impl-usr-incr, speed-res-gklocal_3, speed-res-gklocal_4);
 
 ASSIGN
 	init(speed-usr-late) := FALSE;
@@ -19,6 +31,7 @@ ASSIGN
 	init(speed-res-gklocal_3) := (speed-usr-second | speed-usr-beacon);
 	init(speed-res-gklocal_4) := FALSE;
 	init(speed-impl-usr-incr) := ((speed-usr-beacon & !speed-usr-second) ? 1 : ((speed-usr-second & !speed-usr-beacon) ? -1 : 0));
+	init(speed-impl-usr-diff) := speed-res-call_5.counter-usr-c;
 	init(speed-usr-early) := FALSE;
 	init(speed-res-subrange_1) := (-1 <= speed-impl-usr-incr & speed-impl-usr-incr <= 1);
 
@@ -26,21 +39,29 @@ ASSIGN
 	next(speed-res-gklocal_3) := (next(speed-usr-second) | next(speed-usr-beacon));
 	next(speed-res-gklocal_4) := FALSE;
 	next(speed-impl-usr-incr) := ((next(speed-usr-beacon) & !next(speed-usr-second)) ? 1 : ((next(speed-usr-second) & !next(speed-usr-beacon)) ? -1 : 0));
-	next(speed-usr-late) := (speed-usr-late ? (next(speed-res-call_5.counter-usr-c) < 0) : next(speed-res-call_5.counter-usr-c) <= -10);
-	next(speed-usr-early) := (speed-usr-early ? (next(speed-res-call_5.counter-usr-c) > 0) : next(speed-res-call_5.counter-usr-c) >= 10);
+	next(speed-impl-usr-diff) := next(speed-res-call_5.counter-usr-c);
+	next(speed-usr-late) := (speed-usr-late ? (next(speed-impl-usr-diff) < 0) : next(speed-impl-usr-diff) <= -10);
+	next(speed-usr-early) := (speed-usr-early ? (next(speed-impl-usr-diff) > 0) : next(speed-impl-usr-diff) >= 10);
 	next(speed-res-subrange_1) := (-1 <= next(speed-impl-usr-incr) & next(speed-impl-usr-incr) <= 1);
 
 
 
 MODULE main () 
 VAR
-	top-usr-beacon : boolean;	top-usr-second : boolean;	top-usr-OK : boolean;	top-impl-usr-early : boolean;	top-res-2-call_6 : speed(top-usr-beacon, top-usr-second);
+	top-usr-beacon : boolean;
+	top-usr-second : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-late : boolean;
+	top-impl-usr-early : boolean;
+	top-res-2-call_6 : speed(top-usr-beacon, top-usr-second);
 
 ASSIGN
 	init(top-usr-OK) := TRUE;
+	init(top-impl-usr-late) := top-res-2-call_6.speed-usr-late;
 	init(top-impl-usr-early) := top-res-2-call_6.speed-usr-early;
 
-	next(top-usr-OK) := !(next(top-res-2-call_6.speed-usr-late) & top-impl-usr-early);
+	next(top-impl-usr-late) := next(top-res-2-call_6.speed-usr-late);
+	next(top-usr-OK) := !(next(top-impl-usr-late) & top-impl-usr-early);
 	next(top-impl-usr-early) := next(top-res-2-call_6.speed-usr-early);
 
 

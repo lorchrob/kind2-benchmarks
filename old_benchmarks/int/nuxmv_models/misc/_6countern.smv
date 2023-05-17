@@ -1,7 +1,9 @@
 
 MODULE main () 
 VAR
-	top-usr-OK : boolean;	top-impl-usr-time : integer;
+	top-usr-OK : boolean;
+	top-impl-usr-time : integer;
+
 ASSIGN
 	init(top-impl-usr-time) := 0;
 	init(top-usr-OK) := (top-impl-usr-time < 0);

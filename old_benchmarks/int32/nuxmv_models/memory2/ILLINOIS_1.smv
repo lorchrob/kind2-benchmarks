@@ -103,21 +103,6 @@ VAR
 	top-res-call_18 : excludes9(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9);
 	top-res-call_19 : Sofar(top-res-call_18.excludes9-usr-excludes);
 	top-res-2-call_17 : illinois(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-e7, top-usr-e8, top-usr-e9, top-usr-init_invalid);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
-	top-res-poracle_4 : signed word[32];
-	top-res-poracle_5 : signed word[32];
-	top-res-poracle_6 : signed word[32];
-	top-res-poracle_7 : signed word[32];
-	top-res-poracle_8 : signed word[32];
-	top-res-poracle_9 : signed word[32];
-	top-res-poracle_10 : signed word[32];
-	top-res-poracle_11 : signed word[32];
-	top-res-poracle_12 : signed word[32];
-	top-res-poracle_13 : signed word[32];
-	top-res-poracle_14 : signed word[32];
-	top-res-poracle_15 : signed word[32];
 
 ASSIGN
 	init(top-impl-usr-env) := top-res-call_19.Sofar-usr-Sofar;

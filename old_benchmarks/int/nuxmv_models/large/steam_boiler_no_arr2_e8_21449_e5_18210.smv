@@ -190,7 +190,6 @@ VAR
 	top-impl-usr-mode_normal_then_no_stop_request : boolean;
 	top-res-call_113 : dangerous_level(top-usr-q);
 	top-res-call_112 : ControlMode(top-usr-steam_boiler_waiting, top-usr-physical_units_ready, top-usr-stop_request, top-usr-steam, top-usr-level_defect, top-usr-steam_defect, top-usr-pump_defect_0, top-usr-pump_defect_1, top-usr-pump_defect_2, top-usr-pump_defect_3, top-usr-pump_control_defect_0, top-usr-pump_control_defect_1, top-usr-pump_control_defect_2, top-usr-pump_control_defect_3, top-usr-q, top-usr-pump_state_0, top-usr-pump_state_1, top-usr-pump_state_2, top-usr-pump_state_3);
-	top-res-poracle_1 : integer;
 
 ASSIGN
 	init(top-impl-usr-op_mode) := top-res-call_112.ControlMode-usr-op_mode;

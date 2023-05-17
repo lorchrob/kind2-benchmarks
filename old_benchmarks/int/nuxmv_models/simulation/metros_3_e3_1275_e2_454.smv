@@ -1,7 +1,9 @@
 
 MODULE hypothese (hypothese-usr-B, hypothese-usr-S, hypothese-usr-avance, hypothese-usr-retard)
 VAR
-	hypothese-usr-ok : boolean;	hypothese-impl-usr-c : integer;
+	hypothese-usr-ok : boolean;
+	hypothese-impl-usr-c : integer;
+
 ASSIGN
 	init(hypothese-usr-ok) := TRUE;
 	init(hypothese-impl-usr-c) := 0;
@@ -12,7 +14,10 @@ ASSIGN
 
 MODULE controleur (controleur-usr-nB, controleur-usr-nS)
 VAR
-	controleur-usr-diff : integer;	controleur-usr-avance : boolean;	controleur-usr-retard : boolean;
+	controleur-usr-diff : integer;
+	controleur-usr-avance : boolean;
+	controleur-usr-retard : boolean;
+
 ASSIGN
 	init(controleur-usr-diff) := (controleur-usr-nB - controleur-usr-nS);
 	init(controleur-usr-avance) := FALSE;
@@ -26,13 +31,27 @@ ASSIGN
 
 MODULE main (main-usr-B0, main-usr-B1, main-usr-S)
 VAR
-	main-usr-ast : boolean;	main-usr-nB0 : integer;	main-usr-nB1 : integer;	main-usr-nS : integer;	main-usr-diff0 : integer;	main-usr-diff1 : integer;	main-usr-avance0 : boolean;	main-usr-avance1 : boolean;	main-usr-retard0 : boolean;	main-usr-retard1 : boolean;	main-res-2-call_4 : controleur(main-usr-nB1, main-usr-nS);
+	main-usr-ast : boolean;
+	main-usr-nB0 : integer;
+	main-usr-nB1 : integer;
+	main-usr-nS : integer;
+	main-usr-diff0 : integer;
+	main-usr-diff1 : integer;
+	main-usr-avance0 : boolean;
+	main-usr-avance1 : boolean;
+	main-usr-retard0 : boolean;
+	main-usr-retard1 : boolean;
+	main-impl-usr-H0 : boolean;
+	main-impl-usr-H1 : boolean;
+	main-res-2-call_4 : controleur(main-usr-nB1, main-usr-nS);
 	main-res-2-call_3 : controleur(main-usr-nB0, main-usr-nS);
 	main-res-call_2 : hypothese(main-usr-B1, main-usr-S, main-usr-avance1, main-usr-retard1);
 	main-res-call_1 : hypothese(main-usr-B0, main-usr-S, main-usr-avance0, main-usr-retard0);
 
 ASSIGN
-	init(main-usr-ast) := (main-res-call_1.hypothese-usr-ok & main-res-call_2.hypothese-usr-ok);
+	init(main-impl-usr-H1) := main-res-call_2.hypothese-usr-ok;
+	init(main-impl-usr-H0) := main-res-call_1.hypothese-usr-ok;
+	init(main-usr-ast) := (main-impl-usr-H0 & main-impl-usr-H1);
 	init(main-usr-avance0) := main-res-2-call_3.controleur-usr-avance;
 	init(main-usr-nB0) := 0;
 	init(main-usr-nS) := 0;
@@ -43,7 +62,9 @@ ASSIGN
 	init(main-usr-diff0) := main-res-2-call_3.controleur-usr-diff;
 	init(main-usr-diff1) := main-res-2-call_4.controleur-usr-diff;
 
-	next(main-usr-ast) := (next(main-res-call_1.hypothese-usr-ok) & next(main-res-call_2.hypothese-usr-ok));
+	next(main-impl-usr-H1) := next(main-res-call_2.hypothese-usr-ok);
+	next(main-impl-usr-H0) := next(main-res-call_1.hypothese-usr-ok);
+	next(main-usr-ast) := (next(main-impl-usr-H0) & next(main-impl-usr-H1));
 	next(main-usr-nS) := (next(main-usr-S) ? main-usr-nS + 1 : main-usr-nS);
 	next(main-usr-nB0) := (next(main-usr-B0) ? (main-usr-nB0 - 1) + 1 : main-usr-nB0);
 	next(main-usr-avance0) := next(main-res-2-call_3.controleur-usr-avance);
@@ -59,6 +80,7 @@ ASSIGN
 MODULE Sofar (Sofar-usr-X)
 VAR
 	Sofar-usr-Sofar : boolean;
+
 ASSIGN
 	init(Sofar-usr-Sofar) := Sofar-usr-X;
 	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
@@ -67,7 +89,14 @@ ASSIGN
 
 MODULE main () 
 VAR
-	top-usr-B0 : boolean;	top-usr-B1 : boolean;	top-usr-S : boolean;	top-usr-OK : boolean;	top-impl-usr-nB0 : integer;	top-impl-usr-nB1 : integer;	top-impl-usr-ast : boolean;	top-res-call_6 : Sofar(top-impl-usr-ast);
+	top-usr-B0 : boolean;
+	top-usr-B1 : boolean;
+	top-usr-S : boolean;
+	top-usr-OK : boolean;
+	top-impl-usr-nB0 : integer;
+	top-impl-usr-nB1 : integer;
+	top-impl-usr-ast : boolean;
+	top-res-call_6 : Sofar(top-impl-usr-ast);
 	top-res-2-call_5 : main(top-usr-B0, top-usr-B1, top-usr-S);
 
 ASSIGN

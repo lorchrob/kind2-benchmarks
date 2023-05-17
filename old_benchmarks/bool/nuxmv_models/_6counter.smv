@@ -1,12 +1,12 @@
 
 MODULE main () 
 VAR
-
 	top-usr-OK : boolean;
 	top-impl-usr-a : boolean;
 	top-impl-usr-b : boolean;
 	top-impl-usr-c : boolean;
 	top-res-glocal_1 : boolean;
+
 ASSIGN
 	init(top-usr-OK) := TRUE;
 	init(top-impl-usr-b) := FALSE;

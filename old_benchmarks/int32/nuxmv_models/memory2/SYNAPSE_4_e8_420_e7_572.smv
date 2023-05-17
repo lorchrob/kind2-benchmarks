@@ -66,9 +66,6 @@ VAR
 	top-res-call_5 : excludes3(top-usr-e_s1, top-usr-e_s2, top-usr-e_s3);
 	top-res-call_7 : Sofar(top-res-gklocal_6);
 	top-res-2-call_4 : synapse(top-usr-e_s1, top-usr-e_s2, top-usr-e_s3, top-usr-init_invalid_s);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
 
 ASSIGN
 	init(top-res-gklocal_6) := (top-res-call_5.excludes3-usr-excludes & (top-usr-init_invalid_s >= 0sh32_00000000));

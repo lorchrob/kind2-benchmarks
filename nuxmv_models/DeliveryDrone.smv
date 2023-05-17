@@ -1,0 +1,538 @@
+
+MODULE _TOP__radio (_TOP__radio-usr-__ASSUME__HIST, _TOP__radio-usr-15-comm_in-data_available, _TOP__radio-usr-17-comm_in-target_confirmed, _TOP__radio-usr-radio_in, _TOP__radio-usr-time, _TOP__radio-usr-comm_out, _TOP__radio-usr-15-radio_out-data_available, _TOP__radio-usr-17-radio_out-target_confirmed, _TOP__radio-usr-health_status)
+VAR
+	_TOP__radio-usr-__ASSERT : boolean;
+	_TOP__radio-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__radio-impl-usr-__GUARANTEE1 : boolean;
+
+ASSIGN
+	init(_TOP__radio-impl-usr-__GUARANTEE1) := (!_TOP__radio-usr-radio_in -> !_TOP__radio-usr-15-radio_out-data_available);
+	init(_TOP__radio-impl-usr-__GUARANTEE0) := (_TOP__radio-usr-radio_in -> ((_TOP__radio-usr-15-radio_out-data_available = _TOP__radio-usr-15-comm_in-data_available) & (_TOP__radio-usr-17-comm_in-target_confirmed = _TOP__radio-usr-17-radio_out-target_confirmed)));
+	init(_TOP__radio-usr-__ASSERT) := (_TOP__radio-usr-__ASSUME__HIST -> (_TOP__radio-impl-usr-__GUARANTEE1 & _TOP__radio-impl-usr-__GUARANTEE0));
+
+	next(_TOP__radio-impl-usr-__GUARANTEE1) := (!next(_TOP__radio-usr-radio_in) -> !next(_TOP__radio-usr-15-radio_out-data_available));
+	next(_TOP__radio-impl-usr-__GUARANTEE0) := (next(_TOP__radio-usr-radio_in) -> ((next(_TOP__radio-usr-15-radio_out-data_available) = next(_TOP__radio-usr-15-comm_in-data_available)) & (next(_TOP__radio-usr-17-comm_in-target_confirmed) = next(_TOP__radio-usr-17-radio_out-target_confirmed))));
+	next(_TOP__radio-usr-__ASSERT) := (next(_TOP__radio-usr-__ASSUME__HIST) -> (next(_TOP__radio-impl-usr-__GUARANTEE1) & next(_TOP__radio-impl-usr-__GUARANTEE0)));
+
+
+
+MODULE Agree_Nodes__close_locations (Agree_Nodes__close_locations-usr-2-p1-x, Agree_Nodes__close_locations-usr-2-p1-y, Agree_Nodes__close_locations-usr-2-p2-x, Agree_Nodes__close_locations-usr-2-p2-y)
+VAR
+	Agree_Nodes__close_locations-usr-are_close : boolean;
+
+ASSIGN
+	init(Agree_Nodes__close_locations-usr-are_close) := ((Agree_Nodes__close_locations-usr-2-p1-x = Agree_Nodes__close_locations-usr-2-p2-x) & (Agree_Nodes__close_locations-usr-2-p1-y = Agree_Nodes__close_locations-usr-2-p2-y));
+
+	next(Agree_Nodes__close_locations-usr-are_close) := ((next(Agree_Nodes__close_locations-usr-2-p1-x) = next(Agree_Nodes__close_locations-usr-2-p2-x)) & (next(Agree_Nodes__close_locations-usr-2-p1-y) = next(Agree_Nodes__close_locations-usr-2-p2-y)));
+
+
+
+MODULE Agree_Nodes__FirstLocation (Agree_Nodes__FirstLocation-usr-2-X-x, Agree_Nodes__FirstLocation-usr-2-X-y)
+VAR
+	Agree_Nodes__FirstLocation-usr-2-Y-x : real;
+	Agree_Nodes__FirstLocation-usr-2-Y-y : real;
+
+ASSIGN
+	init(Agree_Nodes__FirstLocation-usr-2-Y-x) := Agree_Nodes__FirstLocation-usr-2-X-x;
+	init(Agree_Nodes__FirstLocation-usr-2-Y-y) := Agree_Nodes__FirstLocation-usr-2-X-y;
+
+	next(Agree_Nodes__FirstLocation-usr-2-Y-x) := Agree_Nodes__FirstLocation-usr-2-Y-x;
+	next(Agree_Nodes__FirstLocation-usr-2-Y-y) := Agree_Nodes__FirstLocation-usr-2-Y-y;
+
+
+
+MODULE Agree_Nodes__Duration (Agree_Nodes__Duration-usr-p)
+VAR
+	Agree_Nodes__Duration-usr-r : integer;
+
+ASSIGN
+	init(Agree_Nodes__Duration-usr-r) := (Agree_Nodes__Duration-usr-p ? 1 : 0);
+
+	next(Agree_Nodes__Duration-usr-r) := (next(Agree_Nodes__Duration-usr-p) ? Agree_Nodes__Duration-usr-r + 1 : 0);
+
+
+
+MODULE _TOP__deliveryPlanner (_TOP__deliveryPlanner-usr-__ASSUME__HIST, _TOP__deliveryPlanner-usr-10-bus_in-abort_cmd, _TOP__deliveryPlanner-usr-10-bus_in-connected, _TOP__deliveryPlanner-usr-14-bus_in-constellation, _TOP__deliveryPlanner-usr-24-bus_in-init_criteria_satisfied, _TOP__deliveryPlanner-usr-2-11-bus_in-launch_pos-x, _TOP__deliveryPlanner-usr-2-11-bus_in-launch_pos-y, _TOP__deliveryPlanner-usr-31-bus_in-mission_store_release_sequence, _TOP__deliveryPlanner-usr-7-bus_in-on_off, _TOP__deliveryPlanner-usr-11-6-bus_in-order-item_value, _TOP__deliveryPlanner-usr-15-6-bus_in-order-target_picture, _TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-x, _TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-y, _TOP__deliveryPlanner-usr-13-bus_in-update_order, _TOP__deliveryPlanner-usr-2-cur_pos-x, _TOP__deliveryPlanner-usr-2-cur_pos-y, _TOP__deliveryPlanner-usr-delivery_status, _TOP__deliveryPlanner-usr-15-radio_response-data_available, _TOP__deliveryPlanner-usr-17-radio_response-target_confirmed, _TOP__deliveryPlanner-usr-camera_result, _TOP__deliveryPlanner-usr-gps_health_status, _TOP__deliveryPlanner-usr-imu_health_status, _TOP__deliveryPlanner-usr-rdo_health_status, _TOP__deliveryPlanner-usr-cam_health_status, _TOP__deliveryPlanner-usr-package_is_secure, _TOP__deliveryPlanner-usr-time, _TOP__deliveryPlanner-usr-11-recent_order-item_value, _TOP__deliveryPlanner-usr-15-recent_order-target_picture, _TOP__deliveryPlanner-usr-2-16-recent_order-target_position-x, _TOP__deliveryPlanner-usr-2-16-recent_order-target_position-y, _TOP__deliveryPlanner-usr-2-truck_position-x, _TOP__deliveryPlanner-usr-2-truck_position-y, _TOP__deliveryPlanner-usr-2-dest_position-x, _TOP__deliveryPlanner-usr-2-dest_position-y, _TOP__deliveryPlanner-usr-expensive_item, _TOP__deliveryPlanner-usr-confirmation, _TOP__deliveryPlanner-usr-confirmation_timeout, _TOP__deliveryPlanner-usr-get_clearance_timeout, _TOP__deliveryPlanner-usr-delivery_failed, _TOP__deliveryPlanner-usr-delivery_completed, _TOP__deliveryPlanner-usr-is_safe_landing, _TOP__deliveryPlanner-usr-on_off, _TOP__deliveryPlanner-usr-init_criteria_succeed, _TOP__deliveryPlanner-usr-init_criteria_failed, _TOP__deliveryPlanner-usr-abort_cmd, _TOP__deliveryPlanner-usr-mission_store_release_sequence, _TOP__deliveryPlanner-usr-okay_to_launch, _TOP__deliveryPlanner-usr-separation, _TOP__deliveryPlanner-usr-destination_location_reached, _TOP__deliveryPlanner-usr-no_clearance, _TOP__deliveryPlanner-usr-successfull_delivery, _TOP__deliveryPlanner-usr-exhaustive_retries, _TOP__deliveryPlanner-usr-internal_error_detected, _TOP__deliveryPlanner-usr-truck_location_reached, _TOP__deliveryPlanner-usr-connected, _TOP__deliveryPlanner-usr-off_mode, _TOP__deliveryPlanner-usr-abort_mode, _TOP__deliveryPlanner-usr-init_mode, _TOP__deliveryPlanner-usr-ready_mode, _TOP__deliveryPlanner-usr-launch_mode, _TOP__deliveryPlanner-usr-flying_to_dest_mode, _TOP__deliveryPlanner-usr-making_delivery_mode, _TOP__deliveryPlanner-usr-return_to_truck_mode, _TOP__deliveryPlanner-usr-radio_cmd, _TOP__deliveryPlanner-usr-delivery_cmd, _TOP__deliveryPlanner-usr-2-dest_location-x, _TOP__deliveryPlanner-usr-2-dest_location-y, _TOP__deliveryPlanner-usr-bus_out, _TOP__deliveryPlanner-usr-nav_cmd, _TOP__deliveryPlanner-usr-camera, _TOP__deliveryPlanner-usr-17-probe_safe_landing-has_valid_marker, _TOP__deliveryPlanner-usr-16-probe_safe_landing-is_target_clear, _TOP__deliveryPlanner-usr-constellation, _TOP__deliveryPlanner-usr-2-launch_pos-x, _TOP__deliveryPlanner-usr-2-launch_pos-y, _TOP__deliveryPlanner-usr-probe_init_mode, _TOP__deliveryPlanner-usr-probe_abort_mode, _TOP__deliveryPlanner-usr-target_clear, _TOP__deliveryPlanner-usr-valid_marker)
+VAR
+	_TOP__deliveryPlanner-usr-__ASSERT : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE3 : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE4 : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE5 : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE6 : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE7 : boolean;
+	_TOP__deliveryPlanner-impl-usr-__GUARANTEE8 : boolean;
+	_TOP__deliveryPlanner-res-gklocal_19 : boolean;
+	_TOP__deliveryPlanner-res-call_16 : Agree_Nodes__close_locations(_TOP__deliveryPlanner-usr-2-cur_pos-x, _TOP__deliveryPlanner-usr-2-cur_pos-y, _TOP__deliveryPlanner-usr-2-truck_position-x, _TOP__deliveryPlanner-usr-2-truck_position-y);
+	_TOP__deliveryPlanner-res-call_17 : Agree_Nodes__close_locations(_TOP__deliveryPlanner-usr-2-cur_pos-x, _TOP__deliveryPlanner-usr-2-cur_pos-y, _TOP__deliveryPlanner-usr-2-dest_position-x, _TOP__deliveryPlanner-usr-2-dest_position-y);
+	_TOP__deliveryPlanner-res-call_18 : Agree_Nodes__Duration(_TOP__deliveryPlanner-usr-no_clearance);
+	_TOP__deliveryPlanner-res-call_20 : Agree_Nodes__Duration(_TOP__deliveryPlanner-res-gklocal_19);
+	_TOP__deliveryPlanner-res-2-call_21 : Agree_Nodes__FirstLocation(_TOP__deliveryPlanner-usr-2-cur_pos-x, _TOP__deliveryPlanner-usr-2-cur_pos-y);
+
+ASSIGN
+	init(_TOP__deliveryPlanner-res-gklocal_19) := !_TOP__deliveryPlanner-usr-confirmation;
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE8) := (_TOP__deliveryPlanner-usr-nav_cmd = (_TOP__deliveryPlanner-usr-return_to_truck_mode | (_TOP__deliveryPlanner-usr-making_delivery_mode | _TOP__deliveryPlanner-usr-flying_to_dest_mode)));
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE7) := (_TOP__deliveryPlanner-usr-probe_abort_mode = _TOP__deliveryPlanner-usr-abort_mode);
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE6) := (_TOP__deliveryPlanner-usr-probe_init_mode = _TOP__deliveryPlanner-usr-init_mode);
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE5) := (_TOP__deliveryPlanner-usr-radio_cmd = (_TOP__deliveryPlanner-usr-making_delivery_mode & _TOP__deliveryPlanner-usr-expensive_item));
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE4) := ((_TOP__deliveryPlanner-usr-2-launch_pos-x = _TOP__deliveryPlanner-usr-2-11-bus_in-launch_pos-x) & (_TOP__deliveryPlanner-usr-2-launch_pos-y = _TOP__deliveryPlanner-usr-2-11-bus_in-launch_pos-y));
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE3) := ((_TOP__deliveryPlanner-usr-2-dest_location-x = _TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-x) & (_TOP__deliveryPlanner-usr-2-dest_location-y = _TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-y));
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE2) := (_TOP__deliveryPlanner-usr-constellation = _TOP__deliveryPlanner-usr-14-bus_in-constellation);
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE1) := (_TOP__deliveryPlanner-usr-delivery_cmd = (((_TOP__deliveryPlanner-usr-making_delivery_mode & !_TOP__deliveryPlanner-usr-no_clearance) & (_TOP__deliveryPlanner-usr-expensive_item -> _TOP__deliveryPlanner-usr-confirmation)) ? 3 : ((_TOP__deliveryPlanner-usr-return_to_truck_mode & _TOP__deliveryPlanner-usr-internal_error_detected) ? 4 : 2)));
+	init(_TOP__deliveryPlanner-impl-usr-__GUARANTEE0) := ((_TOP__deliveryPlanner-usr-17-probe_safe_landing-has_valid_marker = _TOP__deliveryPlanner-usr-valid_marker) & (_TOP__deliveryPlanner-usr-16-probe_safe_landing-is_target_clear = _TOP__deliveryPlanner-usr-target_clear));
+	init(_TOP__deliveryPlanner-usr-__ASSERT) := (!_TOP__deliveryPlanner-usr-return_to_truck_mode & (!_TOP__deliveryPlanner-usr-making_delivery_mode & (!_TOP__deliveryPlanner-usr-flying_to_dest_mode & (!_TOP__deliveryPlanner-usr-launch_mode & (!_TOP__deliveryPlanner-usr-ready_mode & (!_TOP__deliveryPlanner-usr-init_mode & (!_TOP__deliveryPlanner-usr-abort_mode & (_TOP__deliveryPlanner-usr-off_mode & ((_TOP__deliveryPlanner-usr-connected = _TOP__deliveryPlanner-usr-10-bus_in-connected) & ((_TOP__deliveryPlanner-usr-truck_location_reached = _TOP__deliveryPlanner-res-call_16.Agree_Nodes__close_locations-usr-are_close) & ((_TOP__deliveryPlanner-usr-internal_error_detected = (!_TOP__deliveryPlanner-usr-cam_health_status | (!_TOP__deliveryPlanner-usr-rdo_health_status | (!_TOP__deliveryPlanner-usr-imu_health_status | !_TOP__deliveryPlanner-usr-gps_health_status)))) & ((_TOP__deliveryPlanner-usr-exhaustive_retries = (_TOP__deliveryPlanner-usr-confirmation_timeout | _TOP__deliveryPlanner-usr-get_clearance_timeout)) & ((_TOP__deliveryPlanner-usr-successfull_delivery = ((_TOP__deliveryPlanner-usr-delivery_completed & _TOP__deliveryPlanner-usr-destination_location_reached) & !_TOP__deliveryPlanner-usr-no_clearance)) & ((_TOP__deliveryPlanner-usr-no_clearance = !_TOP__deliveryPlanner-usr-is_safe_landing) & ((_TOP__deliveryPlanner-usr-destination_location_reached = _TOP__deliveryPlanner-res-call_17.Agree_Nodes__close_locations-usr-are_close) & ((_TOP__deliveryPlanner-usr-separation = !_TOP__deliveryPlanner-usr-connected) & ((_TOP__deliveryPlanner-usr-okay_to_launch = !_TOP__deliveryPlanner-usr-internal_error_detected) & ((_TOP__deliveryPlanner-usr-mission_store_release_sequence = _TOP__deliveryPlanner-usr-31-bus_in-mission_store_release_sequence) & ((_TOP__deliveryPlanner-usr-abort_cmd = _TOP__deliveryPlanner-usr-10-bus_in-abort_cmd) & ((_TOP__deliveryPlanner-usr-init_criteria_failed = !_TOP__deliveryPlanner-usr-init_criteria_succeed) & ((_TOP__deliveryPlanner-usr-init_criteria_succeed = (_TOP__deliveryPlanner-usr-24-bus_in-init_criteria_satisfied & !_TOP__deliveryPlanner-usr-internal_error_detected)) & ((_TOP__deliveryPlanner-usr-on_off = _TOP__deliveryPlanner-usr-7-bus_in-on_off) & ((_TOP__deliveryPlanner-usr-is_safe_landing = (_TOP__deliveryPlanner-usr-target_clear & _TOP__deliveryPlanner-usr-valid_marker)) & ((_TOP__deliveryPlanner-usr-delivery_completed = (_TOP__deliveryPlanner-usr-delivery_status = 7)) & ((_TOP__deliveryPlanner-usr-delivery_failed = (_TOP__deliveryPlanner-usr-delivery_status = 8)) & ((_TOP__deliveryPlanner-usr-get_clearance_timeout = (_TOP__deliveryPlanner-res-call_18.Agree_Nodes__Duration-usr-r >= 3)) & ((_TOP__deliveryPlanner-usr-confirmation_timeout = (_TOP__deliveryPlanner-res-call_20.Agree_Nodes__Duration-usr-r > 10)) & ((_TOP__deliveryPlanner-usr-confirmation = (_TOP__deliveryPlanner-usr-17-radio_response-target_confirmed & _TOP__deliveryPlanner-usr-15-radio_response-data_available)) & ((_TOP__deliveryPlanner-usr-expensive_item = (_TOP__deliveryPlanner-usr-11-recent_order-item_value >= 100)) & (((_TOP__deliveryPlanner-usr-2-dest_position-x = _TOP__deliveryPlanner-usr-2-dest_location-x) & (_TOP__deliveryPlanner-usr-2-dest_position-y = _TOP__deliveryPlanner-usr-2-dest_location-y)) & (((_TOP__deliveryPlanner-usr-2-truck_position-x = _TOP__deliveryPlanner-res-2-call_21.Agree_Nodes__FirstLocation-usr-2-Y-x) & (_TOP__deliveryPlanner-usr-2-truck_position-y = _TOP__deliveryPlanner-res-2-call_21.Agree_Nodes__FirstLocation-usr-2-Y-y)) & (((((_TOP__deliveryPlanner-usr-11-recent_order-item_value = _TOP__deliveryPlanner-usr-11-6-bus_in-order-item_value) & (_TOP__deliveryPlanner-usr-15-recent_order-target_picture = _TOP__deliveryPlanner-usr-15-6-bus_in-order-target_picture)) & (_TOP__deliveryPlanner-usr-2-16-recent_order-target_position-x = _TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-x)) & (_TOP__deliveryPlanner-usr-2-16-recent_order-target_position-y = _TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-y)) & (_TOP__deliveryPlanner-usr-__ASSUME__HIST -> (_TOP__deliveryPlanner-impl-usr-__GUARANTEE8 & (_TOP__deliveryPlanner-impl-usr-__GUARANTEE7 & (_TOP__deliveryPlanner-impl-usr-__GUARANTEE6 & (_TOP__deliveryPlanner-impl-usr-__GUARANTEE5 & (_TOP__deliveryPlanner-impl-usr-__GUARANTEE4 & (_TOP__deliveryPlanner-impl-usr-__GUARANTEE3 & (_TOP__deliveryPlanner-impl-usr-__GUARANTEE2 & (_TOP__deliveryPlanner-impl-usr-__GUARANTEE1 & _TOP__deliveryPlanner-impl-usr-__GUARANTEE0)))))))))))))))))))))))))))))))))))))))));
+
+	next(_TOP__deliveryPlanner-res-gklocal_19) := !next(_TOP__deliveryPlanner-usr-confirmation);
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE8) := (next(_TOP__deliveryPlanner-usr-nav_cmd) = (next(_TOP__deliveryPlanner-usr-return_to_truck_mode) | (next(_TOP__deliveryPlanner-usr-making_delivery_mode) | next(_TOP__deliveryPlanner-usr-flying_to_dest_mode))));
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE7) := (next(_TOP__deliveryPlanner-usr-probe_abort_mode) = next(_TOP__deliveryPlanner-usr-abort_mode));
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE6) := (next(_TOP__deliveryPlanner-usr-probe_init_mode) = next(_TOP__deliveryPlanner-usr-init_mode));
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE5) := (next(_TOP__deliveryPlanner-usr-radio_cmd) = (next(_TOP__deliveryPlanner-usr-making_delivery_mode) & next(_TOP__deliveryPlanner-usr-expensive_item)));
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE4) := ((next(_TOP__deliveryPlanner-usr-2-launch_pos-x) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-2-11-bus_in-launch_pos-x) : _TOP__deliveryPlanner-usr-2-launch_pos-x)) & (next(_TOP__deliveryPlanner-usr-2-launch_pos-y) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-2-11-bus_in-launch_pos-y) : _TOP__deliveryPlanner-usr-2-launch_pos-y)));
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE3) := ((next(_TOP__deliveryPlanner-usr-2-dest_location-x) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-x) : _TOP__deliveryPlanner-usr-2-dest_location-x)) & (next(_TOP__deliveryPlanner-usr-2-dest_location-y) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-y) : _TOP__deliveryPlanner-usr-2-dest_location-y)));
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE2) := (next(_TOP__deliveryPlanner-usr-constellation) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-14-bus_in-constellation) : _TOP__deliveryPlanner-usr-constellation));
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE1) := (next(_TOP__deliveryPlanner-usr-delivery_cmd) = (((next(_TOP__deliveryPlanner-usr-making_delivery_mode) & !next(_TOP__deliveryPlanner-usr-no_clearance)) & (next(_TOP__deliveryPlanner-usr-expensive_item) -> next(_TOP__deliveryPlanner-usr-confirmation))) ? 3 : ((next(_TOP__deliveryPlanner-usr-return_to_truck_mode) & next(_TOP__deliveryPlanner-usr-internal_error_detected)) ? 4 : 2)));
+	next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE0) := ((next(_TOP__deliveryPlanner-usr-17-probe_safe_landing-has_valid_marker) = next(_TOP__deliveryPlanner-usr-valid_marker)) & (next(_TOP__deliveryPlanner-usr-16-probe_safe_landing-is_target_clear) = next(_TOP__deliveryPlanner-usr-target_clear)));
+	next(_TOP__deliveryPlanner-usr-__ASSERT) := ((next(_TOP__deliveryPlanner-usr-return_to_truck_mode) = ((_TOP__deliveryPlanner-usr-return_to_truck_mode & !(next(_TOP__deliveryPlanner-usr-truck_location_reached) & next(_TOP__deliveryPlanner-usr-connected))) | (_TOP__deliveryPlanner-usr-making_delivery_mode & (next(_TOP__deliveryPlanner-usr-internal_error_detected) | (next(_TOP__deliveryPlanner-usr-delivery_failed) | (next(_TOP__deliveryPlanner-usr-exhaustive_retries) | next(_TOP__deliveryPlanner-usr-successfull_delivery))))))) & ((next(_TOP__deliveryPlanner-usr-making_delivery_mode) = ((_TOP__deliveryPlanner-usr-making_delivery_mode & !next(_TOP__deliveryPlanner-usr-return_to_truck_mode)) | (_TOP__deliveryPlanner-usr-flying_to_dest_mode & next(_TOP__deliveryPlanner-usr-destination_location_reached)))) & ((next(_TOP__deliveryPlanner-usr-flying_to_dest_mode) = ((_TOP__deliveryPlanner-usr-flying_to_dest_mode & !next(_TOP__deliveryPlanner-usr-destination_location_reached)) | ((_TOP__deliveryPlanner-usr-launch_mode & !next(_TOP__deliveryPlanner-usr-abort_mode)) & ((next(_TOP__deliveryPlanner-usr-package_is_secure) & next(_TOP__deliveryPlanner-usr-okay_to_launch)) & next(_TOP__deliveryPlanner-usr-separation))))) & ((next(_TOP__deliveryPlanner-usr-launch_mode) = (((_TOP__deliveryPlanner-usr-launch_mode & !next(_TOP__deliveryPlanner-usr-abort_mode)) & !next(_TOP__deliveryPlanner-usr-flying_to_dest_mode)) | ((((_TOP__deliveryPlanner-usr-ready_mode & !next(_TOP__deliveryPlanner-usr-off_mode)) & !next(_TOP__deliveryPlanner-usr-abort_mode)) & !next(_TOP__deliveryPlanner-usr-init_mode)) & (next(_TOP__deliveryPlanner-usr-mission_store_release_sequence) & next(_TOP__deliveryPlanner-usr-connected))))) & ((next(_TOP__deliveryPlanner-usr-ready_mode) = (((((_TOP__deliveryPlanner-usr-ready_mode & !next(_TOP__deliveryPlanner-usr-off_mode)) & !next(_TOP__deliveryPlanner-usr-abort_mode)) & !next(_TOP__deliveryPlanner-usr-init_mode)) & !next(_TOP__deliveryPlanner-usr-launch_mode)) | (((_TOP__deliveryPlanner-usr-init_mode & !next(_TOP__deliveryPlanner-usr-off_mode)) & !next(_TOP__deliveryPlanner-usr-abort_mode)) & (next(_TOP__deliveryPlanner-usr-init_criteria_succeed) & next(_TOP__deliveryPlanner-usr-connected))))) & ((next(_TOP__deliveryPlanner-usr-init_mode) = ((_TOP__deliveryPlanner-usr-return_to_truck_mode & (next(_TOP__deliveryPlanner-usr-truck_location_reached) & next(_TOP__deliveryPlanner-usr-connected))) | ((((_TOP__deliveryPlanner-usr-ready_mode & !next(_TOP__deliveryPlanner-usr-off_mode)) & !next(_TOP__deliveryPlanner-usr-abort_mode)) & (next(_TOP__deliveryPlanner-usr-init_criteria_failed) & next(_TOP__deliveryPlanner-usr-connected))) | ((((_TOP__deliveryPlanner-usr-init_mode & !next(_TOP__deliveryPlanner-usr-off_mode)) & !next(_TOP__deliveryPlanner-usr-abort_mode)) & !(next(_TOP__deliveryPlanner-usr-init_criteria_succeed) & next(_TOP__deliveryPlanner-usr-connected))) | (_TOP__deliveryPlanner-usr-off_mode & (next(_TOP__deliveryPlanner-usr-on_off) & next(_TOP__deliveryPlanner-usr-connected))))))) & ((next(_TOP__deliveryPlanner-usr-abort_mode) = ((_TOP__deliveryPlanner-usr-abort_mode & !(next(_TOP__deliveryPlanner-usr-on_off) & next(_TOP__deliveryPlanner-usr-connected))) | (((_TOP__deliveryPlanner-usr-launch_mode & next(_TOP__deliveryPlanner-usr-abort_cmd)) & next(_TOP__deliveryPlanner-usr-connected)) | ((((_TOP__deliveryPlanner-usr-ready_mode | _TOP__deliveryPlanner-usr-init_mode) & !next(_TOP__deliveryPlanner-usr-off_mode)) & next(_TOP__deliveryPlanner-usr-abort_cmd)) & next(_TOP__deliveryPlanner-usr-connected))))) & ((next(_TOP__deliveryPlanner-usr-off_mode) = ((((_TOP__deliveryPlanner-usr-abort_mode | (_TOP__deliveryPlanner-usr-ready_mode | _TOP__deliveryPlanner-usr-init_mode)) & next(_TOP__deliveryPlanner-usr-on_off)) & next(_TOP__deliveryPlanner-usr-connected)) | (_TOP__deliveryPlanner-usr-off_mode & !(next(_TOP__deliveryPlanner-usr-on_off) & next(_TOP__deliveryPlanner-usr-connected))))) & ((next(_TOP__deliveryPlanner-usr-connected) = next(_TOP__deliveryPlanner-usr-10-bus_in-connected)) & ((next(_TOP__deliveryPlanner-usr-truck_location_reached) = next(_TOP__deliveryPlanner-res-call_16.Agree_Nodes__close_locations-usr-are_close)) & ((next(_TOP__deliveryPlanner-usr-internal_error_detected) = (!next(_TOP__deliveryPlanner-usr-cam_health_status) | (!next(_TOP__deliveryPlanner-usr-rdo_health_status) | (!next(_TOP__deliveryPlanner-usr-imu_health_status) | !next(_TOP__deliveryPlanner-usr-gps_health_status))))) & ((next(_TOP__deliveryPlanner-usr-exhaustive_retries) = (next(_TOP__deliveryPlanner-usr-confirmation_timeout) | next(_TOP__deliveryPlanner-usr-get_clearance_timeout))) & ((next(_TOP__deliveryPlanner-usr-successfull_delivery) = ((next(_TOP__deliveryPlanner-usr-delivery_completed) & next(_TOP__deliveryPlanner-usr-destination_location_reached)) & !next(_TOP__deliveryPlanner-usr-no_clearance))) & ((next(_TOP__deliveryPlanner-usr-no_clearance) = !next(_TOP__deliveryPlanner-usr-is_safe_landing)) & ((next(_TOP__deliveryPlanner-usr-destination_location_reached) = next(_TOP__deliveryPlanner-res-call_17.Agree_Nodes__close_locations-usr-are_close)) & ((next(_TOP__deliveryPlanner-usr-separation) = !next(_TOP__deliveryPlanner-usr-connected)) & ((next(_TOP__deliveryPlanner-usr-okay_to_launch) = !next(_TOP__deliveryPlanner-usr-internal_error_detected)) & ((next(_TOP__deliveryPlanner-usr-mission_store_release_sequence) = next(_TOP__deliveryPlanner-usr-31-bus_in-mission_store_release_sequence)) & ((next(_TOP__deliveryPlanner-usr-abort_cmd) = next(_TOP__deliveryPlanner-usr-10-bus_in-abort_cmd)) & ((next(_TOP__deliveryPlanner-usr-init_criteria_failed) = !next(_TOP__deliveryPlanner-usr-init_criteria_succeed)) & ((next(_TOP__deliveryPlanner-usr-init_criteria_succeed) = (next(_TOP__deliveryPlanner-usr-24-bus_in-init_criteria_satisfied) & !next(_TOP__deliveryPlanner-usr-internal_error_detected))) & ((next(_TOP__deliveryPlanner-usr-on_off) = next(_TOP__deliveryPlanner-usr-7-bus_in-on_off)) & ((next(_TOP__deliveryPlanner-usr-is_safe_landing) = (next(_TOP__deliveryPlanner-usr-target_clear) & next(_TOP__deliveryPlanner-usr-valid_marker))) & ((next(_TOP__deliveryPlanner-usr-delivery_completed) = (next(_TOP__deliveryPlanner-usr-delivery_status) = 7)) & ((next(_TOP__deliveryPlanner-usr-delivery_failed) = (next(_TOP__deliveryPlanner-usr-delivery_status) = 8)) & ((next(_TOP__deliveryPlanner-usr-get_clearance_timeout) = (next(_TOP__deliveryPlanner-res-call_18.Agree_Nodes__Duration-usr-r) >= 3)) & ((next(_TOP__deliveryPlanner-usr-confirmation_timeout) = (next(_TOP__deliveryPlanner-res-call_20.Agree_Nodes__Duration-usr-r) > 10)) & ((next(_TOP__deliveryPlanner-usr-confirmation) = (next(_TOP__deliveryPlanner-usr-17-radio_response-target_confirmed) & next(_TOP__deliveryPlanner-usr-15-radio_response-data_available))) & ((next(_TOP__deliveryPlanner-usr-expensive_item) = (next(_TOP__deliveryPlanner-usr-11-recent_order-item_value) >= 100)) & (((next(_TOP__deliveryPlanner-usr-2-dest_position-x) = next(_TOP__deliveryPlanner-usr-2-dest_location-x)) & (next(_TOP__deliveryPlanner-usr-2-dest_position-y) = next(_TOP__deliveryPlanner-usr-2-dest_location-y))) & (((next(_TOP__deliveryPlanner-usr-2-truck_position-x) = next(_TOP__deliveryPlanner-res-2-call_21.Agree_Nodes__FirstLocation-usr-2-Y-x)) & (next(_TOP__deliveryPlanner-usr-2-truck_position-y) = next(_TOP__deliveryPlanner-res-2-call_21.Agree_Nodes__FirstLocation-usr-2-Y-y))) & (((((next(_TOP__deliveryPlanner-usr-11-recent_order-item_value) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-11-6-bus_in-order-item_value) : _TOP__deliveryPlanner-usr-11-recent_order-item_value)) & (next(_TOP__deliveryPlanner-usr-15-recent_order-target_picture) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-15-6-bus_in-order-target_picture) : _TOP__deliveryPlanner-usr-15-recent_order-target_picture))) & (next(_TOP__deliveryPlanner-usr-2-16-recent_order-target_position-x) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-x) : _TOP__deliveryPlanner-usr-2-16-recent_order-target_position-x))) & (next(_TOP__deliveryPlanner-usr-2-16-recent_order-target_position-y) = (next(_TOP__deliveryPlanner-usr-init_mode) ? next(_TOP__deliveryPlanner-usr-2-16-6-bus_in-order-target_position-y) : _TOP__deliveryPlanner-usr-2-16-recent_order-target_position-y))) & (next(_TOP__deliveryPlanner-usr-__ASSUME__HIST) -> (next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE8) & (next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE7) & (next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE6) & (next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE5) & (next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE4) & (next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE3) & (next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE2) & (next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE1) & next(_TOP__deliveryPlanner-impl-usr-__GUARANTEE0))))))))))))))))))))))))))))))))))))))))));
+
+
+
+MODULE _TOP__connector (_TOP__connector-usr-__ASSUME__HIST, _TOP__connector-usr-10-bus_in-abort_cmd, _TOP__connector-usr-10-bus_in-connected, _TOP__connector-usr-14-bus_in-constellation, _TOP__connector-usr-24-bus_in-init_criteria_satisfied, _TOP__connector-usr-2-11-bus_in-launch_pos-x, _TOP__connector-usr-2-11-bus_in-launch_pos-y, _TOP__connector-usr-31-bus_in-mission_store_release_sequence, _TOP__connector-usr-7-bus_in-on_off, _TOP__connector-usr-11-6-bus_in-order-item_value, _TOP__connector-usr-15-6-bus_in-order-target_picture, _TOP__connector-usr-2-16-6-bus_in-order-target_position-x, _TOP__connector-usr-2-16-6-bus_in-order-target_position-y, _TOP__connector-usr-13-bus_in-update_order, _TOP__connector-usr-time, _TOP__connector-usr-10-bus_out-abort_cmd, _TOP__connector-usr-10-bus_out-connected, _TOP__connector-usr-14-bus_out-constellation, _TOP__connector-usr-24-bus_out-init_criteria_satisfied, _TOP__connector-usr-2-11-bus_out-launch_pos-x, _TOP__connector-usr-2-11-bus_out-launch_pos-y, _TOP__connector-usr-31-bus_out-mission_store_release_sequence, _TOP__connector-usr-7-bus_out-on_off, _TOP__connector-usr-11-6-bus_out-order-item_value, _TOP__connector-usr-15-6-bus_out-order-target_picture, _TOP__connector-usr-2-16-6-bus_out-order-target_position-x, _TOP__connector-usr-2-16-6-bus_out-order-target_position-y, _TOP__connector-usr-13-bus_out-update_order)
+VAR
+	_TOP__connector-usr-__ASSERT : boolean;
+	_TOP__connector-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__connector-impl-usr-__GUARANTEE0) := (((((((((((((_TOP__connector-usr-10-bus_out-abort_cmd = _TOP__connector-usr-10-bus_in-abort_cmd) & (_TOP__connector-usr-10-bus_out-connected = _TOP__connector-usr-10-bus_in-connected)) & (_TOP__connector-usr-14-bus_out-constellation = _TOP__connector-usr-14-bus_in-constellation)) & (_TOP__connector-usr-24-bus_out-init_criteria_satisfied = _TOP__connector-usr-24-bus_in-init_criteria_satisfied)) & (_TOP__connector-usr-2-11-bus_out-launch_pos-x = _TOP__connector-usr-2-11-bus_in-launch_pos-x)) & (_TOP__connector-usr-2-11-bus_out-launch_pos-y = _TOP__connector-usr-2-11-bus_in-launch_pos-y)) & (_TOP__connector-usr-31-bus_out-mission_store_release_sequence = _TOP__connector-usr-31-bus_in-mission_store_release_sequence)) & (_TOP__connector-usr-7-bus_out-on_off = _TOP__connector-usr-7-bus_in-on_off)) & (_TOP__connector-usr-11-6-bus_out-order-item_value = _TOP__connector-usr-11-6-bus_in-order-item_value)) & (_TOP__connector-usr-15-6-bus_out-order-target_picture = _TOP__connector-usr-15-6-bus_in-order-target_picture)) & (_TOP__connector-usr-2-16-6-bus_out-order-target_position-x = _TOP__connector-usr-2-16-6-bus_in-order-target_position-x)) & (_TOP__connector-usr-2-16-6-bus_out-order-target_position-y = _TOP__connector-usr-2-16-6-bus_in-order-target_position-y)) & (_TOP__connector-usr-13-bus_out-update_order = _TOP__connector-usr-13-bus_in-update_order));
+	init(_TOP__connector-usr-__ASSERT) := (_TOP__connector-usr-__ASSUME__HIST -> _TOP__connector-impl-usr-__GUARANTEE0);
+
+	next(_TOP__connector-impl-usr-__GUARANTEE0) := (((((((((((((next(_TOP__connector-usr-10-bus_out-abort_cmd) = next(_TOP__connector-usr-10-bus_in-abort_cmd)) & (next(_TOP__connector-usr-10-bus_out-connected) = next(_TOP__connector-usr-10-bus_in-connected))) & (next(_TOP__connector-usr-14-bus_out-constellation) = next(_TOP__connector-usr-14-bus_in-constellation))) & (next(_TOP__connector-usr-24-bus_out-init_criteria_satisfied) = next(_TOP__connector-usr-24-bus_in-init_criteria_satisfied))) & (next(_TOP__connector-usr-2-11-bus_out-launch_pos-x) = next(_TOP__connector-usr-2-11-bus_in-launch_pos-x))) & (next(_TOP__connector-usr-2-11-bus_out-launch_pos-y) = next(_TOP__connector-usr-2-11-bus_in-launch_pos-y))) & (next(_TOP__connector-usr-31-bus_out-mission_store_release_sequence) = next(_TOP__connector-usr-31-bus_in-mission_store_release_sequence))) & (next(_TOP__connector-usr-7-bus_out-on_off) = next(_TOP__connector-usr-7-bus_in-on_off))) & (next(_TOP__connector-usr-11-6-bus_out-order-item_value) = next(_TOP__connector-usr-11-6-bus_in-order-item_value))) & (next(_TOP__connector-usr-15-6-bus_out-order-target_picture) = next(_TOP__connector-usr-15-6-bus_in-order-target_picture))) & (next(_TOP__connector-usr-2-16-6-bus_out-order-target_position-x) = next(_TOP__connector-usr-2-16-6-bus_in-order-target_position-x))) & (next(_TOP__connector-usr-2-16-6-bus_out-order-target_position-y) = next(_TOP__connector-usr-2-16-6-bus_in-order-target_position-y))) & (next(_TOP__connector-usr-13-bus_out-update_order) = next(_TOP__connector-usr-13-bus_in-update_order)));
+	next(_TOP__connector-usr-__ASSERT) := (next(_TOP__connector-usr-__ASSUME__HIST) -> next(_TOP__connector-impl-usr-__GUARANTEE0));
+
+
+
+MODULE Agree_Nodes__HasHappened (Agree_Nodes__HasHappened-usr-X)
+VAR
+	Agree_Nodes__HasHappened-usr-Y : boolean;
+
+ASSIGN
+	init(Agree_Nodes__HasHappened-usr-Y) := Agree_Nodes__HasHappened-usr-X;
+
+	next(Agree_Nodes__HasHappened-usr-Y) := (Agree_Nodes__HasHappened-usr-Y | next(Agree_Nodes__HasHappened-usr-X));
+
+
+
+MODULE Agree_Nodes__InitiallyX (Agree_Nodes__InitiallyX-usr-X)
+VAR
+	Agree_Nodes__InitiallyX-usr-Y : boolean;
+
+ASSIGN
+	init(Agree_Nodes__InitiallyX-usr-Y) := Agree_Nodes__InitiallyX-usr-X;
+
+	next(Agree_Nodes__InitiallyX-usr-Y) := TRUE;
+
+
+MODULE _TOP__deliveryItemMechanism (_TOP__deliveryItemMechanism-usr-__ASSUME__HIST, _TOP__deliveryItemMechanism-usr-delivery_cmd_in, _TOP__deliveryItemMechanism-usr-time, _TOP__deliveryItemMechanism-usr-release_cmd, _TOP__deliveryItemMechanism-usr-abort_cmd, _TOP__deliveryItemMechanism-usr-no_op_cmd, _TOP__deliveryItemMechanism-usr-delivery_status_out, _TOP__deliveryItemMechanism-usr-package_is_secure)
+VAR
+	_TOP__deliveryItemMechanism-usr-__ASSERT : boolean;
+	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__deliveryItemMechanism-res-gklocal_22 : boolean;
+	_TOP__deliveryItemMechanism-res-call_23 : Agree_Nodes__InitiallyX(_TOP__deliveryItemMechanism-res-gklocal_22);
+
+ASSIGN
+	init(_TOP__deliveryItemMechanism-res-gklocal_22) := (_TOP__deliveryItemMechanism-usr-delivery_status_out = 5);
+	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) := TRUE;
+	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) := TRUE;
+	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0) := _TOP__deliveryItemMechanism-res-call_23.Agree_Nodes__InitiallyX-usr-Y;
+	init(_TOP__deliveryItemMechanism-usr-__ASSERT) := ((_TOP__deliveryItemMechanism-usr-no_op_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 2)) & ((_TOP__deliveryItemMechanism-usr-abort_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 4)) & ((_TOP__deliveryItemMechanism-usr-release_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 3)) & (_TOP__deliveryItemMechanism-usr-__ASSUME__HIST -> (_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2 & (_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1 & _TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0))))));
+
+	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) := (next(_TOP__deliveryItemMechanism-usr-release_cmd) -> !(next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5));
+	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) := ((next(_TOP__deliveryItemMechanism-usr-abort_cmd) | next(_TOP__deliveryItemMechanism-usr-no_op_cmd)) -> (next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5));
+	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0) := next(_TOP__deliveryItemMechanism-res-call_23.Agree_Nodes__InitiallyX-usr-Y);
+	next(_TOP__deliveryItemMechanism-usr-__ASSERT) := ((next(_TOP__deliveryItemMechanism-usr-no_op_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 2)) & ((next(_TOP__deliveryItemMechanism-usr-abort_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 4)) & ((next(_TOP__deliveryItemMechanism-usr-release_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 3)) & (next(_TOP__deliveryItemMechanism-usr-__ASSUME__HIST) -> (next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) & (next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) & next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0)))))));
+	next(_TOP__deliveryItemMechanism-res-gklocal_22) := (next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5);
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE main () 
+VAR
+	main-usr-radio__comm_out : boolean;
+	main-usr-15-radio__radio_out-data_available : boolean;
+	main-usr-17-radio__radio_out-target_confirmed : boolean;
+	main-usr-radio__health_status : boolean;
+	main-usr-radio____ASSUME__HIST : boolean;
+	main-usr-11-deliveryPlanner__recent_order-item_value : real;
+	main-usr-15-deliveryPlanner__recent_order-target_picture : integer;
+	main-usr-2-16-deliveryPlanner__recent_order-target_position-x : real;
+	main-usr-2-16-deliveryPlanner__recent_order-target_position-y : real;
+	main-usr-2-deliveryPlanner__truck_position-x : real;
+	main-usr-2-deliveryPlanner__truck_position-y : real;
+	main-usr-2-deliveryPlanner__dest_position-x : real;
+	main-usr-2-deliveryPlanner__dest_position-y : real;
+	main-usr-deliveryPlanner__expensive_item : boolean;
+	main-usr-deliveryPlanner__confirmation : boolean;
+	main-usr-deliveryPlanner__confirmation_timeout : boolean;
+	main-usr-deliveryPlanner__get_clearance_timeout : boolean;
+	main-usr-deliveryPlanner__delivery_failed : boolean;
+	main-usr-deliveryPlanner__delivery_completed : boolean;
+	main-usr-deliveryPlanner__is_safe_landing : boolean;
+	main-usr-deliveryPlanner__on_off : boolean;
+	main-usr-deliveryPlanner__init_criteria_succeed : boolean;
+	main-usr-deliveryPlanner__init_criteria_failed : boolean;
+	main-usr-deliveryPlanner__abort_cmd : boolean;
+	main-usr-deliveryPlanner__mission_store_release_sequence : boolean;
+	main-usr-deliveryPlanner__okay_to_launch : boolean;
+	main-usr-deliveryPlanner__separation : boolean;
+	main-usr-deliveryPlanner__destination_location_reached : boolean;
+	main-usr-deliveryPlanner__no_clearance : boolean;
+	main-usr-deliveryPlanner__successfull_delivery : boolean;
+	main-usr-deliveryPlanner__exhaustive_retries : boolean;
+	main-usr-deliveryPlanner__internal_error_detected : boolean;
+	main-usr-deliveryPlanner__truck_location_reached : boolean;
+	main-usr-deliveryPlanner__connected : boolean;
+	main-usr-deliveryPlanner__off_mode : boolean;
+	main-usr-deliveryPlanner__abort_mode : boolean;
+	main-usr-deliveryPlanner__init_mode : boolean;
+	main-usr-deliveryPlanner__ready_mode : boolean;
+	main-usr-deliveryPlanner__launch_mode : boolean;
+	main-usr-deliveryPlanner__flying_to_dest_mode : boolean;
+	main-usr-deliveryPlanner__making_delivery_mode : boolean;
+	main-usr-deliveryPlanner__return_to_truck_mode : boolean;
+	main-usr-deliveryPlanner__radio_cmd : boolean;
+	main-usr-deliveryPlanner__delivery_cmd : 2 .. 4;
+	main-usr-2-deliveryPlanner__dest_location-x : real;
+	main-usr-2-deliveryPlanner__dest_location-y : real;
+	main-usr-deliveryPlanner__bus_out : boolean;
+	main-usr-deliveryPlanner__nav_cmd : boolean;
+	main-usr-deliveryPlanner__camera : boolean;
+	main-usr-17-deliveryPlanner__probe_safe_landing-has_valid_marker : boolean;
+	main-usr-16-deliveryPlanner__probe_safe_landing-is_target_clear : boolean;
+	main-usr-deliveryPlanner__constellation : 0 .. 1;
+	main-usr-2-deliveryPlanner__launch_pos-x : real;
+	main-usr-2-deliveryPlanner__launch_pos-y : real;
+	main-usr-deliveryPlanner__probe_init_mode : boolean;
+	main-usr-deliveryPlanner__probe_abort_mode : boolean;
+	main-usr-deliveryPlanner__target_clear : boolean;
+	main-usr-deliveryPlanner__valid_marker : boolean;
+	main-usr-deliveryPlanner____ASSUME__HIST : boolean;
+	main-usr-deliveryItemMechanism__release_cmd : boolean;
+	main-usr-deliveryItemMechanism__abort_cmd : boolean;
+	main-usr-deliveryItemMechanism__no_op_cmd : boolean;
+	main-usr-deliveryItemMechanism__delivery_status_out : 5 .. 8;
+	main-usr-deliveryItemMechanism__package_is_secure : boolean;
+	main-usr-deliveryItemMechanism____ASSUME__HIST : boolean;
+	main-usr-10-connector__bus_out-abort_cmd : boolean;
+	main-usr-10-connector__bus_out-connected : boolean;
+	main-usr-14-connector__bus_out-constellation : 0 .. 1;
+	main-usr-24-connector__bus_out-init_criteria_satisfied : boolean;
+	main-usr-2-11-connector__bus_out-launch_pos-x : real;
+	main-usr-2-11-connector__bus_out-launch_pos-y : real;
+	main-usr-31-connector__bus_out-mission_store_release_sequence : boolean;
+	main-usr-7-connector__bus_out-on_off : boolean;
+	main-usr-11-6-connector__bus_out-order-item_value : real;
+	main-usr-15-6-connector__bus_out-order-target_picture : integer;
+	main-usr-2-16-6-connector__bus_out-order-target_position-x : real;
+	main-usr-2-16-6-connector__bus_out-order-target_position-y : real;
+	main-usr-13-connector__bus_out-update_order : boolean;
+	main-usr-connector____ASSUME__HIST : boolean;
+	main-usr-delivery_started : boolean;
+	main-usr-confirmation_requested : boolean;
+	main-usr-acknowledge_received : boolean;
+	main-usr-target_confirmed : boolean;
+	main-usr-valuable_package : boolean;
+	main-usr-power_signal : boolean;
+	main-usr-isOn : boolean;
+	main-usr-most_recent_constellation : 0 .. 1;
+	main-usr-2-most_recent_launch_location-x : real;
+	main-usr-2-most_recent_launch_location-y : real;
+	main-usr-11-most_recent_order-item_value : real;
+	main-usr-15-most_recent_order-target_picture : integer;
+	main-usr-2-16-most_recent_order-target_position-x : real;
+	main-usr-2-16-most_recent_order-target_position-y : real;
+	main-usr-2-most_recent_delivery_location-x : real;
+	main-usr-2-most_recent_delivery_location-y : real;
+	main-usr-release_cmd : boolean;
+	main-usr-comm2 : boolean;
+	main-usr-bus2 : boolean;
+	main-usr-radio_cmd : boolean;
+	main-usr-15-radio_response-data_available : boolean;
+	main-usr-17-radio_response-target_confirmed : boolean;
+	main-usr-delivery_status : 5 .. 8;
+	main-usr-probe_init_mode : boolean;
+	main-usr-probe_abort_mode : boolean;
+	main-usr-probe_delivery_cmd : 2 .. 4;
+	main-usr-probe_fly_cmd : boolean;
+	main-usr-15-radio__comm_in-data_available : boolean;
+	main-usr-17-radio__comm_in-target_confirmed : boolean;
+	main-usr-radio__radio_in : boolean;
+	main-usr-radio__time : real;
+	main-usr-10-deliveryPlanner__bus_in-abort_cmd : boolean;
+	main-usr-10-deliveryPlanner__bus_in-connected : boolean;
+	main-usr-14-deliveryPlanner__bus_in-constellation : 0 .. 1;
+	main-usr-24-deliveryPlanner__bus_in-init_criteria_satisfied : boolean;
+	main-usr-2-11-deliveryPlanner__bus_in-launch_pos-x : real;
+	main-usr-2-11-deliveryPlanner__bus_in-launch_pos-y : real;
+	main-usr-31-deliveryPlanner__bus_in-mission_store_release_sequence : boolean;
+	main-usr-7-deliveryPlanner__bus_in-on_off : boolean;
+	main-usr-11-6-deliveryPlanner__bus_in-order-item_value : real;
+	main-usr-15-6-deliveryPlanner__bus_in-order-target_picture : integer;
+	main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-x : real;
+	main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-y : real;
+	main-usr-13-deliveryPlanner__bus_in-update_order : boolean;
+	main-usr-2-deliveryPlanner__cur_pos-x : real;
+	main-usr-2-deliveryPlanner__cur_pos-y : real;
+	main-usr-deliveryPlanner__delivery_status : 5 .. 8;
+	main-usr-15-deliveryPlanner__radio_response-data_available : boolean;
+	main-usr-17-deliveryPlanner__radio_response-target_confirmed : boolean;
+	main-usr-deliveryPlanner__camera_result : integer;
+	main-usr-deliveryPlanner__gps_health_status : boolean;
+	main-usr-deliveryPlanner__imu_health_status : boolean;
+	main-usr-deliveryPlanner__rdo_health_status : boolean;
+	main-usr-deliveryPlanner__cam_health_status : boolean;
+	main-usr-deliveryPlanner__package_is_secure : boolean;
+	main-usr-deliveryPlanner__time : real;
+	main-usr-deliveryItemMechanism__delivery_cmd_in : 2 .. 4;
+	main-usr-deliveryItemMechanism__time : real;
+	main-usr-10-connector__bus_in-abort_cmd : boolean;
+	main-usr-10-connector__bus_in-connected : boolean;
+	main-usr-14-connector__bus_in-constellation : 0 .. 1;
+	main-usr-24-connector__bus_in-init_criteria_satisfied : boolean;
+	main-usr-2-11-connector__bus_in-launch_pos-x : real;
+	main-usr-2-11-connector__bus_in-launch_pos-y : real;
+	main-usr-31-connector__bus_in-mission_store_release_sequence : boolean;
+	main-usr-7-connector__bus_in-on_off : boolean;
+	main-usr-11-6-connector__bus_in-order-item_value : real;
+	main-usr-15-6-connector__bus_in-order-target_picture : integer;
+	main-usr-2-16-6-connector__bus_in-order-target_position-x : real;
+	main-usr-2-16-6-connector__bus_in-order-target_position-y : real;
+	main-usr-13-connector__bus_in-update_order : boolean;
+	main-usr-connector__time : real;
+	main-usr-10-bus1-abort_cmd : boolean;
+	main-usr-10-bus1-connected : boolean;
+	main-usr-14-bus1-constellation : 0 .. 1;
+	main-usr-24-bus1-init_criteria_satisfied : boolean;
+	main-usr-2-11-bus1-launch_pos-x : real;
+	main-usr-2-11-bus1-launch_pos-y : real;
+	main-usr-31-bus1-mission_store_release_sequence : boolean;
+	main-usr-7-bus1-on_off : boolean;
+	main-usr-11-6-bus1-order-item_value : real;
+	main-usr-15-6-bus1-order-target_picture : integer;
+	main-usr-2-16-6-bus1-order-target_position-x : real;
+	main-usr-2-16-6-bus1-order-target_position-y : real;
+	main-usr-13-bus1-update_order : boolean;
+	main-usr-15-comm1-data_available : boolean;
+	main-usr-17-comm1-target_confirmed : boolean;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-res-glocal_26 : boolean;
+	main-res-glocal_28 : boolean;
+	main-res-glocal_31 : boolean;
+	main-res-glocal_32 : boolean;
+	main-res-glocal_34 : boolean;
+	main-res-glocal_35 : boolean;
+	main-res-glocal_36 : boolean;
+	main-res-glocal_38 : boolean;
+	main-res-glocal_39 : boolean;
+	main-res-glocal_40 : boolean;
+	main-res-glocal_42 : boolean;
+	main-res-glocal_43 : boolean;
+	main-res-glocal_44 : boolean;
+	main-res-glocal_45 : boolean;
+	main-res-glocal_46 : boolean;
+	main-res-glocal_47 : boolean;
+	main-res-glocal_48 : boolean;
+	main-res-glocal_49 : boolean;
+	main-res-glocal_50 : boolean;
+	main-res-glocal_51 : boolean;
+	main-res-glocal_52 : boolean;
+	main-res-glocal_53 : boolean;
+	main-res-glocal_54 : boolean;
+	main-res-glocal_55 : boolean;
+	main-res-glocal_56 : boolean;
+	main-res-glocal_57 : boolean;
+	main-res-glocal_58 : boolean;
+	main-res-glocal_59 : boolean;
+	main-res-glocal_60 : boolean;
+	main-res-glocal_61 : boolean;
+	main-res-glocal_62 : boolean;
+	main-res-glocal_64 : boolean;
+	main-res-glocal_65 : boolean;
+	main-res-glocal_68 : boolean;
+	main-res-glocal_69 : boolean;
+	main-res-glocal_70 : boolean;
+	main-res-glocal_71 : boolean;
+	main-res-glocal_72 : boolean;
+	main-res-glocal_73 : boolean;
+	main-res-glocal_74 : boolean;
+	main-res-glocal_75 : boolean;
+	main-res-glocal_76 : boolean;
+	main-res-glocal_77 : boolean;
+	main-res-glocal_78 : boolean;
+	main-res-gklocal_66 : boolean;
+	main-res-gklocal_29 : boolean;
+	main-res-call_67 : Agree_Nodes__HasHappened(main-res-gklocal_66);
+	main-res-call_63 : Agree_Nodes__HasHappened(main-usr-radio_cmd);
+	main-res-call_41 : _TOP__connector(main-usr-connector____ASSUME__HIST, main-usr-10-connector__bus_in-abort_cmd, main-usr-10-connector__bus_in-connected, main-usr-14-connector__bus_in-constellation, main-usr-24-connector__bus_in-init_criteria_satisfied, main-usr-2-11-connector__bus_in-launch_pos-x, main-usr-2-11-connector__bus_in-launch_pos-y, main-usr-31-connector__bus_in-mission_store_release_sequence, main-usr-7-connector__bus_in-on_off, main-usr-11-6-connector__bus_in-order-item_value, main-usr-15-6-connector__bus_in-order-target_picture, main-usr-2-16-6-connector__bus_in-order-target_position-x, main-usr-2-16-6-connector__bus_in-order-target_position-y, main-usr-13-connector__bus_in-update_order, main-usr-connector__time, main-usr-10-connector__bus_out-abort_cmd, main-usr-10-connector__bus_out-connected, main-usr-14-connector__bus_out-constellation, main-usr-24-connector__bus_out-init_criteria_satisfied, main-usr-2-11-connector__bus_out-launch_pos-x, main-usr-2-11-connector__bus_out-launch_pos-y, main-usr-31-connector__bus_out-mission_store_release_sequence, main-usr-7-connector__bus_out-on_off, main-usr-11-6-connector__bus_out-order-item_value, main-usr-15-6-connector__bus_out-order-target_picture, main-usr-2-16-6-connector__bus_out-order-target_position-x, main-usr-2-16-6-connector__bus_out-order-target_position-y, main-usr-13-connector__bus_out-update_order);
+	main-res-call_37 : _TOP__deliveryItemMechanism(main-usr-deliveryItemMechanism____ASSUME__HIST, main-usr-deliveryItemMechanism__delivery_cmd_in, main-usr-deliveryItemMechanism__time, main-usr-deliveryItemMechanism__release_cmd, main-usr-deliveryItemMechanism__abort_cmd, main-usr-deliveryItemMechanism__no_op_cmd, main-usr-deliveryItemMechanism__delivery_status_out, main-usr-deliveryItemMechanism__package_is_secure);
+	main-res-call_33 : _TOP__deliveryPlanner(main-usr-deliveryPlanner____ASSUME__HIST, main-usr-10-deliveryPlanner__bus_in-abort_cmd, main-usr-10-deliveryPlanner__bus_in-connected, main-usr-14-deliveryPlanner__bus_in-constellation, main-usr-24-deliveryPlanner__bus_in-init_criteria_satisfied, main-usr-2-11-deliveryPlanner__bus_in-launch_pos-x, main-usr-2-11-deliveryPlanner__bus_in-launch_pos-y, main-usr-31-deliveryPlanner__bus_in-mission_store_release_sequence, main-usr-7-deliveryPlanner__bus_in-on_off, main-usr-11-6-deliveryPlanner__bus_in-order-item_value, main-usr-15-6-deliveryPlanner__bus_in-order-target_picture, main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-x, main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-y, main-usr-13-deliveryPlanner__bus_in-update_order, main-usr-2-deliveryPlanner__cur_pos-x, main-usr-2-deliveryPlanner__cur_pos-y, main-usr-deliveryPlanner__delivery_status, main-usr-15-deliveryPlanner__radio_response-data_available, main-usr-17-deliveryPlanner__radio_response-target_confirmed, main-usr-deliveryPlanner__camera_result, main-usr-deliveryPlanner__gps_health_status, main-usr-deliveryPlanner__imu_health_status, main-usr-deliveryPlanner__rdo_health_status, main-usr-deliveryPlanner__cam_health_status, main-usr-deliveryPlanner__package_is_secure, main-usr-deliveryPlanner__time, main-usr-11-deliveryPlanner__recent_order-item_value, main-usr-15-deliveryPlanner__recent_order-target_picture, main-usr-2-16-deliveryPlanner__recent_order-target_position-x, main-usr-2-16-deliveryPlanner__recent_order-target_position-y, main-usr-2-deliveryPlanner__truck_position-x, main-usr-2-deliveryPlanner__truck_position-y, main-usr-2-deliveryPlanner__dest_position-x, main-usr-2-deliveryPlanner__dest_position-y, main-usr-deliveryPlanner__expensive_item, main-usr-deliveryPlanner__confirmation, main-usr-deliveryPlanner__confirmation_timeout, main-usr-deliveryPlanner__get_clearance_timeout, main-usr-deliveryPlanner__delivery_failed, main-usr-deliveryPlanner__delivery_completed, main-usr-deliveryPlanner__is_safe_landing, main-usr-deliveryPlanner__on_off, main-usr-deliveryPlanner__init_criteria_succeed, main-usr-deliveryPlanner__init_criteria_failed, main-usr-deliveryPlanner__abort_cmd, main-usr-deliveryPlanner__mission_store_release_sequence, main-usr-deliveryPlanner__okay_to_launch, main-usr-deliveryPlanner__separation, main-usr-deliveryPlanner__destination_location_reached, main-usr-deliveryPlanner__no_clearance, main-usr-deliveryPlanner__successfull_delivery, main-usr-deliveryPlanner__exhaustive_retries, main-usr-deliveryPlanner__internal_error_detected, main-usr-deliveryPlanner__truck_location_reached, main-usr-deliveryPlanner__connected, main-usr-deliveryPlanner__off_mode, main-usr-deliveryPlanner__abort_mode, main-usr-deliveryPlanner__init_mode, main-usr-deliveryPlanner__ready_mode, main-usr-deliveryPlanner__launch_mode, main-usr-deliveryPlanner__flying_to_dest_mode, main-usr-deliveryPlanner__making_delivery_mode, main-usr-deliveryPlanner__return_to_truck_mode, main-usr-deliveryPlanner__radio_cmd, main-usr-deliveryPlanner__delivery_cmd, main-usr-2-deliveryPlanner__dest_location-x, main-usr-2-deliveryPlanner__dest_location-y, main-usr-deliveryPlanner__bus_out, main-usr-deliveryPlanner__nav_cmd, main-usr-deliveryPlanner__camera, main-usr-17-deliveryPlanner__probe_safe_landing-has_valid_marker, main-usr-16-deliveryPlanner__probe_safe_landing-is_target_clear, main-usr-deliveryPlanner__constellation, main-usr-2-deliveryPlanner__launch_pos-x, main-usr-2-deliveryPlanner__launch_pos-y, main-usr-deliveryPlanner__probe_init_mode, main-usr-deliveryPlanner__probe_abort_mode, main-usr-deliveryPlanner__target_clear, main-usr-deliveryPlanner__valid_marker);
+	main-res-call_30 : __HIST(main-res-gklocal_29);
+	main-res-call_27 : _TOP__radio(main-usr-radio____ASSUME__HIST, main-usr-15-radio__comm_in-data_available, main-usr-17-radio__comm_in-target_confirmed, main-usr-radio__radio_in, main-usr-radio__time, main-usr-radio__comm_out, main-usr-15-radio__radio_out-data_available, main-usr-17-radio__radio_out-target_confirmed, main-usr-radio__health_status);
+
+ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-connector____ASSUME__HIST & (main-usr-deliveryItemMechanism____ASSUME__HIST & (main-usr-deliveryPlanner____ASSUME__HIST & main-usr-radio____ASSUME__HIST)));
+	init(main-res-glocal_26) := (main-usr-time = main-usr-radio__time);
+	init(main-res-glocal_28) := main-res-call_27._TOP__radio-usr-__ASSERT;
+	init(main-res-gklocal_29) := TRUE;
+	init(main-res-glocal_31) := (main-usr-radio____ASSUME__HIST = main-res-call_30.__HIST-usr-hist);
+	init(main-res-glocal_32) := (main-usr-time = main-usr-deliveryPlanner__time);
+	init(main-res-glocal_34) := main-res-call_33._TOP__deliveryPlanner-usr-__ASSERT;
+	init(main-res-glocal_35) := (main-usr-deliveryPlanner____ASSUME__HIST = main-res-call_30.__HIST-usr-hist);
+	init(main-res-glocal_36) := (main-usr-time = main-usr-deliveryItemMechanism__time);
+	init(main-res-glocal_38) := main-res-call_37._TOP__deliveryItemMechanism-usr-__ASSERT;
+	init(main-res-glocal_39) := (main-usr-deliveryItemMechanism____ASSUME__HIST = main-res-call_30.__HIST-usr-hist);
+	init(main-res-glocal_40) := (main-usr-time = main-usr-connector__time);
+	init(main-res-glocal_42) := main-res-call_41._TOP__connector-usr-__ASSERT;
+	init(main-res-glocal_43) := (main-usr-connector____ASSUME__HIST = main-res-call_30.__HIST-usr-hist);
+	init(main-res-glocal_44) := (((((((((((((main-usr-10-bus1-abort_cmd = main-usr-10-connector__bus_in-abort_cmd) & (main-usr-10-bus1-connected = main-usr-10-connector__bus_in-connected)) & (main-usr-14-bus1-constellation = main-usr-14-connector__bus_in-constellation)) & (main-usr-24-bus1-init_criteria_satisfied = main-usr-24-connector__bus_in-init_criteria_satisfied)) & (main-usr-2-11-bus1-launch_pos-x = main-usr-2-11-connector__bus_in-launch_pos-x)) & (main-usr-2-11-bus1-launch_pos-y = main-usr-2-11-connector__bus_in-launch_pos-y)) & (main-usr-31-bus1-mission_store_release_sequence = main-usr-31-connector__bus_in-mission_store_release_sequence)) & (main-usr-7-bus1-on_off = main-usr-7-connector__bus_in-on_off)) & (main-usr-11-6-bus1-order-item_value = main-usr-11-6-connector__bus_in-order-item_value)) & (main-usr-15-6-bus1-order-target_picture = main-usr-15-6-connector__bus_in-order-target_picture)) & (main-usr-2-16-6-bus1-order-target_position-x = main-usr-2-16-6-connector__bus_in-order-target_position-x)) & (main-usr-2-16-6-bus1-order-target_position-y = main-usr-2-16-6-connector__bus_in-order-target_position-y)) & (main-usr-13-bus1-update_order = main-usr-13-connector__bus_in-update_order));
+	init(main-res-glocal_45) := ((main-usr-15-comm1-data_available = main-usr-15-radio__comm_in-data_available) & (main-usr-17-comm1-target_confirmed = main-usr-17-radio__comm_in-target_confirmed));
+	init(main-res-glocal_46) := (main-usr-radio__comm_out = main-usr-comm2);
+	init(main-res-glocal_47) := ((main-usr-15-radio__radio_out-data_available = main-usr-15-deliveryPlanner__radio_response-data_available) & (main-usr-17-radio__radio_out-target_confirmed = main-usr-17-deliveryPlanner__radio_response-target_confirmed));
+	init(main-res-glocal_48) := ((main-usr-15-radio__radio_out-data_available = main-usr-15-radio_response-data_available) & (main-usr-17-radio__radio_out-target_confirmed = main-usr-17-radio_response-target_confirmed));
+	init(main-res-glocal_49) := (main-usr-radio__health_status = main-usr-deliveryPlanner__rdo_health_status);
+	init(main-res-glocal_50) := (main-usr-deliveryPlanner__radio_cmd = main-usr-radio__radio_in);
+	init(main-res-glocal_51) := (main-usr-deliveryPlanner__radio_cmd = main-usr-radio_cmd);
+	init(main-res-glocal_52) := (main-usr-deliveryPlanner__delivery_cmd = main-usr-deliveryItemMechanism__delivery_cmd_in);
+	init(main-res-glocal_53) := (main-usr-deliveryPlanner__delivery_cmd = main-usr-probe_delivery_cmd);
+	init(main-res-glocal_54) := (main-usr-deliveryPlanner__bus_out = main-usr-bus2);
+	init(main-res-glocal_55) := (main-usr-deliveryPlanner__nav_cmd = main-usr-probe_fly_cmd);
+	init(main-res-glocal_56) := (main-usr-deliveryPlanner__probe_init_mode = main-usr-probe_init_mode);
+	init(main-res-glocal_57) := (main-usr-deliveryPlanner__probe_abort_mode = main-usr-probe_abort_mode);
+	init(main-res-glocal_58) := (main-usr-deliveryItemMechanism__delivery_status_out = main-usr-deliveryPlanner__delivery_status);
+	init(main-res-glocal_59) := (main-usr-deliveryItemMechanism__delivery_status_out = main-usr-delivery_status);
+	init(main-res-glocal_60) := (main-usr-deliveryItemMechanism__package_is_secure = main-usr-deliveryPlanner__package_is_secure);
+	init(main-res-glocal_61) := (((((((((((((main-usr-10-connector__bus_out-abort_cmd = main-usr-10-deliveryPlanner__bus_in-abort_cmd) & (main-usr-10-connector__bus_out-connected = main-usr-10-deliveryPlanner__bus_in-connected)) & (main-usr-14-connector__bus_out-constellation = main-usr-14-deliveryPlanner__bus_in-constellation)) & (main-usr-24-connector__bus_out-init_criteria_satisfied = main-usr-24-deliveryPlanner__bus_in-init_criteria_satisfied)) & (main-usr-2-11-connector__bus_out-launch_pos-x = main-usr-2-11-deliveryPlanner__bus_in-launch_pos-x)) & (main-usr-2-11-connector__bus_out-launch_pos-y = main-usr-2-11-deliveryPlanner__bus_in-launch_pos-y)) & (main-usr-31-connector__bus_out-mission_store_release_sequence = main-usr-31-deliveryPlanner__bus_in-mission_store_release_sequence)) & (main-usr-7-connector__bus_out-on_off = main-usr-7-deliveryPlanner__bus_in-on_off)) & (main-usr-11-6-connector__bus_out-order-item_value = main-usr-11-6-deliveryPlanner__bus_in-order-item_value)) & (main-usr-15-6-connector__bus_out-order-target_picture = main-usr-15-6-deliveryPlanner__bus_in-order-target_picture)) & (main-usr-2-16-6-connector__bus_out-order-target_position-x = main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-x)) & (main-usr-2-16-6-connector__bus_out-order-target_position-y = main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-y)) & (main-usr-13-connector__bus_out-update_order = main-usr-13-deliveryPlanner__bus_in-update_order));
+	init(main-res-glocal_62) := (main-usr-delivery_started = !(main-usr-delivery_status = 5));
+	init(main-res-glocal_64) := (main-usr-confirmation_requested = main-res-call_63.Agree_Nodes__HasHappened-usr-Y);
+	init(main-res-glocal_65) := (main-usr-acknowledge_received = (main-usr-15-comm1-data_available & main-usr-17-comm1-target_confirmed));
+	init(main-res-gklocal_66) := (main-usr-confirmation_requested & main-usr-acknowledge_received);
+	init(main-res-glocal_68) := (main-usr-target_confirmed = main-res-call_67.Agree_Nodes__HasHappened-usr-Y);
+	init(main-res-glocal_69) := (main-usr-valuable_package = (main-usr-11-most_recent_order-item_value >= 100));
+	init(main-res-glocal_70) := (main-usr-power_signal = (main-usr-7-bus1-on_off & main-usr-10-bus1-connected));
+	init(main-res-glocal_71) := !main-usr-isOn;
+	init(main-res-glocal_72) := (main-usr-most_recent_constellation = main-usr-14-bus1-constellation);
+	init(main-res-glocal_73) := ((main-usr-2-most_recent_launch_location-x = main-usr-2-11-bus1-launch_pos-x) & (main-usr-2-most_recent_launch_location-y = main-usr-2-11-bus1-launch_pos-y));
+	init(main-res-glocal_74) := ((((main-usr-11-most_recent_order-item_value = main-usr-11-6-bus1-order-item_value) & (main-usr-15-most_recent_order-target_picture = main-usr-15-6-bus1-order-target_picture)) & (main-usr-2-16-most_recent_order-target_position-x = main-usr-2-16-6-bus1-order-target_position-x)) & (main-usr-2-16-most_recent_order-target_position-y = main-usr-2-16-6-bus1-order-target_position-y));
+	init(main-res-glocal_75) := ((main-usr-2-most_recent_delivery_location-x = main-usr-2-16-most_recent_order-target_position-x) & (main-usr-2-most_recent_delivery_location-y = main-usr-2-16-most_recent_order-target_position-y));
+	init(main-res-glocal_76) := (main-usr-release_cmd = (main-usr-probe_delivery_cmd = 3));
+	init(main-res-glocal_77) := TRUE;
+	init(main-res-glocal_78) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-connector____ASSUME__HIST) & (next(main-usr-deliveryItemMechanism____ASSUME__HIST) & (next(main-usr-deliveryPlanner____ASSUME__HIST) & next(main-usr-radio____ASSUME__HIST))));
+	next(main-res-glocal_26) := (next(main-usr-time) = next(main-usr-radio__time));
+	next(main-res-glocal_28) := next(main-res-call_27._TOP__radio-usr-__ASSERT);
+	next(main-res-gklocal_29) := TRUE;
+	next(main-res-glocal_31) := (next(main-usr-radio____ASSUME__HIST) = next(main-res-call_30.__HIST-usr-hist));
+	next(main-res-glocal_32) := (next(main-usr-time) = next(main-usr-deliveryPlanner__time));
+	next(main-res-glocal_34) := next(main-res-call_33._TOP__deliveryPlanner-usr-__ASSERT);
+	next(main-res-glocal_35) := (next(main-usr-deliveryPlanner____ASSUME__HIST) = next(main-res-call_30.__HIST-usr-hist));
+	next(main-res-glocal_36) := (next(main-usr-time) = next(main-usr-deliveryItemMechanism__time));
+	next(main-res-glocal_38) := next(main-res-call_37._TOP__deliveryItemMechanism-usr-__ASSERT);
+	next(main-res-glocal_39) := (next(main-usr-deliveryItemMechanism____ASSUME__HIST) = next(main-res-call_30.__HIST-usr-hist));
+	next(main-res-glocal_40) := (next(main-usr-time) = next(main-usr-connector__time));
+	next(main-res-glocal_42) := next(main-res-call_41._TOP__connector-usr-__ASSERT);
+	next(main-res-glocal_43) := (next(main-usr-connector____ASSUME__HIST) = next(main-res-call_30.__HIST-usr-hist));
+	next(main-res-glocal_44) := (((((((((((((next(main-usr-10-bus1-abort_cmd) = next(main-usr-10-connector__bus_in-abort_cmd)) & (next(main-usr-10-bus1-connected) = next(main-usr-10-connector__bus_in-connected))) & (next(main-usr-14-bus1-constellation) = next(main-usr-14-connector__bus_in-constellation))) & (next(main-usr-24-bus1-init_criteria_satisfied) = next(main-usr-24-connector__bus_in-init_criteria_satisfied))) & (next(main-usr-2-11-bus1-launch_pos-x) = next(main-usr-2-11-connector__bus_in-launch_pos-x))) & (next(main-usr-2-11-bus1-launch_pos-y) = next(main-usr-2-11-connector__bus_in-launch_pos-y))) & (next(main-usr-31-bus1-mission_store_release_sequence) = next(main-usr-31-connector__bus_in-mission_store_release_sequence))) & (next(main-usr-7-bus1-on_off) = next(main-usr-7-connector__bus_in-on_off))) & (next(main-usr-11-6-bus1-order-item_value) = next(main-usr-11-6-connector__bus_in-order-item_value))) & (next(main-usr-15-6-bus1-order-target_picture) = next(main-usr-15-6-connector__bus_in-order-target_picture))) & (next(main-usr-2-16-6-bus1-order-target_position-x) = next(main-usr-2-16-6-connector__bus_in-order-target_position-x))) & (next(main-usr-2-16-6-bus1-order-target_position-y) = next(main-usr-2-16-6-connector__bus_in-order-target_position-y))) & (next(main-usr-13-bus1-update_order) = next(main-usr-13-connector__bus_in-update_order)));
+	next(main-res-glocal_45) := ((next(main-usr-15-comm1-data_available) = next(main-usr-15-radio__comm_in-data_available)) & (next(main-usr-17-comm1-target_confirmed) = next(main-usr-17-radio__comm_in-target_confirmed)));
+	next(main-res-glocal_46) := (next(main-usr-radio__comm_out) = next(main-usr-comm2));
+	next(main-res-glocal_47) := ((next(main-usr-15-radio__radio_out-data_available) = next(main-usr-15-deliveryPlanner__radio_response-data_available)) & (next(main-usr-17-radio__radio_out-target_confirmed) = next(main-usr-17-deliveryPlanner__radio_response-target_confirmed)));
+	next(main-res-glocal_48) := ((next(main-usr-15-radio__radio_out-data_available) = next(main-usr-15-radio_response-data_available)) & (next(main-usr-17-radio__radio_out-target_confirmed) = next(main-usr-17-radio_response-target_confirmed)));
+	next(main-res-glocal_49) := (next(main-usr-radio__health_status) = next(main-usr-deliveryPlanner__rdo_health_status));
+	next(main-res-glocal_50) := (next(main-usr-deliveryPlanner__radio_cmd) = next(main-usr-radio__radio_in));
+	next(main-res-glocal_51) := (next(main-usr-deliveryPlanner__radio_cmd) = next(main-usr-radio_cmd));
+	next(main-res-glocal_52) := (next(main-usr-deliveryPlanner__delivery_cmd) = next(main-usr-deliveryItemMechanism__delivery_cmd_in));
+	next(main-res-glocal_53) := (next(main-usr-deliveryPlanner__delivery_cmd) = next(main-usr-probe_delivery_cmd));
+	next(main-res-glocal_54) := (next(main-usr-deliveryPlanner__bus_out) = next(main-usr-bus2));
+	next(main-res-glocal_55) := (next(main-usr-deliveryPlanner__nav_cmd) = next(main-usr-probe_fly_cmd));
+	next(main-res-glocal_56) := (next(main-usr-deliveryPlanner__probe_init_mode) = next(main-usr-probe_init_mode));
+	next(main-res-glocal_57) := (next(main-usr-deliveryPlanner__probe_abort_mode) = next(main-usr-probe_abort_mode));
+	next(main-res-glocal_58) := (next(main-usr-deliveryItemMechanism__delivery_status_out) = next(main-usr-deliveryPlanner__delivery_status));
+	next(main-res-glocal_59) := (next(main-usr-deliveryItemMechanism__delivery_status_out) = next(main-usr-delivery_status));
+	next(main-res-glocal_60) := (next(main-usr-deliveryItemMechanism__package_is_secure) = next(main-usr-deliveryPlanner__package_is_secure));
+	next(main-res-glocal_61) := (((((((((((((next(main-usr-10-connector__bus_out-abort_cmd) = next(main-usr-10-deliveryPlanner__bus_in-abort_cmd)) & (next(main-usr-10-connector__bus_out-connected) = next(main-usr-10-deliveryPlanner__bus_in-connected))) & (next(main-usr-14-connector__bus_out-constellation) = next(main-usr-14-deliveryPlanner__bus_in-constellation))) & (next(main-usr-24-connector__bus_out-init_criteria_satisfied) = next(main-usr-24-deliveryPlanner__bus_in-init_criteria_satisfied))) & (next(main-usr-2-11-connector__bus_out-launch_pos-x) = next(main-usr-2-11-deliveryPlanner__bus_in-launch_pos-x))) & (next(main-usr-2-11-connector__bus_out-launch_pos-y) = next(main-usr-2-11-deliveryPlanner__bus_in-launch_pos-y))) & (next(main-usr-31-connector__bus_out-mission_store_release_sequence) = next(main-usr-31-deliveryPlanner__bus_in-mission_store_release_sequence))) & (next(main-usr-7-connector__bus_out-on_off) = next(main-usr-7-deliveryPlanner__bus_in-on_off))) & (next(main-usr-11-6-connector__bus_out-order-item_value) = next(main-usr-11-6-deliveryPlanner__bus_in-order-item_value))) & (next(main-usr-15-6-connector__bus_out-order-target_picture) = next(main-usr-15-6-deliveryPlanner__bus_in-order-target_picture))) & (next(main-usr-2-16-6-connector__bus_out-order-target_position-x) = next(main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-x))) & (next(main-usr-2-16-6-connector__bus_out-order-target_position-y) = next(main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-y))) & (next(main-usr-13-connector__bus_out-update_order) = next(main-usr-13-deliveryPlanner__bus_in-update_order)));
+	next(main-res-glocal_62) := (next(main-usr-delivery_started) = !(next(main-usr-delivery_status) = 5));
+	next(main-res-glocal_64) := (next(main-usr-confirmation_requested) = next(main-res-call_63.Agree_Nodes__HasHappened-usr-Y));
+	next(main-res-glocal_65) := (next(main-usr-acknowledge_received) = (next(main-usr-15-comm1-data_available) & next(main-usr-17-comm1-target_confirmed)));
+	next(main-res-gklocal_66) := (next(main-usr-confirmation_requested) & next(main-usr-acknowledge_received));
+	next(main-res-glocal_68) := (next(main-usr-target_confirmed) = next(main-res-call_67.Agree_Nodes__HasHappened-usr-Y));
+	next(main-res-glocal_69) := (next(main-usr-valuable_package) = (next(main-usr-11-most_recent_order-item_value) >= 100));
+	next(main-res-glocal_70) := (next(main-usr-power_signal) = (next(main-usr-7-bus1-on_off) & next(main-usr-10-bus1-connected)));
+	next(main-res-glocal_71) := (next(main-usr-isOn) = (next(main-usr-power_signal) ? !main-usr-isOn : main-usr-isOn));
+	next(main-res-glocal_72) := (next(main-usr-most_recent_constellation) = (next(main-usr-probe_init_mode) ? next(main-usr-14-bus1-constellation) : main-usr-most_recent_constellation));
+	next(main-res-glocal_73) := ((next(main-usr-2-most_recent_launch_location-x) = (next(main-usr-probe_init_mode) ? next(main-usr-2-11-bus1-launch_pos-x) : main-usr-2-most_recent_launch_location-x)) & (next(main-usr-2-most_recent_launch_location-y) = (next(main-usr-probe_init_mode) ? next(main-usr-2-11-bus1-launch_pos-y) : main-usr-2-most_recent_launch_location-y)));
+	next(main-res-glocal_74) := ((((next(main-usr-11-most_recent_order-item_value) = (next(main-usr-probe_init_mode) ? next(main-usr-11-6-bus1-order-item_value) : main-usr-11-most_recent_order-item_value)) & (next(main-usr-15-most_recent_order-target_picture) = (next(main-usr-probe_init_mode) ? next(main-usr-15-6-bus1-order-target_picture) : main-usr-15-most_recent_order-target_picture))) & (next(main-usr-2-16-most_recent_order-target_position-x) = (next(main-usr-probe_init_mode) ? next(main-usr-2-16-6-bus1-order-target_position-x) : main-usr-2-16-most_recent_order-target_position-x))) & (next(main-usr-2-16-most_recent_order-target_position-y) = (next(main-usr-probe_init_mode) ? next(main-usr-2-16-6-bus1-order-target_position-y) : main-usr-2-16-most_recent_order-target_position-y)));
+	next(main-res-glocal_75) := ((next(main-usr-2-most_recent_delivery_location-x) = next(main-usr-2-16-most_recent_order-target_position-x)) & (next(main-usr-2-most_recent_delivery_location-y) = next(main-usr-2-16-most_recent_order-target_position-y)));
+	next(main-res-glocal_76) := (next(main-usr-release_cmd) = (next(main-usr-probe_delivery_cmd) = 3));
+	next(main-res-glocal_77) := TRUE;
+	next(main-res-glocal_78) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_78;
+	INVAR main-res-glocal_77;
+	INVAR main-res-glocal_76;
+	INVAR main-res-glocal_75;
+	INVAR main-res-glocal_74;
+	INVAR main-res-glocal_73;
+	INVAR main-res-glocal_72;
+	INVAR main-res-glocal_71;
+	INVAR main-res-glocal_70;
+	INVAR main-res-glocal_69;
+	INVAR main-res-glocal_68;
+	INVAR main-res-glocal_65;
+	INVAR main-res-glocal_64;
+	INVAR main-res-glocal_62;
+	INVAR main-res-glocal_61;
+	INVAR main-res-glocal_60;
+	INVAR main-res-glocal_59;
+	INVAR main-res-glocal_58;
+	INVAR main-res-glocal_57;
+	INVAR main-res-glocal_56;
+	INVAR main-res-glocal_55;
+	INVAR main-res-glocal_54;
+	INVAR main-res-glocal_53;
+	INVAR main-res-glocal_52;
+	INVAR main-res-glocal_51;
+	INVAR main-res-glocal_50;
+	INVAR main-res-glocal_49;
+	INVAR main-res-glocal_48;
+	INVAR main-res-glocal_47;
+	INVAR main-res-glocal_46;
+	INVAR main-res-glocal_45;
+	INVAR main-res-glocal_44;
+	INVAR main-res-glocal_43;
+	INVAR main-res-glocal_42;
+	INVAR main-res-glocal_40;
+	INVAR main-res-glocal_39;
+	INVAR main-res-glocal_38;
+	INVAR main-res-glocal_36;
+	INVAR main-res-glocal_35;
+	INVAR main-res-glocal_34;
+	INVAR main-res-glocal_32;
+	INVAR main-res-glocal_31;
+	INVAR main-res-glocal_28;
+	INVAR main-res-glocal_26;
+
+INVARSPEC 
+((main-impl-usr-__ASSUME__HIST));
+

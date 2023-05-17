@@ -1,21 +1,42 @@
 
 MODULE main () 
 VAR
-	top-usr-a : boolean;	top-usr-b : boolean;	top-usr-c : boolean;	top-usr-ok : boolean;	top-impl-usr-x : integer;	top-impl-usr-y : integer;	top-res-glocal_3 : boolean;	top-res-subrange_1 : boolean;	top-res-subrange_2 : boolean;
-ASSIGN
-	init(top-impl-usr-y) := (top-usr-c ? 0 : ((top-usr-a & (0 < 600)) ? 0 + 1 : 0));
-	init(top-impl-usr-x) := ((top-usr-c | top-usr-b) ? 0 : ((top-usr-a & (0 < 1000)) ? 0 + 1 : 0));
-	init(top-usr-ok) := ((top-impl-usr-x = 1000) -> (top-impl-usr-y = 600));
-	init(top-res-glocal_3) := (((0 <= top-impl-usr-x & top-impl-usr-x <= 1000) & 0 <= top-impl-usr-y) & top-impl-usr-y <= 600);
-	init(top-res-subrange_1) := (1000 <= 1000 & 1000 <= 1000);
-	init(top-res-subrange_2) := (600 <= 600 & 600 <= 600);
+	top-usr-a : boolean;
+	top-usr-b : boolean;
+	top-usr-c : boolean;
+	top-usr-ok : boolean;
+	top-impl-usr-pre_x : integer;
+	top-impl-usr-x : integer;
+	top-impl-usr-pre_y : integer;
+	top-impl-usr-y : integer;
+	top-impl-usr-nX : integer;
+	top-impl-usr-nY : integer;
+	top-res-glocal_3 : boolean;
+	top-res-subrange_1 : boolean;
+	top-res-subrange_2 : boolean;
 
-	next(top-impl-usr-y) := (next(top-usr-c) ? 0 : ((next(top-usr-a) & (top-impl-usr-y < 600)) ? top-impl-usr-y + 1 : top-impl-usr-y));
-	next(top-impl-usr-x) := ((next(top-usr-c) | next(top-usr-b)) ? 0 : ((next(top-usr-a) & (top-impl-usr-x < 1000)) ? top-impl-usr-x + 1 : top-impl-usr-x));
-	next(top-usr-ok) := ((next(top-impl-usr-x) = 1000) -> (next(top-impl-usr-y) = 600));
-	next(top-res-glocal_3) := (((0 <= next(top-impl-usr-x) & next(top-impl-usr-x) <= 1000) & 0 <= next(top-impl-usr-y)) & next(top-impl-usr-y) <= 600);
-	next(top-res-subrange_1) := (1000 <= 1000 & 1000 <= 1000);
-	next(top-res-subrange_2) := (600 <= 600 & 600 <= 600);
+ASSIGN
+	init(top-impl-usr-nY) := 600;
+	init(top-impl-usr-nX) := 1000;
+	init(top-impl-usr-pre_y) := 0;
+	init(top-impl-usr-y) := (top-usr-c ? 0 : ((top-usr-a & (top-impl-usr-pre_y < top-impl-usr-nY)) ? top-impl-usr-pre_y + 1 : top-impl-usr-pre_y));
+	init(top-impl-usr-pre_x) := 0;
+	init(top-impl-usr-x) := ((top-usr-c | top-usr-b) ? 0 : ((top-usr-a & (top-impl-usr-pre_x < top-impl-usr-nX)) ? top-impl-usr-pre_x + 1 : top-impl-usr-pre_x));
+	init(top-usr-ok) := ((top-impl-usr-x = top-impl-usr-nX) -> (top-impl-usr-y = top-impl-usr-nY));
+	init(top-res-glocal_3) := (((0 <= top-impl-usr-x & top-impl-usr-x <= top-impl-usr-nX) & 0 <= top-impl-usr-y) & top-impl-usr-y <= top-impl-usr-nY);
+	init(top-res-subrange_1) := (1000 <= top-impl-usr-nX & top-impl-usr-nX <= 1000);
+	init(top-res-subrange_2) := (600 <= top-impl-usr-nY & top-impl-usr-nY <= 600);
+
+	next(top-impl-usr-nY) := 600;
+	next(top-impl-usr-nX) := 1000;
+	next(top-impl-usr-pre_y) := top-impl-usr-y;
+	next(top-impl-usr-y) := (next(top-usr-c) ? 0 : ((next(top-usr-a) & (next(top-impl-usr-pre_y) < next(top-impl-usr-nY))) ? next(top-impl-usr-pre_y) + 1 : next(top-impl-usr-pre_y)));
+	next(top-impl-usr-pre_x) := top-impl-usr-x;
+	next(top-impl-usr-x) := ((next(top-usr-c) | next(top-usr-b)) ? 0 : ((next(top-usr-a) & (next(top-impl-usr-pre_x) < next(top-impl-usr-nX))) ? next(top-impl-usr-pre_x) + 1 : next(top-impl-usr-pre_x)));
+	next(top-usr-ok) := ((next(top-impl-usr-x) = next(top-impl-usr-nX)) -> (next(top-impl-usr-y) = next(top-impl-usr-nY)));
+	next(top-res-glocal_3) := (((0 <= next(top-impl-usr-x) & next(top-impl-usr-x) <= next(top-impl-usr-nX)) & 0 <= next(top-impl-usr-y)) & next(top-impl-usr-y) <= next(top-impl-usr-nY));
+	next(top-res-subrange_1) := (1000 <= next(top-impl-usr-nX) & next(top-impl-usr-nX) <= 1000);
+	next(top-res-subrange_2) := (600 <= next(top-impl-usr-nY) & next(top-impl-usr-nY) <= 600);
 
 	INVAR top-res-glocal_3;
 

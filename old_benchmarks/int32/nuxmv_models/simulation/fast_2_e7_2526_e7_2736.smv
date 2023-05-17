@@ -173,7 +173,6 @@ VAR
 	top-res-call_17 : PosEdge(top-usr-ccseti);
 	top-res-call_18 : PosEdge(top-usr-ccsetd);
 	top-res-call_19 : PosEdge(top-usr-ccr);
-	top-res-poracle_1 : boolean;
 
 ASSIGN
 	init(top-impl-usr-ccont) := top-res-2-call_24.main-usr-ccont;

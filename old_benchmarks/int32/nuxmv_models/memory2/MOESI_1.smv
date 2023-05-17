@@ -76,11 +76,6 @@ VAR
 	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
 	top-res-call_9 : Sofar(top-res-gklocal_8);
 	top-res-2-call_6 : moesi(top-usr-init_invalid_mo, top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
-	top-res-poracle_4 : signed word[32];
-	top-res-poracle_5 : signed word[32];
 
 ASSIGN
 	init(top-res-gklocal_8) := (top-res-call_7.excludes4-usr-excludes & (top-usr-init_invalid_mo > 0sh32_00000000));

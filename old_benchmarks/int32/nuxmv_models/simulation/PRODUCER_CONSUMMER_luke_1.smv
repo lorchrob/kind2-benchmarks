@@ -78,9 +78,6 @@ VAR
 	top-res-call_6 : Sofar(top-res-call_5.excludes3-usr-excludes);
 	top-res-call_7 : First(top-usr-a_init);
 	top-res-2-call_4 : PRODUCER_CONSUMMER(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-a_init);
-	top-res-poracle_1 : signed word[32];
-	top-res-poracle_2 : signed word[32];
-	top-res-poracle_3 : signed word[32];
 
 ASSIGN
 	init(top-usr-OK) := TRUE;
