@@ -3617,161 +3617,793 @@ ASSIGN
 
 
 INVARSPEC 
-((Mode_Logic-res-subrange_277) & (Mode_Logic-res-subrange_276) & (Mode_Logic-res-subrange_275)); 
-INVARSPEC
- (Mode_Logic-res-subrange_274) & (Mode_Logic-res-subrange_273) & (Mode_Logic-res-subrange_272);
-IN
- (Mode_Logic-res-subrange_271) & (Mode_Logic-res-subrange_270) & (Mode_Logic-res-subrange_269) & 
- (Mode_Logic-res-subrange_268) & (Mode_Logic-res-subrange_267) & (Mode_Logic-res-subrange_266) & 
- (Mode_Logic-res-subrange_265) & (Mode_Logic-res-subrange_264) & (Mode_Logic-res-subrange_263) & 
- (Mode_Logic-res-subrange_262) & (Mode_Logic-res-subrange_261) & (Mode_Logic-res-subrange_260) & 
- (Mode_Logic-res-subrange_259) & (Mode_Logic-res-subrange_258) & (Mode_Logic-res-subrange_257) & 
- (Mode_Logic-res-subrange_256) & (Mode_Logic-res-subrange_255) & (Mode_Logic-res-subrange_254) & 
- (Mode_Logic-res-subrange_253) & (Mode_Logic-res-subrange_252) & (Mode_Logic-res-subrange_251) & 
- (Mode_Logic-res-subrange_250) & (Mode_Logic-res-subrange_249) & (Mode_Logic-res-subrange_248) & 
- (Mode_Logic-res-subrange_247) & (Mode_Logic-res-subrange_246) & (Mode_Logic-res-subrange_245) & 
- (Mode_Logic-res-subrange_244) & (Mode_Logic-res-subrange_243) & (Mode_Logic-res-subrange_242) & 
- (Mode_Logic-res-subrange_241) & (Mode_Logic-res-subrange_240) & (Mode_Logic-res-subrange_239) & 
- (Mode_Logic-res-subrange_238) & (Mode_Logic-res-subrange_237) & (Mode_Logic-res-subrange_236) & 
- (Mode_Logic-res-subrange_235) & (Mode_Logic-res-subrange_234) & (Mode_Logic-res-subrange_233) & 
- (Mode_Logic-res-subrange_232) & (Mode_Logic-res-subrange_231) & (Mode_Logic-res-subrange_230) & 
- (Mode_Logic-res-subrange_229) & (Mode_Logic-res-subrange_228) & (Mode_Logic-res-subrange_227) & 
- (Mode_Logic-res-subrange_226) & (Mode_Logic-res-subrange_225) & (Mode_Logic-res-subrange_224) & 
- (Mode_Logic-res-subrange_223) & (Mode_Logic-res-subrange_222) & (Mode_Logic-res-subrange_221) & 
- (Mode_Logic-res-subrange_220) & (Mode_Logic-res-subrange_219) & (Mode_Logic-res-subrange_218) & 
- (Mode_Logic-res-subrange_217) & (Mode_Logic-res-subrange_216) & (Mode_Logic-res-subrange_215) & 
- (Mode_Logic-res-subrange_214) & (Mode_Logic-res-subrange_213) & (Mode_Logic-res-subrange_212) & 
- (Mode_Logic-res-subrange_211) & (Mode_Logic-res-subrange_210) & (Mode_Logic-res-subrange_209) & 
- (Mode_Logic-res-subrange_208) & (Mode_Logic-res-subrange_207) & (Mode_Logic-res-subrange_206) & 
- (Mode_Logic-res-subrange_205) & (Mode_Logic-res-subrange_204) & (Mode_Logic-res-subrange_203) & 
- (Mode_Logic-res-subrange_202) & (Mode_Logic-res-subrange_201) & (Mode_Logic-res-subrange_200) & 
- (Mode_Logic-res-subrange_199) & (Mode_Logic-res-subrange_198) & (Mode_Logic-res-subrange_197) & 
- (Mode_Logic-res-subrange_196) & (Mode_Logic-res-subrange_195) & (Mode_Logic-res-subrange_194) & 
- (Mode_Logic-res-subrange_193) & (Mode_Logic-res-subrange_192) & (Mode_Logic-res-subrange_191) & 
- (Mode_Logic-res-subrange_190) & (Mode_Logic-res-subrange_189) & (Mode_Logic-res-subrange_188) & 
- (Mode_Logic-res-subrange_187) & (Mode_Logic-res-subrange_186) & (Mode_Logic-res-subrange_185) & 
- (Mode_Logic-res-subrange_184) & (Mode_Logic-res-subrange_183) & (Mode_Logic-res-subrange_182) & 
- (Mode_Logic-res-subrange_181) & (Mode_Logic-res-subrange_180) & (Mode_Logic-res-subrange_179) & 
- (Mode_Logic-res-subrange_178) & (Mode_Logic-res-subrange_177) & (Mode_Logic-res-subrange_176) & 
- (Mode_Logic-res-subrange_175) & (Mode_Logic-res-subrange_174) & (Mode_Logic-res-subrange_173) & 
- (Mode_Logic-res-subrange_172) & (Mode_Logic-res-subrange_171) & (Mode_Logic-res-subrange_170) & 
- (Mode_Logic-res-subrange_169) & (Mode_Logic-res-subrange_168) & (Mode_Logic-res-subrange_167) & 
- (Mode_Logic-res-subrange_166) & (Mode_Logic-res-subrange_165) & (Mode_Logic-res-subrange_164) & 
- (Mode_Logic-res-subrange_163) & (Mode_Logic-res-subrange_162) & (Mode_Logic-res-subrange_161) & 
- (Mode_Logic-res-subrange_160) & (Mode_Logic-res-subrange_159) & (Mode_Logic-res-subrange_158) & 
- (Mode_Logic-res-subrange_157) & (Mode_Logic-res-subrange_156) & (Mode_Logic-res-subrange_155) & 
- (Mode_Logic-res-subrange_154) & (Mode_Logic-res-subrange_153) & (Mode_Logic-res-subrange_152) & 
- (Mode_Logic-res-subrange_151) & (Mode_Logic-res-subrange_150) & (Mode_Logic-res-subrange_149) & 
- (Mode_Logic-res-subrange_148) & (Mode_Logic-res-subrange_147) & (Mode_Logic-res-subrange_146) & 
- (Mode_Logic-res-subrange_145) & (Mode_Logic-res-subrange_144) & (Mode_Logic-res-subrange_143) & 
- (Mode_Logic-res-subrange_142) & (Mode_Logic-res-subrange_141) & (Mode_Logic-res-subrange_140) & 
- (Mode_Logic-res-subrange_139) & (Mode_Logic-res-subrange_138) & (Mode_Logic-res-subrange_137) & 
- (Mode_Logic-res-subrange_136) & (Mode_Logic-res-subrange_135) & (Mode_Logic-res-subrange_134) & 
- (Mode_Logic-res-subrange_133) & (Mode_Logic-res-subrange_132) & (Mode_Logic-res-subrange_131) & 
- (Mode_Logic-res-subrange_130) & (Mode_Logic-res-subrange_129) & (Mode_Logic-res-subrange_128) & 
- (Mode_Logic-res-subrange_127) & (Mode_Logic-res-subrange_126) & (Mode_Logic-res-subrange_125) & 
- (Mode_Logic-res-subrange_124) & (Mode_Logic-res-subrange_123) & (Mode_Logic-res-subrange_122) & 
- (Mode_Logic-res-subrange_121) & (Mode_Logic-res-subrange_120) & (Mode_Logic-res-subrange_119) & 
- (Mode_Logic-res-subrange_118) & (Mode_Logic-res-subrange_117) & (Mode_Logic-res-subrange_116) & 
- (Mode_Logic-res-subrange_115) & (Mode_Logic-res-subrange_114) & (Mode_Logic-res-subrange_113) & 
- (Mode_Logic-res-subrange_112) & (Mode_Logic-res-subrange_111) & (Mode_Logic-res-subrange_110) & 
- (Mode_Logic-res-subrange_109) & (Mode_Logic-res-subrange_108) & (Mode_Logic-res-subrange_107) & 
- (Mode_Logic-res-subrange_106) & (Mode_Logic-res-subrange_105) & (Mode_Logic-res-subrange_104) & 
- (Mode_Logic-res-subrange_103) & (Mode_Logic-res-subrange_102) & (Mode_Logic-res-subrange_101) & 
- (Mode_Logic-res-subrange_100) & (Mode_Logic-res-subrange_99) & (Mode_Logic-res-subrange_98) & 
- (Mode_Logic-res-subrange_97) & (Mode_Logic-res-subrange_96) & (Mode_Logic-res-subrange_95) & 
- (Mode_Logic-res-subrange_94) & (Mode_Logic-res-subrange_93) & (Mode_Logic-res-subrange_92) & 
- (Mode_Logic-res-subrange_91) & (Mode_Logic-res-subrange_90) & (Mode_Logic-res-subrange_89) & 
- (Mode_Logic-res-subrange_88) & (Mode_Logic-res-subrange_87) & (Mode_Logic-res-subrange_86) & 
- (Mode_Logic-res-subrange_85) & (Mode_Logic-res-subrange_84) & (Mode_Logic-res-subrange_83) & 
- (Mode_Logic-res-subrange_82) & (Mode_Logic-res-subrange_81) & (Mode_Logic-res-subrange_80) & 
- (Mode_Logic-res-subrange_79) & (Mode_Logic-res-subrange_78) & (Mode_Logic-res-subrange_77) & 
- (Mode_Logic-res-subrange_76) & (Mode_Logic-res-subrange_75) & (Mode_Logic-res-subrange_74) & 
- (Mode_Logic-res-subrange_73) & (Mode_Logic-res-subrange_72) & (Mode_Logic-res-subrange_71) & 
- (Mode_Logic-res-subrange_70) & (Mode_Logic-res-subrange_69) & (Mode_Logic-res-subrange_68) & 
- (Mode_Logic-res-subrange_67) & (Mode_Logic-res-subrange_66) & (Mode_Logic-res-subrange_65) & 
- (Mode_Logic-res-subrange_64) & (Mode_Logic-res-subrange_63) & (Mode_Logic-res-subrange_62) & 
- (Mode_Logic-res-subrange_61) & (Mode_Logic-res-subrange_60) & (Mode_Logic-res-subrange_59) & 
- (Mode_Logic-res-subrange_58) & (Mode_Logic-res-subrange_57) & (Mode_Logic-res-subrange_56) & 
- (Mode_Logic-res-subrange_55) & (Mode_Logic-res-subrange_54) & (Mode_Logic-res-subrange_53) & 
- (Mode_Logic-res-subrange_52) & (Mode_Logic-res-subrange_51) & (Mode_Logic-res-subrange_50) & 
- (Mode_Logic-res-subrange_49) & (Mode_Logic-res-subrange_48) & (Mode_Logic-res-subrange_47) & 
- (Mode_Logic-res-subrange_46) & (Mode_Logic-res-subrange_45) & (Mode_Logic-res-subrange_44) & 
- (Mode_Logic-res-subrange_43) & (Mode_Logic-res-subrange_42) & (Mode_Logic-res-subrange_41) & 
- (Mode_Logic-res-subrange_40) & (Mode_Logic-res-subrange_39) & (Mode_Logic-res-subrange_38) & 
- (Mode_Logic-res-subrange_37) & (Mode_Logic-res-subrange_36) & (Mode_Logic-res-subrange_35) & 
- (Mode_Logic-res-subrange_34) & (Mode_Logic-res-subrange_33) & (Mode_Logic-res-subrange_32) & 
- (Mode_Logic-res-subrange_31) & (Mode_Logic-res-subrange_30) & (Mode_Logic-res-subrange_29) & 
- (Mode_Logic-res-subrange_28) & (Mode_Logic-res-subrange_27) & (Mode_Logic-res-subrange_26) & 
- (Mode_Logic-res-subrange_25) & (Mode_Logic-res-subrange_24) & (Mode_Logic-res-subrange_23) & 
- (Mode_Logic-res-subrange_22) & (Mode_Logic-res-subrange_21) & (Mode_Logic-res-subrange_20) & 
- (Mode_Logic-res-subrange_19) & (Mode_Logic-res-subrange_18) & (Mode_Logic-res-subrange_17) & 
- (Mode_Logic-res-subrange_16) & (Mode_Logic-res-subrange_15) & (Mode_Logic-res-subrange_14) & 
- (Mode_Logic-res-subrange_13) & (Mode_Logic-res-subrange_12) & (Mode_Logic-res-subrange_11) & 
- (Mode_Logic-res-subrange_10) & (Mode_Logic-res-subrange_9) & (Mode_Logic-res-subrange_8) & 
- (Mode_Logic-res-subrange_7) & (Mode_Logic-res-subrange_6) & (Mode_Logic-res-subrange_5) & 
- (Mode_Logic-res-subrange_4) & (Mode_Logic-res-subrange_3) & (Mode_Logic-res-subrange_2) & 
- (Mode_Logic-res-subrange_1) & (Mode_Logic-impl-usr-Modes_Off_Clears_VGA) & 
- (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_VGA) & (Mode_Logic-impl-usr-VS_Pitch_Wheel_Rotated_Clears_VGA) & 
- (Mode_Logic-impl-usr-SYNC_Switch_Pressed_Clears_VGA) & (Mode_Logic-impl-usr-LGA_Cleared_Clears_VGA) & 
- (Mode_Logic-impl-usr-AP_Engaged_Clears_VGA) & (Mode_Logic-impl-usr-GA_Switch_Pressed_Selects_VGA) & 
- (Mode_Logic-impl-usr-VGA_Selected_Iff_VGA_Active) & (Mode_Logic-impl-usr-Modes_Off_Clears_VAPPR) & 
- (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_VAPPR) & (Mode_Logic-impl-usr-Selected_NAV_Frequency_Changed_Clears_VAPPR) & 
- (Mode_Logic-impl-usr-Selected_NAV_Source_Changed_Clears_VAPPR) & (Mode_Logic-impl-usr-LAPPR_Cleared_Clears_VAPPR) & 
- (Mode_Logic-impl-usr-APPR_Switch_Pressed_Clears_VAPPR) & (Mode_Logic-impl-usr-VAPPR_Active_When_Capture_Cond_Met) & 
- (Mode_Logic-impl-usr-APPR_Switch_Pressed_Selects_VAPPR) & (Mode_Logic-impl-usr-VAPPR_Selected_If_VAPPR_Active) & 
- (Mode_Logic-impl-usr-ALTSEL_Cleared_If_ALT_VAPPR_VGA_Active) & (Mode_Logic-impl-usr-ALTSEL_Deactivated_When_New_Active_Vertical_Mode) & 
- (Mode_Logic-impl-usr-ALTSEL_Deactivated_When_Pilot_Flying_Transfer) & 
- (Mode_Logic-impl-usr-ALTSEL_Deactivated_When_VS_Pitch_Wheel_Rotated) & 
- (Mode_Logic-impl-usr-ALTSEL_Deactivated_When_Target_Changed) & (Mode_Logic-impl-usr-ALTSEL_Track_When_Track_Cond_Met) & 
- (Mode_Logic-impl-usr-ALTSEL_Active_When_Capture_Cond_Met) & (Mode_Logic-impl-usr-ALTSEL_Selected_If_Not_ALT_VAPPR_VGA_Active) & 
- (Mode_Logic-impl-usr-ALTSEL_Active_If_ALTSEL_Track) & (Mode_Logic-impl-usr-ALTSEL_Selected_If_ALTSEL_Active) & 
- (Mode_Logic-impl-usr-Modes_Off_Clears_ALT) & (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_ALT) & 
- (Mode_Logic-impl-usr-VS_Pitch_Wheel_Rotated_Clears_ALT) & (Mode_Logic-impl-usr-ALT_Switch_Pressed_Clears_ALT) & 
- (Mode_Logic-impl-usr-ALTSEL_Target_Changed_Selects_ALT) & (Mode_Logic-impl-usr-ALT_Switch_Pressed_Selects_ALT) & 
- (Mode_Logic-impl-usr-ALT_Selected_Iff_ALT_Active) & (Mode_Logic-impl-usr-Modes_Off_Clears_FLC) & 
- (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_FLC) & (Mode_Logic-impl-usr-VS_Pitch_Wheel_Rotated_Clears_FLC) & 
- (Mode_Logic-impl-usr-FLC_Switch_Pressed_Clears_FLC) & (Mode_Logic-impl-usr-Overspeed_Activates_FLC) & 
- (Mode_Logic-impl-usr-FLC_Switch_Pressed_Selects_FLC) & (Mode_Logic-impl-usr-FLC_Selected_Iff_FLC_Active) & 
- (Mode_Logic-impl-usr-Modes_Off_Clears_VS) & (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_VS) & 
- (Mode_Logic-impl-usr-VS_Switch_Pressed_Clears_VS) & (Mode_Logic-impl-usr-VS_Switch_Pressed_Selects_VS) & 
- (Mode_Logic-impl-usr-VS_Selected_Iff_VS_Active) & (Mode_Logic-impl-usr-AP_Engaged_Modes_Off_Implies_PITCH_Active) & 
- (Mode_Logic-impl-usr-FD_Switch_Pressed_Modes_Off_Implies_PITCH_Active) & 
- (Mode_Logic-impl-usr-Modes_Off_Implies_PITCH_Active) & (Mode_Logic-impl-usr-Default_Vertical_Mode_Is_PITCH) & 
- (Mode_Logic-impl-usr-Modes_Off_Clears_LGA) & (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_LGA) & 
- (Mode_Logic-impl-usr-SYNC_Switch_Pressed_Clears_LGA) & (Mode_Logic-impl-usr-VGA_Cleared_Clears_LGA) & 
- (Mode_Logic-impl-usr-AP_Engaged_Clears_LGA) & (Mode_Logic-impl-usr-GA_Switch_Pressed_Selects_LGA) & 
- (Mode_Logic-impl-usr-LGA_Selected_Iff_LGA_Active) & (Mode_Logic-impl-usr-Modes_Off_Clears_LAPPR) & 
- (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_LAPPR) & (Mode_Logic-impl-usr-Selected_NAV_Frequency_Changed_Clears_LAPPR) & 
- (Mode_Logic-impl-usr-Selected_NAV_Source_Changed_Clears_LAPPR) & (Mode_Logic-impl-usr-APPR_Switch_Pressed_Clears_LAPPR) & 
- (Mode_Logic-impl-usr-LAPPR_Active_When_Capture_Cond_Met) & (Mode_Logic-impl-usr-APPR_Switch_Pressed_Selects_LAPPR) & 
- (Mode_Logic-impl-usr-LAPPR_Selected_If_LAPPR_Active) & (Mode_Logic-impl-usr-Modes_Off_Clears_NAV) & 
- (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_NAV) & (Mode_Logic-impl-usr-Selected_NAV_Frequency_Changed_Clears_NAV) & 
- (Mode_Logic-impl-usr-Selected_NAV_Source_Changed_Clears_NAV) & (Mode_Logic-impl-usr-NAV_Switch_Pressed_Clears_NAV) & 
- (Mode_Logic-impl-usr-NAV_Active_When_Capture_Cond_Met) & (Mode_Logic-impl-usr-NAV_Switch_Pressed_Selects_NAV) & 
- (Mode_Logic-impl-usr-NAV_Selected_If_NAV_Active) & (Mode_Logic-impl-usr-Modes_Off_Clears_HDG) & 
- (Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_HDG) & (Mode_Logic-impl-usr-HDG_Switch_Pressed_Clears_HDG) & 
- (Mode_Logic-impl-usr-HDG_Switch_Pressed_Selects_HDG) & (Mode_Logic-impl-usr-HDG_Selected_Iff_HDG_Active) & 
- (Mode_Logic-impl-usr-AP_Engaged_Modes_Off_Implies_ROLL_Active) & (Mode_Logic-impl-usr-FD_Switch_Pressed_Modes_Off_Implies_ROLL_Active) & 
- (Mode_Logic-impl-usr-Modes_Off_Implies_ROLL_Active) & (Mode_Logic-impl-usr-Default_Lateral_Mode_Is_ROLL) & 
- (Mode_Logic-impl-usr-ROLL_Selected_Iff_ROLL_Active) & (Mode_Logic-impl-usr-Active_iff_Independent_or_Pilot_Flying) & 
- (Mode_Logic-impl-usr-Independent_Mode_Implies_Both_VAPPR_or_VGA_Active) & 
- (Mode_Logic-impl-usr-Both_Sides_VGA_Active_Implies_Independent_Mode) & 
- (Mode_Logic-impl-usr-Both_Sides_VAPPR_Active_Implies_Independent_Mode) & 
- (Mode_Logic-impl-usr-FD_Stays_On_Unless_FD_Switch_Pressed) & (Mode_Logic-impl-usr-FD_Stays_On_When_AP_Disengaged) & 
- (Mode_Logic-impl-usr-FD_Switch_Turns_FD_Off) & (Mode_Logic-impl-usr-Pilot_Flying_Transfer_While_Modes_On_Turns_FD_On) & 
- (Mode_Logic-impl-usr-ALTSEL_Target_Changed_Turns_FD_On) & (Mode_Logic-impl-usr-VS_Pitch_Wheel_Rotated_Turns_FD_On) & 
- (Mode_Logic-impl-usr-ALT_Switch_Turns_FD_On) & (Mode_Logic-impl-usr-FLC_Switch_Turns_FD_On) & 
- (Mode_Logic-impl-usr-VS_Switch_Turns_FD_On) & (Mode_Logic-impl-usr-GA_Switch_Turns_FD_On) & 
- (Mode_Logic-impl-usr-APPR_Switch_Turns_FD_On) & (Mode_Logic-impl-usr-NAV_Switch_Turns_FD_On) & 
- (Mode_Logic-impl-usr-HDG_Switch_Turns_FD_On) & (Mode_Logic-impl-usr-Overspeed_Implies_FD_On) & 
- (Mode_Logic-impl-usr-AP_Engaged_Turns_FD_On) & (Mode_Logic-impl-usr-FD_Switch_Turns_FD_On) & 
- (Mode_Logic-impl-usr-FD_Off_At_Startup) & (Mode_Logic-impl-usr-Modes_On_Iff_FD_On_or_AP_Engaged) & 
- (Mode_Logic-impl-usr-Onside_FD_On_Implies_Modes_On) & (Mode_Logic-impl-usr-Offside_FD_On_Implies_Modes_On) & 
- (Mode_Logic-impl-usr-AP_Engaged_Implies_Modes_On) & (Mode_Logic-impl-usr-Modes_Off_At_Startup) & 
- (Mode_Logic-impl-usr-Overspeed_and_PITCH_Transitory) & (Mode_Logic-impl-usr-Overspeed_Implies_FLC_ALT_ALTSEL_PITCH) & 
- (Mode_Logic-impl-usr-VAPPR_Active_Implies_LAPPR_Active) & (Mode_Logic-impl-usr-VGA_Active_Implies_LGA_Active) & 
- (Mode_Logic-impl-usr-LGA_Active_Implies_VGA_Active) & (Mode_Logic-impl-usr-At_Most_One_Vertical_Mode_Active) & 
- (Mode_Logic-impl-usr-At_Least_One_Vertical_Mode_Active) & (Mode_Logic-impl-usr-At_Most_One_Lateral_Mode_Active) & 
- (Mode_Logic-impl-usr-At_Least_One_Lateral_Mode_Active));
+((Mode_Logic-res-subrange_277));
+INVARSPEC 
+((Mode_Logic-res-subrange_276));
+INVARSPEC 
+((Mode_Logic-res-subrange_275));
+INVARSPEC 
+((Mode_Logic-res-subrange_274));
+INVARSPEC 
+((Mode_Logic-res-subrange_273));
+INVARSPEC 
+((Mode_Logic-res-subrange_272));
+INVARSPEC 
+((Mode_Logic-res-subrange_271));
+INVARSPEC 
+((Mode_Logic-res-subrange_270));
+INVARSPEC 
+((Mode_Logic-res-subrange_269));
+INVARSPEC 
+((Mode_Logic-res-subrange_268));
+INVARSPEC 
+((Mode_Logic-res-subrange_267));
+INVARSPEC 
+((Mode_Logic-res-subrange_266));
+INVARSPEC 
+((Mode_Logic-res-subrange_265));
+INVARSPEC 
+((Mode_Logic-res-subrange_264));
+INVARSPEC 
+((Mode_Logic-res-subrange_263));
+INVARSPEC 
+((Mode_Logic-res-subrange_262));
+INVARSPEC 
+((Mode_Logic-res-subrange_261));
+INVARSPEC 
+((Mode_Logic-res-subrange_260));
+INVARSPEC 
+((Mode_Logic-res-subrange_259));
+INVARSPEC 
+((Mode_Logic-res-subrange_258));
+INVARSPEC 
+((Mode_Logic-res-subrange_257));
+INVARSPEC 
+((Mode_Logic-res-subrange_256));
+INVARSPEC 
+((Mode_Logic-res-subrange_255));
+INVARSPEC 
+((Mode_Logic-res-subrange_254));
+INVARSPEC 
+((Mode_Logic-res-subrange_253));
+INVARSPEC 
+((Mode_Logic-res-subrange_252));
+INVARSPEC 
+((Mode_Logic-res-subrange_251));
+INVARSPEC 
+((Mode_Logic-res-subrange_250));
+INVARSPEC 
+((Mode_Logic-res-subrange_249));
+INVARSPEC 
+((Mode_Logic-res-subrange_248));
+INVARSPEC 
+((Mode_Logic-res-subrange_247));
+INVARSPEC 
+((Mode_Logic-res-subrange_246));
+INVARSPEC 
+((Mode_Logic-res-subrange_245));
+INVARSPEC 
+((Mode_Logic-res-subrange_244));
+INVARSPEC 
+((Mode_Logic-res-subrange_243));
+INVARSPEC 
+((Mode_Logic-res-subrange_242));
+INVARSPEC 
+((Mode_Logic-res-subrange_241));
+INVARSPEC 
+((Mode_Logic-res-subrange_240));
+INVARSPEC 
+((Mode_Logic-res-subrange_239));
+INVARSPEC 
+((Mode_Logic-res-subrange_238));
+INVARSPEC 
+((Mode_Logic-res-subrange_237));
+INVARSPEC 
+((Mode_Logic-res-subrange_236));
+INVARSPEC 
+((Mode_Logic-res-subrange_235));
+INVARSPEC 
+((Mode_Logic-res-subrange_234));
+INVARSPEC 
+((Mode_Logic-res-subrange_233));
+INVARSPEC 
+((Mode_Logic-res-subrange_232));
+INVARSPEC 
+((Mode_Logic-res-subrange_231));
+INVARSPEC 
+((Mode_Logic-res-subrange_230));
+INVARSPEC 
+((Mode_Logic-res-subrange_229));
+INVARSPEC 
+((Mode_Logic-res-subrange_228));
+INVARSPEC 
+((Mode_Logic-res-subrange_227));
+INVARSPEC 
+((Mode_Logic-res-subrange_226));
+INVARSPEC 
+((Mode_Logic-res-subrange_225));
+INVARSPEC 
+((Mode_Logic-res-subrange_224));
+INVARSPEC 
+((Mode_Logic-res-subrange_223));
+INVARSPEC 
+((Mode_Logic-res-subrange_222));
+INVARSPEC 
+((Mode_Logic-res-subrange_221));
+INVARSPEC 
+((Mode_Logic-res-subrange_220));
+INVARSPEC 
+((Mode_Logic-res-subrange_219));
+INVARSPEC 
+((Mode_Logic-res-subrange_218));
+INVARSPEC 
+((Mode_Logic-res-subrange_217));
+INVARSPEC 
+((Mode_Logic-res-subrange_216));
+INVARSPEC 
+((Mode_Logic-res-subrange_215));
+INVARSPEC 
+((Mode_Logic-res-subrange_214));
+INVARSPEC 
+((Mode_Logic-res-subrange_213));
+INVARSPEC 
+((Mode_Logic-res-subrange_212));
+INVARSPEC 
+((Mode_Logic-res-subrange_211));
+INVARSPEC 
+((Mode_Logic-res-subrange_210));
+INVARSPEC 
+((Mode_Logic-res-subrange_209));
+INVARSPEC 
+((Mode_Logic-res-subrange_208));
+INVARSPEC 
+((Mode_Logic-res-subrange_207));
+INVARSPEC 
+((Mode_Logic-res-subrange_206));
+INVARSPEC 
+((Mode_Logic-res-subrange_205));
+INVARSPEC 
+((Mode_Logic-res-subrange_204));
+INVARSPEC 
+((Mode_Logic-res-subrange_203));
+INVARSPEC 
+((Mode_Logic-res-subrange_202));
+INVARSPEC 
+((Mode_Logic-res-subrange_201));
+INVARSPEC 
+((Mode_Logic-res-subrange_200));
+INVARSPEC 
+((Mode_Logic-res-subrange_199));
+INVARSPEC 
+((Mode_Logic-res-subrange_198));
+INVARSPEC 
+((Mode_Logic-res-subrange_197));
+INVARSPEC 
+((Mode_Logic-res-subrange_196));
+INVARSPEC 
+((Mode_Logic-res-subrange_195));
+INVARSPEC 
+((Mode_Logic-res-subrange_194));
+INVARSPEC 
+((Mode_Logic-res-subrange_193));
+INVARSPEC 
+((Mode_Logic-res-subrange_192));
+INVARSPEC 
+((Mode_Logic-res-subrange_191));
+INVARSPEC 
+((Mode_Logic-res-subrange_190));
+INVARSPEC 
+((Mode_Logic-res-subrange_189));
+INVARSPEC 
+((Mode_Logic-res-subrange_188));
+INVARSPEC 
+((Mode_Logic-res-subrange_187));
+INVARSPEC 
+((Mode_Logic-res-subrange_186));
+INVARSPEC 
+((Mode_Logic-res-subrange_185));
+INVARSPEC 
+((Mode_Logic-res-subrange_184));
+INVARSPEC 
+((Mode_Logic-res-subrange_183));
+INVARSPEC 
+((Mode_Logic-res-subrange_182));
+INVARSPEC 
+((Mode_Logic-res-subrange_181));
+INVARSPEC 
+((Mode_Logic-res-subrange_180));
+INVARSPEC 
+((Mode_Logic-res-subrange_179));
+INVARSPEC 
+((Mode_Logic-res-subrange_178));
+INVARSPEC 
+((Mode_Logic-res-subrange_177));
+INVARSPEC 
+((Mode_Logic-res-subrange_176));
+INVARSPEC 
+((Mode_Logic-res-subrange_175));
+INVARSPEC 
+((Mode_Logic-res-subrange_174));
+INVARSPEC 
+((Mode_Logic-res-subrange_173));
+INVARSPEC 
+((Mode_Logic-res-subrange_172));
+INVARSPEC 
+((Mode_Logic-res-subrange_171));
+INVARSPEC 
+((Mode_Logic-res-subrange_170));
+INVARSPEC 
+((Mode_Logic-res-subrange_169));
+INVARSPEC 
+((Mode_Logic-res-subrange_168));
+INVARSPEC 
+((Mode_Logic-res-subrange_167));
+INVARSPEC 
+((Mode_Logic-res-subrange_166));
+INVARSPEC 
+((Mode_Logic-res-subrange_165));
+INVARSPEC 
+((Mode_Logic-res-subrange_164));
+INVARSPEC 
+((Mode_Logic-res-subrange_163));
+INVARSPEC 
+((Mode_Logic-res-subrange_162));
+INVARSPEC 
+((Mode_Logic-res-subrange_161));
+INVARSPEC 
+((Mode_Logic-res-subrange_160));
+INVARSPEC 
+((Mode_Logic-res-subrange_159));
+INVARSPEC 
+((Mode_Logic-res-subrange_158));
+INVARSPEC 
+((Mode_Logic-res-subrange_157));
+INVARSPEC 
+((Mode_Logic-res-subrange_156));
+INVARSPEC 
+((Mode_Logic-res-subrange_155));
+INVARSPEC 
+((Mode_Logic-res-subrange_154));
+INVARSPEC 
+((Mode_Logic-res-subrange_153));
+INVARSPEC 
+((Mode_Logic-res-subrange_152));
+INVARSPEC 
+((Mode_Logic-res-subrange_151));
+INVARSPEC 
+((Mode_Logic-res-subrange_150));
+INVARSPEC 
+((Mode_Logic-res-subrange_149));
+INVARSPEC 
+((Mode_Logic-res-subrange_148));
+INVARSPEC 
+((Mode_Logic-res-subrange_147));
+INVARSPEC 
+((Mode_Logic-res-subrange_146));
+INVARSPEC 
+((Mode_Logic-res-subrange_145));
+INVARSPEC 
+((Mode_Logic-res-subrange_144));
+INVARSPEC 
+((Mode_Logic-res-subrange_143));
+INVARSPEC 
+((Mode_Logic-res-subrange_142));
+INVARSPEC 
+((Mode_Logic-res-subrange_141));
+INVARSPEC 
+((Mode_Logic-res-subrange_140));
+INVARSPEC 
+((Mode_Logic-res-subrange_139));
+INVARSPEC 
+((Mode_Logic-res-subrange_138));
+INVARSPEC 
+((Mode_Logic-res-subrange_137));
+INVARSPEC 
+((Mode_Logic-res-subrange_136));
+INVARSPEC 
+((Mode_Logic-res-subrange_135));
+INVARSPEC 
+((Mode_Logic-res-subrange_134));
+INVARSPEC 
+((Mode_Logic-res-subrange_133));
+INVARSPEC 
+((Mode_Logic-res-subrange_132));
+INVARSPEC 
+((Mode_Logic-res-subrange_131));
+INVARSPEC 
+((Mode_Logic-res-subrange_130));
+INVARSPEC 
+((Mode_Logic-res-subrange_129));
+INVARSPEC 
+((Mode_Logic-res-subrange_128));
+INVARSPEC 
+((Mode_Logic-res-subrange_127));
+INVARSPEC 
+((Mode_Logic-res-subrange_126));
+INVARSPEC 
+((Mode_Logic-res-subrange_125));
+INVARSPEC 
+((Mode_Logic-res-subrange_124));
+INVARSPEC 
+((Mode_Logic-res-subrange_123));
+INVARSPEC 
+((Mode_Logic-res-subrange_122));
+INVARSPEC 
+((Mode_Logic-res-subrange_121));
+INVARSPEC 
+((Mode_Logic-res-subrange_120));
+INVARSPEC 
+((Mode_Logic-res-subrange_119));
+INVARSPEC 
+((Mode_Logic-res-subrange_118));
+INVARSPEC 
+((Mode_Logic-res-subrange_117));
+INVARSPEC 
+((Mode_Logic-res-subrange_116));
+INVARSPEC 
+((Mode_Logic-res-subrange_115));
+INVARSPEC 
+((Mode_Logic-res-subrange_114));
+INVARSPEC 
+((Mode_Logic-res-subrange_113));
+INVARSPEC 
+((Mode_Logic-res-subrange_112));
+INVARSPEC 
+((Mode_Logic-res-subrange_111));
+INVARSPEC 
+((Mode_Logic-res-subrange_110));
+INVARSPEC 
+((Mode_Logic-res-subrange_109));
+INVARSPEC 
+((Mode_Logic-res-subrange_108));
+INVARSPEC 
+((Mode_Logic-res-subrange_107));
+INVARSPEC 
+((Mode_Logic-res-subrange_106));
+INVARSPEC 
+((Mode_Logic-res-subrange_105));
+INVARSPEC 
+((Mode_Logic-res-subrange_104));
+INVARSPEC 
+((Mode_Logic-res-subrange_103));
+INVARSPEC 
+((Mode_Logic-res-subrange_102));
+INVARSPEC 
+((Mode_Logic-res-subrange_101));
+INVARSPEC 
+((Mode_Logic-res-subrange_100));
+INVARSPEC 
+((Mode_Logic-res-subrange_99));
+INVARSPEC 
+((Mode_Logic-res-subrange_98));
+INVARSPEC 
+((Mode_Logic-res-subrange_97));
+INVARSPEC 
+((Mode_Logic-res-subrange_96));
+INVARSPEC 
+((Mode_Logic-res-subrange_95));
+INVARSPEC 
+((Mode_Logic-res-subrange_94));
+INVARSPEC 
+((Mode_Logic-res-subrange_93));
+INVARSPEC 
+((Mode_Logic-res-subrange_92));
+INVARSPEC 
+((Mode_Logic-res-subrange_91));
+INVARSPEC 
+((Mode_Logic-res-subrange_90));
+INVARSPEC 
+((Mode_Logic-res-subrange_89));
+INVARSPEC 
+((Mode_Logic-res-subrange_88));
+INVARSPEC 
+((Mode_Logic-res-subrange_87));
+INVARSPEC 
+((Mode_Logic-res-subrange_86));
+INVARSPEC 
+((Mode_Logic-res-subrange_85));
+INVARSPEC 
+((Mode_Logic-res-subrange_84));
+INVARSPEC 
+((Mode_Logic-res-subrange_83));
+INVARSPEC 
+((Mode_Logic-res-subrange_82));
+INVARSPEC 
+((Mode_Logic-res-subrange_81));
+INVARSPEC 
+((Mode_Logic-res-subrange_80));
+INVARSPEC 
+((Mode_Logic-res-subrange_79));
+INVARSPEC 
+((Mode_Logic-res-subrange_78));
+INVARSPEC 
+((Mode_Logic-res-subrange_77));
+INVARSPEC 
+((Mode_Logic-res-subrange_76));
+INVARSPEC 
+((Mode_Logic-res-subrange_75));
+INVARSPEC 
+((Mode_Logic-res-subrange_74));
+INVARSPEC 
+((Mode_Logic-res-subrange_73));
+INVARSPEC 
+((Mode_Logic-res-subrange_72));
+INVARSPEC 
+((Mode_Logic-res-subrange_71));
+INVARSPEC 
+((Mode_Logic-res-subrange_70));
+INVARSPEC 
+((Mode_Logic-res-subrange_69));
+INVARSPEC 
+((Mode_Logic-res-subrange_68));
+INVARSPEC 
+((Mode_Logic-res-subrange_67));
+INVARSPEC 
+((Mode_Logic-res-subrange_66));
+INVARSPEC 
+((Mode_Logic-res-subrange_65));
+INVARSPEC 
+((Mode_Logic-res-subrange_64));
+INVARSPEC 
+((Mode_Logic-res-subrange_63));
+INVARSPEC 
+((Mode_Logic-res-subrange_62));
+INVARSPEC 
+((Mode_Logic-res-subrange_61));
+INVARSPEC 
+((Mode_Logic-res-subrange_60));
+INVARSPEC 
+((Mode_Logic-res-subrange_59));
+INVARSPEC 
+((Mode_Logic-res-subrange_58));
+INVARSPEC 
+((Mode_Logic-res-subrange_57));
+INVARSPEC 
+((Mode_Logic-res-subrange_56));
+INVARSPEC 
+((Mode_Logic-res-subrange_55));
+INVARSPEC 
+((Mode_Logic-res-subrange_54));
+INVARSPEC 
+((Mode_Logic-res-subrange_53));
+INVARSPEC 
+((Mode_Logic-res-subrange_52));
+INVARSPEC 
+((Mode_Logic-res-subrange_51));
+INVARSPEC 
+((Mode_Logic-res-subrange_50));
+INVARSPEC 
+((Mode_Logic-res-subrange_49));
+INVARSPEC 
+((Mode_Logic-res-subrange_48));
+INVARSPEC 
+((Mode_Logic-res-subrange_47));
+INVARSPEC 
+((Mode_Logic-res-subrange_46));
+INVARSPEC 
+((Mode_Logic-res-subrange_45));
+INVARSPEC 
+((Mode_Logic-res-subrange_44));
+INVARSPEC 
+((Mode_Logic-res-subrange_43));
+INVARSPEC 
+((Mode_Logic-res-subrange_42));
+INVARSPEC 
+((Mode_Logic-res-subrange_41));
+INVARSPEC 
+((Mode_Logic-res-subrange_40));
+INVARSPEC 
+((Mode_Logic-res-subrange_39));
+INVARSPEC 
+((Mode_Logic-res-subrange_38));
+INVARSPEC 
+((Mode_Logic-res-subrange_37));
+INVARSPEC 
+((Mode_Logic-res-subrange_36));
+INVARSPEC 
+((Mode_Logic-res-subrange_35));
+INVARSPEC 
+((Mode_Logic-res-subrange_34));
+INVARSPEC 
+((Mode_Logic-res-subrange_33));
+INVARSPEC 
+((Mode_Logic-res-subrange_32));
+INVARSPEC 
+((Mode_Logic-res-subrange_31));
+INVARSPEC 
+((Mode_Logic-res-subrange_30));
+INVARSPEC 
+((Mode_Logic-res-subrange_29));
+INVARSPEC 
+((Mode_Logic-res-subrange_28));
+INVARSPEC 
+((Mode_Logic-res-subrange_27));
+INVARSPEC 
+((Mode_Logic-res-subrange_26));
+INVARSPEC 
+((Mode_Logic-res-subrange_25));
+INVARSPEC 
+((Mode_Logic-res-subrange_24));
+INVARSPEC 
+((Mode_Logic-res-subrange_23));
+INVARSPEC 
+((Mode_Logic-res-subrange_22));
+INVARSPEC 
+((Mode_Logic-res-subrange_21));
+INVARSPEC 
+((Mode_Logic-res-subrange_20));
+INVARSPEC 
+((Mode_Logic-res-subrange_19));
+INVARSPEC 
+((Mode_Logic-res-subrange_18));
+INVARSPEC 
+((Mode_Logic-res-subrange_17));
+INVARSPEC 
+((Mode_Logic-res-subrange_16));
+INVARSPEC 
+((Mode_Logic-res-subrange_15));
+INVARSPEC 
+((Mode_Logic-res-subrange_14));
+INVARSPEC 
+((Mode_Logic-res-subrange_13));
+INVARSPEC 
+((Mode_Logic-res-subrange_12));
+INVARSPEC 
+((Mode_Logic-res-subrange_11));
+INVARSPEC 
+((Mode_Logic-res-subrange_10));
+INVARSPEC 
+((Mode_Logic-res-subrange_9));
+INVARSPEC 
+((Mode_Logic-res-subrange_8));
+INVARSPEC 
+((Mode_Logic-res-subrange_7));
+INVARSPEC 
+((Mode_Logic-res-subrange_6));
+INVARSPEC 
+((Mode_Logic-res-subrange_5));
+INVARSPEC 
+((Mode_Logic-res-subrange_4));
+INVARSPEC 
+((Mode_Logic-res-subrange_3));
+INVARSPEC 
+((Mode_Logic-res-subrange_2));
+INVARSPEC 
+((Mode_Logic-res-subrange_1));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_VGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_VGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-VS_Pitch_Wheel_Rotated_Clears_VGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-SYNC_Switch_Pressed_Clears_VGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-LGA_Cleared_Clears_VGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-AP_Engaged_Clears_VGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-GA_Switch_Pressed_Selects_VGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-VGA_Selected_Iff_VGA_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_VAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_VAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-Selected_NAV_Frequency_Changed_Clears_VAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-Selected_NAV_Source_Changed_Clears_VAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-LAPPR_Cleared_Clears_VAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-APPR_Switch_Pressed_Clears_VAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-VAPPR_Active_When_Capture_Cond_Met));
+INVARSPEC 
+((Mode_Logic-impl-usr-APPR_Switch_Pressed_Selects_VAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-VAPPR_Selected_If_VAPPR_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Cleared_If_ALT_VAPPR_VGA_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Deactivated_When_New_Active_Vertical_Mode));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Deactivated_When_Pilot_Flying_Transfer));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Deactivated_When_VS_Pitch_Wheel_Rotated));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Deactivated_When_Target_Changed));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Track_When_Track_Cond_Met));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Active_When_Capture_Cond_Met));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Selected_If_Not_ALT_VAPPR_VGA_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Active_If_ALTSEL_Track));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Selected_If_ALTSEL_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_ALT));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_ALT));
+INVARSPEC 
+((Mode_Logic-impl-usr-VS_Pitch_Wheel_Rotated_Clears_ALT));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALT_Switch_Pressed_Clears_ALT));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Target_Changed_Selects_ALT));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALT_Switch_Pressed_Selects_ALT));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALT_Selected_Iff_ALT_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_FLC));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_FLC));
+INVARSPEC 
+((Mode_Logic-impl-usr-VS_Pitch_Wheel_Rotated_Clears_FLC));
+INVARSPEC 
+((Mode_Logic-impl-usr-FLC_Switch_Pressed_Clears_FLC));
+INVARSPEC 
+((Mode_Logic-impl-usr-Overspeed_Activates_FLC));
+INVARSPEC 
+((Mode_Logic-impl-usr-FLC_Switch_Pressed_Selects_FLC));
+INVARSPEC 
+((Mode_Logic-impl-usr-FLC_Selected_Iff_FLC_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_VS));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_VS));
+INVARSPEC 
+((Mode_Logic-impl-usr-VS_Switch_Pressed_Clears_VS));
+INVARSPEC 
+((Mode_Logic-impl-usr-VS_Switch_Pressed_Selects_VS));
+INVARSPEC 
+((Mode_Logic-impl-usr-VS_Selected_Iff_VS_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-AP_Engaged_Modes_Off_Implies_PITCH_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-FD_Switch_Pressed_Modes_Off_Implies_PITCH_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Implies_PITCH_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Default_Vertical_Mode_Is_PITCH));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_LGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_LGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-SYNC_Switch_Pressed_Clears_LGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-VGA_Cleared_Clears_LGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-AP_Engaged_Clears_LGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-GA_Switch_Pressed_Selects_LGA));
+INVARSPEC 
+((Mode_Logic-impl-usr-LGA_Selected_Iff_LGA_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_LAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_LAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-Selected_NAV_Frequency_Changed_Clears_LAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-Selected_NAV_Source_Changed_Clears_LAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-APPR_Switch_Pressed_Clears_LAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-LAPPR_Active_When_Capture_Cond_Met));
+INVARSPEC 
+((Mode_Logic-impl-usr-APPR_Switch_Pressed_Selects_LAPPR));
+INVARSPEC 
+((Mode_Logic-impl-usr-LAPPR_Selected_If_LAPPR_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_NAV));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_NAV));
+INVARSPEC 
+((Mode_Logic-impl-usr-Selected_NAV_Frequency_Changed_Clears_NAV));
+INVARSPEC 
+((Mode_Logic-impl-usr-Selected_NAV_Source_Changed_Clears_NAV));
+INVARSPEC 
+((Mode_Logic-impl-usr-NAV_Switch_Pressed_Clears_NAV));
+INVARSPEC 
+((Mode_Logic-impl-usr-NAV_Active_When_Capture_Cond_Met));
+INVARSPEC 
+((Mode_Logic-impl-usr-NAV_Switch_Pressed_Selects_NAV));
+INVARSPEC 
+((Mode_Logic-impl-usr-NAV_Selected_If_NAV_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Clears_HDG));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_Clears_HDG));
+INVARSPEC 
+((Mode_Logic-impl-usr-HDG_Switch_Pressed_Clears_HDG));
+INVARSPEC 
+((Mode_Logic-impl-usr-HDG_Switch_Pressed_Selects_HDG));
+INVARSPEC 
+((Mode_Logic-impl-usr-HDG_Selected_Iff_HDG_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-AP_Engaged_Modes_Off_Implies_ROLL_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-FD_Switch_Pressed_Modes_Off_Implies_ROLL_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_Implies_ROLL_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Default_Lateral_Mode_Is_ROLL));
+INVARSPEC 
+((Mode_Logic-impl-usr-ROLL_Selected_Iff_ROLL_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Active_iff_Independent_or_Pilot_Flying));
+INVARSPEC 
+((Mode_Logic-impl-usr-Independent_Mode_Implies_Both_VAPPR_or_VGA_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-Both_Sides_VGA_Active_Implies_Independent_Mode));
+INVARSPEC 
+((Mode_Logic-impl-usr-Both_Sides_VAPPR_Active_Implies_Independent_Mode));
+INVARSPEC 
+((Mode_Logic-impl-usr-FD_Stays_On_Unless_FD_Switch_Pressed));
+INVARSPEC 
+((Mode_Logic-impl-usr-FD_Stays_On_When_AP_Disengaged));
+INVARSPEC 
+((Mode_Logic-impl-usr-FD_Switch_Turns_FD_Off));
+INVARSPEC 
+((Mode_Logic-impl-usr-Pilot_Flying_Transfer_While_Modes_On_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALTSEL_Target_Changed_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-VS_Pitch_Wheel_Rotated_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-ALT_Switch_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-FLC_Switch_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-VS_Switch_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-GA_Switch_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-APPR_Switch_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-NAV_Switch_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-HDG_Switch_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-Overspeed_Implies_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-AP_Engaged_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-FD_Switch_Turns_FD_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-FD_Off_At_Startup));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_On_Iff_FD_On_or_AP_Engaged));
+INVARSPEC 
+((Mode_Logic-impl-usr-Onside_FD_On_Implies_Modes_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-Offside_FD_On_Implies_Modes_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-AP_Engaged_Implies_Modes_On));
+INVARSPEC 
+((Mode_Logic-impl-usr-Modes_Off_At_Startup));
+INVARSPEC 
+((Mode_Logic-impl-usr-Overspeed_and_PITCH_Transitory));
+INVARSPEC 
+((Mode_Logic-impl-usr-Overspeed_Implies_FLC_ALT_ALTSEL_PITCH));
+INVARSPEC 
+((Mode_Logic-impl-usr-VAPPR_Active_Implies_LAPPR_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-VGA_Active_Implies_LGA_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-LGA_Active_Implies_VGA_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-At_Most_One_Vertical_Mode_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-At_Least_One_Vertical_Mode_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-At_Most_One_Lateral_Mode_Active));
+INVARSPEC 
+((Mode_Logic-impl-usr-At_Least_One_Lateral_Mode_Active));
 
