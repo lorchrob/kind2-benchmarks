@@ -1,0 +1,189 @@
+
+MODULE _TOP__Sender (_TOP__Sender-usr-__ASSUME__HIST, _TOP__Sender-usr-9-in1-NODE_VAL, _TOP__Sender-usr-9-in2-NODE_VAL, _TOP__Sender-usr-time, _TOP__Sender-usr-9-sender_out-NODE_VAL)
+VAR
+	_TOP__Sender-usr-__ASSERT : boolean;
+	_TOP__Sender-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__Sender-impl-usr-__GUARANTEE0) := (_TOP__Sender-usr-9-sender_out-NODE_VAL = _TOP__Sender-usr-9-in1-NODE_VAL + _TOP__Sender-usr-9-in2-NODE_VAL);
+	init(_TOP__Sender-usr-__ASSERT) := (_TOP__Sender-usr-__ASSUME__HIST -> _TOP__Sender-impl-usr-__GUARANTEE0);
+
+	next(_TOP__Sender-impl-usr-__GUARANTEE0) := (next(_TOP__Sender-usr-9-sender_out-NODE_VAL) = next(_TOP__Sender-usr-9-in1-NODE_VAL) + next(_TOP__Sender-usr-9-in2-NODE_VAL));
+	next(_TOP__Sender-usr-__ASSERT) := (next(_TOP__Sender-usr-__ASSUME__HIST) -> next(_TOP__Sender-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__receiver1 (_TOP__receiver1-usr-__ASSUME__HIST, _TOP__receiver1-usr-9-sender_input-NODE_VAL, _TOP__receiver1-usr-time, _TOP__receiver1-usr-9-output-NODE_VAL)
+VAR
+	_TOP__receiver1-usr-__ASSERT : boolean;
+	_TOP__receiver1-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__receiver1-impl-usr-__GUARANTEE0) := (_TOP__receiver1-usr-9-sender_input-NODE_VAL = _TOP__receiver1-usr-9-output-NODE_VAL);
+	init(_TOP__receiver1-usr-__ASSERT) := (_TOP__receiver1-usr-__ASSUME__HIST -> _TOP__receiver1-impl-usr-__GUARANTEE0);
+
+	next(_TOP__receiver1-impl-usr-__GUARANTEE0) := (next(_TOP__receiver1-usr-9-sender_input-NODE_VAL) = next(_TOP__receiver1-usr-9-output-NODE_VAL));
+	next(_TOP__receiver1-usr-__ASSERT) := (next(_TOP__receiver1-usr-__ASSUME__HIST) -> next(_TOP__receiver1-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__receiver3 (_TOP__receiver3-usr-__ASSUME__HIST, _TOP__receiver3-usr-9-sender_input-NODE_VAL, _TOP__receiver3-usr-time, _TOP__receiver3-usr-9-output-NODE_VAL)
+VAR
+	_TOP__receiver3-usr-__ASSERT : boolean;
+	_TOP__receiver3-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__receiver3-impl-usr-__GUARANTEE0) := (_TOP__receiver3-usr-9-sender_input-NODE_VAL = _TOP__receiver3-usr-9-output-NODE_VAL);
+	init(_TOP__receiver3-usr-__ASSERT) := (_TOP__receiver3-usr-__ASSUME__HIST -> _TOP__receiver3-impl-usr-__GUARANTEE0);
+
+	next(_TOP__receiver3-impl-usr-__GUARANTEE0) := (next(_TOP__receiver3-usr-9-sender_input-NODE_VAL) = next(_TOP__receiver3-usr-9-output-NODE_VAL));
+	next(_TOP__receiver3-usr-__ASSERT) := (next(_TOP__receiver3-usr-__ASSUME__HIST) -> next(_TOP__receiver3-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__receiver2 (_TOP__receiver2-usr-__ASSUME__HIST, _TOP__receiver2-usr-9-sender_input-NODE_VAL, _TOP__receiver2-usr-time, _TOP__receiver2-usr-9-output-NODE_VAL)
+VAR
+	_TOP__receiver2-usr-__ASSERT : boolean;
+	_TOP__receiver2-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__receiver2-impl-usr-__GUARANTEE0) := (_TOP__receiver2-usr-9-sender_input-NODE_VAL = _TOP__receiver2-usr-9-output-NODE_VAL);
+	init(_TOP__receiver2-usr-__ASSERT) := (_TOP__receiver2-usr-__ASSUME__HIST -> _TOP__receiver2-impl-usr-__GUARANTEE0);
+
+	next(_TOP__receiver2-impl-usr-__GUARANTEE0) := (next(_TOP__receiver2-usr-9-sender_input-NODE_VAL) = next(_TOP__receiver2-usr-9-output-NODE_VAL));
+	next(_TOP__receiver2-usr-__ASSERT) := (next(_TOP__receiver2-usr-__ASSUME__HIST) -> next(_TOP__receiver2-impl-usr-__GUARANTEE0));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE main () 
+VAR
+	main-usr-9-Sender__sender_out-NODE_VAL : real;
+	main-usr-Sender____ASSUME__HIST : boolean;
+	main-usr-9-receiver1__output-NODE_VAL : real;
+	main-usr-receiver1____ASSUME__HIST : boolean;
+	main-usr-9-receiver2__output-NODE_VAL : real;
+	main-usr-receiver2____ASSUME__HIST : boolean;
+	main-usr-9-receiver3__output-NODE_VAL : real;
+	main-usr-receiver3____ASSUME__HIST : boolean;
+	main-usr-9-receiver1_output-NODE_VAL : real;
+	main-usr-9-receiver2_output-NODE_VAL : real;
+	main-usr-9-receiver3_output-NODE_VAL : real;
+	main-usr-9-Sender__in1-NODE_VAL : real;
+	main-usr-9-Sender__in2-NODE_VAL : real;
+	main-usr-Sender__time : real;
+	main-usr-9-receiver1__sender_input-NODE_VAL : real;
+	main-usr-receiver1__time : real;
+	main-usr-9-receiver2__sender_input-NODE_VAL : real;
+	main-usr-receiver2__time : real;
+	main-usr-9-receiver3__sender_input-NODE_VAL : real;
+	main-usr-receiver3__time : real;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-res-glocal_2 : boolean;
+	main-res-glocal_4 : boolean;
+	main-res-glocal_7 : boolean;
+	main-res-glocal_8 : boolean;
+	main-res-glocal_10 : boolean;
+	main-res-glocal_11 : boolean;
+	main-res-glocal_12 : boolean;
+	main-res-glocal_14 : boolean;
+	main-res-glocal_15 : boolean;
+	main-res-glocal_16 : boolean;
+	main-res-glocal_18 : boolean;
+	main-res-glocal_19 : boolean;
+	main-res-glocal_20 : boolean;
+	main-res-glocal_21 : boolean;
+	main-res-glocal_22 : boolean;
+	main-res-glocal_23 : boolean;
+	main-res-glocal_24 : boolean;
+	main-res-glocal_25 : boolean;
+	main-res-glocal_26 : boolean;
+	main-res-glocal_27 : boolean;
+	main-res-gklocal_5 : boolean;
+	main-res-call_17 : _TOP__receiver3(main-usr-receiver3____ASSUME__HIST, main-usr-9-receiver3__sender_input-NODE_VAL, main-usr-receiver3__time, main-usr-9-receiver3__output-NODE_VAL);
+	main-res-call_13 : _TOP__receiver2(main-usr-receiver2____ASSUME__HIST, main-usr-9-receiver2__sender_input-NODE_VAL, main-usr-receiver2__time, main-usr-9-receiver2__output-NODE_VAL);
+	main-res-call_9 : _TOP__receiver1(main-usr-receiver1____ASSUME__HIST, main-usr-9-receiver1__sender_input-NODE_VAL, main-usr-receiver1__time, main-usr-9-receiver1__output-NODE_VAL);
+	main-res-call_6 : __HIST(main-res-gklocal_5);
+	main-res-call_3 : _TOP__Sender(main-usr-Sender____ASSUME__HIST, main-usr-9-Sender__in1-NODE_VAL, main-usr-9-Sender__in2-NODE_VAL, main-usr-Sender__time, main-usr-9-Sender__sender_out-NODE_VAL);
+
+ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-receiver3____ASSUME__HIST & (main-usr-receiver2____ASSUME__HIST & (main-usr-receiver1____ASSUME__HIST & main-usr-Sender____ASSUME__HIST)));
+	init(main-res-glocal_2) := (main-usr-time = main-usr-Sender__time);
+	init(main-res-glocal_4) := main-res-call_3._TOP__Sender-usr-__ASSERT;
+	init(main-res-gklocal_5) := TRUE;
+	init(main-res-glocal_7) := (main-usr-Sender____ASSUME__HIST = main-res-call_6.__HIST-usr-hist);
+	init(main-res-glocal_8) := (main-usr-time = main-usr-receiver1__time);
+	init(main-res-glocal_10) := main-res-call_9._TOP__receiver1-usr-__ASSERT;
+	init(main-res-glocal_11) := (main-usr-receiver1____ASSUME__HIST = main-res-call_6.__HIST-usr-hist);
+	init(main-res-glocal_12) := (main-usr-time = main-usr-receiver2__time);
+	init(main-res-glocal_14) := main-res-call_13._TOP__receiver2-usr-__ASSERT;
+	init(main-res-glocal_15) := (main-usr-receiver2____ASSUME__HIST = main-res-call_6.__HIST-usr-hist);
+	init(main-res-glocal_16) := (main-usr-time = main-usr-receiver3__time);
+	init(main-res-glocal_18) := main-res-call_17._TOP__receiver3-usr-__ASSERT;
+	init(main-res-glocal_19) := (main-usr-receiver3____ASSUME__HIST = main-res-call_6.__HIST-usr-hist);
+	init(main-res-glocal_20) := (main-usr-9-Sender__sender_out-NODE_VAL = main-usr-9-receiver1__sender_input-NODE_VAL);
+	init(main-res-glocal_21) := (main-usr-9-Sender__sender_out-NODE_VAL = main-usr-9-receiver2__sender_input-NODE_VAL);
+	init(main-res-glocal_22) := (main-usr-9-Sender__sender_out-NODE_VAL = main-usr-9-receiver3__sender_input-NODE_VAL);
+	init(main-res-glocal_23) := (main-usr-9-receiver1__output-NODE_VAL = main-usr-9-receiver1_output-NODE_VAL);
+	init(main-res-glocal_24) := (main-usr-9-receiver2__output-NODE_VAL = main-usr-9-receiver2_output-NODE_VAL);
+	init(main-res-glocal_25) := (main-usr-9-receiver3__output-NODE_VAL = main-usr-9-receiver3_output-NODE_VAL);
+	init(main-res-glocal_26) := TRUE;
+	init(main-res-glocal_27) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-receiver3____ASSUME__HIST) & (next(main-usr-receiver2____ASSUME__HIST) & (next(main-usr-receiver1____ASSUME__HIST) & next(main-usr-Sender____ASSUME__HIST))));
+	next(main-res-glocal_2) := (next(main-usr-time) = next(main-usr-Sender__time));
+	next(main-res-glocal_4) := next(main-res-call_3._TOP__Sender-usr-__ASSERT);
+	next(main-res-gklocal_5) := TRUE;
+	next(main-res-glocal_7) := (next(main-usr-Sender____ASSUME__HIST) = next(main-res-call_6.__HIST-usr-hist));
+	next(main-res-glocal_8) := (next(main-usr-time) = next(main-usr-receiver1__time));
+	next(main-res-glocal_10) := next(main-res-call_9._TOP__receiver1-usr-__ASSERT);
+	next(main-res-glocal_11) := (next(main-usr-receiver1____ASSUME__HIST) = next(main-res-call_6.__HIST-usr-hist));
+	next(main-res-glocal_12) := (next(main-usr-time) = next(main-usr-receiver2__time));
+	next(main-res-glocal_14) := next(main-res-call_13._TOP__receiver2-usr-__ASSERT);
+	next(main-res-glocal_15) := (next(main-usr-receiver2____ASSUME__HIST) = next(main-res-call_6.__HIST-usr-hist));
+	next(main-res-glocal_16) := (next(main-usr-time) = next(main-usr-receiver3__time));
+	next(main-res-glocal_18) := next(main-res-call_17._TOP__receiver3-usr-__ASSERT);
+	next(main-res-glocal_19) := (next(main-usr-receiver3____ASSUME__HIST) = next(main-res-call_6.__HIST-usr-hist));
+	next(main-res-glocal_20) := (next(main-usr-9-Sender__sender_out-NODE_VAL) = next(main-usr-9-receiver1__sender_input-NODE_VAL));
+	next(main-res-glocal_21) := (next(main-usr-9-Sender__sender_out-NODE_VAL) = next(main-usr-9-receiver2__sender_input-NODE_VAL));
+	next(main-res-glocal_22) := (next(main-usr-9-Sender__sender_out-NODE_VAL) = next(main-usr-9-receiver3__sender_input-NODE_VAL));
+	next(main-res-glocal_23) := (next(main-usr-9-receiver1__output-NODE_VAL) = next(main-usr-9-receiver1_output-NODE_VAL));
+	next(main-res-glocal_24) := (next(main-usr-9-receiver2__output-NODE_VAL) = next(main-usr-9-receiver2_output-NODE_VAL));
+	next(main-res-glocal_25) := (next(main-usr-9-receiver3__output-NODE_VAL) = next(main-usr-9-receiver3_output-NODE_VAL));
+	next(main-res-glocal_26) := TRUE;
+	next(main-res-glocal_27) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_27;
+	INVAR main-res-glocal_26;
+	INVAR main-res-glocal_25;
+	INVAR main-res-glocal_24;
+	INVAR main-res-glocal_23;
+	INVAR main-res-glocal_22;
+	INVAR main-res-glocal_21;
+	INVAR main-res-glocal_20;
+	INVAR main-res-glocal_19;
+	INVAR main-res-glocal_18;
+	INVAR main-res-glocal_16;
+	INVAR main-res-glocal_15;
+	INVAR main-res-glocal_14;
+	INVAR main-res-glocal_12;
+	INVAR main-res-glocal_11;
+	INVAR main-res-glocal_10;
+	INVAR main-res-glocal_8;
+	INVAR main-res-glocal_7;
+	INVAR main-res-glocal_4;
+	INVAR main-res-glocal_2;
+
+INVARSPEC 
+((main-impl-usr-__ASSUME__HIST));
+
