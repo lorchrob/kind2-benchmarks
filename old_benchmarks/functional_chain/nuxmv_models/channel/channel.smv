@@ -16,21 +16,21 @@ ASSIGN
 	init(controlLaw-impl-usr-dtf) := 0;
 	init(controlLaw-impl-usr-inp) := (controlLaw-usr-in1 - (49/1250 * controlLaw-impl-usr-dtf));
 	init(controlLaw-impl-usr-sum1) := 0;
-	init(controlLaw-impl-usr-c1) := (controlLaw-impl-usr-sum1 <= 1 & controlLaw-impl-usr-sum1 >= -1);
-	init(controlLaw-impl-usr-c2) := (controlLaw-impl-usr-sum1 >= 1 & (controlLaw-impl-usr-inp < 0));
-	init(controlLaw-impl-usr-c3) := (controlLaw-impl-usr-sum1 <= -1 & (controlLaw-impl-usr-inp > 0));
-	init(controlLaw-impl-usr-out_stable) := (-25 <= controlLaw-usr-integ & controlLaw-usr-integ <= 25);
-	init(controlLaw-res-glocal_7) := (((-18/5 <= controlLaw-usr-in1 & controlLaw-usr-in1 <= 18/5) & -18/5 <= controlLaw-usr-in2) & controlLaw-usr-in2 <= 18/5);
+	init(controlLaw-impl-usr-c1) := ((controlLaw-impl-usr-sum1 <= 1) & (controlLaw-impl-usr-sum1 >= -1));
+	init(controlLaw-impl-usr-c2) := ((controlLaw-impl-usr-sum1 >= 1) & (controlLaw-impl-usr-inp < 0));
+	init(controlLaw-impl-usr-c3) := ((controlLaw-impl-usr-sum1 <= -1) & (controlLaw-impl-usr-inp > 0));
+	init(controlLaw-impl-usr-out_stable) := ((-25 <= controlLaw-usr-integ) & (controlLaw-usr-integ <= 25));
+	init(controlLaw-res-glocal_7) := ((((-18/5 <= controlLaw-usr-in1) & (controlLaw-usr-in1 <= 18/5)) & (-18/5 <= controlLaw-usr-in2)) & (controlLaw-usr-in2 <= 18/5));
 
 	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201/1250 * controlLaw-impl-usr-dtf);
 	next(controlLaw-impl-usr-inp) := (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)));
 	next(controlLaw-impl-usr-sum1) := (1/25 * controlLaw-usr-integ) + (3/20 * next(controlLaw-impl-usr-inp));
-	next(controlLaw-impl-usr-c3) := (next(controlLaw-impl-usr-sum1) <= -1 & (next(controlLaw-impl-usr-inp) > 0));
-	next(controlLaw-impl-usr-c2) := (next(controlLaw-impl-usr-sum1) >= 1 & (next(controlLaw-impl-usr-inp) < 0));
-	next(controlLaw-impl-usr-c1) := (next(controlLaw-impl-usr-sum1) <= 1 & next(controlLaw-impl-usr-sum1) >= -1);
+	next(controlLaw-impl-usr-c3) := ((next(controlLaw-impl-usr-sum1) <= -1) & (next(controlLaw-impl-usr-inp) > 0));
+	next(controlLaw-impl-usr-c2) := ((next(controlLaw-impl-usr-sum1) >= 1) & (next(controlLaw-impl-usr-inp) < 0));
+	next(controlLaw-impl-usr-c1) := ((next(controlLaw-impl-usr-sum1) <= 1) & (next(controlLaw-impl-usr-sum1) >= -1));
 	next(controlLaw-usr-integ) := controlLaw-usr-integ + ((next(controlLaw-impl-usr-c3) | (next(controlLaw-impl-usr-c2) | next(controlLaw-impl-usr-c1))) ? next(controlLaw-impl-usr-inp) : 0);
-	next(controlLaw-impl-usr-out_stable) := (-25 <= next(controlLaw-usr-integ) & next(controlLaw-usr-integ) <= 25);
-	next(controlLaw-res-glocal_7) := (((-18/5 <= next(controlLaw-usr-in1) & next(controlLaw-usr-in1) <= 18/5) & -18/5 <= next(controlLaw-usr-in2)) & next(controlLaw-usr-in2) <= 18/5);
+	next(controlLaw-impl-usr-out_stable) := ((-25 <= next(controlLaw-usr-integ)) & (next(controlLaw-usr-integ) <= 25));
+	next(controlLaw-res-glocal_7) := ((((-18/5 <= next(controlLaw-usr-in1)) & (next(controlLaw-usr-in1) <= 18/5)) & (-18/5 <= next(controlLaw-usr-in2))) & (next(controlLaw-usr-in2) <= 18/5));
 
 	INVAR controlLaw-res-glocal_7;
 
@@ -121,7 +121,7 @@ ASSIGN
 	init(voter-impl-usr-st3) := ((voter-impl-usr-df3 > 1/2) ? 1/2 : ((voter-impl-usr-df3 < -1/2) ? -1/2 : voter-impl-usr-df3));
 	init(voter-impl-usr-df1) := (voter-impl-usr-equalized1 - voter-impl-usr-three_output);
 	init(voter-impl-usr-st1) := ((voter-impl-usr-df1 > 1/2) ? 1/2 : ((voter-impl-usr-df1 < -1/2) ? -1/2 : voter-impl-usr-df1));
-	init(voter-impl-usr-out_stable) := (-6/5 <= voter-usr-output & voter-usr-output <= 6/5);
+	init(voter-impl-usr-out_stable) := ((-6/5 <= voter-usr-output) & (voter-usr-output <= 6/5));
 	init(voter-res-glocal_1) := (voter-usr-input1 < 6/5);
 	init(voter-res-glocal_2) := (voter-usr-input1 > -6/5);
 	init(voter-res-glocal_3) := (voter-usr-input2 < 6/5);
@@ -151,7 +151,7 @@ ASSIGN
 	next(voter-impl-usr-st3) := ((next(voter-impl-usr-df3) > 1/2) ? 1/2 : ((next(voter-impl-usr-df3) < -1/2) ? -1/2 : next(voter-impl-usr-df3)));
 	next(voter-impl-usr-df1) := (next(voter-impl-usr-equalized1) - next(voter-impl-usr-three_output));
 	next(voter-impl-usr-st1) := ((next(voter-impl-usr-df1) > 1/2) ? 1/2 : ((next(voter-impl-usr-df1) < -1/2) ? -1/2 : next(voter-impl-usr-df1)));
-	next(voter-impl-usr-out_stable) := (-6/5 <= next(voter-usr-output) & next(voter-usr-output) <= 6/5);
+	next(voter-impl-usr-out_stable) := ((-6/5 <= next(voter-usr-output)) & (next(voter-usr-output) <= 6/5));
 	next(voter-res-glocal_1) := (next(voter-usr-input1) < 6/5);
 	next(voter-res-glocal_2) := (next(voter-usr-input1) > -6/5);
 	next(voter-res-glocal_3) := (next(voter-usr-input2) < 6/5);
@@ -195,7 +195,7 @@ VAR
 
 ASSIGN
 	init(channel-usr-output) := channel-res-call_15.controlLaw-usr-integ;
-	init(channel-impl-usr-out_stable) := (-25 <= channel-usr-output & channel-usr-output <= 25);
+	init(channel-impl-usr-out_stable) := ((-25 <= channel-usr-output) & (channel-usr-output <= 25));
 	init(channel-impl-usr-satMax) := 6/5;
 	init(channel-impl-usr-satMin) := -6/5;
 	init(channel-impl-usr-sat1c) := channel-res-2-call_11.saturation3-usr-outC;
@@ -218,9 +218,15 @@ ASSIGN
 	next(channel-impl-usr-v2) := next(channel-res-call_14.voter-usr-output);
 	next(channel-impl-usr-v1) := next(channel-res-call_13.voter-usr-output);
 	next(channel-usr-output) := next(channel-res-call_15.controlLaw-usr-integ);
-	next(channel-impl-usr-out_stable) := (-25 <= next(channel-usr-output) & next(channel-usr-output) <= 25);
+	next(channel-impl-usr-out_stable) := ((-25 <= next(channel-usr-output)) & (next(channel-usr-output) <= 25));
 
 
 INVARSPEC 
-((channel-impl-usr-out_stable) & (TRUE) & (TRUE) & (TRUE));
+((channel-impl-usr-out_stable));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
 

@@ -26,9 +26,9 @@ VAR
 	dangerous_level-usr-dangerous_level : boolean;
 
 ASSIGN
-	init(dangerous_level-usr-dangerous_level) := (dangerous_level-usr-q >= 850 | dangerous_level-usr-q <= 150);
+	init(dangerous_level-usr-dangerous_level) := ((dangerous_level-usr-q >= 850) | (dangerous_level-usr-q <= 150));
 
-	next(dangerous_level-usr-dangerous_level) := (next(dangerous_level-usr-q) >= 850 | next(dangerous_level-usr-q) <= 150);
+	next(dangerous_level-usr-dangerous_level) := ((next(dangerous_level-usr-q) >= 850) | (next(dangerous_level-usr-q) <= 150));
 
 
 
@@ -155,11 +155,11 @@ VAR
 ASSIGN
 	init(ControlMode-usr-op_mode) := 1;
 	init(ControlMode-res-gklocal_82) := ControlMode-res-oracle_81;
-	init(ControlMode-res-subrange_80) := (1 <= ControlMode-usr-op_mode & ControlMode-usr-op_mode <= 6);
+	init(ControlMode-res-subrange_80) := ((1 <= ControlMode-usr-op_mode) & (ControlMode-usr-op_mode <= 6));
 
 	next(ControlMode-res-gklocal_82) := ControlMode-usr-op_mode;
 	next(ControlMode-usr-op_mode) := (((ControlMode-usr-op_mode = 6) | (next(ControlMode-usr-stop_request) | next(ControlMode-res-call_83.critical_failure-usr-critical_failure))) ? 6 : ((ControlMode-usr-op_mode = 1) ? (next(ControlMode-usr-steam_boiler_waiting) ? 2 : 1) : (((ControlMode-usr-op_mode = 2) & !next(ControlMode-usr-physical_units_ready)) ? 2 : (next(ControlMode-res-call_84.level_failure-usr-level_failure) ? 5 : (next(ControlMode-res-call_85.failure-usr-failure) ? 4 : 3)))));
-	next(ControlMode-res-subrange_80) := (1 <= next(ControlMode-usr-op_mode) & next(ControlMode-usr-op_mode) <= 6);
+	next(ControlMode-res-subrange_80) := ((1 <= next(ControlMode-usr-op_mode)) & (next(ControlMode-usr-op_mode) <= 6));
 
 
 
@@ -204,5 +204,7 @@ ASSIGN
 
 
 INVARSPEC 
-((top-usr-OK) & (TRUE));
+((top-usr-OK));
+INVARSPEC 
+((TRUE));
 

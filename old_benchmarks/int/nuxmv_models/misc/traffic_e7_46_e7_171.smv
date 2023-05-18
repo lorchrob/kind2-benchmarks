@@ -34,12 +34,12 @@ VAR
 
 ASSIGN
 	init(top-impl-usr-Total) := top-res-call_1.Store-usr-Total;
-	init(top-usr-OK) := (top-res-call_3.Sofar-usr-Y -> (0 <= top-impl-usr-Total & top-impl-usr-Total <= 20));
-	init(top-res-gklocal_2) := (-1 <= top-usr-Delta & top-usr-Delta <= 1);
+	init(top-usr-OK) := (top-res-call_3.Sofar-usr-Y -> ((0 <= top-impl-usr-Total) & (top-impl-usr-Total <= 20)));
+	init(top-res-gklocal_2) := ((-1 <= top-usr-Delta) & (top-usr-Delta <= 1));
 
-	next(top-res-gklocal_2) := (-1 <= next(top-usr-Delta) & next(top-usr-Delta) <= 1);
+	next(top-res-gklocal_2) := ((-1 <= next(top-usr-Delta)) & (next(top-usr-Delta) <= 1));
 	next(top-impl-usr-Total) := next(top-res-call_1.Store-usr-Total);
-	next(top-usr-OK) := (next(top-res-call_3.Sofar-usr-Y) -> (0 <= next(top-impl-usr-Total) & next(top-impl-usr-Total) <= 20));
+	next(top-usr-OK) := (next(top-res-call_3.Sofar-usr-Y) -> ((0 <= next(top-impl-usr-Total)) & (next(top-impl-usr-Total) <= 20)));
 
 
 INVARSPEC 

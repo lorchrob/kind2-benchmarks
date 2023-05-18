@@ -16,18 +16,18 @@ VAR
 ASSIGN
 	init(PRODUCER_CONSUMMER-usr-a) := PRODUCER_CONSUMMER-usr-a_init;
 	init(PRODUCER_CONSUMMER-usr-i) := PRODUCER_CONSUMMER-usr-a;
-	init(PRODUCER_CONSUMMER-impl-usr-garde1) := PRODUCER_CONSUMMER-res-oracle_1 >= 1;
+	init(PRODUCER_CONSUMMER-impl-usr-garde1) := (PRODUCER_CONSUMMER-res-oracle_1 >= 1);
 	init(PRODUCER_CONSUMMER-usr-b) := 0;
-	init(PRODUCER_CONSUMMER-impl-usr-garde2) := PRODUCER_CONSUMMER-res-oracle_2 >= 1;
-	init(PRODUCER_CONSUMMER-impl-usr-garde3) := PRODUCER_CONSUMMER-res-oracle_3 >= 1;
+	init(PRODUCER_CONSUMMER-impl-usr-garde2) := (PRODUCER_CONSUMMER-res-oracle_2 >= 1);
+	init(PRODUCER_CONSUMMER-impl-usr-garde3) := (PRODUCER_CONSUMMER-res-oracle_3 >= 1);
 	init(PRODUCER_CONSUMMER-usr-o1) := 0;
 	init(PRODUCER_CONSUMMER-usr-o2) := 0;
 
-	next(PRODUCER_CONSUMMER-impl-usr-garde1) := PRODUCER_CONSUMMER-usr-i >= 1;
+	next(PRODUCER_CONSUMMER-impl-usr-garde1) := (PRODUCER_CONSUMMER-usr-i >= 1);
 	next(PRODUCER_CONSUMMER-usr-i) := (next(PRODUCER_CONSUMMER-usr-etat1) ? (next(PRODUCER_CONSUMMER-impl-usr-garde1) ? (PRODUCER_CONSUMMER-usr-i - 1) : PRODUCER_CONSUMMER-usr-i) : PRODUCER_CONSUMMER-usr-i);
 	next(PRODUCER_CONSUMMER-usr-a) := PRODUCER_CONSUMMER-usr-a;
-	next(PRODUCER_CONSUMMER-impl-usr-garde3) := PRODUCER_CONSUMMER-usr-b >= 1;
-	next(PRODUCER_CONSUMMER-impl-usr-garde2) := PRODUCER_CONSUMMER-usr-b >= 1;
+	next(PRODUCER_CONSUMMER-impl-usr-garde3) := (PRODUCER_CONSUMMER-usr-b >= 1);
+	next(PRODUCER_CONSUMMER-impl-usr-garde2) := (PRODUCER_CONSUMMER-usr-b >= 1);
 	next(PRODUCER_CONSUMMER-usr-b) := (next(PRODUCER_CONSUMMER-usr-etat1) ? (next(PRODUCER_CONSUMMER-impl-usr-garde1) ? PRODUCER_CONSUMMER-usr-b + 1 : PRODUCER_CONSUMMER-usr-b) : (next(PRODUCER_CONSUMMER-usr-etat2) ? (next(PRODUCER_CONSUMMER-impl-usr-garde2) ? (PRODUCER_CONSUMMER-usr-b - 1) : PRODUCER_CONSUMMER-usr-b) : (next(PRODUCER_CONSUMMER-impl-usr-garde3) ? (PRODUCER_CONSUMMER-usr-b - 1) : PRODUCER_CONSUMMER-usr-b)));
 	next(PRODUCER_CONSUMMER-usr-o1) := (next(PRODUCER_CONSUMMER-usr-etat2) ? (next(PRODUCER_CONSUMMER-impl-usr-garde2) ? PRODUCER_CONSUMMER-usr-o1 + 1 : PRODUCER_CONSUMMER-usr-o1) : PRODUCER_CONSUMMER-usr-o1);
 	next(PRODUCER_CONSUMMER-usr-o2) := (next(PRODUCER_CONSUMMER-usr-etat3) ? (next(PRODUCER_CONSUMMER-impl-usr-garde3) ? PRODUCER_CONSUMMER-usr-o2 + 1 : PRODUCER_CONSUMMER-usr-o2) : PRODUCER_CONSUMMER-usr-o2);
@@ -98,14 +98,14 @@ ASSIGN
 	init(top-res-gklocal_6) := (!(top-usr-etat3 | (top-usr-etat2 | top-usr-etat1)) | top-res-call_5.excludes3-usr-excludes);
 	init(top-impl-usr-env) := ((top-res-call_7.Sofar-usr-Sofar & top-res-call_9.FirstB-usr-First) & (top-res-call_10.First-usr-First > 0));
 	init(top-impl-usr-i) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-i;
-	init(top-usr-OK) := (top-impl-usr-env -> top-impl-usr-i >= 0);
+	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-i >= 0));
 	init(top-impl-usr-o1) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1;
 
 	next(top-res-gklocal_6) := (!(next(top-usr-etat3) | (next(top-usr-etat2) | next(top-usr-etat1))) | next(top-res-call_5.excludes3-usr-excludes));
 	next(top-impl-usr-env) := ((next(top-res-call_7.Sofar-usr-Sofar) & next(top-res-call_9.FirstB-usr-First)) & (next(top-res-call_10.First-usr-First) > 0));
 	next(top-impl-usr-o1) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1);
 	next(top-impl-usr-i) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-i);
-	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-i) >= 0 & ((top-usr-etat1 & next(top-usr-etat2)) -> ((next(top-impl-usr-o1) = top-impl-usr-o1) | (next(top-impl-usr-o1) = top-impl-usr-o1 + 1)))));
+	next(top-usr-OK) := (next(top-impl-usr-env) -> ((next(top-impl-usr-i) >= 0) & ((top-usr-etat1 & next(top-usr-etat2)) -> ((next(top-impl-usr-o1) = top-impl-usr-o1) | (next(top-impl-usr-o1) = top-impl-usr-o1 + 1)))));
 	next(top-res-gklocal_8) := !(next(top-usr-etat3) | (next(top-usr-etat2) | next(top-usr-etat1)));
 
 

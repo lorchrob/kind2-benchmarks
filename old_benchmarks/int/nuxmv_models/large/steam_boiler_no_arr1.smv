@@ -4,9 +4,9 @@ VAR
 	initialization_complete-usr-initialization_complete : boolean;
 
 ASSIGN
-	init(initialization_complete-usr-initialization_complete) := (((initialization_complete-usr-op_mode = 2) & (400 <= initialization_complete-usr-level & initialization_complete-usr-level <= 600)) & !initialization_complete-usr-valve);
+	init(initialization_complete-usr-initialization_complete) := (((initialization_complete-usr-op_mode = 2) & ((400 <= initialization_complete-usr-level) & (initialization_complete-usr-level <= 600))) & !initialization_complete-usr-valve);
 
-	next(initialization_complete-usr-initialization_complete) := (((next(initialization_complete-usr-op_mode) = 2) & (400 <= next(initialization_complete-usr-level) & next(initialization_complete-usr-level) <= 600)) & !next(initialization_complete-usr-valve));
+	next(initialization_complete-usr-initialization_complete) := (((next(initialization_complete-usr-op_mode) = 2) & ((400 <= next(initialization_complete-usr-level)) & (next(initialization_complete-usr-level) <= 600))) & !next(initialization_complete-usr-valve));
 
 
 
@@ -32,10 +32,10 @@ VAR
 
 ASSIGN
 	init(Operator-impl-usr-nb_stops) := (Operator-usr-stop ? 1 : 0);
-	init(Operator-usr-stop_request) := Operator-impl-usr-nb_stops >= 3;
+	init(Operator-usr-stop_request) := (Operator-impl-usr-nb_stops >= 3);
 
 	next(Operator-impl-usr-nb_stops) := (next(Operator-usr-stop) ? Operator-impl-usr-nb_stops + 1 : 0);
-	next(Operator-usr-stop_request) := next(Operator-impl-usr-nb_stops) >= 3;
+	next(Operator-usr-stop_request) := (next(Operator-impl-usr-nb_stops) >= 3);
 
 
 
@@ -46,10 +46,10 @@ VAR
 
 ASSIGN
 	init(Defect-usr-stateout) := ((Defect-usr-statein = 0) ? (Defect-usr-fail_cond ? 1 : 0) : ((Defect-usr-statein = 1) ? (Defect-usr-ack_chan ? 2 : 1) : (Defect-usr-repair_chan ? 0 : 2)));
-	init(Defect-res-subrange_1) := (0 <= Defect-usr-stateout & Defect-usr-stateout <= 2);
+	init(Defect-res-subrange_1) := ((0 <= Defect-usr-stateout) & (Defect-usr-stateout <= 2));
 
 	next(Defect-usr-stateout) := ((next(Defect-usr-statein) = 0) ? (next(Defect-usr-fail_cond) ? 1 : 0) : ((next(Defect-usr-statein) = 1) ? (next(Defect-usr-ack_chan) ? 2 : 1) : (next(Defect-usr-repair_chan) ? 0 : 2)));
-	next(Defect-res-subrange_1) := (0 <= next(Defect-usr-stateout) & next(Defect-usr-stateout) <= 2);
+	next(Defect-res-subrange_1) := ((0 <= next(Defect-usr-stateout)) & (next(Defect-usr-stateout) <= 2));
 
 
 
@@ -101,7 +101,7 @@ VAR
 ASSIGN
 	init(Valve-usr-valve) := FALSE;
 	init(Valve-usr-valve_state) := 0;
-	next(Valve-usr-valve_state) := ((next(Valve-usr-op_mode) = 2) ? ((next(Valve-usr-q) > 600) ? 1 : (next(Valve-usr-q) <= 600 ? 0 : Valve-usr-valve_state)) : Valve-usr-valve_state);
+	next(Valve-usr-valve_state) := ((next(Valve-usr-op_mode) = 2) ? ((next(Valve-usr-q) > 600) ? 1 : ((next(Valve-usr-q) <= 600) ? 0 : Valve-usr-valve_state)) : Valve-usr-valve_state);
 	next(Valve-usr-valve) := !(next(Valve-usr-valve_state) = Valve-usr-valve_state);
 
 
@@ -329,10 +329,10 @@ ASSIGN
 	init(Dynamics-usr-p_2) := 0;
 	init(Dynamics-usr-p_3) := 0;
 	init(Dynamics-usr-v) := Dynamics-usr-steam;
-	init(Dynamics-res-subrange_28) := (0 <= Dynamics-usr-p_0 & Dynamics-usr-p_0 <= 15);
-	init(Dynamics-res-subrange_29) := (0 <= Dynamics-usr-p_1 & Dynamics-usr-p_1 <= 15);
-	init(Dynamics-res-subrange_30) := (0 <= Dynamics-usr-p_2 & Dynamics-usr-p_2 <= 15);
-	init(Dynamics-res-subrange_31) := (0 <= Dynamics-usr-p_3 & Dynamics-usr-p_3 <= 15);
+	init(Dynamics-res-subrange_28) := ((0 <= Dynamics-usr-p_0) & (Dynamics-usr-p_0 <= 15));
+	init(Dynamics-res-subrange_29) := ((0 <= Dynamics-usr-p_1) & (Dynamics-usr-p_1 <= 15));
+	init(Dynamics-res-subrange_30) := ((0 <= Dynamics-usr-p_2) & (Dynamics-usr-p_2 <= 15));
+	init(Dynamics-res-subrange_31) := ((0 <= Dynamics-usr-p_3) & (Dynamics-usr-p_3 <= 15));
 
 	next(Dynamics-usr-p_3) := (!next(Dynamics-usr-flow_3) ? 0 : 15);
 	next(Dynamics-usr-p_2) := (!next(Dynamics-usr-flow_2) ? 0 : 15);
@@ -340,10 +340,10 @@ ASSIGN
 	next(Dynamics-usr-p_0) := (!next(Dynamics-usr-flow_0) ? 0 : 15);
 	next(Dynamics-usr-q) := (next(Dynamics-res-call_32.level_failure-usr-level_failure) ? ((Dynamics-usr-q - (next(Dynamics-usr-steam) * 5)) + (next(Dynamics-res-call_33.sum-usr-sum) * 5) - ((next(Dynamics-usr-valve_state) = 1) ? 50 : 0)) : next(Dynamics-usr-level));
 	next(Dynamics-usr-v) := (next(Dynamics-res-call_34.steam_failure-usr-steam_failure) ? ((Dynamics-usr-q - next(Dynamics-usr-q)) / 5) + (next(Dynamics-res-call_33.sum-usr-sum) * 5) : next(Dynamics-usr-steam));
-	next(Dynamics-res-subrange_28) := (0 <= next(Dynamics-usr-p_0) & next(Dynamics-usr-p_0) <= 15);
-	next(Dynamics-res-subrange_29) := (0 <= next(Dynamics-usr-p_1) & next(Dynamics-usr-p_1) <= 15);
-	next(Dynamics-res-subrange_30) := (0 <= next(Dynamics-usr-p_2) & next(Dynamics-usr-p_2) <= 15);
-	next(Dynamics-res-subrange_31) := (0 <= next(Dynamics-usr-p_3) & next(Dynamics-usr-p_3) <= 15);
+	next(Dynamics-res-subrange_28) := ((0 <= next(Dynamics-usr-p_0)) & (next(Dynamics-usr-p_0) <= 15));
+	next(Dynamics-res-subrange_29) := ((0 <= next(Dynamics-usr-p_1)) & (next(Dynamics-usr-p_1) <= 15));
+	next(Dynamics-res-subrange_30) := ((0 <= next(Dynamics-usr-p_2)) & (next(Dynamics-usr-p_2) <= 15));
+	next(Dynamics-res-subrange_31) := ((0 <= next(Dynamics-usr-p_3)) & (next(Dynamics-usr-p_3) <= 15));
 
 
 
@@ -426,7 +426,7 @@ ASSIGN
 	init(PumpsStatus-res-gklocal_78) := PumpsStatus-res-oracle_77;
 	init(PumpsStatus-usr-pump_status_3) := 0;
 	init(PumpsStatus-impl-usr-t3) := PumpsStatus-res-2-call_79.operate_pumps-usr-operate_pumps_3;
-	init(PumpsStatus-res-subrange_69) := (0 <= PumpsStatus-impl-usr-n_pumps_flow & PumpsStatus-impl-usr-n_pumps_flow <= 4);
+	init(PumpsStatus-res-subrange_69) := ((0 <= PumpsStatus-impl-usr-n_pumps_flow) & (PumpsStatus-impl-usr-n_pumps_flow <= 4));
 
 	next(PumpsStatus-res-gklocal_72) := PumpsStatus-usr-pump_status_0;
 	next(PumpsStatus-impl-usr-n_pumps_flow) := (next(PumpsStatus-usr-flow_0) ? 1 : 0) + (next(PumpsStatus-usr-flow_1) ? 1 : 0) + (next(PumpsStatus-usr-flow_2) ? 1 : 0) + (next(PumpsStatus-usr-flow_3) ? 1 : 0);
@@ -443,7 +443,7 @@ ASSIGN
 	next(PumpsStatus-res-gklocal_78) := PumpsStatus-usr-pump_status_3;
 	next(PumpsStatus-impl-usr-t3) := next(PumpsStatus-res-2-call_79.operate_pumps-usr-operate_pumps_3);
 	next(PumpsStatus-usr-pump_status_3) := next(PumpsStatus-impl-usr-t3);
-	next(PumpsStatus-res-subrange_69) := (0 <= next(PumpsStatus-impl-usr-n_pumps_flow) & next(PumpsStatus-impl-usr-n_pumps_flow) <= 4);
+	next(PumpsStatus-res-subrange_69) := ((0 <= next(PumpsStatus-impl-usr-n_pumps_flow)) & (next(PumpsStatus-impl-usr-n_pumps_flow) <= 4));
 
 
 
@@ -491,9 +491,9 @@ VAR
 	dangerous_level-usr-dangerous_level : boolean;
 
 ASSIGN
-	init(dangerous_level-usr-dangerous_level) := (dangerous_level-usr-q >= 850 | dangerous_level-usr-q <= 150);
+	init(dangerous_level-usr-dangerous_level) := ((dangerous_level-usr-q >= 850) | (dangerous_level-usr-q <= 150));
 
-	next(dangerous_level-usr-dangerous_level) := (next(dangerous_level-usr-q) >= 850 | next(dangerous_level-usr-q) <= 150);
+	next(dangerous_level-usr-dangerous_level) := ((next(dangerous_level-usr-q) >= 850) | (next(dangerous_level-usr-q) <= 150));
 
 
 
@@ -598,11 +598,11 @@ VAR
 ASSIGN
 	init(ControlMode-usr-op_mode) := 1;
 	init(ControlMode-res-gklocal_82) := ControlMode-res-oracle_81;
-	init(ControlMode-res-subrange_80) := (1 <= ControlMode-usr-op_mode & ControlMode-usr-op_mode <= 6);
+	init(ControlMode-res-subrange_80) := ((1 <= ControlMode-usr-op_mode) & (ControlMode-usr-op_mode <= 6));
 
 	next(ControlMode-res-gklocal_82) := ControlMode-usr-op_mode;
 	next(ControlMode-usr-op_mode) := (((ControlMode-usr-op_mode = 6) | (next(ControlMode-usr-stop_request) | next(ControlMode-res-call_83.critical_failure-usr-critical_failure))) ? 6 : ((ControlMode-usr-op_mode = 1) ? (next(ControlMode-usr-steam_boiler_waiting) ? 2 : 1) : (((ControlMode-usr-op_mode = 2) & !next(ControlMode-usr-physical_units_ready)) ? 2 : (next(ControlMode-res-call_84.level_failure-usr-level_failure) ? 5 : (next(ControlMode-res-call_85.failure-usr-failure) ? 4 : 3)))));
-	next(ControlMode-res-subrange_80) := (1 <= next(ControlMode-usr-op_mode) & next(ControlMode-usr-op_mode) <= 6);
+	next(ControlMode-res-subrange_80) := ((1 <= next(ControlMode-usr-op_mode)) & (next(ControlMode-usr-op_mode) <= 6));
 
 
 
@@ -1083,7 +1083,37 @@ ASSIGN
 
 
 INVARSPEC 
-((top-usr-OK) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & 
- (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & 
- (TRUE) & (TRUE));
+((top-usr-OK));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
 

@@ -19,26 +19,26 @@ VAR
 
 ASSIGN
 	init(moesi-usr-modified_mo) := 0;
-	init(moesi-impl-usr-garde_mo1) := moesi-res-oracle_1 >= 1;
+	init(moesi-impl-usr-garde_mo1) := (moesi-res-oracle_1 >= 1);
 	init(moesi-usr-invalid_mo) := moesi-usr-init_invalid_mo;
 	init(moesi-usr-exclusive_mo) := 0;
-	init(moesi-impl-usr-garde_mo2) := moesi-res-oracle_2 >= 1;
-	init(moesi-impl-usr-garde_mo3) := (moesi-res-oracle_3 - 1) + moesi-res-oracle_4 >= 1;
+	init(moesi-impl-usr-garde_mo2) := (moesi-res-oracle_2 >= 1);
+	init(moesi-impl-usr-garde_mo3) := ((moesi-res-oracle_3 - 1) + moesi-res-oracle_4 >= 1);
 	init(moesi-usr-shared_mo) := 0;
-	init(moesi-impl-usr-garde_mo4) := moesi-res-oracle_5 >= 1;
+	init(moesi-impl-usr-garde_mo4) := (moesi-res-oracle_5 >= 1);
 	init(moesi-usr-owned_mo) := 0;
 	init(moesi-usr-erreur_mo) := FALSE;
 
-	next(moesi-impl-usr-garde_mo4) := moesi-usr-invalid_mo >= 1;
-	next(moesi-impl-usr-garde_mo3) := (moesi-usr-shared_mo - 1) + moesi-usr-owned_mo >= 1;
-	next(moesi-impl-usr-garde_mo2) := moesi-usr-exclusive_mo >= 1;
-	next(moesi-impl-usr-garde_mo1) := moesi-usr-invalid_mo >= 1;
+	next(moesi-impl-usr-garde_mo4) := (moesi-usr-invalid_mo >= 1);
+	next(moesi-impl-usr-garde_mo3) := ((moesi-usr-shared_mo - 1) + moesi-usr-owned_mo >= 1);
+	next(moesi-impl-usr-garde_mo2) := (moesi-usr-exclusive_mo >= 1);
+	next(moesi-impl-usr-garde_mo1) := (moesi-usr-invalid_mo >= 1);
 	next(moesi-usr-modified_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo2) ? (next(moesi-impl-usr-garde_mo2) ? moesi-usr-modified_mo + 1 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? 0 : moesi-usr-modified_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? 0 : moesi-usr-modified_mo) : moesi-usr-modified_mo))));
 	next(moesi-usr-invalid_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? (moesi-usr-invalid_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? (moesi-usr-invalid_mo + moesi-usr-modified_mo + moesi-usr-exclusive_mo + moesi-usr-shared_mo + moesi-usr-owned_mo - 1) : moesi-usr-invalid_mo) : moesi-usr-invalid_mo)));
 	next(moesi-usr-exclusive_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? 0 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo2) ? (next(moesi-impl-usr-garde_mo2) ? (moesi-usr-exclusive_mo - 1) : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? 1 : moesi-usr-exclusive_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? 1 : moesi-usr-exclusive_mo) : moesi-usr-exclusive_mo))));
 	next(moesi-usr-shared_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? (moesi-usr-shared_mo - 1) + moesi-usr-exclusive_mo + 1 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? 0 : moesi-usr-shared_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? 0 : moesi-usr-shared_mo) : moesi-usr-shared_mo)));
 	next(moesi-usr-owned_mo) := (next(moesi-usr-etat_mo1) ? (next(moesi-impl-usr-garde_mo1) ? moesi-usr-owned_mo + moesi-usr-modified_mo : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo3) ? (next(moesi-impl-usr-garde_mo3) ? 0 : moesi-usr-owned_mo) : (next(moesi-usr-etat_mo4) ? (next(moesi-impl-usr-garde_mo4) ? 0 : moesi-usr-owned_mo) : moesi-usr-owned_mo)));
-	next(moesi-usr-erreur_mo) := next(moesi-usr-exclusive_mo) >= 2;
+	next(moesi-usr-erreur_mo) := (next(moesi-usr-exclusive_mo) >= 2);
 
 
 

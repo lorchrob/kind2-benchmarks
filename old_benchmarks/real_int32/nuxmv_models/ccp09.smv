@@ -209,7 +209,7 @@ VAR
 
 ASSIGN
 	init(top-impl-usr-zz222) := 0;
-	init(top-impl-usr-zz182) := top-usr-carSpeed >= 15;
+	init(top-impl-usr-zz182) := (top-usr-carSpeed >= 15);
 	init(top-impl-usr-zz181) := (top-usr-carGear = 0sh32_00000003);
 	init(top-impl-usr-zz186) := ((((!top-usr-cancel & !top-usr-brakePedal) & top-impl-usr-zz181) & top-impl-usr-zz182) & top-usr-validInputs);
 	init(top-impl-usr-zz184) := TRUE;
@@ -407,7 +407,7 @@ ASSIGN
 	init(top-impl-usr-zz161) := top-impl-usr-zz160;
 
 	next(top-impl-usr-zz222) := top-impl-usr-desiredSpeed;
-	next(top-impl-usr-zz182) := next(top-usr-carSpeed) >= 15;
+	next(top-impl-usr-zz182) := (next(top-usr-carSpeed) >= 15);
 	next(top-impl-usr-zz181) := (next(top-usr-carGear) = 0sh32_00000003);
 	next(top-impl-usr-zz186) := ((((!next(top-usr-cancel) & !next(top-usr-brakePedal)) & next(top-impl-usr-zz181)) & next(top-impl-usr-zz182)) & next(top-usr-validInputs));
 	next(top-impl-usr-zz184) := top-impl-usr-zz183;

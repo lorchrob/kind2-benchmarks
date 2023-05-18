@@ -38,50 +38,50 @@ VAR
 
 ASSIGN
 	init(rtp-usr-X1) := 1;
-	init(rtp-impl-usr-g01) := rtp-res-oracle_1 >= 1;
+	init(rtp-impl-usr-g01) := (rtp-res-oracle_1 >= 1);
 	init(rtp-usr-X2) := 0;
-	init(rtp-impl-usr-g02) := rtp-res-oracle_2 >= 1;
-	init(rtp-impl-usr-g12) := rtp-res-oracle_12 >= 1;
+	init(rtp-impl-usr-g02) := (rtp-res-oracle_2 >= 1);
+	init(rtp-impl-usr-g12) := (rtp-res-oracle_12 >= 1);
 	init(rtp-usr-X9) := 0;
-	init(rtp-impl-usr-g05) := rtp-res-oracle_5 >= 1;
+	init(rtp-impl-usr-g05) := (rtp-res-oracle_5 >= 1);
 	init(rtp-usr-X4) := 0;
-	init(rtp-impl-usr-g03) := rtp-res-oracle_3 >= 1;
+	init(rtp-impl-usr-g03) := (rtp-res-oracle_3 >= 1);
 	init(rtp-usr-X3) := 0;
-	init(rtp-impl-usr-g04) := rtp-res-oracle_4 >= 1;
-	init(rtp-impl-usr-g07) := rtp-res-oracle_7 >= 1;
+	init(rtp-impl-usr-g04) := (rtp-res-oracle_4 >= 1);
+	init(rtp-impl-usr-g07) := (rtp-res-oracle_7 >= 1);
 	init(rtp-usr-X6) := 0;
-	init(rtp-impl-usr-g06) := rtp-res-oracle_6 >= 1;
+	init(rtp-impl-usr-g06) := (rtp-res-oracle_6 >= 1);
 	init(rtp-usr-X5) := 0;
-	init(rtp-impl-usr-g08) := rtp-res-oracle_8 >= 1;
-	init(rtp-impl-usr-g09) := rtp-res-oracle_9 >= 1;
-	init(rtp-impl-usr-g10) := rtp-res-oracle_10 >= 1;
+	init(rtp-impl-usr-g08) := (rtp-res-oracle_8 >= 1);
+	init(rtp-impl-usr-g09) := (rtp-res-oracle_9 >= 1);
+	init(rtp-impl-usr-g10) := (rtp-res-oracle_10 >= 1);
 	init(rtp-usr-X7) := 0;
-	init(rtp-impl-usr-g11) := rtp-res-oracle_11 >= 1;
+	init(rtp-impl-usr-g11) := (rtp-res-oracle_11 >= 1);
 	init(rtp-usr-X8) := 0;
-	init(rtp-usr-erreur) := (rtp-usr-X1 >= 2 ? TRUE : FALSE);
+	init(rtp-usr-erreur) := ((rtp-usr-X1 >= 2) ? TRUE : FALSE);
 
-	next(rtp-impl-usr-g01) := rtp-usr-X1 >= 1;
+	next(rtp-impl-usr-g01) := (rtp-usr-X1 >= 1);
 	next(rtp-usr-X1) := (next(rtp-usr-e01) ? (next(rtp-impl-usr-g01) ? (rtp-usr-X1 - 1) : rtp-usr-X1) : rtp-usr-X1);
-	next(rtp-impl-usr-g12) := rtp-usr-X9 >= 1;
-	next(rtp-impl-usr-g02) := rtp-usr-X2 >= 1;
+	next(rtp-impl-usr-g12) := (rtp-usr-X9 >= 1);
+	next(rtp-impl-usr-g02) := (rtp-usr-X2 >= 1);
 	next(rtp-usr-X2) := (next(rtp-usr-e01) ? (next(rtp-impl-usr-g01) ? rtp-usr-X2 + 1 : rtp-usr-X2) : (next(rtp-usr-e02) ? (next(rtp-impl-usr-g02) ? (rtp-usr-X2 - 1) : rtp-usr-X2) : (next(rtp-usr-e12) ? (next(rtp-impl-usr-g12) ? rtp-usr-X2 + 1 : rtp-usr-X2) : rtp-usr-X2)));
-	next(rtp-impl-usr-g11) := rtp-usr-X8 >= 1;
-	next(rtp-impl-usr-g10) := rtp-usr-X7 >= 1;
-	next(rtp-impl-usr-g07) := rtp-usr-X6 >= 1;
-	next(rtp-impl-usr-g05) := rtp-usr-X4 >= 1;
+	next(rtp-impl-usr-g11) := (rtp-usr-X8 >= 1);
+	next(rtp-impl-usr-g10) := (rtp-usr-X7 >= 1);
+	next(rtp-impl-usr-g07) := (rtp-usr-X6 >= 1);
+	next(rtp-impl-usr-g05) := (rtp-usr-X4 >= 1);
 	next(rtp-usr-X9) := (next(rtp-usr-e05) ? (next(rtp-impl-usr-g05) ? rtp-usr-X9 + 1 : rtp-usr-X9) : (next(rtp-usr-e07) ? (next(rtp-impl-usr-g07) ? rtp-usr-X9 + 1 : rtp-usr-X9) : (next(rtp-usr-e10) ? (next(rtp-impl-usr-g10) ? rtp-usr-X9 + 1 : rtp-usr-X9) : (next(rtp-usr-e11) ? (next(rtp-impl-usr-g11) ? rtp-usr-X9 + 1 : rtp-usr-X9) : (next(rtp-usr-e12) ? (next(rtp-impl-usr-g12) ? (rtp-usr-X9 - 1) : rtp-usr-X9) : rtp-usr-X9)))));
-	next(rtp-impl-usr-g04) := rtp-usr-X4 >= 1;
-	next(rtp-impl-usr-g03) := rtp-usr-X3 >= 1;
+	next(rtp-impl-usr-g04) := (rtp-usr-X4 >= 1);
+	next(rtp-impl-usr-g03) := (rtp-usr-X3 >= 1);
 	next(rtp-usr-X4) := (next(rtp-usr-e03) ? (next(rtp-impl-usr-g03) ? rtp-usr-X4 + 1 : rtp-usr-X4) : (next(rtp-usr-e04) ? (next(rtp-impl-usr-g04) ? (rtp-usr-X4 - 1) : rtp-usr-X4) : (next(rtp-usr-e05) ? (next(rtp-impl-usr-g05) ? (rtp-usr-X4 - 1) : rtp-usr-X4) : rtp-usr-X4)));
 	next(rtp-usr-X3) := (next(rtp-usr-e02) ? (next(rtp-impl-usr-g02) ? rtp-usr-X3 + 1 : rtp-usr-X3) : (next(rtp-usr-e03) ? (next(rtp-impl-usr-g03) ? (rtp-usr-X3 - 1) : rtp-usr-X3) : rtp-usr-X3));
-	next(rtp-impl-usr-g09) := rtp-usr-X6 >= 1;
-	next(rtp-impl-usr-g08) := rtp-usr-X6 >= 1;
-	next(rtp-impl-usr-g06) := rtp-usr-X5 >= 1;
+	next(rtp-impl-usr-g09) := (rtp-usr-X6 >= 1);
+	next(rtp-impl-usr-g08) := (rtp-usr-X6 >= 1);
+	next(rtp-impl-usr-g06) := (rtp-usr-X5 >= 1);
 	next(rtp-usr-X6) := (next(rtp-usr-e06) ? (next(rtp-impl-usr-g06) ? rtp-usr-X6 + 1 : rtp-usr-X6) : (next(rtp-usr-e07) ? (next(rtp-impl-usr-g07) ? (rtp-usr-X6 - 1) : rtp-usr-X6) : (next(rtp-usr-e08) ? (next(rtp-impl-usr-g08) ? (rtp-usr-X6 - 1) : rtp-usr-X6) : (next(rtp-usr-e09) ? (next(rtp-impl-usr-g09) ? (rtp-usr-X6 - 1) : rtp-usr-X6) : rtp-usr-X6))));
 	next(rtp-usr-X5) := (next(rtp-usr-e04) ? (next(rtp-impl-usr-g04) ? rtp-usr-X5 + 1 : rtp-usr-X5) : (next(rtp-usr-e06) ? (next(rtp-impl-usr-g06) ? (rtp-usr-X5 - 1) : rtp-usr-X5) : rtp-usr-X5));
 	next(rtp-usr-X7) := (next(rtp-usr-e08) ? (next(rtp-impl-usr-g08) ? rtp-usr-X7 + 1 : rtp-usr-X7) : (next(rtp-usr-e10) ? (next(rtp-impl-usr-g10) ? (rtp-usr-X7 - 1) : rtp-usr-X7) : rtp-usr-X7));
 	next(rtp-usr-X8) := (next(rtp-usr-e09) ? (next(rtp-impl-usr-g09) ? rtp-usr-X8 + 1 : rtp-usr-X8) : (next(rtp-usr-e11) ? (next(rtp-impl-usr-g11) ? (rtp-usr-X8 - 1) : rtp-usr-X8) : rtp-usr-X8));
-	next(rtp-usr-erreur) := (next(rtp-usr-X1) >= 2 ? TRUE : FALSE);
+	next(rtp-usr-erreur) := ((next(rtp-usr-X1) >= 2) ? TRUE : FALSE);
 
 
 
@@ -132,12 +132,12 @@ ASSIGN
 	init(top-impl-usr-X9) := top-res-2-call_13.rtp-usr-X9;
 	init(top-res-gklocal_15) := (top-res-call_14.excludes12-usr-excludes & (top-impl-usr-X9 < 32767));
 	init(top-impl-usr-env) := top-res-call_16.Sofar-usr-Sofar;
-	init(top-usr-OK) := (top-impl-usr-env -> 0 <= top-impl-usr-X9);
+	init(top-usr-OK) := (top-impl-usr-env -> (0 <= top-impl-usr-X9));
 
 	next(top-impl-usr-X9) := next(top-res-2-call_13.rtp-usr-X9);
 	next(top-res-gklocal_15) := (next(top-res-call_14.excludes12-usr-excludes) & (next(top-impl-usr-X9) < 32767));
 	next(top-impl-usr-env) := next(top-res-call_16.Sofar-usr-Sofar);
-	next(top-usr-OK) := (next(top-impl-usr-env) -> 0 <= next(top-impl-usr-X9));
+	next(top-usr-OK) := (next(top-impl-usr-env) -> (0 <= next(top-impl-usr-X9)));
 
 
 INVARSPEC 

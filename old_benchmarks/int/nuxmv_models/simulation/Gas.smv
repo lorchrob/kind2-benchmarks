@@ -56,15 +56,15 @@ VAR
 	top-res-call_6 : Age(top-res-gklocal_5);
 
 ASSIGN
-	init(top-res-gklocal_2) := top-res-call_1.Age-usr-Count <= 10;
-	init(top-impl-usr-env) := (top-res-call_3.Sofar-usr-Sofar & (300 <= top-res-call_6.Age-usr-Count | !top-res-call_4.RaisingEdge-usr-res));
-	init(top-usr-OK) := (top-impl-usr-env -> ((2 * top-res-call_9.Dursince-usr-Count) <= top-res-call_8.Age-usr-Count | top-res-call_8.Age-usr-Count <= 600));
+	init(top-res-gklocal_2) := (top-res-call_1.Age-usr-Count <= 10);
+	init(top-impl-usr-env) := (top-res-call_3.Sofar-usr-Sofar & ((300 <= top-res-call_6.Age-usr-Count) | !top-res-call_4.RaisingEdge-usr-res));
+	init(top-usr-OK) := (top-impl-usr-env -> (((2 * top-res-call_9.Dursince-usr-Count) <= top-res-call_8.Age-usr-Count) | (top-res-call_8.Age-usr-Count <= 600)));
 	init(top-res-gklocal_5) := !top-usr-leak;
 	init(top-res-gklocal_7) := !top-usr-P1;
 
-	next(top-res-gklocal_2) := next(top-res-call_1.Age-usr-Count) <= 10;
-	next(top-impl-usr-env) := (next(top-res-call_3.Sofar-usr-Sofar) & (300 <= next(top-res-call_6.Age-usr-Count) | !next(top-res-call_4.RaisingEdge-usr-res)));
-	next(top-usr-OK) := (next(top-impl-usr-env) -> ((2 * next(top-res-call_9.Dursince-usr-Count)) <= next(top-res-call_8.Age-usr-Count) | next(top-res-call_8.Age-usr-Count) <= 600));
+	next(top-res-gklocal_2) := (next(top-res-call_1.Age-usr-Count) <= 10);
+	next(top-impl-usr-env) := (next(top-res-call_3.Sofar-usr-Sofar) & ((300 <= next(top-res-call_6.Age-usr-Count)) | !next(top-res-call_4.RaisingEdge-usr-res)));
+	next(top-usr-OK) := (next(top-impl-usr-env) -> (((2 * next(top-res-call_9.Dursince-usr-Count)) <= next(top-res-call_8.Age-usr-Count)) | (next(top-res-call_8.Age-usr-Count) <= 600)));
 	next(top-res-gklocal_5) := !next(top-usr-leak);
 	next(top-res-gklocal_7) := !next(top-usr-P1);
 

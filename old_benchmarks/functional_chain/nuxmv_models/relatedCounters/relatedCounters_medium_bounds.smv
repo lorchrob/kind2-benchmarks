@@ -23,9 +23,9 @@ ASSIGN
 	init(top-impl-usr-pre_x) := 0;
 	init(top-impl-usr-x) := ((top-usr-c | top-usr-b) ? 0 : ((top-usr-a & (top-impl-usr-pre_x < top-impl-usr-nX)) ? top-impl-usr-pre_x + 1 : top-impl-usr-pre_x));
 	init(top-usr-ok) := ((top-impl-usr-x = top-impl-usr-nX) -> (top-impl-usr-y = top-impl-usr-nY));
-	init(top-res-glocal_3) := (((0 <= top-impl-usr-x & top-impl-usr-x <= top-impl-usr-nX) & 0 <= top-impl-usr-y) & top-impl-usr-y <= top-impl-usr-nY);
-	init(top-res-subrange_1) := (100 <= top-impl-usr-nX & top-impl-usr-nX <= 100);
-	init(top-res-subrange_2) := (60 <= top-impl-usr-nY & top-impl-usr-nY <= 60);
+	init(top-res-glocal_3) := ((((0 <= top-impl-usr-x) & (top-impl-usr-x <= top-impl-usr-nX)) & (0 <= top-impl-usr-y)) & (top-impl-usr-y <= top-impl-usr-nY));
+	init(top-res-subrange_1) := ((100 <= top-impl-usr-nX) & (top-impl-usr-nX <= 100));
+	init(top-res-subrange_2) := ((60 <= top-impl-usr-nY) & (top-impl-usr-nY <= 60));
 
 	next(top-impl-usr-nY) := 60;
 	next(top-impl-usr-nX) := 100;
@@ -34,12 +34,12 @@ ASSIGN
 	next(top-impl-usr-pre_x) := top-impl-usr-x;
 	next(top-impl-usr-x) := ((next(top-usr-c) | next(top-usr-b)) ? 0 : ((next(top-usr-a) & (next(top-impl-usr-pre_x) < next(top-impl-usr-nX))) ? next(top-impl-usr-pre_x) + 1 : next(top-impl-usr-pre_x)));
 	next(top-usr-ok) := ((next(top-impl-usr-x) = next(top-impl-usr-nX)) -> (next(top-impl-usr-y) = next(top-impl-usr-nY)));
-	next(top-res-glocal_3) := (((0 <= next(top-impl-usr-x) & next(top-impl-usr-x) <= next(top-impl-usr-nX)) & 0 <= next(top-impl-usr-y)) & next(top-impl-usr-y) <= next(top-impl-usr-nY));
-	next(top-res-subrange_1) := (100 <= next(top-impl-usr-nX) & next(top-impl-usr-nX) <= 100);
-	next(top-res-subrange_2) := (60 <= next(top-impl-usr-nY) & next(top-impl-usr-nY) <= 60);
+	next(top-res-glocal_3) := ((((0 <= next(top-impl-usr-x)) & (next(top-impl-usr-x) <= next(top-impl-usr-nX))) & (0 <= next(top-impl-usr-y))) & (next(top-impl-usr-y) <= next(top-impl-usr-nY)));
+	next(top-res-subrange_1) := ((100 <= next(top-impl-usr-nX)) & (next(top-impl-usr-nX) <= 100));
+	next(top-res-subrange_2) := ((60 <= next(top-impl-usr-nY)) & (next(top-impl-usr-nY) <= 60));
 
 	INVAR top-res-glocal_3;
 
 INVARSPEC 
-((top-res-subrange_2) & (top-res-subrange_1) & (top-usr-ok));
+((top-usr-ok));
 

@@ -34,16 +34,16 @@ ASSIGN
 	init(swimingpool-impl-usr-g6) := FALSE;
 	init(swimingpool-usr-x5) := 0;
 
-	next(swimingpool-impl-usr-g2) := (swimingpool-usr-x1 >= 1 & swimingpool-usr-x7 >= 1);
-	next(swimingpool-impl-usr-g1) := swimingpool-usr-x6 >= 1;
+	next(swimingpool-impl-usr-g2) := ((swimingpool-usr-x1 >= 1) & (swimingpool-usr-x7 >= 1));
+	next(swimingpool-impl-usr-g1) := (swimingpool-usr-x6 >= 1);
 	next(swimingpool-usr-x1) := (next(swimingpool-usr-e1) ? (next(swimingpool-impl-usr-g1) ? swimingpool-usr-x1 + 1 : swimingpool-usr-x1) : (next(swimingpool-usr-e2) ? (next(swimingpool-impl-usr-g2) ? (swimingpool-usr-x1 - 1) : swimingpool-usr-x1) : swimingpool-usr-x1));
-	next(swimingpool-impl-usr-g6) := swimingpool-usr-x5 >= 1;
-	next(swimingpool-impl-usr-g4) := (swimingpool-usr-x3 >= 1 & swimingpool-usr-x6 >= 1);
-	next(swimingpool-impl-usr-g3) := swimingpool-usr-x2 >= 1;
+	next(swimingpool-impl-usr-g6) := (swimingpool-usr-x5 >= 1);
+	next(swimingpool-impl-usr-g4) := ((swimingpool-usr-x3 >= 1) & (swimingpool-usr-x6 >= 1));
+	next(swimingpool-impl-usr-g3) := (swimingpool-usr-x2 >= 1);
 	next(swimingpool-usr-x6) := (next(swimingpool-usr-e1) ? (next(swimingpool-impl-usr-g1) ? (swimingpool-usr-x6 - 1) : swimingpool-usr-x6) : (next(swimingpool-usr-e3) ? (next(swimingpool-impl-usr-g3) ? swimingpool-usr-x6 + 1 : swimingpool-usr-x6) : (next(swimingpool-usr-e4) ? (next(swimingpool-impl-usr-g4) ? (swimingpool-usr-x6 - 1) : swimingpool-usr-x6) : (next(swimingpool-usr-e6) ? (next(swimingpool-impl-usr-g6) ? swimingpool-usr-x6 + 1 : swimingpool-usr-x6) : swimingpool-usr-x6))));
 	next(swimingpool-usr-p1) := swimingpool-usr-p1;
 	next(swimingpool-usr-x2) := (next(swimingpool-usr-e2) ? (next(swimingpool-impl-usr-g2) ? swimingpool-usr-x2 + 1 : swimingpool-usr-x2) : (next(swimingpool-usr-e3) ? (next(swimingpool-impl-usr-g3) ? (swimingpool-usr-x2 - 1) : swimingpool-usr-x2) : swimingpool-usr-x2));
-	next(swimingpool-impl-usr-g5) := swimingpool-usr-x4 >= 1;
+	next(swimingpool-impl-usr-g5) := (swimingpool-usr-x4 >= 1);
 	next(swimingpool-usr-x7) := (next(swimingpool-usr-e2) ? (next(swimingpool-impl-usr-g2) ? (swimingpool-usr-x7 - 1) : swimingpool-usr-x7) : (next(swimingpool-usr-e5) ? (next(swimingpool-impl-usr-g5) ? swimingpool-usr-x7 + 1 : swimingpool-usr-x7) : swimingpool-usr-x7));
 	next(swimingpool-usr-p2) := swimingpool-usr-p2;
 	next(swimingpool-usr-x4) := (next(swimingpool-usr-e4) ? (next(swimingpool-impl-usr-g4) ? swimingpool-usr-x4 + 1 : swimingpool-usr-x4) : (next(swimingpool-usr-e5) ? (next(swimingpool-impl-usr-g4) ? (swimingpool-usr-x4 - 1) : swimingpool-usr-x4) : swimingpool-usr-x4));
@@ -103,11 +103,11 @@ VAR
 	top-res-2-call_1 : swimingpool(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6, top-usr-init_p1, top-usr-init_p2);
 
 ASSIGN
-	init(top-impl-usr-env) := ((((top-res-call_3.Sofar-usr-Sofar & 0 <= top-res-call_4.First-usr-First) & 0 <= top-res-call_5.First-usr-First) & (top-res-call_4.First-usr-First < 1000)) & (top-res-call_5.First-usr-First < 1000));
+	init(top-impl-usr-env) := ((((top-res-call_3.Sofar-usr-Sofar & (0 <= top-res-call_4.First-usr-First)) & (0 <= top-res-call_5.First-usr-First)) & (top-res-call_4.First-usr-First < 1000)) & (top-res-call_5.First-usr-First < 1000));
 	init(top-impl-usr-x4) := top-res-2-call_1.swimingpool-usr-x4;
 	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-x4 < 1));
 
-	next(top-impl-usr-env) := ((((next(top-res-call_3.Sofar-usr-Sofar) & 0 <= next(top-res-call_4.First-usr-First)) & 0 <= next(top-res-call_5.First-usr-First)) & (next(top-res-call_4.First-usr-First) < 1000)) & (next(top-res-call_5.First-usr-First) < 1000));
+	next(top-impl-usr-env) := ((((next(top-res-call_3.Sofar-usr-Sofar) & (0 <= next(top-res-call_4.First-usr-First))) & (0 <= next(top-res-call_5.First-usr-First))) & (next(top-res-call_4.First-usr-First) < 1000)) & (next(top-res-call_5.First-usr-First) < 1000));
 	next(top-impl-usr-x4) := next(top-res-2-call_1.swimingpool-usr-x4);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-x4) < 1));
 

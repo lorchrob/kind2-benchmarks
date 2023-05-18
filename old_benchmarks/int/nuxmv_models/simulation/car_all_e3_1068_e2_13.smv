@@ -14,12 +14,12 @@ VAR
 
 ASSIGN
 	init(voiture-usr-speed) := 0;
-	init(voiture-usr-toofast) := voiture-usr-speed >= 3;
+	init(voiture-usr-toofast) := (voiture-usr-speed >= 3);
 	init(voiture-usr-move) := TRUE;
 	init(voiture-usr-time) := 0;
 	init(voiture-usr-dist) := 0;
 	init(voiture-usr-bump) := (voiture-usr-dist = 10);
-	init(voiture-usr-stop) := voiture-usr-time >= 4;
+	init(voiture-usr-stop) := (voiture-usr-time >= 4);
 	init(voiture-res-glocal_1) := (((voiture-usr-move & !voiture-usr-stop) & !voiture-usr-toofast) & !voiture-usr-bump);
 	init(voiture-usr-second) := FALSE;
 	init(voiture-usr-meter) := FALSE;
@@ -28,11 +28,11 @@ ASSIGN
 	next(voiture-usr-second) := next(voiture-usr-s);
 	next(voiture-usr-move) := voiture-res-glocal_1;
 	next(voiture-usr-speed) := ((next(voiture-usr-second) | !next(voiture-usr-move)) ? 0 : ((next(voiture-usr-move) & next(voiture-usr-meter)) ? (voiture-usr-speed - 1) : voiture-usr-speed));
-	next(voiture-usr-toofast) := next(voiture-usr-speed) >= 3;
+	next(voiture-usr-toofast) := (next(voiture-usr-speed) >= 3);
 	next(voiture-usr-time) := (next(voiture-usr-second) ? (voiture-usr-time - 1) + 1 : voiture-usr-time);
 	next(voiture-usr-dist) := ((next(voiture-usr-move) & next(voiture-usr-meter)) ? voiture-usr-dist + 1 : voiture-usr-dist);
 	next(voiture-usr-bump) := (next(voiture-usr-dist) = 10);
-	next(voiture-usr-stop) := next(voiture-usr-time) >= 4;
+	next(voiture-usr-stop) := (next(voiture-usr-time) >= 4);
 	next(voiture-res-glocal_1) := (((next(voiture-usr-move) & !next(voiture-usr-stop)) & !next(voiture-usr-toofast)) & !next(voiture-usr-bump));
 
 
@@ -76,13 +76,13 @@ ASSIGN
 	init(top-res-gklocal_4) := (top-res-call_3.excludes2-usr-excludes & (top-impl-usr-dist < 32767));
 	init(top-impl-usr-env) := top-res-call_5.Sofar-usr-Sofar;
 	init(top-impl-usr-speed) := top-res-2-call_2.voiture-usr-speed;
-	init(top-usr-OK) := (top-impl-usr-env -> (((top-impl-usr-dist >= 0 & (top-impl-usr-dist < 11)) & (top-impl-usr-speed < 4)) & top-impl-usr-speed >= 0));
+	init(top-usr-OK) := (top-impl-usr-env -> ((((top-impl-usr-dist >= 0) & (top-impl-usr-dist < 11)) & (top-impl-usr-speed < 4)) & (top-impl-usr-speed >= 0)));
 
 	next(top-impl-usr-dist) := next(top-res-2-call_2.voiture-usr-dist);
 	next(top-res-gklocal_4) := (next(top-res-call_3.excludes2-usr-excludes) & (next(top-impl-usr-dist) < 32767));
 	next(top-impl-usr-env) := next(top-res-call_5.Sofar-usr-Sofar);
 	next(top-impl-usr-speed) := next(top-res-2-call_2.voiture-usr-speed);
-	next(top-usr-OK) := (next(top-impl-usr-env) -> (((next(top-impl-usr-dist) >= 0 & (next(top-impl-usr-dist) < 11)) & (next(top-impl-usr-speed) < 4)) & next(top-impl-usr-speed) >= 0));
+	next(top-usr-OK) := (next(top-impl-usr-env) -> ((((next(top-impl-usr-dist) >= 0) & (next(top-impl-usr-dist) < 11)) & (next(top-impl-usr-speed) < 4)) & (next(top-impl-usr-speed) >= 0)));
 
 
 INVARSPEC 

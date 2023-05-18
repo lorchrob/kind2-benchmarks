@@ -136,7 +136,7 @@ ASSIGN
 	init(top-impl-usr-zz156) := 0sh32_00000000;
 	init(top-impl-usr-zz153) := (!(top-impl-usr-zz156 = 0sh32_00000001) ? 0sh32_00000001 : top-impl-usr-zz156);
 	init(top-usr-OK) := (((top-impl-usr-zz153 >= 0sh32_00000002) & (top-impl-usr-zz153 <= 0sh32_00000008)) | (top-impl-usr-zz153 = 0sh32_00000001));
-	init(top-impl-usr-zz182) := top-usr-carSpeed >= 15;
+	init(top-impl-usr-zz182) := (top-usr-carSpeed >= 15);
 	init(top-impl-usr-zz181) := (top-usr-carGear = 0sh32_00000003);
 	init(top-impl-usr-zz186) := ((((!top-usr-cancel & !top-usr-brakePedal) & top-impl-usr-zz181) & top-impl-usr-zz182) & top-usr-validInputs);
 	init(top-impl-usr-zz184) := TRUE;
@@ -259,7 +259,7 @@ ASSIGN
 	next(top-impl-usr-zz156) := top-impl-usr-zz161;
 	next(top-impl-usr-zz153) := (!(next(top-impl-usr-zz156) = 0sh32_00000001) ? 0sh32_00000001 : next(top-impl-usr-zz156));
 	next(top-usr-OK) := (((next(top-impl-usr-zz153) >= 0sh32_00000002) & (next(top-impl-usr-zz153) <= 0sh32_00000008)) | (next(top-impl-usr-zz153) = 0sh32_00000001));
-	next(top-impl-usr-zz182) := next(top-usr-carSpeed) >= 15;
+	next(top-impl-usr-zz182) := (next(top-usr-carSpeed) >= 15);
 	next(top-impl-usr-zz181) := (next(top-usr-carGear) = 0sh32_00000003);
 	next(top-impl-usr-zz186) := ((((!next(top-usr-cancel) & !next(top-usr-brakePedal)) & next(top-impl-usr-zz181)) & next(top-impl-usr-zz182)) & next(top-usr-validInputs));
 	next(top-impl-usr-zz184) := top-impl-usr-zz183;

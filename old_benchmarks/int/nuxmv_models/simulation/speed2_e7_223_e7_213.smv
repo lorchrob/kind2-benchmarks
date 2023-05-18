@@ -33,16 +33,16 @@ ASSIGN
 	init(speed-impl-usr-incr) := ((!speed-usr-second | speed-usr-beacon) ? 1 : ((!speed-usr-beacon | speed-usr-second) ? 2 : 0));
 	init(speed-impl-usr-diff) := speed-res-call_5.COUNTER-usr-C;
 	init(speed-usr-early) := FALSE;
-	init(speed-res-subrange_1) := (0 <= speed-impl-usr-incr & speed-impl-usr-incr <= 2);
+	init(speed-res-subrange_1) := ((0 <= speed-impl-usr-incr) & (speed-impl-usr-incr <= 2));
 
 	next(speed-res-gklocal_2) := 0;
 	next(speed-res-gklocal_3) := (next(speed-usr-second) | next(speed-usr-beacon));
 	next(speed-res-gklocal_4) := FALSE;
 	next(speed-impl-usr-incr) := ((!next(speed-usr-second) | next(speed-usr-beacon)) ? 1 : ((!next(speed-usr-beacon) | next(speed-usr-second)) ? 2 : 0));
 	next(speed-impl-usr-diff) := next(speed-res-call_5.COUNTER-usr-C);
-	next(speed-usr-late) := (speed-usr-late ? (next(speed-impl-usr-diff) < 0) : next(speed-impl-usr-diff) <= -10);
-	next(speed-usr-early) := (speed-usr-early ? (next(speed-impl-usr-diff) > 0) : next(speed-impl-usr-diff) >= 10);
-	next(speed-res-subrange_1) := (0 <= next(speed-impl-usr-incr) & next(speed-impl-usr-incr) <= 2);
+	next(speed-usr-late) := (speed-usr-late ? (next(speed-impl-usr-diff) < 0) : (next(speed-impl-usr-diff) <= -10));
+	next(speed-usr-early) := (speed-usr-early ? (next(speed-impl-usr-diff) > 0) : (next(speed-impl-usr-diff) >= 10));
+	next(speed-res-subrange_1) := ((0 <= next(speed-impl-usr-incr)) & (next(speed-impl-usr-incr) <= 2));
 
 
 
@@ -66,5 +66,7 @@ ASSIGN
 
 
 INVARSPEC 
-((top-usr-OK) & (TRUE));
+((top-usr-OK));
+INVARSPEC 
+((TRUE));
 

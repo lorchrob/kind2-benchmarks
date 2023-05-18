@@ -7,7 +7,7 @@ VAR
 ASSIGN
 	init(hypothese-usr-ok) := TRUE;
 	init(hypothese-impl-usr-c) := 0;
-	next(hypothese-usr-ok) := ((hypothese-usr-retard ? !next(hypothese-usr-S) : TRUE) & (hypothese-impl-usr-c >= 9 ? !next(hypothese-usr-B) : TRUE));
+	next(hypothese-usr-ok) := ((hypothese-usr-retard ? !next(hypothese-usr-S) : TRUE) & ((hypothese-impl-usr-c >= 9) ? !next(hypothese-usr-B) : TRUE));
 	next(hypothese-impl-usr-c) := ((hypothese-usr-avance & next(hypothese-usr-avance)) ? (next(hypothese-usr-B) ? (hypothese-impl-usr-c - 1) : hypothese-impl-usr-c) : 0);
 
 
@@ -24,8 +24,8 @@ ASSIGN
 	init(controleur-usr-retard) := FALSE;
 
 	next(controleur-usr-diff) := (next(controleur-usr-nB) - next(controleur-usr-nS));
-	next(controleur-usr-avance) := (!controleur-usr-avance ? next(controleur-usr-diff) >= 10 : (next(controleur-usr-diff) > 0));
-	next(controleur-usr-retard) := (!controleur-usr-retard ? next(controleur-usr-diff) <= -10 : (next(controleur-usr-diff) < 0));
+	next(controleur-usr-avance) := (!controleur-usr-avance ? (next(controleur-usr-diff) >= 10) : (next(controleur-usr-diff) > 0));
+	next(controleur-usr-retard) := (!controleur-usr-retard ? (next(controleur-usr-diff) <= -10) : (next(controleur-usr-diff) < 0));
 
 
 

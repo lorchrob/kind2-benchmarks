@@ -8,11 +8,11 @@ VAR
 ASSIGN
 	init(conf1-impl-usr-pre_cpt) := 0;
 	init(conf1-impl-usr-cpt) := (conf1-usr-signal ? ((conf1-impl-usr-pre_cpt < conf1-usr-n) ? conf1-impl-usr-pre_cpt + 1 : conf1-impl-usr-pre_cpt) : 0);
-	init(conf1-usr-out) := conf1-impl-usr-cpt >= conf1-usr-n;
+	init(conf1-usr-out) := (conf1-impl-usr-cpt >= conf1-usr-n);
 
 	next(conf1-impl-usr-pre_cpt) := conf1-impl-usr-cpt;
 	next(conf1-impl-usr-cpt) := (next(conf1-usr-signal) ? ((next(conf1-impl-usr-pre_cpt) < next(conf1-usr-n)) ? next(conf1-impl-usr-pre_cpt) + 1 : next(conf1-impl-usr-pre_cpt)) : 0);
-	next(conf1-usr-out) := next(conf1-impl-usr-cpt) >= next(conf1-usr-n);
+	next(conf1-usr-out) := (next(conf1-impl-usr-cpt) >= next(conf1-usr-n));
 
 
 
@@ -148,12 +148,12 @@ ASSIGN
 	init(reconfiguration-res-glocal_27) := (!reconfiguration-impl-usr-corrupt3 | (!reconfiguration-impl-usr-corrupt2 | !reconfiguration-impl-usr-corrupt1));
 	init(reconfiguration-res-glocal_28) := ((reconfiguration-impl-usr-m1 < reconfiguration-impl-usr-m2) & (reconfiguration-impl-usr-m2 < reconfiguration-impl-usr-m3));
 	init(reconfiguration-res-glocal_29) := (reconfiguration-impl-usr-safe_value = 0);
-	init(reconfiguration-res-subrange_21) := (10 <= reconfiguration-impl-usr-n1 & reconfiguration-impl-usr-n1 <= 10);
-	init(reconfiguration-res-subrange_22) := (12 <= reconfiguration-impl-usr-n2 & reconfiguration-impl-usr-n2 <= 12);
-	init(reconfiguration-res-subrange_23) := (15 <= reconfiguration-impl-usr-n3 & reconfiguration-impl-usr-n3 <= 15);
-	init(reconfiguration-res-subrange_24) := (5 <= reconfiguration-impl-usr-m1 & reconfiguration-impl-usr-m1 <= 5);
-	init(reconfiguration-res-subrange_25) := (7 <= reconfiguration-impl-usr-m2 & reconfiguration-impl-usr-m2 <= 7);
-	init(reconfiguration-res-subrange_26) := (11 <= reconfiguration-impl-usr-m3 & reconfiguration-impl-usr-m3 <= 11);
+	init(reconfiguration-res-subrange_21) := ((10 <= reconfiguration-impl-usr-n1) & (reconfiguration-impl-usr-n1 <= 10));
+	init(reconfiguration-res-subrange_22) := ((12 <= reconfiguration-impl-usr-n2) & (reconfiguration-impl-usr-n2 <= 12));
+	init(reconfiguration-res-subrange_23) := ((15 <= reconfiguration-impl-usr-n3) & (reconfiguration-impl-usr-n3 <= 15));
+	init(reconfiguration-res-subrange_24) := ((5 <= reconfiguration-impl-usr-m1) & (reconfiguration-impl-usr-m1 <= 5));
+	init(reconfiguration-res-subrange_25) := ((7 <= reconfiguration-impl-usr-m2) & (reconfiguration-impl-usr-m2 <= 7));
+	init(reconfiguration-res-subrange_26) := ((11 <= reconfiguration-impl-usr-m3) & (reconfiguration-impl-usr-m3 <= 11));
 
 	next(reconfiguration-impl-usr-n1) := 10;
 	next(reconfiguration-impl-usr-default_value) := 0;
@@ -185,12 +185,12 @@ ASSIGN
 	next(reconfiguration-res-glocal_27) := (!next(reconfiguration-impl-usr-corrupt3) | (!next(reconfiguration-impl-usr-corrupt2) | !next(reconfiguration-impl-usr-corrupt1)));
 	next(reconfiguration-res-glocal_28) := ((next(reconfiguration-impl-usr-m1) < next(reconfiguration-impl-usr-m2)) & (next(reconfiguration-impl-usr-m2) < next(reconfiguration-impl-usr-m3)));
 	next(reconfiguration-res-glocal_29) := (next(reconfiguration-impl-usr-safe_value) = 0);
-	next(reconfiguration-res-subrange_21) := (10 <= next(reconfiguration-impl-usr-n1) & next(reconfiguration-impl-usr-n1) <= 10);
-	next(reconfiguration-res-subrange_22) := (12 <= next(reconfiguration-impl-usr-n2) & next(reconfiguration-impl-usr-n2) <= 12);
-	next(reconfiguration-res-subrange_23) := (15 <= next(reconfiguration-impl-usr-n3) & next(reconfiguration-impl-usr-n3) <= 15);
-	next(reconfiguration-res-subrange_24) := (5 <= next(reconfiguration-impl-usr-m1) & next(reconfiguration-impl-usr-m1) <= 5);
-	next(reconfiguration-res-subrange_25) := (7 <= next(reconfiguration-impl-usr-m2) & next(reconfiguration-impl-usr-m2) <= 7);
-	next(reconfiguration-res-subrange_26) := (11 <= next(reconfiguration-impl-usr-m3) & next(reconfiguration-impl-usr-m3) <= 11);
+	next(reconfiguration-res-subrange_21) := ((10 <= next(reconfiguration-impl-usr-n1)) & (next(reconfiguration-impl-usr-n1) <= 10));
+	next(reconfiguration-res-subrange_22) := ((12 <= next(reconfiguration-impl-usr-n2)) & (next(reconfiguration-impl-usr-n2) <= 12));
+	next(reconfiguration-res-subrange_23) := ((15 <= next(reconfiguration-impl-usr-n3)) & (next(reconfiguration-impl-usr-n3) <= 15));
+	next(reconfiguration-res-subrange_24) := ((5 <= next(reconfiguration-impl-usr-m1)) & (next(reconfiguration-impl-usr-m1) <= 5));
+	next(reconfiguration-res-subrange_25) := ((7 <= next(reconfiguration-impl-usr-m2)) & (next(reconfiguration-impl-usr-m2) <= 7));
+	next(reconfiguration-res-subrange_26) := ((11 <= next(reconfiguration-impl-usr-m3)) & (next(reconfiguration-impl-usr-m3) <= 11));
 
 	INVAR reconfiguration-res-glocal_29;
 	INVAR reconfiguration-res-glocal_28;
@@ -214,21 +214,21 @@ ASSIGN
 	init(controlLaw-impl-usr-dtf) := 0;
 	init(controlLaw-impl-usr-inp) := (controlLaw-usr-in1 - (49/1250 * controlLaw-impl-usr-dtf));
 	init(controlLaw-impl-usr-sum1) := 0;
-	init(controlLaw-impl-usr-c1) := (controlLaw-impl-usr-sum1 <= 1 & controlLaw-impl-usr-sum1 >= -1);
-	init(controlLaw-impl-usr-c2) := (controlLaw-impl-usr-sum1 >= 1 & (controlLaw-impl-usr-inp < 0));
-	init(controlLaw-impl-usr-c3) := (controlLaw-impl-usr-sum1 <= -1 & (controlLaw-impl-usr-inp > 0));
-	init(controlLaw-impl-usr-out_stable) := (-25 <= controlLaw-usr-integ & controlLaw-usr-integ <= 25);
-	init(controlLaw-res-glocal_7) := (((-18/5 <= controlLaw-usr-in1 & controlLaw-usr-in1 <= 18/5) & -18/5 <= controlLaw-usr-in2) & controlLaw-usr-in2 <= 18/5);
+	init(controlLaw-impl-usr-c1) := ((controlLaw-impl-usr-sum1 <= 1) & (controlLaw-impl-usr-sum1 >= -1));
+	init(controlLaw-impl-usr-c2) := ((controlLaw-impl-usr-sum1 >= 1) & (controlLaw-impl-usr-inp < 0));
+	init(controlLaw-impl-usr-c3) := ((controlLaw-impl-usr-sum1 <= -1) & (controlLaw-impl-usr-inp > 0));
+	init(controlLaw-impl-usr-out_stable) := ((-25 <= controlLaw-usr-integ) & (controlLaw-usr-integ <= 25));
+	init(controlLaw-res-glocal_7) := ((((-18/5 <= controlLaw-usr-in1) & (controlLaw-usr-in1 <= 18/5)) & (-18/5 <= controlLaw-usr-in2)) & (controlLaw-usr-in2 <= 18/5));
 
 	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201/1250 * controlLaw-impl-usr-dtf);
 	next(controlLaw-impl-usr-inp) := (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)));
 	next(controlLaw-impl-usr-sum1) := (1/25 * controlLaw-usr-integ) + (3/20 * next(controlLaw-impl-usr-inp));
-	next(controlLaw-impl-usr-c3) := (next(controlLaw-impl-usr-sum1) <= -1 & (next(controlLaw-impl-usr-inp) > 0));
-	next(controlLaw-impl-usr-c2) := (next(controlLaw-impl-usr-sum1) >= 1 & (next(controlLaw-impl-usr-inp) < 0));
-	next(controlLaw-impl-usr-c1) := (next(controlLaw-impl-usr-sum1) <= 1 & next(controlLaw-impl-usr-sum1) >= -1);
+	next(controlLaw-impl-usr-c3) := ((next(controlLaw-impl-usr-sum1) <= -1) & (next(controlLaw-impl-usr-inp) > 0));
+	next(controlLaw-impl-usr-c2) := ((next(controlLaw-impl-usr-sum1) >= 1) & (next(controlLaw-impl-usr-inp) < 0));
+	next(controlLaw-impl-usr-c1) := ((next(controlLaw-impl-usr-sum1) <= 1) & (next(controlLaw-impl-usr-sum1) >= -1));
 	next(controlLaw-usr-integ) := controlLaw-usr-integ + ((next(controlLaw-impl-usr-c3) | (next(controlLaw-impl-usr-c2) | next(controlLaw-impl-usr-c1))) ? next(controlLaw-impl-usr-inp) : 0);
-	next(controlLaw-impl-usr-out_stable) := (-25 <= next(controlLaw-usr-integ) & next(controlLaw-usr-integ) <= 25);
-	next(controlLaw-res-glocal_7) := (((-18/5 <= next(controlLaw-usr-in1) & next(controlLaw-usr-in1) <= 18/5) & -18/5 <= next(controlLaw-usr-in2)) & next(controlLaw-usr-in2) <= 18/5);
+	next(controlLaw-impl-usr-out_stable) := ((-25 <= next(controlLaw-usr-integ)) & (next(controlLaw-usr-integ) <= 25));
+	next(controlLaw-res-glocal_7) := ((((-18/5 <= next(controlLaw-usr-in1)) & (next(controlLaw-usr-in1) <= 18/5)) & (-18/5 <= next(controlLaw-usr-in2))) & (next(controlLaw-usr-in2) <= 18/5));
 
 	INVAR controlLaw-res-glocal_7;
 
@@ -320,8 +320,8 @@ ASSIGN
 	init(voter-impl-usr-st3) := ((voter-impl-usr-df3 > 1/2) ? 1/2 : ((voter-impl-usr-df3 < -1/2) ? -1/2 : voter-impl-usr-df3));
 	init(voter-impl-usr-df1) := (voter-impl-usr-equalized1 - voter-impl-usr-three_output);
 	init(voter-impl-usr-st1) := ((voter-impl-usr-df1 > 1/2) ? 1/2 : ((voter-impl-usr-df1 < -1/2) ? -1/2 : voter-impl-usr-df1));
-	init(voter-impl-usr-eqs_stable) := (((((voter-impl-usr-equalization1 <= 12/5 & voter-impl-usr-equalization1 >= -12/5) & voter-impl-usr-equalization2 <= 12/5) & voter-impl-usr-equalization2 >= -12/5) & voter-impl-usr-equalization3 <= 12/5) & voter-impl-usr-equalization3 >= -12/5);
-	init(voter-impl-usr-out_stable) := (-6/5 <= voter-usr-output & voter-usr-output <= 6/5);
+	init(voter-impl-usr-eqs_stable) := ((((((voter-impl-usr-equalization1 <= 12/5) & (voter-impl-usr-equalization1 >= -12/5)) & (voter-impl-usr-equalization2 <= 12/5)) & (voter-impl-usr-equalization2 >= -12/5)) & (voter-impl-usr-equalization3 <= 12/5)) & (voter-impl-usr-equalization3 >= -12/5));
+	init(voter-impl-usr-out_stable) := ((-6/5 <= voter-usr-output) & (voter-usr-output <= 6/5));
 	init(voter-res-glocal_1) := (voter-usr-input1 < 6/5);
 	init(voter-res-glocal_2) := (voter-usr-input1 > -6/5);
 	init(voter-res-glocal_3) := (voter-usr-input2 < 6/5);
@@ -351,8 +351,8 @@ ASSIGN
 	next(voter-impl-usr-st3) := ((next(voter-impl-usr-df3) > 1/2) ? 1/2 : ((next(voter-impl-usr-df3) < -1/2) ? -1/2 : next(voter-impl-usr-df3)));
 	next(voter-impl-usr-df1) := (next(voter-impl-usr-equalized1) - next(voter-impl-usr-three_output));
 	next(voter-impl-usr-st1) := ((next(voter-impl-usr-df1) > 1/2) ? 1/2 : ((next(voter-impl-usr-df1) < -1/2) ? -1/2 : next(voter-impl-usr-df1)));
-	next(voter-impl-usr-eqs_stable) := (((((next(voter-impl-usr-equalization1) <= 12/5 & next(voter-impl-usr-equalization1) >= -12/5) & next(voter-impl-usr-equalization2) <= 12/5) & next(voter-impl-usr-equalization2) >= -12/5) & next(voter-impl-usr-equalization3) <= 12/5) & next(voter-impl-usr-equalization3) >= -12/5);
-	next(voter-impl-usr-out_stable) := (-6/5 <= next(voter-usr-output) & next(voter-usr-output) <= 6/5);
+	next(voter-impl-usr-eqs_stable) := ((((((next(voter-impl-usr-equalization1) <= 12/5) & (next(voter-impl-usr-equalization1) >= -12/5)) & (next(voter-impl-usr-equalization2) <= 12/5)) & (next(voter-impl-usr-equalization2) >= -12/5)) & (next(voter-impl-usr-equalization3) <= 12/5)) & (next(voter-impl-usr-equalization3) >= -12/5));
+	next(voter-impl-usr-out_stable) := ((-6/5 <= next(voter-usr-output)) & (next(voter-usr-output) <= 6/5));
 	next(voter-res-glocal_1) := (next(voter-usr-input1) < 6/5);
 	next(voter-res-glocal_2) := (next(voter-usr-input1) > -6/5);
 	next(voter-res-glocal_3) := (next(voter-usr-input2) < 6/5);
@@ -400,7 +400,7 @@ ASSIGN
 	init(channel-impl-usr-sat2b) := channel-res-2-call_17.saturation3-usr-outB;
 	init(channel-impl-usr-sat2a) := channel-res-2-call_17.saturation3-usr-outA;
 	init(channel-impl-usr-v2) := channel-res-call_19.voter-usr-output;
-	init(channel-impl-usr-out_stable) := (-25 <= channel-usr-output & channel-usr-output <= 25);
+	init(channel-impl-usr-out_stable) := ((-25 <= channel-usr-output) & (channel-usr-output <= 25));
 
 	next(channel-impl-usr-satMax) := 6/5;
 	next(channel-impl-usr-satMin) := -6/5;
@@ -413,7 +413,7 @@ ASSIGN
 	next(channel-impl-usr-v2) := next(channel-res-call_19.voter-usr-output);
 	next(channel-impl-usr-v1) := next(channel-res-call_18.voter-usr-output);
 	next(channel-usr-output) := next(channel-res-call_20.controlLaw-usr-integ);
-	next(channel-impl-usr-out_stable) := (-25 <= next(channel-usr-output) & next(channel-usr-output) <= 25);
+	next(channel-impl-usr-out_stable) := ((-25 <= next(channel-usr-output)) & (next(channel-usr-output) <= 25));
 
 
 
@@ -456,7 +456,7 @@ ASSIGN
 	init(top-impl-usr-channel2) := top-res-call_40.channel-usr-output;
 	init(top-impl-usr-channel1) := top-res-call_39.channel-usr-output;
 	init(top-usr-command) := top-res-2-call_42.reconfiguration-usr-command;
-	init(top-impl-usr-stability) := (-25 <= top-usr-command & top-usr-command <= 25);
+	init(top-impl-usr-stability) := ((-25 <= top-usr-command) & (top-usr-command <= 25));
 	init(top-res-gklocal_43) := 25;
 	init(top-impl-usr-no_one_in_command) := top-res-2-call_42.reconfiguration-usr-no_command;
 	init(top-impl-usr-no_command_bounded) := !top-res-call_44.conf1-usr-out;
@@ -465,15 +465,64 @@ ASSIGN
 	next(top-impl-usr-channel2) := next(top-res-call_40.channel-usr-output);
 	next(top-impl-usr-channel1) := next(top-res-call_39.channel-usr-output);
 	next(top-usr-command) := next(top-res-2-call_42.reconfiguration-usr-command);
-	next(top-impl-usr-stability) := (-25 <= next(top-usr-command) & next(top-usr-command) <= 25);
+	next(top-impl-usr-stability) := ((-25 <= next(top-usr-command)) & (next(top-usr-command) <= 25));
 	next(top-res-gklocal_43) := 25;
 	next(top-impl-usr-no_one_in_command) := next(top-res-2-call_42.reconfiguration-usr-no_command);
 	next(top-impl-usr-no_command_bounded) := !next(top-res-call_44.conf1-usr-out);
 
 
 INVARSPEC 
-((top-impl-usr-no_command_bounded) & (top-impl-usr-stability) & (TRUE) & 
- (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & 
- (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & 
- (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE) & (TRUE));
+((top-impl-usr-no_command_bounded));
+INVARSPEC 
+((top-impl-usr-stability));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
+INVARSPEC 
+((TRUE));
 

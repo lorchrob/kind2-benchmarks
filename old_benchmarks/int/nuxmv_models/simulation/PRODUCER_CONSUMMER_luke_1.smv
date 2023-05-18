@@ -16,18 +16,18 @@ VAR
 ASSIGN
 	init(PRODUCER_CONSUMMER-usr-a) := PRODUCER_CONSUMMER-usr-a_init;
 	init(PRODUCER_CONSUMMER-usr-i) := PRODUCER_CONSUMMER-usr-a;
-	init(PRODUCER_CONSUMMER-impl-usr-garde1) := PRODUCER_CONSUMMER-res-oracle_1 >= 1;
+	init(PRODUCER_CONSUMMER-impl-usr-garde1) := (PRODUCER_CONSUMMER-res-oracle_1 >= 1);
 	init(PRODUCER_CONSUMMER-usr-b) := 0;
-	init(PRODUCER_CONSUMMER-impl-usr-garde2) := PRODUCER_CONSUMMER-res-oracle_2 >= 1;
-	init(PRODUCER_CONSUMMER-impl-usr-garde3) := PRODUCER_CONSUMMER-res-oracle_3 >= 1;
+	init(PRODUCER_CONSUMMER-impl-usr-garde2) := (PRODUCER_CONSUMMER-res-oracle_2 >= 1);
+	init(PRODUCER_CONSUMMER-impl-usr-garde3) := (PRODUCER_CONSUMMER-res-oracle_3 >= 1);
 	init(PRODUCER_CONSUMMER-usr-o1) := 0;
 	init(PRODUCER_CONSUMMER-usr-o2) := 0;
 
-	next(PRODUCER_CONSUMMER-impl-usr-garde1) := PRODUCER_CONSUMMER-usr-i >= 1;
+	next(PRODUCER_CONSUMMER-impl-usr-garde1) := (PRODUCER_CONSUMMER-usr-i >= 1);
 	next(PRODUCER_CONSUMMER-usr-i) := (next(PRODUCER_CONSUMMER-usr-etat1) ? (next(PRODUCER_CONSUMMER-impl-usr-garde1) ? (PRODUCER_CONSUMMER-usr-i - 1) : PRODUCER_CONSUMMER-usr-i) : PRODUCER_CONSUMMER-usr-i);
 	next(PRODUCER_CONSUMMER-usr-a) := PRODUCER_CONSUMMER-usr-a;
-	next(PRODUCER_CONSUMMER-impl-usr-garde3) := PRODUCER_CONSUMMER-usr-b >= 1;
-	next(PRODUCER_CONSUMMER-impl-usr-garde2) := PRODUCER_CONSUMMER-usr-b >= 1;
+	next(PRODUCER_CONSUMMER-impl-usr-garde3) := (PRODUCER_CONSUMMER-usr-b >= 1);
+	next(PRODUCER_CONSUMMER-impl-usr-garde2) := (PRODUCER_CONSUMMER-usr-b >= 1);
 	next(PRODUCER_CONSUMMER-usr-b) := (next(PRODUCER_CONSUMMER-usr-etat1) ? (next(PRODUCER_CONSUMMER-impl-usr-garde1) ? PRODUCER_CONSUMMER-usr-b + 1 : PRODUCER_CONSUMMER-usr-b) : (next(PRODUCER_CONSUMMER-usr-etat2) ? (next(PRODUCER_CONSUMMER-impl-usr-garde2) ? (PRODUCER_CONSUMMER-usr-b - 1) : PRODUCER_CONSUMMER-usr-b) : (next(PRODUCER_CONSUMMER-impl-usr-garde3) ? (PRODUCER_CONSUMMER-usr-b - 1) : PRODUCER_CONSUMMER-usr-b)));
 	next(PRODUCER_CONSUMMER-usr-o1) := (next(PRODUCER_CONSUMMER-usr-etat2) ? (next(PRODUCER_CONSUMMER-impl-usr-garde2) ? PRODUCER_CONSUMMER-usr-o1 + 1 : PRODUCER_CONSUMMER-usr-o1) : PRODUCER_CONSUMMER-usr-o1);
 	next(PRODUCER_CONSUMMER-usr-o2) := (next(PRODUCER_CONSUMMER-usr-etat3) ? (next(PRODUCER_CONSUMMER-impl-usr-garde3) ? PRODUCER_CONSUMMER-usr-o2 + 1 : PRODUCER_CONSUMMER-usr-o2) : PRODUCER_CONSUMMER-usr-o2);

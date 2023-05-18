@@ -46,7 +46,7 @@ ASSIGN
 	init(voter-impl-usr-c1) := (voter-impl-usr-equalized1 > voter-impl-usr-equalized2);
 	init(voter-impl-usr-three_output) := ((voter-impl-usr-c1 = voter-impl-usr-c2) ? voter-impl-usr-equalized2 : ((voter-impl-usr-c2 = voter-impl-usr-c3) ? voter-impl-usr-equalized3 : voter-impl-usr-equalized1));
 	init(voter-usr-output) := (voter-impl-usr-three_output / 3);
-	init(voter-impl-usr-out_stable) := (-6/5 <= voter-usr-output & voter-usr-output <= 6/5);
+	init(voter-impl-usr-out_stable) := ((-6/5 <= voter-usr-output) & (voter-usr-output <= 6/5));
 	init(voter-impl-usr-d3) := (voter-impl-usr-equalization3 > voter-impl-usr-equalization1);
 	init(voter-impl-usr-d2) := (voter-impl-usr-equalization2 > voter-impl-usr-equalization3);
 	init(voter-impl-usr-d1) := (voter-impl-usr-equalization1 > voter-impl-usr-equalization2);
@@ -76,7 +76,7 @@ ASSIGN
 	next(voter-impl-usr-c1) := (next(voter-impl-usr-equalized1) > next(voter-impl-usr-equalized2));
 	next(voter-impl-usr-three_output) := ((next(voter-impl-usr-c1) = next(voter-impl-usr-c2)) ? next(voter-impl-usr-equalized2) : ((next(voter-impl-usr-c2) = next(voter-impl-usr-c3)) ? next(voter-impl-usr-equalized3) : next(voter-impl-usr-equalized1)));
 	next(voter-usr-output) := (next(voter-impl-usr-three_output) / 3);
-	next(voter-impl-usr-out_stable) := (-6/5 <= next(voter-usr-output) & next(voter-usr-output) <= 6/5);
+	next(voter-impl-usr-out_stable) := ((-6/5 <= next(voter-usr-output)) & (next(voter-usr-output) <= 6/5));
 	next(voter-impl-usr-d3) := (next(voter-impl-usr-equalization3) > next(voter-impl-usr-equalization1));
 	next(voter-impl-usr-d2) := (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3));
 	next(voter-impl-usr-d1) := (next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2));

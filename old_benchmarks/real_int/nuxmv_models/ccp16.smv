@@ -8,13 +8,13 @@ VAR
 ASSIGN
 	init(top-usr-OK) := TRUE;
 	init(top-impl-usr-zz159) := (top-usr-OK ? 1 : 0);
-	init(top-res-subrange_1) := (0 <= top-impl-usr-zz159 & top-impl-usr-zz159 <= 1);
+	init(top-res-subrange_1) := ((0 <= top-impl-usr-zz159) & (top-impl-usr-zz159 <= 1));
 
 	next(top-usr-OK) := TRUE;
 	next(top-impl-usr-zz159) := (next(top-usr-OK) ? 1 : 0);
-	next(top-res-subrange_1) := (0 <= next(top-impl-usr-zz159) & next(top-impl-usr-zz159) <= 1);
+	next(top-res-subrange_1) := ((0 <= next(top-impl-usr-zz159)) & (next(top-impl-usr-zz159) <= 1));
 
 
 INVARSPEC 
-((top-res-subrange_1) & (top-usr-OK));
+((top-usr-OK));
 

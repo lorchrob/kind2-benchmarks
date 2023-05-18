@@ -9,13 +9,13 @@ VAR
 ASSIGN
 	init(conf1-impl-usr-pre_cpt) := 0;
 	init(conf1-impl-usr-cpt) := (conf1-usr-signal ? ((conf1-impl-usr-pre_cpt < conf1-usr-n) ? conf1-impl-usr-pre_cpt + 1 : conf1-impl-usr-pre_cpt) : 0);
-	init(conf1-usr-out) := conf1-impl-usr-cpt >= conf1-usr-n;
-	init(conf1-res-glocal_1) := (0 <= conf1-impl-usr-pre_cpt & conf1-impl-usr-pre_cpt <= conf1-usr-n);
+	init(conf1-usr-out) := (conf1-impl-usr-cpt >= conf1-usr-n);
+	init(conf1-res-glocal_1) := ((0 <= conf1-impl-usr-pre_cpt) & (conf1-impl-usr-pre_cpt <= conf1-usr-n));
 
 	next(conf1-impl-usr-pre_cpt) := conf1-impl-usr-cpt;
 	next(conf1-impl-usr-cpt) := (next(conf1-usr-signal) ? ((next(conf1-impl-usr-pre_cpt) < next(conf1-usr-n)) ? next(conf1-impl-usr-pre_cpt) + 1 : next(conf1-impl-usr-pre_cpt)) : 0);
-	next(conf1-usr-out) := next(conf1-impl-usr-cpt) >= next(conf1-usr-n);
-	next(conf1-res-glocal_1) := (0 <= next(conf1-impl-usr-pre_cpt) & next(conf1-impl-usr-pre_cpt) <= next(conf1-usr-n));
+	next(conf1-usr-out) := (next(conf1-impl-usr-cpt) >= next(conf1-usr-n));
+	next(conf1-res-glocal_1) := ((0 <= next(conf1-impl-usr-pre_cpt)) & (next(conf1-impl-usr-pre_cpt) <= next(conf1-usr-n)));
 
 	INVAR conf1-res-glocal_1;
 
@@ -147,12 +147,12 @@ ASSIGN
 	init(reconfiguration-res-glocal_13) := (!reconfiguration-impl-usr-corrupt3 | (!reconfiguration-impl-usr-corrupt2 | !reconfiguration-impl-usr-corrupt1));
 	init(reconfiguration-res-glocal_14) := ((reconfiguration-impl-usr-m1 < reconfiguration-impl-usr-m2) & (reconfiguration-impl-usr-m2 < reconfiguration-impl-usr-m3));
 	init(reconfiguration-res-glocal_15) := (reconfiguration-impl-usr-safe_value = 0);
-	init(reconfiguration-res-subrange_7) := (10 <= reconfiguration-impl-usr-n1 & reconfiguration-impl-usr-n1 <= 10);
-	init(reconfiguration-res-subrange_8) := (12 <= reconfiguration-impl-usr-n2 & reconfiguration-impl-usr-n2 <= 12);
-	init(reconfiguration-res-subrange_9) := (15 <= reconfiguration-impl-usr-n3 & reconfiguration-impl-usr-n3 <= 15);
-	init(reconfiguration-res-subrange_10) := (5 <= reconfiguration-impl-usr-m1 & reconfiguration-impl-usr-m1 <= 5);
-	init(reconfiguration-res-subrange_11) := (7 <= reconfiguration-impl-usr-m2 & reconfiguration-impl-usr-m2 <= 7);
-	init(reconfiguration-res-subrange_12) := (11 <= reconfiguration-impl-usr-m3 & reconfiguration-impl-usr-m3 <= 11);
+	init(reconfiguration-res-subrange_7) := ((10 <= reconfiguration-impl-usr-n1) & (reconfiguration-impl-usr-n1 <= 10));
+	init(reconfiguration-res-subrange_8) := ((12 <= reconfiguration-impl-usr-n2) & (reconfiguration-impl-usr-n2 <= 12));
+	init(reconfiguration-res-subrange_9) := ((15 <= reconfiguration-impl-usr-n3) & (reconfiguration-impl-usr-n3 <= 15));
+	init(reconfiguration-res-subrange_10) := ((5 <= reconfiguration-impl-usr-m1) & (reconfiguration-impl-usr-m1 <= 5));
+	init(reconfiguration-res-subrange_11) := ((7 <= reconfiguration-impl-usr-m2) & (reconfiguration-impl-usr-m2 <= 7));
+	init(reconfiguration-res-subrange_12) := ((11 <= reconfiguration-impl-usr-m3) & (reconfiguration-impl-usr-m3 <= 11));
 
 	next(reconfiguration-impl-usr-n1) := 10;
 	next(reconfiguration-impl-usr-min) := -25;
@@ -180,20 +180,17 @@ ASSIGN
 	next(reconfiguration-res-glocal_13) := (!next(reconfiguration-impl-usr-corrupt3) | (!next(reconfiguration-impl-usr-corrupt2) | !next(reconfiguration-impl-usr-corrupt1)));
 	next(reconfiguration-res-glocal_14) := ((next(reconfiguration-impl-usr-m1) < next(reconfiguration-impl-usr-m2)) & (next(reconfiguration-impl-usr-m2) < next(reconfiguration-impl-usr-m3)));
 	next(reconfiguration-res-glocal_15) := (next(reconfiguration-impl-usr-safe_value) = 0);
-	next(reconfiguration-res-subrange_7) := (10 <= next(reconfiguration-impl-usr-n1) & next(reconfiguration-impl-usr-n1) <= 10);
-	next(reconfiguration-res-subrange_8) := (12 <= next(reconfiguration-impl-usr-n2) & next(reconfiguration-impl-usr-n2) <= 12);
-	next(reconfiguration-res-subrange_9) := (15 <= next(reconfiguration-impl-usr-n3) & next(reconfiguration-impl-usr-n3) <= 15);
-	next(reconfiguration-res-subrange_10) := (5 <= next(reconfiguration-impl-usr-m1) & next(reconfiguration-impl-usr-m1) <= 5);
-	next(reconfiguration-res-subrange_11) := (7 <= next(reconfiguration-impl-usr-m2) & next(reconfiguration-impl-usr-m2) <= 7);
-	next(reconfiguration-res-subrange_12) := (11 <= next(reconfiguration-impl-usr-m3) & next(reconfiguration-impl-usr-m3) <= 11);
+	next(reconfiguration-res-subrange_7) := ((10 <= next(reconfiguration-impl-usr-n1)) & (next(reconfiguration-impl-usr-n1) <= 10));
+	next(reconfiguration-res-subrange_8) := ((12 <= next(reconfiguration-impl-usr-n2)) & (next(reconfiguration-impl-usr-n2) <= 12));
+	next(reconfiguration-res-subrange_9) := ((15 <= next(reconfiguration-impl-usr-n3)) & (next(reconfiguration-impl-usr-n3) <= 15));
+	next(reconfiguration-res-subrange_10) := ((5 <= next(reconfiguration-impl-usr-m1)) & (next(reconfiguration-impl-usr-m1) <= 5));
+	next(reconfiguration-res-subrange_11) := ((7 <= next(reconfiguration-impl-usr-m2)) & (next(reconfiguration-impl-usr-m2) <= 7));
+	next(reconfiguration-res-subrange_12) := ((11 <= next(reconfiguration-impl-usr-m3)) & (next(reconfiguration-impl-usr-m3) <= 11));
 
 	INVAR reconfiguration-res-glocal_15;
 	INVAR reconfiguration-res-glocal_14;
 	INVAR reconfiguration-res-glocal_13;
 
 INVARSPEC 
-((reconfiguration-res-subrange_12) & (reconfiguration-res-subrange_11) & 
- (reconfiguration-res-subrange_10) & (reconfiguration-res-subrange_9) & 
- (reconfiguration-res-subrange_8) & (reconfiguration-res-subrange_7) & 
- (reconfiguration-impl-usr-ok));
+((reconfiguration-impl-usr-ok));
 

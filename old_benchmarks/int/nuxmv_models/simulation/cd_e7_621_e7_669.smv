@@ -14,9 +14,9 @@ VAR
 	Environment-usr-ok : boolean;
 
 ASSIGN
-	init(Environment-usr-ok) := ((Environment-usr-diff <= 4 | -4 <= Environment-usr-diff) & Environment-usr-diff >= 1);
+	init(Environment-usr-ok) := (((Environment-usr-diff <= 4) | (-4 <= Environment-usr-diff)) & (Environment-usr-diff >= 1));
 
-	next(Environment-usr-ok) := (((next(Environment-usr-diff) <= 4 | -4 <= next(Environment-usr-diff)) & (Environment-usr-plus ? next(Environment-usr-diff) >= 1 : TRUE)) & (Environment-usr-minus ? next(Environment-usr-diff) <= -1 : TRUE));
+	next(Environment-usr-ok) := ((((next(Environment-usr-diff) <= 4) | (-4 <= next(Environment-usr-diff))) & (Environment-usr-plus ? (next(Environment-usr-diff) >= 1) : TRUE)) & (Environment-usr-minus ? (next(Environment-usr-diff) <= -1) : TRUE));
 
 
 
@@ -29,10 +29,10 @@ VAR
 ASSIGN
 	init(Property-usr-ok) := TRUE;
 	init(Property-impl-usr-cpt) := 0;
-	init(Property-impl-usr-acceptable) := (8 <= Property-usr-speed & Property-usr-speed <= 12);
+	init(Property-impl-usr-acceptable) := ((8 <= Property-usr-speed) & (Property-usr-speed <= 12));
 
-	next(Property-usr-ok) := Property-impl-usr-cpt <= 7;
-	next(Property-impl-usr-acceptable) := (8 <= next(Property-usr-speed) & next(Property-usr-speed) <= 12);
+	next(Property-usr-ok) := (Property-impl-usr-cpt <= 7);
+	next(Property-impl-usr-acceptable) := ((8 <= next(Property-usr-speed)) & (next(Property-usr-speed) <= 12));
 	next(Property-impl-usr-cpt) := (next(Property-impl-usr-acceptable) ? 0 : Property-impl-usr-cpt + 1);
 
 
@@ -45,12 +45,12 @@ VAR
 
 ASSIGN
 	init(Controller-usr-speed) := 0;
-	init(Controller-usr-plus) := Controller-usr-speed <= 9;
-	init(Controller-usr-minus) := Controller-usr-speed >= 11;
+	init(Controller-usr-plus) := (Controller-usr-speed <= 9);
+	init(Controller-usr-minus) := (Controller-usr-speed >= 11);
 
 	next(Controller-usr-speed) := Controller-usr-speed + next(Controller-usr-diff);
-	next(Controller-usr-plus) := next(Controller-usr-speed) <= 9;
-	next(Controller-usr-minus) := next(Controller-usr-speed) >= 11;
+	next(Controller-usr-plus) := (next(Controller-usr-speed) <= 9);
+	next(Controller-usr-minus) := (next(Controller-usr-speed) >= 11);
 
 
 
@@ -71,14 +71,14 @@ VAR
 ASSIGN
 	init(top-impl-usr-realistic) := top-res-call_2.Environment-usr-ok;
 	init(top-impl-usr-speed) := top-res-2-call_1.Controller-usr-speed;
-	init(top-res-gklocal_3) := ((top-impl-usr-realistic & 0 <= top-impl-usr-speed) & (top-impl-usr-speed < 16));
+	init(top-res-gklocal_3) := ((top-impl-usr-realistic & (0 <= top-impl-usr-speed)) & (top-impl-usr-speed < 16));
 	init(top-usr-OK) := (top-res-call_4.Sofar-usr-Sofar -> top-res-call_5.Property-usr-ok);
 	init(top-impl-usr-plus) := top-res-2-call_1.Controller-usr-plus;
 	init(top-impl-usr-minus) := top-res-2-call_1.Controller-usr-minus;
 
 	next(top-impl-usr-realistic) := next(top-res-call_2.Environment-usr-ok);
 	next(top-impl-usr-speed) := next(top-res-2-call_1.Controller-usr-speed);
-	next(top-res-gklocal_3) := ((next(top-impl-usr-realistic) & 0 <= next(top-impl-usr-speed)) & (next(top-impl-usr-speed) < 16));
+	next(top-res-gklocal_3) := ((next(top-impl-usr-realistic) & (0 <= next(top-impl-usr-speed))) & (next(top-impl-usr-speed) < 16));
 	next(top-usr-OK) := (next(top-res-call_4.Sofar-usr-Sofar) -> next(top-res-call_5.Property-usr-ok));
 	next(top-impl-usr-plus) := next(top-res-2-call_1.Controller-usr-plus);
 	next(top-impl-usr-minus) := next(top-res-2-call_1.Controller-usr-minus);

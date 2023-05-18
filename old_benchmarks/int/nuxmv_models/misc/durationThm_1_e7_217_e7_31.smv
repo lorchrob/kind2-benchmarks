@@ -39,14 +39,14 @@ ASSIGN
 	init(top-usr-OK) := TRUE;
 	init(top-impl-usr-k) := top-usr-ik;
 	init(top-impl-usr-m) := top-usr-im;
-	init(top-res-gklocal_3) := (((top-impl-usr-m >= 1 | top-impl-usr-k >= 1) & (top-res-call_1.Age-usr-age_of_p >= top-impl-usr-k -> top-usr-q)) & (top-res-call_2.Age-usr-age_of_p >= top-impl-usr-m -> top-usr-r));
+	init(top-res-gklocal_3) := ((((top-impl-usr-m >= 1) | (top-impl-usr-k >= 1)) & ((top-res-call_1.Age-usr-age_of_p >= top-impl-usr-k) -> top-usr-q)) & ((top-res-call_2.Age-usr-age_of_p >= top-impl-usr-m) -> top-usr-r));
 	init(top-impl-usr-env) := top-res-call_4.Sofar-usr-Sofar;
 
 	next(top-impl-usr-m) := top-impl-usr-m;
 	next(top-impl-usr-k) := top-impl-usr-k;
-	next(top-res-gklocal_3) := (((next(top-impl-usr-m) >= 1 | next(top-impl-usr-k) >= 1) & (next(top-res-call_1.Age-usr-age_of_p) >= next(top-impl-usr-k) -> next(top-usr-q))) & (next(top-res-call_2.Age-usr-age_of_p) >= next(top-impl-usr-m) -> next(top-usr-r)));
+	next(top-res-gklocal_3) := ((((next(top-impl-usr-m) >= 1) | (next(top-impl-usr-k) >= 1)) & ((next(top-res-call_1.Age-usr-age_of_p) >= next(top-impl-usr-k)) -> next(top-usr-q))) & ((next(top-res-call_2.Age-usr-age_of_p) >= next(top-impl-usr-m)) -> next(top-usr-r)));
 	next(top-impl-usr-env) := next(top-res-call_4.Sofar-usr-Sofar);
-	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-res-call_1.Age-usr-age_of_p) >= next(top-impl-usr-k) + next(top-impl-usr-m) -> next(top-usr-r)));
+	next(top-usr-OK) := (next(top-impl-usr-env) -> ((next(top-res-call_1.Age-usr-age_of_p) >= next(top-impl-usr-k) + next(top-impl-usr-m)) -> next(top-usr-r)));
 
 
 INVARSPEC 
