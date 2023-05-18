@@ -50,9 +50,9 @@ VAR
 	Abs-usr-Abs : signed word[32];
 
 ASSIGN
-	init(Abs-usr-Abs) := ((Abs-usr-X < 0sh32_00000000) ? bvnegAbs-usr-X : Abs-usr-X);
+	init(Abs-usr-Abs) := ((Abs-usr-X < 0sh32_00000000) ? -Abs-usr-X : Abs-usr-X);
 
-	next(Abs-usr-Abs) := ((next(Abs-usr-X) < 0sh32_00000000) ? bvnegnext(Abs-usr-X) : next(Abs-usr-X));
+	next(Abs-usr-Abs) := ((next(Abs-usr-X) < 0sh32_00000000) ? -next(Abs-usr-X) : next(Abs-usr-X));
 
 
 

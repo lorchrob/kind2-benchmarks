@@ -14,9 +14,9 @@ VAR
 	Environment-usr-ok : boolean;
 
 ASSIGN
-	init(Environment-usr-ok) := (((bvneg0sh32_00000004 <= Environment-usr-diff) & (Environment-usr-diff <= 0sh32_00000004)) & (Environment-usr-diff >= 0sh32_00000001));
+	init(Environment-usr-ok) := (((-0sh32_00000004 <= Environment-usr-diff) & (Environment-usr-diff <= 0sh32_00000004)) & (Environment-usr-diff >= 0sh32_00000001));
 
-	next(Environment-usr-ok) := ((((bvneg0sh32_00000004 <= next(Environment-usr-diff)) & (next(Environment-usr-diff) <= 0sh32_00000004)) & (Environment-usr-plus ? (next(Environment-usr-diff) >= 0sh32_00000001) : TRUE)) & (Environment-usr-minus ? (next(Environment-usr-diff) <= bvneg0sh32_00000001) : TRUE));
+	next(Environment-usr-ok) := ((((-0sh32_00000004 <= next(Environment-usr-diff)) & (next(Environment-usr-diff) <= 0sh32_00000004)) & (Environment-usr-plus ? (next(Environment-usr-diff) >= 0sh32_00000001) : TRUE)) & (Environment-usr-minus ? (next(Environment-usr-diff) <= -0sh32_00000001) : TRUE));
 
 
 

@@ -38,7 +38,7 @@ ASSIGN
 	next(speed-res-gklocal_3) := FALSE;
 	next(speed-impl-usr-incr) := ((next(speed-usr-beacon) & !next(speed-usr-second)) ? 0sh32_00000001 : ((next(speed-usr-second) & !next(speed-usr-beacon)) ? 0sh32_00000002 : 0sh32_00000000));
 	next(speed-impl-usr-diff) := next(speed-res-call_4.COUNTER-usr-C);
-	next(speed-usr-late) := (speed-usr-late ? (next(speed-impl-usr-diff) < 0sh32_00000000) : (next(speed-impl-usr-diff) <= bvneg0sh32_0000000A));
+	next(speed-usr-late) := (speed-usr-late ? (next(speed-impl-usr-diff) < 0sh32_00000000) : (next(speed-impl-usr-diff) <= -0sh32_0000000A));
 	next(speed-usr-early) := (speed-usr-early ? (next(speed-impl-usr-diff) > 0sh32_00000000) : (next(speed-impl-usr-diff) >= 0sh32_0000000A));
 
 

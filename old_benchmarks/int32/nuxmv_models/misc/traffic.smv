@@ -33,11 +33,11 @@ VAR
 	top-res-call_1 : Store(top-usr-Delta);
 
 ASSIGN
-	init(top-res-gklocal_2) := ((bvneg0sh32_00000001 <= top-usr-Delta) & (top-usr-Delta <= 0sh32_00000001));
+	init(top-res-gklocal_2) := ((-0sh32_00000001 <= top-usr-Delta) & (top-usr-Delta <= 0sh32_00000001));
 	init(top-impl-usr-Total) := top-res-call_1.Store-usr-Total;
 	init(top-usr-OK) := (top-res-call_3.Sofar-usr-Y -> ((0sh32_00000000 <= top-impl-usr-Total) & (top-impl-usr-Total <= 0sh32_00000014)));
 
-	next(top-res-gklocal_2) := ((bvneg0sh32_00000001 <= next(top-usr-Delta)) & (next(top-usr-Delta) <= 0sh32_00000001));
+	next(top-res-gklocal_2) := ((-0sh32_00000001 <= next(top-usr-Delta)) & (next(top-usr-Delta) <= 0sh32_00000001));
 	next(top-impl-usr-Total) := next(top-res-call_1.Store-usr-Total);
 	next(top-usr-OK) := (next(top-res-call_3.Sofar-usr-Y) -> ((0sh32_00000000 <= next(top-impl-usr-Total)) & (next(top-impl-usr-Total) <= 0sh32_00000014)));
 

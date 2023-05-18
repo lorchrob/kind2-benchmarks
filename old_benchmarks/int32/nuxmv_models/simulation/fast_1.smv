@@ -113,7 +113,7 @@ ASSIGN
 
 
 
-MODULE main (main-usr-igsw, main-usr-ccd, main-usr-cconoff, main-usr-bpa, main-usr-cccanc, main-usr-battok, main-usr-gearok, main-usr-qfok, main-usr-sdok, main-usr-accok, main-usr-ccseti, main-usr-ccsetd, main-usr-ccr, main-usr-vs)
+MODULE main2 (main-usr-igsw, main-usr-ccd, main-usr-cconoff, main-usr-bpa, main-usr-cccanc, main-usr-battok, main-usr-gearok, main-usr-qfok, main-usr-sdok, main-usr-accok, main-usr-ccseti, main-usr-ccsetd, main-usr-ccr, main-usr-vs)
 VAR
 	main-usr-ccont : boolean;
 	main-usr-cca : boolean;
@@ -163,7 +163,7 @@ VAR
 	top-res-call_18 : PosEdge(top-usr-ccseti);
 	top-res-call_19 : PosEdge(top-usr-ccsetd);
 	top-res-call_20 : PosEdge(top-usr-ccr);
-	top-res-2-call_16 : main(top-usr-igsw, top-usr-ccd, top-usr-cconoff, top-usr-bpa, top-usr-cccanc, top-usr-battok, top-usr-gearok, top-usr-qfok, top-usr-sdok, top-usr-accok, top-usr-ccseti, top-usr-ccsetd, top-usr-ccr, top-usr-vs);
+	top-res-2-call_16 : main2(top-usr-igsw, top-usr-ccd, top-usr-cconoff, top-usr-bpa, top-usr-cccanc, top-usr-battok, top-usr-gearok, top-usr-qfok, top-usr-sdok, top-usr-accok, top-usr-ccseti, top-usr-ccsetd, top-usr-ccr, top-usr-vs);
 
 ASSIGN
 	init(top-usr-OK) := (top-res-call_17.PosEdge-usr-Y ? (top-res-call_20.PosEdge-usr-Y | (top-res-call_19.PosEdge-usr-Y | top-res-call_18.PosEdge-usr-Y)) : TRUE);

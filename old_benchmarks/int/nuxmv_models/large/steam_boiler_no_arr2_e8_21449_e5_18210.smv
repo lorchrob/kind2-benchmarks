@@ -205,6 +205,4 @@ ASSIGN
 
 INVARSPEC 
 ((top-usr-OK));
-INVARSPEC 
-((TRUE));
 

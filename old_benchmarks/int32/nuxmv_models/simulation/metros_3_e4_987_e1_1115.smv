@@ -26,11 +26,11 @@ ASSIGN
 
 	next(controleur-usr-diff) := (next(controleur-usr-nB) - next(controleur-usr-nS));
 	next(controleur-usr-avance) := (!controleur-usr-avance ? (next(controleur-usr-diff) >= 0sh32_0000000A) : (next(controleur-usr-diff) > 0sh32_00000000));
-	next(controleur-usr-retard) := (!controleur-usr-retard ? (next(controleur-usr-diff) <= bvneg0sh32_0000000A) : (next(controleur-usr-diff) < 0sh32_00000000));
+	next(controleur-usr-retard) := (!controleur-usr-retard ? (next(controleur-usr-diff) <= -0sh32_0000000A) : (next(controleur-usr-diff) < 0sh32_00000000));
 
 
 
-MODULE main (main-usr-B0, main-usr-B1, main-usr-S)
+MODULE main2 (main-usr-B0, main-usr-B1, main-usr-S)
 VAR
 	main-usr-ast : boolean;
 	main-usr-nB0 : signed word[32];
@@ -98,7 +98,7 @@ VAR
 	top-impl-usr-nB1 : signed word[32];
 	top-impl-usr-ast : boolean;
 	top-res-call_6 : Sofar(top-impl-usr-ast);
-	top-res-2-call_5 : main(top-usr-B0, top-usr-B1, top-usr-S);
+	top-res-2-call_5 : main2(top-usr-B0, top-usr-B1, top-usr-S);
 
 ASSIGN
 	init(top-usr-OK) := TRUE;

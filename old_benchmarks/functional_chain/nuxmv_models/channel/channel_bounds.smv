@@ -226,14 +226,4 @@ ASSIGN
 
 INVARSPEC 
 ((channel-impl-usr-out_stable));
-INVARSPEC 
-((TRUE));
-INVARSPEC 
-((TRUE));
-INVARSPEC 
-((TRUE));
-INVARSPEC 
-((TRUE));
-INVARSPEC 
-((TRUE));
 

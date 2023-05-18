@@ -29,7 +29,7 @@ ASSIGN
 
 
 
-MODULE main (main-usr-B0, main-usr-B1, main-usr-S)
+MODULE main2 (main-usr-B0, main-usr-B1, main-usr-S)
 VAR
 	main-usr-ast : boolean;
 	main-usr-nB0 : integer;
@@ -103,7 +103,7 @@ VAR
 	top-impl-usr-ast : boolean;
 	top-res-gklocal_6 : boolean;
 	top-res-call_7 : Sofar(top-res-gklocal_6);
-	top-res-2-call_5 : main(top-usr-B0, top-usr-B1, top-usr-S);
+	top-res-2-call_5 : main2(top-usr-B0, top-usr-B1, top-usr-S);
 
 ASSIGN
 	init(top-usr-OK) := TRUE;

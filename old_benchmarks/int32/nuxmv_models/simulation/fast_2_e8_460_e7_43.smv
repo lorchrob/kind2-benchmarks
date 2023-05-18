@@ -113,7 +113,7 @@ ASSIGN
 
 
 
-MODULE main (main-usr-igsw, main-usr-ccd, main-usr-cconoff, main-usr-bpa, main-usr-cccanc, main-usr-battok, main-usr-gearok, main-usr-qfok, main-usr-sdok, main-usr-accok, main-usr-ccseti, main-usr-ccsetd, main-usr-ccr, main-usr-vs)
+MODULE main2 (main-usr-igsw, main-usr-ccd, main-usr-cconoff, main-usr-bpa, main-usr-cccanc, main-usr-battok, main-usr-gearok, main-usr-qfok, main-usr-sdok, main-usr-accok, main-usr-ccseti, main-usr-ccsetd, main-usr-ccr, main-usr-vs)
 VAR
 	main-usr-ccont : boolean;
 	main-usr-cca : boolean;
@@ -164,7 +164,7 @@ VAR
 	top-impl-usr-p4 : boolean;
 	top-impl-usr-ccont : boolean;
 	top-impl-usr-cca : boolean;
-	top-res-2-call_24 : main(top-usr-igsw, top-usr-ccd, top-usr-cconoff, top-usr-bpa, top-usr-cccanc, top-usr-battok, top-usr-gearok, top-usr-qfok, top-usr-sdok, top-usr-accok, top-usr-ccseti, top-usr-ccsetd, top-usr-ccr, top-usr-vs);
+	top-res-2-call_24 : main2(top-usr-igsw, top-usr-ccd, top-usr-cconoff, top-usr-bpa, top-usr-cccanc, top-usr-battok, top-usr-gearok, top-usr-qfok, top-usr-sdok, top-usr-accok, top-usr-ccseti, top-usr-ccsetd, top-usr-ccr, top-usr-vs);
 	top-res-call_21 : PosEdge(top-impl-usr-ccont);
 	top-res-call_22 : Edge(top-usr-igsw);
 	top-res-call_23 : PosEdge(top-usr-cconoff);
