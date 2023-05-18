@@ -752,7 +752,21 @@ ASSIGN
 	INVAR main-res-glocal_139;
 
 INVARSPEC 
-((main-impl-usr-__LEMMA7) & (main-impl-usr-__LEMMA6) & (main-impl-usr-__LEMMA5) & 
- (main-impl-usr-__LEMMA4) & (main-impl-usr-__LEMMA3) & (main-impl-usr-__LEMMA2) & 
- (main-impl-usr-__LEMMA1) & (main-impl-usr-__LEMMA0) & (main-impl-usr-__ASSUME__HIST));
+((main-impl-usr-__LEMMA7));
+INVARSPEC 
+((main-impl-usr-__LEMMA6));
+INVARSPEC 
+((main-impl-usr-__LEMMA5));
+INVARSPEC 
+((main-impl-usr-__LEMMA4));
+INVARSPEC 
+((main-impl-usr-__LEMMA3));
+INVARSPEC 
+((main-impl-usr-__LEMMA2));
+INVARSPEC 
+((main-impl-usr-__LEMMA1));
+INVARSPEC 
+((main-impl-usr-__LEMMA0));
+INVARSPEC 
+((main-impl-usr-__ASSUME__HIST));
 

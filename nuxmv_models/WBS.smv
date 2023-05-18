@@ -1141,15 +1141,67 @@ ASSIGN
 	INVAR main-res-glocal_2;
 
 INVARSPEC 
-((main-impl-usr-__LEMMA28) & (main-impl-usr-__LEMMA27) & (main-impl-usr-__LEMMA26) & 
- (main-impl-usr-__LEMMA25) & (main-impl-usr-__LEMMA24) & (main-impl-usr-__LEMMA23) & 
- (main-impl-usr-__LEMMA22) & (main-impl-usr-__LEMMA21) & (main-impl-usr-__LEMMA20) & 
- (main-impl-usr-__LEMMA19) & (main-impl-usr-__LEMMA18) & (main-impl-usr-__LEMMA17) & 
- (main-impl-usr-__LEMMA16) & (main-impl-usr-__LEMMA15) & (main-impl-usr-__LEMMA14) & 
- (main-impl-usr-__LEMMA13) & (main-impl-usr-__LEMMA12) & (main-impl-usr-__LEMMA11) & 
- (main-impl-usr-__LEMMA10) & (main-impl-usr-__LEMMA9) & (main-impl-usr-__LEMMA8) & 
- (main-impl-usr-__LEMMA7) & (main-impl-usr-__LEMMA6) & (main-impl-usr-__LEMMA5) & 
- (main-impl-usr-__LEMMA4) & (main-impl-usr-__LEMMA3) & (main-impl-usr-__LEMMA2) & 
- (main-impl-usr-__LEMMA1) & (main-impl-usr-__LEMMA0) & (main-impl-usr-__ASSUME__HIST) & 
- (main-usr-ctrl_sys____ASSUME0) & (main-usr-phys_sys____ASSUME0));
+((main-impl-usr-__LEMMA28));
+INVARSPEC 
+((main-impl-usr-__LEMMA27));
+INVARSPEC 
+((main-impl-usr-__LEMMA26));
+INVARSPEC 
+((main-impl-usr-__LEMMA25));
+INVARSPEC 
+((main-impl-usr-__LEMMA24));
+INVARSPEC 
+((main-impl-usr-__LEMMA23));
+INVARSPEC 
+((main-impl-usr-__LEMMA22));
+INVARSPEC 
+((main-impl-usr-__LEMMA21));
+INVARSPEC 
+((main-impl-usr-__LEMMA20));
+INVARSPEC 
+((main-impl-usr-__LEMMA19));
+INVARSPEC 
+((main-impl-usr-__LEMMA18));
+INVARSPEC 
+((main-impl-usr-__LEMMA17));
+INVARSPEC 
+((main-impl-usr-__LEMMA16));
+INVARSPEC 
+((main-impl-usr-__LEMMA15));
+INVARSPEC 
+((main-impl-usr-__LEMMA14));
+INVARSPEC 
+((main-impl-usr-__LEMMA13));
+INVARSPEC 
+((main-impl-usr-__LEMMA12));
+INVARSPEC 
+((main-impl-usr-__LEMMA11));
+INVARSPEC 
+((main-impl-usr-__LEMMA10));
+INVARSPEC 
+((main-impl-usr-__LEMMA9));
+INVARSPEC 
+((main-impl-usr-__LEMMA8));
+INVARSPEC 
+((main-impl-usr-__LEMMA7));
+INVARSPEC 
+((main-impl-usr-__LEMMA6));
+INVARSPEC 
+((main-impl-usr-__LEMMA5));
+INVARSPEC 
+((main-impl-usr-__LEMMA4));
+INVARSPEC 
+((main-impl-usr-__LEMMA3));
+INVARSPEC 
+((main-impl-usr-__LEMMA2));
+INVARSPEC 
+((main-impl-usr-__LEMMA1));
+INVARSPEC 
+((main-impl-usr-__LEMMA0));
+INVARSPEC 
+((main-impl-usr-__ASSUME__HIST));
+INVARSPEC 
+((main-usr-ctrl_sys____ASSUME0));
+INVARSPEC 
+((main-usr-phys_sys____ASSUME0));
 
