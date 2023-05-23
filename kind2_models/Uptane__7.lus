@@ -1,0 +1,1184 @@
+type Data_Types__SecondaryToPrimary__impl = struct {ecu_version_report : Data_Types__EcuVersionReport__impl};
+type Data_Types__ImageToPrimary__impl = struct {image : Data_Types__Image__impl; image_present : bool; image_secondary : Data_Types__Image__impl; image_secondary2 : Data_Types__Image__impl; image_secondary2_present : bool; image_secondary_present : bool; metadata : Data_Types__Metadata__impl};
+type Data_Types__FilenameList__impl = struct {filename_one : int; filename_three : int; filename_two : int};
+type Data_Types__RootMetadata__impl = struct {common_payload : Data_Types__CommonPayload__impl};
+type Data_Types__FileSizeList__impl = struct {file_size_one : int; file_size_three : int; file_size_two : int};
+type Data_Types__EcuIdList__impl = struct {ecu_id_one : int; ecu_id_three : int; ecu_id_two : int};
+type Data_Types__PrimaryToSecondary__impl = struct {current_time : int; image : Data_Types__Image__impl; metadata : Data_Types__Metadata__impl; metadata_present : Data_Types__MetadataRequest__impl; time_present : bool};
+type Data_Types__ImageHashList__impl = struct {hash_one : int; hash_three : int; hash_two : int};
+type Data_Types__EcuVersionReport__impl = struct {ecu_id : int; image_filename : int; image_hash : int; image_length : int; latest_time : int; nonce : int};
+type Data_Types__HardwareIdList2__impl = struct {hardware_id_five : int; hardware_id_four : int; hardware_id_one : int; hardware_id_three : int; hardware_id_two : int};
+type Data_Types__OptionalFeatures__impl = struct {opt_flag_check_vvm : bool; opt_flag_deps_cons : bool; opt_flag_inc_ver : bool; opt_flag_rel_ctr : bool};
+type Data_Types__TargetsHashList__impl = struct {hash_one : int; hash_three : int; hash_two : int};
+type Data_Types__EcuIdList2__impl = struct {ecu_id_five : int; ecu_id_four : int; ecu_id_one : int; ecu_id_three : int; ecu_id_two : int};
+type Data_Types__CommonPayload__impl = struct {expiration : int; filename : int; version : int};
+type Data_Types__ReleaseCounterList2__impl = struct {release_counter_five : int; release_counter_four : int; release_counter_one : int; release_counter_three : int; release_counter_two : int};
+type Data_Types__Image__impl = struct {bundle : int; contents : int; filename : int; length : int; version : int};
+type Data_Types__SnapshotMetadata__impl = struct {common_payload : Data_Types__CommonPayload__impl; targets_filenames : Data_Types__FilenameList__impl; targets_hashes : Data_Types__TargetsHashList__impl; targets_version_numbers : Data_Types__VersionNumberList__impl};
+type Data_Types__PrimaryToImage__impl = struct {image_filename : int; image_filename_secondary : int; image_filename_secondary2 : int; image_hash : int; image_hash_secondary : int; image_hash_secondary2 : int};
+type Data_Types__VersionNumberList__impl = struct {version_number_one : int; version_number_three : int; version_number_two : int};
+type Data_Types__ImageHashList2__impl = struct {hash_five : int; hash_four : int; hash_one : int; hash_three : int; hash_two : int};
+type Data_Types__Metadata__impl = struct {root_metadata : Data_Types__RootMetadata__impl; snapshot_metadata : Data_Types__SnapshotMetadata__impl; targets_metadata : Data_Types__TargetsMetadata__impl; targets_metadata_i : Data_Types__TargetsMetadataImg__impl; timestamp_metadata : Data_Types__TimestampMetadata__impl};
+type Data_Types__PrimaryToDirector__impl = struct {manifest : Data_Types__VehicleVersionManifest__impl};
+type Data_Types__ReleaseCounterList__impl = struct {release_counter_one : int; release_counter_three : int; release_counter_two : int};
+type Data_Types__TargetsMetadata__impl = struct {common_payload : Data_Types__CommonPayload__impl; ecu_ids : Data_Types__EcuIdList__impl; hardware_ids : Data_Types__HardwareIdList__impl; image_file_sizes : Data_Types__FileSizeList__impl; image_filenames : Data_Types__FilenameList__impl; image_hashes : Data_Types__ImageHashList__impl; release_counters : Data_Types__ReleaseCounterList__impl};
+type Data_Types__DirectorToPrimary__impl = struct {metadata : Data_Types__Metadata__impl};
+type Data_Types__TimestampMetadata__impl = struct {common_payload : Data_Types__CommonPayload__impl; latest_snapshot_filename : int; latest_snapshot_hash : int; latest_snapshot_version : int};
+type Data_Types__TimeServerToPrimary__impl = struct {current_time : int};
+type Data_Types__InitializationBus__impl = struct {ecu_id_one : int; ecu_id_three : int; ecu_id_two : int; hardware_id_one : int; hardware_id_three : int; hardware_id_two : int; manifest : Data_Types__VehicleVersionManifest__impl; metadata_d : Data_Types__Metadata__impl; metadata_i : Data_Types__Metadata__impl; primary_image : Data_Types__Image__impl; report_three : Data_Types__EcuVersionReport__impl; report_two : Data_Types__EcuVersionReport__impl; secondary_image : Data_Types__Image__impl; secondary_image2 : Data_Types__Image__impl};
+type Data_Types__HardwareIdList__impl = struct {hardware_id_one : int; hardware_id_three : int; hardware_id_two : int};
+type Data_Types__VehicleVersionManifest__impl = struct {report_one : Data_Types__EcuVersionReport__impl; report_three : Data_Types__EcuVersionReport__impl; report_two : Data_Types__EcuVersionReport__impl};
+type Data_Types__TargetsMetadataImg__impl = struct {common_payload : Data_Types__CommonPayload__impl; ecu_ids : Data_Types__EcuIdList2__impl; hardware_ids : Data_Types__HardwareIdList2__impl; image_filenames : Data_Types__FilenameList2__impl; image_hashes : Data_Types__ImageHashList2__impl; release_counters : Data_Types__ReleaseCounterList2__impl};
+type Data_Types__FilenameList2__impl = struct {filename_five : int; filename_four : int; filename_one : int; filename_three : int; filename_two : int};
+type Data_Types__VerificationStage = enum {Data_Types__VerificationStage_VERIFICATION_SUCCESS, Data_Types__VerificationStage_VERIFICATION_FAILURE};
+type Data_Types__MetadataRequest__impl = struct {root_metadata : bool; snapshot_metadata : bool; targets_metadata : bool; timestamp_metadata : bool};
+type Data_Types__ModelInputs__impl = struct {image1 : Data_Types__Image__impl; image2 : Data_Types__Image__impl; image3 : Data_Types__Image__impl; image4 : Data_Types__Image__impl; image5 : Data_Types__Image__impl; metadata : Data_Types__Metadata__impl};
+type Base_Types__Boolean = bool;
+type Base_Types__Unsigned = int;
+type Base_Types__Unsigned_64 = int;
+type Base_Types__Unsigned_32 = int;
+type Base_Types__Unsigned_16 = int;
+type Base_Types__Unsigned_8 = int;
+type Base_Types__Integer = int;
+type Base_Types__Integer_64 = int;
+type Base_Types__Integer_32 = int;
+type Base_Types__Integer_16 = int;
+type Base_Types__Integer_8 = int;
+type Base_Types__Float = real;
+type Base_Types__Float_32 = real;
+type Base_Types__Float_64 = real;
+
+node _TOP__opt_flags(
+  __ASSUME__HIST : bool;
+  in_opt_flag_inc_ver : bool;
+  in_opt_flag_rel_ctr : bool;
+  in_opt_flag_check_vvm : bool;
+  in_opt_flag_deps_cons : bool;
+  time : real;
+  out_flags : Data_Types__OptionalFeatures__impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+let
+  __GUARANTEE0 = (out_flags.opt_flag_inc_ver = in_opt_flag_inc_ver);
+
+  __GUARANTEE1 = (out_flags.opt_flag_rel_ctr = in_opt_flag_rel_ctr);
+
+  __GUARANTEE2 = (out_flags.opt_flag_check_vvm = in_opt_flag_check_vvm);
+
+  __GUARANTEE3 = (out_flags.opt_flag_deps_cons = in_opt_flag_deps_cons);
+
+  __ASSERT = (__ASSUME__HIST => (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3;
+
+tel;
+
+node _TOP__director_repo(
+  __ASSUME__HIST : bool;
+  model_inputs : Data_Types__ModelInputs__impl;
+  initialization : Data_Types__InitializationBus__impl;
+  in_primary : Data_Types__PrimaryToDirector__impl;
+  opt_flags : Data_Types__OptionalFeatures__impl;
+  time : real;
+  primary_ecu_id : int;
+  secondary_ecu_id : int;
+  secondary_ecu_id2 : int;
+  hardware_id_one : int;
+  hardware_id_two : int;
+  hardware_id_three : int;
+  valid_manifest : bool;
+  current_manifest : Data_Types__VehicleVersionManifest__impl;
+  out_primary : Data_Types__DirectorToPrimary__impl;
+  latest_targets : Data_Types__TargetsMetadata__impl;
+  latest_manifest : Data_Types__VehicleVersionManifest__impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+let
+  __GUARANTEE0 = (((((((out_primary.metadata.targets_metadata.hardware_ids.hardware_id_one = hardware_id_one) and (out_primary.metadata.targets_metadata.hardware_ids.hardware_id_two = hardware_id_two)) and (out_primary.metadata.targets_metadata.hardware_ids.hardware_id_three = hardware_id_three)) and Agree_Nodes__TargetsPriMatchImg(out_primary.metadata.targets_metadata, model_inputs.image1, model_inputs.image2, model_inputs.image3, model_inputs.image4, model_inputs.image5)) and Agree_Nodes__TargetsSecMatchImg(out_primary.metadata.targets_metadata, model_inputs.image1, model_inputs.image2, model_inputs.image3, model_inputs.image4, model_inputs.image5)) and Agree_Nodes__TargetsSec2MatchImg(out_primary.metadata.targets_metadata, model_inputs.image1, model_inputs.image2, model_inputs.image3, model_inputs.image4, model_inputs.image5)) or (false -> (out_primary.metadata.targets_metadata = (pre out_primary.metadata.targets_metadata))));
+
+  __GUARANTEE1 = (((true -> (out_primary.metadata.targets_metadata.release_counters.release_counter_one >= (pre out_primary.metadata.targets_metadata.release_counters.release_counter_one))) and (true -> (out_primary.metadata.targets_metadata.release_counters.release_counter_two >= (pre out_primary.metadata.targets_metadata.release_counters.release_counter_two)))) and (true -> (out_primary.metadata.targets_metadata.release_counters.release_counter_three >= (pre out_primary.metadata.targets_metadata.release_counters.release_counter_three))));
+
+  __GUARANTEE2 = (opt_flags.opt_flag_deps_cons => Agree_Nodes__Compatible3(out_primary.metadata.targets_metadata.image_filenames.filename_one, out_primary.metadata.targets_metadata.image_filenames.filename_two, out_primary.metadata.targets_metadata.image_filenames.filename_three));
+
+  __GUARANTEE3 = (opt_flags.opt_flag_deps_cons => ((Agree_Nodes__Compatible(out_primary.metadata.targets_metadata.image_filenames.filename_one, hardware_id_one) and Agree_Nodes__Compatible(out_primary.metadata.targets_metadata.image_filenames.filename_two, hardware_id_two)) and Agree_Nodes__Compatible(out_primary.metadata.targets_metadata.image_filenames.filename_three, hardware_id_three)));
+
+  __GUARANTEE4 = (opt_flags.opt_flag_check_vvm => (true -> ((not valid_manifest) => (out_primary.metadata = (pre out_primary.metadata)))));
+
+  __GUARANTEE5 = ((opt_flags.opt_flag_inc_ver => (true -> (((((out_primary.metadata.root_metadata <> (pre out_primary.metadata.root_metadata)) => (out_primary.metadata.root_metadata.common_payload.version = ((pre out_primary.metadata.root_metadata.common_payload.version) + 1))) and ((out_primary.metadata.timestamp_metadata <> (pre out_primary.metadata.timestamp_metadata)) => (out_primary.metadata.timestamp_metadata.common_payload.version = ((pre out_primary.metadata.timestamp_metadata.common_payload.version) + 1)))) and ((out_primary.metadata.targets_metadata <> (pre out_primary.metadata.targets_metadata)) => (out_primary.metadata.targets_metadata.common_payload.version = ((pre out_primary.metadata.targets_metadata.common_payload.version) + 1)))) and ((out_primary.metadata.snapshot_metadata <> (pre out_primary.metadata.snapshot_metadata)) => (out_primary.metadata.snapshot_metadata.common_payload.version = ((pre out_primary.metadata.snapshot_metadata.common_payload.version) + 1)))))) and ((not opt_flags.opt_flag_inc_ver) => (true -> (((((out_primary.metadata.root_metadata <> (pre out_primary.metadata.root_metadata)) => (out_primary.metadata.root_metadata.common_payload.version = (pre out_primary.metadata.root_metadata.common_payload.version))) and ((out_primary.metadata.timestamp_metadata <> (pre out_primary.metadata.timestamp_metadata)) => (out_primary.metadata.timestamp_metadata.common_payload.version = (pre out_primary.metadata.timestamp_metadata.common_payload.version)))) and ((out_primary.metadata.targets_metadata <> (pre out_primary.metadata.targets_metadata)) => (out_primary.metadata.targets_metadata.common_payload.version = (pre out_primary.metadata.targets_metadata.common_payload.version)))) and ((out_primary.metadata.snapshot_metadata <> (pre out_primary.metadata.snapshot_metadata)) => (out_primary.metadata.snapshot_metadata.common_payload.version = (pre out_primary.metadata.snapshot_metadata.common_payload.version)))))));
+
+  __GUARANTEE6 = ((out_primary.metadata = initialization.metadata_d) -> true);
+
+  __GUARANTEE7 = (latest_targets = (initialization.metadata_d.targets_metadata -> out_primary.metadata.targets_metadata));
+
+  __GUARANTEE8 = (latest_manifest = (initialization.manifest -> (if valid_manifest then in_primary.manifest else (pre latest_manifest))));
+
+  __ASSERT = ((current_manifest = (initialization.manifest -> (if valid_manifest then in_primary.manifest else (pre current_manifest)))) and ((valid_manifest = (false -> (opt_flags.opt_flag_check_vvm => ((((in_primary.manifest.report_one.nonce > (pre current_manifest.report_one.nonce)) and (in_primary.manifest.report_two.nonce > (pre current_manifest.report_two.nonce))) and (in_primary.manifest.report_three.nonce > (pre current_manifest.report_three.nonce))) and (((in_primary.manifest.report_one.ecu_id = primary_ecu_id) and (in_primary.manifest.report_two.ecu_id = secondary_ecu_id)) and (in_primary.manifest.report_three.ecu_id = secondary_ecu_id2)))))) and ((hardware_id_three = (initialization.hardware_id_three -> (pre hardware_id_three))) and ((hardware_id_two = (initialization.hardware_id_two -> (pre hardware_id_two))) and ((hardware_id_one = (initialization.hardware_id_one -> (pre hardware_id_one))) and ((secondary_ecu_id2 = (initialization.ecu_id_three -> (pre secondary_ecu_id2))) and ((secondary_ecu_id = (initialization.ecu_id_two -> (pre secondary_ecu_id))) and ((primary_ecu_id = (initialization.ecu_id_one -> (pre primary_ecu_id))) and (__ASSUME__HIST => (__GUARANTEE8 and (__GUARANTEE7 and (__GUARANTEE6 and (__GUARANTEE5 and (__GUARANTEE4 and (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0)))))))))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3, __GUARANTEE4, __GUARANTEE5, __GUARANTEE6, __GUARANTEE7, __GUARANTEE8;
+
+tel;
+
+node _TOP__image_repo(
+  __ASSUME__HIST : bool;
+  model_inputs : Data_Types__ModelInputs__impl;
+  initialization : Data_Types__InitializationBus__impl;
+  in_primary : Data_Types__PrimaryToImage__impl;
+  opt_flags : Data_Types__OptionalFeatures__impl;
+  time : real;
+  hardware_id_one : int;
+  hardware_id_two : int;
+  hardware_id_three : int;
+  out_primary : Data_Types__ImageToPrimary__impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+let
+  __GUARANTEE0 = (((((out_primary.metadata = initialization.metadata_i) and (out_primary.image = initialization.primary_image)) and (out_primary.image_secondary = initialization.secondary_image)) and (out_primary.image_secondary2 = initialization.secondary_image2)) -> true);
+
+  __GUARANTEE1 = (out_primary.metadata = model_inputs.metadata);
+
+  __GUARANTEE2 = (out_primary.image_present => (((out_primary.image.filename = in_primary.image_filename) and out_primary.image_secondary_present) => (((out_primary.image_secondary.filename = in_primary.image_filename_secondary) and out_primary.image_secondary2_present) => (out_primary.image_secondary2.filename = in_primary.image_filename_secondary2))));
+
+  __GUARANTEE3 = (((((((out_primary.image = model_inputs.image1) or (out_primary.image = model_inputs.image2)) or (out_primary.image = model_inputs.image3)) or (out_primary.image = model_inputs.image4)) or (out_primary.image = model_inputs.image5)) and (((((out_primary.image_secondary = model_inputs.image1) or (out_primary.image_secondary = model_inputs.image2)) or (out_primary.image_secondary = model_inputs.image3)) or (out_primary.image_secondary = model_inputs.image4)) or (out_primary.image_secondary = model_inputs.image5))) and (((((out_primary.image_secondary2 = model_inputs.image1) or (out_primary.image_secondary2 = model_inputs.image2)) or (out_primary.image_secondary2 = model_inputs.image3)) or (out_primary.image_secondary2 = model_inputs.image4)) or (out_primary.image_secondary2 = model_inputs.image5)));
+
+  __ASSERT = ((hardware_id_three = (initialization.hardware_id_three -> (pre hardware_id_three))) and ((hardware_id_two = (initialization.hardware_id_two -> (pre hardware_id_two))) and ((hardware_id_one = (initialization.hardware_id_one -> (pre hardware_id_one))) and (__ASSUME__HIST => (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0)))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3;
+
+tel;
+
+node _TOP__primary_ecu(
+  __ASSUME__HIST : bool;
+  initialization : Data_Types__InitializationBus__impl;
+  in_director : Data_Types__DirectorToPrimary__impl;
+  in_image : Data_Types__ImageToPrimary__impl;
+  in_secondary : Data_Types__SecondaryToPrimary__impl;
+  in_secondary2 : Data_Types__SecondaryToPrimary__impl;
+  in_time_server : Data_Types__TimeServerToPrimary__impl;
+  opt_flags : Data_Types__OptionalFeatures__impl;
+  time : real;
+  optional_flag : bool;
+  ecu_id : int;
+  hardware_id : int;
+  hardware_id_secondary : int;
+  hardware_id_secondary2 : int;
+  initial_image : Data_Types__Image__impl;
+  current_time : int;
+  most_recent_secondary_report : Data_Types__EcuVersionReport__impl;
+  most_recent_secondary_report2 : Data_Types__EcuVersionReport__impl;
+  attack_detected : bool;
+  previous_nonce : int;
+  targets_for_secondary : Data_Types__TargetsMetadata__impl;
+  current_targets_director : Data_Types__TargetsMetadata__impl;
+  previous_targets : Data_Types__TargetsMetadata__impl;
+  new_image_verified : bool;
+  new_image_verified_secondary : bool;
+  new_image_verified_secondary2 : bool;
+  root_director_verified : bool;
+  timestamp_director_verified : bool;
+  snapshot_director_verified : bool;
+  targets_director_verified : bool;
+  root_image_verified : bool;
+  timestamp_image_verified : bool;
+  snapshot_image_verified : bool;
+  targets_image_verified : bool;
+  targets_match_verified : bool;
+  out_director : Data_Types__PrimaryToDirector__impl;
+  out_image : Data_Types__PrimaryToImage__impl;
+  out_secondary : Data_Types__PrimaryToSecondary__impl;
+  out_secondary2 : Data_Types__PrimaryToSecondary__impl;
+  installed_image_primary : Data_Types__Image__impl;
+  verification_stage_primary : Data_Types__VerificationStage;
+  verified_metadata_primary_d : Data_Types__Metadata__impl;
+  verified_metadata_primary_i : Data_Types__Metadata__impl;
+  latest_targets_director : Data_Types__TargetsMetadata__impl;
+  ecu_software_version_primary : int;
+  latest_manifest : Data_Types__VehicleVersionManifest__impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+  __GUARANTEE9 : bool;
+  __GUARANTEE10 : bool;
+  __GUARANTEE11 : bool;
+  __GUARANTEE12 : bool;
+  __GUARANTEE13 : bool;
+  __GUARANTEE14 : bool;
+  __GUARANTEE15 : bool;
+  __GUARANTEE16 : bool;
+  __GUARANTEE17 : bool;
+  __GUARANTEE18 : bool;
+  __GUARANTEE19 : bool;
+  __GUARANTEE20 : bool;
+  __GUARANTEE21 : bool;
+  __GUARANTEE22 : bool;
+  __GUARANTEE23 : bool;
+  __GUARANTEE24 : bool;
+let
+  __GUARANTEE0 = ((out_secondary.current_time = current_time) and (out_secondary2.current_time = current_time));
+
+  __GUARANTEE1 = ((out_secondary.metadata.targets_metadata = targets_for_secondary) and (out_secondary2.metadata.targets_metadata = targets_for_secondary));
+
+  __GUARANTEE2 = (true -> ((out_director.manifest.report_two = most_recent_secondary_report) and (out_director.manifest.report_three = most_recent_secondary_report2)));
+
+  __GUARANTEE3 = (true -> (out_director.manifest.report_one.ecu_id = ecu_id));
+
+  __GUARANTEE4 = (true -> (((installed_image_primary.filename = out_director.manifest.report_one.image_filename) and (Agree_Nodes__HashImg(installed_image_primary) = out_director.manifest.report_one.image_hash)) and (installed_image_primary.length = out_director.manifest.report_one.image_length)));
+
+  __GUARANTEE5 = (true -> (out_director.manifest.report_one.latest_time = current_time));
+
+  __GUARANTEE6 = (true -> (out_director.manifest.report_one.nonce > previous_nonce));
+
+  __GUARANTEE7 = Agree_Nodes__AuthoredByEcu(out_director.manifest);
+
+  __GUARANTEE8 = ((out_director.manifest = initialization.manifest) -> true);
+
+  __GUARANTEE9 = (((out_image.image_filename = verified_metadata_primary_d.targets_metadata.image_filenames.filename_one) and (out_image.image_filename_secondary = verified_metadata_primary_d.targets_metadata.image_filenames.filename_two)) and (out_image.image_filename_secondary2 = verified_metadata_primary_d.targets_metadata.image_filenames.filename_three));
+
+  __GUARANTEE10 = (if new_image_verified then (installed_image_primary = (initial_image -> in_image.image)) else (installed_image_primary = (initial_image -> (pre installed_image_primary))));
+
+  __GUARANTEE11 = (if new_image_verified_secondary then (out_secondary.image = (initialization.secondary_image -> in_image.image_secondary)) else (out_secondary.image = (initialization.secondary_image -> (pre out_secondary.image))));
+
+  __GUARANTEE12 = (if new_image_verified_secondary2 then (out_secondary2.image = (initialization.secondary_image2 -> in_image.image_secondary2)) else (out_secondary2.image = (initialization.secondary_image2 -> (pre out_secondary2.image))));
+
+  __GUARANTEE13 = (ecu_software_version_primary = ((if new_image_verified then 1 else 0) -> (if (installed_image_primary.filename <> (pre installed_image_primary.filename)) then ((pre ecu_software_version_primary) + 1) else (pre ecu_software_version_primary))));
+
+  __GUARANTEE14 = ((((verified_metadata_primary_d = initialization.metadata_d) -> true) and ((verified_metadata_primary_i = initialization.metadata_i) -> true)) and ((latest_targets_director = initialization.metadata_d.targets_metadata) -> true));
+
+  __GUARANTEE15 = (if root_director_verified then (verified_metadata_primary_d.root_metadata = (initialization.metadata_d.root_metadata -> in_director.metadata.root_metadata)) else (verified_metadata_primary_d.root_metadata = (initialization.metadata_d.root_metadata -> (pre verified_metadata_primary_d.root_metadata))));
+
+  __GUARANTEE16 = (if timestamp_director_verified then (verified_metadata_primary_d.timestamp_metadata = (initialization.metadata_d.timestamp_metadata -> in_director.metadata.timestamp_metadata)) else (verified_metadata_primary_d.timestamp_metadata = (initialization.metadata_d.timestamp_metadata -> (pre verified_metadata_primary_d.timestamp_metadata))));
+
+  __GUARANTEE17 = (if snapshot_director_verified then (verified_metadata_primary_d.snapshot_metadata = (initialization.metadata_d.snapshot_metadata -> in_director.metadata.snapshot_metadata)) else (verified_metadata_primary_d.snapshot_metadata = (initialization.metadata_d.snapshot_metadata -> (pre verified_metadata_primary_d.snapshot_metadata))));
+
+  __GUARANTEE18 = (if targets_director_verified then ((verified_metadata_primary_d.targets_metadata = (initialization.metadata_d.targets_metadata -> in_director.metadata.targets_metadata)) and (latest_targets_director = in_director.metadata.targets_metadata)) else ((verified_metadata_primary_d.targets_metadata = (initialization.metadata_d.targets_metadata -> (pre verified_metadata_primary_d.targets_metadata))) and (latest_targets_director = (initialization.metadata_d.targets_metadata -> (pre latest_targets_director)))));
+
+  __GUARANTEE19 = (if root_image_verified then (verified_metadata_primary_i.root_metadata = (initialization.metadata_i.root_metadata -> in_image.metadata.root_metadata)) else (verified_metadata_primary_i.root_metadata = (initialization.metadata_i.root_metadata -> (pre verified_metadata_primary_i.root_metadata))));
+
+  __GUARANTEE20 = (if timestamp_image_verified then (verified_metadata_primary_i.timestamp_metadata = (initialization.metadata_i.timestamp_metadata -> in_image.metadata.timestamp_metadata)) else (verified_metadata_primary_i.timestamp_metadata = (initialization.metadata_i.timestamp_metadata -> (pre verified_metadata_primary_i.timestamp_metadata))));
+
+  __GUARANTEE21 = (if snapshot_image_verified then (verified_metadata_primary_i.snapshot_metadata = (initialization.metadata_i.snapshot_metadata -> in_image.metadata.snapshot_metadata)) else (verified_metadata_primary_i.snapshot_metadata = (initialization.metadata_i.snapshot_metadata -> (pre verified_metadata_primary_i.snapshot_metadata))));
+
+  __GUARANTEE22 = (if targets_image_verified then (verified_metadata_primary_i.targets_metadata_i = (initialization.metadata_i.targets_metadata_i -> in_image.metadata.targets_metadata_i)) else (verified_metadata_primary_i.targets_metadata_i = (initialization.metadata_i.targets_metadata_i -> (pre verified_metadata_primary_i.targets_metadata_i))));
+
+  __GUARANTEE23 = (if targets_match_verified then (verification_stage_primary = Data_Types__VerificationStage_VERIFICATION_SUCCESS) else (verification_stage_primary = Data_Types__VerificationStage_VERIFICATION_FAILURE));
+
+  __GUARANTEE24 = (latest_manifest = out_director.manifest);
+
+  __ASSERT = ((targets_match_verified = (false -> (((((((((root_director_verified and timestamp_director_verified) and snapshot_director_verified) and targets_director_verified) and root_image_verified) and timestamp_image_verified) and snapshot_image_verified) and targets_image_verified) and Agree_Nodes__TargetsMatch(latest_targets_director, in_image.metadata.targets_metadata_i, opt_flags.opt_flag_rel_ctr)) and (opt_flags.opt_flag_rel_ctr => (((latest_targets_director.release_counters.release_counter_one >= previous_targets.release_counters.release_counter_one) and (latest_targets_director.release_counters.release_counter_two >= previous_targets.release_counters.release_counter_two)) and (latest_targets_director.release_counters.release_counter_three >= previous_targets.release_counters.release_counter_three)))))) and ((targets_image_verified = (false -> (((((((((root_director_verified and timestamp_director_verified) and snapshot_director_verified) and targets_director_verified) and root_image_verified) and timestamp_image_verified) and snapshot_image_verified) and (in_image.metadata.targets_metadata_i.common_payload.version = verified_metadata_primary_i.snapshot_metadata.targets_version_numbers.version_number_one)) and (in_image.metadata.targets_metadata_i.common_payload.version >= (pre verified_metadata_primary_i.targets_metadata_i.common_payload.version))) and (in_image.metadata.targets_metadata_i.common_payload.expiration > (current_time + 1))))) and ((snapshot_image_verified = (false -> (((((((((((((((root_director_verified and timestamp_director_verified) and snapshot_director_verified) and targets_director_verified) and root_image_verified) and timestamp_image_verified) and (in_image.metadata.snapshot_metadata.common_payload.version >= (pre verified_metadata_primary_i.snapshot_metadata.common_payload.version))) and (in_image.metadata.snapshot_metadata.common_payload.expiration > current_time)) and (Agree_Nodes__HashSnapshot(in_image.metadata.snapshot_metadata) = verified_metadata_primary_i.timestamp_metadata.latest_snapshot_hash)) and (in_image.metadata.snapshot_metadata.common_payload.version = verified_metadata_primary_i.timestamp_metadata.latest_snapshot_version)) and (in_image.metadata.snapshot_metadata.targets_version_numbers.version_number_one >= (pre verified_metadata_primary_i.snapshot_metadata.targets_version_numbers.version_number_one))) and (in_image.metadata.snapshot_metadata.targets_version_numbers.version_number_two >= (pre verified_metadata_primary_i.snapshot_metadata.targets_version_numbers.version_number_two))) and (in_image.metadata.snapshot_metadata.targets_version_numbers.version_number_three >= (pre verified_metadata_primary_i.snapshot_metadata.targets_version_numbers.version_number_three))) and (in_image.metadata.snapshot_metadata.targets_filenames.filename_one = (pre verified_metadata_primary_i.snapshot_metadata.targets_filenames.filename_one))) and (in_image.metadata.snapshot_metadata.targets_filenames.filename_two = (pre verified_metadata_primary_i.snapshot_metadata.targets_filenames.filename_two))) and (in_image.metadata.snapshot_metadata.targets_filenames.filename_three = (pre verified_metadata_primary_i.snapshot_metadata.targets_filenames.filename_three))))) and ((timestamp_image_verified = (false -> ((((((root_director_verified and timestamp_director_verified) and snapshot_director_verified) and targets_director_verified) and root_image_verified) and (in_image.metadata.timestamp_metadata.common_payload.version >= (pre verified_metadata_primary_i.timestamp_metadata.common_payload.version))) and (in_image.metadata.timestamp_metadata.common_payload.expiration > current_time)))) and ((root_image_verified = (false -> (((((root_director_verified and timestamp_director_verified) and snapshot_director_verified) and targets_director_verified) and (in_image.metadata.root_metadata.common_payload.version >= (pre verified_metadata_primary_i.root_metadata.common_payload.version))) and (in_image.metadata.root_metadata.common_payload.expiration > current_time)))) and ((targets_director_verified = (false -> ((((((root_director_verified and timestamp_director_verified) and snapshot_director_verified) and (in_director.metadata.targets_metadata.common_payload.version = verified_metadata_primary_d.snapshot_metadata.targets_version_numbers.version_number_one)) and (in_director.metadata.targets_metadata.common_payload.version >= (pre verified_metadata_primary_d.targets_metadata.common_payload.version))) and (in_director.metadata.targets_metadata.common_payload.expiration > current_time)) and (((in_director.metadata.targets_metadata.ecu_ids.ecu_id_one <> in_director.metadata.targets_metadata.ecu_ids.ecu_id_two) and (in_director.metadata.targets_metadata.ecu_ids.ecu_id_one <> in_director.metadata.targets_metadata.ecu_ids.ecu_id_three)) and (in_director.metadata.targets_metadata.ecu_ids.ecu_id_two <> in_director.metadata.targets_metadata.ecu_ids.ecu_id_three))))) and ((snapshot_director_verified = (false -> (((((((((((root_director_verified and timestamp_director_verified) and (in_director.metadata.snapshot_metadata.common_payload.version >= (pre verified_metadata_primary_d.snapshot_metadata.common_payload.version))) and (in_director.metadata.snapshot_metadata.common_payload.expiration > current_time)) and (Agree_Nodes__HashSnapshot(in_director.metadata.snapshot_metadata) = verified_metadata_primary_d.timestamp_metadata.latest_snapshot_hash)) and (in_director.metadata.snapshot_metadata.common_payload.version = verified_metadata_primary_d.timestamp_metadata.latest_snapshot_version)) and (in_director.metadata.snapshot_metadata.targets_version_numbers.version_number_one >= (pre verified_metadata_primary_d.snapshot_metadata.targets_version_numbers.version_number_one))) and (in_director.metadata.snapshot_metadata.targets_version_numbers.version_number_two >= (pre verified_metadata_primary_d.snapshot_metadata.targets_version_numbers.version_number_two))) and (in_director.metadata.snapshot_metadata.targets_version_numbers.version_number_three >= (pre verified_metadata_primary_d.snapshot_metadata.targets_version_numbers.version_number_three))) and (in_director.metadata.snapshot_metadata.targets_filenames.filename_one = (pre verified_metadata_primary_d.snapshot_metadata.targets_filenames.filename_one))) and (in_director.metadata.snapshot_metadata.targets_filenames.filename_two = (pre verified_metadata_primary_d.snapshot_metadata.targets_filenames.filename_two))) and (in_director.metadata.snapshot_metadata.targets_filenames.filename_three = (pre verified_metadata_primary_d.snapshot_metadata.targets_filenames.filename_three))))) and ((timestamp_director_verified = (false -> ((root_director_verified and (in_director.metadata.timestamp_metadata.common_payload.version >= (pre verified_metadata_primary_d.timestamp_metadata.common_payload.version))) and (in_director.metadata.timestamp_metadata.common_payload.expiration > current_time)))) and ((root_director_verified = (false -> ((in_director.metadata.root_metadata.common_payload.version >= (pre verified_metadata_primary_d.root_metadata.common_payload.version)) and (in_director.metadata.root_metadata.common_payload.expiration > current_time)))) and ((new_image_verified_secondary2 = ((((in_image.image_secondary2_present and (verification_stage_primary = Data_Types__VerificationStage_VERIFICATION_SUCCESS)) and (current_targets_director.hardware_ids.hardware_id_three = hardware_id_secondary2)) and (opt_flags.opt_flag_rel_ctr => (true -> (current_targets_director.release_counters.release_counter_three >= previous_targets.release_counters.release_counter_three)))) and (false -> (current_targets_director.image_hashes.hash_three = Agree_Nodes__HashImg(in_image.image_secondary2))))) and ((new_image_verified_secondary = ((((in_image.image_secondary_present and (verification_stage_primary = Data_Types__VerificationStage_VERIFICATION_SUCCESS)) and (current_targets_director.hardware_ids.hardware_id_two = hardware_id_secondary)) and (opt_flags.opt_flag_rel_ctr => (true -> (current_targets_director.release_counters.release_counter_two >= previous_targets.release_counters.release_counter_two)))) and (false -> (current_targets_director.image_hashes.hash_two = Agree_Nodes__HashImg(in_image.image_secondary))))) and ((new_image_verified = ((((in_image.image_present and (verification_stage_primary = Data_Types__VerificationStage_VERIFICATION_SUCCESS)) and (current_targets_director.hardware_ids.hardware_id_one = hardware_id)) and (opt_flags.opt_flag_rel_ctr => (true -> (current_targets_director.release_counters.release_counter_one >= previous_targets.release_counters.release_counter_one)))) and (false -> (current_targets_director.image_hashes.hash_one = Agree_Nodes__HashImg(in_image.image))))) and ((previous_targets = (initialization.metadata_d.targets_metadata -> (if targets_director_verified then (pre verified_metadata_primary_d.targets_metadata) else (pre previous_targets)))) and ((current_targets_director = verified_metadata_primary_d.targets_metadata) and ((targets_for_secondary = (initialization.metadata_d.targets_metadata -> (if (verification_stage_primary = Data_Types__VerificationStage_VERIFICATION_SUCCESS) then verified_metadata_primary_d.targets_metadata else (pre targets_for_secondary)))) and ((previous_nonce = (0 -> (pre out_director.manifest.report_one.nonce))) and ((attack_detected = false) and ((most_recent_secondary_report2 = in_secondary2.ecu_version_report) and ((most_recent_secondary_report = in_secondary.ecu_version_report) and ((current_time = in_time_server.current_time) and ((initial_image = (initialization.primary_image -> (pre initial_image))) and ((hardware_id_secondary2 = (initialization.hardware_id_three -> (pre hardware_id_secondary2))) and ((hardware_id_secondary = (initialization.hardware_id_two -> (pre hardware_id_secondary))) and ((hardware_id = (initialization.hardware_id_one -> (pre hardware_id))) and ((ecu_id = (initialization.ecu_id_one -> (pre ecu_id))) and ((optional_flag = true) and (__ASSUME__HIST => (__GUARANTEE24 and (__GUARANTEE23 and (__GUARANTEE22 and (__GUARANTEE21 and (__GUARANTEE20 and (__GUARANTEE19 and (__GUARANTEE18 and (__GUARANTEE17 and (__GUARANTEE16 and (__GUARANTEE15 and (__GUARANTEE14 and (__GUARANTEE13 and (__GUARANTEE12 and (__GUARANTEE11 and (__GUARANTEE10 and (__GUARANTEE9 and (__GUARANTEE8 and (__GUARANTEE7 and (__GUARANTEE6 and (__GUARANTEE5 and (__GUARANTEE4 and (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0)))))))))))))))))))))))))))))))))))))))))))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3, __GUARANTEE4, __GUARANTEE5, __GUARANTEE6, __GUARANTEE7, __GUARANTEE8, __GUARANTEE9, __GUARANTEE10, __GUARANTEE11, __GUARANTEE12, __GUARANTEE13, __GUARANTEE14, __GUARANTEE15, __GUARANTEE16, __GUARANTEE17, __GUARANTEE18, __GUARANTEE19, __GUARANTEE20, __GUARANTEE21, __GUARANTEE22, __GUARANTEE23, __GUARANTEE24;
+
+tel;
+
+node _TOP__secondary_ecu(
+  __ASSUME__HIST : bool;
+  initialization : Data_Types__InitializationBus__impl;
+  in_primary : Data_Types__PrimaryToSecondary__impl;
+  opt_flags : Data_Types__OptionalFeatures__impl;
+  time : real;
+  ecu_id : int;
+  hardware_id : int;
+  initial_image : Data_Types__Image__impl;
+  initial_targets : Data_Types__TargetsMetadata__impl;
+  previous_nonce : int;
+  current_time : int;
+  new_targets : Data_Types__TargetsMetadata__impl;
+  current_targets : Data_Types__TargetsMetadata__impl;
+  previous_targets : Data_Types__TargetsMetadata__impl;
+  new_image_verified : bool;
+  new_metadata_verified : bool;
+  out_primary : Data_Types__SecondaryToPrimary__impl;
+  installed_image_secondary : Data_Types__Image__impl;
+  verified_metadata_secondary : Data_Types__Metadata__impl;
+  ecu_software_version_secondary : int;
+  latest_report : Data_Types__EcuVersionReport__impl;
+  verification_stage_secondary : Data_Types__VerificationStage;
+  ecu_metadata_version_secondary : int
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+  __GUARANTEE9 : bool;
+let
+  __GUARANTEE0 = (out_primary.ecu_version_report.ecu_id = ecu_id);
+
+  __GUARANTEE1 = (((installed_image_secondary.filename = out_primary.ecu_version_report.image_filename) and (Agree_Nodes__HashImg(installed_image_secondary) = out_primary.ecu_version_report.image_hash)) and (installed_image_secondary.length = out_primary.ecu_version_report.image_length));
+
+  __GUARANTEE2 = (out_primary.ecu_version_report.latest_time = current_time);
+
+  __GUARANTEE3 = (out_primary.ecu_version_report.nonce > previous_nonce);
+
+  __GUARANTEE4 = (latest_report = out_primary.ecu_version_report);
+
+  __GUARANTEE5 = (if new_image_verified then (installed_image_secondary = (initial_image -> in_primary.image)) else (installed_image_secondary = (initial_image -> (pre installed_image_secondary))));
+
+  __GUARANTEE6 = (ecu_software_version_secondary = ((if new_image_verified then 1 else 0) -> (if (installed_image_secondary.filename <> (pre installed_image_secondary.filename)) then ((pre ecu_software_version_secondary) + 1) else (pre ecu_software_version_secondary))));
+
+  __GUARANTEE7 = ((verified_metadata_secondary = initialization.metadata_d) -> true);
+
+  __GUARANTEE8 = (if new_metadata_verified then (verified_metadata_secondary.targets_metadata = (initialization.metadata_d.targets_metadata -> new_targets)) else (verified_metadata_secondary.targets_metadata = (initial_targets -> (pre verified_metadata_secondary.targets_metadata))));
+
+  __GUARANTEE9 = (true -> (((verified_metadata_secondary.root_metadata = (pre verified_metadata_secondary.root_metadata)) and (verified_metadata_secondary.timestamp_metadata = (pre verified_metadata_secondary.timestamp_metadata))) and (verified_metadata_secondary.snapshot_metadata = (pre verified_metadata_secondary.snapshot_metadata))));
+
+  __ASSERT = ((new_metadata_verified = (false -> (((new_targets.common_payload.version >= (pre current_targets.common_payload.version)) and (new_targets.common_payload.expiration > current_time)) and (((new_targets.ecu_ids.ecu_id_one <> new_targets.ecu_ids.ecu_id_two) and (new_targets.ecu_ids.ecu_id_one <> new_targets.ecu_ids.ecu_id_three)) and (new_targets.ecu_ids.ecu_id_two <> new_targets.ecu_ids.ecu_id_three))))) and ((new_image_verified = (((current_targets.hardware_ids.hardware_id_two = hardware_id) and (opt_flags.opt_flag_rel_ctr => (true -> (current_targets.release_counters.release_counter_two >= previous_targets.release_counters.release_counter_two)))) and (false -> (current_targets.image_hashes.hash_two = Agree_Nodes__HashImg(in_primary.image))))) and ((previous_targets = (initialization.metadata_d.targets_metadata -> (if new_metadata_verified then (pre verified_metadata_secondary.targets_metadata) else (pre previous_targets)))) and ((current_targets = verified_metadata_secondary.targets_metadata) and ((new_targets = in_primary.metadata.targets_metadata) and ((current_time = in_primary.current_time) and ((previous_nonce = (0 -> (pre out_primary.ecu_version_report.nonce))) and ((initial_targets = (initialization.metadata_d.targets_metadata -> (pre initial_targets))) and ((initial_image = (initialization.secondary_image -> (pre initial_image))) and ((hardware_id = (initialization.hardware_id_two -> (pre hardware_id))) and ((ecu_id = (initialization.ecu_id_two -> (pre ecu_id))) and (__ASSUME__HIST => (__GUARANTEE9 and (__GUARANTEE8 and (__GUARANTEE7 and (__GUARANTEE6 and (__GUARANTEE5 and (__GUARANTEE4 and (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0)))))))))))))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3, __GUARANTEE4, __GUARANTEE5, __GUARANTEE6, __GUARANTEE7, __GUARANTEE8, __GUARANTEE9;
+
+tel;
+
+node _TOP__secondary_ecu2(
+  __ASSUME__HIST : bool;
+  initialization : Data_Types__InitializationBus__impl;
+  in_primary : Data_Types__PrimaryToSecondary__impl;
+  opt_flags : Data_Types__OptionalFeatures__impl;
+  time : real;
+  ecu_id : int;
+  hardware_id : int;
+  initial_image : Data_Types__Image__impl;
+  initial_targets : Data_Types__TargetsMetadata__impl;
+  previous_nonce : int;
+  current_time : int;
+  new_targets : Data_Types__TargetsMetadata__impl;
+  current_targets : Data_Types__TargetsMetadata__impl;
+  previous_targets : Data_Types__TargetsMetadata__impl;
+  new_image_verified : bool;
+  new_metadata_verified : bool;
+  out_primary2 : Data_Types__SecondaryToPrimary__impl;
+  installed_image_secondary : Data_Types__Image__impl;
+  verification_stage_secondary : Data_Types__VerificationStage;
+  verified_metadata_secondary : Data_Types__Metadata__impl;
+  ecu_software_version_secondary : int
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+let
+  __GUARANTEE0 = (out_primary2.ecu_version_report.ecu_id = ecu_id);
+
+  __GUARANTEE1 = (((installed_image_secondary.filename = out_primary2.ecu_version_report.image_filename) and (Agree_Nodes__HashImg(installed_image_secondary) = out_primary2.ecu_version_report.image_hash)) and (installed_image_secondary.length = out_primary2.ecu_version_report.image_length));
+
+  __GUARANTEE2 = (out_primary2.ecu_version_report.latest_time = current_time);
+
+  __GUARANTEE3 = (out_primary2.ecu_version_report.nonce > previous_nonce);
+
+  __GUARANTEE4 = (if new_image_verified then (installed_image_secondary = (initial_image -> in_primary.image)) else (installed_image_secondary = (initial_image -> (pre installed_image_secondary))));
+
+  __GUARANTEE5 = (ecu_software_version_secondary = ((if new_image_verified then 1 else 0) -> (if (installed_image_secondary.filename <> (pre installed_image_secondary.filename)) then ((pre ecu_software_version_secondary) + 1) else (pre ecu_software_version_secondary))));
+
+  __GUARANTEE6 = ((verified_metadata_secondary = initialization.metadata_d) -> true);
+
+  __GUARANTEE7 = (if new_metadata_verified then (verified_metadata_secondary.targets_metadata = (initial_targets -> new_targets)) else (verified_metadata_secondary.targets_metadata = (initial_targets -> (pre verified_metadata_secondary.targets_metadata))));
+
+  __GUARANTEE8 = (true -> (((verified_metadata_secondary.root_metadata = (pre verified_metadata_secondary.root_metadata)) and (verified_metadata_secondary.timestamp_metadata = (pre verified_metadata_secondary.timestamp_metadata))) and (verified_metadata_secondary.snapshot_metadata = (pre verified_metadata_secondary.snapshot_metadata))));
+
+  __ASSERT = ((new_metadata_verified = (false -> (((new_targets.common_payload.version >= (pre current_targets.common_payload.version)) and (new_targets.common_payload.expiration > current_time)) and (((new_targets.ecu_ids.ecu_id_one <> new_targets.ecu_ids.ecu_id_two) and (new_targets.ecu_ids.ecu_id_one <> new_targets.ecu_ids.ecu_id_three)) and (new_targets.ecu_ids.ecu_id_two <> new_targets.ecu_ids.ecu_id_three))))) and ((new_image_verified = (((current_targets.hardware_ids.hardware_id_three = hardware_id) and (opt_flags.opt_flag_rel_ctr => (true -> (current_targets.release_counters.release_counter_three >= previous_targets.release_counters.release_counter_three)))) and (false -> (current_targets.image_hashes.hash_three = Agree_Nodes__HashImg(in_primary.image))))) and ((previous_targets = (initialization.metadata_d.targets_metadata -> (if (verified_metadata_secondary.targets_metadata <> (pre verified_metadata_secondary.targets_metadata)) then (pre verified_metadata_secondary.targets_metadata) else (pre previous_targets)))) and ((current_targets = verified_metadata_secondary.targets_metadata) and ((new_targets = in_primary.metadata.targets_metadata) and ((current_time = in_primary.current_time) and ((previous_nonce = (0 -> (pre out_primary2.ecu_version_report.nonce))) and ((initial_targets = (initialization.metadata_d.targets_metadata -> (pre initial_targets))) and ((initial_image = (initialization.secondary_image2 -> (pre initial_image))) and ((hardware_id = (initialization.hardware_id_three -> (pre hardware_id))) and ((ecu_id = (initialization.ecu_id_three -> (pre ecu_id))) and (__ASSUME__HIST => (__GUARANTEE8 and (__GUARANTEE7 and (__GUARANTEE6 and (__GUARANTEE5 and (__GUARANTEE4 and (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0))))))))))))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3, __GUARANTEE4, __GUARANTEE5, __GUARANTEE6, __GUARANTEE7, __GUARANTEE8;
+
+tel;
+
+node _TOP__time_server(
+  __ASSUME__HIST : bool;
+  time : real;
+  out_primary : Data_Types__TimeServerToPrimary__impl;
+  probe_time_server : int
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+let
+  __GUARANTEE0 = (out_primary.current_time = (0 -> ((pre out_primary.current_time) + 1)));
+
+  __GUARANTEE1 = (probe_time_server = out_primary.current_time);
+
+  __ASSERT = (__ASSUME__HIST => (__GUARANTEE1 and __GUARANTEE0));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1;
+
+tel;
+
+node main(
+  opt_flags__out_flags : Data_Types__OptionalFeatures__impl;
+  opt_flags____ASSUME__HIST : bool;
+  director_repo__primary_ecu_id : int;
+  director_repo__secondary_ecu_id : int;
+  director_repo__secondary_ecu_id2 : int;
+  director_repo__hardware_id_one : int;
+  director_repo__hardware_id_two : int;
+  director_repo__hardware_id_three : int;
+  director_repo__valid_manifest : bool;
+  director_repo__current_manifest : Data_Types__VehicleVersionManifest__impl;
+  director_repo__out_primary : Data_Types__DirectorToPrimary__impl;
+  director_repo__latest_targets : Data_Types__TargetsMetadata__impl;
+  director_repo__latest_manifest : Data_Types__VehicleVersionManifest__impl;
+  director_repo____ASSUME__HIST : bool;
+  image_repo__hardware_id_one : int;
+  image_repo__hardware_id_two : int;
+  image_repo__hardware_id_three : int;
+  image_repo__out_primary : Data_Types__ImageToPrimary__impl;
+  image_repo____ASSUME__HIST : bool;
+  primary_ecu__optional_flag : bool;
+  primary_ecu__ecu_id : int;
+  primary_ecu__hardware_id : int;
+  primary_ecu__hardware_id_secondary : int;
+  primary_ecu__hardware_id_secondary2 : int;
+  primary_ecu__initial_image : Data_Types__Image__impl;
+  primary_ecu__current_time : int;
+  primary_ecu__most_recent_secondary_report : Data_Types__EcuVersionReport__impl;
+  primary_ecu__most_recent_secondary_report2 : Data_Types__EcuVersionReport__impl;
+  primary_ecu__attack_detected : bool;
+  primary_ecu__previous_nonce : int;
+  primary_ecu__targets_for_secondary : Data_Types__TargetsMetadata__impl;
+  primary_ecu__current_targets_director : Data_Types__TargetsMetadata__impl;
+  primary_ecu__previous_targets : Data_Types__TargetsMetadata__impl;
+  primary_ecu__new_image_verified : bool;
+  primary_ecu__new_image_verified_secondary : bool;
+  primary_ecu__new_image_verified_secondary2 : bool;
+  primary_ecu__root_director_verified : bool;
+  primary_ecu__timestamp_director_verified : bool;
+  primary_ecu__snapshot_director_verified : bool;
+  primary_ecu__targets_director_verified : bool;
+  primary_ecu__root_image_verified : bool;
+  primary_ecu__timestamp_image_verified : bool;
+  primary_ecu__snapshot_image_verified : bool;
+  primary_ecu__targets_image_verified : bool;
+  primary_ecu__targets_match_verified : bool;
+  primary_ecu__out_director : Data_Types__PrimaryToDirector__impl;
+  primary_ecu__out_image : Data_Types__PrimaryToImage__impl;
+  primary_ecu__out_secondary : Data_Types__PrimaryToSecondary__impl;
+  primary_ecu__out_secondary2 : Data_Types__PrimaryToSecondary__impl;
+  primary_ecu__installed_image_primary : Data_Types__Image__impl;
+  primary_ecu__verification_stage_primary : Data_Types__VerificationStage;
+  primary_ecu__verified_metadata_primary_d : Data_Types__Metadata__impl;
+  primary_ecu__verified_metadata_primary_i : Data_Types__Metadata__impl;
+  primary_ecu__latest_targets_director : Data_Types__TargetsMetadata__impl;
+  primary_ecu__ecu_software_version_primary : int;
+  primary_ecu__latest_manifest : Data_Types__VehicleVersionManifest__impl;
+  primary_ecu____ASSUME__HIST : bool;
+  secondary_ecu__ecu_id : int;
+  secondary_ecu__hardware_id : int;
+  secondary_ecu__initial_image : Data_Types__Image__impl;
+  secondary_ecu__initial_targets : Data_Types__TargetsMetadata__impl;
+  secondary_ecu__previous_nonce : int;
+  secondary_ecu__current_time : int;
+  secondary_ecu__new_targets : Data_Types__TargetsMetadata__impl;
+  secondary_ecu__current_targets : Data_Types__TargetsMetadata__impl;
+  secondary_ecu__previous_targets : Data_Types__TargetsMetadata__impl;
+  secondary_ecu__new_image_verified : bool;
+  secondary_ecu__new_metadata_verified : bool;
+  secondary_ecu__out_primary : Data_Types__SecondaryToPrimary__impl;
+  secondary_ecu__installed_image_secondary : Data_Types__Image__impl;
+  secondary_ecu__verified_metadata_secondary : Data_Types__Metadata__impl;
+  secondary_ecu__ecu_software_version_secondary : int;
+  secondary_ecu__latest_report : Data_Types__EcuVersionReport__impl;
+  secondary_ecu__verification_stage_secondary : Data_Types__VerificationStage;
+  secondary_ecu__ecu_metadata_version_secondary : int;
+  secondary_ecu____ASSUME__HIST : bool;
+  secondary_ecu2__ecu_id : int;
+  secondary_ecu2__hardware_id : int;
+  secondary_ecu2__initial_image : Data_Types__Image__impl;
+  secondary_ecu2__initial_targets : Data_Types__TargetsMetadata__impl;
+  secondary_ecu2__previous_nonce : int;
+  secondary_ecu2__current_time : int;
+  secondary_ecu2__new_targets : Data_Types__TargetsMetadata__impl;
+  secondary_ecu2__current_targets : Data_Types__TargetsMetadata__impl;
+  secondary_ecu2__previous_targets : Data_Types__TargetsMetadata__impl;
+  secondary_ecu2__new_image_verified : bool;
+  secondary_ecu2__new_metadata_verified : bool;
+  secondary_ecu2__out_primary2 : Data_Types__SecondaryToPrimary__impl;
+  secondary_ecu2__installed_image_secondary : Data_Types__Image__impl;
+  secondary_ecu2__verification_stage_secondary : Data_Types__VerificationStage;
+  secondary_ecu2__verified_metadata_secondary : Data_Types__Metadata__impl;
+  secondary_ecu2__ecu_software_version_secondary : int;
+  secondary_ecu2____ASSUME__HIST : bool;
+  time_server__out_primary : Data_Types__TimeServerToPrimary__impl;
+  time_server__probe_time_server : int;
+  time_server____ASSUME__HIST : bool;
+  counter : int;
+  hardware_id_primary : int;
+  hardware_id_secondary : int;
+  hardware_id_secondary2 : int;
+  installed_image_primary : Data_Types__Image__impl;
+  installed_image_secondary : Data_Types__Image__impl;
+  installed_image_secondary2 : Data_Types__Image__impl;
+  verification_stage_primary : Data_Types__VerificationStage;
+  verification_stage_secondary : Data_Types__VerificationStage;
+  verification_stage_secondary2 : Data_Types__VerificationStage;
+  verified_metadata_primary_d : Data_Types__Metadata__impl;
+  verified_metadata_primary_i : Data_Types__Metadata__impl;
+  latest_targets_director_primary : Data_Types__TargetsMetadata__impl;
+  verified_metadata_secondary : Data_Types__Metadata__impl;
+  verified_metadata_secondary2 : Data_Types__Metadata__impl;
+  ecu_software_version_primary : int;
+  ecu_software_version_secondary1 : int;
+  ecu_software_version_secondary2 : int;
+  ecu_metadata_version_secondary : int;
+  director_latest_targets : Data_Types__TargetsMetadata__impl;
+  director_latest_manifest : Data_Types__VehicleVersionManifest__impl;
+  primary_latest_manifest : Data_Types__VehicleVersionManifest__impl;
+  secondary_latest_report : Data_Types__EcuVersionReport__impl;
+  probe_time_server : int;
+  opt_flags__in_opt_flag_inc_ver : bool;
+  opt_flags__in_opt_flag_rel_ctr : bool;
+  opt_flags__in_opt_flag_check_vvm : bool;
+  opt_flags__in_opt_flag_deps_cons : bool;
+  opt_flags__time : real;
+  director_repo__model_inputs : Data_Types__ModelInputs__impl;
+  director_repo__initialization : Data_Types__InitializationBus__impl;
+  director_repo__in_primary : Data_Types__PrimaryToDirector__impl;
+  director_repo__opt_flags : Data_Types__OptionalFeatures__impl;
+  director_repo__time : real;
+  image_repo__model_inputs : Data_Types__ModelInputs__impl;
+  image_repo__initialization : Data_Types__InitializationBus__impl;
+  image_repo__in_primary : Data_Types__PrimaryToImage__impl;
+  image_repo__opt_flags : Data_Types__OptionalFeatures__impl;
+  image_repo__time : real;
+  primary_ecu__initialization : Data_Types__InitializationBus__impl;
+  primary_ecu__in_director : Data_Types__DirectorToPrimary__impl;
+  primary_ecu__in_image : Data_Types__ImageToPrimary__impl;
+  primary_ecu__in_secondary : Data_Types__SecondaryToPrimary__impl;
+  primary_ecu__in_secondary2 : Data_Types__SecondaryToPrimary__impl;
+  primary_ecu__in_time_server : Data_Types__TimeServerToPrimary__impl;
+  primary_ecu__opt_flags : Data_Types__OptionalFeatures__impl;
+  primary_ecu__time : real;
+  secondary_ecu__initialization : Data_Types__InitializationBus__impl;
+  secondary_ecu__in_primary : Data_Types__PrimaryToSecondary__impl;
+  secondary_ecu__opt_flags : Data_Types__OptionalFeatures__impl;
+  secondary_ecu__time : real;
+  secondary_ecu2__initialization : Data_Types__InitializationBus__impl;
+  secondary_ecu2__in_primary : Data_Types__PrimaryToSecondary__impl;
+  secondary_ecu2__opt_flags : Data_Types__OptionalFeatures__impl;
+  secondary_ecu2__time : real;
+  time_server__time : real;
+  model_inputs : Data_Types__ModelInputs__impl;
+  initialization : Data_Types__InitializationBus__impl;
+  opt_flag_inc_ver : bool;
+  opt_flag_rel_ctr : bool;
+  opt_flag_check_vvm : bool;
+  opt_flag_deps_cons : bool;
+  time : real
+) returns (
+
+);
+var
+  __ASSUME0 : bool;
+  __ASSUME1 : bool;
+  __ASSUME2 : bool;
+  __ASSUME3 : bool;
+  __ASSUME4 : bool;
+  __ASSUME5 : bool;
+  __ASSUME6 : bool;
+  __ASSUME7 : bool;
+  __ASSUME8 : bool;
+  __ASSUME9 : bool;
+  __ASSUME10 : bool;
+  __ASSUME11 : bool;
+  __ASSUME__HIST : bool;
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+let
+  --%MAIN;
+  __ASSUME0 = ((((opt_flag_inc_ver = true) and (opt_flag_rel_ctr = true)) and (opt_flag_check_vvm = true)) and (opt_flag_deps_cons = true));
+
+  __ASSUME1 = (((((((((((((((model_inputs.image1.version = model_inputs.metadata.targets_metadata_i.release_counters.release_counter_one) and (model_inputs.image2.version = model_inputs.metadata.targets_metadata_i.release_counters.release_counter_two)) and (model_inputs.image3.version = model_inputs.metadata.targets_metadata_i.release_counters.release_counter_three)) and (model_inputs.image4.version = model_inputs.metadata.targets_metadata_i.release_counters.release_counter_four)) and (model_inputs.image5.version = model_inputs.metadata.targets_metadata_i.release_counters.release_counter_five)) and (model_inputs.image1.filename = model_inputs.metadata.targets_metadata_i.image_filenames.filename_one)) and (model_inputs.image2.filename = model_inputs.metadata.targets_metadata_i.image_filenames.filename_two)) and (model_inputs.image3.filename = model_inputs.metadata.targets_metadata_i.image_filenames.filename_three)) and (model_inputs.image4.filename = model_inputs.metadata.targets_metadata_i.image_filenames.filename_four)) and (model_inputs.image5.filename = model_inputs.metadata.targets_metadata_i.image_filenames.filename_five)) and (Agree_Nodes__HashImg(model_inputs.image1) = model_inputs.metadata.targets_metadata_i.image_hashes.hash_one)) and (Agree_Nodes__HashImg(model_inputs.image2) = model_inputs.metadata.targets_metadata_i.image_hashes.hash_two)) and (Agree_Nodes__HashImg(model_inputs.image3) = model_inputs.metadata.targets_metadata_i.image_hashes.hash_three)) and (Agree_Nodes__HashImg(model_inputs.image4) = model_inputs.metadata.targets_metadata_i.image_hashes.hash_four)) and (Agree_Nodes__HashImg(model_inputs.image5) = model_inputs.metadata.targets_metadata_i.image_hashes.hash_five));
+
+  __ASSUME2 = (true -> (((((model_inputs.metadata.targets_metadata_i.release_counters.release_counter_one >= (pre model_inputs.metadata.targets_metadata_i.release_counters.release_counter_one)) and (model_inputs.metadata.targets_metadata_i.release_counters.release_counter_two >= (pre model_inputs.metadata.targets_metadata_i.release_counters.release_counter_two))) and (model_inputs.metadata.targets_metadata_i.release_counters.release_counter_three >= (pre model_inputs.metadata.targets_metadata_i.release_counters.release_counter_three))) and (model_inputs.metadata.targets_metadata_i.release_counters.release_counter_four >= (pre model_inputs.metadata.targets_metadata_i.release_counters.release_counter_four))) and (model_inputs.metadata.targets_metadata_i.release_counters.release_counter_five >= (pre model_inputs.metadata.targets_metadata_i.release_counters.release_counter_five))));
+
+  __ASSUME3 = (((((((((Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(model_inputs.image1)) and Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(model_inputs.image2))) and Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(model_inputs.image3))) and Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(model_inputs.image4))) and Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(model_inputs.image5))) and Agree_Nodes__AuthoredByOem(model_inputs.metadata.targets_metadata_i.image_hashes.hash_one)) and Agree_Nodes__AuthoredByOem(model_inputs.metadata.targets_metadata_i.image_hashes.hash_two)) and Agree_Nodes__AuthoredByOem(model_inputs.metadata.targets_metadata_i.image_hashes.hash_three)) and Agree_Nodes__AuthoredByOem(model_inputs.metadata.targets_metadata_i.image_hashes.hash_four)) and Agree_Nodes__AuthoredByOem(model_inputs.metadata.targets_metadata_i.image_hashes.hash_five));
+
+  __ASSUME4 = (((((true -> ((((((((((Agree_Nodes__HashImg(model_inputs.image1) >= (pre Agree_Nodes__HashImg(model_inputs.image1))) and (Agree_Nodes__HashImg(model_inputs.image2) >= (pre Agree_Nodes__HashImg(model_inputs.image2)))) and (Agree_Nodes__HashImg(model_inputs.image3) >= (pre Agree_Nodes__HashImg(model_inputs.image3)))) and (Agree_Nodes__HashImg(model_inputs.image4) >= (pre Agree_Nodes__HashImg(model_inputs.image4)))) and (Agree_Nodes__HashImg(model_inputs.image5) >= (pre Agree_Nodes__HashImg(model_inputs.image5)))) and ((Agree_Nodes__HashImg(model_inputs.image1) = (pre Agree_Nodes__HashImg(model_inputs.image1))) => (model_inputs.image1 = (pre model_inputs.image1)))) and ((Agree_Nodes__HashImg(model_inputs.image2) = (pre Agree_Nodes__HashImg(model_inputs.image2))) => (model_inputs.image2 = (pre model_inputs.image2)))) and ((Agree_Nodes__HashImg(model_inputs.image3) = (pre Agree_Nodes__HashImg(model_inputs.image3))) => (model_inputs.image3 = (pre model_inputs.image3)))) and ((Agree_Nodes__HashImg(model_inputs.image4) = (pre Agree_Nodes__HashImg(model_inputs.image4))) => (model_inputs.image4 = (pre model_inputs.image4)))) and ((Agree_Nodes__HashImg(model_inputs.image5) = (pre Agree_Nodes__HashImg(model_inputs.image5))) => (model_inputs.image5 = (pre model_inputs.image5))))) and (Agree_Nodes__HashImg(model_inputs.image1) > Agree_Nodes__HashImg(model_inputs.image2))) and (Agree_Nodes__HashImg(model_inputs.image2) > Agree_Nodes__HashImg(model_inputs.image3))) and (Agree_Nodes__HashImg(model_inputs.image3) > Agree_Nodes__HashImg(model_inputs.image4))) and (Agree_Nodes__HashImg(model_inputs.image4) > Agree_Nodes__HashImg(model_inputs.image5)));
+
+  __ASSUME5 = ((opt_flag_inc_ver => (true -> ((((((model_inputs.metadata.root_metadata <> (pre model_inputs.metadata.root_metadata)) => (model_inputs.metadata.root_metadata.common_payload.version = ((pre model_inputs.metadata.root_metadata.common_payload.version) + 1))) and ((model_inputs.metadata.timestamp_metadata <> (pre model_inputs.metadata.timestamp_metadata)) => (model_inputs.metadata.timestamp_metadata.common_payload.version = ((pre model_inputs.metadata.timestamp_metadata.common_payload.version) + 1)))) and ((model_inputs.metadata.targets_metadata <> (pre model_inputs.metadata.targets_metadata)) => (model_inputs.metadata.targets_metadata.common_payload.version = ((pre model_inputs.metadata.targets_metadata.common_payload.version) + 1)))) and ((model_inputs.metadata.targets_metadata_i <> (pre model_inputs.metadata.targets_metadata_i)) => (model_inputs.metadata.targets_metadata_i.common_payload.version = ((pre model_inputs.metadata.targets_metadata_i.common_payload.version) + 1)))) and ((model_inputs.metadata.snapshot_metadata <> (pre model_inputs.metadata.snapshot_metadata)) => (model_inputs.metadata.snapshot_metadata.common_payload.version = ((pre model_inputs.metadata.snapshot_metadata.common_payload.version) + 1)))))) and ((not opt_flag_inc_ver) => (true -> ((((((model_inputs.metadata.root_metadata <> (pre model_inputs.metadata.root_metadata)) => (model_inputs.metadata.root_metadata.common_payload.version = (pre model_inputs.metadata.root_metadata.common_payload.version))) and ((model_inputs.metadata.timestamp_metadata <> (pre model_inputs.metadata.timestamp_metadata)) => (model_inputs.metadata.timestamp_metadata.common_payload.version = (pre model_inputs.metadata.timestamp_metadata.common_payload.version)))) and ((model_inputs.metadata.targets_metadata <> (pre model_inputs.metadata.targets_metadata)) => (model_inputs.metadata.targets_metadata.common_payload.version = (pre model_inputs.metadata.targets_metadata.common_payload.version)))) and ((model_inputs.metadata.targets_metadata_i <> (pre model_inputs.metadata.targets_metadata_i)) => (model_inputs.metadata.targets_metadata_i.common_payload.version = (pre model_inputs.metadata.targets_metadata_i.common_payload.version)))) and ((model_inputs.metadata.snapshot_metadata <> (pre model_inputs.metadata.snapshot_metadata)) => (model_inputs.metadata.snapshot_metadata.common_payload.version = (pre model_inputs.metadata.snapshot_metadata.common_payload.version)))))));
+
+  __ASSUME6 = Agree_Nodes__Compatible3(model_inputs.image1.filename, model_inputs.image2.filename, model_inputs.image3.filename);
+
+  __ASSUME7 = (opt_flag_deps_cons => ((Agree_Nodes__Compatible(model_inputs.image1.filename, hardware_id_primary) and Agree_Nodes__Compatible(model_inputs.image2.filename, hardware_id_secondary)) and Agree_Nodes__Compatible(model_inputs.image3.filename, hardware_id_secondary2)));
+
+  __ASSUME8 = (((((Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(initialization.primary_image)) and Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(initialization.secondary_image))) and Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(initialization.secondary_image2))) and Agree_Nodes__AuthoredByOem(initialization.metadata_d.targets_metadata.image_hashes.hash_one)) and Agree_Nodes__AuthoredByOem(initialization.metadata_d.targets_metadata.image_hashes.hash_two)) and Agree_Nodes__AuthoredByOem(initialization.metadata_d.targets_metadata.image_hashes.hash_three));
+
+  __ASSUME9 = ((Agree_Nodes__Compatible3(initialization.primary_image.filename, initialization.secondary_image.filename, initialization.secondary_image2.filename) and Agree_Nodes__Compatible3(initialization.metadata_d.targets_metadata.image_filenames.filename_one, initialization.metadata_d.targets_metadata.image_filenames.filename_two, initialization.metadata_d.targets_metadata.image_filenames.filename_three)) and Agree_Nodes__Compatible(initialization.secondary_image.filename, initialization.hardware_id_two));
+
+  __ASSUME10 = (((initialization.metadata_d.targets_metadata.hardware_ids.hardware_id_one = initialization.hardware_id_one) and (initialization.metadata_d.targets_metadata.hardware_ids.hardware_id_two = initialization.hardware_id_two)) and (initialization.metadata_d.targets_metadata.hardware_ids.hardware_id_three = initialization.hardware_id_three));
+
+  __ASSUME11 = (((initialization.metadata_d.targets_metadata.release_counters.release_counter_one >= initialization.primary_image.version) and (initialization.metadata_d.targets_metadata.release_counters.release_counter_two >= initialization.secondary_image.version)) and (initialization.metadata_d.targets_metadata.release_counters.release_counter_three >= initialization.secondary_image2.version));
+
+  __ASSUME__HIST = (time_server____ASSUME__HIST and (secondary_ecu2____ASSUME__HIST and (secondary_ecu____ASSUME__HIST and (primary_ecu____ASSUME__HIST and (image_repo____ASSUME__HIST and (director_repo____ASSUME__HIST and (opt_flags____ASSUME__HIST and true)))))));
+
+  __GUARANTEE0 = (true -> ((verified_metadata_secondary.targets_metadata <> (pre verified_metadata_secondary.targets_metadata)) => (verified_metadata_secondary.targets_metadata = director_latest_targets)));
+
+  __GUARANTEE1 = (true -> ((director_latest_manifest <> (pre director_latest_manifest)) => (director_latest_manifest = primary_latest_manifest)));
+
+  __GUARANTEE2 = (true -> ((director_latest_manifest <> (pre director_latest_manifest)) => (director_latest_manifest.report_two = secondary_latest_report)));
+
+  __GUARANTEE3 = (true -> (installed_image_secondary.version >= (pre installed_image_secondary.version)));
+
+  __GUARANTEE4 = Agree_Nodes__AuthoredByOem(Agree_Nodes__HashImg(installed_image_secondary));
+
+  __GUARANTEE5 = Agree_Nodes__AuthoredByEcu(director_latest_manifest);
+
+  __GUARANTEE6 = Agree_Nodes__Compatible3(verified_metadata_primary_d.targets_metadata.image_filenames.filename_one, verified_metadata_primary_d.targets_metadata.image_filenames.filename_two, verified_metadata_primary_d.targets_metadata.image_filenames.filename_three);
+
+  __GUARANTEE7 = (Agree_Nodes__Sofar(((ecu_software_version_primary = ecu_software_version_secondary1) and (ecu_software_version_primary = ecu_software_version_secondary2))) => Agree_Nodes__Compatible3(installed_image_primary.filename, installed_image_secondary.filename, installed_image_secondary2.filename));
+
+  __GUARANTEE8 = Agree_Nodes__Compatible(installed_image_secondary.filename, hardware_id_secondary);
+
+  assert __ASSUME0;
+
+  assert __ASSUME1;
+
+  assert __ASSUME2;
+
+  assert __ASSUME3;
+
+  assert __ASSUME4;
+
+  assert __ASSUME5;
+
+  assert __ASSUME6;
+
+  assert __ASSUME7;
+
+  assert __ASSUME8;
+
+  assert __ASSUME9;
+
+  assert __ASSUME10;
+
+  assert __ASSUME11;
+
+  assert (time = opt_flags__time);
+
+  assert _TOP__opt_flags(opt_flags____ASSUME__HIST, opt_flags__in_opt_flag_inc_ver, opt_flags__in_opt_flag_rel_ctr, opt_flags__in_opt_flag_check_vvm, opt_flags__in_opt_flag_deps_cons, opt_flags__time, opt_flags__out_flags);
+
+  assert (opt_flags____ASSUME__HIST = __HIST(true));
+
+  assert (time = director_repo__time);
+
+  assert _TOP__director_repo(director_repo____ASSUME__HIST, director_repo__model_inputs, director_repo__initialization, director_repo__in_primary, director_repo__opt_flags, director_repo__time, director_repo__primary_ecu_id, director_repo__secondary_ecu_id, director_repo__secondary_ecu_id2, director_repo__hardware_id_one, director_repo__hardware_id_two, director_repo__hardware_id_three, director_repo__valid_manifest, director_repo__current_manifest, director_repo__out_primary, director_repo__latest_targets, director_repo__latest_manifest);
+
+  assert (director_repo____ASSUME__HIST = __HIST(true));
+
+  assert (time = image_repo__time);
+
+  assert _TOP__image_repo(image_repo____ASSUME__HIST, image_repo__model_inputs, image_repo__initialization, image_repo__in_primary, image_repo__opt_flags, image_repo__time, image_repo__hardware_id_one, image_repo__hardware_id_two, image_repo__hardware_id_three, image_repo__out_primary);
+
+  assert (image_repo____ASSUME__HIST = __HIST(true));
+
+  assert (time = primary_ecu__time);
+
+  assert _TOP__primary_ecu(primary_ecu____ASSUME__HIST, primary_ecu__initialization, primary_ecu__in_director, primary_ecu__in_image, primary_ecu__in_secondary, primary_ecu__in_secondary2, primary_ecu__in_time_server, primary_ecu__opt_flags, primary_ecu__time, primary_ecu__optional_flag, primary_ecu__ecu_id, primary_ecu__hardware_id, primary_ecu__hardware_id_secondary, primary_ecu__hardware_id_secondary2, primary_ecu__initial_image, primary_ecu__current_time, primary_ecu__most_recent_secondary_report, primary_ecu__most_recent_secondary_report2, primary_ecu__attack_detected, primary_ecu__previous_nonce, primary_ecu__targets_for_secondary, primary_ecu__current_targets_director, primary_ecu__previous_targets, primary_ecu__new_image_verified, primary_ecu__new_image_verified_secondary, primary_ecu__new_image_verified_secondary2, primary_ecu__root_director_verified, primary_ecu__timestamp_director_verified, primary_ecu__snapshot_director_verified, primary_ecu__targets_director_verified, primary_ecu__root_image_verified, primary_ecu__timestamp_image_verified, primary_ecu__snapshot_image_verified, primary_ecu__targets_image_verified, primary_ecu__targets_match_verified, primary_ecu__out_director, primary_ecu__out_image, primary_ecu__out_secondary, primary_ecu__out_secondary2, primary_ecu__installed_image_primary, primary_ecu__verification_stage_primary, primary_ecu__verified_metadata_primary_d, primary_ecu__verified_metadata_primary_i, primary_ecu__latest_targets_director, primary_ecu__ecu_software_version_primary, primary_ecu__latest_manifest);
+
+  assert (primary_ecu____ASSUME__HIST = __HIST(true));
+
+  assert (time = secondary_ecu__time);
+
+  assert _TOP__secondary_ecu(secondary_ecu____ASSUME__HIST, secondary_ecu__initialization, secondary_ecu__in_primary, secondary_ecu__opt_flags, secondary_ecu__time, secondary_ecu__ecu_id, secondary_ecu__hardware_id, secondary_ecu__initial_image, secondary_ecu__initial_targets, secondary_ecu__previous_nonce, secondary_ecu__current_time, secondary_ecu__new_targets, secondary_ecu__current_targets, secondary_ecu__previous_targets, secondary_ecu__new_image_verified, secondary_ecu__new_metadata_verified, secondary_ecu__out_primary, secondary_ecu__installed_image_secondary, secondary_ecu__verified_metadata_secondary, secondary_ecu__ecu_software_version_secondary, secondary_ecu__latest_report, secondary_ecu__verification_stage_secondary, secondary_ecu__ecu_metadata_version_secondary);
+
+  assert (secondary_ecu____ASSUME__HIST = __HIST(true));
+
+  assert (time = secondary_ecu2__time);
+
+  assert _TOP__secondary_ecu2(secondary_ecu2____ASSUME__HIST, secondary_ecu2__initialization, secondary_ecu2__in_primary, secondary_ecu2__opt_flags, secondary_ecu2__time, secondary_ecu2__ecu_id, secondary_ecu2__hardware_id, secondary_ecu2__initial_image, secondary_ecu2__initial_targets, secondary_ecu2__previous_nonce, secondary_ecu2__current_time, secondary_ecu2__new_targets, secondary_ecu2__current_targets, secondary_ecu2__previous_targets, secondary_ecu2__new_image_verified, secondary_ecu2__new_metadata_verified, secondary_ecu2__out_primary2, secondary_ecu2__installed_image_secondary, secondary_ecu2__verification_stage_secondary, secondary_ecu2__verified_metadata_secondary, secondary_ecu2__ecu_software_version_secondary);
+
+  assert (secondary_ecu2____ASSUME__HIST = __HIST(true));
+
+  assert (time = time_server__time);
+
+  assert _TOP__time_server(time_server____ASSUME__HIST, time_server__time, time_server__out_primary, time_server__probe_time_server);
+
+  assert (time_server____ASSUME__HIST = __HIST(true));
+
+  assert (model_inputs = director_repo__model_inputs);
+
+  assert (model_inputs = image_repo__model_inputs);
+
+  assert (initialization = director_repo__initialization);
+
+  assert (initialization = primary_ecu__initialization);
+
+  assert (initialization = secondary_ecu__initialization);
+
+  assert (initialization = secondary_ecu2__initialization);
+
+  assert (initialization = image_repo__initialization);
+
+  assert (opt_flag_inc_ver = opt_flags__in_opt_flag_inc_ver);
+
+  assert (opt_flag_rel_ctr = opt_flags__in_opt_flag_rel_ctr);
+
+  assert (opt_flag_check_vvm = opt_flags__in_opt_flag_check_vvm);
+
+  assert (opt_flag_deps_cons = opt_flags__in_opt_flag_deps_cons);
+
+  assert (opt_flags__out_flags = director_repo__opt_flags);
+
+  assert (opt_flags__out_flags = image_repo__opt_flags);
+
+  assert (opt_flags__out_flags = primary_ecu__opt_flags);
+
+  assert (opt_flags__out_flags = secondary_ecu__opt_flags);
+
+  assert (opt_flags__out_flags = secondary_ecu2__opt_flags);
+
+  assert (director_repo__out_primary = primary_ecu__in_director);
+
+  assert (director_repo__latest_targets = director_latest_targets);
+
+  assert (director_repo__latest_manifest = director_latest_manifest);
+
+  assert (image_repo__out_primary = primary_ecu__in_image);
+
+  assert (primary_ecu__out_director = director_repo__in_primary);
+
+  assert (primary_ecu__out_image = image_repo__in_primary);
+
+  assert (primary_ecu__out_secondary = secondary_ecu__in_primary);
+
+  assert (primary_ecu__out_secondary2 = secondary_ecu2__in_primary);
+
+  assert (primary_ecu__installed_image_primary = installed_image_primary);
+
+  assert (primary_ecu__verification_stage_primary = verification_stage_primary);
+
+  assert (primary_ecu__verified_metadata_primary_d = verified_metadata_primary_d);
+
+  assert (primary_ecu__verified_metadata_primary_i = verified_metadata_primary_i);
+
+  assert (primary_ecu__latest_targets_director = latest_targets_director_primary);
+
+  assert (primary_ecu__ecu_software_version_primary = ecu_software_version_primary);
+
+  assert (primary_ecu__latest_manifest = primary_latest_manifest);
+
+  assert (secondary_ecu__out_primary = primary_ecu__in_secondary);
+
+  assert (secondary_ecu__installed_image_secondary = installed_image_secondary);
+
+  assert (secondary_ecu__verified_metadata_secondary = verified_metadata_secondary);
+
+  assert (secondary_ecu__ecu_software_version_secondary = ecu_software_version_secondary1);
+
+  assert (secondary_ecu__latest_report = secondary_latest_report);
+
+  assert (secondary_ecu__verification_stage_secondary = verification_stage_secondary);
+
+  assert (secondary_ecu__ecu_metadata_version_secondary = ecu_metadata_version_secondary);
+
+  assert (secondary_ecu2__out_primary2 = primary_ecu__in_secondary2);
+
+  assert (secondary_ecu2__installed_image_secondary = installed_image_secondary2);
+
+  assert (secondary_ecu2__verification_stage_secondary = verification_stage_secondary2);
+
+  assert (secondary_ecu2__verified_metadata_secondary = verified_metadata_secondary2);
+
+  assert (secondary_ecu2__ecu_software_version_secondary = ecu_software_version_secondary2);
+
+  assert (time_server__out_primary = primary_ecu__in_time_server);
+
+  assert (time_server__probe_time_server = probe_time_server);
+
+  assert (counter = (1 -> (pre (counter + 1))));
+
+  assert (hardware_id_primary = (initialization.hardware_id_one -> (pre hardware_id_primary)));
+
+  assert (hardware_id_secondary = (initialization.hardware_id_two -> (pre hardware_id_secondary)));
+
+  assert (hardware_id_secondary2 = (initialization.hardware_id_three -> (pre hardware_id_secondary2)));
+
+  assert true;
+
+  assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
+
+  --%PROPERTY __GUARANTEE5;
+
+  --%IVC __ASSUME0, __ASSUME1, __ASSUME2, __ASSUME3, __ASSUME4, __ASSUME5, __ASSUME6, __ASSUME7, __ASSUME8, __ASSUME9, __ASSUME10, __ASSUME11;
+
+tel;
+
+node Agree_Nodes__HashImg(
+  X : Data_Types__Image__impl
+) returns (
+  Y : int
+);
+let
+  Y = X.filename;
+
+tel;
+
+node _CLOCKED_Agree_Nodes__HashImg(
+  _CLK : bool;
+  _INIT : bool;
+  X : Data_Types__Image__impl
+) returns (
+  Y : int
+);
+let
+  Y = (if _CLK then X.filename else (pre Y));
+
+tel;
+
+node Agree_Nodes__TargetsPriMatchImg(
+  M : Data_Types__TargetsMetadata__impl;
+  I1 : Data_Types__Image__impl;
+  I2 : Data_Types__Image__impl;
+  I3 : Data_Types__Image__impl;
+  I4 : Data_Types__Image__impl;
+  I5 : Data_Types__Image__impl
+) returns (
+  B : bool
+);
+let
+  B = (((((((M.release_counters.release_counter_one = I1.version) and (M.image_filenames.filename_one = I1.filename)) and (M.image_hashes.hash_one = Agree_Nodes__HashImg(I1))) or (((M.release_counters.release_counter_one = I2.version) and (M.image_filenames.filename_one = I2.filename)) and (M.image_hashes.hash_one = Agree_Nodes__HashImg(I2)))) or (((M.release_counters.release_counter_one = I3.version) and (M.image_filenames.filename_one = I3.filename)) and (M.image_hashes.hash_one = Agree_Nodes__HashImg(I3)))) or (((M.release_counters.release_counter_one = I4.version) and (M.image_filenames.filename_one = I4.filename)) and (M.image_hashes.hash_one = Agree_Nodes__HashImg(I4)))) or (((M.release_counters.release_counter_one = I5.version) and (M.image_filenames.filename_one = I5.filename)) and (M.image_hashes.hash_one = Agree_Nodes__HashImg(I5))));
+
+tel;
+
+node _CLOCKED_Agree_Nodes__TargetsPriMatchImg(
+  _CLK : bool;
+  _INIT : bool;
+  M : Data_Types__TargetsMetadata__impl;
+  I1 : Data_Types__Image__impl;
+  I2 : Data_Types__Image__impl;
+  I3 : Data_Types__Image__impl;
+  I4 : Data_Types__Image__impl;
+  I5 : Data_Types__Image__impl
+) returns (
+  B : bool
+);
+let
+  B = (if _CLK then (((((((M.release_counters.release_counter_one = I1.version) and (M.image_filenames.filename_one = I1.filename)) and (M.image_hashes.hash_one = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I1))) or (((M.release_counters.release_counter_one = I2.version) and (M.image_filenames.filename_one = I2.filename)) and (M.image_hashes.hash_one = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I2)))) or (((M.release_counters.release_counter_one = I3.version) and (M.image_filenames.filename_one = I3.filename)) and (M.image_hashes.hash_one = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I3)))) or (((M.release_counters.release_counter_one = I4.version) and (M.image_filenames.filename_one = I4.filename)) and (M.image_hashes.hash_one = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I4)))) or (((M.release_counters.release_counter_one = I5.version) and (M.image_filenames.filename_one = I5.filename)) and (M.image_hashes.hash_one = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I5)))) else (pre B));
+
+tel;
+
+node Agree_Nodes__TargetsSecMatchImg(
+  M : Data_Types__TargetsMetadata__impl;
+  I1 : Data_Types__Image__impl;
+  I2 : Data_Types__Image__impl;
+  I3 : Data_Types__Image__impl;
+  I4 : Data_Types__Image__impl;
+  I5 : Data_Types__Image__impl
+) returns (
+  B : bool
+);
+let
+  B = (((((((M.release_counters.release_counter_two = I1.version) and (M.image_filenames.filename_two = I1.filename)) and (M.image_hashes.hash_two = Agree_Nodes__HashImg(I1))) or (((M.release_counters.release_counter_two = I2.version) and (M.image_filenames.filename_two = I2.filename)) and (M.image_hashes.hash_two = Agree_Nodes__HashImg(I2)))) or (((M.release_counters.release_counter_two = I3.version) and (M.image_filenames.filename_two = I3.filename)) and (M.image_hashes.hash_two = Agree_Nodes__HashImg(I3)))) or (((M.release_counters.release_counter_two = I4.version) and (M.image_filenames.filename_two = I4.filename)) and (M.image_hashes.hash_two = Agree_Nodes__HashImg(I4)))) or (((M.release_counters.release_counter_two = I5.version) and (M.image_filenames.filename_two = I5.filename)) and (M.image_hashes.hash_two = Agree_Nodes__HashImg(I5))));
+
+tel;
+
+node _CLOCKED_Agree_Nodes__TargetsSecMatchImg(
+  _CLK : bool;
+  _INIT : bool;
+  M : Data_Types__TargetsMetadata__impl;
+  I1 : Data_Types__Image__impl;
+  I2 : Data_Types__Image__impl;
+  I3 : Data_Types__Image__impl;
+  I4 : Data_Types__Image__impl;
+  I5 : Data_Types__Image__impl
+) returns (
+  B : bool
+);
+let
+  B = (if _CLK then (((((((M.release_counters.release_counter_two = I1.version) and (M.image_filenames.filename_two = I1.filename)) and (M.image_hashes.hash_two = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I1))) or (((M.release_counters.release_counter_two = I2.version) and (M.image_filenames.filename_two = I2.filename)) and (M.image_hashes.hash_two = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I2)))) or (((M.release_counters.release_counter_two = I3.version) and (M.image_filenames.filename_two = I3.filename)) and (M.image_hashes.hash_two = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I3)))) or (((M.release_counters.release_counter_two = I4.version) and (M.image_filenames.filename_two = I4.filename)) and (M.image_hashes.hash_two = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I4)))) or (((M.release_counters.release_counter_two = I5.version) and (M.image_filenames.filename_two = I5.filename)) and (M.image_hashes.hash_two = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I5)))) else (pre B));
+
+tel;
+
+node Agree_Nodes__TargetsSec2MatchImg(
+  M : Data_Types__TargetsMetadata__impl;
+  I1 : Data_Types__Image__impl;
+  I2 : Data_Types__Image__impl;
+  I3 : Data_Types__Image__impl;
+  I4 : Data_Types__Image__impl;
+  I5 : Data_Types__Image__impl
+) returns (
+  B : bool
+);
+let
+  B = (((((((M.release_counters.release_counter_three = I1.version) and (M.image_filenames.filename_three = I1.filename)) and (M.image_hashes.hash_three = Agree_Nodes__HashImg(I1))) or (((M.release_counters.release_counter_three = I2.version) and (M.image_filenames.filename_three = I2.filename)) and (M.image_hashes.hash_three = Agree_Nodes__HashImg(I2)))) or (((M.release_counters.release_counter_three = I3.version) and (M.image_filenames.filename_three = I3.filename)) and (M.image_hashes.hash_three = Agree_Nodes__HashImg(I3)))) or (((M.release_counters.release_counter_three = I4.version) and (M.image_filenames.filename_three = I4.filename)) and (M.image_hashes.hash_three = Agree_Nodes__HashImg(I4)))) or (((M.release_counters.release_counter_three = I5.version) and (M.image_filenames.filename_three = I5.filename)) and (M.image_hashes.hash_three = Agree_Nodes__HashImg(I5))));
+
+tel;
+
+node _CLOCKED_Agree_Nodes__TargetsSec2MatchImg(
+  _CLK : bool;
+  _INIT : bool;
+  M : Data_Types__TargetsMetadata__impl;
+  I1 : Data_Types__Image__impl;
+  I2 : Data_Types__Image__impl;
+  I3 : Data_Types__Image__impl;
+  I4 : Data_Types__Image__impl;
+  I5 : Data_Types__Image__impl
+) returns (
+  B : bool
+);
+let
+  B = (if _CLK then (((((((M.release_counters.release_counter_three = I1.version) and (M.image_filenames.filename_three = I1.filename)) and (M.image_hashes.hash_three = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I1))) or (((M.release_counters.release_counter_three = I2.version) and (M.image_filenames.filename_three = I2.filename)) and (M.image_hashes.hash_three = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I2)))) or (((M.release_counters.release_counter_three = I3.version) and (M.image_filenames.filename_three = I3.filename)) and (M.image_hashes.hash_three = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I3)))) or (((M.release_counters.release_counter_three = I4.version) and (M.image_filenames.filename_three = I4.filename)) and (M.image_hashes.hash_three = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I4)))) or (((M.release_counters.release_counter_three = I5.version) and (M.image_filenames.filename_three = I5.filename)) and (M.image_hashes.hash_three = _CLOCKED_Agree_Nodes__HashImg(_CLK, _INIT, I5)))) else (pre B));
+
+tel;
+
+node Agree_Nodes__Compatible3(
+  X : int;
+  Y : int;
+  Z : int
+) returns (
+  o : bool
+);
+let
+  o = ((0 <= ((X + Y) + Z)) and (((X + Y) + Z) < 10));
+
+tel;
+
+node _CLOCKED_Agree_Nodes__Compatible3(
+  _CLK : bool;
+  _INIT : bool;
+  X : int;
+  Y : int;
+  Z : int
+) returns (
+  o : bool
+);
+let
+  o = (if _CLK then ((0 <= ((X + Y) + Z)) and (((X + Y) + Z) < 10)) else (pre o));
+
+tel;
+
+node Agree_Nodes__Compatible(
+  X : int;
+  Y : int
+) returns (
+  Z : bool
+);
+let
+  Z = (((Y - 5) <= X) and (X <= (Y + 5)));
+
+tel;
+
+node _CLOCKED_Agree_Nodes__Compatible(
+  _CLK : bool;
+  _INIT : bool;
+  X : int;
+  Y : int
+) returns (
+  Z : bool
+);
+let
+  Z = (if _CLK then (((Y - 5) <= X) and (X <= (Y + 5))) else (pre Z));
+
+tel;
+
+node Agree_Nodes__AuthoredByEcu(
+  X : Data_Types__VehicleVersionManifest__impl
+) returns (
+  Z : bool
+);
+let
+  Z = (X.report_one.image_length >= 100);
+
+tel;
+
+node _CLOCKED_Agree_Nodes__AuthoredByEcu(
+  _CLK : bool;
+  _INIT : bool;
+  X : Data_Types__VehicleVersionManifest__impl
+) returns (
+  Z : bool
+);
+let
+  Z = (if _CLK then (X.report_one.image_length >= 100) else (pre Z));
+
+tel;
+
+node Agree_Nodes__HashSnapshot(
+  X : Data_Types__SnapshotMetadata__impl
+) returns (
+  Y : int
+);
+let
+  Y = X.common_payload.filename;
+
+tel;
+
+node _CLOCKED_Agree_Nodes__HashSnapshot(
+  _CLK : bool;
+  _INIT : bool;
+  X : Data_Types__SnapshotMetadata__impl
+) returns (
+  Y : int
+);
+let
+  Y = (if _CLK then X.common_payload.filename else (pre Y));
+
+tel;
+
+node Agree_Nodes__TargetsMatch(
+  M1 : Data_Types__TargetsMetadata__impl;
+  M2 : Data_Types__TargetsMetadataImg__impl;
+  opt_flag : bool
+) returns (
+  B : bool
+);
+let
+  B = ((((((((((M1.image_filenames.filename_one = M2.image_filenames.filename_one) and (M1.image_hashes.hash_one = M2.image_hashes.hash_one)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_one))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_one)) or ((((M1.image_filenames.filename_one = M2.image_filenames.filename_two) and (M1.image_hashes.hash_one = M2.image_hashes.hash_two)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_two))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_two))) or ((((M1.image_filenames.filename_one = M2.image_filenames.filename_three) and (M1.image_hashes.hash_one = M2.image_hashes.hash_three)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_three))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_three))) or ((((M1.image_filenames.filename_one = M2.image_filenames.filename_four) and (M1.image_hashes.hash_one = M2.image_hashes.hash_four)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_four))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_four))) or ((((M1.image_filenames.filename_one = M2.image_filenames.filename_five) and (M1.image_hashes.hash_one = M2.image_hashes.hash_five)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_five))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_five))) and ((((((((M1.image_filenames.filename_two = M2.image_filenames.filename_one) and (M1.image_hashes.hash_two = M2.image_hashes.hash_one)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_one))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_one)) or ((((M1.image_filenames.filename_two = M2.image_filenames.filename_two) and (M1.image_hashes.hash_two = M2.image_hashes.hash_two)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_two))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_two))) or ((((M1.image_filenames.filename_two = M2.image_filenames.filename_three) and (M1.image_hashes.hash_two = M2.image_hashes.hash_three)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_three))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_three))) or ((((M1.image_filenames.filename_two = M2.image_filenames.filename_four) and (M1.image_hashes.hash_two = M2.image_hashes.hash_four)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_four))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_four))) or ((((M1.image_filenames.filename_two = M2.image_filenames.filename_five) and (M1.image_hashes.hash_two = M2.image_hashes.hash_five)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_five))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_five)))) and ((((((((M1.image_filenames.filename_three = M2.image_filenames.filename_one) and (M1.image_hashes.hash_three = M2.image_hashes.hash_one)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_one))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_one)) or ((((M1.image_filenames.filename_three = M2.image_filenames.filename_two) and (M1.image_hashes.hash_three = M2.image_hashes.hash_two)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_two))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_two))) or ((((M1.image_filenames.filename_three = M2.image_filenames.filename_three) and (M1.image_hashes.hash_three = M2.image_hashes.hash_three)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_three))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_three))) or ((((M1.image_filenames.filename_three = M2.image_filenames.filename_four) and (M1.image_hashes.hash_three = M2.image_hashes.hash_four)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_four))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_four))) or ((((M1.image_filenames.filename_three = M2.image_filenames.filename_five) and (M1.image_hashes.hash_three = M2.image_hashes.hash_five)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_five))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_five))));
+
+tel;
+
+node _CLOCKED_Agree_Nodes__TargetsMatch(
+  _CLK : bool;
+  _INIT : bool;
+  M1 : Data_Types__TargetsMetadata__impl;
+  M2 : Data_Types__TargetsMetadataImg__impl;
+  opt_flag : bool
+) returns (
+  B : bool
+);
+let
+  B = (if _CLK then ((((((((((M1.image_filenames.filename_one = M2.image_filenames.filename_one) and (M1.image_hashes.hash_one = M2.image_hashes.hash_one)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_one))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_one)) or ((((M1.image_filenames.filename_one = M2.image_filenames.filename_two) and (M1.image_hashes.hash_one = M2.image_hashes.hash_two)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_two))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_two))) or ((((M1.image_filenames.filename_one = M2.image_filenames.filename_three) and (M1.image_hashes.hash_one = M2.image_hashes.hash_three)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_three))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_three))) or ((((M1.image_filenames.filename_one = M2.image_filenames.filename_four) and (M1.image_hashes.hash_one = M2.image_hashes.hash_four)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_four))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_four))) or ((((M1.image_filenames.filename_one = M2.image_filenames.filename_five) and (M1.image_hashes.hash_one = M2.image_hashes.hash_five)) and (opt_flag => (M1.release_counters.release_counter_one = M2.release_counters.release_counter_five))) and (M1.hardware_ids.hardware_id_one = M2.hardware_ids.hardware_id_five))) and ((((((((M1.image_filenames.filename_two = M2.image_filenames.filename_one) and (M1.image_hashes.hash_two = M2.image_hashes.hash_one)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_one))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_one)) or ((((M1.image_filenames.filename_two = M2.image_filenames.filename_two) and (M1.image_hashes.hash_two = M2.image_hashes.hash_two)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_two))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_two))) or ((((M1.image_filenames.filename_two = M2.image_filenames.filename_three) and (M1.image_hashes.hash_two = M2.image_hashes.hash_three)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_three))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_three))) or ((((M1.image_filenames.filename_two = M2.image_filenames.filename_four) and (M1.image_hashes.hash_two = M2.image_hashes.hash_four)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_four))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_four))) or ((((M1.image_filenames.filename_two = M2.image_filenames.filename_five) and (M1.image_hashes.hash_two = M2.image_hashes.hash_five)) and (opt_flag => (M1.release_counters.release_counter_two = M2.release_counters.release_counter_five))) and (M1.hardware_ids.hardware_id_two = M2.hardware_ids.hardware_id_five)))) and ((((((((M1.image_filenames.filename_three = M2.image_filenames.filename_one) and (M1.image_hashes.hash_three = M2.image_hashes.hash_one)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_one))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_one)) or ((((M1.image_filenames.filename_three = M2.image_filenames.filename_two) and (M1.image_hashes.hash_three = M2.image_hashes.hash_two)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_two))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_two))) or ((((M1.image_filenames.filename_three = M2.image_filenames.filename_three) and (M1.image_hashes.hash_three = M2.image_hashes.hash_three)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_three))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_three))) or ((((M1.image_filenames.filename_three = M2.image_filenames.filename_four) and (M1.image_hashes.hash_three = M2.image_hashes.hash_four)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_four))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_four))) or ((((M1.image_filenames.filename_three = M2.image_filenames.filename_five) and (M1.image_hashes.hash_three = M2.image_hashes.hash_five)) and (opt_flag => (M1.release_counters.release_counter_three = M2.release_counters.release_counter_five))) and (M1.hardware_ids.hardware_id_three = M2.hardware_ids.hardware_id_five)))) else (pre B));
+
+tel;
+
+node Agree_Nodes__AuthoredByOem(
+  X : int
+) returns (
+  Z : bool
+);
+let
+  Z = (X >= 0);
+
+tel;
+
+node _CLOCKED_Agree_Nodes__AuthoredByOem(
+  _CLK : bool;
+  _INIT : bool;
+  X : int
+) returns (
+  Z : bool
+);
+let
+  Z = (if _CLK then (X >= 0) else (pre Z));
+
+tel;
+
+node Agree_Nodes__Sofar(
+  X : bool
+) returns (
+  Y : bool
+);
+let
+  Y = (X -> (X and (pre Y)));
+
+tel;
+
+node _CLOCKED_Agree_Nodes__Sofar(
+  _CLK : bool;
+  _INIT : bool;
+  X : bool
+) returns (
+  Y : bool
+);
+var
+  _STATE0 : bool;
+let
+  Y = (if _CLK then (if _INIT then X else (X and _STATE0)) else (pre Y));
+
+  _STATE0 = (if _CLK then (pre Y) else (pre _STATE0));
+
+tel;
+
+node __HIST(
+  input : bool
+) returns (
+  hist : bool
+);
+let
+  hist = (input -> ((pre hist) and input));
+
+tel;
+
+node __MinPos(
+  a : real;
+  b : real
+) returns (
+  ret : real
+);
+let
+  ret = (if (a <= 0.0) then b else (if (b <= 0.0) then a else (if (a <= b) then a else b)));
+
+tel;
+
+node __Rise(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = (input -> ((pre (not input)) and input));
+
+tel;
+
+node __Fall(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = ((not input) -> ((pre input) and (not input)));
+
+tel;
+
