@@ -225,7 +225,7 @@ let
   assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
 
   --%PROPERTY __ASSUME__HIST;
-  -- %PROPERTY __GUARANTEE0;
+  --%PROPERTY __GUARANTEE0;
 
   --%IVC __ASSUME0;
 
