@@ -1,0 +1,247 @@
+
+MODULE Thermostat__Since (Thermostat__Since-usr-X, Thermostat__Since-usr-Y)
+VAR
+	Thermostat__Since-usr-Z : boolean;
+
+ASSIGN
+	init(Thermostat__Since-usr-Z) := Thermostat__Since-usr-X;
+	next(Thermostat__Since-usr-Z) := ((next(Thermostat__Since-usr-Y) & Thermostat__Since-usr-Z) | next(Thermostat__Since-usr-X));
+
+
+
+MODULE _TOP__control_temperature (_TOP__control_temperature-usr-__ASSUME__HIST, _TOP__control_temperature-usr-switch, _TOP__control_temperature-usr-current_temperature, _TOP__control_temperature-usr-setpoint, _TOP__control_temperature-usr-time, _TOP__control_temperature-usr-cooling_start_condition, _TOP__control_temperature-usr-cool_mode, _TOP__control_temperature-usr-heating_start_condition, _TOP__control_temperature-usr-heat_mode, _TOP__control_temperature-usr-off_mode, _TOP__control_temperature-usr-cool_act_signal, _TOP__control_temperature-usr-heat_act_signal)
+VAR
+	_TOP__control_temperature-usr-__ASSERT : boolean;
+	_TOP__control_temperature-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__control_temperature-impl-usr-__GUARANTEE1 : boolean;
+
+ASSIGN
+	init(_TOP__control_temperature-impl-usr-__GUARANTEE1) := (_TOP__control_temperature-usr-heat_act_signal = _TOP__control_temperature-usr-heat_mode);
+	init(_TOP__control_temperature-impl-usr-__GUARANTEE0) := (_TOP__control_temperature-usr-cool_act_signal = _TOP__control_temperature-usr-cool_mode);
+	init(_TOP__control_temperature-usr-__ASSERT) := ((_TOP__control_temperature-usr-off_mode = (!_TOP__control_temperature-usr-cool_mode & !_TOP__control_temperature-usr-heat_mode)) & ((_TOP__control_temperature-usr-heat_mode = _TOP__control_temperature-usr-heating_start_condition) & ((_TOP__control_temperature-usr-heating_start_condition = ((_TOP__control_temperature-usr-switch = 2) & (_TOP__control_temperature-usr-current_temperature < (_TOP__control_temperature-usr-setpoint - 3)))) & ((_TOP__control_temperature-usr-cool_mode = _TOP__control_temperature-usr-cooling_start_condition) & ((_TOP__control_temperature-usr-cooling_start_condition = ((_TOP__control_temperature-usr-switch = 0) & (_TOP__control_temperature-usr-current_temperature > _TOP__control_temperature-usr-setpoint + 3))) & (_TOP__control_temperature-usr-__ASSUME__HIST -> (_TOP__control_temperature-impl-usr-__GUARANTEE1 & _TOP__control_temperature-impl-usr-__GUARANTEE0)))))));
+
+	next(_TOP__control_temperature-impl-usr-__GUARANTEE1) := (next(_TOP__control_temperature-usr-heat_act_signal) = next(_TOP__control_temperature-usr-heat_mode));
+	next(_TOP__control_temperature-impl-usr-__GUARANTEE0) := (next(_TOP__control_temperature-usr-cool_act_signal) = next(_TOP__control_temperature-usr-cool_mode));
+	next(_TOP__control_temperature-usr-__ASSERT) := ((next(_TOP__control_temperature-usr-off_mode) = (!next(_TOP__control_temperature-usr-cool_mode) & !next(_TOP__control_temperature-usr-heat_mode))) & ((next(_TOP__control_temperature-usr-heat_mode) = (((_TOP__control_temperature-usr-heat_mode & (next(_TOP__control_temperature-usr-switch) = 2)) & (next(_TOP__control_temperature-usr-current_temperature) < next(_TOP__control_temperature-usr-setpoint))) | next(_TOP__control_temperature-usr-heating_start_condition))) & ((next(_TOP__control_temperature-usr-heating_start_condition) = ((next(_TOP__control_temperature-usr-switch) = 2) & (next(_TOP__control_temperature-usr-current_temperature) < (next(_TOP__control_temperature-usr-setpoint) - 3)))) & ((next(_TOP__control_temperature-usr-cool_mode) = (((_TOP__control_temperature-usr-cool_mode & (next(_TOP__control_temperature-usr-switch) = 0)) & (next(_TOP__control_temperature-usr-current_temperature) > next(_TOP__control_temperature-usr-setpoint))) | next(_TOP__control_temperature-usr-cooling_start_condition))) & ((next(_TOP__control_temperature-usr-cooling_start_condition) = ((next(_TOP__control_temperature-usr-switch) = 0) & (next(_TOP__control_temperature-usr-current_temperature) > next(_TOP__control_temperature-usr-setpoint) + 3))) & (next(_TOP__control_temperature-usr-__ASSUME__HIST) -> (next(_TOP__control_temperature-impl-usr-__GUARANTEE1) & next(_TOP__control_temperature-impl-usr-__GUARANTEE0))))))));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE _TOP__set_desired_temperature (_TOP__set_desired_temperature-usr-__ASSUME__HIST, _TOP__set_desired_temperature-usr-__ASSUME0, _TOP__set_desired_temperature-usr-up_button, _TOP__set_desired_temperature-usr-down_button, _TOP__set_desired_temperature-usr-time, _TOP__set_desired_temperature-usr-prev_setpoint, _TOP__set_desired_temperature-usr-increment_condition, _TOP__set_desired_temperature-usr-decrement_condition, _TOP__set_desired_temperature-usr-setpoint)
+VAR
+	_TOP__set_desired_temperature-usr-__ASSERT : boolean;
+	_TOP__set_desired_temperature-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__set_desired_temperature-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__set_desired_temperature-impl-usr-__GUARANTEE2 : boolean;
+
+ASSIGN
+	init(_TOP__set_desired_temperature-impl-usr-__GUARANTEE2) := (!(_TOP__set_desired_temperature-usr-decrement_condition | _TOP__set_desired_temperature-usr-increment_condition) -> (_TOP__set_desired_temperature-usr-setpoint = _TOP__set_desired_temperature-usr-prev_setpoint));
+	init(_TOP__set_desired_temperature-impl-usr-__GUARANTEE1) := (_TOP__set_desired_temperature-usr-decrement_condition -> (_TOP__set_desired_temperature-usr-setpoint = (_TOP__set_desired_temperature-usr-prev_setpoint - 1)));
+	init(_TOP__set_desired_temperature-impl-usr-__GUARANTEE0) := (_TOP__set_desired_temperature-usr-increment_condition -> (_TOP__set_desired_temperature-usr-setpoint = _TOP__set_desired_temperature-usr-prev_setpoint + 1));
+	init(_TOP__set_desired_temperature-usr-__ASSERT) := ((_TOP__set_desired_temperature-usr-decrement_condition = (_TOP__set_desired_temperature-usr-down_button & (_TOP__set_desired_temperature-usr-prev_setpoint >= 41))) & ((_TOP__set_desired_temperature-usr-increment_condition = (_TOP__set_desired_temperature-usr-up_button & (_TOP__set_desired_temperature-usr-prev_setpoint <= 99))) & ((_TOP__set_desired_temperature-usr-prev_setpoint = 70) & ((_TOP__set_desired_temperature-usr-__ASSUME__HIST -> (_TOP__set_desired_temperature-impl-usr-__GUARANTEE2 & (_TOP__set_desired_temperature-impl-usr-__GUARANTEE1 & _TOP__set_desired_temperature-impl-usr-__GUARANTEE0))) & (_TOP__set_desired_temperature-usr-__ASSUME0 = !(_TOP__set_desired_temperature-usr-up_button & _TOP__set_desired_temperature-usr-down_button))))));
+
+	next(_TOP__set_desired_temperature-impl-usr-__GUARANTEE2) := (!(next(_TOP__set_desired_temperature-usr-decrement_condition) | next(_TOP__set_desired_temperature-usr-increment_condition)) -> (next(_TOP__set_desired_temperature-usr-setpoint) = next(_TOP__set_desired_temperature-usr-prev_setpoint)));
+	next(_TOP__set_desired_temperature-impl-usr-__GUARANTEE1) := (next(_TOP__set_desired_temperature-usr-decrement_condition) -> (next(_TOP__set_desired_temperature-usr-setpoint) = (next(_TOP__set_desired_temperature-usr-prev_setpoint) - 1)));
+	next(_TOP__set_desired_temperature-impl-usr-__GUARANTEE0) := (next(_TOP__set_desired_temperature-usr-increment_condition) -> (next(_TOP__set_desired_temperature-usr-setpoint) = next(_TOP__set_desired_temperature-usr-prev_setpoint) + 1));
+	next(_TOP__set_desired_temperature-usr-__ASSERT) := ((next(_TOP__set_desired_temperature-usr-decrement_condition) = (next(_TOP__set_desired_temperature-usr-down_button) & (next(_TOP__set_desired_temperature-usr-prev_setpoint) >= 41))) & ((next(_TOP__set_desired_temperature-usr-increment_condition) = (next(_TOP__set_desired_temperature-usr-up_button) & (next(_TOP__set_desired_temperature-usr-prev_setpoint) <= 99))) & ((next(_TOP__set_desired_temperature-usr-prev_setpoint) = _TOP__set_desired_temperature-usr-setpoint) & ((next(_TOP__set_desired_temperature-usr-__ASSUME__HIST) -> (next(_TOP__set_desired_temperature-impl-usr-__GUARANTEE2) & (next(_TOP__set_desired_temperature-impl-usr-__GUARANTEE1) & next(_TOP__set_desired_temperature-impl-usr-__GUARANTEE0)))) & (next(_TOP__set_desired_temperature-usr-__ASSUME0) = !(next(_TOP__set_desired_temperature-usr-up_button) & next(_TOP__set_desired_temperature-usr-down_button)))))));
+
+
+
+MODULE main () 
+VAR
+	main-usr-set_desired_temperature__prev_setpoint : real;
+	main-usr-set_desired_temperature__increment_condition : boolean;
+	main-usr-set_desired_temperature__decrement_condition : boolean;
+	main-usr-set_desired_temperature__setpoint : real;
+	main-usr-set_desired_temperature____ASSUME0 : boolean;
+	main-usr-set_desired_temperature____ASSUME__HIST : boolean;
+	main-usr-control_temperature__cooling_start_condition : boolean;
+	main-usr-control_temperature__cool_mode : boolean;
+	main-usr-control_temperature__heating_start_condition : boolean;
+	main-usr-control_temperature__heat_mode : boolean;
+	main-usr-control_temperature__off_mode : boolean;
+	main-usr-control_temperature__cool_act_signal : boolean;
+	main-usr-control_temperature__heat_act_signal : boolean;
+	main-usr-control_temperature____ASSUME__HIST : boolean;
+	main-usr-current_temperature_in_deadzone : boolean;
+	main-usr-system_is_off : boolean;
+	main-usr-cool_act_signal : boolean;
+	main-usr-heat_act_signal : boolean;
+	main-usr-setpoint : real;
+	main-usr-set_desired_temperature__up_button : boolean;
+	main-usr-set_desired_temperature__down_button : boolean;
+	main-usr-set_desired_temperature__time : real;
+	main-usr-control_temperature__switch : 0 .. 2;
+	main-usr-control_temperature__current_temperature : real;
+	main-usr-control_temperature__setpoint : real;
+	main-usr-control_temperature__time : real;
+	main-usr-switch : 0 .. 2;
+	main-usr-up_button : boolean;
+	main-usr-down_button : boolean;
+	main-usr-current_temperature : real;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME0 : boolean;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
+	main-impl-usr-__GUARANTEE2 : boolean;
+	main-impl-usr-__GUARANTEE3 : boolean;
+	main-impl-usr-__GUARANTEE4 : boolean;
+	main-impl-usr-__GUARANTEE5 : boolean;
+	main-impl-usr-__GUARANTEE6 : boolean;
+	main-impl-usr-__GUARANTEE7 : boolean;
+	main-impl-usr-__GUARANTEE8 : boolean;
+	main-impl-usr-__GUARANTEE9 : boolean;
+	main-impl-usr-__GUARANTEE10 : boolean;
+	main-impl-usr-__GUARANTEE11 : boolean;
+	main-impl-usr-__GUARANTEE12 : boolean;
+	main-impl-usr-__GUARANTEE13 : boolean;
+	main-impl-usr-__GUARANTEE14 : boolean;
+	main-impl-usr-__GUARANTEE15 : boolean;
+	main-impl-usr-__GUARANTEE16 : boolean;
+	main-res-glocal_9 : boolean;
+	main-res-glocal_10 : boolean;
+	main-res-glocal_12 : boolean;
+	main-res-glocal_14 : boolean;
+	main-res-glocal_15 : boolean;
+	main-res-glocal_17 : boolean;
+	main-res-glocal_20 : boolean;
+	main-res-glocal_21 : boolean;
+	main-res-glocal_22 : boolean;
+	main-res-glocal_23 : boolean;
+	main-res-glocal_24 : boolean;
+	main-res-glocal_25 : boolean;
+	main-res-glocal_26 : boolean;
+	main-res-glocal_27 : boolean;
+	main-res-glocal_28 : boolean;
+	main-res-glocal_29 : boolean;
+	main-res-glocal_30 : boolean;
+	main-res-glocal_31 : boolean;
+	main-res-glocal_32 : boolean;
+	main-res-gklocal_18 : boolean;
+	main-res-gklocal_7 : boolean;
+	main-res-gklocal_5 : boolean;
+	main-res-call_19 : __HIST(main-res-gklocal_18);
+	main-res-call_16 : _TOP__control_temperature(main-usr-control_temperature____ASSUME__HIST, main-usr-control_temperature__switch, main-usr-control_temperature__current_temperature, main-usr-control_temperature__setpoint, main-usr-control_temperature__time, main-usr-control_temperature__cooling_start_condition, main-usr-control_temperature__cool_mode, main-usr-control_temperature__heating_start_condition, main-usr-control_temperature__heat_mode, main-usr-control_temperature__off_mode, main-usr-control_temperature__cool_act_signal, main-usr-control_temperature__heat_act_signal);
+	main-res-call_13 : __HIST(main-usr-set_desired_temperature____ASSUME0);
+	main-res-call_11 : _TOP__set_desired_temperature(main-usr-set_desired_temperature____ASSUME__HIST, main-usr-set_desired_temperature____ASSUME0, main-usr-set_desired_temperature__up_button, main-usr-set_desired_temperature__down_button, main-usr-set_desired_temperature__time, main-usr-set_desired_temperature__prev_setpoint, main-usr-set_desired_temperature__increment_condition, main-usr-set_desired_temperature__decrement_condition, main-usr-set_desired_temperature__setpoint);
+	main-res-call_8 : Thermostat__Since(main-usr-heat_act_signal, main-res-gklocal_7);
+	main-res-call_6 : Thermostat__Since(main-usr-cool_act_signal, main-res-gklocal_5);
+
+ASSIGN
+	init(main-impl-usr-__ASSUME0) := !(main-usr-up_button & main-usr-down_button);
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-control_temperature____ASSUME__HIST & main-usr-set_desired_temperature____ASSUME__HIST);
+	init(main-impl-usr-__GUARANTEE0) := TRUE;
+	init(main-impl-usr-__GUARANTEE1) := TRUE;
+	init(main-impl-usr-__GUARANTEE2) := ((main-usr-switch = 1) -> (!main-usr-cool_act_signal & !main-usr-heat_act_signal));
+	init(main-impl-usr-__GUARANTEE3) := (main-usr-cool_act_signal -> (main-usr-switch = 0));
+	init(main-impl-usr-__GUARANTEE4) := (main-usr-heat_act_signal -> (main-usr-switch = 2));
+	init(main-impl-usr-__GUARANTEE5) := !(main-usr-cool_act_signal & main-usr-heat_act_signal);
+	init(main-impl-usr-__GUARANTEE6) := ((40 <= main-usr-setpoint) & (main-usr-setpoint <= 100));
+	init(main-impl-usr-__GUARANTEE7) := ((!main-usr-up_button & !main-usr-down_button) -> (main-usr-setpoint = 70));
+	init(main-impl-usr-__GUARANTEE8) := (main-usr-up_button -> !(main-usr-setpoint < 70));
+	init(main-impl-usr-__GUARANTEE9) := (main-usr-down_button -> !(main-usr-setpoint > 70));
+	init(main-impl-usr-__GUARANTEE10) := TRUE;
+	init(main-impl-usr-__GUARANTEE11) := (main-usr-cool_act_signal -> (main-usr-current_temperature > main-usr-setpoint));
+	init(main-impl-usr-__GUARANTEE12) := (main-usr-heat_act_signal -> (main-usr-current_temperature < main-usr-setpoint));
+	init(main-impl-usr-__GUARANTEE13) := (((main-usr-switch = 0) & (main-usr-current_temperature > main-usr-setpoint + 3)) -> main-usr-cool_act_signal);
+	init(main-impl-usr-__GUARANTEE14) := (((main-usr-switch = 2) & (main-usr-current_temperature < (main-usr-setpoint - 3))) -> main-usr-heat_act_signal);
+	init(main-impl-usr-__GUARANTEE15) := (main-res-call_6.Thermostat__Since-usr-Z -> main-usr-cool_act_signal);
+	init(main-res-gklocal_5) := ((main-usr-switch = 0) & (main-usr-current_temperature > main-usr-setpoint));
+	init(main-impl-usr-__GUARANTEE16) := (main-res-call_8.Thermostat__Since-usr-Z -> main-usr-heat_act_signal);
+	init(main-res-gklocal_7) := ((main-usr-switch = 2) & (main-usr-current_temperature < main-usr-setpoint));
+	init(main-res-glocal_9) := main-impl-usr-__ASSUME0;
+	init(main-res-glocal_10) := (main-usr-time = main-usr-set_desired_temperature__time);
+	init(main-res-glocal_12) := main-res-call_11._TOP__set_desired_temperature-usr-__ASSERT;
+	init(main-res-glocal_14) := (main-usr-set_desired_temperature____ASSUME__HIST = main-res-call_13.__HIST-usr-hist);
+	init(main-res-glocal_15) := (main-usr-time = main-usr-control_temperature__time);
+	init(main-res-glocal_17) := main-res-call_16._TOP__control_temperature-usr-__ASSERT;
+	init(main-res-gklocal_18) := TRUE;
+	init(main-res-glocal_20) := (main-usr-control_temperature____ASSUME__HIST = main-res-call_19.__HIST-usr-hist);
+	init(main-res-glocal_21) := (main-usr-switch = main-usr-control_temperature__switch);
+	init(main-res-glocal_22) := (main-usr-up_button = main-usr-set_desired_temperature__up_button);
+	init(main-res-glocal_23) := (main-usr-down_button = main-usr-set_desired_temperature__down_button);
+	init(main-res-glocal_24) := (main-usr-current_temperature = main-usr-control_temperature__current_temperature);
+	init(main-res-glocal_25) := (main-usr-set_desired_temperature__setpoint = main-usr-control_temperature__setpoint);
+	init(main-res-glocal_26) := (main-usr-set_desired_temperature__setpoint = main-usr-setpoint);
+	init(main-res-glocal_27) := (main-usr-control_temperature__cool_act_signal = main-usr-cool_act_signal);
+	init(main-res-glocal_28) := (main-usr-control_temperature__heat_act_signal = main-usr-heat_act_signal);
+	init(main-res-glocal_29) := (main-usr-current_temperature_in_deadzone = (((main-usr-setpoint - 3) <= main-usr-current_temperature) & (main-usr-current_temperature <= main-usr-setpoint + 3)));
+	init(main-res-glocal_30) := (main-usr-system_is_off = (!main-usr-cool_act_signal & !main-usr-heat_act_signal));
+	init(main-res-glocal_31) := TRUE;
+	init(main-res-glocal_32) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME0) := !(next(main-usr-up_button) & next(main-usr-down_button));
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-control_temperature____ASSUME__HIST) & next(main-usr-set_desired_temperature____ASSUME__HIST));
+	next(main-impl-usr-__GUARANTEE0) := TRUE;
+	next(main-impl-usr-__GUARANTEE1) := TRUE;
+	next(main-impl-usr-__GUARANTEE2) := ((next(main-usr-switch) = 1) -> (!next(main-usr-cool_act_signal) & !next(main-usr-heat_act_signal)));
+	next(main-impl-usr-__GUARANTEE3) := (next(main-usr-cool_act_signal) -> (next(main-usr-switch) = 0));
+	next(main-impl-usr-__GUARANTEE4) := (next(main-usr-heat_act_signal) -> (next(main-usr-switch) = 2));
+	next(main-impl-usr-__GUARANTEE5) := !(next(main-usr-cool_act_signal) & next(main-usr-heat_act_signal));
+	next(main-impl-usr-__GUARANTEE6) := ((40 <= next(main-usr-setpoint)) & (next(main-usr-setpoint) <= 100));
+	next(main-impl-usr-__GUARANTEE7) := ((!next(main-usr-up_button) & !next(main-usr-down_button)) -> (next(main-usr-setpoint) = main-usr-setpoint));
+	next(main-impl-usr-__GUARANTEE8) := (next(main-usr-up_button) -> !(next(main-usr-setpoint) < main-usr-setpoint));
+	next(main-impl-usr-__GUARANTEE9) := (next(main-usr-down_button) -> !(next(main-usr-setpoint) > main-usr-setpoint));
+	next(main-impl-usr-__GUARANTEE10) := ((next(main-usr-current_temperature_in_deadzone) & main-usr-system_is_off) -> next(main-usr-system_is_off));
+	next(main-impl-usr-__GUARANTEE11) := (next(main-usr-cool_act_signal) -> (next(main-usr-current_temperature) > next(main-usr-setpoint)));
+	next(main-impl-usr-__GUARANTEE12) := (next(main-usr-heat_act_signal) -> (next(main-usr-current_temperature) < next(main-usr-setpoint)));
+	next(main-impl-usr-__GUARANTEE13) := (((next(main-usr-switch) = 0) & (next(main-usr-current_temperature) > next(main-usr-setpoint) + 3)) -> next(main-usr-cool_act_signal));
+	next(main-impl-usr-__GUARANTEE14) := (((next(main-usr-switch) = 2) & (next(main-usr-current_temperature) < (next(main-usr-setpoint) - 3))) -> next(main-usr-heat_act_signal));
+	next(main-res-gklocal_5) := ((next(main-usr-switch) = 0) & (next(main-usr-current_temperature) > next(main-usr-setpoint)));
+	next(main-impl-usr-__GUARANTEE15) := (next(main-res-call_6.Thermostat__Since-usr-Z) -> next(main-usr-cool_act_signal));
+	next(main-res-gklocal_7) := ((next(main-usr-switch) = 2) & (next(main-usr-current_temperature) < next(main-usr-setpoint)));
+	next(main-impl-usr-__GUARANTEE16) := (next(main-res-call_8.Thermostat__Since-usr-Z) -> next(main-usr-heat_act_signal));
+	next(main-res-glocal_9) := next(main-impl-usr-__ASSUME0);
+	next(main-res-glocal_10) := (next(main-usr-time) = next(main-usr-set_desired_temperature__time));
+	next(main-res-glocal_12) := next(main-res-call_11._TOP__set_desired_temperature-usr-__ASSERT);
+	next(main-res-glocal_14) := (next(main-usr-set_desired_temperature____ASSUME__HIST) = next(main-res-call_13.__HIST-usr-hist));
+	next(main-res-glocal_15) := (next(main-usr-time) = next(main-usr-control_temperature__time));
+	next(main-res-glocal_17) := next(main-res-call_16._TOP__control_temperature-usr-__ASSERT);
+	next(main-res-gklocal_18) := TRUE;
+	next(main-res-glocal_20) := (next(main-usr-control_temperature____ASSUME__HIST) = next(main-res-call_19.__HIST-usr-hist));
+	next(main-res-glocal_21) := (next(main-usr-switch) = next(main-usr-control_temperature__switch));
+	next(main-res-glocal_22) := (next(main-usr-up_button) = next(main-usr-set_desired_temperature__up_button));
+	next(main-res-glocal_23) := (next(main-usr-down_button) = next(main-usr-set_desired_temperature__down_button));
+	next(main-res-glocal_24) := (next(main-usr-current_temperature) = next(main-usr-control_temperature__current_temperature));
+	next(main-res-glocal_25) := (next(main-usr-set_desired_temperature__setpoint) = next(main-usr-control_temperature__setpoint));
+	next(main-res-glocal_26) := (next(main-usr-set_desired_temperature__setpoint) = next(main-usr-setpoint));
+	next(main-res-glocal_27) := (next(main-usr-control_temperature__cool_act_signal) = next(main-usr-cool_act_signal));
+	next(main-res-glocal_28) := (next(main-usr-control_temperature__heat_act_signal) = next(main-usr-heat_act_signal));
+	next(main-res-glocal_29) := (next(main-usr-current_temperature_in_deadzone) = (((next(main-usr-setpoint) - 3) <= next(main-usr-current_temperature)) & (next(main-usr-current_temperature) <= next(main-usr-setpoint) + 3)));
+	next(main-res-glocal_30) := (next(main-usr-system_is_off) = (!next(main-usr-cool_act_signal) & !next(main-usr-heat_act_signal)));
+	next(main-res-glocal_31) := TRUE;
+	next(main-res-glocal_32) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_32;
+	INVAR main-res-glocal_31;
+	INVAR main-res-glocal_30;
+	INVAR main-res-glocal_29;
+	INVAR main-res-glocal_28;
+	INVAR main-res-glocal_27;
+	INVAR main-res-glocal_26;
+	INVAR main-res-glocal_25;
+	INVAR main-res-glocal_24;
+	INVAR main-res-glocal_23;
+	INVAR main-res-glocal_22;
+	INVAR main-res-glocal_21;
+	INVAR main-res-glocal_20;
+	INVAR main-res-glocal_17;
+	INVAR main-res-glocal_15;
+	INVAR main-res-glocal_14;
+	INVAR main-res-glocal_12;
+	INVAR main-res-glocal_10;
+	INVAR main-res-glocal_9;
+
+INVARSPEC 
+((main-impl-usr-__GUARANTEE5));
+

@@ -63,6 +63,7 @@ VAR
 	main-usr-target__Input : integer;
 	main-usr-target__time : real;
 	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
 	main-res-glocal_2 : boolean;
 	main-res-glocal_4 : boolean;
 	main-res-glocal_7 : boolean;
@@ -85,6 +86,7 @@ VAR
 	main-res-call_3 : _TOP__counter(main-usr-counter____ASSUME__HIST, main-usr-counter__time, main-usr-counter__Output);
 
 ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-target____ASSUME__HIST & (main-usr-sieve____ASSUME__HIST & main-usr-counter____ASSUME__HIST));
 	init(main-res-glocal_2) := (main-usr-time = main-usr-counter__time);
 	init(main-res-glocal_4) := main-res-call_3._TOP__counter-usr-__ASSERT;
 	init(main-res-gklocal_5) := TRUE;
@@ -100,6 +102,7 @@ ASSIGN
 	init(main-res-glocal_20) := TRUE;
 	init(main-res-glocal_21) := (main-usr-time = 0);
 
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-target____ASSUME__HIST) & (next(main-usr-sieve____ASSUME__HIST) & next(main-usr-counter____ASSUME__HIST)));
 	next(main-res-glocal_2) := (next(main-usr-time) = next(main-usr-counter__time));
 	next(main-res-glocal_4) := next(main-res-call_3._TOP__counter-usr-__ASSERT);
 	next(main-res-gklocal_5) := TRUE;

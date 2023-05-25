@@ -170,9 +170,11 @@ VAR
 	main-usr-IRS_Heading : real;
 	main-usr-IRS_CTE___EVENT_ : boolean;
 	main-usr-IRS_CTE : real;
+	main-usr-CAM_VIDEO___EVENT_ : boolean;
 	main-usr-time : real;
 	main-impl-usr-__ASSUME0 : boolean;
 	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
 	main-res-glocal_20 : boolean;
 	main-res-glocal_21 : boolean;
 	main-res-glocal_23 : boolean;
@@ -210,10 +212,12 @@ VAR
 	main-res-call_28 : _TOP__Controller(main-usr-Controller____ASSUME__HIST, main-usr-Controller__Heading___EVENT_, main-usr-Controller__Heading, main-usr-Controller__CTE___EVENT_, main-usr-Controller__CTE, main-usr-Controller__time, main-usr-Controller__Control_Command___EVENT_, main-usr-8-Controller__Control_Command-Heading, main-usr-6-Controller__Control_Command-Speed);
 	main-res-call_25 : __HIST(main-res-gklocal_24);
 	main-res-call_22 : _TOP__Monitor(main-usr-Monitor____ASSUME__HIST, main-usr-Monitor__Actual_Heading___EVENT_, main-usr-Monitor__Actual_Heading, main-usr-Monitor__Estimated_Heading___EVENT_, main-usr-Monitor__Estimated_Heading, main-usr-Monitor__Actual_CTE___EVENT_, main-usr-Monitor__Actual_CTE, main-usr-Monitor__Estimated_CTE___EVENT_, main-usr-Monitor__Estimated_CTE, main-usr-Monitor__time, main-usr-Monitor__Alert___EVENT_, main-usr-Monitor__Alert);
+	main-res-call_19 : Deep_Taxi__SAFE_COMMAND(main-usr-IRS_Heading, main-usr-IRS_CTE, main-usr-8-Aircraft_Command-Heading, main-usr-6-Aircraft_Command-Speed);
 
 ASSIGN
-	init(main-impl-usr-__ASSUME__HIST) := (main-usr-Switch____ASSUME__HIST & (main-usr-Safety____ASSUME__HIST & (main-usr-Controller____ASSUME__HIST & main-usr-Monitor____ASSUME__HIST)));
 	init(main-impl-usr-__ASSUME0) := (main-usr-IRS_CTE < 10);
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-Switch____ASSUME__HIST & (main-usr-Safety____ASSUME__HIST & (main-usr-Controller____ASSUME__HIST & main-usr-Monitor____ASSUME__HIST)));
+	init(main-impl-usr-__GUARANTEE0) := main-res-call_19.Deep_Taxi__SAFE_COMMAND-usr-_outvar;
 	init(main-res-glocal_20) := main-impl-usr-__ASSUME0;
 	init(main-res-glocal_21) := (main-usr-time = main-usr-Monitor__time);
 	init(main-res-glocal_23) := main-res-call_22._TOP__Monitor-usr-__ASSERT;
@@ -245,8 +249,9 @@ ASSIGN
 	init(main-res-glocal_55) := TRUE;
 	init(main-res-glocal_56) := (main-usr-time = 0);
 
-	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-Switch____ASSUME__HIST) & (next(main-usr-Safety____ASSUME__HIST) & (next(main-usr-Controller____ASSUME__HIST) & next(main-usr-Monitor____ASSUME__HIST))));
 	next(main-impl-usr-__ASSUME0) := (next(main-usr-IRS_CTE) < 10);
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-Switch____ASSUME__HIST) & (next(main-usr-Safety____ASSUME__HIST) & (next(main-usr-Controller____ASSUME__HIST) & next(main-usr-Monitor____ASSUME__HIST))));
+	next(main-impl-usr-__GUARANTEE0) := next(main-res-call_19.Deep_Taxi__SAFE_COMMAND-usr-_outvar);
 	next(main-res-glocal_20) := next(main-impl-usr-__ASSUME0);
 	next(main-res-glocal_21) := (next(main-usr-time) = next(main-usr-Monitor__time));
 	next(main-res-glocal_23) := next(main-res-call_22._TOP__Monitor-usr-__ASSERT);
@@ -308,6 +313,8 @@ ASSIGN
 	INVAR main-res-glocal_21;
 	INVAR main-res-glocal_20;
 
+INVARSPEC 
+((main-impl-usr-__GUARANTEE0));
 INVARSPEC 
 ((main-impl-usr-__ASSUME__HIST));
 

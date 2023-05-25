@@ -145,7 +145,20 @@ VAR
 	top-usr-e11 : boolean;
 	top-usr-e12 : boolean;
 	top-usr-OK : boolean;
+	top-impl-usr-x0 : integer;
+	top-impl-usr-x1 : integer;
+	top-impl-usr-x2 : integer;
 	top-impl-usr-x3 : integer;
+	top-impl-usr-x4 : integer;
+	top-impl-usr-x5 : integer;
+	top-impl-usr-x6 : integer;
+	top-impl-usr-x7 : integer;
+	top-impl-usr-x8 : integer;
+	top-impl-usr-x9 : integer;
+	top-impl-usr-x10 : integer;
+	top-impl-usr-x11 : integer;
+	top-impl-usr-x12 : integer;
+	top-impl-usr-x13 : integer;
 	top-impl-usr-env : boolean;
 	top-res-gklocal_27 : boolean;
 	top-res-call_26 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
@@ -158,11 +171,37 @@ ASSIGN
 	init(top-res-gklocal_27) := (top-res-call_26.excludes12-usr-excludes & (top-impl-usr-x3 < 32767));
 	init(top-impl-usr-env) := top-res-call_28.Sofar-usr-Sofar;
 	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-x3 >= 0));
+	init(top-impl-usr-x0) := top-res-2-call_25.peterson-usr-x0;
+	init(top-impl-usr-x1) := top-res-2-call_25.peterson-usr-x1;
+	init(top-impl-usr-x2) := top-res-2-call_25.peterson-usr-x2;
+	init(top-impl-usr-x4) := top-res-2-call_25.peterson-usr-x4;
+	init(top-impl-usr-x5) := top-res-2-call_25.peterson-usr-x5;
+	init(top-impl-usr-x6) := top-res-2-call_25.peterson-usr-x6;
+	init(top-impl-usr-x7) := top-res-2-call_25.peterson-usr-x7;
+	init(top-impl-usr-x8) := top-res-2-call_25.peterson-usr-x8;
+	init(top-impl-usr-x9) := top-res-2-call_25.peterson-usr-x9;
+	init(top-impl-usr-x10) := top-res-3-call_25.peterson-usr-x10;
+	init(top-impl-usr-x11) := top-res-3-call_25.peterson-usr-x11;
+	init(top-impl-usr-x12) := top-res-3-call_25.peterson-usr-x12;
+	init(top-impl-usr-x13) := top-res-3-call_25.peterson-usr-x13;
 
 	next(top-impl-usr-x3) := next(top-res-2-call_25.peterson-usr-x3);
 	next(top-res-gklocal_27) := (next(top-res-call_26.excludes12-usr-excludes) & (next(top-impl-usr-x3) < 32767));
 	next(top-impl-usr-env) := next(top-res-call_28.Sofar-usr-Sofar);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-x3) >= 0));
+	next(top-impl-usr-x0) := next(top-res-2-call_25.peterson-usr-x0);
+	next(top-impl-usr-x1) := next(top-res-2-call_25.peterson-usr-x1);
+	next(top-impl-usr-x2) := next(top-res-2-call_25.peterson-usr-x2);
+	next(top-impl-usr-x4) := next(top-res-2-call_25.peterson-usr-x4);
+	next(top-impl-usr-x5) := next(top-res-2-call_25.peterson-usr-x5);
+	next(top-impl-usr-x6) := next(top-res-2-call_25.peterson-usr-x6);
+	next(top-impl-usr-x7) := next(top-res-2-call_25.peterson-usr-x7);
+	next(top-impl-usr-x8) := next(top-res-2-call_25.peterson-usr-x8);
+	next(top-impl-usr-x9) := next(top-res-2-call_25.peterson-usr-x9);
+	next(top-impl-usr-x10) := next(top-res-3-call_25.peterson-usr-x10);
+	next(top-impl-usr-x11) := next(top-res-3-call_25.peterson-usr-x11);
+	next(top-impl-usr-x12) := next(top-res-3-call_25.peterson-usr-x12);
+	next(top-impl-usr-x13) := next(top-res-3-call_25.peterson-usr-x13);
 
 
 INVARSPEC 

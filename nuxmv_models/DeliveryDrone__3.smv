@@ -1,18 +1,80 @@
 
-MODULE _TOP__radio (_TOP__radio-usr-__ASSUME__HIST, _TOP__radio-usr-15-comm_in-data_available, _TOP__radio-usr-17-comm_in-target_confirmed, _TOP__radio-usr-radio_in, _TOP__radio-usr-time, _TOP__radio-usr-comm_out, _TOP__radio-usr-15-radio_out-data_available, _TOP__radio-usr-17-radio_out-target_confirmed, _TOP__radio-usr-health_status)
+MODULE Agree_Nodes__Since (Agree_Nodes__Since-usr-X, Agree_Nodes__Since-usr-Y)
 VAR
-	_TOP__radio-usr-__ASSERT : boolean;
-	_TOP__radio-impl-usr-__GUARANTEE0 : boolean;
-	_TOP__radio-impl-usr-__GUARANTEE1 : boolean;
+	Agree_Nodes__Since-usr-Z : boolean;
 
 ASSIGN
-	init(_TOP__radio-impl-usr-__GUARANTEE1) := (!_TOP__radio-usr-radio_in -> !_TOP__radio-usr-15-radio_out-data_available);
-	init(_TOP__radio-impl-usr-__GUARANTEE0) := (_TOP__radio-usr-radio_in -> ((_TOP__radio-usr-15-radio_out-data_available = _TOP__radio-usr-15-comm_in-data_available) & (_TOP__radio-usr-17-comm_in-target_confirmed = _TOP__radio-usr-17-radio_out-target_confirmed)));
-	init(_TOP__radio-usr-__ASSERT) := (_TOP__radio-usr-__ASSUME__HIST -> (_TOP__radio-impl-usr-__GUARANTEE1 & _TOP__radio-impl-usr-__GUARANTEE0));
+	init(Agree_Nodes__Since-usr-Z) := Agree_Nodes__Since-usr-X;
+	next(Agree_Nodes__Since-usr-Z) := ((next(Agree_Nodes__Since-usr-Y) & Agree_Nodes__Since-usr-Z) | next(Agree_Nodes__Since-usr-X));
 
-	next(_TOP__radio-impl-usr-__GUARANTEE1) := (!next(_TOP__radio-usr-radio_in) -> !next(_TOP__radio-usr-15-radio_out-data_available));
-	next(_TOP__radio-impl-usr-__GUARANTEE0) := (next(_TOP__radio-usr-radio_in) -> ((next(_TOP__radio-usr-15-radio_out-data_available) = next(_TOP__radio-usr-15-comm_in-data_available)) & (next(_TOP__radio-usr-17-comm_in-target_confirmed) = next(_TOP__radio-usr-17-radio_out-target_confirmed))));
-	next(_TOP__radio-usr-__ASSERT) := (next(_TOP__radio-usr-__ASSUME__HIST) -> (next(_TOP__radio-impl-usr-__GUARANTEE1) & next(_TOP__radio-impl-usr-__GUARANTEE0)));
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE Agree_Nodes__InitiallyX (Agree_Nodes__InitiallyX-usr-X)
+VAR
+	Agree_Nodes__InitiallyX-usr-Y : boolean;
+
+ASSIGN
+	init(Agree_Nodes__InitiallyX-usr-Y) := Agree_Nodes__InitiallyX-usr-X;
+
+	next(Agree_Nodes__InitiallyX-usr-Y) := TRUE;
+
+
+MODULE _TOP__deliveryItemMechanism (_TOP__deliveryItemMechanism-usr-__ASSUME__HIST, _TOP__deliveryItemMechanism-usr-delivery_cmd_in, _TOP__deliveryItemMechanism-usr-time, _TOP__deliveryItemMechanism-usr-release_cmd, _TOP__deliveryItemMechanism-usr-abort_cmd, _TOP__deliveryItemMechanism-usr-no_op_cmd, _TOP__deliveryItemMechanism-usr-delivery_status_out, _TOP__deliveryItemMechanism-usr-package_is_secure)
+VAR
+	_TOP__deliveryItemMechanism-usr-__ASSERT : boolean;
+	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__deliveryItemMechanism-res-gklocal_22 : boolean;
+	_TOP__deliveryItemMechanism-res-call_23 : Agree_Nodes__InitiallyX(_TOP__deliveryItemMechanism-res-gklocal_22);
+
+ASSIGN
+	init(_TOP__deliveryItemMechanism-res-gklocal_22) := (_TOP__deliveryItemMechanism-usr-delivery_status_out = 5);
+	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) := TRUE;
+	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) := TRUE;
+	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0) := _TOP__deliveryItemMechanism-res-call_23.Agree_Nodes__InitiallyX-usr-Y;
+	init(_TOP__deliveryItemMechanism-usr-__ASSERT) := ((_TOP__deliveryItemMechanism-usr-no_op_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 2)) & ((_TOP__deliveryItemMechanism-usr-abort_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 4)) & ((_TOP__deliveryItemMechanism-usr-release_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 3)) & (_TOP__deliveryItemMechanism-usr-__ASSUME__HIST -> (_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2 & (_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1 & _TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0))))));
+
+	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) := (next(_TOP__deliveryItemMechanism-usr-release_cmd) -> !(next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5));
+	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) := ((next(_TOP__deliveryItemMechanism-usr-abort_cmd) | next(_TOP__deliveryItemMechanism-usr-no_op_cmd)) -> (next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5));
+	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0) := next(_TOP__deliveryItemMechanism-res-call_23.Agree_Nodes__InitiallyX-usr-Y);
+	next(_TOP__deliveryItemMechanism-usr-__ASSERT) := ((next(_TOP__deliveryItemMechanism-usr-no_op_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 2)) & ((next(_TOP__deliveryItemMechanism-usr-abort_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 4)) & ((next(_TOP__deliveryItemMechanism-usr-release_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 3)) & (next(_TOP__deliveryItemMechanism-usr-__ASSUME__HIST) -> (next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) & (next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) & next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0)))))));
+	next(_TOP__deliveryItemMechanism-res-gklocal_22) := (next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5);
+
+
+
+MODULE Agree_Nodes__HasHappened (Agree_Nodes__HasHappened-usr-X)
+VAR
+	Agree_Nodes__HasHappened-usr-Y : boolean;
+
+ASSIGN
+	init(Agree_Nodes__HasHappened-usr-Y) := Agree_Nodes__HasHappened-usr-X;
+
+	next(Agree_Nodes__HasHappened-usr-Y) := (Agree_Nodes__HasHappened-usr-Y | next(Agree_Nodes__HasHappened-usr-X));
+
+
+
+MODULE _TOP__connector (_TOP__connector-usr-__ASSUME__HIST, _TOP__connector-usr-10-bus_in-abort_cmd, _TOP__connector-usr-10-bus_in-connected, _TOP__connector-usr-14-bus_in-constellation, _TOP__connector-usr-24-bus_in-init_criteria_satisfied, _TOP__connector-usr-2-11-bus_in-launch_pos-x, _TOP__connector-usr-2-11-bus_in-launch_pos-y, _TOP__connector-usr-31-bus_in-mission_store_release_sequence, _TOP__connector-usr-7-bus_in-on_off, _TOP__connector-usr-11-6-bus_in-order-item_value, _TOP__connector-usr-15-6-bus_in-order-target_picture, _TOP__connector-usr-2-16-6-bus_in-order-target_position-x, _TOP__connector-usr-2-16-6-bus_in-order-target_position-y, _TOP__connector-usr-13-bus_in-update_order, _TOP__connector-usr-time, _TOP__connector-usr-10-bus_out-abort_cmd, _TOP__connector-usr-10-bus_out-connected, _TOP__connector-usr-14-bus_out-constellation, _TOP__connector-usr-24-bus_out-init_criteria_satisfied, _TOP__connector-usr-2-11-bus_out-launch_pos-x, _TOP__connector-usr-2-11-bus_out-launch_pos-y, _TOP__connector-usr-31-bus_out-mission_store_release_sequence, _TOP__connector-usr-7-bus_out-on_off, _TOP__connector-usr-11-6-bus_out-order-item_value, _TOP__connector-usr-15-6-bus_out-order-target_picture, _TOP__connector-usr-2-16-6-bus_out-order-target_position-x, _TOP__connector-usr-2-16-6-bus_out-order-target_position-y, _TOP__connector-usr-13-bus_out-update_order)
+VAR
+	_TOP__connector-usr-__ASSERT : boolean;
+	_TOP__connector-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__connector-impl-usr-__GUARANTEE0) := (((((((((((((_TOP__connector-usr-10-bus_out-abort_cmd = _TOP__connector-usr-10-bus_in-abort_cmd) & (_TOP__connector-usr-10-bus_out-connected = _TOP__connector-usr-10-bus_in-connected)) & (_TOP__connector-usr-14-bus_out-constellation = _TOP__connector-usr-14-bus_in-constellation)) & (_TOP__connector-usr-24-bus_out-init_criteria_satisfied = _TOP__connector-usr-24-bus_in-init_criteria_satisfied)) & (_TOP__connector-usr-2-11-bus_out-launch_pos-x = _TOP__connector-usr-2-11-bus_in-launch_pos-x)) & (_TOP__connector-usr-2-11-bus_out-launch_pos-y = _TOP__connector-usr-2-11-bus_in-launch_pos-y)) & (_TOP__connector-usr-31-bus_out-mission_store_release_sequence = _TOP__connector-usr-31-bus_in-mission_store_release_sequence)) & (_TOP__connector-usr-7-bus_out-on_off = _TOP__connector-usr-7-bus_in-on_off)) & (_TOP__connector-usr-11-6-bus_out-order-item_value = _TOP__connector-usr-11-6-bus_in-order-item_value)) & (_TOP__connector-usr-15-6-bus_out-order-target_picture = _TOP__connector-usr-15-6-bus_in-order-target_picture)) & (_TOP__connector-usr-2-16-6-bus_out-order-target_position-x = _TOP__connector-usr-2-16-6-bus_in-order-target_position-x)) & (_TOP__connector-usr-2-16-6-bus_out-order-target_position-y = _TOP__connector-usr-2-16-6-bus_in-order-target_position-y)) & (_TOP__connector-usr-13-bus_out-update_order = _TOP__connector-usr-13-bus_in-update_order));
+	init(_TOP__connector-usr-__ASSERT) := (_TOP__connector-usr-__ASSUME__HIST -> _TOP__connector-impl-usr-__GUARANTEE0);
+
+	next(_TOP__connector-impl-usr-__GUARANTEE0) := (((((((((((((next(_TOP__connector-usr-10-bus_out-abort_cmd) = next(_TOP__connector-usr-10-bus_in-abort_cmd)) & (next(_TOP__connector-usr-10-bus_out-connected) = next(_TOP__connector-usr-10-bus_in-connected))) & (next(_TOP__connector-usr-14-bus_out-constellation) = next(_TOP__connector-usr-14-bus_in-constellation))) & (next(_TOP__connector-usr-24-bus_out-init_criteria_satisfied) = next(_TOP__connector-usr-24-bus_in-init_criteria_satisfied))) & (next(_TOP__connector-usr-2-11-bus_out-launch_pos-x) = next(_TOP__connector-usr-2-11-bus_in-launch_pos-x))) & (next(_TOP__connector-usr-2-11-bus_out-launch_pos-y) = next(_TOP__connector-usr-2-11-bus_in-launch_pos-y))) & (next(_TOP__connector-usr-31-bus_out-mission_store_release_sequence) = next(_TOP__connector-usr-31-bus_in-mission_store_release_sequence))) & (next(_TOP__connector-usr-7-bus_out-on_off) = next(_TOP__connector-usr-7-bus_in-on_off))) & (next(_TOP__connector-usr-11-6-bus_out-order-item_value) = next(_TOP__connector-usr-11-6-bus_in-order-item_value))) & (next(_TOP__connector-usr-15-6-bus_out-order-target_picture) = next(_TOP__connector-usr-15-6-bus_in-order-target_picture))) & (next(_TOP__connector-usr-2-16-6-bus_out-order-target_position-x) = next(_TOP__connector-usr-2-16-6-bus_in-order-target_position-x))) & (next(_TOP__connector-usr-2-16-6-bus_out-order-target_position-y) = next(_TOP__connector-usr-2-16-6-bus_in-order-target_position-y))) & (next(_TOP__connector-usr-13-bus_out-update_order) = next(_TOP__connector-usr-13-bus_in-update_order)));
+	next(_TOP__connector-usr-__ASSERT) := (next(_TOP__connector-usr-__ASSUME__HIST) -> next(_TOP__connector-impl-usr-__GUARANTEE0));
 
 
 
@@ -98,72 +160,20 @@ ASSIGN
 
 
 
-MODULE _TOP__connector (_TOP__connector-usr-__ASSUME__HIST, _TOP__connector-usr-10-bus_in-abort_cmd, _TOP__connector-usr-10-bus_in-connected, _TOP__connector-usr-14-bus_in-constellation, _TOP__connector-usr-24-bus_in-init_criteria_satisfied, _TOP__connector-usr-2-11-bus_in-launch_pos-x, _TOP__connector-usr-2-11-bus_in-launch_pos-y, _TOP__connector-usr-31-bus_in-mission_store_release_sequence, _TOP__connector-usr-7-bus_in-on_off, _TOP__connector-usr-11-6-bus_in-order-item_value, _TOP__connector-usr-15-6-bus_in-order-target_picture, _TOP__connector-usr-2-16-6-bus_in-order-target_position-x, _TOP__connector-usr-2-16-6-bus_in-order-target_position-y, _TOP__connector-usr-13-bus_in-update_order, _TOP__connector-usr-time, _TOP__connector-usr-10-bus_out-abort_cmd, _TOP__connector-usr-10-bus_out-connected, _TOP__connector-usr-14-bus_out-constellation, _TOP__connector-usr-24-bus_out-init_criteria_satisfied, _TOP__connector-usr-2-11-bus_out-launch_pos-x, _TOP__connector-usr-2-11-bus_out-launch_pos-y, _TOP__connector-usr-31-bus_out-mission_store_release_sequence, _TOP__connector-usr-7-bus_out-on_off, _TOP__connector-usr-11-6-bus_out-order-item_value, _TOP__connector-usr-15-6-bus_out-order-target_picture, _TOP__connector-usr-2-16-6-bus_out-order-target_position-x, _TOP__connector-usr-2-16-6-bus_out-order-target_position-y, _TOP__connector-usr-13-bus_out-update_order)
+MODULE _TOP__radio (_TOP__radio-usr-__ASSUME__HIST, _TOP__radio-usr-15-comm_in-data_available, _TOP__radio-usr-17-comm_in-target_confirmed, _TOP__radio-usr-radio_in, _TOP__radio-usr-time, _TOP__radio-usr-comm_out, _TOP__radio-usr-15-radio_out-data_available, _TOP__radio-usr-17-radio_out-target_confirmed, _TOP__radio-usr-health_status)
 VAR
-	_TOP__connector-usr-__ASSERT : boolean;
-	_TOP__connector-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__radio-usr-__ASSERT : boolean;
+	_TOP__radio-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__radio-impl-usr-__GUARANTEE1 : boolean;
 
 ASSIGN
-	init(_TOP__connector-impl-usr-__GUARANTEE0) := (((((((((((((_TOP__connector-usr-10-bus_out-abort_cmd = _TOP__connector-usr-10-bus_in-abort_cmd) & (_TOP__connector-usr-10-bus_out-connected = _TOP__connector-usr-10-bus_in-connected)) & (_TOP__connector-usr-14-bus_out-constellation = _TOP__connector-usr-14-bus_in-constellation)) & (_TOP__connector-usr-24-bus_out-init_criteria_satisfied = _TOP__connector-usr-24-bus_in-init_criteria_satisfied)) & (_TOP__connector-usr-2-11-bus_out-launch_pos-x = _TOP__connector-usr-2-11-bus_in-launch_pos-x)) & (_TOP__connector-usr-2-11-bus_out-launch_pos-y = _TOP__connector-usr-2-11-bus_in-launch_pos-y)) & (_TOP__connector-usr-31-bus_out-mission_store_release_sequence = _TOP__connector-usr-31-bus_in-mission_store_release_sequence)) & (_TOP__connector-usr-7-bus_out-on_off = _TOP__connector-usr-7-bus_in-on_off)) & (_TOP__connector-usr-11-6-bus_out-order-item_value = _TOP__connector-usr-11-6-bus_in-order-item_value)) & (_TOP__connector-usr-15-6-bus_out-order-target_picture = _TOP__connector-usr-15-6-bus_in-order-target_picture)) & (_TOP__connector-usr-2-16-6-bus_out-order-target_position-x = _TOP__connector-usr-2-16-6-bus_in-order-target_position-x)) & (_TOP__connector-usr-2-16-6-bus_out-order-target_position-y = _TOP__connector-usr-2-16-6-bus_in-order-target_position-y)) & (_TOP__connector-usr-13-bus_out-update_order = _TOP__connector-usr-13-bus_in-update_order));
-	init(_TOP__connector-usr-__ASSERT) := (_TOP__connector-usr-__ASSUME__HIST -> _TOP__connector-impl-usr-__GUARANTEE0);
+	init(_TOP__radio-impl-usr-__GUARANTEE1) := (!_TOP__radio-usr-radio_in -> !_TOP__radio-usr-15-radio_out-data_available);
+	init(_TOP__radio-impl-usr-__GUARANTEE0) := (_TOP__radio-usr-radio_in -> ((_TOP__radio-usr-15-radio_out-data_available = _TOP__radio-usr-15-comm_in-data_available) & (_TOP__radio-usr-17-comm_in-target_confirmed = _TOP__radio-usr-17-radio_out-target_confirmed)));
+	init(_TOP__radio-usr-__ASSERT) := (_TOP__radio-usr-__ASSUME__HIST -> (_TOP__radio-impl-usr-__GUARANTEE1 & _TOP__radio-impl-usr-__GUARANTEE0));
 
-	next(_TOP__connector-impl-usr-__GUARANTEE0) := (((((((((((((next(_TOP__connector-usr-10-bus_out-abort_cmd) = next(_TOP__connector-usr-10-bus_in-abort_cmd)) & (next(_TOP__connector-usr-10-bus_out-connected) = next(_TOP__connector-usr-10-bus_in-connected))) & (next(_TOP__connector-usr-14-bus_out-constellation) = next(_TOP__connector-usr-14-bus_in-constellation))) & (next(_TOP__connector-usr-24-bus_out-init_criteria_satisfied) = next(_TOP__connector-usr-24-bus_in-init_criteria_satisfied))) & (next(_TOP__connector-usr-2-11-bus_out-launch_pos-x) = next(_TOP__connector-usr-2-11-bus_in-launch_pos-x))) & (next(_TOP__connector-usr-2-11-bus_out-launch_pos-y) = next(_TOP__connector-usr-2-11-bus_in-launch_pos-y))) & (next(_TOP__connector-usr-31-bus_out-mission_store_release_sequence) = next(_TOP__connector-usr-31-bus_in-mission_store_release_sequence))) & (next(_TOP__connector-usr-7-bus_out-on_off) = next(_TOP__connector-usr-7-bus_in-on_off))) & (next(_TOP__connector-usr-11-6-bus_out-order-item_value) = next(_TOP__connector-usr-11-6-bus_in-order-item_value))) & (next(_TOP__connector-usr-15-6-bus_out-order-target_picture) = next(_TOP__connector-usr-15-6-bus_in-order-target_picture))) & (next(_TOP__connector-usr-2-16-6-bus_out-order-target_position-x) = next(_TOP__connector-usr-2-16-6-bus_in-order-target_position-x))) & (next(_TOP__connector-usr-2-16-6-bus_out-order-target_position-y) = next(_TOP__connector-usr-2-16-6-bus_in-order-target_position-y))) & (next(_TOP__connector-usr-13-bus_out-update_order) = next(_TOP__connector-usr-13-bus_in-update_order)));
-	next(_TOP__connector-usr-__ASSERT) := (next(_TOP__connector-usr-__ASSUME__HIST) -> next(_TOP__connector-impl-usr-__GUARANTEE0));
-
-
-
-MODULE Agree_Nodes__HasHappened (Agree_Nodes__HasHappened-usr-X)
-VAR
-	Agree_Nodes__HasHappened-usr-Y : boolean;
-
-ASSIGN
-	init(Agree_Nodes__HasHappened-usr-Y) := Agree_Nodes__HasHappened-usr-X;
-
-	next(Agree_Nodes__HasHappened-usr-Y) := (Agree_Nodes__HasHappened-usr-Y | next(Agree_Nodes__HasHappened-usr-X));
-
-
-
-MODULE Agree_Nodes__InitiallyX (Agree_Nodes__InitiallyX-usr-X)
-VAR
-	Agree_Nodes__InitiallyX-usr-Y : boolean;
-
-ASSIGN
-	init(Agree_Nodes__InitiallyX-usr-Y) := Agree_Nodes__InitiallyX-usr-X;
-
-	next(Agree_Nodes__InitiallyX-usr-Y) := TRUE;
-
-
-MODULE _TOP__deliveryItemMechanism (_TOP__deliveryItemMechanism-usr-__ASSUME__HIST, _TOP__deliveryItemMechanism-usr-delivery_cmd_in, _TOP__deliveryItemMechanism-usr-time, _TOP__deliveryItemMechanism-usr-release_cmd, _TOP__deliveryItemMechanism-usr-abort_cmd, _TOP__deliveryItemMechanism-usr-no_op_cmd, _TOP__deliveryItemMechanism-usr-delivery_status_out, _TOP__deliveryItemMechanism-usr-package_is_secure)
-VAR
-	_TOP__deliveryItemMechanism-usr-__ASSERT : boolean;
-	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0 : boolean;
-	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1 : boolean;
-	_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2 : boolean;
-	_TOP__deliveryItemMechanism-res-gklocal_22 : boolean;
-	_TOP__deliveryItemMechanism-res-call_23 : Agree_Nodes__InitiallyX(_TOP__deliveryItemMechanism-res-gklocal_22);
-
-ASSIGN
-	init(_TOP__deliveryItemMechanism-res-gklocal_22) := (_TOP__deliveryItemMechanism-usr-delivery_status_out = 5);
-	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) := TRUE;
-	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) := TRUE;
-	init(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0) := _TOP__deliveryItemMechanism-res-call_23.Agree_Nodes__InitiallyX-usr-Y;
-	init(_TOP__deliveryItemMechanism-usr-__ASSERT) := ((_TOP__deliveryItemMechanism-usr-no_op_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 2)) & ((_TOP__deliveryItemMechanism-usr-abort_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 4)) & ((_TOP__deliveryItemMechanism-usr-release_cmd = (_TOP__deliveryItemMechanism-usr-delivery_cmd_in = 3)) & (_TOP__deliveryItemMechanism-usr-__ASSUME__HIST -> (_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2 & (_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1 & _TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0))))));
-
-	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) := (next(_TOP__deliveryItemMechanism-usr-release_cmd) -> !(next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5));
-	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) := ((next(_TOP__deliveryItemMechanism-usr-abort_cmd) | next(_TOP__deliveryItemMechanism-usr-no_op_cmd)) -> (next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5));
-	next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0) := next(_TOP__deliveryItemMechanism-res-call_23.Agree_Nodes__InitiallyX-usr-Y);
-	next(_TOP__deliveryItemMechanism-usr-__ASSERT) := ((next(_TOP__deliveryItemMechanism-usr-no_op_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 2)) & ((next(_TOP__deliveryItemMechanism-usr-abort_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 4)) & ((next(_TOP__deliveryItemMechanism-usr-release_cmd) = (next(_TOP__deliveryItemMechanism-usr-delivery_cmd_in) = 3)) & (next(_TOP__deliveryItemMechanism-usr-__ASSUME__HIST) -> (next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE2) & (next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE1) & next(_TOP__deliveryItemMechanism-impl-usr-__GUARANTEE0)))))));
-	next(_TOP__deliveryItemMechanism-res-gklocal_22) := (next(_TOP__deliveryItemMechanism-usr-delivery_status_out) = 5);
-
-
-
-MODULE __HIST (__HIST-usr-input)
-VAR
-	__HIST-usr-hist : boolean;
-
-ASSIGN
-	init(__HIST-usr-hist) := __HIST-usr-input;
-	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+	next(_TOP__radio-impl-usr-__GUARANTEE1) := (!next(_TOP__radio-usr-radio_in) -> !next(_TOP__radio-usr-15-radio_out-data_available));
+	next(_TOP__radio-impl-usr-__GUARANTEE0) := (next(_TOP__radio-usr-radio_in) -> ((next(_TOP__radio-usr-15-radio_out-data_available) = next(_TOP__radio-usr-15-comm_in-data_available)) & (next(_TOP__radio-usr-17-comm_in-target_confirmed) = next(_TOP__radio-usr-17-radio_out-target_confirmed))));
+	next(_TOP__radio-usr-__ASSERT) := (next(_TOP__radio-usr-__ASSUME__HIST) -> (next(_TOP__radio-impl-usr-__GUARANTEE1) & next(_TOP__radio-impl-usr-__GUARANTEE0)));
 
 
 
@@ -271,11 +281,15 @@ VAR
 	main-usr-15-radio_response-data_available : boolean;
 	main-usr-17-radio_response-target_confirmed : boolean;
 	main-usr-delivery_status : 5 .. 8;
+	main-usr-actuation_out : boolean;
 	main-usr-probe_init_mode : boolean;
 	main-usr-probe_abort_mode : boolean;
 	main-usr-probe_delivery_cmd : 2 .. 4;
+	main-usr-probe_constellation : 0 .. 1;
 	main-usr-2-probe_launch_location-x : real;
 	main-usr-2-probe_launch_location-y : real;
+	main-usr-2-probe_delivery_location-x : real;
+	main-usr-2-probe_delivery_location-y : real;
 	main-usr-probe_fly_cmd : boolean;
 	main-usr-15-radio__comm_in-data_available : boolean;
 	main-usr-17-radio__comm_in-target_confirmed : boolean;
@@ -322,6 +336,10 @@ VAR
 	main-usr-2-16-6-connector__bus_in-order-target_position-y : real;
 	main-usr-13-connector__bus_in-update_order : boolean;
 	main-usr-connector__time : real;
+	main-usr-2-satellite0_sig_pos-x : real;
+	main-usr-2-satellite0_sig_pos-y : real;
+	main-usr-2-satellite1_sig_pos-x : real;
+	main-usr-2-satellite1_sig_pos-y : real;
 	main-usr-10-bus1-abort_cmd : boolean;
 	main-usr-10-bus1-connected : boolean;
 	main-usr-14-bus1-constellation : 0 .. 1;
@@ -338,7 +356,13 @@ VAR
 	main-usr-15-comm1-data_available : boolean;
 	main-usr-17-comm1-target_confirmed : boolean;
 	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
 	main-impl-usr-__GUARANTEE1 : boolean;
+	main-impl-usr-__GUARANTEE2 : boolean;
+	main-impl-usr-__GUARANTEE3 : boolean;
+	main-impl-usr-__GUARANTEE4 : boolean;
+	main-impl-usr-__GUARANTEE5 : boolean;
 	main-res-glocal_26 : boolean;
 	main-res-glocal_28 : boolean;
 	main-res-glocal_31 : boolean;
@@ -385,6 +409,7 @@ VAR
 	main-res-glocal_78 : boolean;
 	main-res-gklocal_66 : boolean;
 	main-res-gklocal_29 : boolean;
+	main-res-gklocal_24 : boolean;
 	main-res-call_67 : Agree_Nodes__HasHappened(main-res-gklocal_66);
 	main-res-call_63 : Agree_Nodes__HasHappened(main-usr-radio_cmd);
 	main-res-call_41 : _TOP__connector(main-usr-connector____ASSUME__HIST, main-usr-10-connector__bus_in-abort_cmd, main-usr-10-connector__bus_in-connected, main-usr-14-connector__bus_in-constellation, main-usr-24-connector__bus_in-init_criteria_satisfied, main-usr-2-11-connector__bus_in-launch_pos-x, main-usr-2-11-connector__bus_in-launch_pos-y, main-usr-31-connector__bus_in-mission_store_release_sequence, main-usr-7-connector__bus_in-on_off, main-usr-11-6-connector__bus_in-order-item_value, main-usr-15-6-connector__bus_in-order-target_picture, main-usr-2-16-6-connector__bus_in-order-target_position-x, main-usr-2-16-6-connector__bus_in-order-target_position-y, main-usr-13-connector__bus_in-update_order, main-usr-connector__time, main-usr-10-connector__bus_out-abort_cmd, main-usr-10-connector__bus_out-connected, main-usr-14-connector__bus_out-constellation, main-usr-24-connector__bus_out-init_criteria_satisfied, main-usr-2-11-connector__bus_out-launch_pos-x, main-usr-2-11-connector__bus_out-launch_pos-y, main-usr-31-connector__bus_out-mission_store_release_sequence, main-usr-7-connector__bus_out-on_off, main-usr-11-6-connector__bus_out-order-item_value, main-usr-15-6-connector__bus_out-order-target_picture, main-usr-2-16-6-connector__bus_out-order-target_position-x, main-usr-2-16-6-connector__bus_out-order-target_position-y, main-usr-13-connector__bus_out-update_order);
@@ -392,9 +417,17 @@ VAR
 	main-res-call_33 : _TOP__deliveryPlanner(main-usr-deliveryPlanner____ASSUME__HIST, main-usr-10-deliveryPlanner__bus_in-abort_cmd, main-usr-10-deliveryPlanner__bus_in-connected, main-usr-14-deliveryPlanner__bus_in-constellation, main-usr-24-deliveryPlanner__bus_in-init_criteria_satisfied, main-usr-2-11-deliveryPlanner__bus_in-launch_pos-x, main-usr-2-11-deliveryPlanner__bus_in-launch_pos-y, main-usr-31-deliveryPlanner__bus_in-mission_store_release_sequence, main-usr-7-deliveryPlanner__bus_in-on_off, main-usr-11-6-deliveryPlanner__bus_in-order-item_value, main-usr-15-6-deliveryPlanner__bus_in-order-target_picture, main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-x, main-usr-2-16-6-deliveryPlanner__bus_in-order-target_position-y, main-usr-13-deliveryPlanner__bus_in-update_order, main-usr-2-deliveryPlanner__cur_pos-x, main-usr-2-deliveryPlanner__cur_pos-y, main-usr-deliveryPlanner__delivery_status, main-usr-15-deliveryPlanner__radio_response-data_available, main-usr-17-deliveryPlanner__radio_response-target_confirmed, main-usr-deliveryPlanner__camera_result, main-usr-deliveryPlanner__gps_health_status, main-usr-deliveryPlanner__imu_health_status, main-usr-deliveryPlanner__rdo_health_status, main-usr-deliveryPlanner__cam_health_status, main-usr-deliveryPlanner__package_is_secure, main-usr-deliveryPlanner__time, main-usr-11-deliveryPlanner__recent_order-item_value, main-usr-15-deliveryPlanner__recent_order-target_picture, main-usr-2-16-deliveryPlanner__recent_order-target_position-x, main-usr-2-16-deliveryPlanner__recent_order-target_position-y, main-usr-2-deliveryPlanner__truck_position-x, main-usr-2-deliveryPlanner__truck_position-y, main-usr-2-deliveryPlanner__dest_position-x, main-usr-2-deliveryPlanner__dest_position-y, main-usr-deliveryPlanner__expensive_item, main-usr-deliveryPlanner__confirmation, main-usr-deliveryPlanner__confirmation_timeout, main-usr-deliveryPlanner__get_clearance_timeout, main-usr-deliveryPlanner__delivery_failed, main-usr-deliveryPlanner__delivery_completed, main-usr-deliveryPlanner__is_safe_landing, main-usr-deliveryPlanner__on_off, main-usr-deliveryPlanner__init_criteria_succeed, main-usr-deliveryPlanner__init_criteria_failed, main-usr-deliveryPlanner__abort_cmd, main-usr-deliveryPlanner__mission_store_release_sequence, main-usr-deliveryPlanner__okay_to_launch, main-usr-deliveryPlanner__separation, main-usr-deliveryPlanner__destination_location_reached, main-usr-deliveryPlanner__no_clearance, main-usr-deliveryPlanner__successfull_delivery, main-usr-deliveryPlanner__exhaustive_retries, main-usr-deliveryPlanner__internal_error_detected, main-usr-deliveryPlanner__truck_location_reached, main-usr-deliveryPlanner__connected, main-usr-deliveryPlanner__off_mode, main-usr-deliveryPlanner__abort_mode, main-usr-deliveryPlanner__init_mode, main-usr-deliveryPlanner__ready_mode, main-usr-deliveryPlanner__launch_mode, main-usr-deliveryPlanner__flying_to_dest_mode, main-usr-deliveryPlanner__making_delivery_mode, main-usr-deliveryPlanner__return_to_truck_mode, main-usr-deliveryPlanner__radio_cmd, main-usr-deliveryPlanner__delivery_cmd, main-usr-2-deliveryPlanner__dest_location-x, main-usr-2-deliveryPlanner__dest_location-y, main-usr-deliveryPlanner__bus_out, main-usr-deliveryPlanner__nav_cmd, main-usr-deliveryPlanner__camera, main-usr-17-deliveryPlanner__probe_safe_landing-has_valid_marker, main-usr-16-deliveryPlanner__probe_safe_landing-is_target_clear, main-usr-deliveryPlanner__constellation, main-usr-2-deliveryPlanner__launch_pos-x, main-usr-2-deliveryPlanner__launch_pos-y, main-usr-deliveryPlanner__probe_init_mode, main-usr-deliveryPlanner__probe_abort_mode, main-usr-deliveryPlanner__target_clear, main-usr-deliveryPlanner__valid_marker);
 	main-res-call_30 : __HIST(main-res-gklocal_29);
 	main-res-call_27 : _TOP__radio(main-usr-radio____ASSUME__HIST, main-usr-15-radio__comm_in-data_available, main-usr-17-radio__comm_in-target_confirmed, main-usr-radio__radio_in, main-usr-radio__time, main-usr-radio__comm_out, main-usr-15-radio__radio_out-data_available, main-usr-17-radio__radio_out-target_confirmed, main-usr-radio__health_status);
+	main-res-call_25 : Agree_Nodes__Since(main-usr-probe_init_mode, main-res-gklocal_24);
 
 ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-connector____ASSUME__HIST & (main-usr-deliveryItemMechanism____ASSUME__HIST & (main-usr-deliveryPlanner____ASSUME__HIST & main-usr-radio____ASSUME__HIST)));
+	init(main-impl-usr-__GUARANTEE0) := (main-usr-isOn -> (main-usr-most_recent_constellation = main-usr-probe_constellation));
 	init(main-impl-usr-__GUARANTEE1) := (main-usr-isOn -> ((main-usr-2-most_recent_launch_location-x = main-usr-2-probe_launch_location-x) & (main-usr-2-most_recent_launch_location-y = main-usr-2-probe_launch_location-y)));
+	init(main-impl-usr-__GUARANTEE2) := (main-usr-isOn -> ((main-usr-2-most_recent_delivery_location-x = main-usr-2-probe_delivery_location-x) & (main-usr-2-most_recent_delivery_location-y = main-usr-2-probe_delivery_location-y)));
+	init(main-impl-usr-__GUARANTEE3) := ((main-usr-release_cmd & main-usr-valuable_package) -> main-usr-target_confirmed);
+	init(main-impl-usr-__GUARANTEE4) := ((main-usr-delivery_started & main-usr-valuable_package) -> main-usr-confirmation_requested);
+	init(main-impl-usr-__GUARANTEE5) := (main-usr-probe_fly_cmd -> main-res-call_25.Agree_Nodes__Since-usr-Z);
+	init(main-res-gklocal_24) := !main-usr-probe_abort_mode;
 	init(main-res-glocal_26) := (main-usr-time = main-usr-radio__time);
 	init(main-res-glocal_28) := main-res-call_27._TOP__radio-usr-__ASSERT;
 	init(main-res-gklocal_29) := TRUE;
@@ -442,7 +475,14 @@ ASSIGN
 	init(main-res-glocal_77) := TRUE;
 	init(main-res-glocal_78) := (main-usr-time = 0);
 
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-connector____ASSUME__HIST) & (next(main-usr-deliveryItemMechanism____ASSUME__HIST) & (next(main-usr-deliveryPlanner____ASSUME__HIST) & next(main-usr-radio____ASSUME__HIST))));
+	next(main-impl-usr-__GUARANTEE0) := (next(main-usr-isOn) -> (next(main-usr-most_recent_constellation) = next(main-usr-probe_constellation)));
 	next(main-impl-usr-__GUARANTEE1) := (next(main-usr-isOn) -> ((next(main-usr-2-most_recent_launch_location-x) = next(main-usr-2-probe_launch_location-x)) & (next(main-usr-2-most_recent_launch_location-y) = next(main-usr-2-probe_launch_location-y))));
+	next(main-impl-usr-__GUARANTEE2) := (next(main-usr-isOn) -> ((next(main-usr-2-most_recent_delivery_location-x) = next(main-usr-2-probe_delivery_location-x)) & (next(main-usr-2-most_recent_delivery_location-y) = next(main-usr-2-probe_delivery_location-y))));
+	next(main-impl-usr-__GUARANTEE3) := ((next(main-usr-release_cmd) & next(main-usr-valuable_package)) -> next(main-usr-target_confirmed));
+	next(main-impl-usr-__GUARANTEE4) := ((next(main-usr-delivery_started) & next(main-usr-valuable_package)) -> next(main-usr-confirmation_requested));
+	next(main-res-gklocal_24) := !next(main-usr-probe_abort_mode);
+	next(main-impl-usr-__GUARANTEE5) := (next(main-usr-probe_fly_cmd) -> next(main-res-call_25.Agree_Nodes__Since-usr-Z));
 	next(main-res-glocal_26) := (next(main-usr-time) = next(main-usr-radio__time));
 	next(main-res-glocal_28) := next(main-res-call_27._TOP__radio-usr-__ASSERT);
 	next(main-res-gklocal_29) := TRUE;

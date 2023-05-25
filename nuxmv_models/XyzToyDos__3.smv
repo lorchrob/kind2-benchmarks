@@ -89,6 +89,8 @@ VAR
 	main-usr-time : real;
 	main-impl-usr-__ASSUME0 : boolean;
 	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
 	main-res-glocal_4 : boolean;
 	main-res-glocal_5 : boolean;
 	main-res-glocal_7 : boolean;
@@ -117,8 +119,10 @@ VAR
 	main-res-call_3 : Xyz__Lib__ident(main-usr-Input);
 
 ASSIGN
-	init(main-impl-usr-__ASSUME__HIST) := (main-usr-C_sub____ASSUME__HIST & (main-usr-B_sub____ASSUME__HIST & main-usr-A_sub____ASSUME__HIST));
 	init(main-impl-usr-__ASSUME0) := (main-res-call_3.Xyz__Lib__ident-usr-_outvar < 10);
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-C_sub____ASSUME__HIST & (main-usr-B_sub____ASSUME__HIST & main-usr-A_sub____ASSUME__HIST));
+	init(main-impl-usr-__GUARANTEE0) := (main-usr-mode >= 0);
+	init(main-impl-usr-__GUARANTEE1) := (main-usr-Output < 50);
 	init(main-res-glocal_4) := main-impl-usr-__ASSUME0;
 	init(main-res-glocal_5) := (main-usr-time = main-usr-A_sub__time);
 	init(main-res-glocal_7) := main-res-call_6._TOP__A_sub-usr-__ASSERT;
@@ -139,8 +143,10 @@ ASSIGN
 	init(main-res-glocal_27) := TRUE;
 	init(main-res-glocal_28) := (main-usr-time = 0);
 
-	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-C_sub____ASSUME__HIST) & (next(main-usr-B_sub____ASSUME__HIST) & next(main-usr-A_sub____ASSUME__HIST)));
 	next(main-impl-usr-__ASSUME0) := (next(main-res-call_3.Xyz__Lib__ident-usr-_outvar) < 10);
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-C_sub____ASSUME__HIST) & (next(main-usr-B_sub____ASSUME__HIST) & next(main-usr-A_sub____ASSUME__HIST)));
+	next(main-impl-usr-__GUARANTEE0) := (next(main-usr-mode) >= 0);
+	next(main-impl-usr-__GUARANTEE1) := (next(main-usr-Output) < 50);
 	next(main-res-glocal_4) := next(main-impl-usr-__ASSUME0);
 	next(main-res-glocal_5) := (next(main-usr-time) = next(main-usr-A_sub__time));
 	next(main-res-glocal_7) := next(main-res-call_6._TOP__A_sub-usr-__ASSERT);

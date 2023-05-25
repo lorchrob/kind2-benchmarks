@@ -171,41 +171,7 @@ let
                   else 0)
          else 639));
 
-   OK = (((not (enable and 
-      (not KP_CLEAR))) or 
-      ((not (((((((((KP_1 or 
-      KP_2) or 
-      KP_3) or 
-      KP_4) or 
-      KP_5) or 
-      KP_6) or 
-      KP_7) or 
-      KP_8) or 
-      KP_9) or 
-      KP_0)) or 
-      (LEFT_DIGIT = ((STEPS_TO_COOK div 1) div 60)))) -> ((not (enable and 
-      (not KP_CLEAR))) or 
-      ((not ((((((((((KP_1 and 
-      (not (pre KP_1))) or 
-      (KP_2 and 
-      (not (pre KP_2)))) or 
-      (KP_3 and 
-      (not (pre KP_3)))) or 
-      (KP_4 and 
-      (not (pre KP_4)))) or 
-      (KP_5 and 
-      (not (pre KP_5)))) or 
-      (KP_6 and 
-      (not (pre KP_6)))) or 
-      (KP_7 and 
-      (not (pre KP_7)))) or 
-      (KP_8 and 
-      (not (pre KP_8)))) or 
-      (KP_9 and 
-      (not (pre KP_9)))) or 
-      (KP_0 and 
-      (not (pre KP_0))))) or 
-      (LEFT_DIGIT = ((STEPS_TO_COOK div 1) div 60)))));
+   OK =  (LEFT_DIGIT = ((STEPS_TO_COOK div 1) div 60)) -> true;
 
    p23 = (true -> (((not (enable and 
       (not KP_CLEAR))) or 
@@ -326,7 +292,7 @@ let
       (not (pre KP_0)))))))))))))) or 
       (RIGHT_DIGIT = 9))));
 
-   MWI_FcnMaxI_In1 = ((pre rlt__Arrow) - 1);
+   MWI_FcnMaxI_In1 = 0 -> ((pre rlt__Arrow) - 1);
 
    CLEAR_PRESSED = (KP_CLEAR -> (KP_CLEAR and 
       (not (pre KP_CLEAR))));
@@ -378,9 +344,9 @@ let
       (not (pre KP_0)))) or 
       (RIGHT_DIGIT = (pre RIGHT_DIGIT)))));
 
-   MWI_FcnMaxI_In11 = ((pre rlt__Arrow1) - 1);
+   MWI_FcnMaxI_In11 = 0 -> ((pre rlt__Arrow1) - 1);
 
-   MWI_FcnMaxI_In15 = ((pre rlt__Arrow2) - 1);
+   MWI_FcnMaxI_In15 = 0-> ((pre rlt__Arrow2) - 1);
 
    p24 = (true -> (((not (enable and 
       (not KP_CLEAR))) or 
@@ -415,10 +381,10 @@ let
 
    microwave_microwave_TIME_ON_DISPLAY_SECONDS_TO_TENS__QUOTIENT = (((chart_microwave_mode_logic_steps_remaining div 1) - (((chart_microwave_mode_logic_steps_remaining div 1) div 60) * 60)) div 10);
 
-   MWI_FcnMaxI_In16 = ((pre rlt__Arrow3) - 1);
+   MWI_FcnMaxI_In16 = 0 -> ((pre rlt__Arrow3) - 1);
 
 
-   MWI_FcnMaxI_In12 = ((pre rlt__Arrow4) - 1);
+   MWI_FcnMaxI_In12 = 0 -> ((pre rlt__Arrow4) - 1);
 
 
    p30 = (true -> ((not (enable and 
@@ -926,7 +892,7 @@ let
    microwave_microwave_mode_logic_mode = chart_microwave_mode_logic_mode;
 
 
-   MWI_FcnMaxI_In13 = ((pre rlt__Arrow5) - 1);
+   MWI_FcnMaxI_In13 = 0 -> ((pre rlt__Arrow5) - 1);
 
    p27 = (((not (enable and 
       (not KP_CLEAR))) or 
@@ -1420,8 +1386,7 @@ let
    p21 = ((not (enable and 
       KP_CLEAR)) or 
       (MIDDLE_DIGIT = 0));
-
-  --%PROPERTY OK;
+   --%PROPERTY OK;
   --%MAIN;
 
 tel

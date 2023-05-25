@@ -1,6 +1,7 @@
 
 MODULE main () 
 VAR
+	top-usr-init : signed word[32];
 	top-usr-OK : boolean;
 	top-impl-usr-time : signed word[32];
 

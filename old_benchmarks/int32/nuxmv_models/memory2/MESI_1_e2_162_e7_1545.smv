@@ -64,6 +64,9 @@ VAR
 	top-usr-etat_me4 : boolean;
 	top-usr-OK : boolean;
 	top-impl-usr-modified_me : signed word[32];
+	top-impl-usr-exclusive_me : signed word[32];
+	top-impl-usr-shared_me : signed word[32];
+	top-impl-usr-invalid_me : signed word[32];
 	top-impl-usr-env : boolean;
 	top-res-gklocal_7 : boolean;
 	top-res-call_6 : excludes4(top-usr-etat_me1, top-usr-etat_me2, top-usr-etat_me3, top-usr-etat_me4);
@@ -75,11 +78,17 @@ ASSIGN
 	init(top-res-gklocal_7) := (top-res-call_6.excludes4-usr-excludes & (top-impl-usr-modified_me >= 0sh32_00000000));
 	init(top-impl-usr-env) := top-res-call_8.Sofar-usr-Sofar;
 	init(top-usr-OK) := (top-impl-usr-env -> !(top-impl-usr-modified_me > 0sh32_00000002));
+	init(top-impl-usr-exclusive_me) := top-res-2-call_5.mesi-usr-exclusive_me;
+	init(top-impl-usr-shared_me) := top-res-2-call_5.mesi-usr-shared_me;
+	init(top-impl-usr-invalid_me) := top-res-2-call_5.mesi-usr-invalid_me;
 
 	next(top-impl-usr-modified_me) := next(top-res-2-call_5.mesi-usr-modified_me);
 	next(top-res-gklocal_7) := (next(top-res-call_6.excludes4-usr-excludes) & (next(top-impl-usr-modified_me) >= 0sh32_00000000));
 	next(top-impl-usr-env) := next(top-res-call_8.Sofar-usr-Sofar);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> !(next(top-impl-usr-modified_me) > 0sh32_00000002));
+	next(top-impl-usr-exclusive_me) := next(top-res-2-call_5.mesi-usr-exclusive_me);
+	next(top-impl-usr-shared_me) := next(top-res-2-call_5.mesi-usr-shared_me);
+	next(top-impl-usr-invalid_me) := next(top-res-2-call_5.mesi-usr-invalid_me);
 
 
 INVARSPEC 

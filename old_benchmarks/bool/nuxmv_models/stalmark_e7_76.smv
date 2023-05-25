@@ -1,6 +1,7 @@
 
 MODULE main () 
 VAR
+	top-usr-x : boolean;
 	top-usr-OK : boolean;
 	top-impl-usr-a : boolean;
 	top-impl-usr-b : boolean;

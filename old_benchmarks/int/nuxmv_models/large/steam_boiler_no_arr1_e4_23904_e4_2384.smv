@@ -643,6 +643,10 @@ VAR
 	BoilerController-impl-usr-op_mode : integer;
 	BoilerController-impl-usr-q : integer;
 	BoilerController-impl-usr-v : integer;
+	BoilerController-impl-usr-p_0 : integer;
+	BoilerController-impl-usr-p_1 : integer;
+	BoilerController-impl-usr-p_2 : integer;
+	BoilerController-impl-usr-p_3 : integer;
 	BoilerController-impl-usr-valve_state : integer;
 	BoilerController-impl-usr-n_pumps : integer;
 	BoilerController-impl-usr-pump_status_0 : integer;
@@ -679,6 +683,10 @@ VAR
 	BoilerController-impl-usr-u6 : boolean;
 	BoilerController-impl-usr-t4 : integer;
 	BoilerController-impl-usr-t5 : integer;
+	BoilerController-impl-usr-t6 : integer;
+	BoilerController-impl-usr-t7 : integer;
+	BoilerController-impl-usr-t8 : integer;
+	BoilerController-impl-usr-t9 : integer;
 	BoilerController-impl-usr-u0 : integer;
 	BoilerController-impl-usr-u1 : integer;
 	BoilerController-impl-usr-u2 : integer;
@@ -852,6 +860,14 @@ ASSIGN
 	init(BoilerController-impl-usr-b1) := BoilerController-res-2-call_110.LevelOutput-usr-level_outcome_repaired_acknowledgement;
 	init(BoilerController-usr-steam_outcome_repaired_acknowledgement) := FALSE;
 	init(BoilerController-impl-usr-b3) := BoilerController-res-2-call_111.SteamOutput-usr-steam_outcome_repaired_acknowledgement;
+	init(BoilerController-impl-usr-p_0) := 0;
+	init(BoilerController-impl-usr-t6) := BoilerController-res-2-call_103.Dynamics-usr-p_0;
+	init(BoilerController-impl-usr-p_1) := 0;
+	init(BoilerController-impl-usr-t7) := BoilerController-res-2-call_103.Dynamics-usr-p_1;
+	init(BoilerController-impl-usr-p_2) := 0;
+	init(BoilerController-impl-usr-t8) := BoilerController-res-2-call_103.Dynamics-usr-p_2;
+	init(BoilerController-impl-usr-p_3) := 0;
+	init(BoilerController-impl-usr-t9) := BoilerController-res-2-call_103.Dynamics-usr-p_3;
 
 	next(BoilerController-res-gklocal_90) := BoilerController-impl-usr-pump_status_0;
 	next(BoilerController-res-gklocal_93) := BoilerController-impl-usr-pump_status_1;
@@ -963,6 +979,14 @@ ASSIGN
 	next(BoilerController-usr-level_repaired_acknowledgement) := next(BoilerController-impl-usr-b1);
 	next(BoilerController-impl-usr-b3) := next(BoilerController-res-2-call_111.SteamOutput-usr-steam_outcome_repaired_acknowledgement);
 	next(BoilerController-usr-steam_outcome_repaired_acknowledgement) := next(BoilerController-impl-usr-b3);
+	next(BoilerController-impl-usr-t6) := next(BoilerController-res-2-call_103.Dynamics-usr-p_0);
+	next(BoilerController-impl-usr-p_0) := next(BoilerController-impl-usr-t6);
+	next(BoilerController-impl-usr-t7) := next(BoilerController-res-2-call_103.Dynamics-usr-p_1);
+	next(BoilerController-impl-usr-p_1) := next(BoilerController-impl-usr-t7);
+	next(BoilerController-impl-usr-t8) := next(BoilerController-res-2-call_103.Dynamics-usr-p_2);
+	next(BoilerController-impl-usr-p_2) := next(BoilerController-impl-usr-t8);
+	next(BoilerController-impl-usr-t9) := next(BoilerController-res-2-call_103.Dynamics-usr-p_3);
+	next(BoilerController-impl-usr-p_3) := next(BoilerController-impl-usr-t9);
 
 
 
@@ -1002,11 +1026,20 @@ VAR
 	top-usr-level_failure_acknowledgement : boolean;
 	top-usr-steam_failure_acknowledgement : boolean;
 	top-usr-OK : boolean;
+	top-impl-usr-program_ready : boolean;
 	top-impl-usr-mode_ok : boolean;
 	top-impl-usr-mode_normal_then_no_failure : boolean;
 	top-impl-usr-mode_normal_then_valve_off : boolean;
 	top-impl-usr-mode : integer;
 	top-impl-usr-valve : boolean;
+	top-impl-usr-open_pump_0 : boolean;
+	top-impl-usr-open_pump_1 : boolean;
+	top-impl-usr-open_pump_2 : boolean;
+	top-impl-usr-open_pump_3 : boolean;
+	top-impl-usr-close_pump_0 : boolean;
+	top-impl-usr-close_pump_1 : boolean;
+	top-impl-usr-close_pump_2 : boolean;
+	top-impl-usr-close_pump_3 : boolean;
 	top-impl-usr-pump_failure_detection_0 : boolean;
 	top-impl-usr-pump_failure_detection_1 : boolean;
 	top-impl-usr-pump_failure_detection_2 : boolean;
@@ -1017,6 +1050,16 @@ VAR
 	top-impl-usr-pump_control_failure_detection_3 : boolean;
 	top-impl-usr-level_failure_detection : boolean;
 	top-impl-usr-steam_outcome_failure_detection : boolean;
+	top-impl-usr-pump_repaired_acknowledgement_0 : boolean;
+	top-impl-usr-pump_repaired_acknowledgement_1 : boolean;
+	top-impl-usr-pump_repaired_acknowledgement_2 : boolean;
+	top-impl-usr-pump_repaired_acknowledgement_3 : boolean;
+	top-impl-usr-pump_control_repaired_acknowledgement_0 : boolean;
+	top-impl-usr-pump_control_repaired_acknowledgement_1 : boolean;
+	top-impl-usr-pump_control_repaired_acknowledgement_2 : boolean;
+	top-impl-usr-pump_control_repaired_acknowledgement_3 : boolean;
+	top-impl-usr-level_repaired_acknowledgement : boolean;
+	top-impl-usr-steam_outcome_repaired_acknowledgement : boolean;
 	top-res-gklocal_116 : boolean;
 	top-res-gklocal_115 : boolean;
 	top-res-gklocal_114 : boolean;
@@ -1055,6 +1098,25 @@ ASSIGN
 	init(top-impl-usr-mode_normal_then_no_failure) := ((top-impl-usr-mode = 3) -> (((!top-impl-usr-level_failure_detection & !top-impl-usr-steam_outcome_failure_detection) & top-res-call_117.AND-usr-AND) & top-res-call_122.AND-usr-AND));
 	init(top-impl-usr-mode_ok) := ((top-impl-usr-mode = 6) | ((top-impl-usr-mode = 5) | ((top-impl-usr-mode = 4) | ((top-impl-usr-mode = 3) | ((top-impl-usr-mode = 2) | (top-impl-usr-mode = 1))))));
 	init(top-usr-OK) := ((top-impl-usr-mode_ok & top-impl-usr-mode_normal_then_no_failure) & top-impl-usr-mode_normal_then_valve_off);
+	init(top-impl-usr-program_ready) := top-res-2-call_112.BoilerController-usr-program_ready;
+	init(top-impl-usr-open_pump_0) := top-res-2-call_112.BoilerController-usr-open_pump_0;
+	init(top-impl-usr-open_pump_1) := top-res-2-call_112.BoilerController-usr-open_pump_1;
+	init(top-impl-usr-open_pump_2) := top-res-2-call_112.BoilerController-usr-open_pump_2;
+	init(top-impl-usr-open_pump_3) := top-res-2-call_112.BoilerController-usr-open_pump_3;
+	init(top-impl-usr-close_pump_0) := top-res-2-call_112.BoilerController-usr-close_pump_0;
+	init(top-impl-usr-close_pump_1) := top-res-2-call_112.BoilerController-usr-close_pump_1;
+	init(top-impl-usr-close_pump_2) := top-res-2-call_112.BoilerController-usr-close_pump_2;
+	init(top-impl-usr-close_pump_3) := top-res-3-call_112.BoilerController-usr-close_pump_3;
+	init(top-impl-usr-pump_repaired_acknowledgement_0) := top-res-3-call_112.BoilerController-usr-pump_repaired_acknowledgement_0;
+	init(top-impl-usr-pump_repaired_acknowledgement_1) := top-res-3-call_112.BoilerController-usr-pump_repaired_acknowledgement_1;
+	init(top-impl-usr-pump_repaired_acknowledgement_2) := top-res-3-call_112.BoilerController-usr-pump_repaired_acknowledgement_2;
+	init(top-impl-usr-pump_repaired_acknowledgement_3) := top-res-3-call_112.BoilerController-usr-pump_repaired_acknowledgement_3;
+	init(top-impl-usr-pump_control_repaired_acknowledgement_0) := top-res-3-call_112.BoilerController-usr-pump_control_repaired_acknowledgement_0;
+	init(top-impl-usr-pump_control_repaired_acknowledgement_1) := top-res-3-call_112.BoilerController-usr-pump_control_repaired_acknowledgement_1;
+	init(top-impl-usr-pump_control_repaired_acknowledgement_2) := top-res-3-call_112.BoilerController-usr-pump_control_repaired_acknowledgement_2;
+	init(top-impl-usr-pump_control_repaired_acknowledgement_3) := top-res-3-call_112.BoilerController-usr-pump_control_repaired_acknowledgement_3;
+	init(top-impl-usr-level_repaired_acknowledgement) := top-res-3-call_112.BoilerController-usr-level_repaired_acknowledgement;
+	init(top-impl-usr-steam_outcome_repaired_acknowledgement) := top-res-3-call_112.BoilerController-usr-steam_outcome_repaired_acknowledgement;
 
 	next(top-impl-usr-pump_control_failure_detection_0) := next(top-res-3-call_112.BoilerController-usr-pump_control_failure_detection_0);
 	next(top-res-gklocal_118) := !next(top-impl-usr-pump_control_failure_detection_0);
@@ -1080,6 +1142,25 @@ ASSIGN
 	next(top-impl-usr-mode_normal_then_no_failure) := ((next(top-impl-usr-mode) = 3) -> (((!next(top-impl-usr-level_failure_detection) & !next(top-impl-usr-steam_outcome_failure_detection)) & next(top-res-call_117.AND-usr-AND)) & next(top-res-call_122.AND-usr-AND)));
 	next(top-impl-usr-mode_ok) := ((next(top-impl-usr-mode) = 6) | ((next(top-impl-usr-mode) = 5) | ((next(top-impl-usr-mode) = 4) | ((next(top-impl-usr-mode) = 3) | ((next(top-impl-usr-mode) = 2) | (next(top-impl-usr-mode) = 1))))));
 	next(top-usr-OK) := ((next(top-impl-usr-mode_ok) & next(top-impl-usr-mode_normal_then_no_failure)) & next(top-impl-usr-mode_normal_then_valve_off));
+	next(top-impl-usr-program_ready) := next(top-res-2-call_112.BoilerController-usr-program_ready);
+	next(top-impl-usr-open_pump_0) := next(top-res-2-call_112.BoilerController-usr-open_pump_0);
+	next(top-impl-usr-open_pump_1) := next(top-res-2-call_112.BoilerController-usr-open_pump_1);
+	next(top-impl-usr-open_pump_2) := next(top-res-2-call_112.BoilerController-usr-open_pump_2);
+	next(top-impl-usr-open_pump_3) := next(top-res-2-call_112.BoilerController-usr-open_pump_3);
+	next(top-impl-usr-close_pump_0) := next(top-res-2-call_112.BoilerController-usr-close_pump_0);
+	next(top-impl-usr-close_pump_1) := next(top-res-2-call_112.BoilerController-usr-close_pump_1);
+	next(top-impl-usr-close_pump_2) := next(top-res-2-call_112.BoilerController-usr-close_pump_2);
+	next(top-impl-usr-close_pump_3) := next(top-res-3-call_112.BoilerController-usr-close_pump_3);
+	next(top-impl-usr-pump_repaired_acknowledgement_0) := next(top-res-3-call_112.BoilerController-usr-pump_repaired_acknowledgement_0);
+	next(top-impl-usr-pump_repaired_acknowledgement_1) := next(top-res-3-call_112.BoilerController-usr-pump_repaired_acknowledgement_1);
+	next(top-impl-usr-pump_repaired_acknowledgement_2) := next(top-res-3-call_112.BoilerController-usr-pump_repaired_acknowledgement_2);
+	next(top-impl-usr-pump_repaired_acknowledgement_3) := next(top-res-3-call_112.BoilerController-usr-pump_repaired_acknowledgement_3);
+	next(top-impl-usr-pump_control_repaired_acknowledgement_0) := next(top-res-3-call_112.BoilerController-usr-pump_control_repaired_acknowledgement_0);
+	next(top-impl-usr-pump_control_repaired_acknowledgement_1) := next(top-res-3-call_112.BoilerController-usr-pump_control_repaired_acknowledgement_1);
+	next(top-impl-usr-pump_control_repaired_acknowledgement_2) := next(top-res-3-call_112.BoilerController-usr-pump_control_repaired_acknowledgement_2);
+	next(top-impl-usr-pump_control_repaired_acknowledgement_3) := next(top-res-3-call_112.BoilerController-usr-pump_control_repaired_acknowledgement_3);
+	next(top-impl-usr-level_repaired_acknowledgement) := next(top-res-3-call_112.BoilerController-usr-level_repaired_acknowledgement);
+	next(top-impl-usr-steam_outcome_repaired_acknowledgement) := next(top-res-3-call_112.BoilerController-usr-steam_outcome_repaired_acknowledgement);
 
 
 INVARSPEC 

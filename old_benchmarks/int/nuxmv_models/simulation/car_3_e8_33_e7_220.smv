@@ -63,7 +63,15 @@ VAR
 	top-usr-m : boolean;
 	top-usr-s : boolean;
 	top-usr-OK : boolean;
+	top-impl-usr-toofast : boolean;
+	top-impl-usr-stop : boolean;
+	top-impl-usr-bump : boolean;
+	top-impl-usr-dist : integer;
 	top-impl-usr-speed : integer;
+	top-impl-usr-time : integer;
+	top-impl-usr-move : boolean;
+	top-impl-usr-second : boolean;
+	top-impl-usr-meter : boolean;
 	top-impl-usr-env : boolean;
 	top-res-call_3 : excludes2(top-usr-m, top-usr-s);
 	top-res-call_4 : Sofar(top-res-call_3.excludes2-usr-excludes);
@@ -73,10 +81,26 @@ ASSIGN
 	init(top-impl-usr-env) := top-res-call_4.Sofar-usr-Sofar;
 	init(top-impl-usr-speed) := top-res-2-call_2.voiture-usr-speed;
 	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-speed < 4));
+	init(top-impl-usr-toofast) := top-res-2-call_2.voiture-usr-toofast;
+	init(top-impl-usr-stop) := top-res-2-call_2.voiture-usr-stop;
+	init(top-impl-usr-bump) := top-res-2-call_2.voiture-usr-bump;
+	init(top-impl-usr-dist) := top-res-2-call_2.voiture-usr-dist;
+	init(top-impl-usr-time) := top-res-2-call_2.voiture-usr-time;
+	init(top-impl-usr-move) := top-res-2-call_2.voiture-usr-move;
+	init(top-impl-usr-second) := top-res-2-call_2.voiture-usr-second;
+	init(top-impl-usr-meter) := top-res-2-call_2.voiture-usr-meter;
 
 	next(top-impl-usr-env) := next(top-res-call_4.Sofar-usr-Sofar);
 	next(top-impl-usr-speed) := next(top-res-2-call_2.voiture-usr-speed);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-speed) < 4));
+	next(top-impl-usr-toofast) := next(top-res-2-call_2.voiture-usr-toofast);
+	next(top-impl-usr-stop) := next(top-res-2-call_2.voiture-usr-stop);
+	next(top-impl-usr-bump) := next(top-res-2-call_2.voiture-usr-bump);
+	next(top-impl-usr-dist) := next(top-res-2-call_2.voiture-usr-dist);
+	next(top-impl-usr-time) := next(top-res-2-call_2.voiture-usr-time);
+	next(top-impl-usr-move) := next(top-res-2-call_2.voiture-usr-move);
+	next(top-impl-usr-second) := next(top-res-2-call_2.voiture-usr-second);
+	next(top-impl-usr-meter) := next(top-res-2-call_2.voiture-usr-meter);
 
 
 INVARSPEC 

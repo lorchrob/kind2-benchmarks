@@ -121,6 +121,15 @@ VAR
 	top-usr-e11 : boolean;
 	top-usr-e12 : boolean;
 	top-usr-OK : boolean;
+	top-impl-usr-X1 : integer;
+	top-impl-usr-X2 : integer;
+	top-impl-usr-X3 : integer;
+	top-impl-usr-X4 : integer;
+	top-impl-usr-X5 : integer;
+	top-impl-usr-X6 : integer;
+	top-impl-usr-X7 : integer;
+	top-impl-usr-X8 : integer;
+	top-impl-usr-X9 : integer;
 	top-impl-usr-erreur : boolean;
 	top-res-call_14 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
 	top-res-call_15 : Sofar(top-res-call_14.excludes12-usr-excludes);
@@ -129,9 +138,27 @@ VAR
 ASSIGN
 	init(top-impl-usr-erreur) := top-res-2-call_13.rtp-usr-erreur;
 	init(top-usr-OK) := (top-res-call_15.Sofar-usr-Sofar -> !top-impl-usr-erreur);
+	init(top-impl-usr-X1) := top-res-2-call_13.rtp-usr-X1;
+	init(top-impl-usr-X2) := top-res-2-call_13.rtp-usr-X2;
+	init(top-impl-usr-X3) := top-res-2-call_13.rtp-usr-X3;
+	init(top-impl-usr-X4) := top-res-2-call_13.rtp-usr-X4;
+	init(top-impl-usr-X5) := top-res-2-call_13.rtp-usr-X5;
+	init(top-impl-usr-X6) := top-res-2-call_13.rtp-usr-X6;
+	init(top-impl-usr-X7) := top-res-2-call_13.rtp-usr-X7;
+	init(top-impl-usr-X8) := top-res-2-call_13.rtp-usr-X8;
+	init(top-impl-usr-X9) := top-res-2-call_13.rtp-usr-X9;
 
 	next(top-impl-usr-erreur) := next(top-res-2-call_13.rtp-usr-erreur);
 	next(top-usr-OK) := (next(top-res-call_15.Sofar-usr-Sofar) -> !next(top-impl-usr-erreur));
+	next(top-impl-usr-X1) := next(top-res-2-call_13.rtp-usr-X1);
+	next(top-impl-usr-X2) := next(top-res-2-call_13.rtp-usr-X2);
+	next(top-impl-usr-X3) := next(top-res-2-call_13.rtp-usr-X3);
+	next(top-impl-usr-X4) := next(top-res-2-call_13.rtp-usr-X4);
+	next(top-impl-usr-X5) := next(top-res-2-call_13.rtp-usr-X5);
+	next(top-impl-usr-X6) := next(top-res-2-call_13.rtp-usr-X6);
+	next(top-impl-usr-X7) := next(top-res-2-call_13.rtp-usr-X7);
+	next(top-impl-usr-X8) := next(top-res-2-call_13.rtp-usr-X8);
+	next(top-impl-usr-X9) := next(top-res-2-call_13.rtp-usr-X9);
 
 
 INVARSPEC 

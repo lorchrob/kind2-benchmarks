@@ -158,6 +158,7 @@ VAR
 	top-impl-usr-x10 : signed word[32];
 	top-impl-usr-x11 : signed word[32];
 	top-impl-usr-x12 : signed word[32];
+	top-impl-usr-x13 : signed word[32];
 	top-impl-usr-env : boolean;
 	top-res-glocal_28 : signed word[32];
 	top-res-call_26 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
@@ -182,6 +183,7 @@ ASSIGN
 	init(top-impl-usr-x12) := top-res-3-call_25.peterson-usr-x12;
 	init(top-impl-usr-env) := top-res-call_27.Sofar-usr-Sofar;
 	init(top-res-glocal_28) := ((((((((((((top-impl-usr-x0 + top-impl-usr-x1) + top-impl-usr-x2) + top-impl-usr-x3) + top-impl-usr-x4) + top-impl-usr-x5) + top-impl-usr-x6) + top-impl-usr-x7) + top-impl-usr-x8) + top-impl-usr-x9) + top-impl-usr-x10) + top-impl-usr-x11) + top-impl-usr-x12);
+	init(top-impl-usr-x13) := top-res-3-call_25.peterson-usr-x13;
 
 	next(top-impl-usr-env) := next(top-res-call_27.Sofar-usr-Sofar);
 	next(top-impl-usr-x12) := next(top-res-3-call_25.peterson-usr-x12);
@@ -199,6 +201,7 @@ ASSIGN
 	next(top-impl-usr-x0) := next(top-res-2-call_25.peterson-usr-x0);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (((((((((((((next(top-impl-usr-x0) + next(top-impl-usr-x1)) + next(top-impl-usr-x2)) + next(top-impl-usr-x3)) + next(top-impl-usr-x4)) + next(top-impl-usr-x5)) + next(top-impl-usr-x6)) + next(top-impl-usr-x7)) + next(top-impl-usr-x8)) + next(top-impl-usr-x9)) + next(top-impl-usr-x10)) + next(top-impl-usr-x11)) + next(top-impl-usr-x12)) = top-res-glocal_28));
 	next(top-res-glocal_28) := ((((((((((((next(top-impl-usr-x0) + next(top-impl-usr-x1)) + next(top-impl-usr-x2)) + next(top-impl-usr-x3)) + next(top-impl-usr-x4)) + next(top-impl-usr-x5)) + next(top-impl-usr-x6)) + next(top-impl-usr-x7)) + next(top-impl-usr-x8)) + next(top-impl-usr-x9)) + next(top-impl-usr-x10)) + next(top-impl-usr-x11)) + next(top-impl-usr-x12));
+	next(top-impl-usr-x13) := next(top-res-3-call_25.peterson-usr-x13);
 
 
 INVARSPEC 

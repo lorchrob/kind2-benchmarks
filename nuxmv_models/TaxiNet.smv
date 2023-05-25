@@ -89,8 +89,11 @@ VAR
 	main-usr-Kestrel_Components__LEC_Confidence : boolean;
 	main-usr-Kestrel_Components__time : real;
 	main-usr-Camera___EVENT_ : boolean;
+	main-usr-GPS___EVENT_ : boolean;
+	main-usr-IRS___EVENT_ : boolean;
 	main-usr-time : real;
 	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
 	main-res-glocal_3 : boolean;
 	main-res-glocal_5 : boolean;
 	main-res-glocal_8 : boolean;
@@ -113,6 +116,7 @@ VAR
 
 ASSIGN
 	init(main-impl-usr-__ASSUME__HIST) := (main-usr-Kestrel_Components____ASSUME__HIST & main-usr-Boeing_Vehicle_Actuation____ASSUME__HIST);
+	init(main-impl-usr-__GUARANTEE0) := (main-usr-Actuation_Command > 0);
 	init(main-res-glocal_3) := (main-usr-time = main-usr-Boeing_Vehicle_Actuation__time);
 	init(main-res-glocal_5) := main-res-call_4._TOP__Boeing_Vehicle_Actuation-usr-__ASSERT;
 	init(main-res-gklocal_6) := TRUE;
@@ -131,6 +135,7 @@ ASSIGN
 	init(main-res-glocal_21) := (main-usr-time = 0);
 
 	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-Kestrel_Components____ASSUME__HIST) & next(main-usr-Boeing_Vehicle_Actuation____ASSUME__HIST));
+	next(main-impl-usr-__GUARANTEE0) := (next(main-usr-Actuation_Command) > 0);
 	next(main-res-glocal_3) := (next(main-usr-time) = next(main-usr-Boeing_Vehicle_Actuation__time));
 	next(main-res-glocal_5) := next(main-res-call_4._TOP__Boeing_Vehicle_Actuation-usr-__ASSERT);
 	next(main-res-gklocal_6) := TRUE;
@@ -164,6 +169,8 @@ ASSIGN
 	INVAR main-res-glocal_5;
 	INVAR main-res-glocal_3;
 
+INVARSPEC 
+((main-impl-usr-__GUARANTEE0));
 INVARSPEC 
 ((main-impl-usr-__ASSUME__HIST));
 

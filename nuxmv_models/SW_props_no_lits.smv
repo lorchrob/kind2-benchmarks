@@ -183,6 +183,10 @@ VAR
 	main-impl-usr-__ASSUME0 : boolean;
 	main-impl-usr-__ASSUME1 : boolean;
 	main-impl-usr-__ASSUME2 : boolean;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
+	main-impl-usr-__GUARANTEE2 : boolean;
 	main-res-glocal_2 : boolean;
 	main-res-glocal_3 : boolean;
 	main-res-glocal_4 : boolean;
@@ -239,10 +243,14 @@ VAR
 
 ASSIGN
 	init(main-impl-usr-__ASSUME0) := main-usr-5-recv_map-HMAC;
-	init(main-res-glocal_2) := main-impl-usr-__ASSUME0;
 	init(main-impl-usr-__ASSUME1) := ((((((((0 <= (main-usr-2-4-4-recv_map-Map-alt[0])) & ((main-usr-2-4-4-recv_map-Map-alt[0]) <= 15000)) & (0 <= (main-usr-2-4-4-recv_map-Map-alt[1]))) & ((main-usr-2-4-4-recv_map-Map-alt[1]) <= 15000)) & (0 <= (main-usr-2-4-4-recv_map-Map-alt[2]))) & ((main-usr-2-4-4-recv_map-Map-alt[2]) <= 15000)) & (0 <= (main-usr-2-4-4-recv_map-Map-alt[3]))) & ((main-usr-2-4-4-recv_map-Map-alt[3]) <= 15000));
-	init(main-res-glocal_3) := main-impl-usr-__ASSUME1;
 	init(main-impl-usr-__ASSUME2) := ((0 <= main-usr-4-position_status-alt) & (main-usr-4-position_status-alt <= 15000));
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-UART____ASSUME__HIST & (main-usr-WPM____ASSUME__HIST & (main-usr-FPLN____ASSUME__HIST & main-usr-RADIO____ASSUME__HIST)));
+	init(main-impl-usr-__GUARANTEE0) := main-usr-4-waypoint-crc;
+	init(main-impl-usr-__GUARANTEE1) := ((0 <= main-usr-4-send_status-alt) & (main-usr-4-send_status-alt <= 15000));
+	init(main-impl-usr-__GUARANTEE2) := ((((((((0 <= (main-usr-2-4-4-waypoint-wps-alt[0])) & ((main-usr-2-4-4-waypoint-wps-alt[0]) <= 15000)) & (0 <= (main-usr-2-4-4-waypoint-wps-alt[1]))) & ((main-usr-2-4-4-waypoint-wps-alt[1]) <= 15000)) & (0 <= (main-usr-2-4-4-waypoint-wps-alt[2]))) & ((main-usr-2-4-4-waypoint-wps-alt[2]) <= 15000)) & (0 <= (main-usr-2-4-4-waypoint-wps-alt[3]))) & ((main-usr-2-4-4-waypoint-wps-alt[3]) <= 15000));
+	init(main-res-glocal_2) := main-impl-usr-__ASSUME0;
+	init(main-res-glocal_3) := main-impl-usr-__ASSUME1;
 	init(main-res-glocal_4) := main-impl-usr-__ASSUME2;
 	init(main-res-glocal_5) := (main-usr-time = main-usr-RADIO__time);
 	init(main-res-glocal_7) := main-res-call_6._TOP__RADIO-usr-__ASSERT;
@@ -289,10 +297,14 @@ ASSIGN
 	init(main-res-glocal_54) := (main-usr-time = 0);
 
 	next(main-impl-usr-__ASSUME0) := next(main-usr-5-recv_map-HMAC);
-	next(main-res-glocal_2) := next(main-impl-usr-__ASSUME0);
 	next(main-impl-usr-__ASSUME1) := ((((((((0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[0])) & ((next(main-usr-2-4-4-recv_map-Map-alt)[0]) <= 15000)) & (0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[1]))) & ((next(main-usr-2-4-4-recv_map-Map-alt)[1]) <= 15000)) & (0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[2]))) & ((next(main-usr-2-4-4-recv_map-Map-alt)[2]) <= 15000)) & (0 <= (next(main-usr-2-4-4-recv_map-Map-alt)[3]))) & ((next(main-usr-2-4-4-recv_map-Map-alt)[3]) <= 15000));
-	next(main-res-glocal_3) := next(main-impl-usr-__ASSUME1);
 	next(main-impl-usr-__ASSUME2) := ((0 <= next(main-usr-4-position_status-alt)) & (next(main-usr-4-position_status-alt) <= 15000));
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-UART____ASSUME__HIST) & (next(main-usr-WPM____ASSUME__HIST) & (next(main-usr-FPLN____ASSUME__HIST) & next(main-usr-RADIO____ASSUME__HIST))));
+	next(main-impl-usr-__GUARANTEE0) := next(main-usr-4-waypoint-crc);
+	next(main-impl-usr-__GUARANTEE1) := ((0 <= next(main-usr-4-send_status-alt)) & (next(main-usr-4-send_status-alt) <= 15000));
+	next(main-impl-usr-__GUARANTEE2) := ((((((((0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[0])) & ((next(main-usr-2-4-4-waypoint-wps-alt)[0]) <= 15000)) & (0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[1]))) & ((next(main-usr-2-4-4-waypoint-wps-alt)[1]) <= 15000)) & (0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[2]))) & ((next(main-usr-2-4-4-waypoint-wps-alt)[2]) <= 15000)) & (0 <= (next(main-usr-2-4-4-waypoint-wps-alt)[3]))) & ((next(main-usr-2-4-4-waypoint-wps-alt)[3]) <= 15000));
+	next(main-res-glocal_2) := next(main-impl-usr-__ASSUME0);
+	next(main-res-glocal_3) := next(main-impl-usr-__ASSUME1);
 	next(main-res-glocal_4) := next(main-impl-usr-__ASSUME2);
 	next(main-res-glocal_5) := (next(main-usr-time) = next(main-usr-RADIO__time));
 	next(main-res-glocal_7) := next(main-res-call_6._TOP__RADIO-usr-__ASSERT);
@@ -384,6 +396,16 @@ ASSIGN
 	INVAR main-res-glocal_3;
 	INVAR main-res-glocal_2;
 
+INVARSPEC 
+((main-impl-usr-__GUARANTEE2));
+INVARSPEC 
+((main-impl-usr-__GUARANTEE1));
+INVARSPEC 
+((main-impl-usr-__GUARANTEE0));
+INVARSPEC 
+((main-impl-usr-__ASSUME__HIST));
+INVARSPEC 
+((main-usr-FPLN____ASSUME0));
 INVARSPEC 
 ((main-usr-RADIO____ASSUME0));
 

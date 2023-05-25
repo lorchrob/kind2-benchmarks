@@ -72,7 +72,11 @@ VAR
 	top-usr-etat3 : boolean;
 	top-usr-a_init : integer;
 	top-usr-OK : boolean;
+	top-impl-usr-i : integer;
+	top-impl-usr-b : integer;
+	top-impl-usr-a : integer;
 	top-impl-usr-o1 : integer;
+	top-impl-usr-o2 : integer;
 	top-impl-usr-env : boolean;
 	top-res-call_5 : excludes3(top-usr-etat1, top-usr-etat2, top-usr-etat3);
 	top-res-call_6 : Sofar(top-res-call_5.excludes3-usr-excludes);
@@ -83,10 +87,18 @@ ASSIGN
 	init(top-usr-OK) := TRUE;
 	init(top-impl-usr-o1) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1;
 	init(top-impl-usr-env) := (top-res-call_6.Sofar-usr-Sofar & (top-res-call_7.First-usr-First > 0));
+	init(top-impl-usr-i) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-i;
+	init(top-impl-usr-b) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-b;
+	init(top-impl-usr-a) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-a;
+	init(top-impl-usr-o2) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-o2;
 
 	next(top-impl-usr-env) := (next(top-res-call_6.Sofar-usr-Sofar) & (next(top-res-call_7.First-usr-First) > 0));
 	next(top-impl-usr-o1) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> ((top-usr-etat1 & next(top-usr-etat2)) -> (next(top-impl-usr-o1) = top-impl-usr-o1 + 1)));
+	next(top-impl-usr-i) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-i);
+	next(top-impl-usr-b) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-b);
+	next(top-impl-usr-a) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-a);
+	next(top-impl-usr-o2) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-o2);
 
 
 INVARSPEC 

@@ -89,6 +89,27 @@ ASSIGN
 
 
 
+MODULE excludes9 (excludes9-usr-X1, excludes9-usr-X2, excludes9-usr-X3, excludes9-usr-X4, excludes9-usr-X5, excludes9-usr-X6, excludes9-usr-X7, excludes9-usr-X8, excludes9-usr-X9)
+VAR
+	excludes9-usr-excludes : boolean;
+
+ASSIGN
+	init(excludes9-usr-excludes) := (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((!excludes9-usr-X1 & excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | (((((((((excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9) | ((((((((!excludes9-usr-X1 & !excludes9-usr-X2) & !excludes9-usr-X3) & !excludes9-usr-X4) & !excludes9-usr-X5) & !excludes9-usr-X6) & !excludes9-usr-X7) & !excludes9-usr-X8) & !excludes9-usr-X9))))))))));
+
+	next(excludes9-usr-excludes) := (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((!next(excludes9-usr-X1) & next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | (((((((((next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)) | ((((((((!next(excludes9-usr-X1) & !next(excludes9-usr-X2)) & !next(excludes9-usr-X3)) & !next(excludes9-usr-X4)) & !next(excludes9-usr-X5)) & !next(excludes9-usr-X6)) & !next(excludes9-usr-X7)) & !next(excludes9-usr-X8)) & !next(excludes9-usr-X9)))))))))));
+
+
+
+MODULE Sofar (Sofar-usr-X)
+VAR
+	Sofar-usr-Sofar : boolean;
+
+ASSIGN
+	init(Sofar-usr-Sofar) := Sofar-usr-X;
+	next(Sofar-usr-Sofar) := (next(Sofar-usr-X) & Sofar-usr-Sofar);
+
+
+
 MODULE main () 
 VAR
 	top-usr-etat1 : boolean;
@@ -102,15 +123,59 @@ VAR
 	top-usr-etat9 : boolean;
 	top-usr-OK : boolean;
 	top-impl-usr-x0 : integer;
+	top-impl-usr-x1 : integer;
+	top-impl-usr-x2 : integer;
+	top-impl-usr-x3 : integer;
+	top-impl-usr-x4 : integer;
+	top-impl-usr-x5 : integer;
+	top-impl-usr-x6 : integer;
+	top-impl-usr-x7 : integer;
+	top-impl-usr-x8 : integer;
+	top-impl-usr-x9 : integer;
+	top-impl-usr-x10 : integer;
+	top-impl-usr-x11 : integer;
+	top-impl-usr-x12 : integer;
+	top-impl-usr-env : boolean;
+	top-res-gklocal_19 : boolean;
+	top-res-call_18 : excludes9(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9);
+	top-res-call_20 : Sofar(top-res-gklocal_19);
 	top-res-2-call_17 : readwrite(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9);
 	top-res-3-call_17 : readwrite(top-usr-etat1, top-usr-etat2, top-usr-etat3, top-usr-etat4, top-usr-etat5, top-usr-etat6, top-usr-etat7, top-usr-etat8, top-usr-etat9);
 
 ASSIGN
 	init(top-impl-usr-x0) := top-res-2-call_17.readwrite-usr-x0;
 	init(top-usr-OK) := (top-impl-usr-x0 >= 0);
+	init(top-impl-usr-x1) := top-res-2-call_17.readwrite-usr-x1;
+	init(top-impl-usr-x2) := top-res-2-call_17.readwrite-usr-x2;
+	init(top-impl-usr-x3) := top-res-2-call_17.readwrite-usr-x3;
+	init(top-impl-usr-x4) := top-res-2-call_17.readwrite-usr-x4;
+	init(top-impl-usr-x5) := top-res-2-call_17.readwrite-usr-x5;
+	init(top-impl-usr-x6) := top-res-2-call_17.readwrite-usr-x6;
+	init(top-impl-usr-x7) := top-res-2-call_17.readwrite-usr-x7;
+	init(top-impl-usr-x8) := top-res-2-call_17.readwrite-usr-x8;
+	init(top-impl-usr-x9) := top-res-2-call_17.readwrite-usr-x9;
+	init(top-impl-usr-x10) := top-res-3-call_17.readwrite-usr-x10;
+	init(top-impl-usr-x11) := top-res-3-call_17.readwrite-usr-x11;
+	init(top-impl-usr-x12) := top-res-3-call_17.readwrite-usr-x12;
+	init(top-res-gklocal_19) := (((((((((((((((((((((top-res-call_18.excludes9-usr-excludes & (top-impl-usr-x0 > -32768)) & (top-impl-usr-x1 > -32768)) & (top-impl-usr-x2 > -32768)) & (top-impl-usr-x3 > -32768)) & (top-impl-usr-x4 > -32768)) & (top-impl-usr-x5 > -32768)) & (top-impl-usr-x6 > -32768)) & (top-impl-usr-x7 > -32768)) & (top-impl-usr-x8 > -32768)) & (top-impl-usr-x0 < 32767)) & (top-impl-usr-x1 < 32767)) & (top-impl-usr-x3 < 32767)) & (top-impl-usr-x4 < 32767)) & (top-impl-usr-x5 < 32767)) & (top-impl-usr-x6 < 32767)) & (top-impl-usr-x7 < 32767)) & (top-impl-usr-x8 < 32767)) & (top-impl-usr-x9 < 32767)) & (top-impl-usr-x10 < 32767)) & (top-impl-usr-x11 < 32767)) & (top-impl-usr-x12 < 32767));
+	init(top-impl-usr-env) := top-res-call_20.Sofar-usr-Sofar;
 
 	next(top-impl-usr-x0) := next(top-res-2-call_17.readwrite-usr-x0);
 	next(top-usr-OK) := (next(top-impl-usr-x0) >= 0);
+	next(top-impl-usr-x1) := next(top-res-2-call_17.readwrite-usr-x1);
+	next(top-impl-usr-x2) := next(top-res-2-call_17.readwrite-usr-x2);
+	next(top-impl-usr-x3) := next(top-res-2-call_17.readwrite-usr-x3);
+	next(top-impl-usr-x4) := next(top-res-2-call_17.readwrite-usr-x4);
+	next(top-impl-usr-x5) := next(top-res-2-call_17.readwrite-usr-x5);
+	next(top-impl-usr-x6) := next(top-res-2-call_17.readwrite-usr-x6);
+	next(top-impl-usr-x7) := next(top-res-2-call_17.readwrite-usr-x7);
+	next(top-impl-usr-x8) := next(top-res-2-call_17.readwrite-usr-x8);
+	next(top-impl-usr-x9) := next(top-res-2-call_17.readwrite-usr-x9);
+	next(top-impl-usr-x10) := next(top-res-3-call_17.readwrite-usr-x10);
+	next(top-impl-usr-x11) := next(top-res-3-call_17.readwrite-usr-x11);
+	next(top-impl-usr-x12) := next(top-res-3-call_17.readwrite-usr-x12);
+	next(top-res-gklocal_19) := (((((((((((((((((((((next(top-res-call_18.excludes9-usr-excludes) & (next(top-impl-usr-x0) > -32768)) & (next(top-impl-usr-x1) > -32768)) & (next(top-impl-usr-x2) > -32768)) & (next(top-impl-usr-x3) > -32768)) & (next(top-impl-usr-x4) > -32768)) & (next(top-impl-usr-x5) > -32768)) & (next(top-impl-usr-x6) > -32768)) & (next(top-impl-usr-x7) > -32768)) & (next(top-impl-usr-x8) > -32768)) & (next(top-impl-usr-x0) < 32767)) & (next(top-impl-usr-x1) < 32767)) & (next(top-impl-usr-x3) < 32767)) & (next(top-impl-usr-x4) < 32767)) & (next(top-impl-usr-x5) < 32767)) & (next(top-impl-usr-x6) < 32767)) & (next(top-impl-usr-x7) < 32767)) & (next(top-impl-usr-x8) < 32767)) & (next(top-impl-usr-x9) < 32767)) & (next(top-impl-usr-x10) < 32767)) & (next(top-impl-usr-x11) < 32767)) & (next(top-impl-usr-x12) < 32767));
+	next(top-impl-usr-env) := next(top-res-call_20.Sofar-usr-Sofar);
 
 
 INVARSPEC 

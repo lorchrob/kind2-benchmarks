@@ -132,6 +132,11 @@ VAR
 	top-usr-e12 : boolean;
 	top-usr-init_invalid : integer;
 	top-usr-OK : boolean;
+	top-impl-usr-exclusive : integer;
+	top-impl-usr-shared : integer;
+	top-impl-usr-shared_dirty : integer;
+	top-impl-usr-dirty : integer;
+	top-impl-usr-invalid : integer;
 	top-impl-usr-erreur : boolean;
 	top-res-gklocal_34 : boolean;
 	top-res-call_33 : excludes12(top-usr-e01, top-usr-e02, top-usr-e03, top-usr-e04, top-usr-e05, top-usr-e06, top-usr-e07, top-usr-e08, top-usr-e09, top-usr-e10, top-usr-e11, top-usr-e12);
@@ -142,10 +147,20 @@ ASSIGN
 	init(top-res-gklocal_34) := (top-res-call_33.excludes12-usr-excludes & (top-usr-init_invalid > 0));
 	init(top-impl-usr-erreur) := top-res-2-call_32.DRAGON-usr-erreur;
 	init(top-usr-OK) := (top-res-call_35.Sofar-usr-Sofar -> !top-impl-usr-erreur);
+	init(top-impl-usr-exclusive) := top-res-2-call_32.DRAGON-usr-exclusive;
+	init(top-impl-usr-shared) := top-res-2-call_32.DRAGON-usr-shared;
+	init(top-impl-usr-shared_dirty) := top-res-2-call_32.DRAGON-usr-shared_dirty;
+	init(top-impl-usr-dirty) := top-res-2-call_32.DRAGON-usr-dirty;
+	init(top-impl-usr-invalid) := top-res-2-call_32.DRAGON-usr-invalid;
 
 	next(top-res-gklocal_34) := (next(top-res-call_33.excludes12-usr-excludes) & (next(top-usr-init_invalid) > 0));
 	next(top-impl-usr-erreur) := next(top-res-2-call_32.DRAGON-usr-erreur);
 	next(top-usr-OK) := (next(top-res-call_35.Sofar-usr-Sofar) -> !next(top-impl-usr-erreur));
+	next(top-impl-usr-exclusive) := next(top-res-2-call_32.DRAGON-usr-exclusive);
+	next(top-impl-usr-shared) := next(top-res-2-call_32.DRAGON-usr-shared);
+	next(top-impl-usr-shared_dirty) := next(top-res-2-call_32.DRAGON-usr-shared_dirty);
+	next(top-impl-usr-dirty) := next(top-res-2-call_32.DRAGON-usr-dirty);
+	next(top-impl-usr-invalid) := next(top-res-2-call_32.DRAGON-usr-invalid);
 
 
 INVARSPEC 

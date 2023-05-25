@@ -109,6 +109,9 @@ VAR
 	top-usr-e8 : boolean;
 	top-usr-i_invalid : integer;
 	top-usr-OK : boolean;
+	top-impl-usr-invalid : integer;
+	top-impl-usr-dirty : integer;
+	top-impl-usr-exclusive : integer;
 	top-impl-usr-shared : integer;
 	top-impl-usr-env : boolean;
 	top-impl-usr-procs : integer;
@@ -124,12 +127,18 @@ ASSIGN
 	init(top-impl-usr-env) := top-res-call_24.Sofar-usr-Sofar;
 	init(top-impl-usr-shared) := top-res-2-call_21.firefly-usr-shared;
 	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-shared <= top-impl-usr-procs));
+	init(top-impl-usr-invalid) := top-res-2-call_21.firefly-usr-invalid;
+	init(top-impl-usr-dirty) := top-res-2-call_21.firefly-usr-dirty;
+	init(top-impl-usr-exclusive) := top-res-2-call_21.firefly-usr-exclusive;
 
 	next(top-res-gklocal_23) := ((next(top-res-call_22.excludes8-usr-excludes) & (next(top-usr-i_invalid) >= 0)) & (next(top-usr-i_invalid) < 5));
 	next(top-impl-usr-procs) := next(top-res-call_25.First-usr-First);
 	next(top-impl-usr-env) := next(top-res-call_24.Sofar-usr-Sofar);
 	next(top-impl-usr-shared) := next(top-res-2-call_21.firefly-usr-shared);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-shared) <= next(top-impl-usr-procs)));
+	next(top-impl-usr-invalid) := next(top-res-2-call_21.firefly-usr-invalid);
+	next(top-impl-usr-dirty) := next(top-res-2-call_21.firefly-usr-dirty);
+	next(top-impl-usr-exclusive) := next(top-res-2-call_21.firefly-usr-exclusive);
 
 
 INVARSPEC 

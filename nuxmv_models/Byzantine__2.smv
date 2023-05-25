@@ -88,6 +88,7 @@ VAR
 	main-usr-9-receiver3__sender_input-NODE_VAL : real;
 	main-usr-receiver3__time : real;
 	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
 	main-impl-usr-__GUARANTEE0 : boolean;
 	main-res-glocal_2 : boolean;
 	main-res-glocal_4 : boolean;
@@ -117,6 +118,7 @@ VAR
 	main-res-call_3 : _TOP__Sender(main-usr-Sender____ASSUME__HIST, main-usr-9-Sender__in1-NODE_VAL, main-usr-9-Sender__in2-NODE_VAL, main-usr-Sender__time, main-usr-9-Sender__sender_out-NODE_VAL);
 
 ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-receiver3____ASSUME__HIST & (main-usr-receiver2____ASSUME__HIST & (main-usr-receiver1____ASSUME__HIST & main-usr-Sender____ASSUME__HIST)));
 	init(main-impl-usr-__GUARANTEE0) := ((main-usr-9-receiver1_output-NODE_VAL = main-usr-9-receiver2_output-NODE_VAL) & (main-usr-9-receiver1_output-NODE_VAL = main-usr-9-receiver3_output-NODE_VAL));
 	init(main-res-glocal_2) := (main-usr-time = main-usr-Sender__time);
 	init(main-res-glocal_4) := main-res-call_3._TOP__Sender-usr-__ASSERT;
@@ -140,6 +142,7 @@ ASSIGN
 	init(main-res-glocal_26) := TRUE;
 	init(main-res-glocal_27) := (main-usr-time = 0);
 
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-receiver3____ASSUME__HIST) & (next(main-usr-receiver2____ASSUME__HIST) & (next(main-usr-receiver1____ASSUME__HIST) & next(main-usr-Sender____ASSUME__HIST))));
 	next(main-impl-usr-__GUARANTEE0) := ((next(main-usr-9-receiver1_output-NODE_VAL) = next(main-usr-9-receiver2_output-NODE_VAL)) & (next(main-usr-9-receiver1_output-NODE_VAL) = next(main-usr-9-receiver3_output-NODE_VAL)));
 	next(main-res-glocal_2) := (next(main-usr-time) = next(main-usr-Sender__time));
 	next(main-res-glocal_4) := next(main-res-call_3._TOP__Sender-usr-__ASSERT);

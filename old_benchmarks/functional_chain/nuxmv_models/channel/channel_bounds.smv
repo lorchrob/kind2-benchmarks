@@ -198,7 +198,6 @@ VAR
 
 ASSIGN
 	init(channel-usr-output) := channel-res-call_15.controlLaw-usr-integ;
-	init(channel-impl-usr-out_stable) := ((-25 <= channel-usr-output) & (channel-usr-output <= 25));
 	init(channel-impl-usr-satMax) := 6/5;
 	init(channel-impl-usr-satMin) := -6/5;
 	init(channel-impl-usr-sat1c) := channel-res-2-call_11.saturation3-usr-outC;
@@ -209,6 +208,7 @@ ASSIGN
 	init(channel-impl-usr-sat2b) := channel-res-2-call_12.saturation3-usr-outB;
 	init(channel-impl-usr-sat2a) := channel-res-2-call_12.saturation3-usr-outA;
 	init(channel-impl-usr-v2) := channel-res-call_14.voter-usr-output;
+	init(channel-impl-usr-out_stable) := ((-25 <= channel-usr-output) & (channel-usr-output <= 25));
 
 	next(channel-impl-usr-satMax) := 6/5;
 	next(channel-impl-usr-satMin) := -6/5;

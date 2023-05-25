@@ -102,7 +102,9 @@ VAR
 	top-usr-e8 : boolean;
 	top-usr-i_invalid : signed word[32];
 	top-usr-OK : boolean;
+	top-impl-usr-invalid : signed word[32];
 	top-impl-usr-dirty : signed word[32];
+	top-impl-usr-exclusive : signed word[32];
 	top-impl-usr-shared : signed word[32];
 	top-impl-usr-env : boolean;
 	top-res-gklocal_24 : boolean;
@@ -116,12 +118,16 @@ ASSIGN
 	init(top-impl-usr-shared) := top-res-2-call_22.firefly-usr-shared;
 	init(top-impl-usr-dirty) := top-res-2-call_22.firefly-usr-dirty;
 	init(top-usr-OK) := (top-impl-usr-env -> !((top-impl-usr-dirty > 0sh32_00000001) & (top-impl-usr-shared > 0sh32_00000001)));
+	init(top-impl-usr-invalid) := top-res-2-call_22.firefly-usr-invalid;
+	init(top-impl-usr-exclusive) := top-res-2-call_22.firefly-usr-exclusive;
 
 	next(top-res-gklocal_24) := (next(top-res-call_23.excludes8-usr-excludes) & (next(top-usr-i_invalid) >= 0sh32_00000000));
 	next(top-impl-usr-env) := next(top-res-call_25.Sofar-usr-Sofar);
 	next(top-impl-usr-shared) := next(top-res-2-call_22.firefly-usr-shared);
 	next(top-impl-usr-dirty) := next(top-res-2-call_22.firefly-usr-dirty);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> !((next(top-impl-usr-dirty) > 0sh32_00000001) & (next(top-impl-usr-shared) > 0sh32_00000001)));
+	next(top-impl-usr-invalid) := next(top-res-2-call_22.firefly-usr-invalid);
+	next(top-impl-usr-exclusive) := next(top-res-2-call_22.firefly-usr-exclusive);
 
 
 INVARSPEC 

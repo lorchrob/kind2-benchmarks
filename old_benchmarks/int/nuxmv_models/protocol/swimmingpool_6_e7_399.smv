@@ -94,7 +94,15 @@ VAR
 	top-usr-init_p1 : integer;
 	top-usr-init_p2 : integer;
 	top-usr-OK : boolean;
+	top-impl-usr-x1 : integer;
+	top-impl-usr-x2 : integer;
+	top-impl-usr-x3 : integer;
+	top-impl-usr-x4 : integer;
 	top-impl-usr-x5 : integer;
+	top-impl-usr-x6 : integer;
+	top-impl-usr-x7 : integer;
+	top-impl-usr-p1 : integer;
+	top-impl-usr-p2 : integer;
 	top-impl-usr-env : boolean;
 	top-res-call_2 : excludes6(top-usr-e1, top-usr-e2, top-usr-e3, top-usr-e4, top-usr-e5, top-usr-e6);
 	top-res-call_3 : Sofar(top-res-call_2.excludes6-usr-excludes);
@@ -106,10 +114,26 @@ ASSIGN
 	init(top-impl-usr-env) := ((((top-res-call_3.Sofar-usr-Sofar & (0 <= top-res-call_4.First-usr-First)) & (0 <= top-res-call_5.First-usr-First)) & (top-res-call_4.First-usr-First < 1000)) & (top-res-call_5.First-usr-First < 1000));
 	init(top-impl-usr-x5) := top-res-2-call_1.swimingpool-usr-x5;
 	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-x5 < 1));
+	init(top-impl-usr-x1) := top-res-2-call_1.swimingpool-usr-x1;
+	init(top-impl-usr-x2) := top-res-2-call_1.swimingpool-usr-x2;
+	init(top-impl-usr-x3) := top-res-2-call_1.swimingpool-usr-x3;
+	init(top-impl-usr-x4) := top-res-2-call_1.swimingpool-usr-x4;
+	init(top-impl-usr-x6) := top-res-2-call_1.swimingpool-usr-x6;
+	init(top-impl-usr-x7) := top-res-2-call_1.swimingpool-usr-x7;
+	init(top-impl-usr-p1) := top-res-2-call_1.swimingpool-usr-p1;
+	init(top-impl-usr-p2) := top-res-2-call_1.swimingpool-usr-p2;
 
 	next(top-impl-usr-env) := ((((next(top-res-call_3.Sofar-usr-Sofar) & (0 <= next(top-res-call_4.First-usr-First))) & (0 <= next(top-res-call_5.First-usr-First))) & (next(top-res-call_4.First-usr-First) < 1000)) & (next(top-res-call_5.First-usr-First) < 1000));
 	next(top-impl-usr-x5) := next(top-res-2-call_1.swimingpool-usr-x5);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-x5) < 1));
+	next(top-impl-usr-x1) := next(top-res-2-call_1.swimingpool-usr-x1);
+	next(top-impl-usr-x2) := next(top-res-2-call_1.swimingpool-usr-x2);
+	next(top-impl-usr-x3) := next(top-res-2-call_1.swimingpool-usr-x3);
+	next(top-impl-usr-x4) := next(top-res-2-call_1.swimingpool-usr-x4);
+	next(top-impl-usr-x6) := next(top-res-2-call_1.swimingpool-usr-x6);
+	next(top-impl-usr-x7) := next(top-res-2-call_1.swimingpool-usr-x7);
+	next(top-impl-usr-p1) := next(top-res-2-call_1.swimingpool-usr-p1);
+	next(top-impl-usr-p2) := next(top-res-2-call_1.swimingpool-usr-p2);
 
 
 INVARSPEC 

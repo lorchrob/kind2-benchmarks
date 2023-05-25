@@ -1,0 +1,362 @@
+
+MODULE CruiseController__ToInt (CruiseController__ToInt-usr-b)
+VAR
+	CruiseController__ToInt-usr-i : integer;
+	CruiseController__ToInt-res-subrange_1 : boolean;
+
+ASSIGN
+	init(CruiseController__ToInt-usr-i) := (CruiseController__ToInt-usr-b ? 1 : 0);
+	init(CruiseController__ToInt-res-subrange_1) := ((0 <= CruiseController__ToInt-usr-i) & (CruiseController__ToInt-usr-i <= 1));
+
+	next(CruiseController__ToInt-usr-i) := (next(CruiseController__ToInt-usr-b) ? 1 : 0);
+	next(CruiseController__ToInt-res-subrange_1) := ((0 <= next(CruiseController__ToInt-usr-i)) & (next(CruiseController__ToInt-usr-i) <= 1));
+
+
+
+MODULE CruiseController__UnchangedReal (CruiseController__UnchangedReal-usr-n)
+VAR
+	CruiseController__UnchangedReal-usr-b : boolean;
+
+ASSIGN
+	init(CruiseController__UnchangedReal-usr-b) := TRUE;
+	next(CruiseController__UnchangedReal-usr-b) := (next(CruiseController__UnchangedReal-usr-n) = CruiseController__UnchangedReal-usr-n);
+
+
+
+MODULE _TOP__setSpeed (_TOP__setSpeed-usr-__ASSUME__HIST, _TOP__setSpeed-usr-__ASSUME0, _TOP__setSpeed-usr-__ASSUME1, _TOP__setSpeed-usr-on_off, _TOP__setSpeed-usr-resume_speed, _TOP__setSpeed-usr-set_speed, _TOP__setSpeed-usr-inc, _TOP__setSpeed-usr-dec, _TOP__setSpeed-usr-brake_cancel, _TOP__setSpeed-usr-speed, _TOP__setSpeed-usr-time, _TOP__setSpeed-usr-off_mode, _TOP__setSpeed-usr-set_condition, _TOP__setSpeed-usr-ready_mode, _TOP__setSpeed-usr-on_mode, _TOP__setSpeed-usr-paused_mode, _TOP__setSpeed-usr-setting_condition, _TOP__setSpeed-usr-increment_condition, _TOP__setSpeed-usr-decrement_condition, _TOP__setSpeed-usr-invariance_condition, _TOP__setSpeed-usr-desired_speed, _TOP__setSpeed-usr-enabled)
+VAR
+	_TOP__setSpeed-usr-__ASSERT : boolean;
+	_TOP__setSpeed-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__setSpeed-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__setSpeed-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__setSpeed-impl-usr-__GUARANTEE3 : boolean;
+	_TOP__setSpeed-impl-usr-__GUARANTEE4 : boolean;
+	_TOP__setSpeed-res-call_11 : CruiseController__ToInt(_TOP__setSpeed-usr-on_off);
+	_TOP__setSpeed-res-call_12 : CruiseController__ToInt(_TOP__setSpeed-usr-resume_speed);
+	_TOP__setSpeed-res-call_13 : CruiseController__ToInt(_TOP__setSpeed-usr-set_speed);
+	_TOP__setSpeed-res-call_14 : CruiseController__ToInt(_TOP__setSpeed-usr-inc);
+	_TOP__setSpeed-res-call_15 : CruiseController__ToInt(_TOP__setSpeed-usr-dec);
+	_TOP__setSpeed-res-call_16 : CruiseController__ToInt(_TOP__setSpeed-usr-brake_cancel);
+
+ASSIGN
+	init(_TOP__setSpeed-impl-usr-__GUARANTEE4) := TRUE;
+	init(_TOP__setSpeed-impl-usr-__GUARANTEE3) := TRUE;
+	init(_TOP__setSpeed-impl-usr-__GUARANTEE2) := TRUE;
+	init(_TOP__setSpeed-impl-usr-__GUARANTEE1) := (_TOP__setSpeed-usr-setting_condition -> (_TOP__setSpeed-usr-desired_speed = _TOP__setSpeed-usr-speed));
+	init(_TOP__setSpeed-impl-usr-__GUARANTEE0) := (_TOP__setSpeed-usr-enabled = _TOP__setSpeed-usr-on_mode);
+	init(_TOP__setSpeed-usr-__ASSERT) := ((_TOP__setSpeed-usr-invariance_condition = ((!_TOP__setSpeed-usr-setting_condition & !_TOP__setSpeed-usr-increment_condition) & !_TOP__setSpeed-usr-decrement_condition)) & (!_TOP__setSpeed-usr-decrement_condition & (!_TOP__setSpeed-usr-increment_condition & (!_TOP__setSpeed-usr-setting_condition & (!_TOP__setSpeed-usr-paused_mode & (!_TOP__setSpeed-usr-on_mode & (!_TOP__setSpeed-usr-ready_mode & ((_TOP__setSpeed-usr-set_condition = ((_TOP__setSpeed-usr-set_speed & (25 <= _TOP__setSpeed-usr-speed)) & (_TOP__setSpeed-usr-speed <= 130))) & (_TOP__setSpeed-usr-off_mode & ((_TOP__setSpeed-usr-__ASSUME__HIST -> (_TOP__setSpeed-impl-usr-__GUARANTEE4 & (_TOP__setSpeed-impl-usr-__GUARANTEE3 & (_TOP__setSpeed-impl-usr-__GUARANTEE2 & (_TOP__setSpeed-impl-usr-__GUARANTEE1 & _TOP__setSpeed-impl-usr-__GUARANTEE0))))) & ((_TOP__setSpeed-usr-__ASSUME1 = (_TOP__setSpeed-res-call_11.CruiseController__ToInt-usr-i + _TOP__setSpeed-res-call_12.CruiseController__ToInt-usr-i + _TOP__setSpeed-res-call_13.CruiseController__ToInt-usr-i + _TOP__setSpeed-res-call_14.CruiseController__ToInt-usr-i + _TOP__setSpeed-res-call_15.CruiseController__ToInt-usr-i + _TOP__setSpeed-res-call_16.CruiseController__ToInt-usr-i <= 1)) & (_TOP__setSpeed-usr-__ASSUME0 = (_TOP__setSpeed-usr-speed >= 0)))))))))))));
+
+	next(_TOP__setSpeed-impl-usr-__GUARANTEE4) := (next(_TOP__setSpeed-usr-invariance_condition) -> (next(_TOP__setSpeed-usr-desired_speed) = _TOP__setSpeed-usr-desired_speed));
+	next(_TOP__setSpeed-impl-usr-__GUARANTEE3) := (next(_TOP__setSpeed-usr-decrement_condition) -> (next(_TOP__setSpeed-usr-desired_speed) = (_TOP__setSpeed-usr-desired_speed - 1)));
+	next(_TOP__setSpeed-impl-usr-__GUARANTEE2) := (next(_TOP__setSpeed-usr-increment_condition) -> (next(_TOP__setSpeed-usr-desired_speed) = _TOP__setSpeed-usr-desired_speed + 1));
+	next(_TOP__setSpeed-impl-usr-__GUARANTEE1) := (next(_TOP__setSpeed-usr-setting_condition) -> (next(_TOP__setSpeed-usr-desired_speed) = next(_TOP__setSpeed-usr-speed)));
+	next(_TOP__setSpeed-impl-usr-__GUARANTEE0) := (next(_TOP__setSpeed-usr-enabled) = next(_TOP__setSpeed-usr-on_mode));
+	next(_TOP__setSpeed-usr-__ASSERT) := ((next(_TOP__setSpeed-usr-invariance_condition) = ((!next(_TOP__setSpeed-usr-setting_condition) & !next(_TOP__setSpeed-usr-increment_condition)) & !next(_TOP__setSpeed-usr-decrement_condition))) & ((next(_TOP__setSpeed-usr-decrement_condition) = ((_TOP__setSpeed-usr-on_mode & next(_TOP__setSpeed-usr-dec)) & (_TOP__setSpeed-usr-desired_speed >= 26))) & ((next(_TOP__setSpeed-usr-increment_condition) = ((_TOP__setSpeed-usr-on_mode & next(_TOP__setSpeed-usr-inc)) & (_TOP__setSpeed-usr-desired_speed <= 129))) & ((next(_TOP__setSpeed-usr-setting_condition) = (_TOP__setSpeed-usr-ready_mode & next(_TOP__setSpeed-usr-set_condition))) & ((next(_TOP__setSpeed-usr-paused_mode) = ((_TOP__setSpeed-usr-on_mode & next(_TOP__setSpeed-usr-brake_cancel)) | ((_TOP__setSpeed-usr-paused_mode & !next(_TOP__setSpeed-usr-on_off)) & !next(_TOP__setSpeed-usr-resume_speed)))) & ((next(_TOP__setSpeed-usr-on_mode) = ((_TOP__setSpeed-usr-paused_mode & next(_TOP__setSpeed-usr-resume_speed)) | ((_TOP__setSpeed-usr-ready_mode & next(_TOP__setSpeed-usr-set_condition)) | ((_TOP__setSpeed-usr-on_mode & !next(_TOP__setSpeed-usr-on_off)) & !next(_TOP__setSpeed-usr-brake_cancel))))) & ((next(_TOP__setSpeed-usr-ready_mode) = ((_TOP__setSpeed-usr-off_mode & next(_TOP__setSpeed-usr-on_off)) | ((_TOP__setSpeed-usr-ready_mode & !next(_TOP__setSpeed-usr-on_off)) & !next(_TOP__setSpeed-usr-set_condition)))) & ((next(_TOP__setSpeed-usr-set_condition) = ((next(_TOP__setSpeed-usr-set_speed) & (25 <= next(_TOP__setSpeed-usr-speed))) & (next(_TOP__setSpeed-usr-speed) <= 130))) & ((next(_TOP__setSpeed-usr-off_mode) = ((_TOP__setSpeed-usr-paused_mode & next(_TOP__setSpeed-usr-on_off)) | ((_TOP__setSpeed-usr-on_mode & next(_TOP__setSpeed-usr-on_off)) | ((_TOP__setSpeed-usr-ready_mode & next(_TOP__setSpeed-usr-on_off)) | (_TOP__setSpeed-usr-off_mode & !next(_TOP__setSpeed-usr-on_off)))))) & ((next(_TOP__setSpeed-usr-__ASSUME__HIST) -> (next(_TOP__setSpeed-impl-usr-__GUARANTEE4) & (next(_TOP__setSpeed-impl-usr-__GUARANTEE3) & (next(_TOP__setSpeed-impl-usr-__GUARANTEE2) & (next(_TOP__setSpeed-impl-usr-__GUARANTEE1) & next(_TOP__setSpeed-impl-usr-__GUARANTEE0)))))) & ((next(_TOP__setSpeed-usr-__ASSUME1) = (next(_TOP__setSpeed-res-call_11.CruiseController__ToInt-usr-i) + next(_TOP__setSpeed-res-call_12.CruiseController__ToInt-usr-i) + next(_TOP__setSpeed-res-call_13.CruiseController__ToInt-usr-i) + next(_TOP__setSpeed-res-call_14.CruiseController__ToInt-usr-i) + next(_TOP__setSpeed-res-call_15.CruiseController__ToInt-usr-i) + next(_TOP__setSpeed-res-call_16.CruiseController__ToInt-usr-i) <= 1)) & (next(_TOP__setSpeed-usr-__ASSUME0) = (next(_TOP__setSpeed-usr-speed) >= 0)))))))))))));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE CruiseController__Max (CruiseController__Max-usr-a, CruiseController__Max-usr-b)
+VAR
+	CruiseController__Max-usr-z : real;
+
+ASSIGN
+	init(CruiseController__Max-usr-z) := ((CruiseController__Max-usr-a >= CruiseController__Max-usr-b) ? CruiseController__Max-usr-a : CruiseController__Max-usr-b);
+
+	next(CruiseController__Max-usr-z) := ((next(CruiseController__Max-usr-a) >= next(CruiseController__Max-usr-b)) ? next(CruiseController__Max-usr-a) : next(CruiseController__Max-usr-b));
+
+
+
+MODULE _TOP__controlSpeed (_TOP__controlSpeed-usr-__ASSUME__HIST, _TOP__controlSpeed-usr-__ASSUME0, _TOP__controlSpeed-usr-speed, _TOP__controlSpeed-usr-desired_speed, _TOP__controlSpeed-usr-time, _TOP__controlSpeed-usr-force)
+VAR
+	_TOP__controlSpeed-usr-__ASSERT : boolean;
+	_TOP__controlSpeed-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__controlSpeed-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__controlSpeed-res-gklocal_18 : real;
+	_TOP__controlSpeed-res-gklocal_17 : real;
+	_TOP__controlSpeed-res-call_19 : CruiseController__Max(_TOP__controlSpeed-res-gklocal_17, _TOP__controlSpeed-res-gklocal_18);
+
+ASSIGN
+	init(_TOP__controlSpeed-res-gklocal_17) := 0;
+	init(_TOP__controlSpeed-res-gklocal_18) := (1/10 * (_TOP__controlSpeed-usr-desired_speed - _TOP__controlSpeed-usr-speed));
+	init(_TOP__controlSpeed-impl-usr-__GUARANTEE1) := (_TOP__controlSpeed-usr-force >= _TOP__controlSpeed-res-call_19.CruiseController__Max-usr-z);
+	init(_TOP__controlSpeed-impl-usr-__GUARANTEE0) := ((_TOP__controlSpeed-usr-desired_speed <= _TOP__controlSpeed-usr-speed) -> (_TOP__controlSpeed-usr-force = 0));
+	init(_TOP__controlSpeed-usr-__ASSERT) := ((_TOP__controlSpeed-usr-__ASSUME__HIST -> (_TOP__controlSpeed-impl-usr-__GUARANTEE1 & _TOP__controlSpeed-impl-usr-__GUARANTEE0)) & (_TOP__controlSpeed-usr-__ASSUME0 = (_TOP__controlSpeed-usr-speed >= 0)));
+
+	next(_TOP__controlSpeed-res-gklocal_17) := 0;
+	next(_TOP__controlSpeed-res-gklocal_18) := (1/10 * (next(_TOP__controlSpeed-usr-desired_speed) - next(_TOP__controlSpeed-usr-speed)));
+	next(_TOP__controlSpeed-impl-usr-__GUARANTEE1) := (next(_TOP__controlSpeed-usr-force) >= next(_TOP__controlSpeed-res-call_19.CruiseController__Max-usr-z));
+	next(_TOP__controlSpeed-impl-usr-__GUARANTEE0) := ((next(_TOP__controlSpeed-usr-desired_speed) <= next(_TOP__controlSpeed-usr-speed)) -> (next(_TOP__controlSpeed-usr-force) = 0));
+	next(_TOP__controlSpeed-usr-__ASSERT) := ((next(_TOP__controlSpeed-usr-__ASSUME__HIST) -> (next(_TOP__controlSpeed-impl-usr-__GUARANTEE1) & next(_TOP__controlSpeed-impl-usr-__GUARANTEE0))) & (next(_TOP__controlSpeed-usr-__ASSUME0) = (next(_TOP__controlSpeed-usr-speed) >= 0)));
+
+
+
+MODULE CruiseController__InitiallyHolds (CruiseController__InitiallyHolds-usr-X)
+VAR
+	CruiseController__InitiallyHolds-usr-Y : boolean;
+
+ASSIGN
+	init(CruiseController__InitiallyHolds-usr-Y) := CruiseController__InitiallyHolds-usr-X;
+
+	next(CruiseController__InitiallyHolds-usr-Y) := TRUE;
+
+
+MODULE _TOP__measureSpeed (_TOP__measureSpeed-usr-__ASSUME__HIST, _TOP__measureSpeed-usr-rotate___EVENT_, _TOP__measureSpeed-usr-second___EVENT_, _TOP__measureSpeed-usr-time, _TOP__measureSpeed-usr-nc, _TOP__measureSpeed-usr-count, _TOP__measureSpeed-usr-speed)
+VAR
+	_TOP__measureSpeed-usr-__ASSERT : boolean;
+	_TOP__measureSpeed-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__measureSpeed-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__measureSpeed-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__measureSpeed-res-gklocal_9 : boolean;
+	_TOP__measureSpeed-res-call_10 : CruiseController__InitiallyHolds(_TOP__measureSpeed-res-gklocal_9);
+
+ASSIGN
+	init(_TOP__measureSpeed-res-gklocal_9) := (_TOP__measureSpeed-usr-speed = 0);
+	init(_TOP__measureSpeed-impl-usr-__GUARANTEE2) := TRUE;
+	init(_TOP__measureSpeed-impl-usr-__GUARANTEE1) := TRUE;
+	init(_TOP__measureSpeed-impl-usr-__GUARANTEE0) := _TOP__measureSpeed-res-call_10.CruiseController__InitiallyHolds-usr-Y;
+	init(_TOP__measureSpeed-usr-__ASSERT) := ((_TOP__measureSpeed-usr-count = (_TOP__measureSpeed-usr-second___EVENT_ ? 0 : _TOP__measureSpeed-usr-nc)) & ((_TOP__measureSpeed-usr-nc = 0) & (_TOP__measureSpeed-usr-__ASSUME__HIST -> (_TOP__measureSpeed-impl-usr-__GUARANTEE2 & (_TOP__measureSpeed-impl-usr-__GUARANTEE1 & _TOP__measureSpeed-impl-usr-__GUARANTEE0)))));
+
+	next(_TOP__measureSpeed-impl-usr-__GUARANTEE2) := (!next(_TOP__measureSpeed-usr-second___EVENT_) -> (next(_TOP__measureSpeed-usr-speed) = _TOP__measureSpeed-usr-speed));
+	next(_TOP__measureSpeed-impl-usr-__GUARANTEE1) := (next(_TOP__measureSpeed-usr-second___EVENT_) -> (next(_TOP__measureSpeed-usr-speed) = (7351344/2011675 * to_realnext(_TOP__measureSpeed-usr-nc))));
+	next(_TOP__measureSpeed-impl-usr-__GUARANTEE0) := next(_TOP__measureSpeed-res-call_10.CruiseController__InitiallyHolds-usr-Y);
+	next(_TOP__measureSpeed-usr-__ASSERT) := ((next(_TOP__measureSpeed-usr-count) = (next(_TOP__measureSpeed-usr-second___EVENT_) ? 0 : next(_TOP__measureSpeed-usr-nc))) & ((next(_TOP__measureSpeed-usr-nc) = _TOP__measureSpeed-usr-count + (next(_TOP__measureSpeed-usr-rotate___EVENT_) ? 1 : 0)) & (next(_TOP__measureSpeed-usr-__ASSUME__HIST) -> (next(_TOP__measureSpeed-impl-usr-__GUARANTEE2) & (next(_TOP__measureSpeed-impl-usr-__GUARANTEE1) & next(_TOP__measureSpeed-impl-usr-__GUARANTEE0))))));
+	next(_TOP__measureSpeed-res-gklocal_9) := (next(_TOP__measureSpeed-usr-speed) = 0);
+
+
+
+MODULE main () 
+VAR
+	main-usr-measureSpeed__nc : integer;
+	main-usr-measureSpeed__count : integer;
+	main-usr-measureSpeed__speed : real;
+	main-usr-measureSpeed____ASSUME__HIST : boolean;
+	main-usr-setSpeed__off_mode : boolean;
+	main-usr-setSpeed__set_condition : boolean;
+	main-usr-setSpeed__ready_mode : boolean;
+	main-usr-setSpeed__on_mode : boolean;
+	main-usr-setSpeed__paused_mode : boolean;
+	main-usr-setSpeed__setting_condition : boolean;
+	main-usr-setSpeed__increment_condition : boolean;
+	main-usr-setSpeed__decrement_condition : boolean;
+	main-usr-setSpeed__invariance_condition : boolean;
+	main-usr-setSpeed__desired_speed : real;
+	main-usr-setSpeed__enabled : boolean;
+	main-usr-setSpeed____ASSUME0 : boolean;
+	main-usr-setSpeed____ASSUME1 : boolean;
+	main-usr-setSpeed____ASSUME__HIST : boolean;
+	main-usr-controlSpeed__force : real;
+	main-usr-controlSpeed____ASSUME0 : boolean;
+	main-usr-controlSpeed____ASSUME__HIST : boolean;
+	main-usr-disabled : boolean;
+	main-usr-no_button_pressed : boolean;
+	main-usr-force : real;
+	main-usr-enabled : boolean;
+	main-usr-speed : real;
+	main-usr-desired_speed : real;
+	main-usr-measureSpeed__rotate___EVENT_ : boolean;
+	main-usr-measureSpeed__second___EVENT_ : boolean;
+	main-usr-measureSpeed__time : real;
+	main-usr-setSpeed__on_off : boolean;
+	main-usr-setSpeed__resume_speed : boolean;
+	main-usr-setSpeed__set_speed : boolean;
+	main-usr-setSpeed__inc : boolean;
+	main-usr-setSpeed__dec : boolean;
+	main-usr-setSpeed__brake_cancel : boolean;
+	main-usr-setSpeed__speed : real;
+	main-usr-setSpeed__time : real;
+	main-usr-controlSpeed__speed : real;
+	main-usr-controlSpeed__desired_speed : real;
+	main-usr-controlSpeed__time : real;
+	main-usr-on_off : boolean;
+	main-usr-resume_speed : boolean;
+	main-usr-set_speed : boolean;
+	main-usr-inc : boolean;
+	main-usr-dec : boolean;
+	main-usr-brake_cancel : boolean;
+	main-usr-rotate___EVENT_ : boolean;
+	main-usr-second___EVENT_ : boolean;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME0 : boolean;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
+	main-impl-usr-__GUARANTEE2 : boolean;
+	main-impl-usr-__GUARANTEE3 : boolean;
+	main-impl-usr-__GUARANTEE4 : boolean;
+	main-impl-usr-__GUARANTEE5 : boolean;
+	main-impl-usr-__GUARANTEE6 : boolean;
+	main-impl-usr-__GUARANTEE7 : boolean;
+	main-res-glocal_28 : boolean;
+	main-res-glocal_29 : boolean;
+	main-res-glocal_31 : boolean;
+	main-res-glocal_34 : boolean;
+	main-res-glocal_35 : boolean;
+	main-res-glocal_37 : boolean;
+	main-res-glocal_40 : boolean;
+	main-res-glocal_41 : boolean;
+	main-res-glocal_43 : boolean;
+	main-res-glocal_45 : boolean;
+	main-res-glocal_46 : boolean;
+	main-res-glocal_47 : boolean;
+	main-res-glocal_48 : boolean;
+	main-res-glocal_49 : boolean;
+	main-res-glocal_50 : boolean;
+	main-res-glocal_51 : boolean;
+	main-res-glocal_52 : boolean;
+	main-res-glocal_53 : boolean;
+	main-res-glocal_54 : boolean;
+	main-res-glocal_55 : boolean;
+	main-res-glocal_56 : boolean;
+	main-res-glocal_57 : boolean;
+	main-res-glocal_58 : boolean;
+	main-res-glocal_59 : boolean;
+	main-res-glocal_60 : boolean;
+	main-res-glocal_61 : boolean;
+	main-res-glocal_62 : boolean;
+	main-res-glocal_63 : boolean;
+	main-res-glocal_64 : boolean;
+	main-res-gklocal_38 : boolean;
+	main-res-gklocal_32 : boolean;
+	main-res-call_44 : __HIST(main-usr-controlSpeed____ASSUME0);
+	main-res-call_42 : _TOP__controlSpeed(main-usr-controlSpeed____ASSUME__HIST, main-usr-controlSpeed____ASSUME0, main-usr-controlSpeed__speed, main-usr-controlSpeed__desired_speed, main-usr-controlSpeed__time, main-usr-controlSpeed__force);
+	main-res-call_39 : __HIST(main-res-gklocal_38);
+	main-res-call_36 : _TOP__setSpeed(main-usr-setSpeed____ASSUME__HIST, main-usr-setSpeed____ASSUME0, main-usr-setSpeed____ASSUME1, main-usr-setSpeed__on_off, main-usr-setSpeed__resume_speed, main-usr-setSpeed__set_speed, main-usr-setSpeed__inc, main-usr-setSpeed__dec, main-usr-setSpeed__brake_cancel, main-usr-setSpeed__speed, main-usr-setSpeed__time, main-usr-setSpeed__off_mode, main-usr-setSpeed__set_condition, main-usr-setSpeed__ready_mode, main-usr-setSpeed__on_mode, main-usr-setSpeed__paused_mode, main-usr-setSpeed__setting_condition, main-usr-setSpeed__increment_condition, main-usr-setSpeed__decrement_condition, main-usr-setSpeed__invariance_condition, main-usr-setSpeed__desired_speed, main-usr-setSpeed__enabled);
+	main-res-call_33 : __HIST(main-res-gklocal_32);
+	main-res-call_30 : _TOP__measureSpeed(main-usr-measureSpeed____ASSUME__HIST, main-usr-measureSpeed__rotate___EVENT_, main-usr-measureSpeed__second___EVENT_, main-usr-measureSpeed__time, main-usr-measureSpeed__nc, main-usr-measureSpeed__count, main-usr-measureSpeed__speed);
+	main-res-call_27 : CruiseController__UnchangedReal(main-usr-desired_speed);
+	main-res-call_26 : CruiseController__InitiallyHolds(main-usr-disabled);
+	main-res-call_20 : CruiseController__ToInt(main-usr-on_off);
+	main-res-call_21 : CruiseController__ToInt(main-usr-resume_speed);
+	main-res-call_22 : CruiseController__ToInt(main-usr-set_speed);
+	main-res-call_23 : CruiseController__ToInt(main-usr-inc);
+	main-res-call_24 : CruiseController__ToInt(main-usr-dec);
+	main-res-call_25 : CruiseController__ToInt(main-usr-brake_cancel);
+
+ASSIGN
+	init(main-impl-usr-__ASSUME0) := (main-res-call_20.CruiseController__ToInt-usr-i + main-res-call_21.CruiseController__ToInt-usr-i + main-res-call_22.CruiseController__ToInt-usr-i + main-res-call_23.CruiseController__ToInt-usr-i + main-res-call_24.CruiseController__ToInt-usr-i + main-res-call_25.CruiseController__ToInt-usr-i <= 1);
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-controlSpeed____ASSUME__HIST & (main-usr-setSpeed____ASSUME__HIST & main-usr-measureSpeed____ASSUME__HIST));
+	init(main-impl-usr-__GUARANTEE0) := (main-usr-enabled -> ((main-usr-desired_speed >= 25) & (main-usr-desired_speed <= 130)));
+	init(main-impl-usr-__GUARANTEE1) := main-res-call_26.CruiseController__InitiallyHolds-usr-Y;
+	init(main-impl-usr-__GUARANTEE2) := (main-usr-disabled -> main-res-call_27.CruiseController__UnchangedReal-usr-b);
+	init(main-impl-usr-__GUARANTEE3) := TRUE;
+	init(main-impl-usr-__GUARANTEE4) := TRUE;
+	init(main-impl-usr-__GUARANTEE5) := ((main-usr-enabled & main-usr-no_button_pressed) -> main-res-call_27.CruiseController__UnchangedReal-usr-b);
+	init(main-impl-usr-__GUARANTEE6) := ((main-usr-enabled & (main-usr-desired_speed <= main-usr-speed)) -> (main-usr-force = 0));
+	init(main-impl-usr-__GUARANTEE7) := ((main-usr-enabled & (main-usr-desired_speed > main-usr-speed)) -> (main-usr-force > 0));
+	init(main-res-glocal_28) := main-impl-usr-__ASSUME0;
+	init(main-res-glocal_29) := (main-usr-time = main-usr-measureSpeed__time);
+	init(main-res-glocal_31) := main-res-call_30._TOP__measureSpeed-usr-__ASSERT;
+	init(main-res-gklocal_32) := TRUE;
+	init(main-res-glocal_34) := (main-usr-measureSpeed____ASSUME__HIST = main-res-call_33.__HIST-usr-hist);
+	init(main-res-glocal_35) := (main-usr-time = main-usr-setSpeed__time);
+	init(main-res-glocal_37) := main-res-call_36._TOP__setSpeed-usr-__ASSERT;
+	init(main-res-gklocal_38) := (main-usr-setSpeed____ASSUME1 & main-usr-setSpeed____ASSUME0);
+	init(main-res-glocal_40) := (main-usr-setSpeed____ASSUME__HIST = main-res-call_39.__HIST-usr-hist);
+	init(main-res-glocal_41) := (main-usr-time = main-usr-controlSpeed__time);
+	init(main-res-glocal_43) := main-res-call_42._TOP__controlSpeed-usr-__ASSERT;
+	init(main-res-glocal_45) := (main-usr-controlSpeed____ASSUME__HIST = main-res-call_44.__HIST-usr-hist);
+	init(main-res-glocal_46) := (main-usr-on_off = main-usr-setSpeed__on_off);
+	init(main-res-glocal_47) := (main-usr-resume_speed = main-usr-setSpeed__resume_speed);
+	init(main-res-glocal_48) := (main-usr-set_speed = main-usr-setSpeed__set_speed);
+	init(main-res-glocal_49) := (main-usr-inc = main-usr-setSpeed__inc);
+	init(main-res-glocal_50) := (main-usr-dec = main-usr-setSpeed__dec);
+	init(main-res-glocal_51) := (main-usr-brake_cancel = main-usr-setSpeed__brake_cancel);
+	init(main-res-glocal_52) := (main-usr-rotate___EVENT_ = main-usr-measureSpeed__rotate___EVENT_);
+	init(main-res-glocal_53) := (main-usr-second___EVENT_ = main-usr-measureSpeed__second___EVENT_);
+	init(main-res-glocal_54) := (main-usr-measureSpeed__speed = main-usr-setSpeed__speed);
+	init(main-res-glocal_55) := (main-usr-measureSpeed__speed = main-usr-controlSpeed__speed);
+	init(main-res-glocal_56) := (main-usr-measureSpeed__speed = main-usr-speed);
+	init(main-res-glocal_57) := (main-usr-setSpeed__desired_speed = main-usr-controlSpeed__desired_speed);
+	init(main-res-glocal_58) := (main-usr-setSpeed__desired_speed = main-usr-desired_speed);
+	init(main-res-glocal_59) := (main-usr-setSpeed__enabled = main-usr-enabled);
+	init(main-res-glocal_60) := (main-usr-controlSpeed__force = main-usr-force);
+	init(main-res-glocal_61) := (main-usr-disabled = !main-usr-enabled);
+	init(main-res-glocal_62) := (main-usr-no_button_pressed = (((((!main-usr-on_off & !main-usr-resume_speed) & !main-usr-set_speed) & !main-usr-inc) & !main-usr-dec) & !main-usr-brake_cancel));
+	init(main-res-glocal_63) := TRUE;
+	init(main-res-glocal_64) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME0) := (next(main-res-call_20.CruiseController__ToInt-usr-i) + next(main-res-call_21.CruiseController__ToInt-usr-i) + next(main-res-call_22.CruiseController__ToInt-usr-i) + next(main-res-call_23.CruiseController__ToInt-usr-i) + next(main-res-call_24.CruiseController__ToInt-usr-i) + next(main-res-call_25.CruiseController__ToInt-usr-i) <= 1);
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-controlSpeed____ASSUME__HIST) & (next(main-usr-setSpeed____ASSUME__HIST) & next(main-usr-measureSpeed____ASSUME__HIST)));
+	next(main-impl-usr-__GUARANTEE0) := (next(main-usr-enabled) -> ((next(main-usr-desired_speed) >= 25) & (next(main-usr-desired_speed) <= 130)));
+	next(main-impl-usr-__GUARANTEE1) := next(main-res-call_26.CruiseController__InitiallyHolds-usr-Y);
+	next(main-impl-usr-__GUARANTEE2) := (next(main-usr-disabled) -> next(main-res-call_27.CruiseController__UnchangedReal-usr-b));
+	next(main-impl-usr-__GUARANTEE3) := (((next(main-usr-enabled) & next(main-usr-inc)) & (main-usr-desired_speed <= 129)) -> (next(main-usr-desired_speed) = main-usr-desired_speed + 1));
+	next(main-impl-usr-__GUARANTEE4) := (((next(main-usr-enabled) & next(main-usr-dec)) & (main-usr-desired_speed > 26)) -> (next(main-usr-desired_speed) = (main-usr-desired_speed - 1)));
+	next(main-impl-usr-__GUARANTEE5) := ((next(main-usr-enabled) & next(main-usr-no_button_pressed)) -> next(main-res-call_27.CruiseController__UnchangedReal-usr-b));
+	next(main-impl-usr-__GUARANTEE6) := ((next(main-usr-enabled) & (next(main-usr-desired_speed) <= next(main-usr-speed))) -> (next(main-usr-force) = 0));
+	next(main-impl-usr-__GUARANTEE7) := ((next(main-usr-enabled) & (next(main-usr-desired_speed) > next(main-usr-speed))) -> (next(main-usr-force) > 0));
+	next(main-res-glocal_28) := next(main-impl-usr-__ASSUME0);
+	next(main-res-glocal_29) := (next(main-usr-time) = next(main-usr-measureSpeed__time));
+	next(main-res-glocal_31) := next(main-res-call_30._TOP__measureSpeed-usr-__ASSERT);
+	next(main-res-gklocal_32) := TRUE;
+	next(main-res-glocal_34) := (next(main-usr-measureSpeed____ASSUME__HIST) = next(main-res-call_33.__HIST-usr-hist));
+	next(main-res-glocal_35) := (next(main-usr-time) = next(main-usr-setSpeed__time));
+	next(main-res-glocal_37) := next(main-res-call_36._TOP__setSpeed-usr-__ASSERT);
+	next(main-res-gklocal_38) := (next(main-usr-setSpeed____ASSUME1) & next(main-usr-setSpeed____ASSUME0));
+	next(main-res-glocal_40) := (next(main-usr-setSpeed____ASSUME__HIST) = next(main-res-call_39.__HIST-usr-hist));
+	next(main-res-glocal_41) := (next(main-usr-time) = next(main-usr-controlSpeed__time));
+	next(main-res-glocal_43) := next(main-res-call_42._TOP__controlSpeed-usr-__ASSERT);
+	next(main-res-glocal_45) := (next(main-usr-controlSpeed____ASSUME__HIST) = next(main-res-call_44.__HIST-usr-hist));
+	next(main-res-glocal_46) := (next(main-usr-on_off) = next(main-usr-setSpeed__on_off));
+	next(main-res-glocal_47) := (next(main-usr-resume_speed) = next(main-usr-setSpeed__resume_speed));
+	next(main-res-glocal_48) := (next(main-usr-set_speed) = next(main-usr-setSpeed__set_speed));
+	next(main-res-glocal_49) := (next(main-usr-inc) = next(main-usr-setSpeed__inc));
+	next(main-res-glocal_50) := (next(main-usr-dec) = next(main-usr-setSpeed__dec));
+	next(main-res-glocal_51) := (next(main-usr-brake_cancel) = next(main-usr-setSpeed__brake_cancel));
+	next(main-res-glocal_52) := (next(main-usr-rotate___EVENT_) = next(main-usr-measureSpeed__rotate___EVENT_));
+	next(main-res-glocal_53) := (next(main-usr-second___EVENT_) = next(main-usr-measureSpeed__second___EVENT_));
+	next(main-res-glocal_54) := (next(main-usr-measureSpeed__speed) = next(main-usr-setSpeed__speed));
+	next(main-res-glocal_55) := (next(main-usr-measureSpeed__speed) = next(main-usr-controlSpeed__speed));
+	next(main-res-glocal_56) := (next(main-usr-measureSpeed__speed) = next(main-usr-speed));
+	next(main-res-glocal_57) := (next(main-usr-setSpeed__desired_speed) = next(main-usr-controlSpeed__desired_speed));
+	next(main-res-glocal_58) := (next(main-usr-setSpeed__desired_speed) = next(main-usr-desired_speed));
+	next(main-res-glocal_59) := (next(main-usr-setSpeed__enabled) = next(main-usr-enabled));
+	next(main-res-glocal_60) := (next(main-usr-controlSpeed__force) = next(main-usr-force));
+	next(main-res-glocal_61) := (next(main-usr-disabled) = !next(main-usr-enabled));
+	next(main-res-glocal_62) := (next(main-usr-no_button_pressed) = (((((!next(main-usr-on_off) & !next(main-usr-resume_speed)) & !next(main-usr-set_speed)) & !next(main-usr-inc)) & !next(main-usr-dec)) & !next(main-usr-brake_cancel)));
+	next(main-res-glocal_63) := TRUE;
+	next(main-res-glocal_64) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_64;
+	INVAR main-res-glocal_63;
+	INVAR main-res-glocal_62;
+	INVAR main-res-glocal_61;
+	INVAR main-res-glocal_60;
+	INVAR main-res-glocal_59;
+	INVAR main-res-glocal_58;
+	INVAR main-res-glocal_57;
+	INVAR main-res-glocal_56;
+	INVAR main-res-glocal_55;
+	INVAR main-res-glocal_54;
+	INVAR main-res-glocal_53;
+	INVAR main-res-glocal_52;
+	INVAR main-res-glocal_51;
+	INVAR main-res-glocal_50;
+	INVAR main-res-glocal_49;
+	INVAR main-res-glocal_48;
+	INVAR main-res-glocal_47;
+	INVAR main-res-glocal_46;
+	INVAR main-res-glocal_45;
+	INVAR main-res-glocal_43;
+	INVAR main-res-glocal_41;
+	INVAR main-res-glocal_40;
+	INVAR main-res-glocal_37;
+	INVAR main-res-glocal_35;
+	INVAR main-res-glocal_34;
+	INVAR main-res-glocal_31;
+	INVAR main-res-glocal_29;
+	INVAR main-res-glocal_28;
+
+INVARSPEC 
+((main-impl-usr-__GUARANTEE6));
+

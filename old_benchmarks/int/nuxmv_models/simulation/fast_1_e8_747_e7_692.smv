@@ -158,7 +158,9 @@ VAR
 	top-usr-ccr : boolean;
 	top-usr-vs : integer;
 	top-usr-OK : boolean;
+	top-impl-usr-ccont : boolean;
 	top-impl-usr-cca : boolean;
+	top-impl-usr-env : boolean;
 	top-res-call_17 : PosEdge(top-impl-usr-cca);
 	top-res-call_18 : PosEdge(top-usr-ccseti);
 	top-res-call_19 : PosEdge(top-usr-ccsetd);
@@ -168,9 +170,13 @@ VAR
 ASSIGN
 	init(top-usr-OK) := (top-res-call_17.PosEdge-usr-Y ? (top-res-call_20.PosEdge-usr-Y | (top-res-call_19.PosEdge-usr-Y | top-res-call_18.PosEdge-usr-Y)) : TRUE);
 	init(top-impl-usr-cca) := top-res-2-call_16.main-usr-cca;
+	init(top-impl-usr-ccont) := top-res-2-call_16.main-usr-ccont;
+	init(top-impl-usr-env) := !top-usr-igsw;
 
 	next(top-impl-usr-cca) := next(top-res-2-call_16.main-usr-cca);
 	next(top-usr-OK) := (next(top-res-call_17.PosEdge-usr-Y) ? (next(top-res-call_20.PosEdge-usr-Y) | (next(top-res-call_19.PosEdge-usr-Y) | next(top-res-call_18.PosEdge-usr-Y))) : TRUE);
+	next(top-impl-usr-ccont) := next(top-res-2-call_16.main-usr-ccont);
+	next(top-impl-usr-env) := TRUE;
 
 
 INVARSPEC 

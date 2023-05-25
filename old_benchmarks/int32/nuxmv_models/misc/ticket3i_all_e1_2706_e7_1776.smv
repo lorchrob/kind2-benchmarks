@@ -113,6 +113,11 @@ VAR
 	top-impl-usr-p1 : signed word[32];
 	top-impl-usr-p2 : signed word[32];
 	top-impl-usr-p3 : signed word[32];
+	top-impl-usr-t : signed word[32];
+	top-impl-usr-s : signed word[32];
+	top-impl-usr-a1 : signed word[32];
+	top-impl-usr-a2 : signed word[32];
+	top-impl-usr-a3 : signed word[32];
 	top-impl-usr-erreur_ticket3i : boolean;
 	top-impl-usr-env : boolean;
 	top-res-gklocal_15 : boolean;
@@ -128,6 +133,11 @@ ASSIGN
 	init(top-impl-usr-p2) := top-res-2-call_13.ticket3i-usr-p2;
 	init(top-impl-usr-p1) := top-res-2-call_13.ticket3i-usr-p1;
 	init(top-usr-OK) := (top-impl-usr-env -> (((((((!top-impl-usr-erreur_ticket3i & (0sh32_00000000 <= top-impl-usr-p1)) & (top-impl-usr-p1 <= 0sh32_00000003)) & (0sh32_00000000 <= top-impl-usr-p2)) & (top-impl-usr-p2 <= 0sh32_00000003)) & (0sh32_00000000 <= top-impl-usr-p3)) & (top-impl-usr-p3 <= 0sh32_00000003)) & ((((top-impl-usr-p1 + 0sh32_00000001) + top-impl-usr-p2) + top-impl-usr-p3) <= 0sh32_00000009)));
+	init(top-impl-usr-t) := top-res-2-call_13.ticket3i-usr-t;
+	init(top-impl-usr-s) := top-res-2-call_13.ticket3i-usr-s;
+	init(top-impl-usr-a1) := top-res-2-call_13.ticket3i-usr-a1;
+	init(top-impl-usr-a2) := top-res-2-call_13.ticket3i-usr-a2;
+	init(top-impl-usr-a3) := top-res-2-call_13.ticket3i-usr-a3;
 
 	next(top-res-gklocal_15) := ((((next(top-res-call_14.excludes9-usr-excludes) & (next(top-usr-init_a1) >= 0sh32_00000000)) & (next(top-usr-init_a2) >= 0sh32_00000000)) & (next(top-usr-init_a3) >= 0sh32_00000000)) & (next(top-usr-init_t) >= 0sh32_00000000));
 	next(top-impl-usr-env) := next(top-res-call_16.Sofar-usr-Sofar);
@@ -136,6 +146,11 @@ ASSIGN
 	next(top-impl-usr-p2) := next(top-res-2-call_13.ticket3i-usr-p2);
 	next(top-impl-usr-p1) := next(top-res-2-call_13.ticket3i-usr-p1);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (((((((!next(top-impl-usr-erreur_ticket3i) & (0sh32_00000000 <= next(top-impl-usr-p1))) & (next(top-impl-usr-p1) <= 0sh32_00000003)) & (0sh32_00000000 <= next(top-impl-usr-p2))) & (next(top-impl-usr-p2) <= 0sh32_00000003)) & (0sh32_00000000 <= next(top-impl-usr-p3))) & (next(top-impl-usr-p3) <= 0sh32_00000003)) & ((((next(top-impl-usr-p1) + 0sh32_00000001) + next(top-impl-usr-p2)) + next(top-impl-usr-p3)) <= 0sh32_00000009)));
+	next(top-impl-usr-t) := next(top-res-2-call_13.ticket3i-usr-t);
+	next(top-impl-usr-s) := next(top-res-2-call_13.ticket3i-usr-s);
+	next(top-impl-usr-a1) := next(top-res-2-call_13.ticket3i-usr-a1);
+	next(top-impl-usr-a2) := next(top-res-2-call_13.ticket3i-usr-a2);
+	next(top-impl-usr-a3) := next(top-res-2-call_13.ticket3i-usr-a3);
 
 
 INVARSPEC 

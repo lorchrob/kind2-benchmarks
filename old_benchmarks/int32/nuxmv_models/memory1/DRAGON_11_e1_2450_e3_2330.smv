@@ -142,7 +142,12 @@ VAR
 	top-usr-e12 : boolean;
 	top-usr-init_invalid : signed word[32];
 	top-usr-OK : boolean;
+	top-impl-usr-exclusive : signed word[32];
 	top-impl-usr-shared : signed word[32];
+	top-impl-usr-shared_dirty : signed word[32];
+	top-impl-usr-dirty : signed word[32];
+	top-impl-usr-invalid : signed word[32];
+	top-impl-usr-erreur : boolean;
 	top-impl-usr-env : boolean;
 	top-res-gklocal_34 : boolean;
 	top-res-call_36 : First(top-usr-init_invalid);
@@ -155,11 +160,21 @@ ASSIGN
 	init(top-impl-usr-env) := top-res-call_35.Sofar-usr-Sofar;
 	init(top-impl-usr-shared) := top-res-2-call_32.DRAGON-usr-shared;
 	init(top-usr-OK) := (top-impl-usr-env -> (top-impl-usr-shared <= top-res-call_36.First-usr-First));
+	init(top-impl-usr-exclusive) := top-res-2-call_32.DRAGON-usr-exclusive;
+	init(top-impl-usr-shared_dirty) := top-res-2-call_32.DRAGON-usr-shared_dirty;
+	init(top-impl-usr-dirty) := top-res-2-call_32.DRAGON-usr-dirty;
+	init(top-impl-usr-invalid) := top-res-2-call_32.DRAGON-usr-invalid;
+	init(top-impl-usr-erreur) := top-res-2-call_32.DRAGON-usr-erreur;
 
 	next(top-res-gklocal_34) := (next(top-res-call_33.excludes12-usr-excludes) & (next(top-usr-init_invalid) > 0sh32_00000000));
 	next(top-impl-usr-env) := next(top-res-call_35.Sofar-usr-Sofar);
 	next(top-impl-usr-shared) := next(top-res-2-call_32.DRAGON-usr-shared);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-shared) <= next(top-res-call_36.First-usr-First)));
+	next(top-impl-usr-exclusive) := next(top-res-2-call_32.DRAGON-usr-exclusive);
+	next(top-impl-usr-shared_dirty) := next(top-res-2-call_32.DRAGON-usr-shared_dirty);
+	next(top-impl-usr-dirty) := next(top-res-2-call_32.DRAGON-usr-dirty);
+	next(top-impl-usr-invalid) := next(top-res-2-call_32.DRAGON-usr-invalid);
+	next(top-impl-usr-erreur) := next(top-res-2-call_32.DRAGON-usr-erreur);
 
 
 INVARSPEC 

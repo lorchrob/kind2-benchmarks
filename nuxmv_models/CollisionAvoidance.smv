@@ -6,32 +6,46 @@ VAR
 ASSIGN
 
 
-MODULE _TOP__DAA (_TOP__DAA-usr-__ASSUME__HIST, _TOP__DAA-usr-ADSB_In___EVENT_, _TOP__DAA-usr-6-ADSB_In-speed, _TOP__DAA-usr-2-ADSB_In-x, _TOP__DAA-usr-2-ADSB_In-y, _TOP__DAA-usr-STATE_In___EVENT_, _TOP__DAA-usr-6-STATE_In-speed, _TOP__DAA-usr-2-STATE_In-x, _TOP__DAA-usr-2-STATE_In-y, _TOP__DAA-usr-time, _TOP__DAA-usr-ADSB_Out___EVENT_, _TOP__DAA-usr-6-ADSB_Out-speed, _TOP__DAA-usr-2-ADSB_Out-x, _TOP__DAA-usr-2-ADSB_Out-y, _TOP__DAA-usr-STATE_Out___EVENT_, _TOP__DAA-usr-6-STATE_Out-speed, _TOP__DAA-usr-2-STATE_Out-x, _TOP__DAA-usr-2-STATE_Out-y, _TOP__DAA-usr-BAF_Manuever_Out___EVENT_, _TOP__DAA-usr-6-BAF_Manuever_Out-speed, _TOP__DAA-usr-2-BAF_Manuever_Out-x, _TOP__DAA-usr-2-BAF_Manuever_Out-y)
+MODULE __HIST (__HIST-usr-input)
 VAR
-	_TOP__DAA-usr-__ASSERT : boolean;
-	_TOP__DAA-impl-usr-__GUARANTEE0 : boolean;
-	_TOP__DAA-res-call_4 : Collision_Avoidance__CONFLICT_DETECTED(_TOP__DAA-usr-6-ADSB_In-speed, _TOP__DAA-usr-2-ADSB_In-x, _TOP__DAA-usr-2-ADSB_In-y);
+	__HIST-usr-hist : boolean;
 
 ASSIGN
-	init(_TOP__DAA-impl-usr-__GUARANTEE0) := (((_TOP__DAA-usr-ADSB_In___EVENT_ & _TOP__DAA-usr-STATE_In___EVENT_) & _TOP__DAA-res-call_4.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) -> ((((_TOP__DAA-usr-BAF_Manuever_Out___EVENT_ & _TOP__DAA-usr-ADSB_Out___EVENT_) & (((_TOP__DAA-usr-6-ADSB_Out-speed = _TOP__DAA-usr-6-ADSB_In-speed) & (_TOP__DAA-usr-2-ADSB_Out-x = _TOP__DAA-usr-2-ADSB_In-x)) & (_TOP__DAA-usr-2-ADSB_Out-y = _TOP__DAA-usr-2-ADSB_In-y))) & _TOP__DAA-usr-STATE_Out___EVENT_) & (((_TOP__DAA-usr-6-STATE_Out-speed = _TOP__DAA-usr-6-STATE_In-speed) & (_TOP__DAA-usr-2-STATE_Out-x = _TOP__DAA-usr-2-STATE_In-x)) & (_TOP__DAA-usr-2-STATE_Out-y = _TOP__DAA-usr-2-STATE_In-y))));
-	init(_TOP__DAA-usr-__ASSERT) := (_TOP__DAA-usr-__ASSUME__HIST -> _TOP__DAA-impl-usr-__GUARANTEE0);
-
-	next(_TOP__DAA-impl-usr-__GUARANTEE0) := (((next(_TOP__DAA-usr-ADSB_In___EVENT_) & next(_TOP__DAA-usr-STATE_In___EVENT_)) & next(_TOP__DAA-res-call_4.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) -> ((((next(_TOP__DAA-usr-BAF_Manuever_Out___EVENT_) & next(_TOP__DAA-usr-ADSB_Out___EVENT_)) & (((next(_TOP__DAA-usr-6-ADSB_Out-speed) = next(_TOP__DAA-usr-6-ADSB_In-speed)) & (next(_TOP__DAA-usr-2-ADSB_Out-x) = next(_TOP__DAA-usr-2-ADSB_In-x))) & (next(_TOP__DAA-usr-2-ADSB_Out-y) = next(_TOP__DAA-usr-2-ADSB_In-y)))) & next(_TOP__DAA-usr-STATE_Out___EVENT_)) & (((next(_TOP__DAA-usr-6-STATE_Out-speed) = next(_TOP__DAA-usr-6-STATE_In-speed)) & (next(_TOP__DAA-usr-2-STATE_Out-x) = next(_TOP__DAA-usr-2-STATE_In-x))) & (next(_TOP__DAA-usr-2-STATE_Out-y) = next(_TOP__DAA-usr-2-STATE_In-y)))));
-	next(_TOP__DAA-usr-__ASSERT) := (next(_TOP__DAA-usr-__ASSUME__HIST) -> next(_TOP__DAA-impl-usr-__GUARANTEE0));
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
 
 
 
-MODULE _TOP__LEC (_TOP__LEC-usr-__ASSUME__HIST, _TOP__LEC-usr-ADSB_In___EVENT_, _TOP__LEC-usr-6-ADSB_In-speed, _TOP__LEC-usr-2-ADSB_In-x, _TOP__LEC-usr-2-ADSB_In-y, _TOP__LEC-usr-STATE_In___EVENT_, _TOP__LEC-usr-6-STATE_In-speed, _TOP__LEC-usr-2-STATE_In-x, _TOP__LEC-usr-2-STATE_In-y, _TOP__LEC-usr-BAF_Manuever_In___EVENT_, _TOP__LEC-usr-6-BAF_Manuever_In-speed, _TOP__LEC-usr-2-BAF_Manuever_In-x, _TOP__LEC-usr-2-BAF_Manuever_In-y, _TOP__LEC-usr-time, _TOP__LEC-usr-ADSB_Out___EVENT_, _TOP__LEC-usr-6-ADSB_Out-speed, _TOP__LEC-usr-2-ADSB_Out-x, _TOP__LEC-usr-2-ADSB_Out-y, _TOP__LEC-usr-STATE_Out___EVENT_, _TOP__LEC-usr-6-STATE_Out-speed, _TOP__LEC-usr-2-STATE_Out-x, _TOP__LEC-usr-2-STATE_Out-y, _TOP__LEC-usr-BAF_Manuever_Out___EVENT_, _TOP__LEC-usr-6-BAF_Manuever_Out-speed, _TOP__LEC-usr-2-BAF_Manuever_Out-x, _TOP__LEC-usr-2-BAF_Manuever_Out-y, _TOP__LEC-usr-LEC_Manuever_Out___EVENT_, _TOP__LEC-usr-6-LEC_Manuever_Out-speed, _TOP__LEC-usr-2-LEC_Manuever_Out-x, _TOP__LEC-usr-2-LEC_Manuever_Out-y)
+MODULE Collision_Avoidance__SELECT_PLAN (Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed, Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x, Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y, Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed, Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x, Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y, Collision_Avoidance__SELECT_PLAN-usr-Selection)
 VAR
-	_TOP__LEC-usr-__ASSERT : boolean;
-	_TOP__LEC-impl-usr-__GUARANTEE0 : boolean;
+	Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed : real;
+	Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x : real;
+	Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y : real;
 
 ASSIGN
-	init(_TOP__LEC-impl-usr-__GUARANTEE0) := (((_TOP__LEC-usr-ADSB_In___EVENT_ & _TOP__LEC-usr-STATE_In___EVENT_) & _TOP__LEC-usr-BAF_Manuever_In___EVENT_) -> ((((((_TOP__LEC-usr-LEC_Manuever_Out___EVENT_ & _TOP__LEC-usr-BAF_Manuever_Out___EVENT_) & (((_TOP__LEC-usr-6-BAF_Manuever_Out-speed = _TOP__LEC-usr-6-BAF_Manuever_In-speed) & (_TOP__LEC-usr-2-BAF_Manuever_Out-x = _TOP__LEC-usr-2-BAF_Manuever_In-x)) & (_TOP__LEC-usr-2-BAF_Manuever_Out-y = _TOP__LEC-usr-2-BAF_Manuever_In-y))) & _TOP__LEC-usr-ADSB_Out___EVENT_) & (((_TOP__LEC-usr-6-ADSB_Out-speed = _TOP__LEC-usr-6-ADSB_In-speed) & (_TOP__LEC-usr-2-ADSB_Out-x = _TOP__LEC-usr-2-ADSB_In-x)) & (_TOP__LEC-usr-2-ADSB_Out-y = _TOP__LEC-usr-2-ADSB_In-y))) & _TOP__LEC-usr-STATE_Out___EVENT_) & (((_TOP__LEC-usr-6-STATE_Out-speed = _TOP__LEC-usr-6-STATE_In-speed) & (_TOP__LEC-usr-2-STATE_Out-x = _TOP__LEC-usr-2-STATE_In-x)) & (_TOP__LEC-usr-2-STATE_Out-y = _TOP__LEC-usr-2-STATE_In-y))));
-	init(_TOP__LEC-usr-__ASSERT) := (_TOP__LEC-usr-__ASSUME__HIST -> _TOP__LEC-impl-usr-__GUARANTEE0);
+	init(Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed : Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed);
+	init(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x : Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x);
+	init(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y : Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y);
 
-	next(_TOP__LEC-impl-usr-__GUARANTEE0) := (((next(_TOP__LEC-usr-ADSB_In___EVENT_) & next(_TOP__LEC-usr-STATE_In___EVENT_)) & next(_TOP__LEC-usr-BAF_Manuever_In___EVENT_)) -> ((((((next(_TOP__LEC-usr-LEC_Manuever_Out___EVENT_) & next(_TOP__LEC-usr-BAF_Manuever_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-BAF_Manuever_Out-speed) = next(_TOP__LEC-usr-6-BAF_Manuever_In-speed)) & (next(_TOP__LEC-usr-2-BAF_Manuever_Out-x) = next(_TOP__LEC-usr-2-BAF_Manuever_In-x))) & (next(_TOP__LEC-usr-2-BAF_Manuever_Out-y) = next(_TOP__LEC-usr-2-BAF_Manuever_In-y)))) & next(_TOP__LEC-usr-ADSB_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-ADSB_Out-speed) = next(_TOP__LEC-usr-6-ADSB_In-speed)) & (next(_TOP__LEC-usr-2-ADSB_Out-x) = next(_TOP__LEC-usr-2-ADSB_In-x))) & (next(_TOP__LEC-usr-2-ADSB_Out-y) = next(_TOP__LEC-usr-2-ADSB_In-y)))) & next(_TOP__LEC-usr-STATE_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-STATE_Out-speed) = next(_TOP__LEC-usr-6-STATE_In-speed)) & (next(_TOP__LEC-usr-2-STATE_Out-x) = next(_TOP__LEC-usr-2-STATE_In-x))) & (next(_TOP__LEC-usr-2-STATE_Out-y) = next(_TOP__LEC-usr-2-STATE_In-y)))));
-	next(_TOP__LEC-usr-__ASSERT) := (next(_TOP__LEC-usr-__ASSUME__HIST) -> next(_TOP__LEC-impl-usr-__GUARANTEE0));
+	next(Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed) : next(Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed));
+	next(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x) : next(Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x));
+	next(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y) : next(Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y));
+
+
+
+MODULE _TOP__Plan_Switch (_TOP__Plan_Switch-usr-__ASSUME__HIST, _TOP__Plan_Switch-usr-BAF_Manuever___EVENT_, _TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-LEC_Manuever___EVENT_, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan___EVENT_, _TOP__Plan_Switch-usr-Selected_Plan, _TOP__Plan_Switch-usr-time, _TOP__Plan_Switch-usr-Plan_Decision___EVENT_, _TOP__Plan_Switch-usr-6-Plan_Decision-speed, _TOP__Plan_Switch-usr-2-Plan_Decision-x, _TOP__Plan_Switch-usr-2-Plan_Decision-y)
+VAR
+	_TOP__Plan_Switch-usr-__ASSERT : boolean;
+	_TOP__Plan_Switch-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__Plan_Switch-res-6-call_5 : Collision_Avoidance__SELECT_PLAN(_TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan);
+	_TOP__Plan_Switch-res-2-call_5 : Collision_Avoidance__SELECT_PLAN(_TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan);
+
+ASSIGN
+	init(_TOP__Plan_Switch-impl-usr-__GUARANTEE0) := (((_TOP__Plan_Switch-usr-BAF_Manuever___EVENT_ & _TOP__Plan_Switch-usr-LEC_Manuever___EVENT_) & _TOP__Plan_Switch-usr-Selected_Plan___EVENT_) -> (_TOP__Plan_Switch-usr-Plan_Decision___EVENT_ & (((_TOP__Plan_Switch-usr-6-Plan_Decision-speed = _TOP__Plan_Switch-res-6-call_5.Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) & (_TOP__Plan_Switch-usr-2-Plan_Decision-x = _TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x)) & (_TOP__Plan_Switch-usr-2-Plan_Decision-y = _TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y))));
+	init(_TOP__Plan_Switch-usr-__ASSERT) := (_TOP__Plan_Switch-usr-__ASSUME__HIST -> _TOP__Plan_Switch-impl-usr-__GUARANTEE0);
+
+	next(_TOP__Plan_Switch-impl-usr-__GUARANTEE0) := (((next(_TOP__Plan_Switch-usr-BAF_Manuever___EVENT_) & next(_TOP__Plan_Switch-usr-LEC_Manuever___EVENT_)) & next(_TOP__Plan_Switch-usr-Selected_Plan___EVENT_)) -> (next(_TOP__Plan_Switch-usr-Plan_Decision___EVENT_) & (((next(_TOP__Plan_Switch-usr-6-Plan_Decision-speed) = next(_TOP__Plan_Switch-res-6-call_5.Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed)) & (next(_TOP__Plan_Switch-usr-2-Plan_Decision-x) = next(_TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x))) & (next(_TOP__Plan_Switch-usr-2-Plan_Decision-y) = next(_TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y)))));
+	next(_TOP__Plan_Switch-usr-__ASSERT) := (next(_TOP__Plan_Switch-usr-__ASSUME__HIST) -> next(_TOP__Plan_Switch-impl-usr-__GUARANTEE0));
 
 
 
@@ -136,46 +150,32 @@ ASSIGN
 
 
 
-MODULE Collision_Avoidance__SELECT_PLAN (Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed, Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x, Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y, Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed, Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x, Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y, Collision_Avoidance__SELECT_PLAN-usr-Selection)
+MODULE _TOP__LEC (_TOP__LEC-usr-__ASSUME__HIST, _TOP__LEC-usr-ADSB_In___EVENT_, _TOP__LEC-usr-6-ADSB_In-speed, _TOP__LEC-usr-2-ADSB_In-x, _TOP__LEC-usr-2-ADSB_In-y, _TOP__LEC-usr-STATE_In___EVENT_, _TOP__LEC-usr-6-STATE_In-speed, _TOP__LEC-usr-2-STATE_In-x, _TOP__LEC-usr-2-STATE_In-y, _TOP__LEC-usr-BAF_Manuever_In___EVENT_, _TOP__LEC-usr-6-BAF_Manuever_In-speed, _TOP__LEC-usr-2-BAF_Manuever_In-x, _TOP__LEC-usr-2-BAF_Manuever_In-y, _TOP__LEC-usr-time, _TOP__LEC-usr-ADSB_Out___EVENT_, _TOP__LEC-usr-6-ADSB_Out-speed, _TOP__LEC-usr-2-ADSB_Out-x, _TOP__LEC-usr-2-ADSB_Out-y, _TOP__LEC-usr-STATE_Out___EVENT_, _TOP__LEC-usr-6-STATE_Out-speed, _TOP__LEC-usr-2-STATE_Out-x, _TOP__LEC-usr-2-STATE_Out-y, _TOP__LEC-usr-BAF_Manuever_Out___EVENT_, _TOP__LEC-usr-6-BAF_Manuever_Out-speed, _TOP__LEC-usr-2-BAF_Manuever_Out-x, _TOP__LEC-usr-2-BAF_Manuever_Out-y, _TOP__LEC-usr-LEC_Manuever_Out___EVENT_, _TOP__LEC-usr-6-LEC_Manuever_Out-speed, _TOP__LEC-usr-2-LEC_Manuever_Out-x, _TOP__LEC-usr-2-LEC_Manuever_Out-y)
 VAR
-	Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed : real;
-	Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x : real;
-	Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y : real;
+	_TOP__LEC-usr-__ASSERT : boolean;
+	_TOP__LEC-impl-usr-__GUARANTEE0 : boolean;
 
 ASSIGN
-	init(Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed : Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed);
-	init(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x : Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x);
-	init(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y) := (Collision_Avoidance__SELECT_PLAN-usr-Selection ? Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y : Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y);
+	init(_TOP__LEC-impl-usr-__GUARANTEE0) := (((_TOP__LEC-usr-ADSB_In___EVENT_ & _TOP__LEC-usr-STATE_In___EVENT_) & _TOP__LEC-usr-BAF_Manuever_In___EVENT_) -> ((((((_TOP__LEC-usr-LEC_Manuever_Out___EVENT_ & _TOP__LEC-usr-BAF_Manuever_Out___EVENT_) & (((_TOP__LEC-usr-6-BAF_Manuever_Out-speed = _TOP__LEC-usr-6-BAF_Manuever_In-speed) & (_TOP__LEC-usr-2-BAF_Manuever_Out-x = _TOP__LEC-usr-2-BAF_Manuever_In-x)) & (_TOP__LEC-usr-2-BAF_Manuever_Out-y = _TOP__LEC-usr-2-BAF_Manuever_In-y))) & _TOP__LEC-usr-ADSB_Out___EVENT_) & (((_TOP__LEC-usr-6-ADSB_Out-speed = _TOP__LEC-usr-6-ADSB_In-speed) & (_TOP__LEC-usr-2-ADSB_Out-x = _TOP__LEC-usr-2-ADSB_In-x)) & (_TOP__LEC-usr-2-ADSB_Out-y = _TOP__LEC-usr-2-ADSB_In-y))) & _TOP__LEC-usr-STATE_Out___EVENT_) & (((_TOP__LEC-usr-6-STATE_Out-speed = _TOP__LEC-usr-6-STATE_In-speed) & (_TOP__LEC-usr-2-STATE_Out-x = _TOP__LEC-usr-2-STATE_In-x)) & (_TOP__LEC-usr-2-STATE_Out-y = _TOP__LEC-usr-2-STATE_In-y))));
+	init(_TOP__LEC-usr-__ASSERT) := (_TOP__LEC-usr-__ASSUME__HIST -> _TOP__LEC-impl-usr-__GUARANTEE0);
 
-	next(Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-6-LEC-speed) : next(Collision_Avoidance__SELECT_PLAN-usr-6-BAF-speed));
-	next(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-2-LEC-x) : next(Collision_Avoidance__SELECT_PLAN-usr-2-BAF-x));
-	next(Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y) := (next(Collision_Avoidance__SELECT_PLAN-usr-Selection) ? next(Collision_Avoidance__SELECT_PLAN-usr-2-LEC-y) : next(Collision_Avoidance__SELECT_PLAN-usr-2-BAF-y));
+	next(_TOP__LEC-impl-usr-__GUARANTEE0) := (((next(_TOP__LEC-usr-ADSB_In___EVENT_) & next(_TOP__LEC-usr-STATE_In___EVENT_)) & next(_TOP__LEC-usr-BAF_Manuever_In___EVENT_)) -> ((((((next(_TOP__LEC-usr-LEC_Manuever_Out___EVENT_) & next(_TOP__LEC-usr-BAF_Manuever_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-BAF_Manuever_Out-speed) = next(_TOP__LEC-usr-6-BAF_Manuever_In-speed)) & (next(_TOP__LEC-usr-2-BAF_Manuever_Out-x) = next(_TOP__LEC-usr-2-BAF_Manuever_In-x))) & (next(_TOP__LEC-usr-2-BAF_Manuever_Out-y) = next(_TOP__LEC-usr-2-BAF_Manuever_In-y)))) & next(_TOP__LEC-usr-ADSB_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-ADSB_Out-speed) = next(_TOP__LEC-usr-6-ADSB_In-speed)) & (next(_TOP__LEC-usr-2-ADSB_Out-x) = next(_TOP__LEC-usr-2-ADSB_In-x))) & (next(_TOP__LEC-usr-2-ADSB_Out-y) = next(_TOP__LEC-usr-2-ADSB_In-y)))) & next(_TOP__LEC-usr-STATE_Out___EVENT_)) & (((next(_TOP__LEC-usr-6-STATE_Out-speed) = next(_TOP__LEC-usr-6-STATE_In-speed)) & (next(_TOP__LEC-usr-2-STATE_Out-x) = next(_TOP__LEC-usr-2-STATE_In-x))) & (next(_TOP__LEC-usr-2-STATE_Out-y) = next(_TOP__LEC-usr-2-STATE_In-y)))));
+	next(_TOP__LEC-usr-__ASSERT) := (next(_TOP__LEC-usr-__ASSUME__HIST) -> next(_TOP__LEC-impl-usr-__GUARANTEE0));
 
 
 
-MODULE _TOP__Plan_Switch (_TOP__Plan_Switch-usr-__ASSUME__HIST, _TOP__Plan_Switch-usr-BAF_Manuever___EVENT_, _TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-LEC_Manuever___EVENT_, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan___EVENT_, _TOP__Plan_Switch-usr-Selected_Plan, _TOP__Plan_Switch-usr-time, _TOP__Plan_Switch-usr-Plan_Decision___EVENT_, _TOP__Plan_Switch-usr-6-Plan_Decision-speed, _TOP__Plan_Switch-usr-2-Plan_Decision-x, _TOP__Plan_Switch-usr-2-Plan_Decision-y)
+MODULE _TOP__DAA (_TOP__DAA-usr-__ASSUME__HIST, _TOP__DAA-usr-ADSB_In___EVENT_, _TOP__DAA-usr-6-ADSB_In-speed, _TOP__DAA-usr-2-ADSB_In-x, _TOP__DAA-usr-2-ADSB_In-y, _TOP__DAA-usr-STATE_In___EVENT_, _TOP__DAA-usr-6-STATE_In-speed, _TOP__DAA-usr-2-STATE_In-x, _TOP__DAA-usr-2-STATE_In-y, _TOP__DAA-usr-time, _TOP__DAA-usr-ADSB_Out___EVENT_, _TOP__DAA-usr-6-ADSB_Out-speed, _TOP__DAA-usr-2-ADSB_Out-x, _TOP__DAA-usr-2-ADSB_Out-y, _TOP__DAA-usr-STATE_Out___EVENT_, _TOP__DAA-usr-6-STATE_Out-speed, _TOP__DAA-usr-2-STATE_Out-x, _TOP__DAA-usr-2-STATE_Out-y, _TOP__DAA-usr-BAF_Manuever_Out___EVENT_, _TOP__DAA-usr-6-BAF_Manuever_Out-speed, _TOP__DAA-usr-2-BAF_Manuever_Out-x, _TOP__DAA-usr-2-BAF_Manuever_Out-y)
 VAR
-	_TOP__Plan_Switch-usr-__ASSERT : boolean;
-	_TOP__Plan_Switch-impl-usr-__GUARANTEE0 : boolean;
-	_TOP__Plan_Switch-res-6-call_5 : Collision_Avoidance__SELECT_PLAN(_TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan);
-	_TOP__Plan_Switch-res-2-call_5 : Collision_Avoidance__SELECT_PLAN(_TOP__Plan_Switch-usr-6-BAF_Manuever-speed, _TOP__Plan_Switch-usr-2-BAF_Manuever-x, _TOP__Plan_Switch-usr-2-BAF_Manuever-y, _TOP__Plan_Switch-usr-6-LEC_Manuever-speed, _TOP__Plan_Switch-usr-2-LEC_Manuever-x, _TOP__Plan_Switch-usr-2-LEC_Manuever-y, _TOP__Plan_Switch-usr-Selected_Plan);
+	_TOP__DAA-usr-__ASSERT : boolean;
+	_TOP__DAA-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__DAA-res-call_4 : Collision_Avoidance__CONFLICT_DETECTED(_TOP__DAA-usr-6-ADSB_In-speed, _TOP__DAA-usr-2-ADSB_In-x, _TOP__DAA-usr-2-ADSB_In-y);
 
 ASSIGN
-	init(_TOP__Plan_Switch-impl-usr-__GUARANTEE0) := (((_TOP__Plan_Switch-usr-BAF_Manuever___EVENT_ & _TOP__Plan_Switch-usr-LEC_Manuever___EVENT_) & _TOP__Plan_Switch-usr-Selected_Plan___EVENT_) -> (_TOP__Plan_Switch-usr-Plan_Decision___EVENT_ & (((_TOP__Plan_Switch-usr-6-Plan_Decision-speed = _TOP__Plan_Switch-res-6-call_5.Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed) & (_TOP__Plan_Switch-usr-2-Plan_Decision-x = _TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x)) & (_TOP__Plan_Switch-usr-2-Plan_Decision-y = _TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y))));
-	init(_TOP__Plan_Switch-usr-__ASSERT) := (_TOP__Plan_Switch-usr-__ASSUME__HIST -> _TOP__Plan_Switch-impl-usr-__GUARANTEE0);
+	init(_TOP__DAA-impl-usr-__GUARANTEE0) := (((_TOP__DAA-usr-ADSB_In___EVENT_ & _TOP__DAA-usr-STATE_In___EVENT_) & _TOP__DAA-res-call_4.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) -> ((((_TOP__DAA-usr-BAF_Manuever_Out___EVENT_ & _TOP__DAA-usr-ADSB_Out___EVENT_) & (((_TOP__DAA-usr-6-ADSB_Out-speed = _TOP__DAA-usr-6-ADSB_In-speed) & (_TOP__DAA-usr-2-ADSB_Out-x = _TOP__DAA-usr-2-ADSB_In-x)) & (_TOP__DAA-usr-2-ADSB_Out-y = _TOP__DAA-usr-2-ADSB_In-y))) & _TOP__DAA-usr-STATE_Out___EVENT_) & (((_TOP__DAA-usr-6-STATE_Out-speed = _TOP__DAA-usr-6-STATE_In-speed) & (_TOP__DAA-usr-2-STATE_Out-x = _TOP__DAA-usr-2-STATE_In-x)) & (_TOP__DAA-usr-2-STATE_Out-y = _TOP__DAA-usr-2-STATE_In-y))));
+	init(_TOP__DAA-usr-__ASSERT) := (_TOP__DAA-usr-__ASSUME__HIST -> _TOP__DAA-impl-usr-__GUARANTEE0);
 
-	next(_TOP__Plan_Switch-impl-usr-__GUARANTEE0) := (((next(_TOP__Plan_Switch-usr-BAF_Manuever___EVENT_) & next(_TOP__Plan_Switch-usr-LEC_Manuever___EVENT_)) & next(_TOP__Plan_Switch-usr-Selected_Plan___EVENT_)) -> (next(_TOP__Plan_Switch-usr-Plan_Decision___EVENT_) & (((next(_TOP__Plan_Switch-usr-6-Plan_Decision-speed) = next(_TOP__Plan_Switch-res-6-call_5.Collision_Avoidance__SELECT_PLAN-usr-6-_outvar-speed)) & (next(_TOP__Plan_Switch-usr-2-Plan_Decision-x) = next(_TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-x))) & (next(_TOP__Plan_Switch-usr-2-Plan_Decision-y) = next(_TOP__Plan_Switch-res-2-call_5.Collision_Avoidance__SELECT_PLAN-usr-2-_outvar-y)))));
-	next(_TOP__Plan_Switch-usr-__ASSERT) := (next(_TOP__Plan_Switch-usr-__ASSUME__HIST) -> next(_TOP__Plan_Switch-impl-usr-__GUARANTEE0));
-
-
-
-MODULE __HIST (__HIST-usr-input)
-VAR
-	__HIST-usr-hist : boolean;
-
-ASSIGN
-	init(__HIST-usr-hist) := __HIST-usr-input;
-	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+	next(_TOP__DAA-impl-usr-__GUARANTEE0) := (((next(_TOP__DAA-usr-ADSB_In___EVENT_) & next(_TOP__DAA-usr-STATE_In___EVENT_)) & next(_TOP__DAA-res-call_4.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) -> ((((next(_TOP__DAA-usr-BAF_Manuever_Out___EVENT_) & next(_TOP__DAA-usr-ADSB_Out___EVENT_)) & (((next(_TOP__DAA-usr-6-ADSB_Out-speed) = next(_TOP__DAA-usr-6-ADSB_In-speed)) & (next(_TOP__DAA-usr-2-ADSB_Out-x) = next(_TOP__DAA-usr-2-ADSB_In-x))) & (next(_TOP__DAA-usr-2-ADSB_Out-y) = next(_TOP__DAA-usr-2-ADSB_In-y)))) & next(_TOP__DAA-usr-STATE_Out___EVENT_)) & (((next(_TOP__DAA-usr-6-STATE_Out-speed) = next(_TOP__DAA-usr-6-STATE_In-speed)) & (next(_TOP__DAA-usr-2-STATE_Out-x) = next(_TOP__DAA-usr-2-STATE_In-x))) & (next(_TOP__DAA-usr-2-STATE_Out-y) = next(_TOP__DAA-usr-2-STATE_In-y)))));
+	next(_TOP__DAA-usr-__ASSERT) := (next(_TOP__DAA-usr-__ASSUME__HIST) -> next(_TOP__DAA-impl-usr-__GUARANTEE0));
 
 
 
@@ -263,6 +263,10 @@ VAR
 	main-usr-2-STATE_Out-y : real;
 	main-usr-Selected_Plan_Out : boolean;
 	main-usr-is_plan_decision_eq_baf : boolean;
+	main-usr-Plan_Manuever___EVENT_ : boolean;
+	main-usr-6-Plan_Manuever-speed : real;
+	main-usr-2-Plan_Manuever-x : real;
+	main-usr-2-Plan_Manuever-y : real;
 	main-usr-DAA__ADSB_In___EVENT_ : boolean;
 	main-usr-6-DAA__ADSB_In-speed : real;
 	main-usr-2-DAA__ADSB_In-x : real;
@@ -323,6 +327,12 @@ VAR
 	main-usr-2-STATE-y : real;
 	main-usr-time : real;
 	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
+	main-impl-usr-__GUARANTEE2 : boolean;
+	main-impl-usr-__GUARANTEE3 : boolean;
+	main-impl-usr-__GUARANTEE4 : boolean;
+	main-impl-usr-__GUARANTEE5 : boolean;
 	main-res-glocal_24 : boolean;
 	main-res-glocal_26 : boolean;
 	main-res-glocal_29 : boolean;
@@ -397,9 +407,16 @@ VAR
 	main-res-call_31 : _TOP__LEC(main-usr-LEC____ASSUME__HIST, main-usr-LEC__ADSB_In___EVENT_, main-usr-6-LEC__ADSB_In-speed, main-usr-2-LEC__ADSB_In-x, main-usr-2-LEC__ADSB_In-y, main-usr-LEC__STATE_In___EVENT_, main-usr-6-LEC__STATE_In-speed, main-usr-2-LEC__STATE_In-x, main-usr-2-LEC__STATE_In-y, main-usr-LEC__BAF_Manuever_In___EVENT_, main-usr-6-LEC__BAF_Manuever_In-speed, main-usr-2-LEC__BAF_Manuever_In-x, main-usr-2-LEC__BAF_Manuever_In-y, main-usr-LEC__time, main-usr-LEC__ADSB_Out___EVENT_, main-usr-6-LEC__ADSB_Out-speed, main-usr-2-LEC__ADSB_Out-x, main-usr-2-LEC__ADSB_Out-y, main-usr-LEC__STATE_Out___EVENT_, main-usr-6-LEC__STATE_Out-speed, main-usr-2-LEC__STATE_Out-x, main-usr-2-LEC__STATE_Out-y, main-usr-LEC__BAF_Manuever_Out___EVENT_, main-usr-6-LEC__BAF_Manuever_Out-speed, main-usr-2-LEC__BAF_Manuever_Out-x, main-usr-2-LEC__BAF_Manuever_Out-y, main-usr-LEC__LEC_Manuever_Out___EVENT_, main-usr-6-LEC__LEC_Manuever_Out-speed, main-usr-2-LEC__LEC_Manuever_Out-x, main-usr-2-LEC__LEC_Manuever_Out-y);
 	main-res-call_28 : __HIST(main-res-gklocal_27);
 	main-res-call_25 : _TOP__DAA(main-usr-DAA____ASSUME__HIST, main-usr-DAA__ADSB_In___EVENT_, main-usr-6-DAA__ADSB_In-speed, main-usr-2-DAA__ADSB_In-x, main-usr-2-DAA__ADSB_In-y, main-usr-DAA__STATE_In___EVENT_, main-usr-6-DAA__STATE_In-speed, main-usr-2-DAA__STATE_In-x, main-usr-2-DAA__STATE_In-y, main-usr-DAA__time, main-usr-DAA__ADSB_Out___EVENT_, main-usr-6-DAA__ADSB_Out-speed, main-usr-2-DAA__ADSB_Out-x, main-usr-2-DAA__ADSB_Out-y, main-usr-DAA__STATE_Out___EVENT_, main-usr-6-DAA__STATE_Out-speed, main-usr-2-DAA__STATE_Out-x, main-usr-2-DAA__STATE_Out-y, main-usr-DAA__BAF_Manuever_Out___EVENT_, main-usr-6-DAA__BAF_Manuever_Out-speed, main-usr-2-DAA__BAF_Manuever_Out-x, main-usr-2-DAA__BAF_Manuever_Out-y);
+	main-res-call_23 : Collision_Avoidance__CONFLICT_DETECTED(main-usr-6-ADSB-speed, main-usr-2-ADSB-x, main-usr-2-ADSB-y);
 
 ASSIGN
 	init(main-impl-usr-__ASSUME__HIST) := (main-usr-High_Assurance_System____ASSUME__HIST & (main-usr-Plan_Switch____ASSUME__HIST & (main-usr-LEC____ASSUME__HIST & main-usr-DAA____ASSUME__HIST)));
+	init(main-impl-usr-__GUARANTEE0) := (((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) -> main-usr-event_BAF_Manuever_Out);
+	init(main-impl-usr-__GUARANTEE1) := (((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) -> main-usr-event_LEC_Manuever_Out);
+	init(main-impl-usr-__GUARANTEE2) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> main-usr-is_safe_manuever);
+	init(main-impl-usr-__GUARANTEE3) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> !main-usr-Selected_Plan_Out);
+	init(main-impl-usr-__GUARANTEE4) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> main-usr-is_safe_plan_decision);
+	init(main-impl-usr-__GUARANTEE5) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> main-usr-is_plan_decision_eq_baf);
 	init(main-res-glocal_24) := (main-usr-time = main-usr-DAA__time);
 	init(main-res-glocal_26) := main-res-call_25._TOP__DAA-usr-__ASSERT;
 	init(main-res-gklocal_27) := TRUE;
@@ -465,6 +482,12 @@ ASSIGN
 	init(main-res-glocal_96) := (main-usr-time = 0);
 
 	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-High_Assurance_System____ASSUME__HIST) & (next(main-usr-Plan_Switch____ASSUME__HIST) & (next(main-usr-LEC____ASSUME__HIST) & next(main-usr-DAA____ASSUME__HIST))));
+	next(main-impl-usr-__GUARANTEE0) := (((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) -> next(main-usr-event_BAF_Manuever_Out));
+	next(main-impl-usr-__GUARANTEE1) := (((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) -> next(main-usr-event_LEC_Manuever_Out));
+	next(main-impl-usr-__GUARANTEE2) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> next(main-usr-is_safe_manuever));
+	next(main-impl-usr-__GUARANTEE3) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> !next(main-usr-Selected_Plan_Out));
+	next(main-impl-usr-__GUARANTEE4) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> next(main-usr-is_safe_plan_decision));
+	next(main-impl-usr-__GUARANTEE5) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> next(main-usr-is_plan_decision_eq_baf));
 	next(main-res-glocal_24) := (next(main-usr-time) = next(main-usr-DAA__time));
 	next(main-res-glocal_26) := next(main-res-call_25._TOP__DAA-usr-__ASSERT);
 	next(main-res-gklocal_27) := TRUE;
@@ -592,6 +615,18 @@ ASSIGN
 	INVAR main-res-glocal_26;
 	INVAR main-res-glocal_24;
 
+INVARSPEC 
+((main-impl-usr-__GUARANTEE5));
+INVARSPEC 
+((main-impl-usr-__GUARANTEE4));
+INVARSPEC 
+((main-impl-usr-__GUARANTEE3));
+INVARSPEC 
+((main-impl-usr-__GUARANTEE2));
+INVARSPEC 
+((main-impl-usr-__GUARANTEE1));
+INVARSPEC 
+((main-impl-usr-__GUARANTEE0));
 INVARSPEC 
 ((main-impl-usr-__ASSUME__HIST));
 

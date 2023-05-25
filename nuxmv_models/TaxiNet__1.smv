@@ -1,0 +1,174 @@
+
+MODULE _TOP__Boeing_Vehicle_Actuation (_TOP__Boeing_Vehicle_Actuation-usr-__ASSUME__HIST, _TOP__Boeing_Vehicle_Actuation-usr-Camera___EVENT_, _TOP__Boeing_Vehicle_Actuation-usr-Slow___EVENT_, _TOP__Boeing_Vehicle_Actuation-usr-Slow, _TOP__Boeing_Vehicle_Actuation-usr-Halt___EVENT_, _TOP__Boeing_Vehicle_Actuation-usr-Halt, _TOP__Boeing_Vehicle_Actuation-usr-time, _TOP__Boeing_Vehicle_Actuation-usr-Actuation_Command___EVENT_, _TOP__Boeing_Vehicle_Actuation-usr-Actuation_Command)
+VAR
+	_TOP__Boeing_Vehicle_Actuation-usr-__ASSERT : boolean;
+	_TOP__Boeing_Vehicle_Actuation-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__Boeing_Vehicle_Actuation-impl-usr-__GUARANTEE0) := (_TOP__Boeing_Vehicle_Actuation-usr-Actuation_Command > 0);
+	init(_TOP__Boeing_Vehicle_Actuation-usr-__ASSERT) := (_TOP__Boeing_Vehicle_Actuation-usr-__ASSUME__HIST -> _TOP__Boeing_Vehicle_Actuation-impl-usr-__GUARANTEE0);
+
+	next(_TOP__Boeing_Vehicle_Actuation-impl-usr-__GUARANTEE0) := (next(_TOP__Boeing_Vehicle_Actuation-usr-Actuation_Command) > 0);
+	next(_TOP__Boeing_Vehicle_Actuation-usr-__ASSERT) := (next(_TOP__Boeing_Vehicle_Actuation-usr-__ASSUME__HIST) -> next(_TOP__Boeing_Vehicle_Actuation-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__Kestrel_Components (_TOP__Kestrel_Components-usr-__ASSUME__HIST, _TOP__Kestrel_Components-usr-GPS_Monitor___EVENT_, _TOP__Kestrel_Components-usr-18-GPS_Monitor-CTE_1_Sigma_Bound, _TOP__Kestrel_Components-usr-13-GPS_Monitor-CTE_Estimate, _TOP__Kestrel_Components-usr-26-GPS_Monitor-CTE_High_Confidence_Bound, _TOP__Kestrel_Components-usr-18-GPS_Monitor-Monitor_Available, _TOP__Kestrel_Components-usr-17-GPS_Monitor-Safe_At_Tstop_95, _TOP__Kestrel_Components-usr-17-GPS_Monitor-Safe_At_Tstop_99, _TOP__Kestrel_Components-usr-9-GPS_Monitor-Safe_Now, _TOP__Kestrel_Components-usr-CV_Monitor___EVENT_, _TOP__Kestrel_Components-usr-18-CV_Monitor-CTE_1_Sigma_Bound, _TOP__Kestrel_Components-usr-13-CV_Monitor-CTE_Estimate, _TOP__Kestrel_Components-usr-26-CV_Monitor-CTE_High_Confidence_Bound, _TOP__Kestrel_Components-usr-18-CV_Monitor-Monitor_Available, _TOP__Kestrel_Components-usr-17-CV_Monitor-Safe_At_Tstop_95, _TOP__Kestrel_Components-usr-17-CV_Monitor-Safe_At_Tstop_99, _TOP__Kestrel_Components-usr-9-CV_Monitor-Safe_Now, _TOP__Kestrel_Components-usr-IRS_Monitor___EVENT_, _TOP__Kestrel_Components-usr-18-IRS_Monitor-CTE_1_Sigma_Bound, _TOP__Kestrel_Components-usr-13-IRS_Monitor-CTE_Estimate, _TOP__Kestrel_Components-usr-26-IRS_Monitor-CTE_High_Confidence_Bound, _TOP__Kestrel_Components-usr-18-IRS_Monitor-Monitor_Available, _TOP__Kestrel_Components-usr-17-IRS_Monitor-Safe_At_Tstop_95, _TOP__Kestrel_Components-usr-17-IRS_Monitor-Safe_At_Tstop_99, _TOP__Kestrel_Components-usr-9-IRS_Monitor-Safe_Now, _TOP__Kestrel_Components-usr-ISSM1___EVENT_, _TOP__Kestrel_Components-usr-ISSM1, _TOP__Kestrel_Components-usr-LEC_Confidence___EVENT_, _TOP__Kestrel_Components-usr-LEC_Confidence, _TOP__Kestrel_Components-usr-time, _TOP__Kestrel_Components-usr-no_mon_avail, _TOP__Kestrel_Components-usr-Slow___EVENT_, _TOP__Kestrel_Components-usr-Slow, _TOP__Kestrel_Components-usr-Halt___EVENT_, _TOP__Kestrel_Components-usr-Halt)
+VAR
+	_TOP__Kestrel_Components-usr-__ASSERT : boolean;
+	_TOP__Kestrel_Components-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__Kestrel_Components-res-glocal_1 : boolean;
+
+ASSIGN
+	init(_TOP__Kestrel_Components-impl-usr-__GUARANTEE0) := (_TOP__Kestrel_Components-usr-no_mon_avail -> _TOP__Kestrel_Components-usr-Halt);
+	init(_TOP__Kestrel_Components-usr-__ASSERT) := (!_TOP__Kestrel_Components-usr-no_mon_avail & (_TOP__Kestrel_Components-usr-__ASSUME__HIST -> _TOP__Kestrel_Components-impl-usr-__GUARANTEE0));
+	init(_TOP__Kestrel_Components-res-glocal_1) := !(_TOP__Kestrel_Components-usr-18-IRS_Monitor-Monitor_Available | (_TOP__Kestrel_Components-usr-18-CV_Monitor-Monitor_Available | _TOP__Kestrel_Components-usr-18-GPS_Monitor-Monitor_Available));
+
+	next(_TOP__Kestrel_Components-impl-usr-__GUARANTEE0) := (next(_TOP__Kestrel_Components-usr-no_mon_avail) -> next(_TOP__Kestrel_Components-usr-Halt));
+	next(_TOP__Kestrel_Components-usr-__ASSERT) := ((next(_TOP__Kestrel_Components-usr-no_mon_avail) = _TOP__Kestrel_Components-res-glocal_1) & (next(_TOP__Kestrel_Components-usr-__ASSUME__HIST) -> next(_TOP__Kestrel_Components-impl-usr-__GUARANTEE0)));
+	next(_TOP__Kestrel_Components-res-glocal_1) := !(next(_TOP__Kestrel_Components-usr-18-IRS_Monitor-Monitor_Available) | (next(_TOP__Kestrel_Components-usr-18-CV_Monitor-Monitor_Available) | next(_TOP__Kestrel_Components-usr-18-GPS_Monitor-Monitor_Available)));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE main () 
+VAR
+	main-usr-Boeing_Vehicle_Actuation__Actuation_Command___EVENT_ : boolean;
+	main-usr-Boeing_Vehicle_Actuation__Actuation_Command : integer;
+	main-usr-Boeing_Vehicle_Actuation____ASSUME__HIST : boolean;
+	main-usr-Kestrel_Components__no_mon_avail : boolean;
+	main-usr-Kestrel_Components__Slow___EVENT_ : boolean;
+	main-usr-Kestrel_Components__Slow : boolean;
+	main-usr-Kestrel_Components__Halt___EVENT_ : boolean;
+	main-usr-Kestrel_Components__Halt : boolean;
+	main-usr-Kestrel_Components____ASSUME__HIST : boolean;
+	main-usr-Actuation_Command___EVENT_ : boolean;
+	main-usr-Actuation_Command : integer;
+	main-usr-Boeing_Vehicle_Actuation__Camera___EVENT_ : boolean;
+	main-usr-Boeing_Vehicle_Actuation__Slow___EVENT_ : boolean;
+	main-usr-Boeing_Vehicle_Actuation__Slow : boolean;
+	main-usr-Boeing_Vehicle_Actuation__Halt___EVENT_ : boolean;
+	main-usr-Boeing_Vehicle_Actuation__Halt : boolean;
+	main-usr-Boeing_Vehicle_Actuation__time : real;
+	main-usr-Kestrel_Components__GPS_Monitor___EVENT_ : boolean;
+	main-usr-18-Kestrel_Components__GPS_Monitor-CTE_1_Sigma_Bound : real;
+	main-usr-13-Kestrel_Components__GPS_Monitor-CTE_Estimate : real;
+	main-usr-26-Kestrel_Components__GPS_Monitor-CTE_High_Confidence_Bound : real;
+	main-usr-18-Kestrel_Components__GPS_Monitor-Monitor_Available : boolean;
+	main-usr-17-Kestrel_Components__GPS_Monitor-Safe_At_Tstop_95 : boolean;
+	main-usr-17-Kestrel_Components__GPS_Monitor-Safe_At_Tstop_99 : boolean;
+	main-usr-9-Kestrel_Components__GPS_Monitor-Safe_Now : boolean;
+	main-usr-Kestrel_Components__CV_Monitor___EVENT_ : boolean;
+	main-usr-18-Kestrel_Components__CV_Monitor-CTE_1_Sigma_Bound : real;
+	main-usr-13-Kestrel_Components__CV_Monitor-CTE_Estimate : real;
+	main-usr-26-Kestrel_Components__CV_Monitor-CTE_High_Confidence_Bound : real;
+	main-usr-18-Kestrel_Components__CV_Monitor-Monitor_Available : boolean;
+	main-usr-17-Kestrel_Components__CV_Monitor-Safe_At_Tstop_95 : boolean;
+	main-usr-17-Kestrel_Components__CV_Monitor-Safe_At_Tstop_99 : boolean;
+	main-usr-9-Kestrel_Components__CV_Monitor-Safe_Now : boolean;
+	main-usr-Kestrel_Components__IRS_Monitor___EVENT_ : boolean;
+	main-usr-18-Kestrel_Components__IRS_Monitor-CTE_1_Sigma_Bound : real;
+	main-usr-13-Kestrel_Components__IRS_Monitor-CTE_Estimate : real;
+	main-usr-26-Kestrel_Components__IRS_Monitor-CTE_High_Confidence_Bound : real;
+	main-usr-18-Kestrel_Components__IRS_Monitor-Monitor_Available : boolean;
+	main-usr-17-Kestrel_Components__IRS_Monitor-Safe_At_Tstop_95 : boolean;
+	main-usr-17-Kestrel_Components__IRS_Monitor-Safe_At_Tstop_99 : boolean;
+	main-usr-9-Kestrel_Components__IRS_Monitor-Safe_Now : boolean;
+	main-usr-Kestrel_Components__ISSM1___EVENT_ : boolean;
+	main-usr-Kestrel_Components__ISSM1 : integer;
+	main-usr-Kestrel_Components__LEC_Confidence___EVENT_ : boolean;
+	main-usr-Kestrel_Components__LEC_Confidence : boolean;
+	main-usr-Kestrel_Components__time : real;
+	main-usr-Camera___EVENT_ : boolean;
+	main-usr-GPS___EVENT_ : boolean;
+	main-usr-IRS___EVENT_ : boolean;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-res-glocal_3 : boolean;
+	main-res-glocal_5 : boolean;
+	main-res-glocal_8 : boolean;
+	main-res-glocal_9 : boolean;
+	main-res-glocal_11 : boolean;
+	main-res-glocal_12 : boolean;
+	main-res-glocal_13 : boolean;
+	main-res-glocal_14 : boolean;
+	main-res-glocal_15 : boolean;
+	main-res-glocal_16 : boolean;
+	main-res-glocal_17 : boolean;
+	main-res-glocal_18 : boolean;
+	main-res-glocal_19 : boolean;
+	main-res-glocal_20 : boolean;
+	main-res-glocal_21 : boolean;
+	main-res-gklocal_6 : boolean;
+	main-res-call_10 : _TOP__Kestrel_Components(main-usr-Kestrel_Components____ASSUME__HIST, main-usr-Kestrel_Components__GPS_Monitor___EVENT_, main-usr-18-Kestrel_Components__GPS_Monitor-CTE_1_Sigma_Bound, main-usr-13-Kestrel_Components__GPS_Monitor-CTE_Estimate, main-usr-26-Kestrel_Components__GPS_Monitor-CTE_High_Confidence_Bound, main-usr-18-Kestrel_Components__GPS_Monitor-Monitor_Available, main-usr-17-Kestrel_Components__GPS_Monitor-Safe_At_Tstop_95, main-usr-17-Kestrel_Components__GPS_Monitor-Safe_At_Tstop_99, main-usr-9-Kestrel_Components__GPS_Monitor-Safe_Now, main-usr-Kestrel_Components__CV_Monitor___EVENT_, main-usr-18-Kestrel_Components__CV_Monitor-CTE_1_Sigma_Bound, main-usr-13-Kestrel_Components__CV_Monitor-CTE_Estimate, main-usr-26-Kestrel_Components__CV_Monitor-CTE_High_Confidence_Bound, main-usr-18-Kestrel_Components__CV_Monitor-Monitor_Available, main-usr-17-Kestrel_Components__CV_Monitor-Safe_At_Tstop_95, main-usr-17-Kestrel_Components__CV_Monitor-Safe_At_Tstop_99, main-usr-9-Kestrel_Components__CV_Monitor-Safe_Now, main-usr-Kestrel_Components__IRS_Monitor___EVENT_, main-usr-18-Kestrel_Components__IRS_Monitor-CTE_1_Sigma_Bound, main-usr-13-Kestrel_Components__IRS_Monitor-CTE_Estimate, main-usr-26-Kestrel_Components__IRS_Monitor-CTE_High_Confidence_Bound, main-usr-18-Kestrel_Components__IRS_Monitor-Monitor_Available, main-usr-17-Kestrel_Components__IRS_Monitor-Safe_At_Tstop_95, main-usr-17-Kestrel_Components__IRS_Monitor-Safe_At_Tstop_99, main-usr-9-Kestrel_Components__IRS_Monitor-Safe_Now, main-usr-Kestrel_Components__ISSM1___EVENT_, main-usr-Kestrel_Components__ISSM1, main-usr-Kestrel_Components__LEC_Confidence___EVENT_, main-usr-Kestrel_Components__LEC_Confidence, main-usr-Kestrel_Components__time, main-usr-Kestrel_Components__no_mon_avail, main-usr-Kestrel_Components__Slow___EVENT_, main-usr-Kestrel_Components__Slow, main-usr-Kestrel_Components__Halt___EVENT_, main-usr-Kestrel_Components__Halt);
+	main-res-call_7 : __HIST(main-res-gklocal_6);
+	main-res-call_4 : _TOP__Boeing_Vehicle_Actuation(main-usr-Boeing_Vehicle_Actuation____ASSUME__HIST, main-usr-Boeing_Vehicle_Actuation__Camera___EVENT_, main-usr-Boeing_Vehicle_Actuation__Slow___EVENT_, main-usr-Boeing_Vehicle_Actuation__Slow, main-usr-Boeing_Vehicle_Actuation__Halt___EVENT_, main-usr-Boeing_Vehicle_Actuation__Halt, main-usr-Boeing_Vehicle_Actuation__time, main-usr-Boeing_Vehicle_Actuation__Actuation_Command___EVENT_, main-usr-Boeing_Vehicle_Actuation__Actuation_Command);
+
+ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-Kestrel_Components____ASSUME__HIST & main-usr-Boeing_Vehicle_Actuation____ASSUME__HIST);
+	init(main-impl-usr-__GUARANTEE0) := (main-usr-Actuation_Command > 0);
+	init(main-res-glocal_3) := (main-usr-time = main-usr-Boeing_Vehicle_Actuation__time);
+	init(main-res-glocal_5) := main-res-call_4._TOP__Boeing_Vehicle_Actuation-usr-__ASSERT;
+	init(main-res-gklocal_6) := TRUE;
+	init(main-res-glocal_8) := (main-usr-Boeing_Vehicle_Actuation____ASSUME__HIST = main-res-call_7.__HIST-usr-hist);
+	init(main-res-glocal_9) := (main-usr-time = main-usr-Kestrel_Components__time);
+	init(main-res-glocal_11) := main-res-call_10._TOP__Kestrel_Components-usr-__ASSERT;
+	init(main-res-glocal_12) := (main-usr-Kestrel_Components____ASSUME__HIST = main-res-call_7.__HIST-usr-hist);
+	init(main-res-glocal_13) := (main-usr-Camera___EVENT_ = main-usr-Boeing_Vehicle_Actuation__Camera___EVENT_);
+	init(main-res-glocal_14) := (main-usr-Boeing_Vehicle_Actuation__Actuation_Command = main-usr-Actuation_Command);
+	init(main-res-glocal_15) := (main-usr-Boeing_Vehicle_Actuation__Actuation_Command___EVENT_ = main-usr-Actuation_Command___EVENT_);
+	init(main-res-glocal_16) := (main-usr-Kestrel_Components__Slow = main-usr-Boeing_Vehicle_Actuation__Slow);
+	init(main-res-glocal_17) := (main-usr-Kestrel_Components__Slow___EVENT_ = main-usr-Boeing_Vehicle_Actuation__Slow___EVENT_);
+	init(main-res-glocal_18) := (main-usr-Kestrel_Components__Halt = main-usr-Boeing_Vehicle_Actuation__Halt);
+	init(main-res-glocal_19) := (main-usr-Kestrel_Components__Halt___EVENT_ = main-usr-Boeing_Vehicle_Actuation__Halt___EVENT_);
+	init(main-res-glocal_20) := TRUE;
+	init(main-res-glocal_21) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-Kestrel_Components____ASSUME__HIST) & next(main-usr-Boeing_Vehicle_Actuation____ASSUME__HIST));
+	next(main-impl-usr-__GUARANTEE0) := (next(main-usr-Actuation_Command) > 0);
+	next(main-res-glocal_3) := (next(main-usr-time) = next(main-usr-Boeing_Vehicle_Actuation__time));
+	next(main-res-glocal_5) := next(main-res-call_4._TOP__Boeing_Vehicle_Actuation-usr-__ASSERT);
+	next(main-res-gklocal_6) := TRUE;
+	next(main-res-glocal_8) := (next(main-usr-Boeing_Vehicle_Actuation____ASSUME__HIST) = next(main-res-call_7.__HIST-usr-hist));
+	next(main-res-glocal_9) := (next(main-usr-time) = next(main-usr-Kestrel_Components__time));
+	next(main-res-glocal_11) := next(main-res-call_10._TOP__Kestrel_Components-usr-__ASSERT);
+	next(main-res-glocal_12) := (next(main-usr-Kestrel_Components____ASSUME__HIST) = next(main-res-call_7.__HIST-usr-hist));
+	next(main-res-glocal_13) := (next(main-usr-Camera___EVENT_) = next(main-usr-Boeing_Vehicle_Actuation__Camera___EVENT_));
+	next(main-res-glocal_14) := (next(main-usr-Boeing_Vehicle_Actuation__Actuation_Command) = next(main-usr-Actuation_Command));
+	next(main-res-glocal_15) := (next(main-usr-Boeing_Vehicle_Actuation__Actuation_Command___EVENT_) = next(main-usr-Actuation_Command___EVENT_));
+	next(main-res-glocal_16) := (next(main-usr-Kestrel_Components__Slow) = next(main-usr-Boeing_Vehicle_Actuation__Slow));
+	next(main-res-glocal_17) := (next(main-usr-Kestrel_Components__Slow___EVENT_) = next(main-usr-Boeing_Vehicle_Actuation__Slow___EVENT_));
+	next(main-res-glocal_18) := (next(main-usr-Kestrel_Components__Halt) = next(main-usr-Boeing_Vehicle_Actuation__Halt));
+	next(main-res-glocal_19) := (next(main-usr-Kestrel_Components__Halt___EVENT_) = next(main-usr-Boeing_Vehicle_Actuation__Halt___EVENT_));
+	next(main-res-glocal_20) := TRUE;
+	next(main-res-glocal_21) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_21;
+	INVAR main-res-glocal_20;
+	INVAR main-res-glocal_19;
+	INVAR main-res-glocal_18;
+	INVAR main-res-glocal_17;
+	INVAR main-res-glocal_16;
+	INVAR main-res-glocal_15;
+	INVAR main-res-glocal_14;
+	INVAR main-res-glocal_13;
+	INVAR main-res-glocal_12;
+	INVAR main-res-glocal_11;
+	INVAR main-res-glocal_9;
+	INVAR main-res-glocal_8;
+	INVAR main-res-glocal_5;
+	INVAR main-res-glocal_3;
+
+INVARSPEC 
+((main-impl-usr-__ASSUME__HIST));
+

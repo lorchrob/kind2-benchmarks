@@ -60,7 +60,9 @@ VAR
 	top-usr-init_invalid_s : signed word[32];
 	top-usr-OK : boolean;
 	top-impl-usr-invalid_s : signed word[32];
+	top-impl-usr-valid_s : signed word[32];
 	top-impl-usr-dirty_s : signed word[32];
+	top-impl-usr-mem_init_s : signed word[32];
 	top-impl-usr-env : boolean;
 	top-res-gklocal_6 : boolean;
 	top-res-call_5 : excludes3(top-usr-e_s1, top-usr-e_s2, top-usr-e_s3);
@@ -73,12 +75,16 @@ ASSIGN
 	init(top-impl-usr-dirty_s) := top-res-2-call_4.synapse-usr-dirty_s;
 	init(top-impl-usr-invalid_s) := top-res-2-call_4.synapse-usr-invalid_s;
 	init(top-usr-OK) := (top-impl-usr-env -> ((top-impl-usr-invalid_s < 0sh32_00000002) | (top-impl-usr-dirty_s < 0sh32_00000001)));
+	init(top-impl-usr-valid_s) := top-res-2-call_4.synapse-usr-valid_s;
+	init(top-impl-usr-mem_init_s) := top-res-2-call_4.synapse-usr-mem_init_s;
 
 	next(top-res-gklocal_6) := (next(top-res-call_5.excludes3-usr-excludes) & (next(top-usr-init_invalid_s) >= 0sh32_00000000));
 	next(top-impl-usr-env) := next(top-res-call_7.Sofar-usr-Sofar);
 	next(top-impl-usr-dirty_s) := next(top-res-2-call_4.synapse-usr-dirty_s);
 	next(top-impl-usr-invalid_s) := next(top-res-2-call_4.synapse-usr-invalid_s);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> ((next(top-impl-usr-invalid_s) < 0sh32_00000002) | (next(top-impl-usr-dirty_s) < 0sh32_00000001)));
+	next(top-impl-usr-valid_s) := next(top-res-2-call_4.synapse-usr-valid_s);
+	next(top-impl-usr-mem_init_s) := next(top-res-2-call_4.synapse-usr-mem_init_s);
 
 
 INVARSPEC 

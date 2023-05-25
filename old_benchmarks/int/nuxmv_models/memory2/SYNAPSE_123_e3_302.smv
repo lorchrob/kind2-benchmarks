@@ -72,6 +72,7 @@ VAR
 	top-impl-usr-invalid_s : integer;
 	top-impl-usr-valid_s : integer;
 	top-impl-usr-dirty_s : integer;
+	top-impl-usr-mem_init_s : integer;
 	top-impl-usr-R1 : boolean;
 	top-impl-usr-R2 : boolean;
 	top-impl-usr-R3 : boolean;
@@ -94,6 +95,7 @@ ASSIGN
 	init(top-impl-usr-R1) := (top-impl-usr-env -> (top-impl-usr-dirty_s < 2));
 	init(top-usr-OK) := ((top-impl-usr-R2 & top-impl-usr-R1) & top-impl-usr-R3);
 	init(top-res-glocal_8) := top-impl-usr-invalid_s + top-impl-usr-valid_s + top-impl-usr-dirty_s;
+	init(top-impl-usr-mem_init_s) := top-res-2-call_4.synapse-usr-mem_init_s;
 
 	next(top-res-gklocal_6) := (next(top-res-call_5.excludes3-usr-excludes) & (next(top-usr-init_invalid_s) >= 0));
 	next(top-impl-usr-env) := next(top-res-call_7.Sofar-usr-Sofar);
@@ -105,6 +107,7 @@ ASSIGN
 	next(top-impl-usr-R1) := (next(top-impl-usr-env) -> (next(top-impl-usr-dirty_s) < 2));
 	next(top-usr-OK) := ((next(top-impl-usr-R2) & next(top-impl-usr-R1)) & next(top-impl-usr-R3));
 	next(top-res-glocal_8) := next(top-impl-usr-invalid_s) + next(top-impl-usr-valid_s) + next(top-impl-usr-dirty_s);
+	next(top-impl-usr-mem_init_s) := next(top-res-2-call_4.synapse-usr-mem_init_s);
 
 
 INVARSPEC 

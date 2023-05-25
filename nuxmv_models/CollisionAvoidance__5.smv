@@ -263,6 +263,10 @@ VAR
 	main-usr-2-STATE_Out-y : real;
 	main-usr-Selected_Plan_Out : boolean;
 	main-usr-is_plan_decision_eq_baf : boolean;
+	main-usr-Plan_Manuever___EVENT_ : boolean;
+	main-usr-6-Plan_Manuever-speed : real;
+	main-usr-2-Plan_Manuever-x : real;
+	main-usr-2-Plan_Manuever-y : real;
 	main-usr-DAA__ADSB_In___EVENT_ : boolean;
 	main-usr-6-DAA__ADSB_In-speed : real;
 	main-usr-2-DAA__ADSB_In-x : real;
@@ -322,7 +326,13 @@ VAR
 	main-usr-2-STATE-x : real;
 	main-usr-2-STATE-y : real;
 	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
+	main-impl-usr-__GUARANTEE2 : boolean;
 	main-impl-usr-__GUARANTEE3 : boolean;
+	main-impl-usr-__GUARANTEE4 : boolean;
+	main-impl-usr-__GUARANTEE5 : boolean;
 	main-res-glocal_24 : boolean;
 	main-res-glocal_26 : boolean;
 	main-res-glocal_29 : boolean;
@@ -400,7 +410,13 @@ VAR
 	main-res-call_23 : Collision_Avoidance__CONFLICT_DETECTED(main-usr-6-ADSB-speed, main-usr-2-ADSB-x, main-usr-2-ADSB-y);
 
 ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-High_Assurance_System____ASSUME__HIST & (main-usr-Plan_Switch____ASSUME__HIST & (main-usr-LEC____ASSUME__HIST & main-usr-DAA____ASSUME__HIST)));
+	init(main-impl-usr-__GUARANTEE0) := (((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) -> main-usr-event_BAF_Manuever_Out);
+	init(main-impl-usr-__GUARANTEE1) := (((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) -> main-usr-event_LEC_Manuever_Out);
+	init(main-impl-usr-__GUARANTEE2) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> main-usr-is_safe_manuever);
 	init(main-impl-usr-__GUARANTEE3) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> !main-usr-Selected_Plan_Out);
+	init(main-impl-usr-__GUARANTEE4) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> main-usr-is_safe_plan_decision);
+	init(main-impl-usr-__GUARANTEE5) := (((((main-usr-ADSB___EVENT_ & main-usr-STATE___EVENT_) & main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar) & main-usr-event_Selected_Plan_Out) & main-usr-is_baf_safe) -> main-usr-is_plan_decision_eq_baf);
 	init(main-res-glocal_24) := (main-usr-time = main-usr-DAA__time);
 	init(main-res-glocal_26) := main-res-call_25._TOP__DAA-usr-__ASSERT;
 	init(main-res-gklocal_27) := TRUE;
@@ -465,7 +481,13 @@ ASSIGN
 	init(main-res-glocal_95) := TRUE;
 	init(main-res-glocal_96) := (main-usr-time = 0);
 
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-High_Assurance_System____ASSUME__HIST) & (next(main-usr-Plan_Switch____ASSUME__HIST) & (next(main-usr-LEC____ASSUME__HIST) & next(main-usr-DAA____ASSUME__HIST))));
+	next(main-impl-usr-__GUARANTEE0) := (((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) -> next(main-usr-event_BAF_Manuever_Out));
+	next(main-impl-usr-__GUARANTEE1) := (((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) -> next(main-usr-event_LEC_Manuever_Out));
+	next(main-impl-usr-__GUARANTEE2) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> next(main-usr-is_safe_manuever));
 	next(main-impl-usr-__GUARANTEE3) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> !next(main-usr-Selected_Plan_Out));
+	next(main-impl-usr-__GUARANTEE4) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> next(main-usr-is_safe_plan_decision));
+	next(main-impl-usr-__GUARANTEE5) := (((((next(main-usr-ADSB___EVENT_) & next(main-usr-STATE___EVENT_)) & next(main-res-call_23.Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar)) & next(main-usr-event_Selected_Plan_Out)) & next(main-usr-is_baf_safe)) -> next(main-usr-is_plan_decision_eq_baf));
 	next(main-res-glocal_24) := (next(main-usr-time) = next(main-usr-DAA__time));
 	next(main-res-glocal_26) := next(main-res-call_25._TOP__DAA-usr-__ASSERT);
 	next(main-res-gklocal_27) := TRUE;

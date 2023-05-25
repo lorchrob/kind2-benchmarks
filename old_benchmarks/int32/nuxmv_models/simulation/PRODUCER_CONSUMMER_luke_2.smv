@@ -72,6 +72,8 @@ VAR
 	top-usr-etat3 : boolean;
 	top-usr-a_init : signed word[32];
 	top-usr-OK : boolean;
+	top-impl-usr-i : signed word[32];
+	top-impl-usr-b : signed word[32];
 	top-impl-usr-a : signed word[32];
 	top-impl-usr-o1 : signed word[32];
 	top-impl-usr-o2 : signed word[32];
@@ -87,12 +89,16 @@ ASSIGN
 	init(top-impl-usr-o1) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1;
 	init(top-impl-usr-a) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-a;
 	init(top-usr-OK) := (top-impl-usr-env -> ((top-impl-usr-o1 + top-impl-usr-o2) <= top-impl-usr-a));
+	init(top-impl-usr-i) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-i;
+	init(top-impl-usr-b) := top-res-2-call_4.PRODUCER_CONSUMMER-usr-b;
 
 	next(top-impl-usr-env) := (next(top-res-call_6.Sofar-usr-Sofar) & (next(top-res-call_7.First-usr-First) > 0sh32_00000000));
 	next(top-impl-usr-o2) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-o2);
 	next(top-impl-usr-o1) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-o1);
 	next(top-impl-usr-a) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-a);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> ((next(top-impl-usr-o1) + next(top-impl-usr-o2)) <= next(top-impl-usr-a)));
+	next(top-impl-usr-i) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-i);
+	next(top-impl-usr-b) := next(top-res-2-call_4.PRODUCER_CONSUMMER-usr-b);
 
 
 INVARSPEC 

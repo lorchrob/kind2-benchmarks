@@ -1,6 +1,7 @@
 
 MODULE main () 
 VAR
+	top-usr-init : integer;
 	top-usr-OK : boolean;
 	top-impl-usr-time : integer;
 

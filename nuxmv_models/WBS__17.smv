@@ -1,0 +1,1145 @@
+
+MODULE _TOP__phys_sys (_TOP__phys_sys-usr-__ASSUME__HIST, _TOP__phys_sys-usr-__ASSUME0, _TOP__phys_sys-usr-hyd_supply1, _TOP__phys_sys-usr-hyd_supply2, _TOP__phys_sys-usr-pump_power1, _TOP__phys_sys-usr-pump_power2, _TOP__phys_sys-usr-system_validity, _TOP__phys_sys-usr-brake_as_cmd_1, _TOP__phys_sys-usr-brake_as_cmd_2, _TOP__phys_sys-usr-brake_as_cmd_3, _TOP__phys_sys-usr-brake_as_cmd_4, _TOP__phys_sys-usr-brake_as_cmd_5, _TOP__phys_sys-usr-brake_as_cmd_6, _TOP__phys_sys-usr-brake_as_cmd_7, _TOP__phys_sys-usr-brake_as_cmd_8, _TOP__phys_sys-usr-as_cmd_pair_1_5, _TOP__phys_sys-usr-as_cmd_pair_2_6, _TOP__phys_sys-usr-as_cmd_pair_3_7, _TOP__phys_sys-usr-as_cmd_pair_4_8, _TOP__phys_sys-usr-ground_speed, _TOP__phys_sys-usr-mech_pedal_pos_L, _TOP__phys_sys-usr-mech_pedal_pos_R, _TOP__phys_sys-usr-time, _TOP__phys_sys-usr-hyd_supply1_range, _TOP__phys_sys-usr-hyd_supply2_range, _TOP__phys_sys-usr-ground_speed_range, _TOP__phys_sys-usr-GREEN_PRESSURE_VALID, _TOP__phys_sys-usr-NORMAL1, _TOP__phys_sys-usr-ALTERNATE1, _TOP__phys_sys-usr-NORMAL2, _TOP__phys_sys-usr-ALTERNATE2, _TOP__phys_sys-usr-NORMAL3, _TOP__phys_sys-usr-ALTERNATE3, _TOP__phys_sys-usr-NORMAL4, _TOP__phys_sys-usr-ALTERNATE4, _TOP__phys_sys-usr-NORMAL5, _TOP__phys_sys-usr-ALTERNATE5, _TOP__phys_sys-usr-NORMAL6, _TOP__phys_sys-usr-ALTERNATE6, _TOP__phys_sys-usr-NORMAL7, _TOP__phys_sys-usr-ALTERNATE7, _TOP__phys_sys-usr-NORMAL8, _TOP__phys_sys-usr-ALTERNATE8, _TOP__phys_sys-usr-L_PEDAL_VALID, _TOP__phys_sys-usr-R_PEDAL_VALID, _TOP__phys_sys-usr-ALL_WHEELS_BRAKE, _TOP__phys_sys-usr-ALL_WHEELS_STOPPED, _TOP__phys_sys-usr-BRAKE_AS_NOT_COMMANDED, _TOP__phys_sys-usr-PEDALS_NOT_PRESSED, _TOP__phys_sys-usr-accum_pressure_display_in, _TOP__phys_sys-usr-accum_pressure_display, _TOP__phys_sys-usr-green_pressure_in_selec_valve, _TOP__phys_sys-usr-wheel_status1, _TOP__phys_sys-usr-wheel_status2, _TOP__phys_sys-usr-wheel_status3, _TOP__phys_sys-usr-wheel_status4, _TOP__phys_sys-usr-wheel_status5, _TOP__phys_sys-usr-wheel_status6, _TOP__phys_sys-usr-wheel_status7, _TOP__phys_sys-usr-wheel_status8, _TOP__phys_sys-usr-wheel_braking_force1, _TOP__phys_sys-usr-wheel_braking_force2, _TOP__phys_sys-usr-wheel_braking_force3, _TOP__phys_sys-usr-wheel_braking_force4, _TOP__phys_sys-usr-wheel_braking_force5, _TOP__phys_sys-usr-wheel_braking_force6, _TOP__phys_sys-usr-wheel_braking_force7, _TOP__phys_sys-usr-wheel_braking_force8)
+VAR
+	_TOP__phys_sys-usr-__ASSERT : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE3 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE4 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE5 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE6 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE7 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE8 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE9 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE10 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE11 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE12 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE13 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE14 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE15 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE16 : boolean;
+	_TOP__phys_sys-impl-usr-__GUARANTEE17 : boolean;
+
+ASSIGN
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE17) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE16) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE15) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE14) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE13) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE12) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE11) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE10) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE9) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE8) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE7) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE6) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE5) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE4) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE3) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE2) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE1) := TRUE;
+	init(_TOP__phys_sys-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__phys_sys-usr-__ASSERT) := ((_TOP__phys_sys-usr-PEDALS_NOT_PRESSED = (!_TOP__phys_sys-usr-mech_pedal_pos_L & !_TOP__phys_sys-usr-mech_pedal_pos_R)) & ((_TOP__phys_sys-usr-BRAKE_AS_NOT_COMMANDED = (((((((!_TOP__phys_sys-usr-brake_as_cmd_1 & !_TOP__phys_sys-usr-brake_as_cmd_2) & !_TOP__phys_sys-usr-brake_as_cmd_3) & !_TOP__phys_sys-usr-brake_as_cmd_4) & !_TOP__phys_sys-usr-brake_as_cmd_5) & !_TOP__phys_sys-usr-brake_as_cmd_6) & !_TOP__phys_sys-usr-brake_as_cmd_7) & !_TOP__phys_sys-usr-brake_as_cmd_8)) & ((_TOP__phys_sys-usr-ALL_WHEELS_STOPPED = (((((((!_TOP__phys_sys-usr-wheel_status1 & !_TOP__phys_sys-usr-wheel_status2) & !_TOP__phys_sys-usr-wheel_status3) & !_TOP__phys_sys-usr-wheel_status4) & !_TOP__phys_sys-usr-wheel_status5) & !_TOP__phys_sys-usr-wheel_status6) & !_TOP__phys_sys-usr-wheel_status7) & !_TOP__phys_sys-usr-wheel_status8)) & ((_TOP__phys_sys-usr-ALL_WHEELS_BRAKE = ((((((((_TOP__phys_sys-usr-wheel_braking_force1 > 0) & (_TOP__phys_sys-usr-wheel_braking_force2 > 0)) & (_TOP__phys_sys-usr-wheel_braking_force3 > 0)) & (_TOP__phys_sys-usr-wheel_braking_force4 > 0)) & (_TOP__phys_sys-usr-wheel_braking_force5 > 0)) & (_TOP__phys_sys-usr-wheel_braking_force6 > 0)) & (_TOP__phys_sys-usr-wheel_braking_force7 > 0)) & (_TOP__phys_sys-usr-wheel_braking_force8 > 0))) & ((_TOP__phys_sys-usr-R_PEDAL_VALID = (_TOP__phys_sys-usr-mech_pedal_pos_R & _TOP__phys_sys-usr-system_validity)) & ((_TOP__phys_sys-usr-L_PEDAL_VALID = (_TOP__phys_sys-usr-mech_pedal_pos_L & _TOP__phys_sys-usr-system_validity)) & ((_TOP__phys_sys-usr-ALTERNATE8 = ((_TOP__phys_sys-usr-mech_pedal_pos_R & !_TOP__phys_sys-usr-as_cmd_pair_4_8) & !_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-NORMAL8 = (_TOP__phys_sys-usr-brake_as_cmd_8 & _TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-ALTERNATE7 = ((_TOP__phys_sys-usr-mech_pedal_pos_R & !_TOP__phys_sys-usr-as_cmd_pair_3_7) & !_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-NORMAL7 = (_TOP__phys_sys-usr-brake_as_cmd_7 & _TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-ALTERNATE6 = ((_TOP__phys_sys-usr-mech_pedal_pos_L & !_TOP__phys_sys-usr-as_cmd_pair_2_6) & !_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-NORMAL6 = (_TOP__phys_sys-usr-brake_as_cmd_6 & _TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-ALTERNATE5 = ((_TOP__phys_sys-usr-mech_pedal_pos_L & !_TOP__phys_sys-usr-as_cmd_pair_1_5) & !_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-NORMAL5 = (_TOP__phys_sys-usr-brake_as_cmd_5 & _TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-ALTERNATE4 = ((_TOP__phys_sys-usr-mech_pedal_pos_R & !_TOP__phys_sys-usr-as_cmd_pair_4_8) & !_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-NORMAL4 = (_TOP__phys_sys-usr-brake_as_cmd_4 & _TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-ALTERNATE3 = ((_TOP__phys_sys-usr-mech_pedal_pos_R & !_TOP__phys_sys-usr-as_cmd_pair_3_7) & !_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-NORMAL3 = (_TOP__phys_sys-usr-brake_as_cmd_3 & _TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-ALTERNATE2 = ((_TOP__phys_sys-usr-mech_pedal_pos_L & !_TOP__phys_sys-usr-as_cmd_pair_2_6) & !_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-NORMAL2 = (_TOP__phys_sys-usr-brake_as_cmd_2 & _TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-ALTERNATE1 = ((_TOP__phys_sys-usr-mech_pedal_pos_L & !_TOP__phys_sys-usr-as_cmd_pair_1_5) & !_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-NORMAL1 = (_TOP__phys_sys-usr-brake_as_cmd_1 & _TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) & ((_TOP__phys_sys-usr-GREEN_PRESSURE_VALID = ((_TOP__phys_sys-usr-green_pressure_in_selec_valve > 0) & _TOP__phys_sys-usr-system_validity)) & ((_TOP__phys_sys-usr-ground_speed_range = ((_TOP__phys_sys-usr-ground_speed > -1) & (_TOP__phys_sys-usr-ground_speed < 11))) & ((_TOP__phys_sys-usr-hyd_supply2_range = ((_TOP__phys_sys-usr-hyd_supply2 > -1) & (_TOP__phys_sys-usr-hyd_supply2 < 11))) & ((_TOP__phys_sys-usr-hyd_supply1_range = ((_TOP__phys_sys-usr-hyd_supply1 > -1) & (_TOP__phys_sys-usr-hyd_supply1 < 11))) & ((_TOP__phys_sys-usr-__ASSUME__HIST -> (_TOP__phys_sys-impl-usr-__GUARANTEE17 & (_TOP__phys_sys-impl-usr-__GUARANTEE16 & (_TOP__phys_sys-impl-usr-__GUARANTEE15 & (_TOP__phys_sys-impl-usr-__GUARANTEE14 & (_TOP__phys_sys-impl-usr-__GUARANTEE13 & (_TOP__phys_sys-impl-usr-__GUARANTEE12 & (_TOP__phys_sys-impl-usr-__GUARANTEE11 & (_TOP__phys_sys-impl-usr-__GUARANTEE10 & (_TOP__phys_sys-impl-usr-__GUARANTEE9 & (_TOP__phys_sys-impl-usr-__GUARANTEE8 & (_TOP__phys_sys-impl-usr-__GUARANTEE7 & (_TOP__phys_sys-impl-usr-__GUARANTEE6 & (_TOP__phys_sys-impl-usr-__GUARANTEE5 & (_TOP__phys_sys-impl-usr-__GUARANTEE4 & (_TOP__phys_sys-impl-usr-__GUARANTEE3 & (_TOP__phys_sys-impl-usr-__GUARANTEE2 & (_TOP__phys_sys-impl-usr-__GUARANTEE1 & _TOP__phys_sys-impl-usr-__GUARANTEE0)))))))))))))))))) & _TOP__phys_sys-usr-__ASSUME0)))))))))))))))))))))))))));
+
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE17) := !(((next(_TOP__phys_sys-usr-PEDALS_NOT_PRESSED) & next(_TOP__phys_sys-usr-BRAKE_AS_NOT_COMMANDED)) & next(_TOP__phys_sys-usr-ALL_WHEELS_BRAKE)) & (next(_TOP__phys_sys-usr-ground_speed) > 0));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE16) := (((next(_TOP__phys_sys-usr-R_PEDAL_VALID) & !next(_TOP__phys_sys-usr-brake_as_cmd_8)) -> next(_TOP__phys_sys-usr-as_cmd_pair_1_5)) -> ((next(_TOP__phys_sys-usr-wheel_braking_force8) > 0) -> (((next(_TOP__phys_sys-usr-mech_pedal_pos_R) & !next(_TOP__phys_sys-usr-as_cmd_pair_4_8)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) | (next(_TOP__phys_sys-usr-brake_as_cmd_8) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)))));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE15) := (((next(_TOP__phys_sys-usr-R_PEDAL_VALID) & !next(_TOP__phys_sys-usr-brake_as_cmd_7)) -> next(_TOP__phys_sys-usr-as_cmd_pair_3_7)) -> ((next(_TOP__phys_sys-usr-wheel_braking_force7) > 0) -> (((next(_TOP__phys_sys-usr-mech_pedal_pos_R) & !next(_TOP__phys_sys-usr-as_cmd_pair_3_7)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) | (next(_TOP__phys_sys-usr-brake_as_cmd_7) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)))));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE14) := (((next(_TOP__phys_sys-usr-L_PEDAL_VALID) & !next(_TOP__phys_sys-usr-brake_as_cmd_6)) -> next(_TOP__phys_sys-usr-as_cmd_pair_2_6)) -> ((next(_TOP__phys_sys-usr-wheel_braking_force6) > 0) -> (((next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-as_cmd_pair_2_6)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) | (next(_TOP__phys_sys-usr-brake_as_cmd_6) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)))));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE13) := (((next(_TOP__phys_sys-usr-L_PEDAL_VALID) & !next(_TOP__phys_sys-usr-brake_as_cmd_5)) -> next(_TOP__phys_sys-usr-as_cmd_pair_1_5)) -> ((next(_TOP__phys_sys-usr-wheel_braking_force5) > 0) -> (((next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-as_cmd_pair_1_5)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) | (next(_TOP__phys_sys-usr-brake_as_cmd_5) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)))));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE12) := (((next(_TOP__phys_sys-usr-R_PEDAL_VALID) & !next(_TOP__phys_sys-usr-brake_as_cmd_4)) -> next(_TOP__phys_sys-usr-as_cmd_pair_4_8)) -> ((next(_TOP__phys_sys-usr-wheel_braking_force4) > 0) -> (((next(_TOP__phys_sys-usr-mech_pedal_pos_R) & !next(_TOP__phys_sys-usr-as_cmd_pair_4_8)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) | (next(_TOP__phys_sys-usr-brake_as_cmd_4) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)))));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE11) := (((next(_TOP__phys_sys-usr-R_PEDAL_VALID) & !next(_TOP__phys_sys-usr-brake_as_cmd_3)) -> next(_TOP__phys_sys-usr-as_cmd_pair_3_7)) -> ((next(_TOP__phys_sys-usr-wheel_braking_force3) > 0) -> (((next(_TOP__phys_sys-usr-mech_pedal_pos_R) & !next(_TOP__phys_sys-usr-as_cmd_pair_3_7)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) | (next(_TOP__phys_sys-usr-brake_as_cmd_3) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)))));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE10) := (((next(_TOP__phys_sys-usr-L_PEDAL_VALID) & !next(_TOP__phys_sys-usr-brake_as_cmd_2)) -> next(_TOP__phys_sys-usr-as_cmd_pair_2_6)) -> ((next(_TOP__phys_sys-usr-wheel_braking_force2) > 0) -> (((next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-as_cmd_pair_2_6)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) | (next(_TOP__phys_sys-usr-brake_as_cmd_2) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)))));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE9) := (((next(_TOP__phys_sys-usr-L_PEDAL_VALID) & !next(_TOP__phys_sys-usr-brake_as_cmd_1)) -> next(_TOP__phys_sys-usr-as_cmd_pair_1_5)) -> ((next(_TOP__phys_sys-usr-wheel_braking_force1) > 0) -> (((next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-as_cmd_pair_1_5)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)) | (next(_TOP__phys_sys-usr-brake_as_cmd_1) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID)))));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE8) := ((next(_TOP__phys_sys-usr-green_pressure_in_selec_valve) > 0) = ((next(_TOP__phys_sys-usr-system_validity) & next(_TOP__phys_sys-usr-pump_power1)) & (next(_TOP__phys_sys-usr-hyd_supply1) > 0)));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE7) := ((next(_TOP__phys_sys-usr-ALTERNATE8) | next(_TOP__phys_sys-usr-NORMAL8)) -> (next(_TOP__phys_sys-usr-wheel_braking_force8) > 0));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE6) := ((next(_TOP__phys_sys-usr-ALTERNATE7) | next(_TOP__phys_sys-usr-NORMAL7)) -> (next(_TOP__phys_sys-usr-wheel_braking_force7) > 0));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE5) := ((next(_TOP__phys_sys-usr-ALTERNATE6) | next(_TOP__phys_sys-usr-NORMAL6)) -> (next(_TOP__phys_sys-usr-wheel_braking_force6) > 0));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE4) := ((next(_TOP__phys_sys-usr-ALTERNATE5) | next(_TOP__phys_sys-usr-NORMAL5)) -> (next(_TOP__phys_sys-usr-wheel_braking_force5) > 0));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE3) := ((next(_TOP__phys_sys-usr-ALTERNATE4) | next(_TOP__phys_sys-usr-NORMAL4)) -> (next(_TOP__phys_sys-usr-wheel_braking_force4) > 0));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE2) := ((next(_TOP__phys_sys-usr-ALTERNATE3) | next(_TOP__phys_sys-usr-NORMAL3)) -> (next(_TOP__phys_sys-usr-wheel_braking_force3) > 0));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE1) := ((next(_TOP__phys_sys-usr-ALTERNATE2) | next(_TOP__phys_sys-usr-NORMAL2)) -> (next(_TOP__phys_sys-usr-wheel_braking_force2) > 0));
+	next(_TOP__phys_sys-impl-usr-__GUARANTEE0) := ((next(_TOP__phys_sys-usr-ALTERNATE1) | next(_TOP__phys_sys-usr-NORMAL1)) -> (next(_TOP__phys_sys-usr-wheel_braking_force1) > 0));
+	next(_TOP__phys_sys-usr-__ASSERT) := ((next(_TOP__phys_sys-usr-PEDALS_NOT_PRESSED) = (!next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-mech_pedal_pos_R))) & ((next(_TOP__phys_sys-usr-BRAKE_AS_NOT_COMMANDED) = (((((((!next(_TOP__phys_sys-usr-brake_as_cmd_1) & !next(_TOP__phys_sys-usr-brake_as_cmd_2)) & !next(_TOP__phys_sys-usr-brake_as_cmd_3)) & !next(_TOP__phys_sys-usr-brake_as_cmd_4)) & !next(_TOP__phys_sys-usr-brake_as_cmd_5)) & !next(_TOP__phys_sys-usr-brake_as_cmd_6)) & !next(_TOP__phys_sys-usr-brake_as_cmd_7)) & !next(_TOP__phys_sys-usr-brake_as_cmd_8))) & ((next(_TOP__phys_sys-usr-ALL_WHEELS_STOPPED) = (((((((!next(_TOP__phys_sys-usr-wheel_status1) & !next(_TOP__phys_sys-usr-wheel_status2)) & !next(_TOP__phys_sys-usr-wheel_status3)) & !next(_TOP__phys_sys-usr-wheel_status4)) & !next(_TOP__phys_sys-usr-wheel_status5)) & !next(_TOP__phys_sys-usr-wheel_status6)) & !next(_TOP__phys_sys-usr-wheel_status7)) & !next(_TOP__phys_sys-usr-wheel_status8))) & ((next(_TOP__phys_sys-usr-ALL_WHEELS_BRAKE) = ((((((((next(_TOP__phys_sys-usr-wheel_braking_force1) > 0) & (next(_TOP__phys_sys-usr-wheel_braking_force2) > 0)) & (next(_TOP__phys_sys-usr-wheel_braking_force3) > 0)) & (next(_TOP__phys_sys-usr-wheel_braking_force4) > 0)) & (next(_TOP__phys_sys-usr-wheel_braking_force5) > 0)) & (next(_TOP__phys_sys-usr-wheel_braking_force6) > 0)) & (next(_TOP__phys_sys-usr-wheel_braking_force7) > 0)) & (next(_TOP__phys_sys-usr-wheel_braking_force8) > 0))) & ((next(_TOP__phys_sys-usr-R_PEDAL_VALID) = (next(_TOP__phys_sys-usr-mech_pedal_pos_R) & next(_TOP__phys_sys-usr-system_validity))) & ((next(_TOP__phys_sys-usr-L_PEDAL_VALID) = (next(_TOP__phys_sys-usr-mech_pedal_pos_L) & next(_TOP__phys_sys-usr-system_validity))) & ((next(_TOP__phys_sys-usr-ALTERNATE8) = ((next(_TOP__phys_sys-usr-mech_pedal_pos_R) & !next(_TOP__phys_sys-usr-as_cmd_pair_4_8)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-NORMAL8) = (next(_TOP__phys_sys-usr-brake_as_cmd_8) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-ALTERNATE7) = ((next(_TOP__phys_sys-usr-mech_pedal_pos_R) & !next(_TOP__phys_sys-usr-as_cmd_pair_3_7)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-NORMAL7) = (next(_TOP__phys_sys-usr-brake_as_cmd_7) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-ALTERNATE6) = ((next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-as_cmd_pair_2_6)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-NORMAL6) = (next(_TOP__phys_sys-usr-brake_as_cmd_6) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-ALTERNATE5) = ((next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-as_cmd_pair_1_5)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-NORMAL5) = (next(_TOP__phys_sys-usr-brake_as_cmd_5) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-ALTERNATE4) = ((next(_TOP__phys_sys-usr-mech_pedal_pos_R) & !next(_TOP__phys_sys-usr-as_cmd_pair_4_8)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-NORMAL4) = (next(_TOP__phys_sys-usr-brake_as_cmd_4) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-ALTERNATE3) = ((next(_TOP__phys_sys-usr-mech_pedal_pos_R) & !next(_TOP__phys_sys-usr-as_cmd_pair_3_7)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-NORMAL3) = (next(_TOP__phys_sys-usr-brake_as_cmd_3) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-ALTERNATE2) = ((next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-as_cmd_pair_2_6)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-NORMAL2) = (next(_TOP__phys_sys-usr-brake_as_cmd_2) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-ALTERNATE1) = ((next(_TOP__phys_sys-usr-mech_pedal_pos_L) & !next(_TOP__phys_sys-usr-as_cmd_pair_1_5)) & !next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-NORMAL1) = (next(_TOP__phys_sys-usr-brake_as_cmd_1) & next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID))) & ((next(_TOP__phys_sys-usr-GREEN_PRESSURE_VALID) = ((next(_TOP__phys_sys-usr-green_pressure_in_selec_valve) > 0) & next(_TOP__phys_sys-usr-system_validity))) & ((next(_TOP__phys_sys-usr-ground_speed_range) = ((next(_TOP__phys_sys-usr-ground_speed) > -1) & (next(_TOP__phys_sys-usr-ground_speed) < 11))) & ((next(_TOP__phys_sys-usr-hyd_supply2_range) = ((next(_TOP__phys_sys-usr-hyd_supply2) > -1) & (next(_TOP__phys_sys-usr-hyd_supply2) < 11))) & ((next(_TOP__phys_sys-usr-hyd_supply1_range) = ((next(_TOP__phys_sys-usr-hyd_supply1) > -1) & (next(_TOP__phys_sys-usr-hyd_supply1) < 11))) & ((next(_TOP__phys_sys-usr-__ASSUME__HIST) -> (next(_TOP__phys_sys-impl-usr-__GUARANTEE17) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE16) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE15) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE14) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE13) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE12) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE11) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE10) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE9) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE8) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE7) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE6) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE5) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE4) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE3) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE2) & (next(_TOP__phys_sys-impl-usr-__GUARANTEE1) & next(_TOP__phys_sys-impl-usr-__GUARANTEE0))))))))))))))))))) & (next(_TOP__phys_sys-usr-__ASSUME0) = ((next(_TOP__phys_sys-usr-hyd_supply1_range) & next(_TOP__phys_sys-usr-hyd_supply2_range)) & next(_TOP__phys_sys-usr-ground_speed_range))))))))))))))))))))))))))))));
+
+
+
+MODULE _TOP__wheel_sensor1 (_TOP__wheel_sensor1-usr-__ASSUME__HIST, _TOP__wheel_sensor1-usr-wheel_status, _TOP__wheel_sensor1-usr-time, _TOP__wheel_sensor1-usr-wheel_rolling)
+VAR
+	_TOP__wheel_sensor1-usr-__ASSERT : boolean;
+	_TOP__wheel_sensor1-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__wheel_sensor1-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__wheel_sensor1-usr-__ASSERT) := (_TOP__wheel_sensor1-usr-__ASSUME__HIST -> _TOP__wheel_sensor1-impl-usr-__GUARANTEE0);
+
+	next(_TOP__wheel_sensor1-impl-usr-__GUARANTEE0) := (next(_TOP__wheel_sensor1-usr-wheel_rolling) = next(_TOP__wheel_sensor1-usr-wheel_status));
+	next(_TOP__wheel_sensor1-usr-__ASSERT) := (next(_TOP__wheel_sensor1-usr-__ASSUME__HIST) -> next(_TOP__wheel_sensor1-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__wheel_sensor2 (_TOP__wheel_sensor2-usr-__ASSUME__HIST, _TOP__wheel_sensor2-usr-wheel_status, _TOP__wheel_sensor2-usr-time, _TOP__wheel_sensor2-usr-wheel_rolling)
+VAR
+	_TOP__wheel_sensor2-usr-__ASSERT : boolean;
+	_TOP__wheel_sensor2-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__wheel_sensor2-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__wheel_sensor2-usr-__ASSERT) := (_TOP__wheel_sensor2-usr-__ASSUME__HIST -> _TOP__wheel_sensor2-impl-usr-__GUARANTEE0);
+
+	next(_TOP__wheel_sensor2-impl-usr-__GUARANTEE0) := (next(_TOP__wheel_sensor2-usr-wheel_rolling) = next(_TOP__wheel_sensor2-usr-wheel_status));
+	next(_TOP__wheel_sensor2-usr-__ASSERT) := (next(_TOP__wheel_sensor2-usr-__ASSUME__HIST) -> next(_TOP__wheel_sensor2-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__wheel_sensor4 (_TOP__wheel_sensor4-usr-__ASSUME__HIST, _TOP__wheel_sensor4-usr-wheel_status, _TOP__wheel_sensor4-usr-time, _TOP__wheel_sensor4-usr-wheel_rolling)
+VAR
+	_TOP__wheel_sensor4-usr-__ASSERT : boolean;
+	_TOP__wheel_sensor4-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__wheel_sensor4-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__wheel_sensor4-usr-__ASSERT) := (_TOP__wheel_sensor4-usr-__ASSUME__HIST -> _TOP__wheel_sensor4-impl-usr-__GUARANTEE0);
+
+	next(_TOP__wheel_sensor4-impl-usr-__GUARANTEE0) := (next(_TOP__wheel_sensor4-usr-wheel_rolling) = next(_TOP__wheel_sensor4-usr-wheel_status));
+	next(_TOP__wheel_sensor4-usr-__ASSERT) := (next(_TOP__wheel_sensor4-usr-__ASSUME__HIST) -> next(_TOP__wheel_sensor4-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__wheel_sensor6 (_TOP__wheel_sensor6-usr-__ASSUME__HIST, _TOP__wheel_sensor6-usr-wheel_status, _TOP__wheel_sensor6-usr-time, _TOP__wheel_sensor6-usr-wheel_rolling)
+VAR
+	_TOP__wheel_sensor6-usr-__ASSERT : boolean;
+	_TOP__wheel_sensor6-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__wheel_sensor6-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__wheel_sensor6-usr-__ASSERT) := (_TOP__wheel_sensor6-usr-__ASSUME__HIST -> _TOP__wheel_sensor6-impl-usr-__GUARANTEE0);
+
+	next(_TOP__wheel_sensor6-impl-usr-__GUARANTEE0) := (next(_TOP__wheel_sensor6-usr-wheel_rolling) = next(_TOP__wheel_sensor6-usr-wheel_status));
+	next(_TOP__wheel_sensor6-usr-__ASSERT) := (next(_TOP__wheel_sensor6-usr-__ASSUME__HIST) -> next(_TOP__wheel_sensor6-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__wheel_sensor8 (_TOP__wheel_sensor8-usr-__ASSUME__HIST, _TOP__wheel_sensor8-usr-wheel_status, _TOP__wheel_sensor8-usr-time, _TOP__wheel_sensor8-usr-wheel_rolling)
+VAR
+	_TOP__wheel_sensor8-usr-__ASSERT : boolean;
+	_TOP__wheel_sensor8-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__wheel_sensor8-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__wheel_sensor8-usr-__ASSERT) := (_TOP__wheel_sensor8-usr-__ASSUME__HIST -> _TOP__wheel_sensor8-impl-usr-__GUARANTEE0);
+
+	next(_TOP__wheel_sensor8-impl-usr-__GUARANTEE0) := (next(_TOP__wheel_sensor8-usr-wheel_rolling) = next(_TOP__wheel_sensor8-usr-wheel_status));
+	next(_TOP__wheel_sensor8-usr-__ASSERT) := (next(_TOP__wheel_sensor8-usr-__ASSUME__HIST) -> next(_TOP__wheel_sensor8-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__pedal_sensor_R (_TOP__pedal_sensor_R-usr-__ASSUME__HIST, _TOP__pedal_sensor_R-usr-mech_pedal_pos, _TOP__pedal_sensor_R-usr-time, _TOP__pedal_sensor_R-usr-elec_pedal_pos)
+VAR
+	_TOP__pedal_sensor_R-usr-__ASSERT : boolean;
+	_TOP__pedal_sensor_R-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__pedal_sensor_R-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__pedal_sensor_R-usr-__ASSERT) := (_TOP__pedal_sensor_R-usr-__ASSUME__HIST -> _TOP__pedal_sensor_R-impl-usr-__GUARANTEE0);
+
+	next(_TOP__pedal_sensor_R-impl-usr-__GUARANTEE0) := (next(_TOP__pedal_sensor_R-usr-mech_pedal_pos) = next(_TOP__pedal_sensor_R-usr-elec_pedal_pos));
+	next(_TOP__pedal_sensor_R-usr-__ASSERT) := (next(_TOP__pedal_sensor_R-usr-__ASSUME__HIST) -> next(_TOP__pedal_sensor_R-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__pedal_sensor_L (_TOP__pedal_sensor_L-usr-__ASSUME__HIST, _TOP__pedal_sensor_L-usr-mech_pedal_pos, _TOP__pedal_sensor_L-usr-time, _TOP__pedal_sensor_L-usr-elec_pedal_pos)
+VAR
+	_TOP__pedal_sensor_L-usr-__ASSERT : boolean;
+	_TOP__pedal_sensor_L-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__pedal_sensor_L-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__pedal_sensor_L-usr-__ASSERT) := (_TOP__pedal_sensor_L-usr-__ASSUME__HIST -> _TOP__pedal_sensor_L-impl-usr-__GUARANTEE0);
+
+	next(_TOP__pedal_sensor_L-impl-usr-__GUARANTEE0) := (next(_TOP__pedal_sensor_L-usr-mech_pedal_pos) = next(_TOP__pedal_sensor_L-usr-elec_pedal_pos));
+	next(_TOP__pedal_sensor_L-usr-__ASSERT) := (next(_TOP__pedal_sensor_L-usr-__ASSUME__HIST) -> next(_TOP__pedal_sensor_L-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__wheel_sensor7 (_TOP__wheel_sensor7-usr-__ASSUME__HIST, _TOP__wheel_sensor7-usr-wheel_status, _TOP__wheel_sensor7-usr-time, _TOP__wheel_sensor7-usr-wheel_rolling)
+VAR
+	_TOP__wheel_sensor7-usr-__ASSERT : boolean;
+	_TOP__wheel_sensor7-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__wheel_sensor7-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__wheel_sensor7-usr-__ASSERT) := (_TOP__wheel_sensor7-usr-__ASSUME__HIST -> _TOP__wheel_sensor7-impl-usr-__GUARANTEE0);
+
+	next(_TOP__wheel_sensor7-impl-usr-__GUARANTEE0) := (next(_TOP__wheel_sensor7-usr-wheel_rolling) = next(_TOP__wheel_sensor7-usr-wheel_status));
+	next(_TOP__wheel_sensor7-usr-__ASSERT) := (next(_TOP__wheel_sensor7-usr-__ASSUME__HIST) -> next(_TOP__wheel_sensor7-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__wheel_sensor5 (_TOP__wheel_sensor5-usr-__ASSUME__HIST, _TOP__wheel_sensor5-usr-wheel_status, _TOP__wheel_sensor5-usr-time, _TOP__wheel_sensor5-usr-wheel_rolling)
+VAR
+	_TOP__wheel_sensor5-usr-__ASSERT : boolean;
+	_TOP__wheel_sensor5-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__wheel_sensor5-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__wheel_sensor5-usr-__ASSERT) := (_TOP__wheel_sensor5-usr-__ASSUME__HIST -> _TOP__wheel_sensor5-impl-usr-__GUARANTEE0);
+
+	next(_TOP__wheel_sensor5-impl-usr-__GUARANTEE0) := (next(_TOP__wheel_sensor5-usr-wheel_rolling) = next(_TOP__wheel_sensor5-usr-wheel_status));
+	next(_TOP__wheel_sensor5-usr-__ASSERT) := (next(_TOP__wheel_sensor5-usr-__ASSUME__HIST) -> next(_TOP__wheel_sensor5-impl-usr-__GUARANTEE0));
+
+
+
+MODULE _TOP__wheel_sensor3 (_TOP__wheel_sensor3-usr-__ASSUME__HIST, _TOP__wheel_sensor3-usr-wheel_status, _TOP__wheel_sensor3-usr-time, _TOP__wheel_sensor3-usr-wheel_rolling)
+VAR
+	_TOP__wheel_sensor3-usr-__ASSERT : boolean;
+	_TOP__wheel_sensor3-impl-usr-__GUARANTEE0 : boolean;
+
+ASSIGN
+	init(_TOP__wheel_sensor3-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__wheel_sensor3-usr-__ASSERT) := (_TOP__wheel_sensor3-usr-__ASSUME__HIST -> _TOP__wheel_sensor3-impl-usr-__GUARANTEE0);
+
+	next(_TOP__wheel_sensor3-impl-usr-__GUARANTEE0) := (next(_TOP__wheel_sensor3-usr-wheel_rolling) = next(_TOP__wheel_sensor3-usr-wheel_status));
+	next(_TOP__wheel_sensor3-usr-__ASSERT) := (next(_TOP__wheel_sensor3-usr-__ASSUME__HIST) -> next(_TOP__wheel_sensor3-impl-usr-__GUARANTEE0));
+
+
+
+MODULE __HIST (__HIST-usr-input)
+VAR
+	__HIST-usr-hist : boolean;
+
+ASSIGN
+	init(__HIST-usr-hist) := __HIST-usr-input;
+	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
+
+
+
+MODULE _TOP__ctrl_sys (_TOP__ctrl_sys-usr-__ASSUME__HIST, _TOP__ctrl_sys-usr-__ASSUME0, _TOP__ctrl_sys-usr-power_1, _TOP__ctrl_sys-usr-power_2, _TOP__ctrl_sys-usr-ground_speed, _TOP__ctrl_sys-usr-elec_pedal_pos_L, _TOP__ctrl_sys-usr-elec_pedal_pos_R, _TOP__ctrl_sys-usr-wheel_rolling_1, _TOP__ctrl_sys-usr-wheel_rolling_2, _TOP__ctrl_sys-usr-wheel_rolling_3, _TOP__ctrl_sys-usr-wheel_rolling_4, _TOP__ctrl_sys-usr-wheel_rolling_5, _TOP__ctrl_sys-usr-wheel_rolling_6, _TOP__ctrl_sys-usr-wheel_rolling_7, _TOP__ctrl_sys-usr-wheel_rolling_8, _TOP__ctrl_sys-usr-time, _TOP__ctrl_sys-usr-SPEED, _TOP__ctrl_sys-usr-VALID, _TOP__ctrl_sys-usr-power, _TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_15, _TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_26, _TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_37, _TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_48, _TOP__ctrl_sys-usr-VALIDPAIR_15, _TOP__ctrl_sys-usr-VALIDPAIR_26, _TOP__ctrl_sys-usr-VALIDPAIR_37, _TOP__ctrl_sys-usr-VALIDPAIR_48, _TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_15, _TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_26, _TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_37, _TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_48, _TOP__ctrl_sys-usr-brake_as_cmd_1, _TOP__ctrl_sys-usr-brake_as_cmd_2, _TOP__ctrl_sys-usr-brake_as_cmd_3, _TOP__ctrl_sys-usr-brake_as_cmd_4, _TOP__ctrl_sys-usr-brake_as_cmd_5, _TOP__ctrl_sys-usr-brake_as_cmd_6, _TOP__ctrl_sys-usr-brake_as_cmd_7, _TOP__ctrl_sys-usr-brake_as_cmd_8, _TOP__ctrl_sys-usr-as_cmd_pair_1_5, _TOP__ctrl_sys-usr-as_cmd_pair_2_6, _TOP__ctrl_sys-usr-as_cmd_pair_3_7, _TOP__ctrl_sys-usr-as_cmd_pair_4_8, _TOP__ctrl_sys-usr-system_validity)
+VAR
+	_TOP__ctrl_sys-usr-__ASSERT : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE0 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE1 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE2 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE3 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE4 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE5 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE6 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE7 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE8 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE9 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE10 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE11 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE12 : boolean;
+	_TOP__ctrl_sys-impl-usr-__GUARANTEE13 : boolean;
+
+ASSIGN
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE13) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE12) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE11) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE10) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE9) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE8) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE7) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE6) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE5) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE4) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE3) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE2) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE1) := TRUE;
+	init(_TOP__ctrl_sys-impl-usr-__GUARANTEE0) := TRUE;
+	init(_TOP__ctrl_sys-usr-__ASSERT) := ((_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_48 = (_TOP__ctrl_sys-usr-brake_as_cmd_4 & _TOP__ctrl_sys-usr-brake_as_cmd_8)) & ((_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_37 = (_TOP__ctrl_sys-usr-brake_as_cmd_3 & _TOP__ctrl_sys-usr-brake_as_cmd_7)) & ((_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_26 = (_TOP__ctrl_sys-usr-brake_as_cmd_2 & _TOP__ctrl_sys-usr-brake_as_cmd_6)) & ((_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_15 = (_TOP__ctrl_sys-usr-brake_as_cmd_1 & _TOP__ctrl_sys-usr-brake_as_cmd_5)) & ((_TOP__ctrl_sys-usr-VALIDPAIR_48 = (_TOP__ctrl_sys-usr-as_cmd_pair_4_8 & _TOP__ctrl_sys-usr-system_validity)) & ((_TOP__ctrl_sys-usr-VALIDPAIR_37 = (_TOP__ctrl_sys-usr-as_cmd_pair_3_7 & _TOP__ctrl_sys-usr-system_validity)) & ((_TOP__ctrl_sys-usr-VALIDPAIR_26 = (_TOP__ctrl_sys-usr-as_cmd_pair_2_6 & _TOP__ctrl_sys-usr-system_validity)) & ((_TOP__ctrl_sys-usr-VALIDPAIR_15 = (_TOP__ctrl_sys-usr-as_cmd_pair_1_5 & _TOP__ctrl_sys-usr-system_validity)) & ((_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_48 = (!_TOP__ctrl_sys-usr-wheel_rolling_8 | !_TOP__ctrl_sys-usr-wheel_rolling_4)) & ((_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_37 = (!_TOP__ctrl_sys-usr-wheel_rolling_7 | !_TOP__ctrl_sys-usr-wheel_rolling_3)) & ((_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_26 = (!_TOP__ctrl_sys-usr-wheel_rolling_6 | !_TOP__ctrl_sys-usr-wheel_rolling_2)) & ((_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_15 = (!_TOP__ctrl_sys-usr-wheel_rolling_5 | !_TOP__ctrl_sys-usr-wheel_rolling_1)) & ((_TOP__ctrl_sys-usr-power = (_TOP__ctrl_sys-usr-power_2 | _TOP__ctrl_sys-usr-power_1)) & ((_TOP__ctrl_sys-usr-VALID = _TOP__ctrl_sys-usr-system_validity) & ((_TOP__ctrl_sys-usr-SPEED = (_TOP__ctrl_sys-usr-ground_speed > 0)) & ((_TOP__ctrl_sys-usr-__ASSUME__HIST -> (_TOP__ctrl_sys-impl-usr-__GUARANTEE13 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE12 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE11 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE10 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE9 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE8 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE7 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE6 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE5 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE4 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE3 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE2 & (_TOP__ctrl_sys-impl-usr-__GUARANTEE1 & _TOP__ctrl_sys-impl-usr-__GUARANTEE0)))))))))))))) & (_TOP__ctrl_sys-usr-__ASSUME0 = ((_TOP__ctrl_sys-usr-ground_speed >= 0) & (_TOP__ctrl_sys-usr-ground_speed <= 10)))))))))))))))))));
+
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE13) := ((((next(_TOP__ctrl_sys-usr-VALID) & next(_TOP__ctrl_sys-usr-power)) & next(_TOP__ctrl_sys-usr-elec_pedal_pos_R)) & (!next(_TOP__ctrl_sys-usr-SPEED) | (next(_TOP__ctrl_sys-usr-SPEED) & next(_TOP__ctrl_sys-usr-wheel_rolling_8)))) = next(_TOP__ctrl_sys-usr-brake_as_cmd_8));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE12) := ((((next(_TOP__ctrl_sys-usr-VALID) & next(_TOP__ctrl_sys-usr-power)) & next(_TOP__ctrl_sys-usr-elec_pedal_pos_R)) & (!next(_TOP__ctrl_sys-usr-SPEED) | (next(_TOP__ctrl_sys-usr-SPEED) & next(_TOP__ctrl_sys-usr-wheel_rolling_7)))) = next(_TOP__ctrl_sys-usr-brake_as_cmd_7));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE11) := ((((next(_TOP__ctrl_sys-usr-VALID) & next(_TOP__ctrl_sys-usr-power)) & next(_TOP__ctrl_sys-usr-elec_pedal_pos_L)) & (!next(_TOP__ctrl_sys-usr-SPEED) | (next(_TOP__ctrl_sys-usr-SPEED) & next(_TOP__ctrl_sys-usr-wheel_rolling_6)))) = next(_TOP__ctrl_sys-usr-brake_as_cmd_6));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE10) := ((((next(_TOP__ctrl_sys-usr-VALID) & next(_TOP__ctrl_sys-usr-power)) & next(_TOP__ctrl_sys-usr-elec_pedal_pos_L)) & (!next(_TOP__ctrl_sys-usr-SPEED) | (next(_TOP__ctrl_sys-usr-SPEED) & next(_TOP__ctrl_sys-usr-wheel_rolling_5)))) = next(_TOP__ctrl_sys-usr-brake_as_cmd_5));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE9) := ((((next(_TOP__ctrl_sys-usr-VALID) & next(_TOP__ctrl_sys-usr-power)) & next(_TOP__ctrl_sys-usr-elec_pedal_pos_R)) & (!next(_TOP__ctrl_sys-usr-SPEED) | (next(_TOP__ctrl_sys-usr-SPEED) & next(_TOP__ctrl_sys-usr-wheel_rolling_4)))) = next(_TOP__ctrl_sys-usr-brake_as_cmd_4));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE8) := ((((next(_TOP__ctrl_sys-usr-VALID) & next(_TOP__ctrl_sys-usr-power)) & next(_TOP__ctrl_sys-usr-elec_pedal_pos_R)) & (!next(_TOP__ctrl_sys-usr-SPEED) | (next(_TOP__ctrl_sys-usr-SPEED) & next(_TOP__ctrl_sys-usr-wheel_rolling_3)))) = next(_TOP__ctrl_sys-usr-brake_as_cmd_3));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE7) := ((((next(_TOP__ctrl_sys-usr-VALID) & next(_TOP__ctrl_sys-usr-power)) & next(_TOP__ctrl_sys-usr-elec_pedal_pos_L)) & (!next(_TOP__ctrl_sys-usr-SPEED) | (next(_TOP__ctrl_sys-usr-SPEED) & next(_TOP__ctrl_sys-usr-wheel_rolling_2)))) = next(_TOP__ctrl_sys-usr-brake_as_cmd_2));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE6) := ((((next(_TOP__ctrl_sys-usr-VALID) & next(_TOP__ctrl_sys-usr-power)) & next(_TOP__ctrl_sys-usr-elec_pedal_pos_L)) & (!next(_TOP__ctrl_sys-usr-SPEED) | (next(_TOP__ctrl_sys-usr-SPEED) & next(_TOP__ctrl_sys-usr-wheel_rolling_1)))) = next(_TOP__ctrl_sys-usr-brake_as_cmd_1));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE5) := (((((next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_15) & next(_TOP__ctrl_sys-usr-VALID)) -> !next(_TOP__ctrl_sys-usr-as_cmd_pair_1_5)) & ((next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_26) & next(_TOP__ctrl_sys-usr-VALID)) -> !next(_TOP__ctrl_sys-usr-as_cmd_pair_2_6))) & ((next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_37) & next(_TOP__ctrl_sys-usr-VALID)) -> !next(_TOP__ctrl_sys-usr-as_cmd_pair_3_7))) & ((next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_48) & next(_TOP__ctrl_sys-usr-VALID)) -> !next(_TOP__ctrl_sys-usr-as_cmd_pair_4_8)));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE4) := ((((next(_TOP__ctrl_sys-usr-VALIDPAIR_15) -> !next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_15)) & (next(_TOP__ctrl_sys-usr-VALIDPAIR_26) -> !next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_26))) & (next(_TOP__ctrl_sys-usr-VALIDPAIR_37) -> !next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_37))) & (next(_TOP__ctrl_sys-usr-VALIDPAIR_48) -> !next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_48)));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE3) := (!next(_TOP__ctrl_sys-usr-as_cmd_pair_4_8) | (next(_TOP__ctrl_sys-usr-as_cmd_pair_4_8) = ((next(_TOP__ctrl_sys-usr-power) & next(_TOP__ctrl_sys-usr-SPEED)) & next(_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_48))));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE2) := (!next(_TOP__ctrl_sys-usr-as_cmd_pair_3_7) | (next(_TOP__ctrl_sys-usr-as_cmd_pair_3_7) = ((next(_TOP__ctrl_sys-usr-power) & next(_TOP__ctrl_sys-usr-SPEED)) & next(_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_37))));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE1) := (!next(_TOP__ctrl_sys-usr-as_cmd_pair_2_6) | (next(_TOP__ctrl_sys-usr-as_cmd_pair_2_6) = ((next(_TOP__ctrl_sys-usr-power) & next(_TOP__ctrl_sys-usr-SPEED)) & next(_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_26))));
+	next(_TOP__ctrl_sys-impl-usr-__GUARANTEE0) := (!next(_TOP__ctrl_sys-usr-as_cmd_pair_1_5) | (next(_TOP__ctrl_sys-usr-as_cmd_pair_1_5) = ((next(_TOP__ctrl_sys-usr-power) & next(_TOP__ctrl_sys-usr-SPEED)) & next(_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_15))));
+	next(_TOP__ctrl_sys-usr-__ASSERT) := ((next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_48) = (next(_TOP__ctrl_sys-usr-brake_as_cmd_4) & next(_TOP__ctrl_sys-usr-brake_as_cmd_8))) & ((next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_37) = (next(_TOP__ctrl_sys-usr-brake_as_cmd_3) & next(_TOP__ctrl_sys-usr-brake_as_cmd_7))) & ((next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_26) = (next(_TOP__ctrl_sys-usr-brake_as_cmd_2) & next(_TOP__ctrl_sys-usr-brake_as_cmd_6))) & ((next(_TOP__ctrl_sys-usr-BRAKE_AS_COMMANDED_15) = (next(_TOP__ctrl_sys-usr-brake_as_cmd_1) & next(_TOP__ctrl_sys-usr-brake_as_cmd_5))) & ((next(_TOP__ctrl_sys-usr-VALIDPAIR_48) = (next(_TOP__ctrl_sys-usr-as_cmd_pair_4_8) & next(_TOP__ctrl_sys-usr-system_validity))) & ((next(_TOP__ctrl_sys-usr-VALIDPAIR_37) = (next(_TOP__ctrl_sys-usr-as_cmd_pair_3_7) & next(_TOP__ctrl_sys-usr-system_validity))) & ((next(_TOP__ctrl_sys-usr-VALIDPAIR_26) = (next(_TOP__ctrl_sys-usr-as_cmd_pair_2_6) & next(_TOP__ctrl_sys-usr-system_validity))) & ((next(_TOP__ctrl_sys-usr-VALIDPAIR_15) = (next(_TOP__ctrl_sys-usr-as_cmd_pair_1_5) & next(_TOP__ctrl_sys-usr-system_validity))) & ((next(_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_48) = (!next(_TOP__ctrl_sys-usr-wheel_rolling_8) | !next(_TOP__ctrl_sys-usr-wheel_rolling_4))) & ((next(_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_37) = (!next(_TOP__ctrl_sys-usr-wheel_rolling_7) | !next(_TOP__ctrl_sys-usr-wheel_rolling_3))) & ((next(_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_26) = (!next(_TOP__ctrl_sys-usr-wheel_rolling_6) | !next(_TOP__ctrl_sys-usr-wheel_rolling_2))) & ((next(_TOP__ctrl_sys-usr-PAIR_NOT_ROLLING_15) = (!next(_TOP__ctrl_sys-usr-wheel_rolling_5) | !next(_TOP__ctrl_sys-usr-wheel_rolling_1))) & ((next(_TOP__ctrl_sys-usr-power) = (next(_TOP__ctrl_sys-usr-power_2) | next(_TOP__ctrl_sys-usr-power_1))) & ((next(_TOP__ctrl_sys-usr-VALID) = next(_TOP__ctrl_sys-usr-system_validity)) & ((next(_TOP__ctrl_sys-usr-SPEED) = (next(_TOP__ctrl_sys-usr-ground_speed) > 0)) & ((next(_TOP__ctrl_sys-usr-__ASSUME__HIST) -> (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE13) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE12) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE11) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE10) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE9) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE8) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE7) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE6) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE5) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE4) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE3) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE2) & (next(_TOP__ctrl_sys-impl-usr-__GUARANTEE1) & next(_TOP__ctrl_sys-impl-usr-__GUARANTEE0))))))))))))))) & (next(_TOP__ctrl_sys-usr-__ASSUME0) = ((next(_TOP__ctrl_sys-usr-ground_speed) >= 0) & (next(_TOP__ctrl_sys-usr-ground_speed) <= 10)))))))))))))))))));
+
+
+
+MODULE main () 
+VAR
+	main-usr-phys_sys__hyd_supply1_range : boolean;
+	main-usr-phys_sys__hyd_supply2_range : boolean;
+	main-usr-phys_sys__ground_speed_range : boolean;
+	main-usr-phys_sys__GREEN_PRESSURE_VALID : boolean;
+	main-usr-phys_sys__NORMAL1 : boolean;
+	main-usr-phys_sys__ALTERNATE1 : boolean;
+	main-usr-phys_sys__NORMAL2 : boolean;
+	main-usr-phys_sys__ALTERNATE2 : boolean;
+	main-usr-phys_sys__NORMAL3 : boolean;
+	main-usr-phys_sys__ALTERNATE3 : boolean;
+	main-usr-phys_sys__NORMAL4 : boolean;
+	main-usr-phys_sys__ALTERNATE4 : boolean;
+	main-usr-phys_sys__NORMAL5 : boolean;
+	main-usr-phys_sys__ALTERNATE5 : boolean;
+	main-usr-phys_sys__NORMAL6 : boolean;
+	main-usr-phys_sys__ALTERNATE6 : boolean;
+	main-usr-phys_sys__NORMAL7 : boolean;
+	main-usr-phys_sys__ALTERNATE7 : boolean;
+	main-usr-phys_sys__NORMAL8 : boolean;
+	main-usr-phys_sys__ALTERNATE8 : boolean;
+	main-usr-phys_sys__L_PEDAL_VALID : boolean;
+	main-usr-phys_sys__R_PEDAL_VALID : boolean;
+	main-usr-phys_sys__ALL_WHEELS_BRAKE : boolean;
+	main-usr-phys_sys__ALL_WHEELS_STOPPED : boolean;
+	main-usr-phys_sys__BRAKE_AS_NOT_COMMANDED : boolean;
+	main-usr-phys_sys__PEDALS_NOT_PRESSED : boolean;
+	main-usr-phys_sys__accum_pressure_display_in : integer;
+	main-usr-phys_sys__accum_pressure_display : integer;
+	main-usr-phys_sys__green_pressure_in_selec_valve : integer;
+	main-usr-phys_sys__wheel_status1 : boolean;
+	main-usr-phys_sys__wheel_status2 : boolean;
+	main-usr-phys_sys__wheel_status3 : boolean;
+	main-usr-phys_sys__wheel_status4 : boolean;
+	main-usr-phys_sys__wheel_status5 : boolean;
+	main-usr-phys_sys__wheel_status6 : boolean;
+	main-usr-phys_sys__wheel_status7 : boolean;
+	main-usr-phys_sys__wheel_status8 : boolean;
+	main-usr-phys_sys__wheel_braking_force1 : integer;
+	main-usr-phys_sys__wheel_braking_force2 : integer;
+	main-usr-phys_sys__wheel_braking_force3 : integer;
+	main-usr-phys_sys__wheel_braking_force4 : integer;
+	main-usr-phys_sys__wheel_braking_force5 : integer;
+	main-usr-phys_sys__wheel_braking_force6 : integer;
+	main-usr-phys_sys__wheel_braking_force7 : integer;
+	main-usr-phys_sys__wheel_braking_force8 : integer;
+	main-usr-phys_sys____ASSUME0 : boolean;
+	main-usr-phys_sys____ASSUME__HIST : boolean;
+	main-usr-ctrl_sys__SPEED : boolean;
+	main-usr-ctrl_sys__VALID : boolean;
+	main-usr-ctrl_sys__power : boolean;
+	main-usr-ctrl_sys__PAIR_NOT_ROLLING_15 : boolean;
+	main-usr-ctrl_sys__PAIR_NOT_ROLLING_26 : boolean;
+	main-usr-ctrl_sys__PAIR_NOT_ROLLING_37 : boolean;
+	main-usr-ctrl_sys__PAIR_NOT_ROLLING_48 : boolean;
+	main-usr-ctrl_sys__VALIDPAIR_15 : boolean;
+	main-usr-ctrl_sys__VALIDPAIR_26 : boolean;
+	main-usr-ctrl_sys__VALIDPAIR_37 : boolean;
+	main-usr-ctrl_sys__VALIDPAIR_48 : boolean;
+	main-usr-ctrl_sys__BRAKE_AS_COMMANDED_15 : boolean;
+	main-usr-ctrl_sys__BRAKE_AS_COMMANDED_26 : boolean;
+	main-usr-ctrl_sys__BRAKE_AS_COMMANDED_37 : boolean;
+	main-usr-ctrl_sys__BRAKE_AS_COMMANDED_48 : boolean;
+	main-usr-ctrl_sys__brake_as_cmd_1 : boolean;
+	main-usr-ctrl_sys__brake_as_cmd_2 : boolean;
+	main-usr-ctrl_sys__brake_as_cmd_3 : boolean;
+	main-usr-ctrl_sys__brake_as_cmd_4 : boolean;
+	main-usr-ctrl_sys__brake_as_cmd_5 : boolean;
+	main-usr-ctrl_sys__brake_as_cmd_6 : boolean;
+	main-usr-ctrl_sys__brake_as_cmd_7 : boolean;
+	main-usr-ctrl_sys__brake_as_cmd_8 : boolean;
+	main-usr-ctrl_sys__as_cmd_pair_1_5 : boolean;
+	main-usr-ctrl_sys__as_cmd_pair_2_6 : boolean;
+	main-usr-ctrl_sys__as_cmd_pair_3_7 : boolean;
+	main-usr-ctrl_sys__as_cmd_pair_4_8 : boolean;
+	main-usr-ctrl_sys__system_validity : boolean;
+	main-usr-ctrl_sys____ASSUME0 : boolean;
+	main-usr-ctrl_sys____ASSUME__HIST : boolean;
+	main-usr-wheel_sensor1__wheel_rolling : boolean;
+	main-usr-wheel_sensor1____ASSUME__HIST : boolean;
+	main-usr-wheel_sensor2__wheel_rolling : boolean;
+	main-usr-wheel_sensor2____ASSUME__HIST : boolean;
+	main-usr-wheel_sensor3__wheel_rolling : boolean;
+	main-usr-wheel_sensor3____ASSUME__HIST : boolean;
+	main-usr-wheel_sensor4__wheel_rolling : boolean;
+	main-usr-wheel_sensor4____ASSUME__HIST : boolean;
+	main-usr-wheel_sensor5__wheel_rolling : boolean;
+	main-usr-wheel_sensor5____ASSUME__HIST : boolean;
+	main-usr-wheel_sensor6__wheel_rolling : boolean;
+	main-usr-wheel_sensor6____ASSUME__HIST : boolean;
+	main-usr-wheel_sensor7__wheel_rolling : boolean;
+	main-usr-wheel_sensor7____ASSUME__HIST : boolean;
+	main-usr-wheel_sensor8__wheel_rolling : boolean;
+	main-usr-wheel_sensor8____ASSUME__HIST : boolean;
+	main-usr-pedal_sensor_L__elec_pedal_pos : boolean;
+	main-usr-pedal_sensor_L____ASSUME__HIST : boolean;
+	main-usr-pedal_sensor_R__elec_pedal_pos : boolean;
+	main-usr-pedal_sensor_R____ASSUME__HIST : boolean;
+	main-usr-ALL_WHEELS_BRAKE : boolean;
+	main-usr-ALL_WHEELS_STOPPED : boolean;
+	main-usr-BRAKE_AS_NOT_COMMANDED : boolean;
+	main-usr-PEDALS_NOT_PRESSED : boolean;
+	main-usr-GREEN_PRESSURE_VALID : boolean;
+	main-usr-NORMAL1 : boolean;
+	main-usr-ALTERNATE1 : boolean;
+	main-usr-NORMAL2 : boolean;
+	main-usr-ALTERNATE2 : boolean;
+	main-usr-NORMAL3 : boolean;
+	main-usr-ALTERNATE3 : boolean;
+	main-usr-NORMAL4 : boolean;
+	main-usr-ALTERNATE4 : boolean;
+	main-usr-NORMAL5 : boolean;
+	main-usr-ALTERNATE5 : boolean;
+	main-usr-NORMAL6 : boolean;
+	main-usr-ALTERNATE6 : boolean;
+	main-usr-NORMAL7 : boolean;
+	main-usr-ALTERNATE7 : boolean;
+	main-usr-NORMAL8 : boolean;
+	main-usr-ALTERNATE8 : boolean;
+	main-usr-L_PEDAL_VALID : boolean;
+	main-usr-R_PEDAL_VALID : boolean;
+	main-usr-POWER : boolean;
+	main-usr-HYD_PRESSURE_MAX : boolean;
+	main-usr-SPEED : boolean;
+	main-usr-W1ROLL : boolean;
+	main-usr-W2ROLL : boolean;
+	main-usr-W3ROLL : boolean;
+	main-usr-W4ROLL : boolean;
+	main-usr-W5ROLL : boolean;
+	main-usr-W6ROLL : boolean;
+	main-usr-W7ROLL : boolean;
+	main-usr-W8ROLL : boolean;
+	main-usr-accum_pressure_display : integer;
+	main-usr-wheel_braking_force1 : integer;
+	main-usr-wheel_braking_force2 : integer;
+	main-usr-wheel_braking_force3 : integer;
+	main-usr-wheel_braking_force4 : integer;
+	main-usr-wheel_braking_force5 : integer;
+	main-usr-wheel_braking_force6 : integer;
+	main-usr-wheel_braking_force7 : integer;
+	main-usr-wheel_braking_force8 : integer;
+	main-usr-wheel_status1 : boolean;
+	main-usr-wheel_status2 : boolean;
+	main-usr-wheel_status3 : boolean;
+	main-usr-wheel_status4 : boolean;
+	main-usr-wheel_status5 : boolean;
+	main-usr-wheel_status6 : boolean;
+	main-usr-wheel_status7 : boolean;
+	main-usr-wheel_status8 : boolean;
+	main-usr-green_pressure_in_selector_valve : integer;
+	main-usr-system_validity : boolean;
+	main-usr-phys_sys__hyd_supply1 : integer;
+	main-usr-phys_sys__hyd_supply2 : integer;
+	main-usr-phys_sys__pump_power1 : boolean;
+	main-usr-phys_sys__pump_power2 : boolean;
+	main-usr-phys_sys__system_validity : boolean;
+	main-usr-phys_sys__brake_as_cmd_1 : boolean;
+	main-usr-phys_sys__brake_as_cmd_2 : boolean;
+	main-usr-phys_sys__brake_as_cmd_3 : boolean;
+	main-usr-phys_sys__brake_as_cmd_4 : boolean;
+	main-usr-phys_sys__brake_as_cmd_5 : boolean;
+	main-usr-phys_sys__brake_as_cmd_6 : boolean;
+	main-usr-phys_sys__brake_as_cmd_7 : boolean;
+	main-usr-phys_sys__brake_as_cmd_8 : boolean;
+	main-usr-phys_sys__as_cmd_pair_1_5 : boolean;
+	main-usr-phys_sys__as_cmd_pair_2_6 : boolean;
+	main-usr-phys_sys__as_cmd_pair_3_7 : boolean;
+	main-usr-phys_sys__as_cmd_pair_4_8 : boolean;
+	main-usr-phys_sys__ground_speed : integer;
+	main-usr-phys_sys__mech_pedal_pos_L : boolean;
+	main-usr-phys_sys__mech_pedal_pos_R : boolean;
+	main-usr-phys_sys__time : real;
+	main-usr-ctrl_sys__power_1 : boolean;
+	main-usr-ctrl_sys__power_2 : boolean;
+	main-usr-ctrl_sys__ground_speed : integer;
+	main-usr-ctrl_sys__elec_pedal_pos_L : boolean;
+	main-usr-ctrl_sys__elec_pedal_pos_R : boolean;
+	main-usr-ctrl_sys__wheel_rolling_1 : boolean;
+	main-usr-ctrl_sys__wheel_rolling_2 : boolean;
+	main-usr-ctrl_sys__wheel_rolling_3 : boolean;
+	main-usr-ctrl_sys__wheel_rolling_4 : boolean;
+	main-usr-ctrl_sys__wheel_rolling_5 : boolean;
+	main-usr-ctrl_sys__wheel_rolling_6 : boolean;
+	main-usr-ctrl_sys__wheel_rolling_7 : boolean;
+	main-usr-ctrl_sys__wheel_rolling_8 : boolean;
+	main-usr-ctrl_sys__time : real;
+	main-usr-wheel_sensor1__wheel_status : boolean;
+	main-usr-wheel_sensor1__time : real;
+	main-usr-wheel_sensor2__wheel_status : boolean;
+	main-usr-wheel_sensor2__time : real;
+	main-usr-wheel_sensor3__wheel_status : boolean;
+	main-usr-wheel_sensor3__time : real;
+	main-usr-wheel_sensor4__wheel_status : boolean;
+	main-usr-wheel_sensor4__time : real;
+	main-usr-wheel_sensor5__wheel_status : boolean;
+	main-usr-wheel_sensor5__time : real;
+	main-usr-wheel_sensor6__wheel_status : boolean;
+	main-usr-wheel_sensor6__time : real;
+	main-usr-wheel_sensor7__wheel_status : boolean;
+	main-usr-wheel_sensor7__time : real;
+	main-usr-wheel_sensor8__wheel_status : boolean;
+	main-usr-wheel_sensor8__time : real;
+	main-usr-pedal_sensor_L__mech_pedal_pos : boolean;
+	main-usr-pedal_sensor_L__time : real;
+	main-usr-pedal_sensor_R__mech_pedal_pos : boolean;
+	main-usr-pedal_sensor_R__time : real;
+	main-usr-mechanical_pedal_pos_R : boolean;
+	main-usr-mechanical_pedal_pos_L : boolean;
+	main-usr-power1 : boolean;
+	main-usr-power2 : boolean;
+	main-usr-pump_power1 : boolean;
+	main-usr-pump_power2 : boolean;
+	main-usr-ground_speed : integer;
+	main-usr-hyd_supply1 : integer;
+	main-usr-hyd_supply2 : integer;
+	main-usr-time : real;
+	main-impl-usr-__ASSUME0 : boolean;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__LEMMA0 : boolean;
+	main-impl-usr-__LEMMA1 : boolean;
+	main-impl-usr-__LEMMA2 : boolean;
+	main-impl-usr-__LEMMA3 : boolean;
+	main-impl-usr-__LEMMA4 : boolean;
+	main-impl-usr-__LEMMA5 : boolean;
+	main-impl-usr-__LEMMA6 : boolean;
+	main-impl-usr-__LEMMA7 : boolean;
+	main-impl-usr-__LEMMA8 : boolean;
+	main-impl-usr-__LEMMA9 : boolean;
+	main-impl-usr-__LEMMA10 : boolean;
+	main-impl-usr-__LEMMA11 : boolean;
+	main-impl-usr-__LEMMA12 : boolean;
+	main-impl-usr-__LEMMA13 : boolean;
+	main-impl-usr-__LEMMA14 : boolean;
+	main-impl-usr-__LEMMA15 : boolean;
+	main-impl-usr-__LEMMA16 : boolean;
+	main-impl-usr-__LEMMA17 : boolean;
+	main-impl-usr-__LEMMA18 : boolean;
+	main-impl-usr-__LEMMA19 : boolean;
+	main-impl-usr-__LEMMA20 : boolean;
+	main-impl-usr-__LEMMA21 : boolean;
+	main-impl-usr-__LEMMA22 : boolean;
+	main-impl-usr-__LEMMA23 : boolean;
+	main-impl-usr-__LEMMA24 : boolean;
+	main-impl-usr-__LEMMA25 : boolean;
+	main-impl-usr-__LEMMA26 : boolean;
+	main-impl-usr-__LEMMA27 : boolean;
+	main-impl-usr-__LEMMA28 : boolean;
+	main-res-glocal_2 : boolean;
+	main-res-glocal_3 : boolean;
+	main-res-glocal_5 : boolean;
+	main-res-glocal_7 : boolean;
+	main-res-glocal_8 : boolean;
+	main-res-glocal_10 : boolean;
+	main-res-glocal_12 : boolean;
+	main-res-glocal_13 : boolean;
+	main-res-glocal_15 : boolean;
+	main-res-glocal_18 : boolean;
+	main-res-glocal_19 : boolean;
+	main-res-glocal_21 : boolean;
+	main-res-glocal_22 : boolean;
+	main-res-glocal_23 : boolean;
+	main-res-glocal_25 : boolean;
+	main-res-glocal_26 : boolean;
+	main-res-glocal_27 : boolean;
+	main-res-glocal_29 : boolean;
+	main-res-glocal_30 : boolean;
+	main-res-glocal_31 : boolean;
+	main-res-glocal_33 : boolean;
+	main-res-glocal_34 : boolean;
+	main-res-glocal_35 : boolean;
+	main-res-glocal_37 : boolean;
+	main-res-glocal_38 : boolean;
+	main-res-glocal_39 : boolean;
+	main-res-glocal_41 : boolean;
+	main-res-glocal_42 : boolean;
+	main-res-glocal_43 : boolean;
+	main-res-glocal_45 : boolean;
+	main-res-glocal_46 : boolean;
+	main-res-glocal_47 : boolean;
+	main-res-glocal_49 : boolean;
+	main-res-glocal_50 : boolean;
+	main-res-glocal_51 : boolean;
+	main-res-glocal_53 : boolean;
+	main-res-glocal_54 : boolean;
+	main-res-glocal_55 : boolean;
+	main-res-glocal_56 : boolean;
+	main-res-glocal_57 : boolean;
+	main-res-glocal_58 : boolean;
+	main-res-glocal_59 : boolean;
+	main-res-glocal_60 : boolean;
+	main-res-glocal_61 : boolean;
+	main-res-glocal_62 : boolean;
+	main-res-glocal_63 : boolean;
+	main-res-glocal_64 : boolean;
+	main-res-glocal_65 : boolean;
+	main-res-glocal_66 : boolean;
+	main-res-glocal_67 : boolean;
+	main-res-glocal_68 : boolean;
+	main-res-glocal_69 : boolean;
+	main-res-glocal_70 : boolean;
+	main-res-glocal_71 : boolean;
+	main-res-glocal_72 : boolean;
+	main-res-glocal_73 : boolean;
+	main-res-glocal_74 : boolean;
+	main-res-glocal_75 : boolean;
+	main-res-glocal_76 : boolean;
+	main-res-glocal_77 : boolean;
+	main-res-glocal_78 : boolean;
+	main-res-glocal_79 : boolean;
+	main-res-glocal_80 : boolean;
+	main-res-glocal_81 : boolean;
+	main-res-glocal_82 : boolean;
+	main-res-glocal_83 : boolean;
+	main-res-glocal_84 : boolean;
+	main-res-glocal_85 : boolean;
+	main-res-glocal_86 : boolean;
+	main-res-glocal_87 : boolean;
+	main-res-glocal_88 : boolean;
+	main-res-glocal_89 : boolean;
+	main-res-glocal_90 : boolean;
+	main-res-glocal_91 : boolean;
+	main-res-glocal_92 : boolean;
+	main-res-glocal_93 : boolean;
+	main-res-glocal_94 : boolean;
+	main-res-glocal_95 : boolean;
+	main-res-glocal_96 : boolean;
+	main-res-glocal_97 : boolean;
+	main-res-glocal_98 : boolean;
+	main-res-glocal_99 : boolean;
+	main-res-glocal_100 : boolean;
+	main-res-glocal_101 : boolean;
+	main-res-glocal_102 : boolean;
+	main-res-glocal_103 : boolean;
+	main-res-glocal_104 : boolean;
+	main-res-glocal_105 : boolean;
+	main-res-glocal_106 : boolean;
+	main-res-glocal_107 : boolean;
+	main-res-glocal_108 : boolean;
+	main-res-glocal_109 : boolean;
+	main-res-glocal_110 : boolean;
+	main-res-glocal_111 : boolean;
+	main-res-glocal_112 : boolean;
+	main-res-glocal_113 : boolean;
+	main-res-glocal_114 : boolean;
+	main-res-glocal_115 : boolean;
+	main-res-glocal_116 : boolean;
+	main-res-glocal_117 : boolean;
+	main-res-glocal_118 : boolean;
+	main-res-glocal_119 : boolean;
+	main-res-glocal_120 : boolean;
+	main-res-glocal_121 : boolean;
+	main-res-glocal_122 : boolean;
+	main-res-glocal_123 : boolean;
+	main-res-glocal_124 : boolean;
+	main-res-glocal_125 : boolean;
+	main-res-glocal_126 : boolean;
+	main-res-glocal_127 : boolean;
+	main-res-glocal_128 : boolean;
+	main-res-glocal_129 : boolean;
+	main-res-glocal_130 : boolean;
+	main-res-glocal_131 : boolean;
+	main-res-glocal_132 : boolean;
+	main-res-glocal_133 : boolean;
+	main-res-glocal_134 : boolean;
+	main-res-glocal_135 : boolean;
+	main-res-glocal_136 : boolean;
+	main-res-glocal_137 : boolean;
+	main-res-glocal_138 : boolean;
+	main-res-glocal_139 : boolean;
+	main-res-glocal_140 : boolean;
+	main-res-glocal_141 : boolean;
+	main-res-glocal_142 : boolean;
+	main-res-glocal_143 : boolean;
+	main-res-glocal_144 : boolean;
+	main-res-glocal_145 : boolean;
+	main-res-glocal_146 : boolean;
+	main-res-glocal_147 : boolean;
+	main-res-glocal_148 : boolean;
+	main-res-glocal_149 : boolean;
+	main-res-glocal_150 : boolean;
+	main-res-glocal_151 : boolean;
+	main-res-glocal_152 : boolean;
+	main-res-gklocal_16 : boolean;
+	main-res-call_52 : _TOP__pedal_sensor_R(main-usr-pedal_sensor_R____ASSUME__HIST, main-usr-pedal_sensor_R__mech_pedal_pos, main-usr-pedal_sensor_R__time, main-usr-pedal_sensor_R__elec_pedal_pos);
+	main-res-call_48 : _TOP__pedal_sensor_L(main-usr-pedal_sensor_L____ASSUME__HIST, main-usr-pedal_sensor_L__mech_pedal_pos, main-usr-pedal_sensor_L__time, main-usr-pedal_sensor_L__elec_pedal_pos);
+	main-res-call_44 : _TOP__wheel_sensor8(main-usr-wheel_sensor8____ASSUME__HIST, main-usr-wheel_sensor8__wheel_status, main-usr-wheel_sensor8__time, main-usr-wheel_sensor8__wheel_rolling);
+	main-res-call_40 : _TOP__wheel_sensor7(main-usr-wheel_sensor7____ASSUME__HIST, main-usr-wheel_sensor7__wheel_status, main-usr-wheel_sensor7__time, main-usr-wheel_sensor7__wheel_rolling);
+	main-res-call_36 : _TOP__wheel_sensor6(main-usr-wheel_sensor6____ASSUME__HIST, main-usr-wheel_sensor6__wheel_status, main-usr-wheel_sensor6__time, main-usr-wheel_sensor6__wheel_rolling);
+	main-res-call_32 : _TOP__wheel_sensor5(main-usr-wheel_sensor5____ASSUME__HIST, main-usr-wheel_sensor5__wheel_status, main-usr-wheel_sensor5__time, main-usr-wheel_sensor5__wheel_rolling);
+	main-res-call_28 : _TOP__wheel_sensor4(main-usr-wheel_sensor4____ASSUME__HIST, main-usr-wheel_sensor4__wheel_status, main-usr-wheel_sensor4__time, main-usr-wheel_sensor4__wheel_rolling);
+	main-res-call_24 : _TOP__wheel_sensor3(main-usr-wheel_sensor3____ASSUME__HIST, main-usr-wheel_sensor3__wheel_status, main-usr-wheel_sensor3__time, main-usr-wheel_sensor3__wheel_rolling);
+	main-res-call_20 : _TOP__wheel_sensor2(main-usr-wheel_sensor2____ASSUME__HIST, main-usr-wheel_sensor2__wheel_status, main-usr-wheel_sensor2__time, main-usr-wheel_sensor2__wheel_rolling);
+	main-res-call_17 : __HIST(main-res-gklocal_16);
+	main-res-call_14 : _TOP__wheel_sensor1(main-usr-wheel_sensor1____ASSUME__HIST, main-usr-wheel_sensor1__wheel_status, main-usr-wheel_sensor1__time, main-usr-wheel_sensor1__wheel_rolling);
+	main-res-call_11 : __HIST(main-usr-ctrl_sys____ASSUME0);
+	main-res-call_9 : _TOP__ctrl_sys(main-usr-ctrl_sys____ASSUME__HIST, main-usr-ctrl_sys____ASSUME0, main-usr-ctrl_sys__power_1, main-usr-ctrl_sys__power_2, main-usr-ctrl_sys__ground_speed, main-usr-ctrl_sys__elec_pedal_pos_L, main-usr-ctrl_sys__elec_pedal_pos_R, main-usr-ctrl_sys__wheel_rolling_1, main-usr-ctrl_sys__wheel_rolling_2, main-usr-ctrl_sys__wheel_rolling_3, main-usr-ctrl_sys__wheel_rolling_4, main-usr-ctrl_sys__wheel_rolling_5, main-usr-ctrl_sys__wheel_rolling_6, main-usr-ctrl_sys__wheel_rolling_7, main-usr-ctrl_sys__wheel_rolling_8, main-usr-ctrl_sys__time, main-usr-ctrl_sys__SPEED, main-usr-ctrl_sys__VALID, main-usr-ctrl_sys__power, main-usr-ctrl_sys__PAIR_NOT_ROLLING_15, main-usr-ctrl_sys__PAIR_NOT_ROLLING_26, main-usr-ctrl_sys__PAIR_NOT_ROLLING_37, main-usr-ctrl_sys__PAIR_NOT_ROLLING_48, main-usr-ctrl_sys__VALIDPAIR_15, main-usr-ctrl_sys__VALIDPAIR_26, main-usr-ctrl_sys__VALIDPAIR_37, main-usr-ctrl_sys__VALIDPAIR_48, main-usr-ctrl_sys__BRAKE_AS_COMMANDED_15, main-usr-ctrl_sys__BRAKE_AS_COMMANDED_26, main-usr-ctrl_sys__BRAKE_AS_COMMANDED_37, main-usr-ctrl_sys__BRAKE_AS_COMMANDED_48, main-usr-ctrl_sys__brake_as_cmd_1, main-usr-ctrl_sys__brake_as_cmd_2, main-usr-ctrl_sys__brake_as_cmd_3, main-usr-ctrl_sys__brake_as_cmd_4, main-usr-ctrl_sys__brake_as_cmd_5, main-usr-ctrl_sys__brake_as_cmd_6, main-usr-ctrl_sys__brake_as_cmd_7, main-usr-ctrl_sys__brake_as_cmd_8, main-usr-ctrl_sys__as_cmd_pair_1_5, main-usr-ctrl_sys__as_cmd_pair_2_6, main-usr-ctrl_sys__as_cmd_pair_3_7, main-usr-ctrl_sys__as_cmd_pair_4_8, main-usr-ctrl_sys__system_validity);
+	main-res-call_6 : __HIST(main-usr-phys_sys____ASSUME0);
+	main-res-call_4 : _TOP__phys_sys(main-usr-phys_sys____ASSUME__HIST, main-usr-phys_sys____ASSUME0, main-usr-phys_sys__hyd_supply1, main-usr-phys_sys__hyd_supply2, main-usr-phys_sys__pump_power1, main-usr-phys_sys__pump_power2, main-usr-phys_sys__system_validity, main-usr-phys_sys__brake_as_cmd_1, main-usr-phys_sys__brake_as_cmd_2, main-usr-phys_sys__brake_as_cmd_3, main-usr-phys_sys__brake_as_cmd_4, main-usr-phys_sys__brake_as_cmd_5, main-usr-phys_sys__brake_as_cmd_6, main-usr-phys_sys__brake_as_cmd_7, main-usr-phys_sys__brake_as_cmd_8, main-usr-phys_sys__as_cmd_pair_1_5, main-usr-phys_sys__as_cmd_pair_2_6, main-usr-phys_sys__as_cmd_pair_3_7, main-usr-phys_sys__as_cmd_pair_4_8, main-usr-phys_sys__ground_speed, main-usr-phys_sys__mech_pedal_pos_L, main-usr-phys_sys__mech_pedal_pos_R, main-usr-phys_sys__time, main-usr-phys_sys__hyd_supply1_range, main-usr-phys_sys__hyd_supply2_range, main-usr-phys_sys__ground_speed_range, main-usr-phys_sys__GREEN_PRESSURE_VALID, main-usr-phys_sys__NORMAL1, main-usr-phys_sys__ALTERNATE1, main-usr-phys_sys__NORMAL2, main-usr-phys_sys__ALTERNATE2, main-usr-phys_sys__NORMAL3, main-usr-phys_sys__ALTERNATE3, main-usr-phys_sys__NORMAL4, main-usr-phys_sys__ALTERNATE4, main-usr-phys_sys__NORMAL5, main-usr-phys_sys__ALTERNATE5, main-usr-phys_sys__NORMAL6, main-usr-phys_sys__ALTERNATE6, main-usr-phys_sys__NORMAL7, main-usr-phys_sys__ALTERNATE7, main-usr-phys_sys__NORMAL8, main-usr-phys_sys__ALTERNATE8, main-usr-phys_sys__L_PEDAL_VALID, main-usr-phys_sys__R_PEDAL_VALID, main-usr-phys_sys__ALL_WHEELS_BRAKE, main-usr-phys_sys__ALL_WHEELS_STOPPED, main-usr-phys_sys__BRAKE_AS_NOT_COMMANDED, main-usr-phys_sys__PEDALS_NOT_PRESSED, main-usr-phys_sys__accum_pressure_display_in, main-usr-phys_sys__accum_pressure_display, main-usr-phys_sys__green_pressure_in_selec_valve, main-usr-phys_sys__wheel_status1, main-usr-phys_sys__wheel_status2, main-usr-phys_sys__wheel_status3, main-usr-phys_sys__wheel_status4, main-usr-phys_sys__wheel_status5, main-usr-phys_sys__wheel_status6, main-usr-phys_sys__wheel_status7, main-usr-phys_sys__wheel_status8, main-usr-phys_sys__wheel_braking_force1, main-usr-phys_sys__wheel_braking_force2, main-usr-phys_sys__wheel_braking_force3, main-usr-phys_sys__wheel_braking_force4, main-usr-phys_sys__wheel_braking_force5, main-usr-phys_sys__wheel_braking_force6, main-usr-phys_sys__wheel_braking_force7, main-usr-phys_sys__wheel_braking_force8);
+
+ASSIGN
+	init(main-impl-usr-__ASSUME0) := ((((main-usr-hyd_supply1 > -1) & (main-usr-hyd_supply1 < 11)) & ((main-usr-hyd_supply2 > -1) & (main-usr-hyd_supply2 < 11))) & ((main-usr-ground_speed > -1) & (main-usr-ground_speed < 11)));
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-pedal_sensor_R____ASSUME__HIST & (main-usr-pedal_sensor_L____ASSUME__HIST & (main-usr-wheel_sensor8____ASSUME__HIST & (main-usr-wheel_sensor7____ASSUME__HIST & (main-usr-wheel_sensor6____ASSUME__HIST & (main-usr-wheel_sensor5____ASSUME__HIST & (main-usr-wheel_sensor4____ASSUME__HIST & (main-usr-wheel_sensor3____ASSUME__HIST & (main-usr-wheel_sensor2____ASSUME__HIST & (main-usr-wheel_sensor1____ASSUME__HIST & (main-usr-ctrl_sys____ASSUME__HIST & main-usr-phys_sys____ASSUME__HIST)))))))))));
+	init(main-impl-usr-__LEMMA0) := TRUE;
+	init(main-impl-usr-__LEMMA1) := TRUE;
+	init(main-impl-usr-__LEMMA2) := TRUE;
+	init(main-impl-usr-__LEMMA3) := TRUE;
+	init(main-impl-usr-__LEMMA4) := TRUE;
+	init(main-impl-usr-__LEMMA5) := TRUE;
+	init(main-impl-usr-__LEMMA6) := TRUE;
+	init(main-impl-usr-__LEMMA7) := TRUE;
+	init(main-impl-usr-__LEMMA8) := TRUE;
+	init(main-impl-usr-__LEMMA9) := TRUE;
+	init(main-impl-usr-__LEMMA10) := TRUE;
+	init(main-impl-usr-__LEMMA11) := TRUE;
+	init(main-impl-usr-__LEMMA12) := TRUE;
+	init(main-impl-usr-__LEMMA13) := TRUE;
+	init(main-impl-usr-__LEMMA14) := TRUE;
+	init(main-impl-usr-__LEMMA15) := TRUE;
+	init(main-impl-usr-__LEMMA16) := TRUE;
+	init(main-impl-usr-__LEMMA17) := TRUE;
+	init(main-impl-usr-__LEMMA18) := TRUE;
+	init(main-impl-usr-__LEMMA19) := TRUE;
+	init(main-impl-usr-__LEMMA20) := TRUE;
+	init(main-impl-usr-__LEMMA21) := TRUE;
+	init(main-impl-usr-__LEMMA22) := TRUE;
+	init(main-impl-usr-__LEMMA23) := TRUE;
+	init(main-impl-usr-__LEMMA24) := TRUE;
+	init(main-impl-usr-__LEMMA25) := TRUE;
+	init(main-impl-usr-__LEMMA26) := TRUE;
+	init(main-impl-usr-__LEMMA27) := TRUE;
+	init(main-impl-usr-__LEMMA28) := TRUE;
+	init(main-res-glocal_2) := main-impl-usr-__ASSUME0;
+	init(main-res-glocal_3) := (main-usr-time = main-usr-phys_sys__time);
+	init(main-res-glocal_5) := main-res-call_4._TOP__phys_sys-usr-__ASSERT;
+	init(main-res-glocal_7) := (main-usr-phys_sys____ASSUME__HIST = main-res-call_6.__HIST-usr-hist);
+	init(main-res-glocal_8) := (main-usr-time = main-usr-ctrl_sys__time);
+	init(main-res-glocal_10) := main-res-call_9._TOP__ctrl_sys-usr-__ASSERT;
+	init(main-res-glocal_12) := (main-usr-ctrl_sys____ASSUME__HIST = main-res-call_11.__HIST-usr-hist);
+	init(main-res-glocal_13) := (main-usr-time = main-usr-wheel_sensor1__time);
+	init(main-res-glocal_15) := main-res-call_14._TOP__wheel_sensor1-usr-__ASSERT;
+	init(main-res-gklocal_16) := TRUE;
+	init(main-res-glocal_18) := (main-usr-wheel_sensor1____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_19) := (main-usr-time = main-usr-wheel_sensor2__time);
+	init(main-res-glocal_21) := main-res-call_20._TOP__wheel_sensor2-usr-__ASSERT;
+	init(main-res-glocal_22) := (main-usr-wheel_sensor2____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_23) := (main-usr-time = main-usr-wheel_sensor3__time);
+	init(main-res-glocal_25) := main-res-call_24._TOP__wheel_sensor3-usr-__ASSERT;
+	init(main-res-glocal_26) := (main-usr-wheel_sensor3____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_27) := (main-usr-time = main-usr-wheel_sensor4__time);
+	init(main-res-glocal_29) := main-res-call_28._TOP__wheel_sensor4-usr-__ASSERT;
+	init(main-res-glocal_30) := (main-usr-wheel_sensor4____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_31) := (main-usr-time = main-usr-wheel_sensor5__time);
+	init(main-res-glocal_33) := main-res-call_32._TOP__wheel_sensor5-usr-__ASSERT;
+	init(main-res-glocal_34) := (main-usr-wheel_sensor5____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_35) := (main-usr-time = main-usr-wheel_sensor6__time);
+	init(main-res-glocal_37) := main-res-call_36._TOP__wheel_sensor6-usr-__ASSERT;
+	init(main-res-glocal_38) := (main-usr-wheel_sensor6____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_39) := (main-usr-time = main-usr-wheel_sensor7__time);
+	init(main-res-glocal_41) := main-res-call_40._TOP__wheel_sensor7-usr-__ASSERT;
+	init(main-res-glocal_42) := (main-usr-wheel_sensor7____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_43) := (main-usr-time = main-usr-wheel_sensor8__time);
+	init(main-res-glocal_45) := main-res-call_44._TOP__wheel_sensor8-usr-__ASSERT;
+	init(main-res-glocal_46) := (main-usr-wheel_sensor8____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_47) := (main-usr-time = main-usr-pedal_sensor_L__time);
+	init(main-res-glocal_49) := main-res-call_48._TOP__pedal_sensor_L-usr-__ASSERT;
+	init(main-res-glocal_50) := (main-usr-pedal_sensor_L____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_51) := (main-usr-time = main-usr-pedal_sensor_R__time);
+	init(main-res-glocal_53) := main-res-call_52._TOP__pedal_sensor_R-usr-__ASSERT;
+	init(main-res-glocal_54) := (main-usr-pedal_sensor_R____ASSUME__HIST = main-res-call_17.__HIST-usr-hist);
+	init(main-res-glocal_55) := (main-usr-mechanical_pedal_pos_R = main-usr-phys_sys__mech_pedal_pos_R);
+	init(main-res-glocal_56) := (main-usr-mechanical_pedal_pos_R = main-usr-pedal_sensor_R__mech_pedal_pos);
+	init(main-res-glocal_57) := (main-usr-mechanical_pedal_pos_L = main-usr-phys_sys__mech_pedal_pos_L);
+	init(main-res-glocal_58) := (main-usr-mechanical_pedal_pos_L = main-usr-pedal_sensor_L__mech_pedal_pos);
+	init(main-res-glocal_59) := (main-usr-power1 = main-usr-ctrl_sys__power_1);
+	init(main-res-glocal_60) := (main-usr-power1 = main-usr-phys_sys__pump_power1);
+	init(main-res-glocal_61) := (main-usr-power2 = main-usr-ctrl_sys__power_2);
+	init(main-res-glocal_62) := (main-usr-power2 = main-usr-phys_sys__pump_power2);
+	init(main-res-glocal_63) := (main-usr-ground_speed = main-usr-ctrl_sys__ground_speed);
+	init(main-res-glocal_64) := (main-usr-ground_speed = main-usr-phys_sys__ground_speed);
+	init(main-res-glocal_65) := (main-usr-hyd_supply1 = main-usr-phys_sys__hyd_supply1);
+	init(main-res-glocal_66) := (main-usr-hyd_supply2 = main-usr-phys_sys__hyd_supply2);
+	init(main-res-glocal_67) := (main-usr-phys_sys__accum_pressure_display_in = main-usr-accum_pressure_display);
+	init(main-res-glocal_68) := (main-usr-phys_sys__green_pressure_in_selec_valve = main-usr-green_pressure_in_selector_valve);
+	init(main-res-glocal_69) := (main-usr-phys_sys__wheel_braking_force1 = main-usr-wheel_braking_force1);
+	init(main-res-glocal_70) := (main-usr-phys_sys__wheel_braking_force2 = main-usr-wheel_braking_force2);
+	init(main-res-glocal_71) := (main-usr-phys_sys__wheel_braking_force3 = main-usr-wheel_braking_force3);
+	init(main-res-glocal_72) := (main-usr-phys_sys__wheel_braking_force4 = main-usr-wheel_braking_force4);
+	init(main-res-glocal_73) := (main-usr-phys_sys__wheel_braking_force5 = main-usr-wheel_braking_force5);
+	init(main-res-glocal_74) := (main-usr-phys_sys__wheel_braking_force6 = main-usr-wheel_braking_force6);
+	init(main-res-glocal_75) := (main-usr-phys_sys__wheel_braking_force7 = main-usr-wheel_braking_force7);
+	init(main-res-glocal_76) := (main-usr-phys_sys__wheel_braking_force8 = main-usr-wheel_braking_force8);
+	init(main-res-glocal_77) := (main-usr-phys_sys__wheel_status1 = main-usr-wheel_sensor1__wheel_status);
+	init(main-res-glocal_78) := (main-usr-phys_sys__wheel_status1 = main-usr-wheel_status1);
+	init(main-res-glocal_79) := (main-usr-phys_sys__wheel_status2 = main-usr-wheel_sensor2__wheel_status);
+	init(main-res-glocal_80) := (main-usr-phys_sys__wheel_status2 = main-usr-wheel_status2);
+	init(main-res-glocal_81) := (main-usr-phys_sys__wheel_status3 = main-usr-wheel_sensor3__wheel_status);
+	init(main-res-glocal_82) := (main-usr-phys_sys__wheel_status3 = main-usr-wheel_status3);
+	init(main-res-glocal_83) := (main-usr-phys_sys__wheel_status4 = main-usr-wheel_sensor4__wheel_status);
+	init(main-res-glocal_84) := (main-usr-phys_sys__wheel_status4 = main-usr-wheel_status4);
+	init(main-res-glocal_85) := (main-usr-phys_sys__wheel_status5 = main-usr-wheel_sensor5__wheel_status);
+	init(main-res-glocal_86) := (main-usr-phys_sys__wheel_status5 = main-usr-wheel_status5);
+	init(main-res-glocal_87) := (main-usr-phys_sys__wheel_status6 = main-usr-wheel_sensor6__wheel_status);
+	init(main-res-glocal_88) := (main-usr-phys_sys__wheel_status6 = main-usr-wheel_status6);
+	init(main-res-glocal_89) := (main-usr-phys_sys__wheel_status7 = main-usr-wheel_sensor7__wheel_status);
+	init(main-res-glocal_90) := (main-usr-phys_sys__wheel_status7 = main-usr-wheel_status7);
+	init(main-res-glocal_91) := (main-usr-phys_sys__wheel_status8 = main-usr-wheel_sensor8__wheel_status);
+	init(main-res-glocal_92) := (main-usr-phys_sys__wheel_status8 = main-usr-wheel_status8);
+	init(main-res-glocal_93) := (main-usr-ctrl_sys__system_validity = main-usr-phys_sys__system_validity);
+	init(main-res-glocal_94) := (main-usr-ctrl_sys__system_validity = main-usr-system_validity);
+	init(main-res-glocal_95) := (main-usr-ctrl_sys__brake_as_cmd_1 = main-usr-phys_sys__brake_as_cmd_1);
+	init(main-res-glocal_96) := (main-usr-ctrl_sys__brake_as_cmd_2 = main-usr-phys_sys__brake_as_cmd_2);
+	init(main-res-glocal_97) := (main-usr-ctrl_sys__brake_as_cmd_3 = main-usr-phys_sys__brake_as_cmd_3);
+	init(main-res-glocal_98) := (main-usr-ctrl_sys__brake_as_cmd_4 = main-usr-phys_sys__brake_as_cmd_4);
+	init(main-res-glocal_99) := (main-usr-ctrl_sys__brake_as_cmd_5 = main-usr-phys_sys__brake_as_cmd_5);
+	init(main-res-glocal_100) := (main-usr-ctrl_sys__brake_as_cmd_6 = main-usr-phys_sys__brake_as_cmd_6);
+	init(main-res-glocal_101) := (main-usr-ctrl_sys__brake_as_cmd_7 = main-usr-phys_sys__brake_as_cmd_7);
+	init(main-res-glocal_102) := (main-usr-ctrl_sys__brake_as_cmd_8 = main-usr-phys_sys__brake_as_cmd_8);
+	init(main-res-glocal_103) := (main-usr-ctrl_sys__as_cmd_pair_1_5 = main-usr-phys_sys__as_cmd_pair_1_5);
+	init(main-res-glocal_104) := (main-usr-ctrl_sys__as_cmd_pair_2_6 = main-usr-phys_sys__as_cmd_pair_2_6);
+	init(main-res-glocal_105) := (main-usr-ctrl_sys__as_cmd_pair_3_7 = main-usr-phys_sys__as_cmd_pair_3_7);
+	init(main-res-glocal_106) := (main-usr-ctrl_sys__as_cmd_pair_4_8 = main-usr-phys_sys__as_cmd_pair_4_8);
+	init(main-res-glocal_107) := (main-usr-wheel_sensor1__wheel_rolling = main-usr-ctrl_sys__wheel_rolling_1);
+	init(main-res-glocal_108) := (main-usr-wheel_sensor2__wheel_rolling = main-usr-ctrl_sys__wheel_rolling_2);
+	init(main-res-glocal_109) := (main-usr-wheel_sensor3__wheel_rolling = main-usr-ctrl_sys__wheel_rolling_3);
+	init(main-res-glocal_110) := (main-usr-wheel_sensor4__wheel_rolling = main-usr-ctrl_sys__wheel_rolling_4);
+	init(main-res-glocal_111) := (main-usr-wheel_sensor5__wheel_rolling = main-usr-ctrl_sys__wheel_rolling_5);
+	init(main-res-glocal_112) := (main-usr-wheel_sensor6__wheel_rolling = main-usr-ctrl_sys__wheel_rolling_6);
+	init(main-res-glocal_113) := (main-usr-wheel_sensor7__wheel_rolling = main-usr-ctrl_sys__wheel_rolling_7);
+	init(main-res-glocal_114) := (main-usr-wheel_sensor8__wheel_rolling = main-usr-ctrl_sys__wheel_rolling_8);
+	init(main-res-glocal_115) := (main-usr-pedal_sensor_L__elec_pedal_pos = main-usr-ctrl_sys__elec_pedal_pos_L);
+	init(main-res-glocal_116) := (main-usr-pedal_sensor_R__elec_pedal_pos = main-usr-ctrl_sys__elec_pedal_pos_R);
+	init(main-res-glocal_117) := (main-usr-ALL_WHEELS_BRAKE = ((((((((main-usr-phys_sys__wheel_braking_force1 > 0) & (main-usr-phys_sys__wheel_braking_force2 > 0)) & (main-usr-phys_sys__wheel_braking_force3 > 0)) & (main-usr-phys_sys__wheel_braking_force4 > 0)) & (main-usr-phys_sys__wheel_braking_force5 > 0)) & (main-usr-phys_sys__wheel_braking_force6 > 0)) & (main-usr-phys_sys__wheel_braking_force7 > 0)) & (main-usr-phys_sys__wheel_braking_force8 > 0)));
+	init(main-res-glocal_118) := (main-usr-ALL_WHEELS_STOPPED = (((((((!main-usr-phys_sys__wheel_status1 & !main-usr-phys_sys__wheel_status2) & !main-usr-phys_sys__wheel_status3) & !main-usr-phys_sys__wheel_status4) & !main-usr-phys_sys__wheel_status5) & !main-usr-phys_sys__wheel_status6) & !main-usr-phys_sys__wheel_status7) & !main-usr-phys_sys__wheel_status8));
+	init(main-res-glocal_119) := (main-usr-BRAKE_AS_NOT_COMMANDED = (((((((!main-usr-phys_sys__brake_as_cmd_1 & !main-usr-phys_sys__brake_as_cmd_2) & !main-usr-phys_sys__brake_as_cmd_3) & !main-usr-phys_sys__brake_as_cmd_4) & !main-usr-phys_sys__brake_as_cmd_5) & !main-usr-phys_sys__brake_as_cmd_6) & !main-usr-phys_sys__brake_as_cmd_7) & !main-usr-phys_sys__brake_as_cmd_8));
+	init(main-res-glocal_120) := (main-usr-PEDALS_NOT_PRESSED = (!main-usr-phys_sys__mech_pedal_pos_L & !main-usr-phys_sys__mech_pedal_pos_R));
+	init(main-res-glocal_121) := (main-usr-GREEN_PRESSURE_VALID = ((main-usr-phys_sys__green_pressure_in_selec_valve > 0) & main-usr-system_validity));
+	init(main-res-glocal_122) := (main-usr-NORMAL1 = (main-usr-phys_sys__brake_as_cmd_1 & main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_123) := (main-usr-ALTERNATE1 = ((main-usr-phys_sys__mech_pedal_pos_L & !main-usr-phys_sys__as_cmd_pair_1_5) & !main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_124) := (main-usr-NORMAL2 = (main-usr-phys_sys__brake_as_cmd_2 & main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_125) := (main-usr-ALTERNATE2 = ((main-usr-phys_sys__mech_pedal_pos_L & !main-usr-phys_sys__as_cmd_pair_2_6) & !main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_126) := (main-usr-NORMAL3 = (main-usr-phys_sys__brake_as_cmd_3 & main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_127) := (main-usr-ALTERNATE3 = ((main-usr-phys_sys__mech_pedal_pos_R & !main-usr-phys_sys__as_cmd_pair_3_7) & !main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_128) := (main-usr-NORMAL4 = (main-usr-phys_sys__brake_as_cmd_4 & main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_129) := (main-usr-ALTERNATE4 = ((main-usr-phys_sys__mech_pedal_pos_R & !main-usr-phys_sys__as_cmd_pair_4_8) & !main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_130) := (main-usr-NORMAL5 = (main-usr-phys_sys__brake_as_cmd_5 & main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_131) := (main-usr-ALTERNATE5 = ((main-usr-phys_sys__mech_pedal_pos_L & !main-usr-phys_sys__as_cmd_pair_1_5) & !main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_132) := (main-usr-NORMAL6 = (main-usr-phys_sys__brake_as_cmd_6 & main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_133) := (main-usr-ALTERNATE6 = ((main-usr-phys_sys__mech_pedal_pos_L & !main-usr-phys_sys__as_cmd_pair_2_6) & !main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_134) := (main-usr-NORMAL7 = (main-usr-phys_sys__brake_as_cmd_7 & main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_135) := (main-usr-ALTERNATE7 = ((main-usr-phys_sys__mech_pedal_pos_R & !main-usr-phys_sys__as_cmd_pair_3_7) & !main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_136) := (main-usr-NORMAL8 = (main-usr-phys_sys__brake_as_cmd_8 & main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_137) := (main-usr-ALTERNATE8 = ((main-usr-phys_sys__mech_pedal_pos_R & !main-usr-phys_sys__as_cmd_pair_4_8) & !main-usr-GREEN_PRESSURE_VALID));
+	init(main-res-glocal_138) := (main-usr-L_PEDAL_VALID = (main-usr-phys_sys__mech_pedal_pos_L & main-usr-system_validity));
+	init(main-res-glocal_139) := (main-usr-R_PEDAL_VALID = (main-usr-phys_sys__mech_pedal_pos_R & main-usr-system_validity));
+	init(main-res-glocal_140) := (main-usr-POWER = (((main-usr-power1 & main-usr-power2) & main-usr-pump_power1) & main-usr-pump_power2));
+	init(main-res-glocal_141) := (main-usr-HYD_PRESSURE_MAX = ((main-usr-hyd_supply1 = 10) & (main-usr-hyd_supply2 = 10)));
+	init(main-res-glocal_142) := (main-usr-SPEED = (main-usr-ground_speed > 0));
+	init(main-res-glocal_143) := (main-usr-W1ROLL = main-usr-wheel_status1);
+	init(main-res-glocal_144) := (main-usr-W2ROLL = main-usr-wheel_status2);
+	init(main-res-glocal_145) := (main-usr-W3ROLL = main-usr-wheel_status3);
+	init(main-res-glocal_146) := (main-usr-W4ROLL = main-usr-wheel_status4);
+	init(main-res-glocal_147) := (main-usr-W5ROLL = main-usr-wheel_status5);
+	init(main-res-glocal_148) := (main-usr-W6ROLL = main-usr-wheel_status6);
+	init(main-res-glocal_149) := (main-usr-W7ROLL = main-usr-wheel_status7);
+	init(main-res-glocal_150) := (main-usr-W8ROLL = main-usr-wheel_status8);
+	init(main-res-glocal_151) := TRUE;
+	init(main-res-glocal_152) := (main-usr-time = 0);
+
+	next(main-impl-usr-__ASSUME0) := ((((next(main-usr-hyd_supply1) > -1) & (next(main-usr-hyd_supply1) < 11)) & ((next(main-usr-hyd_supply2) > -1) & (next(main-usr-hyd_supply2) < 11))) & ((next(main-usr-ground_speed) > -1) & (next(main-usr-ground_speed) < 11)));
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-pedal_sensor_R____ASSUME__HIST) & (next(main-usr-pedal_sensor_L____ASSUME__HIST) & (next(main-usr-wheel_sensor8____ASSUME__HIST) & (next(main-usr-wheel_sensor7____ASSUME__HIST) & (next(main-usr-wheel_sensor6____ASSUME__HIST) & (next(main-usr-wheel_sensor5____ASSUME__HIST) & (next(main-usr-wheel_sensor4____ASSUME__HIST) & (next(main-usr-wheel_sensor3____ASSUME__HIST) & (next(main-usr-wheel_sensor2____ASSUME__HIST) & (next(main-usr-wheel_sensor1____ASSUME__HIST) & (next(main-usr-ctrl_sys____ASSUME__HIST) & next(main-usr-phys_sys____ASSUME__HIST))))))))))));
+	next(main-impl-usr-__LEMMA0) := !((((((((((next(main-usr-mechanical_pedal_pos_L) & next(main-usr-mechanical_pedal_pos_R)) & (next(main-usr-ground_speed) > 0)) & !((((next(main-usr-mechanical_pedal_pos_L) & !next(main-usr-ctrl_sys__as_cmd_pair_1_5)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_1) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force1) > 0))) & !((((next(main-usr-mechanical_pedal_pos_L) & !next(main-usr-ctrl_sys__as_cmd_pair_2_6)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_2) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force2) > 0))) & !((((next(main-usr-mechanical_pedal_pos_L) & !next(main-usr-ctrl_sys__as_cmd_pair_1_5)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_5) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force5) > 0))) & !((((next(main-usr-mechanical_pedal_pos_L) & !next(main-usr-ctrl_sys__as_cmd_pair_2_6)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_6) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force6) > 0))) & !((((next(main-usr-mechanical_pedal_pos_R) & !next(main-usr-ctrl_sys__as_cmd_pair_3_7)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_3) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force3) > 0))) & !((((next(main-usr-mechanical_pedal_pos_R) & !next(main-usr-ctrl_sys__as_cmd_pair_4_8)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_4) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force4) > 0))) & !((((next(main-usr-mechanical_pedal_pos_R) & !next(main-usr-ctrl_sys__as_cmd_pair_3_7)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_7) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force7) > 0))) & !((((next(main-usr-mechanical_pedal_pos_R) & !next(main-usr-ctrl_sys__as_cmd_pair_4_8)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_8) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force8) > 0)));
+	next(main-impl-usr-__LEMMA1) := (((((((next(main-usr-mechanical_pedal_pos_L) & !next(main-usr-ctrl_sys__as_cmd_pair_1_5)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_1) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force1) > 0)) & ((((next(main-usr-mechanical_pedal_pos_L) & !next(main-usr-ctrl_sys__as_cmd_pair_2_6)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_2) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force2) > 0))) & ((((next(main-usr-mechanical_pedal_pos_L) & !next(main-usr-ctrl_sys__as_cmd_pair_1_5)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_5) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force5) > 0))) & ((((next(main-usr-mechanical_pedal_pos_L) & !next(main-usr-ctrl_sys__as_cmd_pair_2_6)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_6) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force6) > 0)));
+	next(main-impl-usr-__LEMMA2) := (((((((next(main-usr-mechanical_pedal_pos_R) & !next(main-usr-ctrl_sys__as_cmd_pair_3_7)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_3) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force3) > 0)) & ((((next(main-usr-mechanical_pedal_pos_R) & !next(main-usr-ctrl_sys__as_cmd_pair_4_8)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_4) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force4) > 0))) & ((((next(main-usr-mechanical_pedal_pos_R) & !next(main-usr-ctrl_sys__as_cmd_pair_3_7)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_7) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force7) > 0))) & ((((next(main-usr-mechanical_pedal_pos_R) & !next(main-usr-ctrl_sys__as_cmd_pair_4_8)) & (!next(main-usr-system_validity) | (next(main-usr-green_pressure_in_selector_valve) = 0))) | (next(main-usr-ctrl_sys__brake_as_cmd_8) & ((next(main-usr-green_pressure_in_selector_valve) > 0) & next(main-usr-system_validity)))) -> (next(main-usr-wheel_braking_force8) > 0)));
+	next(main-impl-usr-__LEMMA3) := ((((((((!next(main-usr-W1ROLL) | ((next(main-usr-wheel_braking_force1) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_L) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)))))) & (!next(main-usr-W2ROLL) | ((next(main-usr-wheel_braking_force2) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_L) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER))))))) & (!next(main-usr-W3ROLL) | ((next(main-usr-wheel_braking_force3) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_R) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER))))))) & (!next(main-usr-W4ROLL) | ((next(main-usr-wheel_braking_force4) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_R) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER))))))) & (!next(main-usr-W5ROLL) | ((next(main-usr-wheel_braking_force5) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_L) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER))))))) & (!next(main-usr-W6ROLL) | ((next(main-usr-wheel_braking_force6) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_L) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER))))))) & (!next(main-usr-W7ROLL) | ((next(main-usr-wheel_braking_force7) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_R) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER))))))) & (!next(main-usr-W8ROLL) | ((next(main-usr-wheel_braking_force8) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_R) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)))))));
+	next(main-impl-usr-__LEMMA4) := ((next(main-usr-wheel_braking_force8) <= 0) | ((next(main-usr-wheel_braking_force7) <= 0) | ((next(main-usr-wheel_braking_force6) <= 0) | ((next(main-usr-wheel_braking_force5) <= 0) | ((next(main-usr-wheel_braking_force4) <= 0) | ((next(main-usr-wheel_braking_force3) <= 0) | ((next(main-usr-wheel_braking_force2) <= 0) | ((next(main-usr-wheel_braking_force1) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_R) | (next(main-usr-mechanical_pedal_pos_L) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)))))))))))));
+	next(main-impl-usr-__LEMMA5) := (!next(main-usr-W1ROLL) | ((next(main-usr-wheel_braking_force1) <= 0) | (!next(main-usr-SPEED) | (next(main-usr-mechanical_pedal_pos_L) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER))))));
+	next(main-impl-usr-__LEMMA6) := ((!next(main-usr-W2ROLL) | ((next(main-usr-wheel_braking_force2) <= 0) | (!next(main-usr-SPEED) | next(main-usr-mechanical_pedal_pos_L)))) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)));
+	next(main-impl-usr-__LEMMA7) := ((!next(main-usr-W3ROLL) | ((next(main-usr-wheel_braking_force3) <= 0) | (!next(main-usr-SPEED) | next(main-usr-mechanical_pedal_pos_R)))) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)));
+	next(main-impl-usr-__LEMMA8) := ((!next(main-usr-W4ROLL) | ((next(main-usr-wheel_braking_force4) <= 0) | (!next(main-usr-SPEED) | next(main-usr-mechanical_pedal_pos_R)))) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)));
+	next(main-impl-usr-__LEMMA9) := ((!next(main-usr-W5ROLL) | ((next(main-usr-wheel_braking_force5) <= 0) | (!next(main-usr-SPEED) | next(main-usr-mechanical_pedal_pos_L)))) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)));
+	next(main-impl-usr-__LEMMA10) := ((!next(main-usr-W6ROLL) | ((next(main-usr-wheel_braking_force6) <= 0) | (!next(main-usr-SPEED) | next(main-usr-mechanical_pedal_pos_L)))) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)));
+	next(main-impl-usr-__LEMMA11) := ((!next(main-usr-W7ROLL) | ((next(main-usr-wheel_braking_force7) <= 0) | (!next(main-usr-SPEED) | next(main-usr-mechanical_pedal_pos_R)))) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)));
+	next(main-impl-usr-__LEMMA12) := ((!next(main-usr-W8ROLL) | ((next(main-usr-wheel_braking_force8) <= 0) | (!next(main-usr-SPEED) | next(main-usr-mechanical_pedal_pos_R)))) | (!next(main-usr-HYD_PRESSURE_MAX) | !next(main-usr-POWER)));
+	next(main-impl-usr-__LEMMA13) := ((next(main-usr-ALTERNATE1) | next(main-usr-NORMAL1)) -> (next(main-usr-wheel_braking_force1) > 0));
+	next(main-impl-usr-__LEMMA14) := ((next(main-usr-ALTERNATE2) | next(main-usr-NORMAL2)) -> (next(main-usr-wheel_braking_force2) > 0));
+	next(main-impl-usr-__LEMMA15) := ((next(main-usr-ALTERNATE3) | next(main-usr-NORMAL3)) -> (next(main-usr-wheel_braking_force3) > 0));
+	next(main-impl-usr-__LEMMA16) := ((next(main-usr-ALTERNATE4) | next(main-usr-NORMAL4)) -> (next(main-usr-wheel_braking_force4) > 0));
+	next(main-impl-usr-__LEMMA17) := ((next(main-usr-ALTERNATE5) | next(main-usr-NORMAL5)) -> (next(main-usr-wheel_braking_force5) > 0));
+	next(main-impl-usr-__LEMMA18) := ((next(main-usr-ALTERNATE6) | next(main-usr-NORMAL6)) -> (next(main-usr-wheel_braking_force6) > 0));
+	next(main-impl-usr-__LEMMA19) := ((next(main-usr-ALTERNATE7) | next(main-usr-NORMAL7)) -> (next(main-usr-wheel_braking_force7) > 0));
+	next(main-impl-usr-__LEMMA20) := ((next(main-usr-ALTERNATE8) | next(main-usr-NORMAL8)) -> (next(main-usr-wheel_braking_force8) > 0));
+	next(main-impl-usr-__LEMMA21) := (((next(main-usr-L_PEDAL_VALID) & !next(main-usr-phys_sys__brake_as_cmd_1)) -> next(main-usr-phys_sys__as_cmd_pair_1_5)) -> ((next(main-usr-wheel_braking_force1) > 0) -> (((next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__as_cmd_pair_1_5)) & !next(main-usr-GREEN_PRESSURE_VALID)) | (next(main-usr-phys_sys__brake_as_cmd_1) & next(main-usr-GREEN_PRESSURE_VALID)))));
+	next(main-impl-usr-__LEMMA22) := (((next(main-usr-L_PEDAL_VALID) & !next(main-usr-phys_sys__brake_as_cmd_2)) -> next(main-usr-phys_sys__as_cmd_pair_2_6)) -> ((next(main-usr-wheel_braking_force2) > 0) -> (((next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__as_cmd_pair_2_6)) & !next(main-usr-GREEN_PRESSURE_VALID)) | (next(main-usr-phys_sys__brake_as_cmd_2) & next(main-usr-GREEN_PRESSURE_VALID)))));
+	next(main-impl-usr-__LEMMA23) := (((next(main-usr-R_PEDAL_VALID) & !next(main-usr-phys_sys__brake_as_cmd_3)) -> next(main-usr-phys_sys__as_cmd_pair_3_7)) -> ((next(main-usr-wheel_braking_force3) > 0) -> (((next(main-usr-phys_sys__mech_pedal_pos_R) & !next(main-usr-phys_sys__as_cmd_pair_3_7)) & !next(main-usr-GREEN_PRESSURE_VALID)) | (next(main-usr-phys_sys__brake_as_cmd_3) & next(main-usr-GREEN_PRESSURE_VALID)))));
+	next(main-impl-usr-__LEMMA24) := (((next(main-usr-R_PEDAL_VALID) & !next(main-usr-phys_sys__brake_as_cmd_4)) -> next(main-usr-phys_sys__as_cmd_pair_4_8)) -> ((next(main-usr-wheel_braking_force4) > 0) -> (((next(main-usr-phys_sys__mech_pedal_pos_R) & !next(main-usr-phys_sys__as_cmd_pair_4_8)) & !next(main-usr-GREEN_PRESSURE_VALID)) | (next(main-usr-phys_sys__brake_as_cmd_4) & next(main-usr-GREEN_PRESSURE_VALID)))));
+	next(main-impl-usr-__LEMMA25) := (((next(main-usr-L_PEDAL_VALID) & !next(main-usr-phys_sys__brake_as_cmd_5)) -> next(main-usr-phys_sys__as_cmd_pair_1_5)) -> ((next(main-usr-wheel_braking_force5) > 0) -> (((next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__as_cmd_pair_1_5)) & !next(main-usr-GREEN_PRESSURE_VALID)) | (next(main-usr-phys_sys__brake_as_cmd_5) & next(main-usr-GREEN_PRESSURE_VALID)))));
+	next(main-impl-usr-__LEMMA26) := (((next(main-usr-L_PEDAL_VALID) & !next(main-usr-phys_sys__brake_as_cmd_6)) -> next(main-usr-phys_sys__as_cmd_pair_2_6)) -> ((next(main-usr-wheel_braking_force6) > 0) -> (((next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__as_cmd_pair_2_6)) & !next(main-usr-GREEN_PRESSURE_VALID)) | (next(main-usr-phys_sys__brake_as_cmd_6) & next(main-usr-GREEN_PRESSURE_VALID)))));
+	next(main-impl-usr-__LEMMA27) := (((next(main-usr-R_PEDAL_VALID) & !next(main-usr-phys_sys__brake_as_cmd_7)) -> next(main-usr-phys_sys__as_cmd_pair_3_7)) -> ((next(main-usr-wheel_braking_force7) > 0) -> (((next(main-usr-phys_sys__mech_pedal_pos_R) & !next(main-usr-phys_sys__as_cmd_pair_3_7)) & !next(main-usr-GREEN_PRESSURE_VALID)) | (next(main-usr-phys_sys__brake_as_cmd_7) & next(main-usr-GREEN_PRESSURE_VALID)))));
+	next(main-impl-usr-__LEMMA28) := (((next(main-usr-R_PEDAL_VALID) & !next(main-usr-phys_sys__brake_as_cmd_8)) -> next(main-usr-phys_sys__as_cmd_pair_1_5)) -> ((next(main-usr-wheel_braking_force8) > 0) -> (((next(main-usr-phys_sys__mech_pedal_pos_R) & !next(main-usr-phys_sys__as_cmd_pair_4_8)) & !next(main-usr-GREEN_PRESSURE_VALID)) | (next(main-usr-phys_sys__brake_as_cmd_8) & next(main-usr-GREEN_PRESSURE_VALID)))));
+	next(main-res-glocal_2) := next(main-impl-usr-__ASSUME0);
+	next(main-res-glocal_3) := (next(main-usr-time) = next(main-usr-phys_sys__time));
+	next(main-res-glocal_5) := next(main-res-call_4._TOP__phys_sys-usr-__ASSERT);
+	next(main-res-glocal_7) := (next(main-usr-phys_sys____ASSUME__HIST) = next(main-res-call_6.__HIST-usr-hist));
+	next(main-res-glocal_8) := (next(main-usr-time) = next(main-usr-ctrl_sys__time));
+	next(main-res-glocal_10) := next(main-res-call_9._TOP__ctrl_sys-usr-__ASSERT);
+	next(main-res-glocal_12) := (next(main-usr-ctrl_sys____ASSUME__HIST) = next(main-res-call_11.__HIST-usr-hist));
+	next(main-res-glocal_13) := (next(main-usr-time) = next(main-usr-wheel_sensor1__time));
+	next(main-res-glocal_15) := next(main-res-call_14._TOP__wheel_sensor1-usr-__ASSERT);
+	next(main-res-gklocal_16) := TRUE;
+	next(main-res-glocal_18) := (next(main-usr-wheel_sensor1____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_19) := (next(main-usr-time) = next(main-usr-wheel_sensor2__time));
+	next(main-res-glocal_21) := next(main-res-call_20._TOP__wheel_sensor2-usr-__ASSERT);
+	next(main-res-glocal_22) := (next(main-usr-wheel_sensor2____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_23) := (next(main-usr-time) = next(main-usr-wheel_sensor3__time));
+	next(main-res-glocal_25) := next(main-res-call_24._TOP__wheel_sensor3-usr-__ASSERT);
+	next(main-res-glocal_26) := (next(main-usr-wheel_sensor3____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_27) := (next(main-usr-time) = next(main-usr-wheel_sensor4__time));
+	next(main-res-glocal_29) := next(main-res-call_28._TOP__wheel_sensor4-usr-__ASSERT);
+	next(main-res-glocal_30) := (next(main-usr-wheel_sensor4____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_31) := (next(main-usr-time) = next(main-usr-wheel_sensor5__time));
+	next(main-res-glocal_33) := next(main-res-call_32._TOP__wheel_sensor5-usr-__ASSERT);
+	next(main-res-glocal_34) := (next(main-usr-wheel_sensor5____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_35) := (next(main-usr-time) = next(main-usr-wheel_sensor6__time));
+	next(main-res-glocal_37) := next(main-res-call_36._TOP__wheel_sensor6-usr-__ASSERT);
+	next(main-res-glocal_38) := (next(main-usr-wheel_sensor6____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_39) := (next(main-usr-time) = next(main-usr-wheel_sensor7__time));
+	next(main-res-glocal_41) := next(main-res-call_40._TOP__wheel_sensor7-usr-__ASSERT);
+	next(main-res-glocal_42) := (next(main-usr-wheel_sensor7____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_43) := (next(main-usr-time) = next(main-usr-wheel_sensor8__time));
+	next(main-res-glocal_45) := next(main-res-call_44._TOP__wheel_sensor8-usr-__ASSERT);
+	next(main-res-glocal_46) := (next(main-usr-wheel_sensor8____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_47) := (next(main-usr-time) = next(main-usr-pedal_sensor_L__time));
+	next(main-res-glocal_49) := next(main-res-call_48._TOP__pedal_sensor_L-usr-__ASSERT);
+	next(main-res-glocal_50) := (next(main-usr-pedal_sensor_L____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_51) := (next(main-usr-time) = next(main-usr-pedal_sensor_R__time));
+	next(main-res-glocal_53) := next(main-res-call_52._TOP__pedal_sensor_R-usr-__ASSERT);
+	next(main-res-glocal_54) := (next(main-usr-pedal_sensor_R____ASSUME__HIST) = next(main-res-call_17.__HIST-usr-hist));
+	next(main-res-glocal_55) := (next(main-usr-mechanical_pedal_pos_R) = next(main-usr-phys_sys__mech_pedal_pos_R));
+	next(main-res-glocal_56) := (next(main-usr-mechanical_pedal_pos_R) = next(main-usr-pedal_sensor_R__mech_pedal_pos));
+	next(main-res-glocal_57) := (next(main-usr-mechanical_pedal_pos_L) = next(main-usr-phys_sys__mech_pedal_pos_L));
+	next(main-res-glocal_58) := (next(main-usr-mechanical_pedal_pos_L) = next(main-usr-pedal_sensor_L__mech_pedal_pos));
+	next(main-res-glocal_59) := (next(main-usr-power1) = next(main-usr-ctrl_sys__power_1));
+	next(main-res-glocal_60) := (next(main-usr-power1) = next(main-usr-phys_sys__pump_power1));
+	next(main-res-glocal_61) := (next(main-usr-power2) = next(main-usr-ctrl_sys__power_2));
+	next(main-res-glocal_62) := (next(main-usr-power2) = next(main-usr-phys_sys__pump_power2));
+	next(main-res-glocal_63) := (next(main-usr-ground_speed) = next(main-usr-ctrl_sys__ground_speed));
+	next(main-res-glocal_64) := (next(main-usr-ground_speed) = next(main-usr-phys_sys__ground_speed));
+	next(main-res-glocal_65) := (next(main-usr-hyd_supply1) = next(main-usr-phys_sys__hyd_supply1));
+	next(main-res-glocal_66) := (next(main-usr-hyd_supply2) = next(main-usr-phys_sys__hyd_supply2));
+	next(main-res-glocal_67) := (next(main-usr-phys_sys__accum_pressure_display_in) = next(main-usr-accum_pressure_display));
+	next(main-res-glocal_68) := (next(main-usr-phys_sys__green_pressure_in_selec_valve) = next(main-usr-green_pressure_in_selector_valve));
+	next(main-res-glocal_69) := (next(main-usr-phys_sys__wheel_braking_force1) = next(main-usr-wheel_braking_force1));
+	next(main-res-glocal_70) := (next(main-usr-phys_sys__wheel_braking_force2) = next(main-usr-wheel_braking_force2));
+	next(main-res-glocal_71) := (next(main-usr-phys_sys__wheel_braking_force3) = next(main-usr-wheel_braking_force3));
+	next(main-res-glocal_72) := (next(main-usr-phys_sys__wheel_braking_force4) = next(main-usr-wheel_braking_force4));
+	next(main-res-glocal_73) := (next(main-usr-phys_sys__wheel_braking_force5) = next(main-usr-wheel_braking_force5));
+	next(main-res-glocal_74) := (next(main-usr-phys_sys__wheel_braking_force6) = next(main-usr-wheel_braking_force6));
+	next(main-res-glocal_75) := (next(main-usr-phys_sys__wheel_braking_force7) = next(main-usr-wheel_braking_force7));
+	next(main-res-glocal_76) := (next(main-usr-phys_sys__wheel_braking_force8) = next(main-usr-wheel_braking_force8));
+	next(main-res-glocal_77) := (next(main-usr-phys_sys__wheel_status1) = next(main-usr-wheel_sensor1__wheel_status));
+	next(main-res-glocal_78) := (next(main-usr-phys_sys__wheel_status1) = next(main-usr-wheel_status1));
+	next(main-res-glocal_79) := (next(main-usr-phys_sys__wheel_status2) = next(main-usr-wheel_sensor2__wheel_status));
+	next(main-res-glocal_80) := (next(main-usr-phys_sys__wheel_status2) = next(main-usr-wheel_status2));
+	next(main-res-glocal_81) := (next(main-usr-phys_sys__wheel_status3) = next(main-usr-wheel_sensor3__wheel_status));
+	next(main-res-glocal_82) := (next(main-usr-phys_sys__wheel_status3) = next(main-usr-wheel_status3));
+	next(main-res-glocal_83) := (next(main-usr-phys_sys__wheel_status4) = next(main-usr-wheel_sensor4__wheel_status));
+	next(main-res-glocal_84) := (next(main-usr-phys_sys__wheel_status4) = next(main-usr-wheel_status4));
+	next(main-res-glocal_85) := (next(main-usr-phys_sys__wheel_status5) = next(main-usr-wheel_sensor5__wheel_status));
+	next(main-res-glocal_86) := (next(main-usr-phys_sys__wheel_status5) = next(main-usr-wheel_status5));
+	next(main-res-glocal_87) := (next(main-usr-phys_sys__wheel_status6) = next(main-usr-wheel_sensor6__wheel_status));
+	next(main-res-glocal_88) := (next(main-usr-phys_sys__wheel_status6) = next(main-usr-wheel_status6));
+	next(main-res-glocal_89) := (next(main-usr-phys_sys__wheel_status7) = next(main-usr-wheel_sensor7__wheel_status));
+	next(main-res-glocal_90) := (next(main-usr-phys_sys__wheel_status7) = next(main-usr-wheel_status7));
+	next(main-res-glocal_91) := (next(main-usr-phys_sys__wheel_status8) = next(main-usr-wheel_sensor8__wheel_status));
+	next(main-res-glocal_92) := (next(main-usr-phys_sys__wheel_status8) = next(main-usr-wheel_status8));
+	next(main-res-glocal_93) := (next(main-usr-ctrl_sys__system_validity) = next(main-usr-phys_sys__system_validity));
+	next(main-res-glocal_94) := (next(main-usr-ctrl_sys__system_validity) = next(main-usr-system_validity));
+	next(main-res-glocal_95) := (next(main-usr-ctrl_sys__brake_as_cmd_1) = next(main-usr-phys_sys__brake_as_cmd_1));
+	next(main-res-glocal_96) := (next(main-usr-ctrl_sys__brake_as_cmd_2) = next(main-usr-phys_sys__brake_as_cmd_2));
+	next(main-res-glocal_97) := (next(main-usr-ctrl_sys__brake_as_cmd_3) = next(main-usr-phys_sys__brake_as_cmd_3));
+	next(main-res-glocal_98) := (next(main-usr-ctrl_sys__brake_as_cmd_4) = next(main-usr-phys_sys__brake_as_cmd_4));
+	next(main-res-glocal_99) := (next(main-usr-ctrl_sys__brake_as_cmd_5) = next(main-usr-phys_sys__brake_as_cmd_5));
+	next(main-res-glocal_100) := (next(main-usr-ctrl_sys__brake_as_cmd_6) = next(main-usr-phys_sys__brake_as_cmd_6));
+	next(main-res-glocal_101) := (next(main-usr-ctrl_sys__brake_as_cmd_7) = next(main-usr-phys_sys__brake_as_cmd_7));
+	next(main-res-glocal_102) := (next(main-usr-ctrl_sys__brake_as_cmd_8) = next(main-usr-phys_sys__brake_as_cmd_8));
+	next(main-res-glocal_103) := (next(main-usr-ctrl_sys__as_cmd_pair_1_5) = next(main-usr-phys_sys__as_cmd_pair_1_5));
+	next(main-res-glocal_104) := (next(main-usr-ctrl_sys__as_cmd_pair_2_6) = next(main-usr-phys_sys__as_cmd_pair_2_6));
+	next(main-res-glocal_105) := (next(main-usr-ctrl_sys__as_cmd_pair_3_7) = next(main-usr-phys_sys__as_cmd_pair_3_7));
+	next(main-res-glocal_106) := (next(main-usr-ctrl_sys__as_cmd_pair_4_8) = next(main-usr-phys_sys__as_cmd_pair_4_8));
+	next(main-res-glocal_107) := (next(main-usr-wheel_sensor1__wheel_rolling) = next(main-usr-ctrl_sys__wheel_rolling_1));
+	next(main-res-glocal_108) := (next(main-usr-wheel_sensor2__wheel_rolling) = next(main-usr-ctrl_sys__wheel_rolling_2));
+	next(main-res-glocal_109) := (next(main-usr-wheel_sensor3__wheel_rolling) = next(main-usr-ctrl_sys__wheel_rolling_3));
+	next(main-res-glocal_110) := (next(main-usr-wheel_sensor4__wheel_rolling) = next(main-usr-ctrl_sys__wheel_rolling_4));
+	next(main-res-glocal_111) := (next(main-usr-wheel_sensor5__wheel_rolling) = next(main-usr-ctrl_sys__wheel_rolling_5));
+	next(main-res-glocal_112) := (next(main-usr-wheel_sensor6__wheel_rolling) = next(main-usr-ctrl_sys__wheel_rolling_6));
+	next(main-res-glocal_113) := (next(main-usr-wheel_sensor7__wheel_rolling) = next(main-usr-ctrl_sys__wheel_rolling_7));
+	next(main-res-glocal_114) := (next(main-usr-wheel_sensor8__wheel_rolling) = next(main-usr-ctrl_sys__wheel_rolling_8));
+	next(main-res-glocal_115) := (next(main-usr-pedal_sensor_L__elec_pedal_pos) = next(main-usr-ctrl_sys__elec_pedal_pos_L));
+	next(main-res-glocal_116) := (next(main-usr-pedal_sensor_R__elec_pedal_pos) = next(main-usr-ctrl_sys__elec_pedal_pos_R));
+	next(main-res-glocal_117) := (next(main-usr-ALL_WHEELS_BRAKE) = ((((((((next(main-usr-phys_sys__wheel_braking_force1) > 0) & (next(main-usr-phys_sys__wheel_braking_force2) > 0)) & (next(main-usr-phys_sys__wheel_braking_force3) > 0)) & (next(main-usr-phys_sys__wheel_braking_force4) > 0)) & (next(main-usr-phys_sys__wheel_braking_force5) > 0)) & (next(main-usr-phys_sys__wheel_braking_force6) > 0)) & (next(main-usr-phys_sys__wheel_braking_force7) > 0)) & (next(main-usr-phys_sys__wheel_braking_force8) > 0)));
+	next(main-res-glocal_118) := (next(main-usr-ALL_WHEELS_STOPPED) = (((((((!next(main-usr-phys_sys__wheel_status1) & !next(main-usr-phys_sys__wheel_status2)) & !next(main-usr-phys_sys__wheel_status3)) & !next(main-usr-phys_sys__wheel_status4)) & !next(main-usr-phys_sys__wheel_status5)) & !next(main-usr-phys_sys__wheel_status6)) & !next(main-usr-phys_sys__wheel_status7)) & !next(main-usr-phys_sys__wheel_status8)));
+	next(main-res-glocal_119) := (next(main-usr-BRAKE_AS_NOT_COMMANDED) = (((((((!next(main-usr-phys_sys__brake_as_cmd_1) & !next(main-usr-phys_sys__brake_as_cmd_2)) & !next(main-usr-phys_sys__brake_as_cmd_3)) & !next(main-usr-phys_sys__brake_as_cmd_4)) & !next(main-usr-phys_sys__brake_as_cmd_5)) & !next(main-usr-phys_sys__brake_as_cmd_6)) & !next(main-usr-phys_sys__brake_as_cmd_7)) & !next(main-usr-phys_sys__brake_as_cmd_8)));
+	next(main-res-glocal_120) := (next(main-usr-PEDALS_NOT_PRESSED) = (!next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__mech_pedal_pos_R)));
+	next(main-res-glocal_121) := (next(main-usr-GREEN_PRESSURE_VALID) = ((next(main-usr-phys_sys__green_pressure_in_selec_valve) > 0) & next(main-usr-system_validity)));
+	next(main-res-glocal_122) := (next(main-usr-NORMAL1) = (next(main-usr-phys_sys__brake_as_cmd_1) & next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_123) := (next(main-usr-ALTERNATE1) = ((next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__as_cmd_pair_1_5)) & !next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_124) := (next(main-usr-NORMAL2) = (next(main-usr-phys_sys__brake_as_cmd_2) & next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_125) := (next(main-usr-ALTERNATE2) = ((next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__as_cmd_pair_2_6)) & !next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_126) := (next(main-usr-NORMAL3) = (next(main-usr-phys_sys__brake_as_cmd_3) & next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_127) := (next(main-usr-ALTERNATE3) = ((next(main-usr-phys_sys__mech_pedal_pos_R) & !next(main-usr-phys_sys__as_cmd_pair_3_7)) & !next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_128) := (next(main-usr-NORMAL4) = (next(main-usr-phys_sys__brake_as_cmd_4) & next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_129) := (next(main-usr-ALTERNATE4) = ((next(main-usr-phys_sys__mech_pedal_pos_R) & !next(main-usr-phys_sys__as_cmd_pair_4_8)) & !next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_130) := (next(main-usr-NORMAL5) = (next(main-usr-phys_sys__brake_as_cmd_5) & next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_131) := (next(main-usr-ALTERNATE5) = ((next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__as_cmd_pair_1_5)) & !next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_132) := (next(main-usr-NORMAL6) = (next(main-usr-phys_sys__brake_as_cmd_6) & next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_133) := (next(main-usr-ALTERNATE6) = ((next(main-usr-phys_sys__mech_pedal_pos_L) & !next(main-usr-phys_sys__as_cmd_pair_2_6)) & !next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_134) := (next(main-usr-NORMAL7) = (next(main-usr-phys_sys__brake_as_cmd_7) & next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_135) := (next(main-usr-ALTERNATE7) = ((next(main-usr-phys_sys__mech_pedal_pos_R) & !next(main-usr-phys_sys__as_cmd_pair_3_7)) & !next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_136) := (next(main-usr-NORMAL8) = (next(main-usr-phys_sys__brake_as_cmd_8) & next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_137) := (next(main-usr-ALTERNATE8) = ((next(main-usr-phys_sys__mech_pedal_pos_R) & !next(main-usr-phys_sys__as_cmd_pair_4_8)) & !next(main-usr-GREEN_PRESSURE_VALID)));
+	next(main-res-glocal_138) := (next(main-usr-L_PEDAL_VALID) = (next(main-usr-phys_sys__mech_pedal_pos_L) & next(main-usr-system_validity)));
+	next(main-res-glocal_139) := (next(main-usr-R_PEDAL_VALID) = (next(main-usr-phys_sys__mech_pedal_pos_R) & next(main-usr-system_validity)));
+	next(main-res-glocal_140) := (next(main-usr-POWER) = (((next(main-usr-power1) & next(main-usr-power2)) & next(main-usr-pump_power1)) & next(main-usr-pump_power2)));
+	next(main-res-glocal_141) := (next(main-usr-HYD_PRESSURE_MAX) = ((next(main-usr-hyd_supply1) = 10) & (next(main-usr-hyd_supply2) = 10)));
+	next(main-res-glocal_142) := (next(main-usr-SPEED) = (next(main-usr-ground_speed) > 0));
+	next(main-res-glocal_143) := (next(main-usr-W1ROLL) = next(main-usr-wheel_status1));
+	next(main-res-glocal_144) := (next(main-usr-W2ROLL) = next(main-usr-wheel_status2));
+	next(main-res-glocal_145) := (next(main-usr-W3ROLL) = next(main-usr-wheel_status3));
+	next(main-res-glocal_146) := (next(main-usr-W4ROLL) = next(main-usr-wheel_status4));
+	next(main-res-glocal_147) := (next(main-usr-W5ROLL) = next(main-usr-wheel_status5));
+	next(main-res-glocal_148) := (next(main-usr-W6ROLL) = next(main-usr-wheel_status6));
+	next(main-res-glocal_149) := (next(main-usr-W7ROLL) = next(main-usr-wheel_status7));
+	next(main-res-glocal_150) := (next(main-usr-W8ROLL) = next(main-usr-wheel_status8));
+	next(main-res-glocal_151) := TRUE;
+	next(main-res-glocal_152) := ((next(main-usr-time) > main-usr-time) & (next(main-usr-time) = main-usr-time + (next(main-usr-time) - main-usr-time)));
+
+	INVAR main-res-glocal_152;
+	INVAR main-res-glocal_151;
+	INVAR main-res-glocal_150;
+	INVAR main-res-glocal_149;
+	INVAR main-res-glocal_148;
+	INVAR main-res-glocal_147;
+	INVAR main-res-glocal_146;
+	INVAR main-res-glocal_145;
+	INVAR main-res-glocal_144;
+	INVAR main-res-glocal_143;
+	INVAR main-res-glocal_142;
+	INVAR main-res-glocal_141;
+	INVAR main-res-glocal_140;
+	INVAR main-res-glocal_139;
+	INVAR main-res-glocal_138;
+	INVAR main-res-glocal_137;
+	INVAR main-res-glocal_136;
+	INVAR main-res-glocal_135;
+	INVAR main-res-glocal_134;
+	INVAR main-res-glocal_133;
+	INVAR main-res-glocal_132;
+	INVAR main-res-glocal_131;
+	INVAR main-res-glocal_130;
+	INVAR main-res-glocal_129;
+	INVAR main-res-glocal_128;
+	INVAR main-res-glocal_127;
+	INVAR main-res-glocal_126;
+	INVAR main-res-glocal_125;
+	INVAR main-res-glocal_124;
+	INVAR main-res-glocal_123;
+	INVAR main-res-glocal_122;
+	INVAR main-res-glocal_121;
+	INVAR main-res-glocal_120;
+	INVAR main-res-glocal_119;
+	INVAR main-res-glocal_118;
+	INVAR main-res-glocal_117;
+	INVAR main-res-glocal_116;
+	INVAR main-res-glocal_115;
+	INVAR main-res-glocal_114;
+	INVAR main-res-glocal_113;
+	INVAR main-res-glocal_112;
+	INVAR main-res-glocal_111;
+	INVAR main-res-glocal_110;
+	INVAR main-res-glocal_109;
+	INVAR main-res-glocal_108;
+	INVAR main-res-glocal_107;
+	INVAR main-res-glocal_106;
+	INVAR main-res-glocal_105;
+	INVAR main-res-glocal_104;
+	INVAR main-res-glocal_103;
+	INVAR main-res-glocal_102;
+	INVAR main-res-glocal_101;
+	INVAR main-res-glocal_100;
+	INVAR main-res-glocal_99;
+	INVAR main-res-glocal_98;
+	INVAR main-res-glocal_97;
+	INVAR main-res-glocal_96;
+	INVAR main-res-glocal_95;
+	INVAR main-res-glocal_94;
+	INVAR main-res-glocal_93;
+	INVAR main-res-glocal_92;
+	INVAR main-res-glocal_91;
+	INVAR main-res-glocal_90;
+	INVAR main-res-glocal_89;
+	INVAR main-res-glocal_88;
+	INVAR main-res-glocal_87;
+	INVAR main-res-glocal_86;
+	INVAR main-res-glocal_85;
+	INVAR main-res-glocal_84;
+	INVAR main-res-glocal_83;
+	INVAR main-res-glocal_82;
+	INVAR main-res-glocal_81;
+	INVAR main-res-glocal_80;
+	INVAR main-res-glocal_79;
+	INVAR main-res-glocal_78;
+	INVAR main-res-glocal_77;
+	INVAR main-res-glocal_76;
+	INVAR main-res-glocal_75;
+	INVAR main-res-glocal_74;
+	INVAR main-res-glocal_73;
+	INVAR main-res-glocal_72;
+	INVAR main-res-glocal_71;
+	INVAR main-res-glocal_70;
+	INVAR main-res-glocal_69;
+	INVAR main-res-glocal_68;
+	INVAR main-res-glocal_67;
+	INVAR main-res-glocal_66;
+	INVAR main-res-glocal_65;
+	INVAR main-res-glocal_64;
+	INVAR main-res-glocal_63;
+	INVAR main-res-glocal_62;
+	INVAR main-res-glocal_61;
+	INVAR main-res-glocal_60;
+	INVAR main-res-glocal_59;
+	INVAR main-res-glocal_58;
+	INVAR main-res-glocal_57;
+	INVAR main-res-glocal_56;
+	INVAR main-res-glocal_55;
+	INVAR main-res-glocal_54;
+	INVAR main-res-glocal_53;
+	INVAR main-res-glocal_51;
+	INVAR main-res-glocal_50;
+	INVAR main-res-glocal_49;
+	INVAR main-res-glocal_47;
+	INVAR main-res-glocal_46;
+	INVAR main-res-glocal_45;
+	INVAR main-res-glocal_43;
+	INVAR main-res-glocal_42;
+	INVAR main-res-glocal_41;
+	INVAR main-res-glocal_39;
+	INVAR main-res-glocal_38;
+	INVAR main-res-glocal_37;
+	INVAR main-res-glocal_35;
+	INVAR main-res-glocal_34;
+	INVAR main-res-glocal_33;
+	INVAR main-res-glocal_31;
+	INVAR main-res-glocal_30;
+	INVAR main-res-glocal_29;
+	INVAR main-res-glocal_27;
+	INVAR main-res-glocal_26;
+	INVAR main-res-glocal_25;
+	INVAR main-res-glocal_23;
+	INVAR main-res-glocal_22;
+	INVAR main-res-glocal_21;
+	INVAR main-res-glocal_19;
+	INVAR main-res-glocal_18;
+	INVAR main-res-glocal_15;
+	INVAR main-res-glocal_13;
+	INVAR main-res-glocal_12;
+	INVAR main-res-glocal_10;
+	INVAR main-res-glocal_8;
+	INVAR main-res-glocal_7;
+	INVAR main-res-glocal_5;
+	INVAR main-res-glocal_3;
+	INVAR main-res-glocal_2;
+
+INVARSPEC 
+((main-impl-usr-__LEMMA13));
+

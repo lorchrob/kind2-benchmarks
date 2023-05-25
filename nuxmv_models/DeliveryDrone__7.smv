@@ -281,9 +281,15 @@ VAR
 	main-usr-15-radio_response-data_available : boolean;
 	main-usr-17-radio_response-target_confirmed : boolean;
 	main-usr-delivery_status : 5 .. 8;
+	main-usr-actuation_out : boolean;
 	main-usr-probe_init_mode : boolean;
 	main-usr-probe_abort_mode : boolean;
 	main-usr-probe_delivery_cmd : 2 .. 4;
+	main-usr-probe_constellation : 0 .. 1;
+	main-usr-2-probe_launch_location-x : real;
+	main-usr-2-probe_launch_location-y : real;
+	main-usr-2-probe_delivery_location-x : real;
+	main-usr-2-probe_delivery_location-y : real;
 	main-usr-probe_fly_cmd : boolean;
 	main-usr-15-radio__comm_in-data_available : boolean;
 	main-usr-17-radio__comm_in-target_confirmed : boolean;
@@ -330,6 +336,10 @@ VAR
 	main-usr-2-16-6-connector__bus_in-order-target_position-y : real;
 	main-usr-13-connector__bus_in-update_order : boolean;
 	main-usr-connector__time : real;
+	main-usr-2-satellite0_sig_pos-x : real;
+	main-usr-2-satellite0_sig_pos-y : real;
+	main-usr-2-satellite1_sig_pos-x : real;
+	main-usr-2-satellite1_sig_pos-y : real;
 	main-usr-10-bus1-abort_cmd : boolean;
 	main-usr-10-bus1-connected : boolean;
 	main-usr-14-bus1-constellation : 0 .. 1;
@@ -346,6 +356,12 @@ VAR
 	main-usr-15-comm1-data_available : boolean;
 	main-usr-17-comm1-target_confirmed : boolean;
 	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
+	main-impl-usr-__GUARANTEE1 : boolean;
+	main-impl-usr-__GUARANTEE2 : boolean;
+	main-impl-usr-__GUARANTEE3 : boolean;
+	main-impl-usr-__GUARANTEE4 : boolean;
 	main-impl-usr-__GUARANTEE5 : boolean;
 	main-res-glocal_26 : boolean;
 	main-res-glocal_28 : boolean;
@@ -404,6 +420,12 @@ VAR
 	main-res-call_25 : Agree_Nodes__Since(main-usr-probe_init_mode, main-res-gklocal_24);
 
 ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-connector____ASSUME__HIST & (main-usr-deliveryItemMechanism____ASSUME__HIST & (main-usr-deliveryPlanner____ASSUME__HIST & main-usr-radio____ASSUME__HIST)));
+	init(main-impl-usr-__GUARANTEE0) := (main-usr-isOn -> (main-usr-most_recent_constellation = main-usr-probe_constellation));
+	init(main-impl-usr-__GUARANTEE1) := (main-usr-isOn -> ((main-usr-2-most_recent_launch_location-x = main-usr-2-probe_launch_location-x) & (main-usr-2-most_recent_launch_location-y = main-usr-2-probe_launch_location-y)));
+	init(main-impl-usr-__GUARANTEE2) := (main-usr-isOn -> ((main-usr-2-most_recent_delivery_location-x = main-usr-2-probe_delivery_location-x) & (main-usr-2-most_recent_delivery_location-y = main-usr-2-probe_delivery_location-y)));
+	init(main-impl-usr-__GUARANTEE3) := ((main-usr-release_cmd & main-usr-valuable_package) -> main-usr-target_confirmed);
+	init(main-impl-usr-__GUARANTEE4) := ((main-usr-delivery_started & main-usr-valuable_package) -> main-usr-confirmation_requested);
 	init(main-impl-usr-__GUARANTEE5) := (main-usr-probe_fly_cmd -> main-res-call_25.Agree_Nodes__Since-usr-Z);
 	init(main-res-gklocal_24) := !main-usr-probe_abort_mode;
 	init(main-res-glocal_26) := (main-usr-time = main-usr-radio__time);
@@ -453,6 +475,12 @@ ASSIGN
 	init(main-res-glocal_77) := TRUE;
 	init(main-res-glocal_78) := (main-usr-time = 0);
 
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-connector____ASSUME__HIST) & (next(main-usr-deliveryItemMechanism____ASSUME__HIST) & (next(main-usr-deliveryPlanner____ASSUME__HIST) & next(main-usr-radio____ASSUME__HIST))));
+	next(main-impl-usr-__GUARANTEE0) := (next(main-usr-isOn) -> (next(main-usr-most_recent_constellation) = next(main-usr-probe_constellation)));
+	next(main-impl-usr-__GUARANTEE1) := (next(main-usr-isOn) -> ((next(main-usr-2-most_recent_launch_location-x) = next(main-usr-2-probe_launch_location-x)) & (next(main-usr-2-most_recent_launch_location-y) = next(main-usr-2-probe_launch_location-y))));
+	next(main-impl-usr-__GUARANTEE2) := (next(main-usr-isOn) -> ((next(main-usr-2-most_recent_delivery_location-x) = next(main-usr-2-probe_delivery_location-x)) & (next(main-usr-2-most_recent_delivery_location-y) = next(main-usr-2-probe_delivery_location-y))));
+	next(main-impl-usr-__GUARANTEE3) := ((next(main-usr-release_cmd) & next(main-usr-valuable_package)) -> next(main-usr-target_confirmed));
+	next(main-impl-usr-__GUARANTEE4) := ((next(main-usr-delivery_started) & next(main-usr-valuable_package)) -> next(main-usr-confirmation_requested));
 	next(main-res-gklocal_24) := !next(main-usr-probe_abort_mode);
 	next(main-impl-usr-__GUARANTEE5) := (next(main-usr-probe_fly_cmd) -> next(main-res-call_25.Agree_Nodes__Since-usr-Z));
 	next(main-res-glocal_26) := (next(main-usr-time) = next(main-usr-radio__time));

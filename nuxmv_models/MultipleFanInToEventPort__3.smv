@@ -79,6 +79,8 @@ VAR
 	main-usr-12-C__Request_in-msg_details : integer;
 	main-usr-C__time : real;
 	main-usr-time : real;
+	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__LEMMA0 : boolean;
 	main-impl-usr-__LEMMA1 : boolean;
 	main-res-glocal_3 : boolean;
 	main-res-glocal_5 : boolean;
@@ -104,6 +106,8 @@ VAR
 	main-res-call_4 : _TOP__A(main-usr-A____ASSUME__HIST, main-usr-A__time, main-usr-A__Request_out___EVENT_, main-usr-3-A__Request_out-ID, main-usr-12-A__Request_out-msg_details);
 
 ASSIGN
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-C____ASSUME__HIST & (main-usr-B____ASSUME__HIST & main-usr-A____ASSUME__HIST));
+	init(main-impl-usr-__LEMMA0) := (main-usr-C__Request_in___EVENT_ = (main-usr-B__Request_out___EVENT_ | main-usr-A__Request_out___EVENT_));
 	init(main-impl-usr-__LEMMA1) := TRUE;
 	init(main-res-glocal_3) := (main-usr-time = main-usr-A__time);
 	init(main-res-glocal_5) := main-res-call_4._TOP__A-usr-__ASSERT;
@@ -124,6 +128,8 @@ ASSIGN
 	init(main-res-glocal_23) := TRUE;
 	init(main-res-glocal_24) := (main-usr-time = 0);
 
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-C____ASSUME__HIST) & (next(main-usr-B____ASSUME__HIST) & next(main-usr-A____ASSUME__HIST)));
+	next(main-impl-usr-__LEMMA0) := (next(main-usr-C__Request_in___EVENT_) = (next(main-usr-B__Request_out___EVENT_) | next(main-usr-A__Request_out___EVENT_)));
 	next(main-impl-usr-__LEMMA1) := (next(main-usr-C__Response_out___EVENT_) -> ((next(main-usr-3-C__Response_out-ID) = 2) | (next(main-usr-3-C__Response_out-ID) = 1)));
 	next(main-res-glocal_3) := (next(main-usr-time) = next(main-usr-A__time));
 	next(main-res-glocal_5) := next(main-res-call_4._TOP__A-usr-__ASSERT);

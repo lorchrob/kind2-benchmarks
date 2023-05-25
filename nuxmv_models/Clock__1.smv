@@ -1,91 +1,90 @@
--- Issue with mod operator, only applies to bounded integers
+
 MODULE _TOP__counter (_TOP__counter-usr-__ASSUME__HIST, _TOP__counter-usr-time, _TOP__counter-usr-Output, _TOP__counter-usr-_CLK)
 VAR
-	_TOP__counter-res-init_flag : boolean;
 	_TOP__counter-usr-__ASSERT : boolean;
 	_TOP__counter-impl-usr-__GUARANTEE0 : boolean;
 	_TOP__counter-impl-usr-_TICKED : boolean;
+	_TOP__counter-impl-usr-_INIT : boolean;
 	_TOP__counter-impl-usr-_STATE0 : integer;
 	_TOP__counter-res-oracle_2 : integer;
 	_TOP__counter-res-oracle_3 : integer;
 	_TOP__counter-res-oracle_1 : boolean;
+
 ASSIGN
 	init(_TOP__counter-impl-usr-_STATE0) := (_TOP__counter-usr-_CLK ? _TOP__counter-res-oracle_2 : _TOP__counter-res-oracle_3);
-	init(_TOP__counter-impl-usr-__GUARANTEE0) := (_TOP__counter-usr-_CLK ? (_TOP__counter-usr-Output = (_TOP__counter-usr-_CLK ? 0 : _TOP__counter-impl-usr-_STATE0 + 1)) : _TOP__counter-res-oracle_1);
+	init(_TOP__counter-impl-usr-_INIT) := _TOP__counter-usr-_CLK;
+	init(_TOP__counter-impl-usr-__GUARANTEE0) := (_TOP__counter-usr-_CLK ? (_TOP__counter-usr-Output = (_TOP__counter-impl-usr-_INIT ? 0 : _TOP__counter-impl-usr-_STATE0 + 1)) : _TOP__counter-res-oracle_1);
 	init(_TOP__counter-usr-__ASSERT) := (_TOP__counter-usr-_CLK -> (_TOP__counter-usr-__ASSUME__HIST -> _TOP__counter-impl-usr-__GUARANTEE0));
 	init(_TOP__counter-impl-usr-_TICKED) := _TOP__counter-usr-_CLK;
-	init(_TOP__counter-res-init_flag) := TRUE;
 
 	next(_TOP__counter-impl-usr-_STATE0) := (next(_TOP__counter-usr-_CLK) ? _TOP__counter-usr-Output : _TOP__counter-impl-usr-_STATE0);
-	next(_TOP__counter-impl-usr-__GUARANTEE0) := (next(_TOP__counter-usr-_CLK) ? (next(_TOP__counter-usr-Output) = ((next(_TOP__counter-usr-_CLK) & !_TOP__counter-impl-usr-_TICKED) ? 0 : next(_TOP__counter-impl-usr-_STATE0) + 1)) : _TOP__counter-impl-usr-__GUARANTEE0);
+	next(_TOP__counter-impl-usr-_INIT) := (next(_TOP__counter-usr-_CLK) & !_TOP__counter-impl-usr-_TICKED);
+	next(_TOP__counter-impl-usr-__GUARANTEE0) := (next(_TOP__counter-usr-_CLK) ? (next(_TOP__counter-usr-Output) = (next(_TOP__counter-impl-usr-_INIT) ? 0 : next(_TOP__counter-impl-usr-_STATE0) + 1)) : _TOP__counter-impl-usr-__GUARANTEE0);
 	next(_TOP__counter-usr-__ASSERT) := ((!next(_TOP__counter-usr-_CLK) -> (next(_TOP__counter-usr-Output) = _TOP__counter-usr-Output)) & (next(_TOP__counter-usr-_CLK) -> (next(_TOP__counter-usr-__ASSUME__HIST) -> next(_TOP__counter-impl-usr-__GUARANTEE0))));
 	next(_TOP__counter-impl-usr-_TICKED) := (_TOP__counter-impl-usr-_TICKED | next(_TOP__counter-usr-_CLK));
-	next(_TOP__counter-res-init_flag) := FALSE;
 
 
 
 MODULE _TOP__target (_TOP__target-usr-__ASSUME__HIST, _TOP__target-usr-__ASSUME0, _TOP__target-usr-Input, _TOP__target-usr-time, _TOP__target-usr-_CLK)
 VAR
-	_TOP__target-res-init_flag : boolean;
 	_TOP__target-usr-__ASSERT : boolean;
 	_TOP__target-impl-usr-_TICKED : boolean;
+	_TOP__target-impl-usr-_INIT : boolean;
 	_TOP__target-impl-usr-_STATE0 : integer;
 	_TOP__target-res-oracle_7 : integer;
 	_TOP__target-res-oracle_8 : integer;
+
 ASSIGN
 	init(_TOP__target-impl-usr-_STATE0) := (_TOP__target-usr-_CLK ? _TOP__target-res-oracle_7 : _TOP__target-res-oracle_8);
-	init(_TOP__target-usr-__ASSERT) := ((!_TOP__target-usr-_CLK -> _TOP__target-usr-__ASSUME0) & (_TOP__target-usr-_CLK -> (_TOP__target-usr-__ASSUME0 = ((_TOP__target-usr-_CLK ? (_TOP__target-usr-Input = 0) : (_TOP__target-impl-usr-_STATE0 < _TOP__target-usr-Input)) & !((_TOP__target-usr-Input mod 7) = 0)))));
+	init(_TOP__target-impl-usr-_INIT) := _TOP__target-usr-_CLK;
+	init(_TOP__target-usr-__ASSERT) := ((!_TOP__target-usr-_CLK -> _TOP__target-usr-__ASSUME0) & (_TOP__target-usr-_CLK -> (_TOP__target-usr-__ASSUME0 = ((_TOP__target-impl-usr-_INIT ? (_TOP__target-usr-Input = 0) : (_TOP__target-impl-usr-_STATE0 < _TOP__target-usr-Input)) & !((_TOP__target-usr-Input mod 7) = 0)))));
 	init(_TOP__target-impl-usr-_TICKED) := _TOP__target-usr-_CLK;
-	init(_TOP__target-res-init_flag) := TRUE;
 
 	next(_TOP__target-impl-usr-_STATE0) := (next(_TOP__target-usr-_CLK) ? _TOP__target-usr-Input : _TOP__target-impl-usr-_STATE0);
-	next(_TOP__target-usr-__ASSERT) := ((!next(_TOP__target-usr-_CLK) -> (next(_TOP__target-usr-__ASSUME0) = _TOP__target-usr-__ASSUME0)) & (next(_TOP__target-usr-_CLK) -> (next(_TOP__target-usr-__ASSUME0) = (((next(_TOP__target-usr-_CLK) & !_TOP__target-impl-usr-_TICKED) ? (next(_TOP__target-usr-Input) = 0) : (next(_TOP__target-impl-usr-_STATE0) < next(_TOP__target-usr-Input))) & !((next(_TOP__target-usr-Input) mod 7) = 0)))));
+	next(_TOP__target-impl-usr-_INIT) := (next(_TOP__target-usr-_CLK) & !_TOP__target-impl-usr-_TICKED);
+	next(_TOP__target-usr-__ASSERT) := ((!next(_TOP__target-usr-_CLK) -> (next(_TOP__target-usr-__ASSUME0) = _TOP__target-usr-__ASSUME0)) & (next(_TOP__target-usr-_CLK) -> (next(_TOP__target-usr-__ASSUME0) = ((next(_TOP__target-impl-usr-_INIT) ? (next(_TOP__target-usr-Input) = 0) : (next(_TOP__target-impl-usr-_STATE0) < next(_TOP__target-usr-Input))) & !((next(_TOP__target-usr-Input) mod 7) = 0)))));
 	next(_TOP__target-impl-usr-_TICKED) := (_TOP__target-impl-usr-_TICKED | next(_TOP__target-usr-_CLK));
-	next(_TOP__target-res-init_flag) := FALSE;
 
 
 
 MODULE __HIST (__HIST-usr-input)
 VAR
-	__HIST-res-init_flag : boolean;
 	__HIST-usr-hist : boolean;
+
 ASSIGN
 	init(__HIST-usr-hist) := __HIST-usr-input;
-	init(__HIST-res-init_flag) := TRUE;
-
 	next(__HIST-usr-hist) := (__HIST-usr-hist & next(__HIST-usr-input));
-	next(__HIST-res-init_flag) := FALSE;
 
 
 
 MODULE _TOP__sieve (_TOP__sieve-usr-__ASSUME__HIST, _TOP__sieve-usr-__ASSUME0, _TOP__sieve-usr-Input, _TOP__sieve-usr-time, _TOP__sieve-usr-Output, _TOP__sieve-usr-_CLK)
 VAR
-	_TOP__sieve-res-init_flag : boolean;
 	_TOP__sieve-usr-__ASSERT : boolean;
 	_TOP__sieve-impl-usr-__GUARANTEE0 : boolean;
 	_TOP__sieve-impl-usr-_TICKED : boolean;
+	_TOP__sieve-impl-usr-_INIT : boolean;
 	_TOP__sieve-impl-usr-_STATE0 : integer;
 	_TOP__sieve-res-oracle_5 : integer;
 	_TOP__sieve-res-oracle_6 : integer;
 	_TOP__sieve-res-oracle_4 : boolean;
+
 ASSIGN
 	init(_TOP__sieve-impl-usr-_STATE0) := (_TOP__sieve-usr-_CLK ? _TOP__sieve-res-oracle_5 : _TOP__sieve-res-oracle_6);
+	init(_TOP__sieve-impl-usr-_INIT) := _TOP__sieve-usr-_CLK;
 	init(_TOP__sieve-impl-usr-__GUARANTEE0) := (_TOP__sieve-usr-_CLK ? (_TOP__sieve-usr-Output = (((_TOP__sieve-usr-Input mod 7) = 0) ? -1 : _TOP__sieve-usr-Input)) : _TOP__sieve-res-oracle_4);
-	init(_TOP__sieve-usr-__ASSERT) := ((!_TOP__sieve-usr-_CLK -> _TOP__sieve-usr-__ASSUME0) & (_TOP__sieve-usr-_CLK -> ((_TOP__sieve-usr-__ASSUME__HIST -> _TOP__sieve-impl-usr-__GUARANTEE0) & (_TOP__sieve-usr-__ASSUME0 = (_TOP__sieve-usr-_CLK ? (_TOP__sieve-usr-Input = 0) : (_TOP__sieve-impl-usr-_STATE0 < _TOP__sieve-usr-Input))))));
+	init(_TOP__sieve-usr-__ASSERT) := ((!_TOP__sieve-usr-_CLK -> _TOP__sieve-usr-__ASSUME0) & (_TOP__sieve-usr-_CLK -> ((_TOP__sieve-usr-__ASSUME__HIST -> _TOP__sieve-impl-usr-__GUARANTEE0) & (_TOP__sieve-usr-__ASSUME0 = (_TOP__sieve-impl-usr-_INIT ? (_TOP__sieve-usr-Input = 0) : (_TOP__sieve-impl-usr-_STATE0 < _TOP__sieve-usr-Input))))));
 	init(_TOP__sieve-impl-usr-_TICKED) := _TOP__sieve-usr-_CLK;
-	init(_TOP__sieve-res-init_flag) := TRUE;
 
 	next(_TOP__sieve-impl-usr-_STATE0) := (next(_TOP__sieve-usr-_CLK) ? _TOP__sieve-usr-Input : _TOP__sieve-impl-usr-_STATE0);
+	next(_TOP__sieve-impl-usr-_INIT) := (next(_TOP__sieve-usr-_CLK) & !_TOP__sieve-impl-usr-_TICKED);
 	next(_TOP__sieve-impl-usr-__GUARANTEE0) := (next(_TOP__sieve-usr-_CLK) ? (next(_TOP__sieve-usr-Output) = (((next(_TOP__sieve-usr-Input) mod 7) = 0) ? -1 : next(_TOP__sieve-usr-Input))) : _TOP__sieve-impl-usr-__GUARANTEE0);
-	next(_TOP__sieve-usr-__ASSERT) := ((!next(_TOP__sieve-usr-_CLK) -> ((next(_TOP__sieve-usr-Output) = _TOP__sieve-usr-Output) & (next(_TOP__sieve-usr-__ASSUME0) = _TOP__sieve-usr-__ASSUME0))) & (next(_TOP__sieve-usr-_CLK) -> ((next(_TOP__sieve-usr-__ASSUME__HIST) -> next(_TOP__sieve-impl-usr-__GUARANTEE0)) & (next(_TOP__sieve-usr-__ASSUME0) = ((next(_TOP__sieve-usr-_CLK) & !_TOP__sieve-impl-usr-_TICKED) ? (next(_TOP__sieve-usr-Input) = 0) : (next(_TOP__sieve-impl-usr-_STATE0) < next(_TOP__sieve-usr-Input)))))));
+	next(_TOP__sieve-usr-__ASSERT) := ((!next(_TOP__sieve-usr-_CLK) -> ((next(_TOP__sieve-usr-Output) = _TOP__sieve-usr-Output) & (next(_TOP__sieve-usr-__ASSUME0) = _TOP__sieve-usr-__ASSUME0))) & (next(_TOP__sieve-usr-_CLK) -> ((next(_TOP__sieve-usr-__ASSUME__HIST) -> next(_TOP__sieve-impl-usr-__GUARANTEE0)) & (next(_TOP__sieve-usr-__ASSUME0) = (next(_TOP__sieve-impl-usr-_INIT) ? (next(_TOP__sieve-usr-Input) = 0) : (next(_TOP__sieve-impl-usr-_STATE0) < next(_TOP__sieve-usr-Input)))))));
 	next(_TOP__sieve-impl-usr-_TICKED) := (_TOP__sieve-impl-usr-_TICKED | next(_TOP__sieve-usr-_CLK));
-	next(_TOP__sieve-res-init_flag) := FALSE;
 
 
 
-MODULE main ()
+MODULE main () 
 VAR
-	main-res-init_flag : boolean;
 	main-usr-counter__Output : integer;
 	main-usr-counter____ASSUME__HIST : boolean;
 	main-usr-sieve__Output : integer;
@@ -98,7 +97,7 @@ VAR
 	main-usr-sieve__Input : integer;
 	main-usr-sieve__time : real;
 	main-usr-sieve___CLOCK_ : boolean;
-	main-usr-target__Input : -10000 .. 10000;
+	main-usr-target__Input : integer;
 	main-usr-target__time : real;
 	main-usr-target___CLOCK_ : boolean;
 	main-usr-time : real;
@@ -127,28 +126,7 @@ VAR
 	main-res-call_17 : _TOP__sieve(main-usr-sieve____ASSUME__HIST, main-usr-sieve____ASSUME0, main-usr-sieve__Input, main-usr-sieve__time, main-usr-sieve__Output, main-usr-sieve___CLOCK_);
 	main-res-call_14 : __HIST(main-res-gklocal_13);
 	main-res-call_11 : _TOP__counter(main-usr-counter____ASSUME__HIST, main-usr-counter__time, main-usr-counter__Output, main-usr-counter___CLOCK_);
-	main-res-poracle_1 : integer;
-	main-res-poracle_2 : integer;
-	main-res-poracle_3 : boolean;
-	main-res-poracle_4 : integer;
-	main-res-poracle_5 : integer;
-	main-res-poracle_6 : boolean;
-	main-res-poracle_7 : integer;
-	main-res-poracle_8 : integer;
-	main-res-inst_0 : boolean;
-	main-res-inst_1 : integer;
-	main-res-inst_2 : boolean;
-	main-res-inst_3 : boolean;
-	main-res-inst_4 : boolean;
-	main-res-inst_5 : integer;
-	main-res-inst_6 : boolean;
-	main-res-inst_7 : boolean;
-	main-res-inst_8 : boolean;
-	main-res-inst_9 : boolean;
-	main-res-inst_10 : integer;
-	main-res-inst_11 : boolean;
-	main-res-inst_12 : boolean;
-	main-res-inst_13 : boolean;
+
 ASSIGN
 	init(main-impl-usr-__ASSUME__HIST) := (main-usr-target____ASSUME__HIST & (main-usr-sieve____ASSUME__HIST & main-usr-counter____ASSUME__HIST));
 	init(main-res-glocal_10) := (main-usr-time = main-usr-counter__time);
@@ -172,15 +150,15 @@ ASSIGN
 
 	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-target____ASSUME__HIST) & (next(main-usr-sieve____ASSUME__HIST) & next(main-usr-counter____ASSUME__HIST)));
 	next(main-res-glocal_10) := (next(main-usr-time) = next(main-usr-counter__time));
-	next(main-res-glocal_12) := main-res-call_11._TOP__counter-usr-__ASSERT;
+	next(main-res-glocal_12) := next(main-res-call_11._TOP__counter-usr-__ASSERT);
 	next(main-res-gklocal_13) := TRUE;
-	next(main-res-glocal_15) := (next(main-usr-counter____ASSUME__HIST) = main-res-call_14.__HIST-usr-hist);
+	next(main-res-glocal_15) := (next(main-usr-counter____ASSUME__HIST) = next(main-res-call_14.__HIST-usr-hist));
 	next(main-res-glocal_16) := (next(main-usr-time) = next(main-usr-sieve__time));
-	next(main-res-glocal_18) := main-res-call_17._TOP__sieve-usr-__ASSERT;
-	next(main-res-glocal_20) := (next(main-usr-sieve____ASSUME__HIST) = main-res-call_19.__HIST-usr-hist);
+	next(main-res-glocal_18) := next(main-res-call_17._TOP__sieve-usr-__ASSERT);
+	next(main-res-glocal_20) := (next(main-usr-sieve____ASSUME__HIST) = next(main-res-call_19.__HIST-usr-hist));
 	next(main-res-glocal_21) := (next(main-usr-time) = next(main-usr-target__time));
-	next(main-res-glocal_23) := main-res-call_22._TOP__target-usr-__ASSERT;
-	next(main-res-glocal_25) := (next(main-usr-target____ASSUME__HIST) = main-res-call_24.__HIST-usr-hist);
+	next(main-res-glocal_23) := next(main-res-call_22._TOP__target-usr-__ASSERT);
+	next(main-res-glocal_25) := (next(main-usr-target____ASSUME__HIST) = next(main-res-call_24.__HIST-usr-hist));
 	next(main-res-glocal_26) := (next(main-usr-target___CLOCK_) | (next(main-usr-sieve___CLOCK_) | next(main-usr-counter___CLOCK_)));
 	next(main-res-glocal_27) := (next(main-usr-counter__Output) = next(main-usr-sieve__Input));
 	next(main-res-glocal_28) := (next(main-usr-sieve__Output) = next(main-usr-target__Input));
@@ -208,5 +186,6 @@ ASSIGN
 	INVAR main-res-glocal_12;
 	INVAR main-res-glocal_10;
 
-LTLSPEC G
-((main-impl-usr-__ASSUME__HIST) & (main-usr-target____ASSUME0) & (main-usr-sieve____ASSUME0));
+INVARSPEC 
+((main-usr-sieve____ASSUME0));
+

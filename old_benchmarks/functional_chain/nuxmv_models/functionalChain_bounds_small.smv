@@ -88,6 +88,9 @@ VAR
 	reconfiguration-impl-usr-max : real;
 	reconfiguration-impl-usr-min : real;
 	reconfiguration-impl-usr-default_value : real;
+	reconfiguration-impl-usr-out_of_range1 : boolean;
+	reconfiguration-impl-usr-out_of_range2 : boolean;
+	reconfiguration-impl-usr-out_of_range3 : boolean;
 	reconfiguration-impl-usr-corrupt1 : boolean;
 	reconfiguration-impl-usr-corrupt2 : boolean;
 	reconfiguration-impl-usr-corrupt3 : boolean;
@@ -145,6 +148,9 @@ ASSIGN
 	init(reconfiguration-impl-usr-in_command3) := reconfiguration-res-2-call_37.priority-usr-in_command;
 	init(reconfiguration-usr-no_command) := !(reconfiguration-impl-usr-in_command3 | (reconfiguration-impl-usr-in_command2 | reconfiguration-impl-usr-in_command1));
 	init(reconfiguration-impl-usr-ok) := !reconfiguration-res-call_38.conf1-usr-out;
+	init(reconfiguration-impl-usr-out_of_range1) := reconfiguration-res-2-call_30.range_monitor-usr-out_of_range;
+	init(reconfiguration-impl-usr-out_of_range2) := reconfiguration-res-2-call_31.range_monitor-usr-out_of_range;
+	init(reconfiguration-impl-usr-out_of_range3) := reconfiguration-res-2-call_32.range_monitor-usr-out_of_range;
 	init(reconfiguration-res-glocal_27) := (!reconfiguration-impl-usr-corrupt3 | (!reconfiguration-impl-usr-corrupt2 | !reconfiguration-impl-usr-corrupt1));
 	init(reconfiguration-res-glocal_28) := ((reconfiguration-impl-usr-m1 < reconfiguration-impl-usr-m2) & (reconfiguration-impl-usr-m2 < reconfiguration-impl-usr-m3));
 	init(reconfiguration-res-glocal_29) := (reconfiguration-impl-usr-safe_value = 0);
@@ -182,6 +188,9 @@ ASSIGN
 	next(reconfiguration-impl-usr-in_command3) := next(reconfiguration-res-2-call_37.priority-usr-in_command);
 	next(reconfiguration-usr-no_command) := !(next(reconfiguration-impl-usr-in_command3) | (next(reconfiguration-impl-usr-in_command2) | next(reconfiguration-impl-usr-in_command1)));
 	next(reconfiguration-impl-usr-ok) := !next(reconfiguration-res-call_38.conf1-usr-out);
+	next(reconfiguration-impl-usr-out_of_range1) := next(reconfiguration-res-2-call_30.range_monitor-usr-out_of_range);
+	next(reconfiguration-impl-usr-out_of_range2) := next(reconfiguration-res-2-call_31.range_monitor-usr-out_of_range);
+	next(reconfiguration-impl-usr-out_of_range3) := next(reconfiguration-res-2-call_32.range_monitor-usr-out_of_range);
 	next(reconfiguration-res-glocal_27) := (!next(reconfiguration-impl-usr-corrupt3) | (!next(reconfiguration-impl-usr-corrupt2) | !next(reconfiguration-impl-usr-corrupt1)));
 	next(reconfiguration-res-glocal_28) := ((next(reconfiguration-impl-usr-m1) < next(reconfiguration-impl-usr-m2)) & (next(reconfiguration-impl-usr-m2) < next(reconfiguration-impl-usr-m3)));
 	next(reconfiguration-res-glocal_29) := (next(reconfiguration-impl-usr-safe_value) = 0);
@@ -457,8 +466,8 @@ ASSIGN
 	init(top-impl-usr-channel1) := top-res-call_39.channel-usr-output;
 	init(top-usr-command) := top-res-2-call_42.reconfiguration-usr-command;
 	init(top-impl-usr-stability) := ((-25 <= top-usr-command) & (top-usr-command <= 25));
-	init(top-res-gklocal_43) := 25;
 	init(top-impl-usr-no_one_in_command) := top-res-2-call_42.reconfiguration-usr-no_command;
+	init(top-res-gklocal_43) := 25;
 	init(top-impl-usr-no_command_bounded) := !top-res-call_44.conf1-usr-out;
 
 	next(top-impl-usr-channel3) := next(top-res-call_41.channel-usr-output);
@@ -466,8 +475,8 @@ ASSIGN
 	next(top-impl-usr-channel1) := next(top-res-call_39.channel-usr-output);
 	next(top-usr-command) := next(top-res-2-call_42.reconfiguration-usr-command);
 	next(top-impl-usr-stability) := ((-25 <= next(top-usr-command)) & (next(top-usr-command) <= 25));
-	next(top-res-gklocal_43) := 25;
 	next(top-impl-usr-no_one_in_command) := next(top-res-2-call_42.reconfiguration-usr-no_command);
+	next(top-res-gklocal_43) := 25;
 	next(top-impl-usr-no_command_bounded) := !next(top-res-call_44.conf1-usr-out);
 
 

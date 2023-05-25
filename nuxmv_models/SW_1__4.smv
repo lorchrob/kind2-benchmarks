@@ -329,6 +329,7 @@ VAR
 	main-impl-usr-__ASSUME0 : boolean;
 	main-impl-usr-__ASSUME1 : boolean;
 	main-impl-usr-__ASSUME__HIST : boolean;
+	main-impl-usr-__GUARANTEE0 : boolean;
 	main-res-glocal_2 : boolean;
 	main-res-glocal_3 : boolean;
 	main-res-glocal_4 : boolean;
@@ -381,10 +382,11 @@ VAR
 	main-res-call_5 : _TOP__RADIO(main-usr-RADIO____ASSUME__HIST, main-usr-RADIO____ASSUME0, main-usr-RADIO__recv_map_in___EVENT_, main-usr-5-RADIO__recv_map_in-HMAC, main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-alt, main-usr-4-4-4-RADIO__recv_map_in-Map-wp1-lat, main-usr-5-4-4-RADIO__recv_map_in-Map-wp1-long, main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-alt, main-usr-4-4-4-RADIO__recv_map_in-Map-wp2-lat, main-usr-5-4-4-RADIO__recv_map_in-Map-wp2-long, main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-alt, main-usr-4-4-4-RADIO__recv_map_in-Map-wp3-lat, main-usr-5-4-4-RADIO__recv_map_in-Map-wp3-long, main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-alt, main-usr-4-4-4-RADIO__recv_map_in-Map-wp4-lat, main-usr-5-4-4-RADIO__recv_map_in-Map-wp4-long, main-usr-8-RADIO__recv_map_in-Pattern, main-usr-RADIO__send_status_in___EVENT_, main-usr-4-RADIO__send_status_in-alt, main-usr-4-RADIO__send_status_in-lat, main-usr-5-RADIO__send_status_in-long, main-usr-RADIO__time, main-usr-RADIO__send_status_out___EVENT_, main-usr-4-RADIO__send_status_out-alt, main-usr-4-RADIO__send_status_out-lat, main-usr-5-RADIO__send_status_out-long, main-usr-RADIO__recv_map_out___EVENT_, main-usr-5-RADIO__recv_map_out-HMAC, main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-alt, main-usr-4-4-4-RADIO__recv_map_out-Map-wp1-lat, main-usr-5-4-4-RADIO__recv_map_out-Map-wp1-long, main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-alt, main-usr-4-4-4-RADIO__recv_map_out-Map-wp2-lat, main-usr-5-4-4-RADIO__recv_map_out-Map-wp2-long, main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-alt, main-usr-4-4-4-RADIO__recv_map_out-Map-wp3-lat, main-usr-5-4-4-RADIO__recv_map_out-Map-wp3-long, main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-alt, main-usr-4-4-4-RADIO__recv_map_out-Map-wp4-lat, main-usr-5-4-4-RADIO__recv_map_out-Map-wp4-long, main-usr-8-RADIO__recv_map_out-Pattern);
 
 ASSIGN
-	init(main-impl-usr-__ASSUME__HIST) := (main-usr-UART____ASSUME__HIST & (main-usr-WPM____ASSUME__HIST & (main-usr-FPLN____ASSUME__HIST & (main-usr-FLT____ASSUME__HIST & main-usr-RADIO____ASSUME__HIST))));
 	init(main-impl-usr-__ASSUME0) := main-usr-5-recv_map-HMAC;
-	init(main-res-glocal_2) := main-impl-usr-__ASSUME0;
 	init(main-impl-usr-__ASSUME1) := main-usr-5-recv_map-HMAC;
+	init(main-impl-usr-__ASSUME__HIST) := (main-usr-UART____ASSUME__HIST & (main-usr-WPM____ASSUME__HIST & (main-usr-FPLN____ASSUME__HIST & (main-usr-FLT____ASSUME__HIST & main-usr-RADIO____ASSUME__HIST))));
+	init(main-impl-usr-__GUARANTEE0) := main-usr-4-waypoint-crc;
+	init(main-res-glocal_2) := main-impl-usr-__ASSUME0;
 	init(main-res-glocal_3) := main-impl-usr-__ASSUME1;
 	init(main-res-glocal_4) := (main-usr-time = main-usr-RADIO__time);
 	init(main-res-glocal_6) := main-res-call_5._TOP__RADIO-usr-__ASSERT;
@@ -427,10 +429,11 @@ ASSIGN
 	init(main-res-glocal_50) := TRUE;
 	init(main-res-glocal_51) := (main-usr-time = 0);
 
-	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-UART____ASSUME__HIST) & (next(main-usr-WPM____ASSUME__HIST) & (next(main-usr-FPLN____ASSUME__HIST) & (next(main-usr-FLT____ASSUME__HIST) & next(main-usr-RADIO____ASSUME__HIST)))));
 	next(main-impl-usr-__ASSUME0) := next(main-usr-5-recv_map-HMAC);
-	next(main-res-glocal_2) := next(main-impl-usr-__ASSUME0);
 	next(main-impl-usr-__ASSUME1) := next(main-usr-5-recv_map-HMAC);
+	next(main-impl-usr-__ASSUME__HIST) := (next(main-usr-UART____ASSUME__HIST) & (next(main-usr-WPM____ASSUME__HIST) & (next(main-usr-FPLN____ASSUME__HIST) & (next(main-usr-FLT____ASSUME__HIST) & next(main-usr-RADIO____ASSUME__HIST)))));
+	next(main-impl-usr-__GUARANTEE0) := next(main-usr-4-waypoint-crc);
+	next(main-res-glocal_2) := next(main-impl-usr-__ASSUME0);
 	next(main-res-glocal_3) := next(main-impl-usr-__ASSUME1);
 	next(main-res-glocal_4) := (next(main-usr-time) = next(main-usr-RADIO__time));
 	next(main-res-glocal_6) := next(main-res-call_5._TOP__RADIO-usr-__ASSERT);

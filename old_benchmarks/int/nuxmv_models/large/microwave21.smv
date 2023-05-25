@@ -1,4 +1,3 @@
-
 MODULE main () 
 VAR
 	top-usr-KP_START : boolean;
@@ -86,12 +85,6 @@ VAR
 	top-res-subrange_1 : boolean;
 	top-res-subrange_2 : boolean;
 	top-res-subrange_3 : boolean;
-	top-res-oracle_9 : integer;
-	top-res-oracle_8 : integer;
-	top-res-oracle_7 : integer;
-	top-res-oracle_6 : integer;
-	top-res-oracle_5 : integer;
-	top-res-oracle_4 : integer;
 
 ASSIGN
 	init(top-impl-usr-chart_microwave_mode_logic_begin_state_outports_steps_remaining) := 0;
@@ -147,7 +140,22 @@ ASSIGN
 	init(top-impl-usr-chart_microwave_mode_logic_steps_remaining) := (top-impl-usr-chart_microwave_mode_logic____wakeup___ ? (top-impl-usr-chart_microwave_mode_logic_rlt_evtInitStep ? top-impl-usr-chart_microwave_mode_logic_begin_state_outports_steps_remaining : ((!top-impl-usr-rlt_eval_microwave_mode_logic_rlt_fired_1 & ((top-impl-usr-rlt_eval_microwave_mode_logic_rlt_state_3_states___root >= 1) & (top-impl-usr-rlt_eval_microwave_mode_logic_rlt_state_3_states___root <= 3))) ? (top-impl-usr-rlt_eval_microwave_mode_logic_ON_rlt_fired_5 ? (top-impl-usr-rlt_eval_microwave_mode_logic_ON_rlt_state_6_outports_steps_remaining - 1) : top-impl-usr-rlt_eval_microwave_mode_logic_ON_rlt_state_6_outports_steps_remaining) : top-impl-usr-rlt_eval_microwave_mode_logic_rlt_state_1_outports_steps_remaining)) : top-impl-usr-chart_microwave_mode_logic_begin_state_outports_steps_remaining);
 	init(top-impl-usr-microwave_microwave_TIME_ON_DISPLAY_SECONDS_TO_MINUTES__QUOTIENT) := ((top-impl-usr-chart_microwave_mode_logic_steps_remaining / 1) / 60);
 	init(top-impl-usr-LEFT_DIGIT) := top-impl-usr-microwave_microwave_TIME_ON_DISPLAY_SECONDS_TO_MINUTES__QUOTIENT;
-	init(top-usr-OK) := (((top-impl-usr-LEFT_DIGIT = ((top-impl-usr-STEPS_TO_COOK / 1) / 60)) | !(top-usr-KP_0 | (top-usr-KP_9 | (top-usr-KP_8 | (top-usr-KP_7 | (top-usr-KP_6 | (top-usr-KP_5 | (top-usr-KP_4 | (top-usr-KP_3 | (top-usr-KP_2 | top-usr-KP_1)))))))))) | !(top-impl-usr-enable & !top-usr-KP_CLEAR));
+
+
+
+
+
+
+
+	init(top-usr-OK) := (top-impl-usr-LEFT_DIGIT = ((top-impl-usr-STEPS_TO_COOK) / 60));
+
+
+
+
+
+
+
+
 	init(top-impl-usr-chart_microwave_mode_logic_begin_state_outports_mode) := 0;
 	init(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_2_outports_mode) := (top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_fired_1 ? (!(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_1_states___root = 2) ? 2 : top-impl-usr-chart_microwave_mode_logic_begin_state_outports_mode) : top-impl-usr-chart_microwave_mode_logic_begin_state_outports_mode);
 	init(top-impl-usr-rlt_eval_microwave_mode_logic_rlt_state_3_outports_mode) := (top-impl-usr-rlt_eval_microwave_mode_logic_rlt_fired_1 ? (top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_fired_2 ? (!(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_2_states___root = 3) ? 3 : top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_2_outports_mode) : top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_2_outports_mode) : top-impl-usr-chart_microwave_mode_logic_begin_state_outports_mode);
@@ -220,7 +228,7 @@ ASSIGN
 	next(top-impl-usr-chart_microwave_mode_logic_steps_remaining) := (next(top-impl-usr-chart_microwave_mode_logic____wakeup___) ? (next(top-impl-usr-chart_microwave_mode_logic_rlt_evtInitStep) ? next(top-impl-usr-chart_microwave_mode_logic_begin_state_outports_steps_remaining) : ((!next(top-impl-usr-rlt_eval_microwave_mode_logic_rlt_fired_1) & ((next(top-impl-usr-rlt_eval_microwave_mode_logic_rlt_state_3_states___root) >= 1) & (next(top-impl-usr-rlt_eval_microwave_mode_logic_rlt_state_3_states___root) <= 3))) ? (next(top-impl-usr-rlt_eval_microwave_mode_logic_ON_rlt_fired_5) ? (next(top-impl-usr-rlt_eval_microwave_mode_logic_ON_rlt_state_6_outports_steps_remaining) - 1) : next(top-impl-usr-rlt_eval_microwave_mode_logic_ON_rlt_state_6_outports_steps_remaining)) : next(top-impl-usr-rlt_eval_microwave_mode_logic_rlt_state_1_outports_steps_remaining))) : next(top-impl-usr-chart_microwave_mode_logic_begin_state_outports_steps_remaining));
 	next(top-impl-usr-microwave_microwave_TIME_ON_DISPLAY_SECONDS_TO_MINUTES__QUOTIENT) := ((next(top-impl-usr-chart_microwave_mode_logic_steps_remaining) / 1) / 60);
 	next(top-impl-usr-LEFT_DIGIT) := next(top-impl-usr-microwave_microwave_TIME_ON_DISPLAY_SECONDS_TO_MINUTES__QUOTIENT);
-	next(top-usr-OK) := (((next(top-impl-usr-LEFT_DIGIT) = ((next(top-impl-usr-STEPS_TO_COOK) / 1) / 60)) | !((next(top-usr-KP_0) & !top-usr-KP_0) | ((next(top-usr-KP_9) & !top-usr-KP_9) | ((next(top-usr-KP_8) & !top-usr-KP_8) | ((next(top-usr-KP_7) & !top-usr-KP_7) | ((next(top-usr-KP_6) & !top-usr-KP_6) | ((next(top-usr-KP_5) & !top-usr-KP_5) | ((next(top-usr-KP_4) & !top-usr-KP_4) | ((next(top-usr-KP_3) & !top-usr-KP_3) | ((next(top-usr-KP_2) & !top-usr-KP_2) | (next(top-usr-KP_1) & !top-usr-KP_1))))))))))) | !(next(top-impl-usr-enable) & !next(top-usr-KP_CLEAR)));
+	next(top-usr-OK) := TRUE;
 	next(top-impl-usr-chart_microwave_mode_logic_begin_state_outports_mode) := top-impl-usr-chart_microwave_mode_logic_mode;
 	next(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_2_outports_mode) := (next(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_fired_1) ? (!(next(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_1_states___root) = 2) ? 2 : next(top-impl-usr-chart_microwave_mode_logic_begin_state_outports_mode)) : next(top-impl-usr-chart_microwave_mode_logic_begin_state_outports_mode));
 	next(top-impl-usr-rlt_eval_microwave_mode_logic_rlt_state_3_outports_mode) := (next(top-impl-usr-rlt_eval_microwave_mode_logic_rlt_fired_1) ? (next(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_fired_2) ? (!(next(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_2_states___root) = 3) ? 3 : next(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_2_outports_mode)) : next(top-impl-usr-rlt_enter_microwave_mode_logic_ON_rlt_state_2_outports_mode)) : next(top-impl-usr-chart_microwave_mode_logic_begin_state_outports_mode));

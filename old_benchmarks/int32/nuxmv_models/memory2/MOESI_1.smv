@@ -71,6 +71,11 @@ VAR
 	top-usr-etat_mo3 : boolean;
 	top-usr-etat_mo4 : boolean;
 	top-usr-OK : boolean;
+	top-impl-usr-modified_mo : signed word[32];
+	top-impl-usr-exclusive_mo : signed word[32];
+	top-impl-usr-shared_mo : signed word[32];
+	top-impl-usr-invalid_mo : signed word[32];
+	top-impl-usr-owned_mo : signed word[32];
 	top-impl-usr-erreur_mo : boolean;
 	top-res-gklocal_8 : boolean;
 	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
@@ -81,10 +86,20 @@ ASSIGN
 	init(top-res-gklocal_8) := (top-res-call_7.excludes4-usr-excludes & (top-usr-init_invalid_mo > 0sh32_00000000));
 	init(top-impl-usr-erreur_mo) := top-res-2-call_6.moesi-usr-erreur_mo;
 	init(top-usr-OK) := (top-res-call_9.Sofar-usr-Sofar -> !top-impl-usr-erreur_mo);
+	init(top-impl-usr-modified_mo) := top-res-2-call_6.moesi-usr-modified_mo;
+	init(top-impl-usr-exclusive_mo) := top-res-2-call_6.moesi-usr-exclusive_mo;
+	init(top-impl-usr-shared_mo) := top-res-2-call_6.moesi-usr-shared_mo;
+	init(top-impl-usr-invalid_mo) := top-res-2-call_6.moesi-usr-invalid_mo;
+	init(top-impl-usr-owned_mo) := top-res-2-call_6.moesi-usr-owned_mo;
 
 	next(top-res-gklocal_8) := (next(top-res-call_7.excludes4-usr-excludes) & (next(top-usr-init_invalid_mo) > 0sh32_00000000));
 	next(top-impl-usr-erreur_mo) := next(top-res-2-call_6.moesi-usr-erreur_mo);
 	next(top-usr-OK) := (next(top-res-call_9.Sofar-usr-Sofar) -> !next(top-impl-usr-erreur_mo));
+	next(top-impl-usr-modified_mo) := next(top-res-2-call_6.moesi-usr-modified_mo);
+	next(top-impl-usr-exclusive_mo) := next(top-res-2-call_6.moesi-usr-exclusive_mo);
+	next(top-impl-usr-shared_mo) := next(top-res-2-call_6.moesi-usr-shared_mo);
+	next(top-impl-usr-invalid_mo) := next(top-res-2-call_6.moesi-usr-invalid_mo);
+	next(top-impl-usr-owned_mo) := next(top-res-2-call_6.moesi-usr-owned_mo);
 
 
 INVARSPEC 

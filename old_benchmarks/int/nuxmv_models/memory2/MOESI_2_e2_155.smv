@@ -76,6 +76,7 @@ VAR
 	top-impl-usr-shared_mo : integer;
 	top-impl-usr-invalid_mo : integer;
 	top-impl-usr-owned_mo : integer;
+	top-impl-usr-erreur_mo : boolean;
 	top-impl-usr-env : boolean;
 	top-res-glocal_9 : integer;
 	top-res-call_7 : excludes4(top-usr-etat_mo1, top-usr-etat_mo2, top-usr-etat_mo3, top-usr-etat_mo4);
@@ -91,6 +92,7 @@ ASSIGN
 	init(top-impl-usr-owned_mo) := top-res-2-call_6.moesi-usr-owned_mo;
 	init(top-impl-usr-env) := top-res-call_8.Sofar-usr-Sofar;
 	init(top-res-glocal_9) := top-impl-usr-modified_mo + top-impl-usr-exclusive_mo + top-impl-usr-shared_mo + top-impl-usr-invalid_mo + top-impl-usr-owned_mo;
+	init(top-impl-usr-erreur_mo) := top-res-2-call_6.moesi-usr-erreur_mo;
 
 	next(top-impl-usr-env) := next(top-res-call_8.Sofar-usr-Sofar);
 	next(top-impl-usr-owned_mo) := next(top-res-2-call_6.moesi-usr-owned_mo);
@@ -100,6 +102,7 @@ ASSIGN
 	next(top-impl-usr-modified_mo) := next(top-res-2-call_6.moesi-usr-modified_mo);
 	next(top-usr-OK) := (next(top-impl-usr-env) -> (next(top-impl-usr-modified_mo) + next(top-impl-usr-exclusive_mo) + next(top-impl-usr-shared_mo) + next(top-impl-usr-invalid_mo) + next(top-impl-usr-owned_mo) = top-res-glocal_9));
 	next(top-res-glocal_9) := next(top-impl-usr-modified_mo) + next(top-impl-usr-exclusive_mo) + next(top-impl-usr-shared_mo) + next(top-impl-usr-invalid_mo) + next(top-impl-usr-owned_mo);
+	next(top-impl-usr-erreur_mo) := next(top-res-2-call_6.moesi-usr-erreur_mo);
 
 
 INVARSPEC 

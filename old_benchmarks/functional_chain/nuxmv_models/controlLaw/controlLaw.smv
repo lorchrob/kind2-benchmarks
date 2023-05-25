@@ -14,13 +14,13 @@ VAR
 
 ASSIGN
 	init(controlLaw-usr-integ) := 0;
-	init(controlLaw-impl-usr-check_cond) := ((-25 <= controlLaw-usr-integ) & (controlLaw-usr-integ <= 25));
 	init(controlLaw-impl-usr-dtf) := 0;
 	init(controlLaw-impl-usr-inp) := (controlLaw-usr-in1 - (49/1250 * controlLaw-impl-usr-dtf));
 	init(controlLaw-impl-usr-sum1) := 0;
 	init(controlLaw-impl-usr-c1) := ((controlLaw-impl-usr-sum1 <= 1) & (controlLaw-impl-usr-sum1 >= -1));
 	init(controlLaw-impl-usr-c2) := ((controlLaw-impl-usr-sum1 >= 1) & (controlLaw-impl-usr-inp < 0));
 	init(controlLaw-impl-usr-c3) := ((controlLaw-impl-usr-sum1 <= -1) & (controlLaw-impl-usr-inp > 0));
+	init(controlLaw-impl-usr-check_cond) := ((-25 <= controlLaw-usr-integ) & (controlLaw-usr-integ <= 25));
 
 	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201/1250 * controlLaw-impl-usr-dtf);
 	next(controlLaw-impl-usr-inp) := (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)));

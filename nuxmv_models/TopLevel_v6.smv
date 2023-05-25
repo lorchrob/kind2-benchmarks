@@ -490,6 +490,10 @@ VAR
 	main-usr-n2_node4_pid4 : integer;
 	main-usr-n3_node4_pid4 : integer;
 	main-usr-n4_node4_pid4 : integer;
+	main-usr-testNodeOutput1 : boolean;
+	main-usr-testNodeOutput2 : boolean;
+	main-usr-testNodeOutput3 : boolean;
+	main-usr-testNodeOutput4 : boolean;
 	main-usr-21-node1__Node1_In-Node1_PID_from_Node1 : integer;
 	main-usr-21-node1__Node1_In-Node2_PID_from_Node2 : integer;
 	main-usr-21-node1__Node1_In-Node3_PID_from_Node3 : integer;
