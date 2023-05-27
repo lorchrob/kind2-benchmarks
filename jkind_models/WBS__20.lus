@@ -1,0 +1,1069 @@
+type Base_Types__Boolean = bool;
+type Base_Types__Unsigned = int;
+type Base_Types__Unsigned_64 = int;
+type Base_Types__Unsigned_32 = int;
+type Base_Types__Unsigned_16 = int;
+type Base_Types__Unsigned_8 = int;
+type Base_Types__Integer = int;
+type Base_Types__Integer_64 = int;
+type Base_Types__Integer_32 = int;
+type Base_Types__Integer_16 = int;
+type Base_Types__Integer_8 = int;
+type Base_Types__Float = real;
+type Base_Types__Float_32 = real;
+type Base_Types__Float_64 = real;
+
+node _TOP__phys_sys(
+  __ASSUME__HIST : bool;
+  __ASSUME0 : bool;
+  hyd_supply1 : int;
+  hyd_supply2 : int;
+  pump_power1 : bool;
+  pump_power2 : bool;
+  system_validity : bool;
+  brake_as_cmd_1 : bool;
+  brake_as_cmd_2 : bool;
+  brake_as_cmd_3 : bool;
+  brake_as_cmd_4 : bool;
+  brake_as_cmd_5 : bool;
+  brake_as_cmd_6 : bool;
+  brake_as_cmd_7 : bool;
+  brake_as_cmd_8 : bool;
+  as_cmd_pair_1_5 : bool;
+  as_cmd_pair_2_6 : bool;
+  as_cmd_pair_3_7 : bool;
+  as_cmd_pair_4_8 : bool;
+  ground_speed : int;
+  mech_pedal_pos_L : bool;
+  mech_pedal_pos_R : bool;
+  time : real;
+  hyd_supply1_range : bool;
+  hyd_supply2_range : bool;
+  ground_speed_range : bool;
+  GREEN_PRESSURE_VALID : bool;
+  NORMAL1 : bool;
+  ALTERNATE1 : bool;
+  NORMAL2 : bool;
+  ALTERNATE2 : bool;
+  NORMAL3 : bool;
+  ALTERNATE3 : bool;
+  NORMAL4 : bool;
+  ALTERNATE4 : bool;
+  NORMAL5 : bool;
+  ALTERNATE5 : bool;
+  NORMAL6 : bool;
+  ALTERNATE6 : bool;
+  NORMAL7 : bool;
+  ALTERNATE7 : bool;
+  NORMAL8 : bool;
+  ALTERNATE8 : bool;
+  L_PEDAL_VALID : bool;
+  R_PEDAL_VALID : bool;
+  ALL_WHEELS_BRAKE : bool;
+  ALL_WHEELS_STOPPED : bool;
+  BRAKE_AS_NOT_COMMANDED : bool;
+  PEDALS_NOT_PRESSED : bool;
+  accum_pressure_display_in : int;
+  accum_pressure_display : int;
+  green_pressure_in_selec_valve : int;
+  wheel_status1 : bool;
+  wheel_status2 : bool;
+  wheel_status3 : bool;
+  wheel_status4 : bool;
+  wheel_status5 : bool;
+  wheel_status6 : bool;
+  wheel_status7 : bool;
+  wheel_status8 : bool;
+  wheel_braking_force1 : int;
+  wheel_braking_force2 : int;
+  wheel_braking_force3 : int;
+  wheel_braking_force4 : int;
+  wheel_braking_force5 : int;
+  wheel_braking_force6 : int;
+  wheel_braking_force7 : int;
+  wheel_braking_force8 : int
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+  __GUARANTEE9 : bool;
+  __GUARANTEE10 : bool;
+  __GUARANTEE11 : bool;
+  __GUARANTEE12 : bool;
+  __GUARANTEE13 : bool;
+  __GUARANTEE14 : bool;
+  __GUARANTEE15 : bool;
+  __GUARANTEE16 : bool;
+  __GUARANTEE17 : bool;
+let
+  __GUARANTEE0 = (true -> ((NORMAL1 or ALTERNATE1) => (wheel_braking_force1 > 0)));
+
+  __GUARANTEE1 = (true -> ((NORMAL2 or ALTERNATE2) => (wheel_braking_force2 > 0)));
+
+  __GUARANTEE2 = (true -> ((NORMAL3 or ALTERNATE3) => (wheel_braking_force3 > 0)));
+
+  __GUARANTEE3 = (true -> ((NORMAL4 or ALTERNATE4) => (wheel_braking_force4 > 0)));
+
+  __GUARANTEE4 = (true -> ((NORMAL5 or ALTERNATE5) => (wheel_braking_force5 > 0)));
+
+  __GUARANTEE5 = (true -> ((NORMAL6 or ALTERNATE6) => (wheel_braking_force6 > 0)));
+
+  __GUARANTEE6 = (true -> ((NORMAL7 or ALTERNATE7) => (wheel_braking_force7 > 0)));
+
+  __GUARANTEE7 = (true -> ((NORMAL8 or ALTERNATE8) => (wheel_braking_force8 > 0)));
+
+  __GUARANTEE8 = (true -> ((green_pressure_in_selec_valve > 0) = ((system_validity and pump_power1) and (hyd_supply1 > 0))));
+
+  __GUARANTEE9 = (true -> (((L_PEDAL_VALID and (not brake_as_cmd_1)) => as_cmd_pair_1_5) => ((wheel_braking_force1 > 0) => ((brake_as_cmd_1 and GREEN_PRESSURE_VALID) or ((mech_pedal_pos_L and (not as_cmd_pair_1_5)) and (not GREEN_PRESSURE_VALID))))));
+
+  __GUARANTEE10 = (true -> (((L_PEDAL_VALID and (not brake_as_cmd_2)) => as_cmd_pair_2_6) => ((wheel_braking_force2 > 0) => ((brake_as_cmd_2 and GREEN_PRESSURE_VALID) or ((mech_pedal_pos_L and (not as_cmd_pair_2_6)) and (not GREEN_PRESSURE_VALID))))));
+
+  __GUARANTEE11 = (true -> (((R_PEDAL_VALID and (not brake_as_cmd_3)) => as_cmd_pair_3_7) => ((wheel_braking_force3 > 0) => ((brake_as_cmd_3 and GREEN_PRESSURE_VALID) or ((mech_pedal_pos_R and (not as_cmd_pair_3_7)) and (not GREEN_PRESSURE_VALID))))));
+
+  __GUARANTEE12 = (true -> (((R_PEDAL_VALID and (not brake_as_cmd_4)) => as_cmd_pair_4_8) => ((wheel_braking_force4 > 0) => ((brake_as_cmd_4 and GREEN_PRESSURE_VALID) or ((mech_pedal_pos_R and (not as_cmd_pair_4_8)) and (not GREEN_PRESSURE_VALID))))));
+
+  __GUARANTEE13 = (true -> (((L_PEDAL_VALID and (not brake_as_cmd_5)) => as_cmd_pair_1_5) => ((wheel_braking_force5 > 0) => ((brake_as_cmd_5 and GREEN_PRESSURE_VALID) or ((mech_pedal_pos_L and (not as_cmd_pair_1_5)) and (not GREEN_PRESSURE_VALID))))));
+
+  __GUARANTEE14 = (true -> (((L_PEDAL_VALID and (not brake_as_cmd_6)) => as_cmd_pair_2_6) => ((wheel_braking_force6 > 0) => ((brake_as_cmd_6 and GREEN_PRESSURE_VALID) or ((mech_pedal_pos_L and (not as_cmd_pair_2_6)) and (not GREEN_PRESSURE_VALID))))));
+
+  __GUARANTEE15 = (true -> (((R_PEDAL_VALID and (not brake_as_cmd_7)) => as_cmd_pair_3_7) => ((wheel_braking_force7 > 0) => ((brake_as_cmd_7 and GREEN_PRESSURE_VALID) or ((mech_pedal_pos_R and (not as_cmd_pair_3_7)) and (not GREEN_PRESSURE_VALID))))));
+
+  __GUARANTEE16 = (true -> (((R_PEDAL_VALID and (not brake_as_cmd_8)) => as_cmd_pair_1_5) => ((wheel_braking_force8 > 0) => ((brake_as_cmd_8 and GREEN_PRESSURE_VALID) or ((mech_pedal_pos_R and (not as_cmd_pair_4_8)) and (not GREEN_PRESSURE_VALID))))));
+
+  __GUARANTEE17 = (true -> (not (((PEDALS_NOT_PRESSED and BRAKE_AS_NOT_COMMANDED) and ALL_WHEELS_BRAKE) and (ground_speed > 0))));
+
+  __ASSERT = ((PEDALS_NOT_PRESSED = ((not mech_pedal_pos_L) and (not mech_pedal_pos_R))) and ((BRAKE_AS_NOT_COMMANDED = ((((((((not brake_as_cmd_1) and (not brake_as_cmd_2)) and (not brake_as_cmd_3)) and (not brake_as_cmd_4)) and (not brake_as_cmd_5)) and (not brake_as_cmd_6)) and (not brake_as_cmd_7)) and (not brake_as_cmd_8))) and ((ALL_WHEELS_STOPPED = ((((((((not wheel_status1) and (not wheel_status2)) and (not wheel_status3)) and (not wheel_status4)) and (not wheel_status5)) and (not wheel_status6)) and (not wheel_status7)) and (not wheel_status8))) and ((ALL_WHEELS_BRAKE = ((((((((wheel_braking_force1 > 0) and (wheel_braking_force2 > 0)) and (wheel_braking_force3 > 0)) and (wheel_braking_force4 > 0)) and (wheel_braking_force5 > 0)) and (wheel_braking_force6 > 0)) and (wheel_braking_force7 > 0)) and (wheel_braking_force8 > 0))) and ((R_PEDAL_VALID = (mech_pedal_pos_R and system_validity)) and ((L_PEDAL_VALID = (mech_pedal_pos_L and system_validity)) and ((ALTERNATE8 = ((mech_pedal_pos_R and (not as_cmd_pair_4_8)) and (not GREEN_PRESSURE_VALID))) and ((NORMAL8 = (brake_as_cmd_8 and GREEN_PRESSURE_VALID)) and ((ALTERNATE7 = ((mech_pedal_pos_R and (not as_cmd_pair_3_7)) and (not GREEN_PRESSURE_VALID))) and ((NORMAL7 = (brake_as_cmd_7 and GREEN_PRESSURE_VALID)) and ((ALTERNATE6 = ((mech_pedal_pos_L and (not as_cmd_pair_2_6)) and (not GREEN_PRESSURE_VALID))) and ((NORMAL6 = (brake_as_cmd_6 and GREEN_PRESSURE_VALID)) and ((ALTERNATE5 = ((mech_pedal_pos_L and (not as_cmd_pair_1_5)) and (not GREEN_PRESSURE_VALID))) and ((NORMAL5 = (brake_as_cmd_5 and GREEN_PRESSURE_VALID)) and ((ALTERNATE4 = ((mech_pedal_pos_R and (not as_cmd_pair_4_8)) and (not GREEN_PRESSURE_VALID))) and ((NORMAL4 = (brake_as_cmd_4 and GREEN_PRESSURE_VALID)) and ((ALTERNATE3 = ((mech_pedal_pos_R and (not as_cmd_pair_3_7)) and (not GREEN_PRESSURE_VALID))) and ((NORMAL3 = (brake_as_cmd_3 and GREEN_PRESSURE_VALID)) and ((ALTERNATE2 = ((mech_pedal_pos_L and (not as_cmd_pair_2_6)) and (not GREEN_PRESSURE_VALID))) and ((NORMAL2 = (brake_as_cmd_2 and GREEN_PRESSURE_VALID)) and ((ALTERNATE1 = ((mech_pedal_pos_L and (not as_cmd_pair_1_5)) and (not GREEN_PRESSURE_VALID))) and ((NORMAL1 = (brake_as_cmd_1 and GREEN_PRESSURE_VALID)) and ((GREEN_PRESSURE_VALID = ((green_pressure_in_selec_valve > 0) and system_validity)) and ((ground_speed_range = ((ground_speed > (-1)) and (ground_speed < 11))) and ((hyd_supply2_range = ((hyd_supply2 > (-1)) and (hyd_supply2 < 11))) and ((hyd_supply1_range = ((hyd_supply1 > (-1)) and (hyd_supply1 < 11))) and ((__ASSUME__HIST => (__GUARANTEE17 and (__GUARANTEE16 and (__GUARANTEE15 and (__GUARANTEE14 and (__GUARANTEE13 and (__GUARANTEE12 and (__GUARANTEE11 and (__GUARANTEE10 and (__GUARANTEE9 and (__GUARANTEE8 and (__GUARANTEE7 and (__GUARANTEE6 and (__GUARANTEE5 and (__GUARANTEE4 and (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0)))))))))))))))))) and (__ASSUME0 = (true -> ((hyd_supply1_range and hyd_supply2_range) and ground_speed_range))))))))))))))))))))))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3, __GUARANTEE4, __GUARANTEE5, __GUARANTEE6, __GUARANTEE7, __GUARANTEE8, __GUARANTEE9, __GUARANTEE10, __GUARANTEE11, __GUARANTEE12, __GUARANTEE13, __GUARANTEE14, __GUARANTEE15, __GUARANTEE16, __GUARANTEE17;
+
+tel;
+
+node _TOP__ctrl_sys(
+  __ASSUME__HIST : bool;
+  __ASSUME0 : bool;
+  power_1 : bool;
+  power_2 : bool;
+  ground_speed : int;
+  elec_pedal_pos_L : bool;
+  elec_pedal_pos_R : bool;
+  wheel_rolling_1 : bool;
+  wheel_rolling_2 : bool;
+  wheel_rolling_3 : bool;
+  wheel_rolling_4 : bool;
+  wheel_rolling_5 : bool;
+  wheel_rolling_6 : bool;
+  wheel_rolling_7 : bool;
+  wheel_rolling_8 : bool;
+  time : real;
+  SPEED : bool;
+  VALID : bool;
+  power : bool;
+  PAIR_NOT_ROLLING_15 : bool;
+  PAIR_NOT_ROLLING_26 : bool;
+  PAIR_NOT_ROLLING_37 : bool;
+  PAIR_NOT_ROLLING_48 : bool;
+  VALIDPAIR_15 : bool;
+  VALIDPAIR_26 : bool;
+  VALIDPAIR_37 : bool;
+  VALIDPAIR_48 : bool;
+  BRAKE_AS_COMMANDED_15 : bool;
+  BRAKE_AS_COMMANDED_26 : bool;
+  BRAKE_AS_COMMANDED_37 : bool;
+  BRAKE_AS_COMMANDED_48 : bool;
+  brake_as_cmd_1 : bool;
+  brake_as_cmd_2 : bool;
+  brake_as_cmd_3 : bool;
+  brake_as_cmd_4 : bool;
+  brake_as_cmd_5 : bool;
+  brake_as_cmd_6 : bool;
+  brake_as_cmd_7 : bool;
+  brake_as_cmd_8 : bool;
+  as_cmd_pair_1_5 : bool;
+  as_cmd_pair_2_6 : bool;
+  as_cmd_pair_3_7 : bool;
+  as_cmd_pair_4_8 : bool;
+  system_validity : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+  __GUARANTEE9 : bool;
+  __GUARANTEE10 : bool;
+  __GUARANTEE11 : bool;
+  __GUARANTEE12 : bool;
+  __GUARANTEE13 : bool;
+let
+  __GUARANTEE0 = (true -> ((as_cmd_pair_1_5 = ((power and SPEED) and PAIR_NOT_ROLLING_15)) or (as_cmd_pair_1_5 = false)));
+
+  __GUARANTEE1 = (true -> ((as_cmd_pair_2_6 = ((power and SPEED) and PAIR_NOT_ROLLING_26)) or (as_cmd_pair_2_6 = false)));
+
+  __GUARANTEE2 = (true -> ((as_cmd_pair_3_7 = ((power and SPEED) and PAIR_NOT_ROLLING_37)) or (as_cmd_pair_3_7 = false)));
+
+  __GUARANTEE3 = (true -> ((as_cmd_pair_4_8 = ((power and SPEED) and PAIR_NOT_ROLLING_48)) or (as_cmd_pair_4_8 = false)));
+
+  __GUARANTEE4 = (true -> ((((VALIDPAIR_15 => (not BRAKE_AS_COMMANDED_15)) and (VALIDPAIR_26 => (not BRAKE_AS_COMMANDED_26))) and (VALIDPAIR_37 => (not BRAKE_AS_COMMANDED_37))) and (VALIDPAIR_48 => (not BRAKE_AS_COMMANDED_48))));
+
+  __GUARANTEE5 = (true -> (((((BRAKE_AS_COMMANDED_15 and VALID) => (not as_cmd_pair_1_5)) and ((BRAKE_AS_COMMANDED_26 and VALID) => (not as_cmd_pair_2_6))) and ((BRAKE_AS_COMMANDED_37 and VALID) => (not as_cmd_pair_3_7))) and ((BRAKE_AS_COMMANDED_48 and VALID) => (not as_cmd_pair_4_8))));
+
+  __GUARANTEE6 = (true -> ((((VALID and power) and elec_pedal_pos_L) and ((SPEED and wheel_rolling_1) or (not SPEED))) = brake_as_cmd_1));
+
+  __GUARANTEE7 = (true -> ((((VALID and power) and elec_pedal_pos_L) and ((SPEED and wheel_rolling_2) or (not SPEED))) = brake_as_cmd_2));
+
+  __GUARANTEE8 = (true -> ((((VALID and power) and elec_pedal_pos_R) and ((SPEED and wheel_rolling_3) or (not SPEED))) = brake_as_cmd_3));
+
+  __GUARANTEE9 = (true -> ((((VALID and power) and elec_pedal_pos_R) and ((SPEED and wheel_rolling_4) or (not SPEED))) = brake_as_cmd_4));
+
+  __GUARANTEE10 = (true -> ((((VALID and power) and elec_pedal_pos_L) and ((SPEED and wheel_rolling_5) or (not SPEED))) = brake_as_cmd_5));
+
+  __GUARANTEE11 = (true -> ((((VALID and power) and elec_pedal_pos_L) and ((SPEED and wheel_rolling_6) or (not SPEED))) = brake_as_cmd_6));
+
+  __GUARANTEE12 = (true -> ((((VALID and power) and elec_pedal_pos_R) and ((SPEED and wheel_rolling_7) or (not SPEED))) = brake_as_cmd_7));
+
+  __GUARANTEE13 = (true -> ((((VALID and power) and elec_pedal_pos_R) and ((SPEED and wheel_rolling_8) or (not SPEED))) = brake_as_cmd_8));
+
+  __ASSERT = ((BRAKE_AS_COMMANDED_48 = (brake_as_cmd_4 and brake_as_cmd_8)) and ((BRAKE_AS_COMMANDED_37 = (brake_as_cmd_3 and brake_as_cmd_7)) and ((BRAKE_AS_COMMANDED_26 = (brake_as_cmd_2 and brake_as_cmd_6)) and ((BRAKE_AS_COMMANDED_15 = (brake_as_cmd_1 and brake_as_cmd_5)) and ((VALIDPAIR_48 = (as_cmd_pair_4_8 and system_validity)) and ((VALIDPAIR_37 = (as_cmd_pair_3_7 and system_validity)) and ((VALIDPAIR_26 = (as_cmd_pair_2_6 and system_validity)) and ((VALIDPAIR_15 = (as_cmd_pair_1_5 and system_validity)) and ((PAIR_NOT_ROLLING_48 = ((not wheel_rolling_4) or (not wheel_rolling_8))) and ((PAIR_NOT_ROLLING_37 = ((not wheel_rolling_3) or (not wheel_rolling_7))) and ((PAIR_NOT_ROLLING_26 = ((not wheel_rolling_2) or (not wheel_rolling_6))) and ((PAIR_NOT_ROLLING_15 = ((not wheel_rolling_1) or (not wheel_rolling_5))) and ((power = (power_1 or power_2)) and ((VALID = system_validity) and ((SPEED = (ground_speed > 0)) and ((__ASSUME__HIST => (__GUARANTEE13 and (__GUARANTEE12 and (__GUARANTEE11 and (__GUARANTEE10 and (__GUARANTEE9 and (__GUARANTEE8 and (__GUARANTEE7 and (__GUARANTEE6 and (__GUARANTEE5 and (__GUARANTEE4 and (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0)))))))))))))) and (__ASSUME0 = ((ground_speed >= 0) and (ground_speed <= 10)))))))))))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3, __GUARANTEE4, __GUARANTEE5, __GUARANTEE6, __GUARANTEE7, __GUARANTEE8, __GUARANTEE9, __GUARANTEE10, __GUARANTEE11, __GUARANTEE12, __GUARANTEE13;
+
+tel;
+
+node _TOP__wheel_sensor1(
+  __ASSUME__HIST : bool;
+  wheel_status : bool;
+  time : real;
+  wheel_rolling : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (wheel_rolling = wheel_status));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__wheel_sensor2(
+  __ASSUME__HIST : bool;
+  wheel_status : bool;
+  time : real;
+  wheel_rolling : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (wheel_rolling = wheel_status));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__wheel_sensor3(
+  __ASSUME__HIST : bool;
+  wheel_status : bool;
+  time : real;
+  wheel_rolling : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (wheel_rolling = wheel_status));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__wheel_sensor4(
+  __ASSUME__HIST : bool;
+  wheel_status : bool;
+  time : real;
+  wheel_rolling : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (wheel_rolling = wheel_status));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__wheel_sensor5(
+  __ASSUME__HIST : bool;
+  wheel_status : bool;
+  time : real;
+  wheel_rolling : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (wheel_rolling = wheel_status));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__wheel_sensor6(
+  __ASSUME__HIST : bool;
+  wheel_status : bool;
+  time : real;
+  wheel_rolling : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (wheel_rolling = wheel_status));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__wheel_sensor7(
+  __ASSUME__HIST : bool;
+  wheel_status : bool;
+  time : real;
+  wheel_rolling : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (wheel_rolling = wheel_status));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__wheel_sensor8(
+  __ASSUME__HIST : bool;
+  wheel_status : bool;
+  time : real;
+  wheel_rolling : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (wheel_rolling = wheel_status));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__pedal_sensor_L(
+  __ASSUME__HIST : bool;
+  mech_pedal_pos : bool;
+  time : real;
+  elec_pedal_pos : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (mech_pedal_pos = elec_pedal_pos));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node _TOP__pedal_sensor_R(
+  __ASSUME__HIST : bool;
+  mech_pedal_pos : bool;
+  time : real;
+  elec_pedal_pos : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+let
+  __GUARANTEE0 = (true -> (mech_pedal_pos = elec_pedal_pos));
+
+  __ASSERT = (__ASSUME__HIST => __GUARANTEE0);
+
+  --%IVC __GUARANTEE0;
+
+tel;
+
+node main(
+  phys_sys__hyd_supply1_range : bool;
+  phys_sys__hyd_supply2_range : bool;
+  phys_sys__ground_speed_range : bool;
+  phys_sys__GREEN_PRESSURE_VALID : bool;
+  phys_sys__NORMAL1 : bool;
+  phys_sys__ALTERNATE1 : bool;
+  phys_sys__NORMAL2 : bool;
+  phys_sys__ALTERNATE2 : bool;
+  phys_sys__NORMAL3 : bool;
+  phys_sys__ALTERNATE3 : bool;
+  phys_sys__NORMAL4 : bool;
+  phys_sys__ALTERNATE4 : bool;
+  phys_sys__NORMAL5 : bool;
+  phys_sys__ALTERNATE5 : bool;
+  phys_sys__NORMAL6 : bool;
+  phys_sys__ALTERNATE6 : bool;
+  phys_sys__NORMAL7 : bool;
+  phys_sys__ALTERNATE7 : bool;
+  phys_sys__NORMAL8 : bool;
+  phys_sys__ALTERNATE8 : bool;
+  phys_sys__L_PEDAL_VALID : bool;
+  phys_sys__R_PEDAL_VALID : bool;
+  phys_sys__ALL_WHEELS_BRAKE : bool;
+  phys_sys__ALL_WHEELS_STOPPED : bool;
+  phys_sys__BRAKE_AS_NOT_COMMANDED : bool;
+  phys_sys__PEDALS_NOT_PRESSED : bool;
+  phys_sys__accum_pressure_display_in : int;
+  phys_sys__accum_pressure_display : int;
+  phys_sys__green_pressure_in_selec_valve : int;
+  phys_sys__wheel_status1 : bool;
+  phys_sys__wheel_status2 : bool;
+  phys_sys__wheel_status3 : bool;
+  phys_sys__wheel_status4 : bool;
+  phys_sys__wheel_status5 : bool;
+  phys_sys__wheel_status6 : bool;
+  phys_sys__wheel_status7 : bool;
+  phys_sys__wheel_status8 : bool;
+  phys_sys__wheel_braking_force1 : int;
+  phys_sys__wheel_braking_force2 : int;
+  phys_sys__wheel_braking_force3 : int;
+  phys_sys__wheel_braking_force4 : int;
+  phys_sys__wheel_braking_force5 : int;
+  phys_sys__wheel_braking_force6 : int;
+  phys_sys__wheel_braking_force7 : int;
+  phys_sys__wheel_braking_force8 : int;
+  phys_sys____ASSUME0 : bool;
+  phys_sys____ASSUME__HIST : bool;
+  ctrl_sys__SPEED : bool;
+  ctrl_sys__VALID : bool;
+  ctrl_sys__power : bool;
+  ctrl_sys__PAIR_NOT_ROLLING_15 : bool;
+  ctrl_sys__PAIR_NOT_ROLLING_26 : bool;
+  ctrl_sys__PAIR_NOT_ROLLING_37 : bool;
+  ctrl_sys__PAIR_NOT_ROLLING_48 : bool;
+  ctrl_sys__VALIDPAIR_15 : bool;
+  ctrl_sys__VALIDPAIR_26 : bool;
+  ctrl_sys__VALIDPAIR_37 : bool;
+  ctrl_sys__VALIDPAIR_48 : bool;
+  ctrl_sys__BRAKE_AS_COMMANDED_15 : bool;
+  ctrl_sys__BRAKE_AS_COMMANDED_26 : bool;
+  ctrl_sys__BRAKE_AS_COMMANDED_37 : bool;
+  ctrl_sys__BRAKE_AS_COMMANDED_48 : bool;
+  ctrl_sys__brake_as_cmd_1 : bool;
+  ctrl_sys__brake_as_cmd_2 : bool;
+  ctrl_sys__brake_as_cmd_3 : bool;
+  ctrl_sys__brake_as_cmd_4 : bool;
+  ctrl_sys__brake_as_cmd_5 : bool;
+  ctrl_sys__brake_as_cmd_6 : bool;
+  ctrl_sys__brake_as_cmd_7 : bool;
+  ctrl_sys__brake_as_cmd_8 : bool;
+  ctrl_sys__as_cmd_pair_1_5 : bool;
+  ctrl_sys__as_cmd_pair_2_6 : bool;
+  ctrl_sys__as_cmd_pair_3_7 : bool;
+  ctrl_sys__as_cmd_pair_4_8 : bool;
+  ctrl_sys__system_validity : bool;
+  ctrl_sys____ASSUME0 : bool;
+  ctrl_sys____ASSUME__HIST : bool;
+  wheel_sensor1__wheel_rolling : bool;
+  wheel_sensor1____ASSUME__HIST : bool;
+  wheel_sensor2__wheel_rolling : bool;
+  wheel_sensor2____ASSUME__HIST : bool;
+  wheel_sensor3__wheel_rolling : bool;
+  wheel_sensor3____ASSUME__HIST : bool;
+  wheel_sensor4__wheel_rolling : bool;
+  wheel_sensor4____ASSUME__HIST : bool;
+  wheel_sensor5__wheel_rolling : bool;
+  wheel_sensor5____ASSUME__HIST : bool;
+  wheel_sensor6__wheel_rolling : bool;
+  wheel_sensor6____ASSUME__HIST : bool;
+  wheel_sensor7__wheel_rolling : bool;
+  wheel_sensor7____ASSUME__HIST : bool;
+  wheel_sensor8__wheel_rolling : bool;
+  wheel_sensor8____ASSUME__HIST : bool;
+  pedal_sensor_L__elec_pedal_pos : bool;
+  pedal_sensor_L____ASSUME__HIST : bool;
+  pedal_sensor_R__elec_pedal_pos : bool;
+  pedal_sensor_R____ASSUME__HIST : bool;
+  ALL_WHEELS_BRAKE : bool;
+  ALL_WHEELS_STOPPED : bool;
+  BRAKE_AS_NOT_COMMANDED : bool;
+  PEDALS_NOT_PRESSED : bool;
+  GREEN_PRESSURE_VALID : bool;
+  NORMAL1 : bool;
+  ALTERNATE1 : bool;
+  NORMAL2 : bool;
+  ALTERNATE2 : bool;
+  NORMAL3 : bool;
+  ALTERNATE3 : bool;
+  NORMAL4 : bool;
+  ALTERNATE4 : bool;
+  NORMAL5 : bool;
+  ALTERNATE5 : bool;
+  NORMAL6 : bool;
+  ALTERNATE6 : bool;
+  NORMAL7 : bool;
+  ALTERNATE7 : bool;
+  NORMAL8 : bool;
+  ALTERNATE8 : bool;
+  L_PEDAL_VALID : bool;
+  R_PEDAL_VALID : bool;
+  POWER : bool;
+  HYD_PRESSURE_MAX : bool;
+  SPEED : bool;
+  W1ROLL : bool;
+  W2ROLL : bool;
+  W3ROLL : bool;
+  W4ROLL : bool;
+  W5ROLL : bool;
+  W6ROLL : bool;
+  W7ROLL : bool;
+  W8ROLL : bool;
+  accum_pressure_display : int;
+  wheel_braking_force1 : int;
+  wheel_braking_force2 : int;
+  wheel_braking_force3 : int;
+  wheel_braking_force4 : int;
+  wheel_braking_force5 : int;
+  wheel_braking_force6 : int;
+  wheel_braking_force7 : int;
+  wheel_braking_force8 : int;
+  wheel_status1 : bool;
+  wheel_status2 : bool;
+  wheel_status3 : bool;
+  wheel_status4 : bool;
+  wheel_status5 : bool;
+  wheel_status6 : bool;
+  wheel_status7 : bool;
+  wheel_status8 : bool;
+  green_pressure_in_selector_valve : int;
+  system_validity : bool;
+  phys_sys__hyd_supply1 : int;
+  phys_sys__hyd_supply2 : int;
+  phys_sys__pump_power1 : bool;
+  phys_sys__pump_power2 : bool;
+  phys_sys__system_validity : bool;
+  phys_sys__brake_as_cmd_1 : bool;
+  phys_sys__brake_as_cmd_2 : bool;
+  phys_sys__brake_as_cmd_3 : bool;
+  phys_sys__brake_as_cmd_4 : bool;
+  phys_sys__brake_as_cmd_5 : bool;
+  phys_sys__brake_as_cmd_6 : bool;
+  phys_sys__brake_as_cmd_7 : bool;
+  phys_sys__brake_as_cmd_8 : bool;
+  phys_sys__as_cmd_pair_1_5 : bool;
+  phys_sys__as_cmd_pair_2_6 : bool;
+  phys_sys__as_cmd_pair_3_7 : bool;
+  phys_sys__as_cmd_pair_4_8 : bool;
+  phys_sys__ground_speed : int;
+  phys_sys__mech_pedal_pos_L : bool;
+  phys_sys__mech_pedal_pos_R : bool;
+  phys_sys__time : real;
+  ctrl_sys__power_1 : bool;
+  ctrl_sys__power_2 : bool;
+  ctrl_sys__ground_speed : int;
+  ctrl_sys__elec_pedal_pos_L : bool;
+  ctrl_sys__elec_pedal_pos_R : bool;
+  ctrl_sys__wheel_rolling_1 : bool;
+  ctrl_sys__wheel_rolling_2 : bool;
+  ctrl_sys__wheel_rolling_3 : bool;
+  ctrl_sys__wheel_rolling_4 : bool;
+  ctrl_sys__wheel_rolling_5 : bool;
+  ctrl_sys__wheel_rolling_6 : bool;
+  ctrl_sys__wheel_rolling_7 : bool;
+  ctrl_sys__wheel_rolling_8 : bool;
+  ctrl_sys__time : real;
+  wheel_sensor1__wheel_status : bool;
+  wheel_sensor1__time : real;
+  wheel_sensor2__wheel_status : bool;
+  wheel_sensor2__time : real;
+  wheel_sensor3__wheel_status : bool;
+  wheel_sensor3__time : real;
+  wheel_sensor4__wheel_status : bool;
+  wheel_sensor4__time : real;
+  wheel_sensor5__wheel_status : bool;
+  wheel_sensor5__time : real;
+  wheel_sensor6__wheel_status : bool;
+  wheel_sensor6__time : real;
+  wheel_sensor7__wheel_status : bool;
+  wheel_sensor7__time : real;
+  wheel_sensor8__wheel_status : bool;
+  wheel_sensor8__time : real;
+  pedal_sensor_L__mech_pedal_pos : bool;
+  pedal_sensor_L__time : real;
+  pedal_sensor_R__mech_pedal_pos : bool;
+  pedal_sensor_R__time : real;
+  mechanical_pedal_pos_R : bool;
+  mechanical_pedal_pos_L : bool;
+  power1 : bool;
+  power2 : bool;
+  pump_power1 : bool;
+  pump_power2 : bool;
+  ground_speed : int;
+  hyd_supply1 : int;
+  hyd_supply2 : int;
+  time : real
+) returns (
+
+);
+var
+  __ASSUME0 : bool;
+  __ASSUME__HIST : bool;
+  __LEMMA0 : bool;
+  __LEMMA1 : bool;
+  __LEMMA2 : bool;
+  __LEMMA3 : bool;
+  __LEMMA4 : bool;
+  __LEMMA5 : bool;
+  __LEMMA6 : bool;
+  __LEMMA7 : bool;
+  __LEMMA8 : bool;
+  __LEMMA9 : bool;
+  __LEMMA10 : bool;
+  __LEMMA11 : bool;
+  __LEMMA12 : bool;
+  __LEMMA13 : bool;
+  __LEMMA14 : bool;
+  __LEMMA15 : bool;
+  __LEMMA16 : bool;
+  __LEMMA17 : bool;
+  __LEMMA18 : bool;
+  __LEMMA19 : bool;
+  __LEMMA20 : bool;
+  __LEMMA21 : bool;
+  __LEMMA22 : bool;
+  __LEMMA23 : bool;
+  __LEMMA24 : bool;
+  __LEMMA25 : bool;
+  __LEMMA26 : bool;
+  __LEMMA27 : bool;
+  __LEMMA28 : bool;
+let
+  --%MAIN;
+  __ASSUME0 = ((((hyd_supply1 > (-1)) and (hyd_supply1 < 11)) and ((hyd_supply2 > (-1)) and (hyd_supply2 < 11))) and ((ground_speed > (-1)) and (ground_speed < 11)));
+
+  __ASSUME__HIST = (pedal_sensor_R____ASSUME__HIST and (pedal_sensor_L____ASSUME__HIST and (wheel_sensor8____ASSUME__HIST and (wheel_sensor7____ASSUME__HIST and (wheel_sensor6____ASSUME__HIST and (wheel_sensor5____ASSUME__HIST and (wheel_sensor4____ASSUME__HIST and (wheel_sensor3____ASSUME__HIST and (wheel_sensor2____ASSUME__HIST and (wheel_sensor1____ASSUME__HIST and (ctrl_sys____ASSUME__HIST and (phys_sys____ASSUME__HIST and true))))))))))));
+
+  __LEMMA0 = (true -> (not ((((((((((mechanical_pedal_pos_L and mechanical_pedal_pos_R) and (ground_speed > 0)) and (not (((ctrl_sys__brake_as_cmd_1 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_L and (not ctrl_sys__as_cmd_pair_1_5)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force1 > 0)))) and (not (((ctrl_sys__brake_as_cmd_2 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_L and (not ctrl_sys__as_cmd_pair_2_6)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force2 > 0)))) and (not (((ctrl_sys__brake_as_cmd_5 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_L and (not ctrl_sys__as_cmd_pair_1_5)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force5 > 0)))) and (not (((ctrl_sys__brake_as_cmd_6 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_L and (not ctrl_sys__as_cmd_pair_2_6)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force6 > 0)))) and (not (((ctrl_sys__brake_as_cmd_3 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_R and (not ctrl_sys__as_cmd_pair_3_7)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force3 > 0)))) and (not (((ctrl_sys__brake_as_cmd_4 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_R and (not ctrl_sys__as_cmd_pair_4_8)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force4 > 0)))) and (not (((ctrl_sys__brake_as_cmd_7 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_R and (not ctrl_sys__as_cmd_pair_3_7)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force7 > 0)))) and (not (((ctrl_sys__brake_as_cmd_8 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_R and (not ctrl_sys__as_cmd_pair_4_8)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force8 > 0))))));
+
+  __LEMMA1 = (true -> ((((((ctrl_sys__brake_as_cmd_1 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_L and (not ctrl_sys__as_cmd_pair_1_5)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force1 > 0)) and (((ctrl_sys__brake_as_cmd_2 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_L and (not ctrl_sys__as_cmd_pair_2_6)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force2 > 0))) and (((ctrl_sys__brake_as_cmd_5 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_L and (not ctrl_sys__as_cmd_pair_1_5)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force5 > 0))) and (((ctrl_sys__brake_as_cmd_6 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_L and (not ctrl_sys__as_cmd_pair_2_6)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force6 > 0))));
+
+  __LEMMA2 = (true -> ((((((ctrl_sys__brake_as_cmd_3 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_R and (not ctrl_sys__as_cmd_pair_3_7)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force3 > 0)) and (((ctrl_sys__brake_as_cmd_4 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_R and (not ctrl_sys__as_cmd_pair_4_8)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force4 > 0))) and (((ctrl_sys__brake_as_cmd_7 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_R and (not ctrl_sys__as_cmd_pair_3_7)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force7 > 0))) and (((ctrl_sys__brake_as_cmd_8 and ((green_pressure_in_selector_valve > 0) and system_validity)) or ((mechanical_pedal_pos_R and (not ctrl_sys__as_cmd_pair_4_8)) and ((green_pressure_in_selector_valve = 0) or (not system_validity)))) => (wheel_braking_force8 > 0))));
+
+  __LEMMA3 = (true -> (((((((((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_L) or (not SPEED)) or (wheel_braking_force1 <= 0)) or (not W1ROLL)) and ((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_L) or (not SPEED)) or (wheel_braking_force2 <= 0)) or (not W2ROLL))) and ((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_R) or (not SPEED)) or (wheel_braking_force3 <= 0)) or (not W3ROLL))) and ((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_R) or (not SPEED)) or (wheel_braking_force4 <= 0)) or (not W4ROLL))) and ((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_L) or (not SPEED)) or (wheel_braking_force5 <= 0)) or (not W5ROLL))) and ((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_L) or (not SPEED)) or (wheel_braking_force6 <= 0)) or (not W6ROLL))) and ((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_R) or (not SPEED)) or (wheel_braking_force7 <= 0)) or (not W7ROLL))) and ((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_R) or (not SPEED)) or (wheel_braking_force8 <= 0)) or (not W8ROLL))));
+
+  __LEMMA4 = (true -> (((((((((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_L) or mechanical_pedal_pos_R) or (not SPEED)) or (wheel_braking_force1 <= 0)) or (wheel_braking_force2 <= 0)) or (wheel_braking_force3 <= 0)) or (wheel_braking_force4 <= 0)) or (wheel_braking_force5 <= 0)) or (wheel_braking_force6 <= 0)) or (wheel_braking_force7 <= 0)) or (wheel_braking_force8 <= 0)));
+
+  __LEMMA5 = (true -> ((((((not POWER) or (not HYD_PRESSURE_MAX)) or mechanical_pedal_pos_L) or (not SPEED)) or (wheel_braking_force1 <= 0)) or (not W1ROLL)));
+
+  __LEMMA6 = (true -> (((not POWER) or (not HYD_PRESSURE_MAX)) or (((mechanical_pedal_pos_L or (not SPEED)) or (wheel_braking_force2 <= 0)) or (not W2ROLL))));
+
+  __LEMMA7 = (true -> (((not POWER) or (not HYD_PRESSURE_MAX)) or (((mechanical_pedal_pos_R or (not SPEED)) or (wheel_braking_force3 <= 0)) or (not W3ROLL))));
+
+  __LEMMA8 = (true -> (((not POWER) or (not HYD_PRESSURE_MAX)) or (((mechanical_pedal_pos_R or (not SPEED)) or (wheel_braking_force4 <= 0)) or (not W4ROLL))));
+
+  __LEMMA9 = (true -> (((not POWER) or (not HYD_PRESSURE_MAX)) or (((mechanical_pedal_pos_L or (not SPEED)) or (wheel_braking_force5 <= 0)) or (not W5ROLL))));
+
+  __LEMMA10 = (true -> (((not POWER) or (not HYD_PRESSURE_MAX)) or (((mechanical_pedal_pos_L or (not SPEED)) or (wheel_braking_force6 <= 0)) or (not W6ROLL))));
+
+  __LEMMA11 = (true -> (((not POWER) or (not HYD_PRESSURE_MAX)) or (((mechanical_pedal_pos_R or (not SPEED)) or (wheel_braking_force7 <= 0)) or (not W7ROLL))));
+
+  __LEMMA12 = (true -> (((not POWER) or (not HYD_PRESSURE_MAX)) or (((mechanical_pedal_pos_R or (not SPEED)) or (wheel_braking_force8 <= 0)) or (not W8ROLL))));
+
+  __LEMMA13 = (true -> ((NORMAL1 or ALTERNATE1) => (wheel_braking_force1 > 0)));
+
+  __LEMMA14 = (true -> ((NORMAL2 or ALTERNATE2) => (wheel_braking_force2 > 0)));
+
+  __LEMMA15 = (true -> ((NORMAL3 or ALTERNATE3) => (wheel_braking_force3 > 0)));
+
+  __LEMMA16 = (true -> ((NORMAL4 or ALTERNATE4) => (wheel_braking_force4 > 0)));
+
+  __LEMMA17 = (true -> ((NORMAL5 or ALTERNATE5) => (wheel_braking_force5 > 0)));
+
+  __LEMMA18 = (true -> ((NORMAL6 or ALTERNATE6) => (wheel_braking_force6 > 0)));
+
+  __LEMMA19 = (true -> ((NORMAL7 or ALTERNATE7) => (wheel_braking_force7 > 0)));
+
+  __LEMMA20 = (true -> ((NORMAL8 or ALTERNATE8) => (wheel_braking_force8 > 0)));
+
+  __LEMMA21 = (true -> (((L_PEDAL_VALID and (not phys_sys__brake_as_cmd_1)) => phys_sys__as_cmd_pair_1_5) => ((wheel_braking_force1 > 0) => ((phys_sys__brake_as_cmd_1 and GREEN_PRESSURE_VALID) or ((phys_sys__mech_pedal_pos_L and (not phys_sys__as_cmd_pair_1_5)) and (not GREEN_PRESSURE_VALID))))));
+
+  __LEMMA22 = (true -> (((L_PEDAL_VALID and (not phys_sys__brake_as_cmd_2)) => phys_sys__as_cmd_pair_2_6) => ((wheel_braking_force2 > 0) => ((phys_sys__brake_as_cmd_2 and GREEN_PRESSURE_VALID) or ((phys_sys__mech_pedal_pos_L and (not phys_sys__as_cmd_pair_2_6)) and (not GREEN_PRESSURE_VALID))))));
+
+  __LEMMA23 = (true -> (((R_PEDAL_VALID and (not phys_sys__brake_as_cmd_3)) => phys_sys__as_cmd_pair_3_7) => ((wheel_braking_force3 > 0) => ((phys_sys__brake_as_cmd_3 and GREEN_PRESSURE_VALID) or ((phys_sys__mech_pedal_pos_R and (not phys_sys__as_cmd_pair_3_7)) and (not GREEN_PRESSURE_VALID))))));
+
+  __LEMMA24 = (true -> (((R_PEDAL_VALID and (not phys_sys__brake_as_cmd_4)) => phys_sys__as_cmd_pair_4_8) => ((wheel_braking_force4 > 0) => ((phys_sys__brake_as_cmd_4 and GREEN_PRESSURE_VALID) or ((phys_sys__mech_pedal_pos_R and (not phys_sys__as_cmd_pair_4_8)) and (not GREEN_PRESSURE_VALID))))));
+
+  __LEMMA25 = (true -> (((L_PEDAL_VALID and (not phys_sys__brake_as_cmd_5)) => phys_sys__as_cmd_pair_1_5) => ((wheel_braking_force5 > 0) => ((phys_sys__brake_as_cmd_5 and GREEN_PRESSURE_VALID) or ((phys_sys__mech_pedal_pos_L and (not phys_sys__as_cmd_pair_1_5)) and (not GREEN_PRESSURE_VALID))))));
+
+  __LEMMA26 = (true -> (((L_PEDAL_VALID and (not phys_sys__brake_as_cmd_6)) => phys_sys__as_cmd_pair_2_6) => ((wheel_braking_force6 > 0) => ((phys_sys__brake_as_cmd_6 and GREEN_PRESSURE_VALID) or ((phys_sys__mech_pedal_pos_L and (not phys_sys__as_cmd_pair_2_6)) and (not GREEN_PRESSURE_VALID))))));
+
+  __LEMMA27 = (true -> (((R_PEDAL_VALID and (not phys_sys__brake_as_cmd_7)) => phys_sys__as_cmd_pair_3_7) => ((wheel_braking_force7 > 0) => ((phys_sys__brake_as_cmd_7 and GREEN_PRESSURE_VALID) or ((phys_sys__mech_pedal_pos_R and (not phys_sys__as_cmd_pair_3_7)) and (not GREEN_PRESSURE_VALID))))));
+
+  __LEMMA28 = (true -> (((R_PEDAL_VALID and (not phys_sys__brake_as_cmd_8)) => phys_sys__as_cmd_pair_1_5) => ((wheel_braking_force8 > 0) => ((phys_sys__brake_as_cmd_8 and GREEN_PRESSURE_VALID) or ((phys_sys__mech_pedal_pos_R and (not phys_sys__as_cmd_pair_4_8)) and (not GREEN_PRESSURE_VALID))))));
+
+  assert __ASSUME0;
+
+  assert (time = phys_sys__time);
+
+  assert _TOP__phys_sys(phys_sys____ASSUME__HIST, phys_sys____ASSUME0, phys_sys__hyd_supply1, phys_sys__hyd_supply2, phys_sys__pump_power1, phys_sys__pump_power2, phys_sys__system_validity, phys_sys__brake_as_cmd_1, phys_sys__brake_as_cmd_2, phys_sys__brake_as_cmd_3, phys_sys__brake_as_cmd_4, phys_sys__brake_as_cmd_5, phys_sys__brake_as_cmd_6, phys_sys__brake_as_cmd_7, phys_sys__brake_as_cmd_8, phys_sys__as_cmd_pair_1_5, phys_sys__as_cmd_pair_2_6, phys_sys__as_cmd_pair_3_7, phys_sys__as_cmd_pair_4_8, phys_sys__ground_speed, phys_sys__mech_pedal_pos_L, phys_sys__mech_pedal_pos_R, phys_sys__time, phys_sys__hyd_supply1_range, phys_sys__hyd_supply2_range, phys_sys__ground_speed_range, phys_sys__GREEN_PRESSURE_VALID, phys_sys__NORMAL1, phys_sys__ALTERNATE1, phys_sys__NORMAL2, phys_sys__ALTERNATE2, phys_sys__NORMAL3, phys_sys__ALTERNATE3, phys_sys__NORMAL4, phys_sys__ALTERNATE4, phys_sys__NORMAL5, phys_sys__ALTERNATE5, phys_sys__NORMAL6, phys_sys__ALTERNATE6, phys_sys__NORMAL7, phys_sys__ALTERNATE7, phys_sys__NORMAL8, phys_sys__ALTERNATE8, phys_sys__L_PEDAL_VALID, phys_sys__R_PEDAL_VALID, phys_sys__ALL_WHEELS_BRAKE, phys_sys__ALL_WHEELS_STOPPED, phys_sys__BRAKE_AS_NOT_COMMANDED, phys_sys__PEDALS_NOT_PRESSED, phys_sys__accum_pressure_display_in, phys_sys__accum_pressure_display, phys_sys__green_pressure_in_selec_valve, phys_sys__wheel_status1, phys_sys__wheel_status2, phys_sys__wheel_status3, phys_sys__wheel_status4, phys_sys__wheel_status5, phys_sys__wheel_status6, phys_sys__wheel_status7, phys_sys__wheel_status8, phys_sys__wheel_braking_force1, phys_sys__wheel_braking_force2, phys_sys__wheel_braking_force3, phys_sys__wheel_braking_force4, phys_sys__wheel_braking_force5, phys_sys__wheel_braking_force6, phys_sys__wheel_braking_force7, phys_sys__wheel_braking_force8);
+
+  assert (phys_sys____ASSUME__HIST = __HIST(phys_sys____ASSUME0));
+
+  assert (time = ctrl_sys__time);
+
+  assert _TOP__ctrl_sys(ctrl_sys____ASSUME__HIST, ctrl_sys____ASSUME0, ctrl_sys__power_1, ctrl_sys__power_2, ctrl_sys__ground_speed, ctrl_sys__elec_pedal_pos_L, ctrl_sys__elec_pedal_pos_R, ctrl_sys__wheel_rolling_1, ctrl_sys__wheel_rolling_2, ctrl_sys__wheel_rolling_3, ctrl_sys__wheel_rolling_4, ctrl_sys__wheel_rolling_5, ctrl_sys__wheel_rolling_6, ctrl_sys__wheel_rolling_7, ctrl_sys__wheel_rolling_8, ctrl_sys__time, ctrl_sys__SPEED, ctrl_sys__VALID, ctrl_sys__power, ctrl_sys__PAIR_NOT_ROLLING_15, ctrl_sys__PAIR_NOT_ROLLING_26, ctrl_sys__PAIR_NOT_ROLLING_37, ctrl_sys__PAIR_NOT_ROLLING_48, ctrl_sys__VALIDPAIR_15, ctrl_sys__VALIDPAIR_26, ctrl_sys__VALIDPAIR_37, ctrl_sys__VALIDPAIR_48, ctrl_sys__BRAKE_AS_COMMANDED_15, ctrl_sys__BRAKE_AS_COMMANDED_26, ctrl_sys__BRAKE_AS_COMMANDED_37, ctrl_sys__BRAKE_AS_COMMANDED_48, ctrl_sys__brake_as_cmd_1, ctrl_sys__brake_as_cmd_2, ctrl_sys__brake_as_cmd_3, ctrl_sys__brake_as_cmd_4, ctrl_sys__brake_as_cmd_5, ctrl_sys__brake_as_cmd_6, ctrl_sys__brake_as_cmd_7, ctrl_sys__brake_as_cmd_8, ctrl_sys__as_cmd_pair_1_5, ctrl_sys__as_cmd_pair_2_6, ctrl_sys__as_cmd_pair_3_7, ctrl_sys__as_cmd_pair_4_8, ctrl_sys__system_validity);
+
+  assert (ctrl_sys____ASSUME__HIST = __HIST(ctrl_sys____ASSUME0));
+
+  assert (time = wheel_sensor1__time);
+
+  assert _TOP__wheel_sensor1(wheel_sensor1____ASSUME__HIST, wheel_sensor1__wheel_status, wheel_sensor1__time, wheel_sensor1__wheel_rolling);
+
+  assert (wheel_sensor1____ASSUME__HIST = __HIST(true));
+
+  assert (time = wheel_sensor2__time);
+
+  assert _TOP__wheel_sensor2(wheel_sensor2____ASSUME__HIST, wheel_sensor2__wheel_status, wheel_sensor2__time, wheel_sensor2__wheel_rolling);
+
+  assert (wheel_sensor2____ASSUME__HIST = __HIST(true));
+
+  assert (time = wheel_sensor3__time);
+
+  assert _TOP__wheel_sensor3(wheel_sensor3____ASSUME__HIST, wheel_sensor3__wheel_status, wheel_sensor3__time, wheel_sensor3__wheel_rolling);
+
+  assert (wheel_sensor3____ASSUME__HIST = __HIST(true));
+
+  assert (time = wheel_sensor4__time);
+
+  assert _TOP__wheel_sensor4(wheel_sensor4____ASSUME__HIST, wheel_sensor4__wheel_status, wheel_sensor4__time, wheel_sensor4__wheel_rolling);
+
+  assert (wheel_sensor4____ASSUME__HIST = __HIST(true));
+
+  assert (time = wheel_sensor5__time);
+
+  assert _TOP__wheel_sensor5(wheel_sensor5____ASSUME__HIST, wheel_sensor5__wheel_status, wheel_sensor5__time, wheel_sensor5__wheel_rolling);
+
+  assert (wheel_sensor5____ASSUME__HIST = __HIST(true));
+
+  assert (time = wheel_sensor6__time);
+
+  assert _TOP__wheel_sensor6(wheel_sensor6____ASSUME__HIST, wheel_sensor6__wheel_status, wheel_sensor6__time, wheel_sensor6__wheel_rolling);
+
+  assert (wheel_sensor6____ASSUME__HIST = __HIST(true));
+
+  assert (time = wheel_sensor7__time);
+
+  assert _TOP__wheel_sensor7(wheel_sensor7____ASSUME__HIST, wheel_sensor7__wheel_status, wheel_sensor7__time, wheel_sensor7__wheel_rolling);
+
+  assert (wheel_sensor7____ASSUME__HIST = __HIST(true));
+
+  assert (time = wheel_sensor8__time);
+
+  assert _TOP__wheel_sensor8(wheel_sensor8____ASSUME__HIST, wheel_sensor8__wheel_status, wheel_sensor8__time, wheel_sensor8__wheel_rolling);
+
+  assert (wheel_sensor8____ASSUME__HIST = __HIST(true));
+
+  assert (time = pedal_sensor_L__time);
+
+  assert _TOP__pedal_sensor_L(pedal_sensor_L____ASSUME__HIST, pedal_sensor_L__mech_pedal_pos, pedal_sensor_L__time, pedal_sensor_L__elec_pedal_pos);
+
+  assert (pedal_sensor_L____ASSUME__HIST = __HIST(true));
+
+  assert (time = pedal_sensor_R__time);
+
+  assert _TOP__pedal_sensor_R(pedal_sensor_R____ASSUME__HIST, pedal_sensor_R__mech_pedal_pos, pedal_sensor_R__time, pedal_sensor_R__elec_pedal_pos);
+
+  assert (pedal_sensor_R____ASSUME__HIST = __HIST(true));
+
+  assert (mechanical_pedal_pos_R = phys_sys__mech_pedal_pos_R);
+
+  assert (mechanical_pedal_pos_R = pedal_sensor_R__mech_pedal_pos);
+
+  assert (mechanical_pedal_pos_L = phys_sys__mech_pedal_pos_L);
+
+  assert (mechanical_pedal_pos_L = pedal_sensor_L__mech_pedal_pos);
+
+  assert (power1 = ctrl_sys__power_1);
+
+  assert (power1 = phys_sys__pump_power1);
+
+  assert (power2 = ctrl_sys__power_2);
+
+  assert (power2 = phys_sys__pump_power2);
+
+  assert (ground_speed = ctrl_sys__ground_speed);
+
+  assert (ground_speed = phys_sys__ground_speed);
+
+  assert (hyd_supply1 = phys_sys__hyd_supply1);
+
+  assert (hyd_supply2 = phys_sys__hyd_supply2);
+
+  assert (phys_sys__accum_pressure_display_in = accum_pressure_display);
+
+  assert (phys_sys__green_pressure_in_selec_valve = green_pressure_in_selector_valve);
+
+  assert (phys_sys__wheel_braking_force1 = wheel_braking_force1);
+
+  assert (phys_sys__wheel_braking_force2 = wheel_braking_force2);
+
+  assert (phys_sys__wheel_braking_force3 = wheel_braking_force3);
+
+  assert (phys_sys__wheel_braking_force4 = wheel_braking_force4);
+
+  assert (phys_sys__wheel_braking_force5 = wheel_braking_force5);
+
+  assert (phys_sys__wheel_braking_force6 = wheel_braking_force6);
+
+  assert (phys_sys__wheel_braking_force7 = wheel_braking_force7);
+
+  assert (phys_sys__wheel_braking_force8 = wheel_braking_force8);
+
+  assert (phys_sys__wheel_status1 = wheel_sensor1__wheel_status);
+
+  assert (phys_sys__wheel_status1 = wheel_status1);
+
+  assert (phys_sys__wheel_status2 = wheel_sensor2__wheel_status);
+
+  assert (phys_sys__wheel_status2 = wheel_status2);
+
+  assert (phys_sys__wheel_status3 = wheel_sensor3__wheel_status);
+
+  assert (phys_sys__wheel_status3 = wheel_status3);
+
+  assert (phys_sys__wheel_status4 = wheel_sensor4__wheel_status);
+
+  assert (phys_sys__wheel_status4 = wheel_status4);
+
+  assert (phys_sys__wheel_status5 = wheel_sensor5__wheel_status);
+
+  assert (phys_sys__wheel_status5 = wheel_status5);
+
+  assert (phys_sys__wheel_status6 = wheel_sensor6__wheel_status);
+
+  assert (phys_sys__wheel_status6 = wheel_status6);
+
+  assert (phys_sys__wheel_status7 = wheel_sensor7__wheel_status);
+
+  assert (phys_sys__wheel_status7 = wheel_status7);
+
+  assert (phys_sys__wheel_status8 = wheel_sensor8__wheel_status);
+
+  assert (phys_sys__wheel_status8 = wheel_status8);
+
+  assert (ctrl_sys__system_validity = phys_sys__system_validity);
+
+  assert (ctrl_sys__system_validity = system_validity);
+
+  assert (ctrl_sys__brake_as_cmd_1 = phys_sys__brake_as_cmd_1);
+
+  assert (ctrl_sys__brake_as_cmd_2 = phys_sys__brake_as_cmd_2);
+
+  assert (ctrl_sys__brake_as_cmd_3 = phys_sys__brake_as_cmd_3);
+
+  assert (ctrl_sys__brake_as_cmd_4 = phys_sys__brake_as_cmd_4);
+
+  assert (ctrl_sys__brake_as_cmd_5 = phys_sys__brake_as_cmd_5);
+
+  assert (ctrl_sys__brake_as_cmd_6 = phys_sys__brake_as_cmd_6);
+
+  assert (ctrl_sys__brake_as_cmd_7 = phys_sys__brake_as_cmd_7);
+
+  assert (ctrl_sys__brake_as_cmd_8 = phys_sys__brake_as_cmd_8);
+
+  assert (ctrl_sys__as_cmd_pair_1_5 = phys_sys__as_cmd_pair_1_5);
+
+  assert (ctrl_sys__as_cmd_pair_2_6 = phys_sys__as_cmd_pair_2_6);
+
+  assert (ctrl_sys__as_cmd_pair_3_7 = phys_sys__as_cmd_pair_3_7);
+
+  assert (ctrl_sys__as_cmd_pair_4_8 = phys_sys__as_cmd_pair_4_8);
+
+  assert (wheel_sensor1__wheel_rolling = ctrl_sys__wheel_rolling_1);
+
+  assert (wheel_sensor2__wheel_rolling = ctrl_sys__wheel_rolling_2);
+
+  assert (wheel_sensor3__wheel_rolling = ctrl_sys__wheel_rolling_3);
+
+  assert (wheel_sensor4__wheel_rolling = ctrl_sys__wheel_rolling_4);
+
+  assert (wheel_sensor5__wheel_rolling = ctrl_sys__wheel_rolling_5);
+
+  assert (wheel_sensor6__wheel_rolling = ctrl_sys__wheel_rolling_6);
+
+  assert (wheel_sensor7__wheel_rolling = ctrl_sys__wheel_rolling_7);
+
+  assert (wheel_sensor8__wheel_rolling = ctrl_sys__wheel_rolling_8);
+
+  assert (pedal_sensor_L__elec_pedal_pos = ctrl_sys__elec_pedal_pos_L);
+
+  assert (pedal_sensor_R__elec_pedal_pos = ctrl_sys__elec_pedal_pos_R);
+
+  assert (ALL_WHEELS_BRAKE = ((((((((phys_sys__wheel_braking_force1 > 0) and (phys_sys__wheel_braking_force2 > 0)) and (phys_sys__wheel_braking_force3 > 0)) and (phys_sys__wheel_braking_force4 > 0)) and (phys_sys__wheel_braking_force5 > 0)) and (phys_sys__wheel_braking_force6 > 0)) and (phys_sys__wheel_braking_force7 > 0)) and (phys_sys__wheel_braking_force8 > 0)));
+
+  assert (ALL_WHEELS_STOPPED = ((((((((not phys_sys__wheel_status1) and (not phys_sys__wheel_status2)) and (not phys_sys__wheel_status3)) and (not phys_sys__wheel_status4)) and (not phys_sys__wheel_status5)) and (not phys_sys__wheel_status6)) and (not phys_sys__wheel_status7)) and (not phys_sys__wheel_status8)));
+
+  assert (BRAKE_AS_NOT_COMMANDED = ((((((((not phys_sys__brake_as_cmd_1) and (not phys_sys__brake_as_cmd_2)) and (not phys_sys__brake_as_cmd_3)) and (not phys_sys__brake_as_cmd_4)) and (not phys_sys__brake_as_cmd_5)) and (not phys_sys__brake_as_cmd_6)) and (not phys_sys__brake_as_cmd_7)) and (not phys_sys__brake_as_cmd_8)));
+
+  assert (PEDALS_NOT_PRESSED = ((not phys_sys__mech_pedal_pos_L) and (not phys_sys__mech_pedal_pos_R)));
+
+  assert (GREEN_PRESSURE_VALID = ((phys_sys__green_pressure_in_selec_valve > 0) and system_validity));
+
+  assert (NORMAL1 = (phys_sys__brake_as_cmd_1 and GREEN_PRESSURE_VALID));
+
+  assert (ALTERNATE1 = ((phys_sys__mech_pedal_pos_L and (not phys_sys__as_cmd_pair_1_5)) and (not GREEN_PRESSURE_VALID)));
+
+  assert (NORMAL2 = (phys_sys__brake_as_cmd_2 and GREEN_PRESSURE_VALID));
+
+  assert (ALTERNATE2 = ((phys_sys__mech_pedal_pos_L and (not phys_sys__as_cmd_pair_2_6)) and (not GREEN_PRESSURE_VALID)));
+
+  assert (NORMAL3 = (phys_sys__brake_as_cmd_3 and GREEN_PRESSURE_VALID));
+
+  assert (ALTERNATE3 = ((phys_sys__mech_pedal_pos_R and (not phys_sys__as_cmd_pair_3_7)) and (not GREEN_PRESSURE_VALID)));
+
+  assert (NORMAL4 = (phys_sys__brake_as_cmd_4 and GREEN_PRESSURE_VALID));
+
+  assert (ALTERNATE4 = ((phys_sys__mech_pedal_pos_R and (not phys_sys__as_cmd_pair_4_8)) and (not GREEN_PRESSURE_VALID)));
+
+  assert (NORMAL5 = (phys_sys__brake_as_cmd_5 and GREEN_PRESSURE_VALID));
+
+  assert (ALTERNATE5 = ((phys_sys__mech_pedal_pos_L and (not phys_sys__as_cmd_pair_1_5)) and (not GREEN_PRESSURE_VALID)));
+
+  assert (NORMAL6 = (phys_sys__brake_as_cmd_6 and GREEN_PRESSURE_VALID));
+
+  assert (ALTERNATE6 = ((phys_sys__mech_pedal_pos_L and (not phys_sys__as_cmd_pair_2_6)) and (not GREEN_PRESSURE_VALID)));
+
+  assert (NORMAL7 = (phys_sys__brake_as_cmd_7 and GREEN_PRESSURE_VALID));
+
+  assert (ALTERNATE7 = ((phys_sys__mech_pedal_pos_R and (not phys_sys__as_cmd_pair_3_7)) and (not GREEN_PRESSURE_VALID)));
+
+  assert (NORMAL8 = (phys_sys__brake_as_cmd_8 and GREEN_PRESSURE_VALID));
+
+  assert (ALTERNATE8 = ((phys_sys__mech_pedal_pos_R and (not phys_sys__as_cmd_pair_4_8)) and (not GREEN_PRESSURE_VALID)));
+
+  assert (L_PEDAL_VALID = (phys_sys__mech_pedal_pos_L and system_validity));
+
+  assert (R_PEDAL_VALID = (phys_sys__mech_pedal_pos_R and system_validity));
+
+  assert (POWER = (((power1 and power2) and pump_power1) and pump_power2));
+
+  assert (HYD_PRESSURE_MAX = ((hyd_supply1 = 10) and (hyd_supply2 = 10)));
+
+  assert (SPEED = (ground_speed > 0));
+
+  assert (W1ROLL = wheel_status1);
+
+  assert (W2ROLL = wheel_status2);
+
+  assert (W3ROLL = wheel_status3);
+
+  assert (W4ROLL = wheel_status4);
+
+  assert (W5ROLL = wheel_status5);
+
+  assert (W6ROLL = wheel_status6);
+
+  assert (W7ROLL = wheel_status7);
+
+  assert (W8ROLL = wheel_status8);
+
+  assert true;
+
+  assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
+
+  --%PROPERTY __LEMMA16;
+
+  --%IVC __ASSUME0;
+
+tel;
+
+node __HIST(
+  input : bool
+) returns (
+  hist : bool
+);
+let
+  hist = (input -> ((pre hist) and input));
+
+tel;
+
+node __MinPos(
+  a : real;
+  b : real
+) returns (
+  ret : real
+);
+let
+  ret = (if (a <= 0.0) then b else (if (b <= 0.0) then a else (if (a <= b) then a else b)));
+
+tel;
+
+node __Rise(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = (input -> ((pre (not input)) and input));
+
+tel;
+
+node __Fall(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = ((not input) -> ((pre input) and (not input)));
+
+tel;
+

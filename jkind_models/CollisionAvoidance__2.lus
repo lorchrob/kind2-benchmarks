@@ -19,8 +19,8 @@ function Collision_Avoidance__CONFLICT_DETECTED(
   ADSB : Collision_Avoidance__Vehicle_State__Impl
 ) returns (
   _outvar : bool
-);
-
+)
+;
 function Collision_Avoidance__ASSESS_TRAJECTORY(
   Own : Collision_Avoidance__Vehicle_State__Impl;
   Intruder : Collision_Avoidance__Vehicle_State__Impl
@@ -39,8 +39,8 @@ function Collision_Avoidance__CALC_INTRUDER_TRAJECTORY(
   ADSB : Collision_Avoidance__Vehicle_State__Impl
 ) returns (
   _outvar : Collision_Avoidance__Vehicle_State__Impl
-);
-
+)
+;
 
 node _TOP__DAA(
   __ASSUME__HIST : bool;

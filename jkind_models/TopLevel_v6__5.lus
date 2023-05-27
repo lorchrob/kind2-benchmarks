@@ -1,0 +1,422 @@
+type Data_Types__Node_Msg__Impl = struct {Node1_PID_from_Node1 : int; Node2_PID_from_Node2 : int; Node3_PID_from_Node3 : int; Node4_PID_from_Node4 : int};
+type Base_Types__Boolean = bool;
+type Base_Types__Unsigned = int;
+type Base_Types__Unsigned_64 = int;
+type Base_Types__Unsigned_32 = int;
+type Base_Types__Unsigned_16 = int;
+type Base_Types__Unsigned_8 = int;
+type Base_Types__Integer = int;
+type Base_Types__Integer_64 = int;
+type Base_Types__Integer_32 = int;
+type Base_Types__Integer_16 = int;
+type Base_Types__Integer_8 = int;
+type Base_Types__Float = real;
+type Base_Types__Float_32 = real;
+type Base_Types__Float_64 = real;
+
+node _TOP__node1(
+  __ASSUME__HIST : bool;
+  Node1_In : Data_Types__Node_Msg__Impl;
+  Node2_In : Data_Types__Node_Msg__Impl;
+  Node3_In : Data_Types__Node_Msg__Impl;
+  time : real;
+  pid : int;
+  node_num : int;
+  node1_pid1 : int;
+  node2_pid2 : int;
+  node3_pid3 : int;
+  node4_pid4 : int;
+  Node_Out : Data_Types__Node_Msg__Impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+let
+  __GUARANTEE0 = (Node_Out.Node1_PID_from_Node1 = (if (node_num = 1) then pid else (0 -> (pre Node1_In.Node1_PID_from_Node1))));
+
+  __GUARANTEE1 = (Node_Out.Node2_PID_from_Node2 = (if (node_num = 2) then pid else (if (node_num = 1) then (0 -> (pre Node1_In.Node2_PID_from_Node2)) else (0 -> (pre Node2_In.Node2_PID_from_Node2)))));
+
+  __GUARANTEE2 = (Node_Out.Node3_PID_from_Node3 = (if (node_num = 3) then pid else (if (node_num = 4) then (0 -> (pre Node3_In.Node3_PID_from_Node3)) else (0 -> (pre Node2_In.Node3_PID_from_Node3)))));
+
+  __GUARANTEE3 = (Node_Out.Node4_PID_from_Node4 = (if (node_num = 4) then pid else (0 -> (pre Node3_In.Node4_PID_from_Node4))));
+
+  __ASSERT = ((node4_pid4 = (if (node_num = 4) then pid else (0 -> Library__majority(Node1_In.Node4_PID_from_Node4, Node2_In.Node4_PID_from_Node4, (pre Node3_In.Node4_PID_from_Node4))))) and ((node3_pid3 = (if (node_num = 3) then pid else (if (node_num = 4) then (0 -> Library__majority(Node1_In.Node3_PID_from_Node3, Node2_In.Node3_PID_from_Node3, (pre Node3_In.Node3_PID_from_Node3))) else (0 -> Library__majority(Node1_In.Node3_PID_from_Node3, Node3_In.Node3_PID_from_Node3, (pre Node2_In.Node3_PID_from_Node3)))))) and ((node2_pid2 = (if (node_num = 2) then pid else (if (node_num = 1) then (0 -> Library__majority(Node2_In.Node2_PID_from_Node2, Node3_In.Node2_PID_from_Node2, (pre Node1_In.Node2_PID_from_Node2))) else (0 -> Library__majority(Node1_In.Node2_PID_from_Node2, Node3_In.Node2_PID_from_Node2, (pre Node2_In.Node2_PID_from_Node2)))))) and ((node1_pid1 = (if (node_num = 1) then pid else (0 -> Library__majority(Node2_In.Node1_PID_from_Node1, Node3_In.Node1_PID_from_Node1, (pre Node1_In.Node1_PID_from_Node1))))) and ((node_num = 1) and ((pid = 10) and (__ASSUME__HIST => (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3;
+
+tel;
+
+node _TOP__node2(
+  __ASSUME__HIST : bool;
+  Node1_In : Data_Types__Node_Msg__Impl;
+  Node2_In : Data_Types__Node_Msg__Impl;
+  Node3_In : Data_Types__Node_Msg__Impl;
+  time : real;
+  pid : int;
+  node_num : int;
+  node1_pid1 : int;
+  node2_pid2 : int;
+  node3_pid3 : int;
+  node4_pid4 : int;
+  Node_Out : Data_Types__Node_Msg__Impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+let
+  __GUARANTEE0 = (Node_Out.Node1_PID_from_Node1 = (if (node_num = 1) then pid else (0 -> (pre Node1_In.Node1_PID_from_Node1))));
+
+  __GUARANTEE1 = (Node_Out.Node2_PID_from_Node2 = (if (node_num = 2) then pid else (if (node_num = 1) then (0 -> (pre Node1_In.Node2_PID_from_Node2)) else (0 -> (pre Node2_In.Node2_PID_from_Node2)))));
+
+  __GUARANTEE2 = (Node_Out.Node3_PID_from_Node3 = (if (node_num = 3) then pid else (if (node_num = 4) then (0 -> (pre Node3_In.Node3_PID_from_Node3)) else (0 -> (pre Node2_In.Node3_PID_from_Node3)))));
+
+  __GUARANTEE3 = (Node_Out.Node4_PID_from_Node4 = (if (node_num = 4) then pid else (0 -> (pre Node3_In.Node4_PID_from_Node4))));
+
+  __ASSERT = ((node4_pid4 = (if (node_num = 4) then pid else (0 -> Library__majority(Node1_In.Node4_PID_from_Node4, Node2_In.Node4_PID_from_Node4, (pre Node3_In.Node4_PID_from_Node4))))) and ((node3_pid3 = (if (node_num = 3) then pid else (if (node_num = 4) then (0 -> Library__majority(Node1_In.Node3_PID_from_Node3, Node2_In.Node3_PID_from_Node3, (pre Node3_In.Node3_PID_from_Node3))) else (0 -> Library__majority(Node1_In.Node3_PID_from_Node3, Node3_In.Node3_PID_from_Node3, (pre Node2_In.Node3_PID_from_Node3)))))) and ((node2_pid2 = (if (node_num = 2) then pid else (if (node_num = 1) then (0 -> Library__majority(Node2_In.Node2_PID_from_Node2, Node3_In.Node2_PID_from_Node2, (pre Node1_In.Node2_PID_from_Node2))) else (0 -> Library__majority(Node1_In.Node2_PID_from_Node2, Node3_In.Node2_PID_from_Node2, (pre Node2_In.Node2_PID_from_Node2)))))) and ((node1_pid1 = (if (node_num = 1) then pid else (0 -> Library__majority(Node2_In.Node1_PID_from_Node1, Node3_In.Node1_PID_from_Node1, (pre Node1_In.Node1_PID_from_Node1))))) and ((node_num = 2) and ((pid = 20) and (__ASSUME__HIST => (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3;
+
+tel;
+
+node _TOP__node3(
+  __ASSUME__HIST : bool;
+  Node1_In : Data_Types__Node_Msg__Impl;
+  Node2_In : Data_Types__Node_Msg__Impl;
+  Node3_In : Data_Types__Node_Msg__Impl;
+  time : real;
+  pid : int;
+  node_num : int;
+  node1_pid1 : int;
+  node2_pid2 : int;
+  node3_pid3 : int;
+  node4_pid4 : int;
+  Node_Out : Data_Types__Node_Msg__Impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+let
+  __GUARANTEE0 = (Node_Out.Node1_PID_from_Node1 = (if (node_num = 1) then pid else (0 -> (pre Node1_In.Node1_PID_from_Node1))));
+
+  __GUARANTEE1 = (Node_Out.Node2_PID_from_Node2 = (if (node_num = 2) then pid else (if (node_num = 1) then (0 -> (pre Node1_In.Node2_PID_from_Node2)) else (0 -> (pre Node2_In.Node2_PID_from_Node2)))));
+
+  __GUARANTEE2 = (Node_Out.Node3_PID_from_Node3 = (if (node_num = 3) then pid else (if (node_num = 4) then (0 -> (pre Node3_In.Node3_PID_from_Node3)) else (0 -> (pre Node2_In.Node3_PID_from_Node3)))));
+
+  __GUARANTEE3 = (Node_Out.Node4_PID_from_Node4 = (if (node_num = 4) then pid else (0 -> (pre Node3_In.Node4_PID_from_Node4))));
+
+  __ASSERT = ((node4_pid4 = (if (node_num = 4) then pid else (0 -> Library__majority(Node1_In.Node4_PID_from_Node4, Node2_In.Node4_PID_from_Node4, (pre Node3_In.Node4_PID_from_Node4))))) and ((node3_pid3 = (if (node_num = 3) then pid else (if (node_num = 4) then (0 -> Library__majority(Node1_In.Node3_PID_from_Node3, Node2_In.Node3_PID_from_Node3, (pre Node3_In.Node3_PID_from_Node3))) else (0 -> Library__majority(Node1_In.Node3_PID_from_Node3, Node3_In.Node3_PID_from_Node3, (pre Node2_In.Node3_PID_from_Node3)))))) and ((node2_pid2 = (if (node_num = 2) then pid else (if (node_num = 1) then (0 -> Library__majority(Node2_In.Node2_PID_from_Node2, Node3_In.Node2_PID_from_Node2, (pre Node1_In.Node2_PID_from_Node2))) else (0 -> Library__majority(Node1_In.Node2_PID_from_Node2, Node3_In.Node2_PID_from_Node2, (pre Node2_In.Node2_PID_from_Node2)))))) and ((node1_pid1 = (if (node_num = 1) then pid else (0 -> Library__majority(Node2_In.Node1_PID_from_Node1, Node3_In.Node1_PID_from_Node1, (pre Node1_In.Node1_PID_from_Node1))))) and ((node_num = 3) and ((pid = 30) and (__ASSUME__HIST => (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3;
+
+tel;
+
+node _TOP__node4(
+  __ASSUME__HIST : bool;
+  Node1_In : Data_Types__Node_Msg__Impl;
+  Node2_In : Data_Types__Node_Msg__Impl;
+  Node3_In : Data_Types__Node_Msg__Impl;
+  time : real;
+  pid : int;
+  node_num : int;
+  node1_pid1 : int;
+  node2_pid2 : int;
+  node3_pid3 : int;
+  node4_pid4 : int;
+  Node_Out : Data_Types__Node_Msg__Impl
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+let
+  __GUARANTEE0 = (Node_Out.Node1_PID_from_Node1 = (if (node_num = 1) then pid else (0 -> (pre Node1_In.Node1_PID_from_Node1))));
+
+  __GUARANTEE1 = (Node_Out.Node2_PID_from_Node2 = (if (node_num = 2) then pid else (if (node_num = 1) then (0 -> (pre Node1_In.Node2_PID_from_Node2)) else (0 -> (pre Node2_In.Node2_PID_from_Node2)))));
+
+  __GUARANTEE2 = (Node_Out.Node3_PID_from_Node3 = (if (node_num = 3) then pid else (if (node_num = 4) then (0 -> (pre Node3_In.Node3_PID_from_Node3)) else (0 -> (pre Node2_In.Node3_PID_from_Node3)))));
+
+  __GUARANTEE3 = (Node_Out.Node4_PID_from_Node4 = (if (node_num = 4) then pid else (0 -> (pre Node3_In.Node4_PID_from_Node4))));
+
+  __ASSERT = ((node4_pid4 = (if (node_num = 4) then pid else (0 -> Library__majority(Node1_In.Node4_PID_from_Node4, Node2_In.Node4_PID_from_Node4, (pre Node3_In.Node4_PID_from_Node4))))) and ((node3_pid3 = (if (node_num = 3) then pid else (if (node_num = 4) then (0 -> Library__majority(Node1_In.Node3_PID_from_Node3, Node2_In.Node3_PID_from_Node3, (pre Node3_In.Node3_PID_from_Node3))) else (0 -> Library__majority(Node1_In.Node3_PID_from_Node3, Node3_In.Node3_PID_from_Node3, (pre Node2_In.Node3_PID_from_Node3)))))) and ((node2_pid2 = (if (node_num = 2) then pid else (if (node_num = 1) then (0 -> Library__majority(Node2_In.Node2_PID_from_Node2, Node3_In.Node2_PID_from_Node2, (pre Node1_In.Node2_PID_from_Node2))) else (0 -> Library__majority(Node1_In.Node2_PID_from_Node2, Node3_In.Node2_PID_from_Node2, (pre Node2_In.Node2_PID_from_Node2)))))) and ((node1_pid1 = (if (node_num = 1) then pid else (0 -> Library__majority(Node2_In.Node1_PID_from_Node1, Node3_In.Node1_PID_from_Node1, (pre Node1_In.Node1_PID_from_Node1))))) and ((node_num = 4) and ((pid = 40) and (__ASSUME__HIST => (__GUARANTEE3 and (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0))))))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2, __GUARANTEE3;
+
+tel;
+
+node main(
+  node1__pid : int;
+  node1__node_num : int;
+  node1__node1_pid1 : int;
+  node1__node2_pid2 : int;
+  node1__node3_pid3 : int;
+  node1__node4_pid4 : int;
+  node1__Node_Out : Data_Types__Node_Msg__Impl;
+  node1____ASSUME__HIST : bool;
+  node2__pid : int;
+  node2__node_num : int;
+  node2__node1_pid1 : int;
+  node2__node2_pid2 : int;
+  node2__node3_pid3 : int;
+  node2__node4_pid4 : int;
+  node2__Node_Out : Data_Types__Node_Msg__Impl;
+  node2____ASSUME__HIST : bool;
+  node3__pid : int;
+  node3__node_num : int;
+  node3__node1_pid1 : int;
+  node3__node2_pid2 : int;
+  node3__node3_pid3 : int;
+  node3__node4_pid4 : int;
+  node3__Node_Out : Data_Types__Node_Msg__Impl;
+  node3____ASSUME__HIST : bool;
+  node4__pid : int;
+  node4__node_num : int;
+  node4__node1_pid1 : int;
+  node4__node2_pid2 : int;
+  node4__node3_pid3 : int;
+  node4__node4_pid4 : int;
+  node4__Node_Out : Data_Types__Node_Msg__Impl;
+  node4____ASSUME__HIST : bool;
+  n1_failed : bool;
+  n2_failed : bool;
+  n3_failed : bool;
+  n4_failed : bool;
+  n1_node1_pid1 : int;
+  n2_node1_pid1 : int;
+  n3_node1_pid1 : int;
+  n4_node1_pid1 : int;
+  n1_node2_pid2 : int;
+  n2_node2_pid2 : int;
+  n3_node2_pid2 : int;
+  n4_node2_pid2 : int;
+  n1_node3_pid3 : int;
+  n2_node3_pid3 : int;
+  n3_node3_pid3 : int;
+  n4_node3_pid3 : int;
+  n1_node4_pid4 : int;
+  n2_node4_pid4 : int;
+  n3_node4_pid4 : int;
+  n4_node4_pid4 : int;
+  testNodeOutput1 : bool;
+  testNodeOutput2 : bool;
+  testNodeOutput3 : bool;
+  testNodeOutput4 : bool;
+  node1__Node1_In : Data_Types__Node_Msg__Impl;
+  node1__Node2_In : Data_Types__Node_Msg__Impl;
+  node1__Node3_In : Data_Types__Node_Msg__Impl;
+  node1__time : real;
+  node2__Node1_In : Data_Types__Node_Msg__Impl;
+  node2__Node2_In : Data_Types__Node_Msg__Impl;
+  node2__Node3_In : Data_Types__Node_Msg__Impl;
+  node2__time : real;
+  node3__Node1_In : Data_Types__Node_Msg__Impl;
+  node3__Node2_In : Data_Types__Node_Msg__Impl;
+  node3__Node3_In : Data_Types__Node_Msg__Impl;
+  node3__time : real;
+  node4__Node1_In : Data_Types__Node_Msg__Impl;
+  node4__Node2_In : Data_Types__Node_Msg__Impl;
+  node4__Node3_In : Data_Types__Node_Msg__Impl;
+  node4__time : real;
+  time : real
+) returns (
+
+);
+var
+  __ASSUME__HIST : bool;
+  __LEMMA0 : bool;
+  __LEMMA1 : bool;
+  __LEMMA2 : bool;
+  __LEMMA3 : bool;
+  __LEMMA4 : bool;
+  __LEMMA5 : bool;
+  __LEMMA6 : bool;
+  __LEMMA7 : bool;
+let
+  --%MAIN;
+  __ASSUME__HIST = (node4____ASSUME__HIST and (node3____ASSUME__HIST and (node2____ASSUME__HIST and (node1____ASSUME__HIST and true))));
+
+  __LEMMA0 = (true -> (((n1_node1_pid1 = n2_node1_pid1) and (n2_node1_pid1 = n3_node1_pid1)) and (n3_node1_pid1 = n4_node1_pid1)));
+
+  __LEMMA1 = (true -> (((n1_node2_pid2 = n2_node2_pid2) and (n2_node2_pid2 = n3_node2_pid2)) and (n3_node2_pid2 = n4_node2_pid2)));
+
+  __LEMMA2 = (true -> (((n1_node3_pid3 = n2_node3_pid3) and (n2_node3_pid3 = n3_node3_pid3)) and (n3_node3_pid3 = n4_node3_pid3)));
+
+  __LEMMA3 = (true -> (((n1_node4_pid4 = n2_node4_pid4) and (n2_node4_pid4 = n3_node4_pid4)) and (n3_node4_pid4 = n4_node4_pid4)));
+
+  __LEMMA4 = (true -> (if n1_failed then ((n2_node1_pid1 = n3_node1_pid1) and (n3_node1_pid1 = n4_node1_pid1)) else (if n2_failed then ((n1_node1_pid1 = n3_node1_pid1) and (n3_node1_pid1 = n4_node1_pid1)) else (if n3_failed then ((n1_node1_pid1 = n2_node1_pid1) and (n2_node1_pid1 = n4_node1_pid1)) else (if n4_failed then ((n1_node1_pid1 = n2_node1_pid1) and (n2_node1_pid1 = n3_node1_pid1)) else (((n1_node1_pid1 = n2_node1_pid1) and (n2_node1_pid1 = n3_node1_pid1)) and (n3_node1_pid1 = n4_node1_pid1)))))));
+
+  __LEMMA5 = (true -> (if n1_failed then ((n2_node2_pid2 = n3_node2_pid2) and (n3_node2_pid2 = n4_node2_pid2)) else (if n2_failed then ((n1_node2_pid2 = n3_node2_pid2) and (n3_node2_pid2 = n4_node2_pid2)) else (if n3_failed then ((n1_node2_pid2 = n2_node2_pid2) and (n2_node2_pid2 = n4_node2_pid2)) else (if n4_failed then ((n1_node2_pid2 = n2_node2_pid2) and (n2_node2_pid2 = n3_node2_pid2)) else (((n1_node2_pid2 = n2_node2_pid2) and (n2_node2_pid2 = n3_node2_pid2)) and (n3_node2_pid2 = n4_node2_pid2)))))));
+
+  __LEMMA6 = (true -> (if n1_failed then ((n2_node3_pid3 = n3_node3_pid3) and (n3_node3_pid3 = n4_node3_pid3)) else (if n2_failed then ((n1_node3_pid3 = n3_node3_pid3) and (n3_node3_pid3 = n4_node3_pid3)) else (if n3_failed then ((n1_node3_pid3 = n2_node3_pid3) and (n2_node3_pid3 = n4_node3_pid3)) else (if n4_failed then ((n1_node3_pid3 = n2_node3_pid3) and (n2_node3_pid3 = n3_node3_pid3)) else (((n1_node3_pid3 = n2_node3_pid3) and (n2_node3_pid3 = n3_node3_pid3)) and (n3_node3_pid3 = n4_node3_pid3)))))));
+
+  __LEMMA7 = (true -> (if n1_failed then ((n2_node4_pid4 = n3_node4_pid4) and (n3_node4_pid4 = n4_node4_pid4)) else (if n2_failed then ((n1_node4_pid4 = n3_node4_pid4) and (n3_node4_pid4 = n4_node4_pid4)) else (if n3_failed then ((n1_node4_pid4 = n2_node4_pid4) and (n2_node4_pid4 = n4_node4_pid4)) else (if n4_failed then ((n1_node4_pid4 = n2_node4_pid4) and (n2_node4_pid4 = n3_node4_pid4)) else (((n1_node4_pid4 = n2_node4_pid4) and (n2_node4_pid4 = n3_node4_pid4)) and (n3_node4_pid4 = n4_node4_pid4)))))));
+
+  assert (time = node1__time);
+
+  assert _TOP__node1(node1____ASSUME__HIST, node1__Node1_In, node1__Node2_In, node1__Node3_In, node1__time, node1__pid, node1__node_num, node1__node1_pid1, node1__node2_pid2, node1__node3_pid3, node1__node4_pid4, node1__Node_Out);
+
+  assert (node1____ASSUME__HIST = __HIST(true));
+
+  assert (time = node2__time);
+
+  assert _TOP__node2(node2____ASSUME__HIST, node2__Node1_In, node2__Node2_In, node2__Node3_In, node2__time, node2__pid, node2__node_num, node2__node1_pid1, node2__node2_pid2, node2__node3_pid3, node2__node4_pid4, node2__Node_Out);
+
+  assert (node2____ASSUME__HIST = __HIST(true));
+
+  assert (time = node3__time);
+
+  assert _TOP__node3(node3____ASSUME__HIST, node3__Node1_In, node3__Node2_In, node3__Node3_In, node3__time, node3__pid, node3__node_num, node3__node1_pid1, node3__node2_pid2, node3__node3_pid3, node3__node4_pid4, node3__Node_Out);
+
+  assert (node3____ASSUME__HIST = __HIST(true));
+
+  assert (time = node4__time);
+
+  assert _TOP__node4(node4____ASSUME__HIST, node4__Node1_In, node4__Node2_In, node4__Node3_In, node4__time, node4__pid, node4__node_num, node4__node1_pid1, node4__node2_pid2, node4__node3_pid3, node4__node4_pid4, node4__Node_Out);
+
+  assert (node4____ASSUME__HIST = __HIST(true));
+
+  assert (node1__Node_Out = node2__Node1_In);
+
+  assert (node1__Node_Out = node3__Node1_In);
+
+  assert (node1__Node_Out = node4__Node1_In);
+
+  assert (node2__Node_Out = node1__Node1_In);
+
+  assert (node2__Node_Out = node3__Node2_In);
+
+  assert (node2__Node_Out = node4__Node2_In);
+
+  assert (node3__Node_Out = node1__Node2_In);
+
+  assert (node3__Node_Out = node2__Node2_In);
+
+  assert (node3__Node_Out = node4__Node3_In);
+
+  assert (node4__Node_Out = node1__Node3_In);
+
+  assert (node4__Node_Out = node2__Node3_In);
+
+  assert (node4__Node_Out = node3__Node3_In);
+
+  assert (n1_node1_pid1 = node1__node1_pid1);
+
+  assert (n2_node1_pid1 = node2__node1_pid1);
+
+  assert (n3_node1_pid1 = node3__node1_pid1);
+
+  assert (n4_node1_pid1 = node4__node1_pid1);
+
+  assert (n1_node2_pid2 = node1__node2_pid2);
+
+  assert (n2_node2_pid2 = node2__node2_pid2);
+
+  assert (n3_node2_pid2 = node3__node2_pid2);
+
+  assert (n4_node2_pid2 = node4__node2_pid2);
+
+  assert (n1_node3_pid3 = node1__node3_pid3);
+
+  assert (n2_node3_pid3 = node2__node3_pid3);
+
+  assert (n3_node3_pid3 = node3__node3_pid3);
+
+  assert (n4_node3_pid3 = node4__node3_pid3);
+
+  assert (n1_node4_pid4 = node1__node4_pid4);
+
+  assert (n2_node4_pid4 = node2__node4_pid4);
+
+  assert (n3_node4_pid4 = node3__node4_pid4);
+
+  assert (n4_node4_pid4 = node4__node4_pid4);
+
+  assert true;
+
+  assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
+
+  --%PROPERTY __LEMMA3;
+
+tel;
+
+node Library__majority(
+  val_in1 : int;
+  val_in2 : int;
+  val_in3 : int
+) returns (
+  val_out : int
+);
+let
+  val_out = (if ((val_in1 = val_in2) or (val_in1 = val_in3)) then val_in1 else (if (val_in2 = val_in3) then val_in2 else 0));
+
+tel;
+
+node _CLOCKED_Library__majority(
+  _CLK : bool;
+  _INIT : bool;
+  val_in1 : int;
+  val_in2 : int;
+  val_in3 : int
+) returns (
+  val_out : int
+);
+let
+  val_out = (if _CLK then (if ((val_in1 = val_in2) or (val_in1 = val_in3)) then val_in1 else (if (val_in2 = val_in3) then val_in2 else 0)) else (pre val_out));
+
+tel;
+
+node __HIST(
+  input : bool
+) returns (
+  hist : bool
+);
+let
+  hist = (input -> ((pre hist) and input));
+
+tel;
+
+node __MinPos(
+  a : real;
+  b : real
+) returns (
+  ret : real
+);
+let
+  ret = (if (a <= 0.0) then b else (if (b <= 0.0) then a else (if (a <= b) then a else b)));
+
+tel;
+
+node __Rise(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = (input -> ((pre (not input)) and input));
+
+tel;
+
+node __Fall(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = ((not input) -> ((pre input) and (not input)));
+
+tel;
+

@@ -1,0 +1,284 @@
+type Thermostat__SwitchPosition = enum {Thermostat__SwitchPosition_Cool, Thermostat__SwitchPosition_Off, Thermostat__SwitchPosition_Heat};
+type Base_Types__Boolean = bool;
+type Base_Types__Unsigned = int;
+type Base_Types__Unsigned_64 = int;
+type Base_Types__Unsigned_32 = int;
+type Base_Types__Unsigned_16 = int;
+type Base_Types__Unsigned_8 = int;
+type Base_Types__Integer = int;
+type Base_Types__Integer_64 = int;
+type Base_Types__Integer_32 = int;
+type Base_Types__Integer_16 = int;
+type Base_Types__Integer_8 = int;
+type Base_Types__Float = real;
+type Base_Types__Float_32 = real;
+type Base_Types__Float_64 = real;
+
+node _TOP__set_desired_temperature(
+  __ASSUME__HIST : bool;
+  __ASSUME0 : bool;
+  up_button : bool;
+  down_button : bool;
+  time : real;
+  prev_setpoint : real;
+  increment_condition : bool;
+  decrement_condition : bool;
+  setpoint : real
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+let
+  __GUARANTEE0 = (increment_condition => (setpoint = (prev_setpoint + 1.0)));
+
+  __GUARANTEE1 = (decrement_condition => (setpoint = (prev_setpoint - 1.0)));
+
+  __GUARANTEE2 = ((not (increment_condition or decrement_condition)) => (setpoint = prev_setpoint));
+
+  __ASSERT = ((decrement_condition = (down_button and (prev_setpoint >= (40.0 + 1.0)))) and ((increment_condition = (up_button and (prev_setpoint <= (100.0 - 1.0)))) and ((prev_setpoint = (70.0 -> (pre setpoint))) and ((__ASSUME__HIST => (__GUARANTEE2 and (__GUARANTEE1 and __GUARANTEE0))) and (__ASSUME0 = (not (up_button and down_button)))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1, __GUARANTEE2;
+
+tel;
+
+node _TOP__control_temperature(
+  __ASSUME__HIST : bool;
+  switch : Thermostat__SwitchPosition;
+  current_temperature : real;
+  setpoint : real;
+  time : real;
+  cooling_start_condition : bool;
+  cool_mode : bool;
+  heating_start_condition : bool;
+  heat_mode : bool;
+  off_mode : bool;
+  cool_act_signal : bool;
+  heat_act_signal : bool
+) returns (
+  __ASSERT : bool
+);
+var
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+let
+  __GUARANTEE0 = (cool_act_signal = cool_mode);
+
+  __GUARANTEE1 = (heat_act_signal = heat_mode);
+
+  __ASSERT = ((off_mode = ((not cool_mode) and (not heat_mode))) and ((heat_mode = (heating_start_condition -> (heating_start_condition or (((pre heat_mode) and (switch = Thermostat__SwitchPosition_Heat)) and (current_temperature < setpoint))))) and ((heating_start_condition = ((switch = Thermostat__SwitchPosition_Heat) and (current_temperature < (setpoint - 3.0)))) and ((cool_mode = (cooling_start_condition -> (cooling_start_condition or (((pre cool_mode) and (switch = Thermostat__SwitchPosition_Cool)) and (current_temperature > setpoint))))) and ((cooling_start_condition = ((switch = Thermostat__SwitchPosition_Cool) and (current_temperature > (setpoint + 3.0)))) and (__ASSUME__HIST => (__GUARANTEE1 and __GUARANTEE0)))))));
+
+  --%IVC __GUARANTEE0, __GUARANTEE1;
+
+tel;
+
+node main(
+  set_desired_temperature__prev_setpoint : real;
+  set_desired_temperature__increment_condition : bool;
+  set_desired_temperature__decrement_condition : bool;
+  set_desired_temperature__setpoint : real;
+  set_desired_temperature____ASSUME0 : bool;
+  set_desired_temperature____ASSUME__HIST : bool;
+  control_temperature__cooling_start_condition : bool;
+  control_temperature__cool_mode : bool;
+  control_temperature__heating_start_condition : bool;
+  control_temperature__heat_mode : bool;
+  control_temperature__off_mode : bool;
+  control_temperature__cool_act_signal : bool;
+  control_temperature__heat_act_signal : bool;
+  control_temperature____ASSUME__HIST : bool;
+  current_temperature_in_deadzone : bool;
+  system_is_off : bool;
+  cool_act_signal : bool;
+  heat_act_signal : bool;
+  setpoint : real;
+  set_desired_temperature__up_button : bool;
+  set_desired_temperature__down_button : bool;
+  set_desired_temperature__time : real;
+  control_temperature__switch : Thermostat__SwitchPosition;
+  control_temperature__current_temperature : real;
+  control_temperature__setpoint : real;
+  control_temperature__time : real;
+  switch : Thermostat__SwitchPosition;
+  up_button : bool;
+  down_button : bool;
+  current_temperature : real;
+  time : real
+) returns (
+
+);
+var
+  __ASSUME0 : bool;
+  __ASSUME__HIST : bool;
+  __GUARANTEE0 : bool;
+  __GUARANTEE1 : bool;
+  __GUARANTEE2 : bool;
+  __GUARANTEE3 : bool;
+  __GUARANTEE4 : bool;
+  __GUARANTEE5 : bool;
+  __GUARANTEE6 : bool;
+  __GUARANTEE7 : bool;
+  __GUARANTEE8 : bool;
+  __GUARANTEE9 : bool;
+  __GUARANTEE10 : bool;
+  __GUARANTEE11 : bool;
+  __GUARANTEE12 : bool;
+  __GUARANTEE13 : bool;
+  __GUARANTEE14 : bool;
+  __GUARANTEE15 : bool;
+  __GUARANTEE16 : bool;
+let
+  --%MAIN;
+  __ASSUME0 = (not (up_button and down_button));
+
+  __ASSUME__HIST = (control_temperature____ASSUME__HIST and (set_desired_temperature____ASSUME__HIST and true));
+
+  __GUARANTEE0 = ((40.0 <= 70.0) and (70.0 <= 100.0));
+
+  __GUARANTEE1 = ((3.0 > 0.0) and (1.0 > 0.0));
+
+  __GUARANTEE2 = ((switch = Thermostat__SwitchPosition_Off) => ((not cool_act_signal) and (not heat_act_signal)));
+
+  __GUARANTEE3 = (cool_act_signal => (switch = Thermostat__SwitchPosition_Cool));
+
+  __GUARANTEE4 = (heat_act_signal => (switch = Thermostat__SwitchPosition_Heat));
+
+  __GUARANTEE5 = (not (cool_act_signal and heat_act_signal));
+
+  __GUARANTEE6 = ((40.0 <= setpoint) and (setpoint <= 100.0));
+
+  __GUARANTEE7 = (((not up_button) and (not down_button)) => (setpoint = (70.0 -> (pre setpoint))));
+
+  __GUARANTEE8 = (up_button => (not (setpoint < (70.0 -> (pre setpoint)))));
+
+  __GUARANTEE9 = (down_button => (not (setpoint > (70.0 -> (pre setpoint)))));
+
+  __GUARANTEE10 = (true -> ((current_temperature_in_deadzone and (pre system_is_off)) => system_is_off));
+
+  __GUARANTEE11 = (cool_act_signal => (current_temperature > setpoint));
+
+  __GUARANTEE12 = (heat_act_signal => (current_temperature < setpoint));
+
+  __GUARANTEE13 = (((switch = Thermostat__SwitchPosition_Cool) and (current_temperature > (setpoint + 3.0))) => cool_act_signal);
+
+  __GUARANTEE14 = (((switch = Thermostat__SwitchPosition_Heat) and (current_temperature < (setpoint - 3.0))) => heat_act_signal);
+
+  __GUARANTEE15 = (Thermostat__Since(cool_act_signal, ((switch = Thermostat__SwitchPosition_Cool) and (current_temperature > setpoint))) => cool_act_signal);
+
+  __GUARANTEE16 = (Thermostat__Since(heat_act_signal, ((switch = Thermostat__SwitchPosition_Heat) and (current_temperature < setpoint))) => heat_act_signal);
+
+  assert __ASSUME0;
+
+  assert (time = set_desired_temperature__time);
+
+  assert _TOP__set_desired_temperature(set_desired_temperature____ASSUME__HIST, set_desired_temperature____ASSUME0, set_desired_temperature__up_button, set_desired_temperature__down_button, set_desired_temperature__time, set_desired_temperature__prev_setpoint, set_desired_temperature__increment_condition, set_desired_temperature__decrement_condition, set_desired_temperature__setpoint);
+
+  assert (set_desired_temperature____ASSUME__HIST = __HIST(set_desired_temperature____ASSUME0));
+
+  assert (time = control_temperature__time);
+
+  assert _TOP__control_temperature(control_temperature____ASSUME__HIST, control_temperature__switch, control_temperature__current_temperature, control_temperature__setpoint, control_temperature__time, control_temperature__cooling_start_condition, control_temperature__cool_mode, control_temperature__heating_start_condition, control_temperature__heat_mode, control_temperature__off_mode, control_temperature__cool_act_signal, control_temperature__heat_act_signal);
+
+  assert (control_temperature____ASSUME__HIST = __HIST(true));
+
+  assert (switch = control_temperature__switch);
+
+  assert (up_button = set_desired_temperature__up_button);
+
+  assert (down_button = set_desired_temperature__down_button);
+
+  assert (current_temperature = control_temperature__current_temperature);
+
+  assert (set_desired_temperature__setpoint = control_temperature__setpoint);
+
+  assert (set_desired_temperature__setpoint = setpoint);
+
+  assert (control_temperature__cool_act_signal = cool_act_signal);
+
+  assert (control_temperature__heat_act_signal = heat_act_signal);
+
+  assert (current_temperature_in_deadzone = (((setpoint - 3.0) <= current_temperature) and (current_temperature <= (setpoint + 3.0))));
+
+  assert (system_is_off = ((not cool_act_signal) and (not heat_act_signal)));
+
+  assert true;
+
+  assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
+
+  --%PROPERTY set_desired_temperature____ASSUME0;
+
+  --%IVC __ASSUME0;
+
+tel;
+
+node Thermostat__Since(
+  X : bool;
+  Y : bool
+) returns (
+  Z : bool
+);
+let
+  Z = (X or (Y and (false -> (pre Z))));
+
+tel;
+
+node _CLOCKED_Thermostat__Since(
+  _CLK : bool;
+  _INIT : bool;
+  X : bool;
+  Y : bool
+) returns (
+  Z : bool
+);
+var
+  _STATE0 : bool;
+let
+  Z = (if _CLK then (X or (Y and (if _INIT then false else _STATE0))) else (pre Z));
+
+  _STATE0 = (if _CLK then (pre Z) else (pre _STATE0));
+
+tel;
+
+node __HIST(
+  input : bool
+) returns (
+  hist : bool
+);
+let
+  hist = (input -> ((pre hist) and input));
+
+tel;
+
+node __MinPos(
+  a : real;
+  b : real
+) returns (
+  ret : real
+);
+let
+  ret = (if (a <= 0.0) then b else (if (b <= 0.0) then a else (if (a <= b) then a else b)));
+
+tel;
+
+node __Rise(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = (input -> ((pre (not input)) and input));
+
+tel;
+
+node __Fall(
+  input : bool
+) returns (
+  output : bool
+);
+let
+  output = ((not input) -> ((pre input) and (not input)));
+
+tel;
+

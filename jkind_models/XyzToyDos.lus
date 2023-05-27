@@ -156,10 +156,10 @@ let
   assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
 
   --%PROPERTY A_sub____ASSUME0;
-  -- %PROPERTY B_sub____ASSUME0;
-  -- %PROPERTY __ASSUME__HIST;
-  -- %PROPERTY __GUARANTEE0;
-  -- %PROPERTY __GUARANTEE1;
+  --%PROPERTY B_sub____ASSUME0;
+  --%PROPERTY __ASSUME__HIST;
+  --%PROPERTY __GUARANTEE0;
+  --%PROPERTY __GUARANTEE1;
 
   --%IVC __ASSUME0;
 

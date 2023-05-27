@@ -257,8 +257,8 @@ let
   assert (((time = 0.0) -> (time > (pre time))) and (true -> (time = ((pre time) + (time - (pre time))))));
 
   --%PROPERTY __ASSUME__HIST;
-  -- %PROPERTY __GUARANTEE0;
-  -- %PROPERTY __GUARANTEE1;
+  --%PROPERTY __GUARANTEE0;
+  --%PROPERTY __GUARANTEE1;
 
   --%IVC __ASSUME0, __ASSUME1, __ASSUME2;
 
