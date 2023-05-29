@@ -143,7 +143,7 @@ tel
 
 node channel(
   in1a, in1b, in1c,
-  in2a, in2b, in2c: real;
+  in2a, in2b, in2c: real
 ) returns (
   output: real
 );
@@ -259,7 +259,8 @@ tel
 node reconfiguration(
   sensor_value1, sensor_value2, sensor_value3: real
 ) returns (
-  command: real; no_command: bool;
+  command: real; 
+  no_command: bool
 );
 
 var
@@ -334,9 +335,9 @@ node top(
   -- Second channel inputs.
   in21a, in21b, in21c, in22a, in22b, in22c,
   -- Third channel inputs.
-  in31a, in31b, in31c, in32a, in32b, in32c: real;
+  in31a, in31b, in31c, in32a, in32b, in32c: real
 ) returns (
-  command: real;
+  command: real
 );
 var
   channel1, channel2, channel3: real;

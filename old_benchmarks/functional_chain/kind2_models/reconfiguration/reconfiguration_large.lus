@@ -77,7 +77,7 @@ tel
 node reconfiguration(
   sensor_value1, sensor_value2, sensor_value3: real
 ) returns (
-  command: real; no_command: bool;
+  command: real; no_command: bool
 );
 
 var
