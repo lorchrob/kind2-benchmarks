@@ -136,7 +136,7 @@ tel
 
 node channel(
   in1a, in1b, in1c,
-  in2a, in2b, in2c: real;
+  in2a, in2b, in2c: real
 ) returns (
   output: real
 );
