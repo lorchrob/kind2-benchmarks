@@ -127,7 +127,7 @@ ASSIGN
 	init(_TOP__measureSpeed-usr-__ASSERT) := ((_TOP__measureSpeed-usr-count = (_TOP__measureSpeed-usr-second___EVENT_ ? 0 : _TOP__measureSpeed-usr-nc)) & ((_TOP__measureSpeed-usr-nc = 0) & (_TOP__measureSpeed-usr-__ASSUME__HIST -> (_TOP__measureSpeed-impl-usr-__GUARANTEE2 & (_TOP__measureSpeed-impl-usr-__GUARANTEE1 & _TOP__measureSpeed-impl-usr-__GUARANTEE0)))));
 
 	next(_TOP__measureSpeed-impl-usr-__GUARANTEE2) := (!next(_TOP__measureSpeed-usr-second___EVENT_) -> (next(_TOP__measureSpeed-usr-speed) = _TOP__measureSpeed-usr-speed));
-	next(_TOP__measureSpeed-impl-usr-__GUARANTEE1) := (next(_TOP__measureSpeed-usr-second___EVENT_) -> (next(_TOP__measureSpeed-usr-speed) = (7351344/2011675 * to_realnext(_TOP__measureSpeed-usr-nc))));
+	next(_TOP__measureSpeed-impl-usr-__GUARANTEE1) := (next(_TOP__measureSpeed-usr-second___EVENT_) -> (next(_TOP__measureSpeed-usr-speed) = (7351344/2011675 * next(_TOP__measureSpeed-usr-nc))));
 	next(_TOP__measureSpeed-impl-usr-__GUARANTEE0) := next(_TOP__measureSpeed-res-call_10.CruiseController__InitiallyHolds-usr-Y);
 	next(_TOP__measureSpeed-usr-__ASSERT) := ((next(_TOP__measureSpeed-usr-count) = (next(_TOP__measureSpeed-usr-second___EVENT_) ? 0 : next(_TOP__measureSpeed-usr-nc))) & ((next(_TOP__measureSpeed-usr-nc) = _TOP__measureSpeed-usr-count + (next(_TOP__measureSpeed-usr-rotate___EVENT_) ? 1 : 0)) & (next(_TOP__measureSpeed-usr-__ASSUME__HIST) -> (next(_TOP__measureSpeed-impl-usr-__GUARANTEE2) & (next(_TOP__measureSpeed-impl-usr-__GUARANTEE1) & next(_TOP__measureSpeed-impl-usr-__GUARANTEE0))))));
 	next(_TOP__measureSpeed-res-gklocal_9) := (next(_TOP__measureSpeed-usr-speed) = 0);
