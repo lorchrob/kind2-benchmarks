@@ -1,6 +1,6 @@
 type SW_props_no_lits__MissionWindow__Impl = struct {crc : bool; wps : SW_props_no_lits__Coordinate__Impl[4]};
 type SW_props_no_lits__Coordinate__Impl = struct {alt : int; lat : int; long : int};
-type SW_props_no_lits__Command__Impl = struct {HMAC : bool; Map : SW_props_no_lits__Coordinate__Impl; Pattern : SW_props_no_lits__FlightPattern};
+type SW_props_no_lits__Command__Impl = struct {HMAC : bool; Map : SW_props_no_lits__Coordinate__Impl[4]; Pattern : SW_props_no_lits__FlightPattern};
 type SW_props_no_lits__FlightPattern = enum {SW_props_no_lits__FlightPattern_ZigZag, SW_props_no_lits__FlightPattern_StraightLine, SW_props_no_lits__FlightPattern_Perimeter};
 type Base_Types__Boolean = bool;
 type Base_Types__Unsigned = int;
