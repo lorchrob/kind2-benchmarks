@@ -1,6 +1,6 @@
-type SW_props_no_lits__MissionWindow__Impl = struct {crc : bool; wps : SW_props_no_lits__Coordinate__Impl^4};
+type SW_props_no_lits__MissionWindow__Impl = struct {crc : bool; wps : SW_props_no_lits__Coordinate__Impl[4]};
 type SW_props_no_lits__Coordinate__Impl = struct {alt : int; lat : int; long : int};
-type SW_props_no_lits__Command__Impl = struct {HMAC : bool; Map : SW_props_no_lits__Coordinate__Impl^4; Pattern : SW_props_no_lits__FlightPattern};
+type SW_props_no_lits__Command__Impl = struct {HMAC : bool; Map : SW_props_no_lits__Coordinate__Impl[4]; Pattern : SW_props_no_lits__FlightPattern};
 type SW_props_no_lits__FlightPattern = enum {SW_props_no_lits__FlightPattern_ZigZag, SW_props_no_lits__FlightPattern_StraightLine, SW_props_no_lits__FlightPattern_Perimeter};
 type Base_Types__Boolean = bool;
 type Base_Types__Unsigned = int;
@@ -61,7 +61,7 @@ node _TOP__FPLN(
   position_status___EVENT_ : bool;
   position_status : SW_props_no_lits__Coordinate__Impl;
   time : real;
-  flight_plan : SW_props_no_lits__Coordinate__Impl^10
+  flight_plan : SW_props_no_lits__Coordinate__Impl[10]
 ) returns (
   __ASSERT : bool
 );
@@ -80,7 +80,7 @@ node _TOP__WPM(
   __ASSUME__HIST : bool;
   __ASSUME0 : bool;
   __ASSUME1 : bool;
-  flight_plan : SW_props_no_lits__Coordinate__Impl^10;
+  flight_plan : SW_props_no_lits__Coordinate__Impl[10];
   position_status___EVENT_ : bool;
   position_status : SW_props_no_lits__Coordinate__Impl;
   time : real;
@@ -142,7 +142,7 @@ node main(
   RADIO____ASSUME1 : bool;
   RADIO____ASSUME2 : bool;
   RADIO____ASSUME__HIST : bool;
-  FPLN__flight_plan : SW_props_no_lits__Coordinate__Impl^10;
+  FPLN__flight_plan : SW_props_no_lits__Coordinate__Impl[10];
   FPLN____ASSUME0 : bool;
   FPLN____ASSUME1 : bool;
   FPLN____ASSUME2 : bool;
@@ -173,7 +173,7 @@ node main(
   FPLN__position_status___EVENT_ : bool;
   FPLN__position_status : SW_props_no_lits__Coordinate__Impl;
   FPLN__time : real;
-  WPM__flight_plan : SW_props_no_lits__Coordinate__Impl^10;
+  WPM__flight_plan : SW_props_no_lits__Coordinate__Impl[10];
   WPM__position_status___EVENT_ : bool;
   WPM__position_status : SW_props_no_lits__Coordinate__Impl;
   WPM__time : real;
