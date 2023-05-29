@@ -119,7 +119,7 @@ CollisionAvoidance__4.lus,Invalid,0.91,3.67,Invalid,0.94,3.4,Invalid,0.12,0.1
 CollisionAvoidance__5.lus,Invalid,0.85,3.69,Invalid,0.94,3.31,Invalid,0.11,0.09
 CollisionAvoidance__6.lus,Invalid,0.97,3.83,Invalid,0.93,3.32,Invalid,0.11,0.09
 CollisionAvoidance__7.lus,Invalid,0.99,4.1,Invalid,0.92,3.26,Invalid,0.11,0.09
-CollisionAvoidance.lus:2:4:0:1.13,4.8,,,5.47,,,0.3,,
+CollisionAvoidance.lus,Invalid,1.36,5.64,Invalid,1.17,5.68,Invalid,0.31,0.29
 controlLaw.lus,Valid,0.5,1.46,Valid,0.42,0.84,Valid,0.04,0.02
 cruise_controller_01.lus,Valid,0.78,3.09,Valid,0.99,1.79,Valid,7.89,7.86
 cruise_controller_02.lus,Valid,0.73,3.02,Valid,0.86,1.65,Valid,6.75,6.73
@@ -168,7 +168,7 @@ DeliveryDrone__4.lus,Invalid,1.03,4.16,Invalid,0.95,2.79,Invalid,0.12,0.1
 DeliveryDrone__5.lus,Valid,4.56,30.84,Valid,84.79,563.9,Valid,0.95,0.93
 DeliveryDrone__6.lus,Valid,3.12,20.48,Valid,74.99,493.08,Valid,0.43,0.4
 DeliveryDrone__7.lus,Valid,4.44,30.22,Timeout,180.43,1268.96,Valid,1.76,1.74
-DeliveryDrone.lus:5:3:0:6.04,41.76,,,1268.01,,,3.15,,
+DeliveryDrone.lus,Invalid,7.14,50.72,Invalid,180.44,1268.87,Invalid,3.2,3.17
 DRAGON_1_e1_14612_e1_268_e7_501.lus,Valid,1.97,11.65,Valid,0.6,1.74,Valid,0.08,0.06
 DRAGON_1_e1_14612_e2_2653_e7_4370.lus,Valid,1.96,11.54,Valid,0.6,1.45,Valid,0.07,0.05
 DRAGON_1_e1_3184_e7_1888.lus,Valid,1.96,11.22,Valid,0.65,2,Valid,0.08,0.05
@@ -371,7 +371,7 @@ fast_2.lus,Valid,0.65,2.08,Valid,0.7,1.99,Valid,0.06,0.04
 FCS__1.lus,Valid,0.69,2.51,Valid,0.8,2.42,Valid,0.15,0.13
 FCS__2.lus,Valid,3.11,19.94,Valid,5.54,30.35,Valid,2.51,2.49
 FCS__3.lus,Invalid,0.95,4.25,Invalid,1.19,5.31,Invalid,13.96,13.93
-FCS.lus:3:1:0:1.10,5.03,,,6.8,,,16.55,,
+FCS.lus,Invalid,1.07,4.81,Invalid,1.35,6.46,Invalid,16.54,16.52
 FIREFLY_1_e1_1092_e1_1486.lus,Invalid,0.64,2.28,Invalid,0.53,1.3,Invalid,0.22,0.2
 FIREFLY_1_e1_1092_e2_1853.lus,Valid,0.46,1.32,Valid,0.51,1.19,Valid,0.08,0.06
 FIREFLY_1_e1_1092_e3_389.lus,Invalid,0.75,2.34,Invalid,0.51,1.25,Invalid,0.22,0.19
@@ -511,7 +511,7 @@ functionalChain_str_small.lus,Valid,230.35,1227.28,Valid,180.43,1206.9,Valid,138
 Gas.lus,Timeout,290.39,1225.8,Timeout,200.39,1207.81,Timeout,300.14,290.15
 HacmsTiming__1.lus,Valid,0.68,2.49,Valid,0.88,3.09,Valid,0.18,0.16
 HacmsTiming__2.lus,Invalid,0.79,3.13,Invalid,0.93,3.58,Invalid,0.75,0.72
-HacmsTiming.lus:2:1:0:0.89,3.77,,,3.3,,,0.84,,
+HacmsTiming.lus,Invalid,0.93,3.57,Invalid,3.55,0.94,Invalid,0.85,0.82
 hysteresis_1.lus,Valid,0.45,1.19,Valid,0.43,0.87,Valid,0.04,0.02
 hysteresis_2.lus,Valid,0.5,1.31,Valid,0.45,1,Valid,0.37,0.35
 hysteresis_3.lus,Valid,0.47,1.35,Valid,0.49,1.11,Valid,0.38,0.37
@@ -1789,7 +1789,7 @@ SW_1__2.lus,Invalid,0.67,2.39,Invalid,0.91,2.76,Invalid,0.1,0.08
 SW_1__3.lus,Valid,0.93,4.11,Valid,18.81,124.8,Valid,0.12,0.1
 SW_1__4.lus,Invalid,0.69,2.58,Invalid,0.9,2.79,Invalid,0.1,0.08
 SW_1__5.lus,Valid,0.99,4.4,Valid,19.58,135.56,Valid,0.12,0.09
-SW_1.lus:4:2:0:1.01,4.69,,,132.62,,,0.24,,
+SW_1.lus,Invalid,1.07,4.89,Invalid,18.76,120.75,Invalid,0.26,0.24
 SW_props_no_lits__1.lus,Valid,0.74,3,Valid,0.74,1.82,Timeout,0.66,0.04
 SW_props_no_lits__2.lus,Valid,1.55,9.03,Valid,2.77,16.65,Timeout,0.68,0.04
 SW_props_no_lits__3.lus,Valid,1.4,8.1,Valid,2.88,17.3,Timeout,0.71,0.05
