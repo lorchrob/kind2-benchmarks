@@ -1,10 +1,59 @@
 
 MODULE Collision_Avoidance__CONFLICT_DETECTED (Collision_Avoidance__CONFLICT_DETECTED-usr-6-ADSB-speed, Collision_Avoidance__CONFLICT_DETECTED-usr-2-ADSB-x, Collision_Avoidance__CONFLICT_DETECTED-usr-2-ADSB-y)
+FUN
+	my_fun : real * real * real -> boolean;
 VAR
 	Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar : boolean;
+INVAR
+	Collision_Avoidance__CONFLICT_DETECTED-usr-_outvar = my_fun(Collision_Avoidance__CONFLICT_DETECTED-usr-6-ADSB-speed, Collision_Avoidance__CONFLICT_DETECTED-usr-2-ADSB-x, Collision_Avoidance__CONFLICT_DETECTED-usr-2-ADSB-y);
 
-ASSIGN
+MODULE Collision_Avoidance__ASSESS_TRAJECTORY (Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Own-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-y, Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Intruder-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-y)
+FUN
+	my_fun1 : real * real * real * real * real * real -> real;
+	my_fun2 : real * real * real * real * real * real -> boolean;
+	my_fun3 : real * real * real * real * real * real -> boolean;
+	my_fun4 : real * real * real * real * real * real -> boolean;
+	my_fun5 : real * real * real * real * real * real -> integer;
+VAR
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-4-_outvar-PMD : real;
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-10-_outvar-Plan_Safe : boolean;
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-12-_outvar-Plan_Source : boolean;
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-11-_outvar-Plan_Valid : boolean;
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-5-_outvar-TCPA : integer;
+INVAR
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-4-_outvar-PMD = my_fun1(Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Own-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-y, Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Intruder-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-y) &
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-10-_outvar-Plan_Safe = my_fun2(Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Own-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-y, Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Intruder-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-y) &
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-12-_outvar-Plan_Source = my_fun3(Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Own-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-y, Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Intruder-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-y) &
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-11-_outvar-Plan_Valid = my_fun4(Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Own-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-y, Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Intruder-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-y) &
+	Collision_Avoidance__ASSESS_TRAJECTORY-usr-5-_outvar-TCPA = my_fun5(Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Own-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-y, Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Intruder-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-y)
 
+MODULE Collision_Avoidance__CALC_TRAJECTORY_2 (Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-S-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-y, Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-D-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-y)
+FUN
+	my_fun1: real * real * real * real * real * real -> real;
+	my_fun2: real * real * real * real * real * real -> real;
+	my_fun3: real * real * real * real * real * real -> real;
+VAR
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed : real;
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x : real;
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y : real;
+INVAR
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed  = my_fun1(Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-S-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-y, Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-D-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-y) &
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x = my_fun2(Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-S-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-y, Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-D-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-y) &
+	Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y = my_fun3(Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-S-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-y, Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-D-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-y);
+
+MODULE Collision_Avoidance__CALC_INTRUDER_TRAJECTORY (Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-ADSB-speed, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-x, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-y)
+FUN
+	my_fun1: real * real * real -> real;
+	my_fun2: real * real * real -> real;
+	my_fun3: real * real * real -> real;
+VAR
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-_outvar-speed : real;
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-x : real;
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-y : real;
+INVAR
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-_outvar-speed  = my_fun1(Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-ADSB-speed, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-x, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-y) &
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-x = my_fun2(Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-ADSB-speed, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-x, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-y) &
+	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-y = my_fun3(Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-ADSB-speed, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-x, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-y);
 
 MODULE __HIST (__HIST-usr-input)
 VAR
@@ -59,27 +108,6 @@ ASSIGN
 	next(Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar) := next(Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-10-A-Plan_Safe);
 
 
-
-MODULE Collision_Avoidance__CALC_TRAJECTORY_2 (Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-S-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-S-y, Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-D-speed, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-x, Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-D-y)
-VAR
-	Collision_Avoidance__CALC_TRAJECTORY_2-usr-6-_outvar-speed : real;
-	Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-x : real;
-	Collision_Avoidance__CALC_TRAJECTORY_2-usr-2-_outvar-y : real;
-
-ASSIGN
-
-
-MODULE Collision_Avoidance__ASSESS_TRAJECTORY (Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Own-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Own-y, Collision_Avoidance__ASSESS_TRAJECTORY-usr-6-Intruder-speed, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-x, Collision_Avoidance__ASSESS_TRAJECTORY-usr-2-Intruder-y)
-VAR
-	Collision_Avoidance__ASSESS_TRAJECTORY-usr-4-_outvar-PMD : real;
-	Collision_Avoidance__ASSESS_TRAJECTORY-usr-10-_outvar-Plan_Safe : boolean;
-	Collision_Avoidance__ASSESS_TRAJECTORY-usr-12-_outvar-Plan_Source : boolean;
-	Collision_Avoidance__ASSESS_TRAJECTORY-usr-11-_outvar-Plan_Valid : boolean;
-	Collision_Avoidance__ASSESS_TRAJECTORY-usr-5-_outvar-TCPA : integer;
-
-ASSIGN
-
-
 MODULE Collision_Avoidance__IS_SAFE_MANUEVER (Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-A-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-A-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-A-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-State-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-State-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-State-y, Collision_Avoidance__IS_SAFE_MANUEVER-usr-6-Intruder-speed, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-x, Collision_Avoidance__IS_SAFE_MANUEVER-usr-2-Intruder-y)
 VAR
 	Collision_Avoidance__IS_SAFE_MANUEVER-usr-_outvar : boolean;
@@ -96,16 +124,6 @@ ASSIGN
 	init(Collision_Avoidance__IS_SAFE_MANUEVER-usr-_outvar) := Collision_Avoidance__IS_SAFE_MANUEVER-res-call_8.Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar;
 
 	next(Collision_Avoidance__IS_SAFE_MANUEVER-usr-_outvar) := next(Collision_Avoidance__IS_SAFE_MANUEVER-res-call_8.Collision_Avoidance__IS_SAFE_PLAN_ASSESSMENT-usr-_outvar);
-
-
-
-MODULE Collision_Avoidance__CALC_INTRUDER_TRAJECTORY (Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-ADSB-speed, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-x, Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-ADSB-y)
-VAR
-	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-6-_outvar-speed : real;
-	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-x : real;
-	Collision_Avoidance__CALC_INTRUDER_TRAJECTORY-usr-2-_outvar-y : real;
-
-ASSIGN
 
 
 MODULE Collision_Avoidance__IS_SAFE_MANUEVER_2 (Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-A-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-A-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-A-y, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-State-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-State-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-State-y, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-6-ADSB-speed, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-ADSB-x, Collision_Avoidance__IS_SAFE_MANUEVER_2-usr-2-ADSB-y)
@@ -615,18 +633,10 @@ ASSIGN
 	INVAR main-res-glocal_26;
 	INVAR main-res-glocal_24;
 
-INVARSPEC 
-((main-impl-usr-__GUARANTEE5));
-INVARSPEC 
-((main-impl-usr-__GUARANTEE4));
-INVARSPEC 
-((main-impl-usr-__GUARANTEE3));
-INVARSPEC 
-((main-impl-usr-__GUARANTEE2));
+
 INVARSPEC 
 ((main-impl-usr-__GUARANTEE1));
 INVARSPEC 
 ((main-impl-usr-__GUARANTEE0));
 INVARSPEC 
 ((main-impl-usr-__ASSUME__HIST));
-
