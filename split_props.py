@@ -1,8 +1,8 @@
 import sys
 import re
 
-filename = "kind2_models/Uptane"
-num_props = 10
+filename = "kind2_models/Mode_Logic"
+num_props = 118
 
 for i in range(1, num_props+1):
   f = open(filename + ".lus", "r")
