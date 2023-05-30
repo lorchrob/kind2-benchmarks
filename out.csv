@@ -29,6 +29,7 @@ SW2.lus,multi-property
 TaxiNet.lus,multi-property
 Thermostat.lus,multi-property
 TopLevel_v6.lus,multi-property
+TopSystem.lus,multi-property
 triplexVoter_bounds.lus,multi-property
 triplexVoter_str.lus,multi-property
 Uptane.lus,multi-property
@@ -1958,7 +1959,6 @@ TopLevel_v6__8.lus,single property
 TopLevel_v6__9.lus,single property
 TopSystem__1.lus,single property
 TopSystem__2.lus,single property
-TopSystem.lus,single property
 traffic_e7_46_e7_171.lus,single property
 traffic_e7_46.lus,single property
 traffic.lus,single property
