@@ -279,7 +279,7 @@ var
   n1, n2, n3: int;
   m1, m2, m3: int;
 let
-  -- "10^-9" assumption on sensors.
+  
   assert (not corrupt1 or not corrupt2 or not corrupt3);
   -- This is needed to ensure channels consistently pass command.
   assert (m1 < m2 and m2 < m3);

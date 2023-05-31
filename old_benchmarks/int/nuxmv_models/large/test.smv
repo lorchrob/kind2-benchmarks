@@ -1,0 +1,11 @@
+MODULE main ()
+VAR
+  test1: integer;
+  test2: integer;
+ASSIGN
+  init(test1) := 1 / 60;
+  init(test2) := 0;
+  next(test1) := 1 / 60;
+  next(test2) := 0;
+INVARSPEC
+  test1 = test2
