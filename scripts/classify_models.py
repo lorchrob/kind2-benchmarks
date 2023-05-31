@@ -1,6 +1,7 @@
 import os 
 
 ##!! Figure out Kind 2 vs jkind models
+##!! Maybe copy lustre models to both Kind2 and JKind, then manually update
 
 # Loop through files
 for subdir, dirs, files in os.walk("/Users/lorchrob/Desktop/kind2-benchmarks/FMCAD23"):
@@ -52,19 +53,19 @@ for subdir, dirs, files in os.walk("/Users/lorchrob/Desktop/kind2-benchmarks/FMC
     # Send file to correct location
     if has_array:
       out_dir = "/Users/lorchrob/Desktop/kind2-benchmarks/FMCAD23/{model_dir}/{prop_dir}/array/{filename}"
-      continue
-    if has_uf:
-      continue
-    if has_int32 and not has_real:
-      continue 
     if has_bool and not (has_real or has_int32 or has_int): 
-      continue 
+      out_dir = "/Users/lorchrob/Desktop/kind2-benchmarks/FMCAD23/{model_dir}/{prop_dir}/bool/{filename}"
     if has_int and not (has_real or has_int32):
-      continue 
-    if has_int32 and not (has_real or has_int): 
-      continue 
-    if has_real and not (has_int32 or has_int):
-      continue 
+      out_dir = "/Users/lorchrob/Desktop/kind2-benchmarks/FMCAD23/{model_dir}/{prop_dir}/int/{filename}"
     if has_real and has_int and not has_int32:
-      continue 
+      out_dir = "/Users/lorchrob/Desktop/kind2-benchmarks/FMCAD23/{model_dir}/{prop_dir}/int-real/{filename}" 
+    if has_int32 and not has_real:
+      out_dir = "/Users/lorchrob/Desktop/kind2-benchmarks/FMCAD23/{model_dir}/{prop_dir}/int32/{filename}" 
+    if has_real and not (has_int32 or has_int):
+      out_dir = "/Users/lorchrob/Desktop/kind2-benchmarks/FMCAD23/{model_dir}/{prop_dir}/real/{filename}" 
+    if has_uf:
+      out_dir = "/Users/lorchrob/Desktop/kind2-benchmarks/FMCAD23/{model_dir}/{prop_dir}/uf/{filename}"
+    
+    
+    os.replace(os.path.join(subdir, filename), out_dir)
       
