@@ -1815,30 +1815,30 @@ let
          then zz8
          else zz45);
 
---  --%PROPERTY zz57;
---   --%PROPERTY zz65;
---   --%PROPERTY zz73;
---   --%PROPERTY zz117;
---   --%PROPERTY zz152;
---   --%PROPERTY       VRP1;
---   --%PROPERTY       VRP2;
---   --%PROPERTY       CP8a;
---   --%PROPERTY       VRP3;
+
+
+
+
+
+
+
+
+
    --%PROPERTY       OK;
---   --%PROPERTY       SP4;
---   --%PROPERTY       SP5;
---   --%PROPERTY       SP6;
---   --%PROPERTY       SP7;
---   --%PROPERTY       SP3b;
---   --%PROPERTY       SP3c;
---   --%PROPERTY       SP3;
---   --%PROPERTY       SP3a;
---   --%PROPERTY       SP2;
---   --%PROPERTY       SP1;
---   --%PROPERTY       SP8;
---   --%PROPERTY       SP9;
---   --%PROPERTY       SP10;
---   --%PROPERTY       SP11;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --   check zz57; 
 

@@ -32,7 +32,7 @@ let
   --cannot go directly from early to late (valid)
 
   -- always was early and is not late; incorrect
---  --%PROPERTY true -> not late and pre early;
+
 
   -- if was early, will not next be late; correct
   --%PROPERTY OK; 
