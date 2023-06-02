@@ -7,10 +7,10 @@ var
   satCentering, centering : real;
   df1, df2, df3 : real;
   st1, st2, st3 : real;
-  three_output: real;
   c1, c2, c3 : bool;
   d1, d2, d3 : bool;
-  eqs_stable, out_stable: bool;
+  three_output: real;
+  str_invariant, eqs_stable, out_stable: bool;
 let
 
   assert (input1 <  1.2); 
@@ -74,10 +74,10 @@ let
                ( equalization3 <=  2.0 * 1.2) and
                ( equalization3 >= -2.0 * 1.2);
 
---%PROPERTY out_stable;
---%PROPERTY eqs_stable;
-
-
+  -- Strengthening invariant making out_stable 0-inductive.
+  str_invariant =
+    (-2.9 <= equalization1 + equalization2 + equalization3       ) and
+    (        equalization1 + equalization2 + equalization3 <= 2.9);
 tel
 
 
@@ -109,8 +109,6 @@ let
   dtf = 0.0 -> in2 + 0.9608 * pre dtf;
 
   out_stable = ((-25.0 <= integ) and (integ <= 25.0));
-
-  --%PROPERTY out_stable;
 tel
 
 

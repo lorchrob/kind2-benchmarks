@@ -10,6 +10,7 @@ var
   c1, c2, c3 : bool;
   d1, d2, d3 : bool;
   three_output: real;
+  out_stable: bool;
 let
 
   assert (input1 <  1.2); 
@@ -62,6 +63,9 @@ let
 
   output = three_output / 3.0 ;
 
+  -- Stability property.
+  out_stable = (-1.2 <= output) and (output <= 1.2);
+
 tel
 
 
@@ -70,12 +74,17 @@ tel
 
 -- |===| CONTROL LAW.
 
+
+
 node controlLaw(in1, in2 : real) returns (integ : real);
 var
   inp,sum1,dtf : real;
   c1,c2,c3 : bool;
-  --out_stable: bool;
+  out_stable: bool;
 let
+
+  assert((-3.6 <= in1) and (in1 <= 3.6) and
+         (-3.6 <= in2) and (in2 <= 3.6));
 
   inp = in1 - 0.0392 * dtf;
   sum1 = 0.0 -> 0.04 * (pre integ) + 0.15 * inp;
@@ -86,6 +95,9 @@ let
 
   integ = 0.0 -> pre integ + if (c1 or c2 or c3) then inp else 0.0;
   dtf = 0.0 -> in2 + 0.9608 * pre dtf;
+
+  out_stable = ((-25.0 <= integ) and (integ <= 25.0));
+
 tel
 
 
@@ -128,7 +140,6 @@ var
   sat1a, sat1b, sat1c,
   sat2a, sat2b, sat2c,
   v1, v2: real;
-  triplex_stable: bool;
   out_stable: bool;
 let
 
@@ -145,13 +156,9 @@ let
   -- Control law.
   output = controlLaw(v1, v2);
 
-  triplex_stable =
-    (-1.2 <= v1) and (v1 <= 1.2) and
-    (-1.2 <= v2) and (v2 <= 1.2);
   out_stable = (-25.0 <= output) and (output <= 25.0);
 
   --%PROPERTY out_stable;
-  --%PROPERTY triplex_stable;
 
 tel
 

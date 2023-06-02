@@ -7,10 +7,10 @@ var
   satCentering, centering : real;
   df1, df2, df3 : real;
   st1, st2, st3 : real;
+  three_output: real;
   c1, c2, c3 : bool;
   d1, d2, d3 : bool;
-  three_output: real;
-  out_stable: bool;
+  eqs_stable, out_stable: bool;
 let
 
   assert (input1 <  1.2); 
@@ -66,10 +66,13 @@ let
   -- Stability property.
   out_stable = (-1.2 <= output) and (output <= 1.2);
 
---%PROPERTY out_stable;
-
-
-
+  -- Lemma usually known easing the process of proving the property.
+  eqs_stable = ( equalization1 <=  2.0 * 1.2) and
+               ( equalization1 >= -2.0 * 1.2) and
+               ( equalization2 <=  2.0 * 1.2) and
+               ( equalization2 >= -2.0 * 1.2) and
+               ( equalization3 <=  2.0 * 1.2) and
+               ( equalization3 >= -2.0 * 1.2);
 tel
 
 
@@ -101,8 +104,6 @@ let
   dtf = 0.0 -> in2 + 0.9608 * pre dtf;
 
   out_stable = ((-25.0 <= integ) and (integ <= 25.0));
-
-  --%PROPERTY out_stable;
 tel
 
 
