@@ -50,7 +50,7 @@ for subdir, dirs, files in os.walk("/Users/lorchrob/Desktop/kind2-benchmarks/kin
         has_int32 = True
       if ": bool" in line or ":bool" in line or "boolean;" in line:
         has_bool = True
-      if ":int" in line or ": int" in line or "integer;" in line:
+      if ":int" in line or ": int" in line or "integer;" in line or "of int" in line or "0 .. 2" in line:
         has_int = True
       
     if num_props == 1: 
