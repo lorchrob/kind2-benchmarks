@@ -3,12 +3,12 @@ source ~/.zshrc
 # for file in ./old_benchmarks/int/kind2_models/*; do 
 #   kind2tonuxmv $file > $file"/../nuxmv.smv"
 # done
-cd ./kind2_models
+cd ./../kind2_models/single-prop/int-real/
 for file in *; do 
-  if [[ $file == *"Mode_Logic"* ]]; then
+  if [[ $file == *"Uptane"* ]]; then
     echo $file
-    timeout 15 '/Users/lorchrob/Documents/CodeProjects/kind2_parent/kind2/bin/kind2' '--slice_nodes' 'false' $file 
-    cp "/Users/lorchrob/Desktop/out.smv" "./../nuxmv_models/${file%.*}.smv"
+    timeout 10 '/Users/lorchrob/Documents/CodeProjects/kind2_parent/kind2/bin/kind2' '--slice_nodes' 'false' $file 
+    cp "/Users/lorchrob/Desktop/out.smv" "./../../../nuxmv_models/single-prop/int-real/${file%.*}.smv"
     echo $file
   fi
 done
