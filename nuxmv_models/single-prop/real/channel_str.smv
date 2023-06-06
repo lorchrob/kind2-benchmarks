@@ -14,23 +14,23 @@ VAR
 ASSIGN
 	init(controlLaw-usr-integ) := 0;
 	init(controlLaw-impl-usr-dtf) := 0;
-	init(controlLaw-impl-usr-inp) := (controlLaw-usr-in1 - (49/1250 * controlLaw-impl-usr-dtf));
+	init(controlLaw-impl-usr-inp) := (controlLaw-usr-in1 - (49.0/1250.0 * controlLaw-impl-usr-dtf));
 	init(controlLaw-impl-usr-sum1) := 0;
 	init(controlLaw-impl-usr-c1) := ((controlLaw-impl-usr-sum1 <= 1) & (controlLaw-impl-usr-sum1 >= -1));
 	init(controlLaw-impl-usr-c2) := ((controlLaw-impl-usr-sum1 >= 1) & (controlLaw-impl-usr-inp < 0));
 	init(controlLaw-impl-usr-c3) := ((controlLaw-impl-usr-sum1 <= -1) & (controlLaw-impl-usr-inp > 0));
 	init(controlLaw-impl-usr-out_stable) := ((-25 <= controlLaw-usr-integ) & (controlLaw-usr-integ <= 25));
-	init(controlLaw-res-glocal_7) := ((((-18/5 <= controlLaw-usr-in1) & (controlLaw-usr-in1 <= 18/5)) & (-18/5 <= controlLaw-usr-in2)) & (controlLaw-usr-in2 <= 18/5));
+	init(controlLaw-res-glocal_7) := ((((-18.0/5.0 <= controlLaw-usr-in1) & (controlLaw-usr-in1 <= 18.0/5.0)) & (-18.0/5.0 <= controlLaw-usr-in2)) & (controlLaw-usr-in2 <= 18.0/5.0));
 
-	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201/1250 * controlLaw-impl-usr-dtf);
-	next(controlLaw-impl-usr-inp) := (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)));
-	next(controlLaw-impl-usr-sum1) := (1/25 * controlLaw-usr-integ) + (3/20 * next(controlLaw-impl-usr-inp));
+	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201.0/1250.0 * controlLaw-impl-usr-dtf);
+	next(controlLaw-impl-usr-inp) := (next(controlLaw-usr-in1) - (49.0/1250.0 * next(controlLaw-impl-usr-dtf)));
+	next(controlLaw-impl-usr-sum1) := (1.0/25.0 * controlLaw-usr-integ) + (3.0/20.0 * next(controlLaw-impl-usr-inp));
 	next(controlLaw-impl-usr-c3) := ((next(controlLaw-impl-usr-sum1) <= -1) & (next(controlLaw-impl-usr-inp) > 0));
 	next(controlLaw-impl-usr-c2) := ((next(controlLaw-impl-usr-sum1) >= 1) & (next(controlLaw-impl-usr-inp) < 0));
 	next(controlLaw-impl-usr-c1) := ((next(controlLaw-impl-usr-sum1) <= 1) & (next(controlLaw-impl-usr-sum1) >= -1));
 	next(controlLaw-usr-integ) := controlLaw-usr-integ + ((next(controlLaw-impl-usr-c3) | (next(controlLaw-impl-usr-c2) | next(controlLaw-impl-usr-c1))) ? next(controlLaw-impl-usr-inp) : 0);
 	next(controlLaw-impl-usr-out_stable) := ((-25 <= next(controlLaw-usr-integ)) & (next(controlLaw-usr-integ) <= 25));
-	next(controlLaw-res-glocal_7) := ((((-18/5 <= next(controlLaw-usr-in1)) & (next(controlLaw-usr-in1) <= 18/5)) & (-18/5 <= next(controlLaw-usr-in2))) & (next(controlLaw-usr-in2) <= 18/5));
+	next(controlLaw-res-glocal_7) := ((((-18.0/5.0 <= next(controlLaw-usr-in1)) & (next(controlLaw-usr-in1) <= 18.0/5.0)) & (-18.0/5.0 <= next(controlLaw-usr-in2))) & (next(controlLaw-usr-in2) <= 18.0/5.0));
 
 	INVAR controlLaw-res-glocal_7;
 
@@ -116,29 +116,29 @@ ASSIGN
 	init(voter-impl-usr-d2) := (voter-impl-usr-equalization2 > voter-impl-usr-equalization3);
 	init(voter-impl-usr-d1) := (voter-impl-usr-equalization1 > voter-impl-usr-equalization2);
 	init(voter-impl-usr-centering) := ((voter-impl-usr-d1 = voter-impl-usr-d2) ? voter-impl-usr-equalization2 : ((voter-impl-usr-d2 = voter-impl-usr-d3) ? voter-impl-usr-equalization3 : voter-impl-usr-equalization1));
-	init(voter-impl-usr-satCentering) := ((voter-impl-usr-centering > 1/4) ? 1/4 : ((voter-impl-usr-centering < -1/4) ? -1/4 : voter-impl-usr-centering));
+	init(voter-impl-usr-satCentering) := ((voter-impl-usr-centering > 1.0/4.0) ? 1.0/4.0 : ((voter-impl-usr-centering < -1.0/4.0) ? -1.0/4.0 : voter-impl-usr-centering));
 	init(voter-impl-usr-df2) := (voter-impl-usr-equalized2 - voter-impl-usr-three_output);
-	init(voter-impl-usr-st2) := ((voter-impl-usr-df2 > 1/2) ? 1/2 : ((voter-impl-usr-df2 < -1/2) ? -1/2 : voter-impl-usr-df2));
+	init(voter-impl-usr-st2) := ((voter-impl-usr-df2 > 1.0/2.0) ? 1.0/2.0 : ((voter-impl-usr-df2 < -1.0/2.0) ? -1.0/2.0 : voter-impl-usr-df2));
 	init(voter-impl-usr-df3) := (voter-impl-usr-equalized3 - voter-impl-usr-three_output);
-	init(voter-impl-usr-st3) := ((voter-impl-usr-df3 > 1/2) ? 1/2 : ((voter-impl-usr-df3 < -1/2) ? -1/2 : voter-impl-usr-df3));
+	init(voter-impl-usr-st3) := ((voter-impl-usr-df3 > 1.0/2.0) ? 1.0/2.0 : ((voter-impl-usr-df3 < -1.0/2.0) ? -1.0/2.0 : voter-impl-usr-df3));
 	init(voter-impl-usr-df1) := (voter-impl-usr-equalized1 - voter-impl-usr-three_output);
-	init(voter-impl-usr-st1) := ((voter-impl-usr-df1 > 1/2) ? 1/2 : ((voter-impl-usr-df1 < -1/2) ? -1/2 : voter-impl-usr-df1));
-	init(voter-impl-usr-str_invariant) := ((-29/10 <= voter-impl-usr-equalization1 + voter-impl-usr-equalization2 + voter-impl-usr-equalization3) & (voter-impl-usr-equalization1 + voter-impl-usr-equalization2 + voter-impl-usr-equalization3 <= 29/10));
-	init(voter-impl-usr-eqs_stable) := ((((((voter-impl-usr-equalization1 <= 12/5) & (voter-impl-usr-equalization1 >= -12/5)) & (voter-impl-usr-equalization2 <= 12/5)) & (voter-impl-usr-equalization2 >= -12/5)) & (voter-impl-usr-equalization3 <= 12/5)) & (voter-impl-usr-equalization3 >= -12/5));
-	init(voter-impl-usr-out_stable) := ((-6/5 <= voter-usr-output) & (voter-usr-output <= 6/5));
-	init(voter-res-glocal_1) := (voter-usr-input1 < 6/5);
-	init(voter-res-glocal_2) := (voter-usr-input1 > -6/5);
-	init(voter-res-glocal_3) := (voter-usr-input2 < 6/5);
-	init(voter-res-glocal_4) := (voter-usr-input2 > -6/5);
-	init(voter-res-glocal_5) := (voter-usr-input3 < 6/5);
-	init(voter-res-glocal_6) := (voter-usr-input3 > -6/5);
+	init(voter-impl-usr-st1) := ((voter-impl-usr-df1 > 1.0/2.0) ? 1.0/2.0 : ((voter-impl-usr-df1 < -1.0/2.0) ? -1.0/2.0 : voter-impl-usr-df1));
+	init(voter-impl-usr-str_invariant) := ((-29.0/10.0 <= voter-impl-usr-equalization1 + voter-impl-usr-equalization2 + voter-impl-usr-equalization3) & (voter-impl-usr-equalization1 + voter-impl-usr-equalization2 + voter-impl-usr-equalization3 <= 29.0/10.0));
+	init(voter-impl-usr-eqs_stable) := ((((((voter-impl-usr-equalization1 <= 12.0/5.0) & (voter-impl-usr-equalization1 >= -12.0/5.0)) & (voter-impl-usr-equalization2 <= 12.0/5.0)) & (voter-impl-usr-equalization2 >= -12.0/5.0)) & (voter-impl-usr-equalization3 <= 12.0/5.0)) & (voter-impl-usr-equalization3 >= -12.0/5.0));
+	init(voter-impl-usr-out_stable) := ((-6.0/5.0 <= voter-usr-output) & (voter-usr-output <= 6.0/5.0));
+	init(voter-res-glocal_1) := (voter-usr-input1 < 6.0/5.0);
+	init(voter-res-glocal_2) := (voter-usr-input1 > -6.0/5.0);
+	init(voter-res-glocal_3) := (voter-usr-input2 < 6.0/5.0);
+	init(voter-res-glocal_4) := (voter-usr-input2 > -6.0/5.0);
+	init(voter-res-glocal_5) := (voter-usr-input3 < 6.0/5.0);
+	init(voter-res-glocal_6) := (voter-usr-input3 > -6.0/5.0);
 
-	next(voter-impl-usr-equalization3) := voter-impl-usr-equalization3 + ((voter-impl-usr-st3 - voter-impl-usr-satCentering) * 1/20);
-	next(voter-impl-usr-equalization1) := voter-impl-usr-equalization1 + ((voter-impl-usr-st1 - voter-impl-usr-satCentering) * 1/20);
+	next(voter-impl-usr-equalization3) := voter-impl-usr-equalization3 + ((voter-impl-usr-st3 - voter-impl-usr-satCentering) * 1.0/20.0);
+	next(voter-impl-usr-equalization1) := voter-impl-usr-equalization1 + ((voter-impl-usr-st1 - voter-impl-usr-satCentering) * 1.0/20.0);
 	next(voter-impl-usr-equalized3) := (next(voter-usr-input3) - next(voter-impl-usr-equalization3));
 	next(voter-impl-usr-equalized1) := (next(voter-usr-input1) - next(voter-impl-usr-equalization1));
 	next(voter-impl-usr-c3) := (next(voter-impl-usr-equalized3) > next(voter-impl-usr-equalized1));
-	next(voter-impl-usr-equalization2) := voter-impl-usr-equalization2 + ((voter-impl-usr-st2 - voter-impl-usr-satCentering) * 1/20);
+	next(voter-impl-usr-equalization2) := voter-impl-usr-equalization2 + ((voter-impl-usr-st2 - voter-impl-usr-satCentering) * 1.0/20.0);
 	next(voter-impl-usr-equalized2) := (next(voter-usr-input2) - next(voter-impl-usr-equalization2));
 	next(voter-impl-usr-c2) := (next(voter-impl-usr-equalized2) > next(voter-impl-usr-equalized3));
 	next(voter-impl-usr-c1) := (next(voter-impl-usr-equalized1) > next(voter-impl-usr-equalized2));
@@ -148,22 +148,22 @@ ASSIGN
 	next(voter-impl-usr-d2) := (next(voter-impl-usr-equalization2) > next(voter-impl-usr-equalization3));
 	next(voter-impl-usr-d1) := (next(voter-impl-usr-equalization1) > next(voter-impl-usr-equalization2));
 	next(voter-impl-usr-centering) := ((next(voter-impl-usr-d1) = next(voter-impl-usr-d2)) ? next(voter-impl-usr-equalization2) : ((next(voter-impl-usr-d2) = next(voter-impl-usr-d3)) ? next(voter-impl-usr-equalization3) : next(voter-impl-usr-equalization1)));
-	next(voter-impl-usr-satCentering) := ((next(voter-impl-usr-centering) > 1/4) ? 1/4 : ((next(voter-impl-usr-centering) < -1/4) ? -1/4 : next(voter-impl-usr-centering)));
+	next(voter-impl-usr-satCentering) := ((next(voter-impl-usr-centering) > 1.0/4.0) ? 1.0/4.0 : ((next(voter-impl-usr-centering) < -1.0/4.0) ? -1.0/4.0 : next(voter-impl-usr-centering)));
 	next(voter-impl-usr-df2) := (next(voter-impl-usr-equalized2) - next(voter-impl-usr-three_output));
-	next(voter-impl-usr-st2) := ((next(voter-impl-usr-df2) > 1/2) ? 1/2 : ((next(voter-impl-usr-df2) < -1/2) ? -1/2 : next(voter-impl-usr-df2)));
+	next(voter-impl-usr-st2) := ((next(voter-impl-usr-df2) > 1.0/2.0) ? 1.0/2.0 : ((next(voter-impl-usr-df2) < -1.0/2.0) ? -1.0/2.0 : next(voter-impl-usr-df2)));
 	next(voter-impl-usr-df3) := (next(voter-impl-usr-equalized3) - next(voter-impl-usr-three_output));
-	next(voter-impl-usr-st3) := ((next(voter-impl-usr-df3) > 1/2) ? 1/2 : ((next(voter-impl-usr-df3) < -1/2) ? -1/2 : next(voter-impl-usr-df3)));
+	next(voter-impl-usr-st3) := ((next(voter-impl-usr-df3) > 1.0/2.0) ? 1.0/2.0 : ((next(voter-impl-usr-df3) < -1.0/2.0) ? -1.0/2.0 : next(voter-impl-usr-df3)));
 	next(voter-impl-usr-df1) := (next(voter-impl-usr-equalized1) - next(voter-impl-usr-three_output));
-	next(voter-impl-usr-st1) := ((next(voter-impl-usr-df1) > 1/2) ? 1/2 : ((next(voter-impl-usr-df1) < -1/2) ? -1/2 : next(voter-impl-usr-df1)));
-	next(voter-impl-usr-str_invariant) := ((-29/10 <= next(voter-impl-usr-equalization1) + next(voter-impl-usr-equalization2) + next(voter-impl-usr-equalization3)) & (next(voter-impl-usr-equalization1) + next(voter-impl-usr-equalization2) + next(voter-impl-usr-equalization3) <= 29/10));
-	next(voter-impl-usr-eqs_stable) := ((((((next(voter-impl-usr-equalization1) <= 12/5) & (next(voter-impl-usr-equalization1) >= -12/5)) & (next(voter-impl-usr-equalization2) <= 12/5)) & (next(voter-impl-usr-equalization2) >= -12/5)) & (next(voter-impl-usr-equalization3) <= 12/5)) & (next(voter-impl-usr-equalization3) >= -12/5));
-	next(voter-impl-usr-out_stable) := ((-6/5 <= next(voter-usr-output)) & (next(voter-usr-output) <= 6/5));
-	next(voter-res-glocal_1) := (next(voter-usr-input1) < 6/5);
-	next(voter-res-glocal_2) := (next(voter-usr-input1) > -6/5);
-	next(voter-res-glocal_3) := (next(voter-usr-input2) < 6/5);
-	next(voter-res-glocal_4) := (next(voter-usr-input2) > -6/5);
-	next(voter-res-glocal_5) := (next(voter-usr-input3) < 6/5);
-	next(voter-res-glocal_6) := (next(voter-usr-input3) > -6/5);
+	next(voter-impl-usr-st1) := ((next(voter-impl-usr-df1) > 1.0/2.0) ? 1.0/2.0 : ((next(voter-impl-usr-df1) < -1.0/2.0) ? -1.0/2.0 : next(voter-impl-usr-df1)));
+	next(voter-impl-usr-str_invariant) := ((-29.0/10.0 <= next(voter-impl-usr-equalization1) + next(voter-impl-usr-equalization2) + next(voter-impl-usr-equalization3)) & (next(voter-impl-usr-equalization1) + next(voter-impl-usr-equalization2) + next(voter-impl-usr-equalization3) <= 29.0/10.0));
+	next(voter-impl-usr-eqs_stable) := ((((((next(voter-impl-usr-equalization1) <= 12.0/5.0) & (next(voter-impl-usr-equalization1) >= -12.0/5.0)) & (next(voter-impl-usr-equalization2) <= 12.0/5.0)) & (next(voter-impl-usr-equalization2) >= -12.0/5.0)) & (next(voter-impl-usr-equalization3) <= 12.0/5.0)) & (next(voter-impl-usr-equalization3) >= -12.0/5.0));
+	next(voter-impl-usr-out_stable) := ((-6.0/5.0 <= next(voter-usr-output)) & (next(voter-usr-output) <= 6.0/5.0));
+	next(voter-res-glocal_1) := (next(voter-usr-input1) < 6.0/5.0);
+	next(voter-res-glocal_2) := (next(voter-usr-input1) > -6.0/5.0);
+	next(voter-res-glocal_3) := (next(voter-usr-input2) < 6.0/5.0);
+	next(voter-res-glocal_4) := (next(voter-usr-input2) > -6.0/5.0);
+	next(voter-res-glocal_5) := (next(voter-usr-input3) < 6.0/5.0);
+	next(voter-res-glocal_6) := (next(voter-usr-input3) > -6.0/5.0);
 
 	INVAR voter-res-glocal_6;
 	INVAR voter-res-glocal_5;
@@ -201,8 +201,8 @@ VAR
 
 ASSIGN
 	init(channel-usr-output) := channel-res-call_15.controlLaw-usr-integ;
-	init(channel-impl-usr-satMax) := 6/5;
-	init(channel-impl-usr-satMin) := -6/5;
+	init(channel-impl-usr-satMax) := 6.0/5.0;
+	init(channel-impl-usr-satMin) := -6.0/5.0;
 	init(channel-impl-usr-sat1c) := channel-res-2-call_11.saturation3-usr-outC;
 	init(channel-impl-usr-sat1b) := channel-res-2-call_11.saturation3-usr-outB;
 	init(channel-impl-usr-sat1a) := channel-res-2-call_11.saturation3-usr-outA;
@@ -213,8 +213,8 @@ ASSIGN
 	init(channel-impl-usr-v2) := channel-res-call_14.voter-usr-output;
 	init(channel-impl-usr-out_stable) := ((-25 <= channel-usr-output) & (channel-usr-output <= 25));
 
-	next(channel-impl-usr-satMax) := 6/5;
-	next(channel-impl-usr-satMin) := -6/5;
+	next(channel-impl-usr-satMax) := 6.0/5.0;
+	next(channel-impl-usr-satMin) := -6.0/5.0;
 	next(channel-impl-usr-sat1c) := next(channel-res-2-call_11.saturation3-usr-outC);
 	next(channel-impl-usr-sat1b) := next(channel-res-2-call_11.saturation3-usr-outB);
 	next(channel-impl-usr-sat1a) := next(channel-res-2-call_11.saturation3-usr-outA);

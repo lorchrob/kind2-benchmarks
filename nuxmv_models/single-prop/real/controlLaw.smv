@@ -15,16 +15,16 @@ VAR
 ASSIGN
 	init(controlLaw-usr-integ) := 0;
 	init(controlLaw-impl-usr-dtf) := 0;
-	init(controlLaw-impl-usr-inp) := (controlLaw-usr-in1 - (49/1250 * controlLaw-impl-usr-dtf));
+	init(controlLaw-impl-usr-inp) := (controlLaw-usr-in1 - (49.0/1250.0 * controlLaw-impl-usr-dtf));
 	init(controlLaw-impl-usr-sum1) := 0;
 	init(controlLaw-impl-usr-c1) := ((controlLaw-impl-usr-sum1 <= 1) & (controlLaw-impl-usr-sum1 >= -1));
 	init(controlLaw-impl-usr-c2) := ((controlLaw-impl-usr-sum1 >= 1) & (controlLaw-impl-usr-inp < 0));
 	init(controlLaw-impl-usr-c3) := ((controlLaw-impl-usr-sum1 <= -1) & (controlLaw-impl-usr-inp > 0));
 	init(controlLaw-impl-usr-check_cond) := ((-25 <= controlLaw-usr-integ) & (controlLaw-usr-integ <= 25));
 
-	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201/1250 * controlLaw-impl-usr-dtf);
-	next(controlLaw-impl-usr-inp) := (next(controlLaw-usr-in1) - (49/1250 * next(controlLaw-impl-usr-dtf)));
-	next(controlLaw-impl-usr-sum1) := (1/25 * controlLaw-usr-integ) + (3/20 * next(controlLaw-impl-usr-inp));
+	next(controlLaw-impl-usr-dtf) := next(controlLaw-usr-in2) + (1201.0/1250.0 * controlLaw-impl-usr-dtf);
+	next(controlLaw-impl-usr-inp) := (next(controlLaw-usr-in1) - (49.0/1250.0 * next(controlLaw-impl-usr-dtf)));
+	next(controlLaw-impl-usr-sum1) := (1.0/25.0 * controlLaw-usr-integ) + (3.0/20.0 * next(controlLaw-impl-usr-inp));
 	next(controlLaw-impl-usr-c3) := ((next(controlLaw-impl-usr-sum1) <= -1) & (next(controlLaw-impl-usr-inp) > 0));
 	next(controlLaw-impl-usr-c2) := ((next(controlLaw-impl-usr-sum1) >= 1) & (next(controlLaw-impl-usr-inp) < 0));
 	next(controlLaw-impl-usr-c1) := ((next(controlLaw-impl-usr-sum1) <= 1) & (next(controlLaw-impl-usr-sum1) >= -1));
