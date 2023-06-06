@@ -151,6 +151,6 @@ let
   out_stable = (-25.0 <= output) and (output <= 25.0);
 
   --%PROPERTY triplex_stable;
-
+  --%PROPERTY out_stable;
 tel
 
