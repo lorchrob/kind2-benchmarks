@@ -216,4 +216,6 @@ ASSIGN
 
 INVARSPEC 
 ((channel-impl-usr-triplex_stable));
+INVARSPEC
+channel-impl-usr-out_stable;
 
