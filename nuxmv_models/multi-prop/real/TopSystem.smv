@@ -189,4 +189,6 @@ ASSIGN
 
 INVARSPEC 
 ((main-impl-usr-__ASSUME__HIST));
+INVARSPEC
+((main-impl-usr-__GUARANTEE0));
 
