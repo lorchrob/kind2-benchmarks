@@ -4,8 +4,8 @@ checkers Kind 2, JKind, and NuXmv.
 
 All benchmarks under the `old_benchmarks` directory are from https://github.com/kind2-mc/kind2-benchmarks. The `kind2_models`, `jkind_models`, and `nuxmv_models` 
 folders contain benchmarks from the following Collins projects:
-[CASE](http://loonwerks.com/projects/case.html),
-[AAHAA](http://loonwerks.com/projects/aahaa.html),
-[AMASE](http://loonwerks.com/projects/amase.html),
-[HACMS](http://loonwerks.com/projects/hacms.html), and
-[DO-333](http://loonwerks.com/projects/do333.html).
+[CASE](https://github.com/loonwerks/formal-methods-workbench),
+[AAHAA](https://github.com/loonwerks/AAHAA),
+[AMASE](https://github.com/loonwerks/AMASE),
+[HACMS](https://github.com/smaccm/smaccm), and
+[DO-333](https://shemesh.larc.nasa.gov/fm/DO-333-case-studies.html).
