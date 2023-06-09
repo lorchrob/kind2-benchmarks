@@ -362,7 +362,7 @@ let
   no_command_bounded = not conf1(no_one_in_command, 25);
 
   --%PROPERTY stability;
-  --%PROPERTY no_command_bounded;
+  -- %PROPERTY no_command_bounded;
   --%MAIN;
 
 tel

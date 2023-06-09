@@ -7,10 +7,10 @@ var
   satCentering, centering : real;
   df1, df2, df3 : real;
   st1, st2, st3 : real;
+  three_output: real;
   c1, c2, c3 : bool;
   d1, d2, d3 : bool;
-  three_output: real;
-  str_invariant, eqs_stable, out_stable: bool;
+  eqs_stable, out_stable: bool;
 let
 
   assert (input1 <  1.2); 
@@ -73,11 +73,6 @@ let
                ( equalization2 >= -2.0 * 1.2) and
                ( equalization3 <=  2.0 * 1.2) and
                ( equalization3 >= -2.0 * 1.2);
-
-  -- Strengthening invariant making out_stable 0-inductive.
-  str_invariant =
-    (-2.9 <= equalization1 + equalization2 + equalization3       ) and
-    (        equalization1 + equalization2 + equalization3 <= 2.9);
 
 tel
 
@@ -171,6 +166,7 @@ let
 
   out_stable = (-25.0 <= output) and (output <= 25.0);
 
+
 tel
 
 
@@ -179,16 +175,12 @@ tel
 -- |===| RECONFIGURATION NODE.
 
 
-
-
 -- Counts the cycles during which 'signal' is active.
 -- Output becomes true when the counter goes above 'n'.
 node conf1(signal: bool; n: int) returns (out: bool);
 var
   pre_cpt, cpt: int;
 let
-  assert (0 <= pre_cpt and pre_cpt <= n);
-
   pre_cpt = 0 -> pre(cpt);
 
   cpt = if signal then
@@ -255,14 +247,15 @@ let
 tel
 
 
--- Three channels reconfiguration logic with error
+-- Top node. Three channels reconfiguration logic with error
 -- confirmation and delayed delegation of command.
 -- Each channel takes input from a sensor, which is typically
 -- the output of some voting logic system.
 node reconfiguration(
   sensor_value1, sensor_value2, sensor_value3: real
 ) returns (
-  command: real; no_command: bool
+  command: real; 
+  no_command: bool
 );
 
 var
@@ -300,9 +293,9 @@ let
   n1 = 10;
   n2 = 12;
   n3 = 15;
-  m1 = 5;
-  m2 = 7;
-  m3 = 11;
+  m1 = 30;
+  m2 = 60;
+  m3 = 90;
 
   -- Flags and ranged values on input sensors.
   (out_of_range1, corrupt1, ranged_sensor1) = range_monitor(sensor_value1, default_value, min, max, n1);
@@ -323,7 +316,6 @@ let
   ok = not conf1(no_command, m3);
 
 tel
-
 
 
 
@@ -361,7 +353,7 @@ let
 
   no_command_bounded = not conf1(no_one_in_command, 25);
 
-  --%PROPERTY stability;
+  -- %PROPERTY stability;
   --%PROPERTY no_command_bounded;
   --%MAIN;
 

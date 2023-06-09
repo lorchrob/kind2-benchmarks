@@ -74,8 +74,6 @@ let
                ( equalization3 <=  2.0 * 1.2) and
                ( equalization3 >= -2.0 * 1.2);
 
---%PROPERTY out_stable;
---%PROPERTY eqs_stable;
 
 tel
 
@@ -109,7 +107,6 @@ let
 
   out_stable = ((-25.0 <= integ) and (integ <= 25.0));
 
-  --%PROPERTY out_stable;
 tel
 
 
@@ -169,8 +166,6 @@ let
   output = controlLaw(v1, v2);
 
   out_stable = (-25.0 <= output) and (output <= 25.0);
-
-  --%PROPERTY out_stable;
 
 tel
 
@@ -321,7 +316,6 @@ let
   -- ... but it cannot be true forever. Hopefully.
   ok = not conf1(no_command, m3);
 
-  --%PROPERTY ok;
 tel
 
 

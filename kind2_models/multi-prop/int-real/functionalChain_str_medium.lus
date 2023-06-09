@@ -79,9 +79,6 @@ let
     (-2.9 <= equalization1 + equalization2 + equalization3       ) and
     (        equalization1 + equalization2 + equalization3 <= 2.9);
 
---%PROPERTY out_stable;
---%PROPERTY eqs_stable;
---%PROPERTY str_invariant;
 
 tel
 
@@ -115,7 +112,6 @@ let
 
   out_stable = ((-25.0 <= integ) and (integ <= 25.0));
 
-  --%PROPERTY out_stable;
 tel
 
 
@@ -176,7 +172,6 @@ let
 
   out_stable = (-25.0 <= output) and (output <= 25.0);
 
-  --%PROPERTY out_stable;
 
 tel
 
@@ -329,7 +324,6 @@ let
   -- ... but it cannot be true forever. Hopefully.
   ok = not conf1(no_command, m3);
 
-  --%PROPERTY ok;
 tel
 
 
